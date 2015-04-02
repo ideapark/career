@@ -1,0 +1,24 @@
+- All open files and open directories.
+
+- The umask setting.
+
+- The current working directory.
+
+- The root directory.
+
+- The current nice value.
+
+- The process ID and parent process ID.
+
+- The process group ID.
+
+- The session ID and controlling terminal.
+
+- The process signal mask and any pending signals, as well as any
+  unexpired alarms or timers.
+
+- The real user ID and group IDs and the supplemental group set.
+
+- File locks remain in place.
+
+- Accumulated CPU times for the process and its children don't change.
