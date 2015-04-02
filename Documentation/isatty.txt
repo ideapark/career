@@ -1,0 +1,9 @@
+#include <unistd.h>
+
+int isatty(int desc);
+
+
+One place where isatty() comes to use is in modern versions
+of ls, in which the default is to print filenames in columns
+if the standard output is a terminal and to print them one
+per line if not.
