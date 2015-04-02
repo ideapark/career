@@ -1,0 +1,22 @@
+POSIX regular expression character classes
+==========================================
+
+----------------------------------------------------------------------------
+ Class name        Matches
+----------------------------------------------------------------------------
+ [:alnum:]         Alphanumeric characters
+ [:alpha:]         Alphabetic characters
+ [:blank:]         Space and TAB characters
+ [:cntrl:]         Control characters
+ [:digit:]         Numeric characters
+ [:graph:]         Characters that are both printable and visible. (A
+                   newline is printable but not visible, whereas a $
+                   is both)
+ [:lower:]         Lowercase alphabetic characters
+ [:print:]         Printable alphabetic characters
+ [:punct:]         Punctuation characters (not letters, digits, control
+                   characters, or space characters)
+ [:space:]         Space characters (such as space, TAB, newline, and so on)
+ [:upper:]         Uppercase alphabetic characters
+ [:xdigit:]        Characters from the set abcdefABCDEF0123456789
+----------------------------------------------------------------------------
