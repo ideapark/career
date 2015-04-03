@@ -1,0 +1,44 @@
+---------------------------------------------------------------------------------------
+ Name        Value    Default    Source    Meaning
+---------------------------------------------------------------------------------------
+ SIGHUP      1        Term       POSIX     Hangup
+ SIGINT      2        Term       ISO C     Interrupt
+ SIGQUIT     3        Core       POSIX     Quit
+ SIGILL      4        Core       ISO C     Illegal instruction
+ SIGTRAP     5        Core       POSIX     Trace trap
+ SIGABRT     6        Core       ISO C     Abort
+ SIGIOT      6        Core       BSD       IOT trap
+ SIGBUS      7        core       BSD       Bus error
+ SIGFPE      8        Core       ISO C     Floating-point exception
+ SIGKILL     9        Term       POSIX     Kill, unblockable
+ SIGUSR1     10       Term       POSIX     User-defined signal 1
+ SIGSEGV     11       Core       ISO C     Segmentation violation
+ SIGUSR2     12       Term       POSIX     User-defined signal 2
+ SIGPIPE     13       Term       POSIX     Broken pipe
+ SIGALRM     14       Term       POSIX     Alarm clock
+ SIGTERM     15       Term       ISO C     Termination
+ SIGSTKFLT   16       Term       Linux     Stack fault on a processor (unused)
+ SIGCHLD     17       Ignr       POSIX     Child process status changed
+ SIGCLD      17       Ignr       System V  Same as SIGCHLD (for compatibility only)
+ SIGCONT     18                  POSIX     Continue if stopped
+ SIGSTOP     19       Stop       POSIX     Stop, unblockable
+ SIGTSTP     20       Stop       POSIX     Keyboard stop
+ SIGTTIN     21       Stop       POSIX     Background read from tty
+ SIGTTOU     22       Stop       POSIX     Background write to tty
+ SIGURG      23       Ignr       BSD       Urgent condition on socket
+ SIGXCPU     24       Core       BSD       CPU limit exceeded
+ SIGXFSZ     25       Core       BSD       File size limit exceeded
+ SIGVTALRM   26       Term       BSD       Virtual alarm clock
+ SIGPROF     27       Term       BSD       Profiling alarm clock
+ SIGWITCH    28       Ignr       BSD       Window size change
+ SIGIO       29       Term       BSD       I/O now possible
+ SIGPOLL     29       Term       System V  Pollable event occurred: same as SIGIO (for
+                                           compatibility only)
+ SIGPWR      30       Term       System V  Power failure restart
+ SIGSYS      31       Core       POSIX     Bad system call
+---------------------------------------------------------------------------------------
+    Core: Terminate the process and produce a core file.
+    Ignr: Ignore the signal.
+    Stop: Stop the process.
+    Term: Terminate the process.
+---------------------------------------------------------------------------------------
