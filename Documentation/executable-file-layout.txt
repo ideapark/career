@@ -1,0 +1,10 @@
+- a set of "headers" that describe the attributes of the file.
+
+- the program text.
+
+- a machine language representation of data that has initial values
+  when the program starts execution, and an indication of how much
+  space the kernel should allocate for uninitialized data, called
+  BSS (the kernel initializes it to 0 at run time).
+
+- other sections, such as symbol table information.
