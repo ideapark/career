@@ -1,0 +1,48 @@
+(1)
+          +----------+                    +-------------+
+          | pipeline | ----- pipe() ----> | fd 3 | fd 4 |
+          +----------+                    +-------------+
+             /    \                            /|\
+         fork()  fork()                         |
+           /        \                           |
+         \/          \/                         | Pipe is shared
+    +----------+  +----------+                  | among parent
+    | pipeline |  | pipeline |                  | and both children
+    +----------+  +----------+                  |
+         |              |                       |
+         +--------------+-----------------------+
+  Left-hand child  Right-hand child
+
+(2)
+                                           |
+          +----------+                     | +-------------+
+          | pipeline | ----- close() ----> | | fd 3 | fd 4 |
+          +----------+                     | +-------------+
+           /        \                      |       /|\
+       wait()      wait()                           |
+         /            ----------\                   |
+       \/                        \/                 | Parent closes pipe,
+ +----------+       |       +----------+            | waits for children
+ | pipeline | --> 1 | 0 --> | pipeline |            |
+ +----------+       |       +----------+            | Children move pipe
+  |                 |                 |             | to stdout (left-hand child)
+  +- close()/dup() -|- close()/dup() -+             | and stdin (right-hand child),
+                    |                               | close signal pipe fds
+                    +-------------------------------+
+Left-hand child           Right-hand child
+
+(3)
+          +----------+
+          | pipeline |
+          +----------+
+           /        \
+        wait()     wait()            Child call exec(),
+          /            \             programs run
+         /              \-------------
+       \/                             \/
++---------------+               +------------------+
+| echo hi there | --> 1 | 0 --> | sed s/hi/hello/g | hello there
++---------------+               +------------------+
+   execvp()            pipe           execvp()
+
+ Left-hand child                  Right-hand child
