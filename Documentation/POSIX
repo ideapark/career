@@ -1,0 +1,61 @@
+=== Conventions ===
+
+1. Program names should have no less than two and no more than nine characters.
+
+2. Program names should consist of only lowercase letters and digits.
+
+3. Option names should be single alphanumeric character. Multidigit options
+   should not be allowed. For vendors implementing the POSIX utilities, the -W
+   option is reserved for vendor-specific options.
+
+4. All options should begin with a '-' character.
+
+5. For options that don't require option arguments, it should be possible to
+   group multiple options after a single '-' character. (For example,
+   'foo -a -b -c' and 'foo -abc' should be treated the same way.)
+
+6. When an option does require an option argument, the argument should be
+   separated from the option by a space(For example, 'fgrep -f patfile').
+   The standard, however, does allow for historical practice, whereby sometimes
+   the option and the operand could be in the same thing; 'fgrep -fpatfile',
+   In practice, the getopt() and getopt_long() functions interpret '-fpatfile'
+   as '-f patfile', not as '-f -p -a -t ...'.
+
+7. Option arguments should not be optional.
+   This means that when a program documents and option as requiring an option
+   argument, that option's argument must always be present or else the program
+   will fail. GNU getopt() does provide for optional option arguments since
+   they're occasionally useful.
+
+8. If an option takes an argument that may have multiple values, the program
+   should receive that argument as a single string, with values separated by
+   commas or whitspace.
+   For example, suppose a hypothetical program myprog requires a list of users
+   for its -u option. Then, it should be invoked in one of these two ways:
+   myprog -u "arnold,joe,jane"     Separate with commas
+   myprog -u "arnold joe jane"     Separate with whitespace
+   In such a case, you're on your own for splitting out and processing each value
+   (That is, there is no standard routine), but doing so manually is usually
+   straightforward.
+
+9. Options should come first one the command line, before operands, Unix versions
+   getopt() enforce this convention. GNU getopt() does not by default, although
+   you can tell it to.
+
+10. The special argument '--' indicates the end of all options. Any subsequent
+    arguments on the command line are treated as operands, even if the begin with
+    a dash.
+
+11. The order in which options are given should not matter. However, for mutually
+    exclusive options, when one option overrides the setting of another, then
+    (so to speak) the last one wins. If an option that has arguments is repeated,
+    the program should process the arguments in order. For example,
+    'myprog -u arnold -u jane' is the same as 'myprog -u "arnold,jane"'.(You have
+    to enforce this yourself; getopt() doesn't help you.)
+
+12. It is OK for the order of operands to matter to a program. Each program should
+    document such things.
+
+13. Programs that read or write named files should treat the single argument '-'
+    as meaning standard input or standard output, as is appropriate for the
+    program.
