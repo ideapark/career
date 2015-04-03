@@ -1,0 +1,64 @@
+
+               --------
+      |--------| init |--------|                                            PID 1
+      |        --------        |
+      |                        |
+fork()/exec()            fork()/exec()
+      |                        |
+      |                        |
+     \|/                      \|/
+  ---------                ---------
+  | getty |  ... ... ....  | getty |                                        PID 523 ruid: 0 euid: 0
+  ---------                ---------
+                               |
+                               |
+                             exec()
+                               |
+                               |           ---------
+                               |---------> | login |                        PID 523 ruid: 0 euid: 0
+                                           ---------
+                                               |
+                                               |
+                                         open()/dup()
+                                 setgroups()/setgid()/setuid()
+                                               |
+                                             exec()
+                                               |
+                                               |                ---------
+                                               |--------------> | shell |   PID 523 ruid: 42 euid: 42
+                                                                ---------
+
+
+
+1. init is the primordial process, It has PID 1. All other processes are
+   descended from it. The kernel handcrafts process 1 at boot time and
+   runs init in it. It runs with both the real and effective UID set to
+   zero, that is, as root.
+
+2. init reads /etc/inittab, which, among other things, tells init on which
+   hardware devices it should start a getty process. For each such device
+   (Such as the console, serial terminals, or virtual consoles on a
+   GNU/Linux system), init forks a new process, This new process then uses
+   exec() to run getty ("get tty", that is, a terminal). On many GNU/Linux
+   systems, this command is named mingetty. The program opens the device,
+   resets its state, and prints the 'login:' prompt.
+
+3. Upon reading a login name, getty execs login. The login program looks
+   up the username in the password file, prompts for a password, and
+   verifies the password. If they match, the login process continues.
+
+4. login changes to the user's home directory, sets up the initial
+   environment, and then sets up the initial set of open files. It closes
+   all file descriptors, opens the terminal, and uses dup() to copy the
+   terminal's file descriptor to 0, 1, and 2. This is where the already
+   opened standard input, output, and error file descriptors come form.
+
+5. login then uses setgroups() to set the supplemental group set, setgid()
+   to set the real, effective, and saved set-group IDs to those of the
+   user, and finally setuid() to set all three of the real, effective, and
+   saved set-user IDs to those of the logging-in user. Note that the call
+   to setuid() must come last to that the other two calls succeed.
+
+6. Finally, login execs the user's login shell. Bourne-style shells then
+   read /etc/profile and $HOME/.profile, if those files exist. Finally,
+   the shell prints a prompt.
