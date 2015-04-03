@@ -1,0 +1,39 @@
+Linux/Unix Process Address Space
+================================
+
+    Program Stack    ||  High Address
+          |          ||
+          |          ||  STACK SEGMENT
+         \|/         ||
+                     ||  Stack grows downward
+
+     Possible "hole"
+    in address space
+
+         /|\         ||  Heap grows upward
+          |          ||
+          |          ||
+         Heap        ||
+    ---------------- ||
+    BSS: zero-filled ||
+       variables     ||  DATA SEGMENT
+    ---------------- ||
+      Globals and    ||
+    Static Variables ||
+         (Data)      ||
+   ===================)  Low Address
+
+     Executable code ||
+        (Shared)     ||  TEXT SEGMENT
+   ===================)
+
+
+Permission and File Type Bits
+=============================
+
+ 15   14   13   12   11   10   9     8    7    6   5    4    3    2    1    0
+    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
+                   |    |    |    |              |              |              |
+     FILE TYPE     |SUID|SGID|SVTX| Owner r/w/x  | Group r/w/x  | Other r/w/x  |
+    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
+--------------------------------------------------------------------------------
