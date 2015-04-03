@@ -1,0 +1,23 @@
+-------------------------------------------------------------------------
+  Symbolic constant    Value    Meaning
+-------------------------------------------------------------------------
+ S_IRWXU               00700    User read, write, and execute permission
+ S_IRUSR               00400    User read permission
+ S_IWUSR               00200    User write permission
+ S_IXUSR               00100    User execute permission
+ S_IRRAD                        Same as S_IRUSR
+ S_IWRITE                       Same as S_IWUSR
+ S_IEXEC                        Same as S_IXUSR
+ S_IRWXG               00070    Group read, write, and execute permission
+ S_IRGRP               00040    Group read permission
+ S_IWGRP               00020    Group write permission
+ S_IXGRP               00010    Group execute permission
+ S_IRWXO               00007    Other read, write, and execute permission
+ S_IROTH               00004    Other read permission
+ S_IWOTH               00002    Other write permission
+ s_IXOTH               00001    Other execute permission
+
+ S_ISUID               04000    Set user ID
+ S_ISGID               02000    Set group ID
+ S_ISVTX               01000    Save text
+-------------------------------------------------------------------------
