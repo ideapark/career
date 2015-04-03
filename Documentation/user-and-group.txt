@@ -1,0 +1,105 @@
+See `grep root /etc/passwd`
+==========================
+
+The User Name
+-------------
+
+This is what the user types to log in, what shows up for
+'ls -l' and in any others context that displays users.
+
+The password field
+------------------
+
+On older systems, this is the user's encrypted password.
+On newer systems, this field is likely to be an x (as shown),
+meaning that the password information is held in a different
+file. This separation is a security measure; if the encrypted
+passwd isn't available to nonprivileged users, it is much
+harder to "crack".
+
+The User ID Number
+------------------
+
+This should be unique; one number per user.
+
+The Group ID Number
+-------------------
+
+This is the user's initial group ID number. on modern
+systems processes have multiple groups associated with them.
+
+The User's Real Name
+--------------------
+
+This is at least a first and last name. Some system allow
+for comma-separated fields, for office location, phone
+number, and so on, but this is not standardized.
+
+The Login Directory
+-------------------
+
+This directory becomes the home directory for users when
+they log in ($HOME - the default for the cd command).
+
+The Login Program
+-----------------
+
+The program to run when the user logins in. This is usually
+a shell, but it need not be.  If this is left empty, the
+default is /bin/sh.
+
+See `grep root /etc/group`
+=========================
+
+The Group Name
+--------------
+
+This is the name of the group, as shown in 'ls -l' or in
+any other context in which a group name is needed.
+
+The Group Password
+------------------
+
+This field is historical. It is no longer used.
+
+
+The Group ID Number
+-------------------
+
+As with the user ID, this should be unique to each group.
+
+The User List
+-------------
+
+This is comma-separated list of users who are members of the group.
+
+Data Structure
+--------------
+
+struct passwd {
+    char *pw_name;   /* user name */
+    char *pw_passwd; /* user password */
+    uid_t pw_uid;    /* user id */
+    gid_t pw_gid;    /* group id */
+    char *pw_gecos;  /* real name */
+    char *pw_dir;    /* home directory */
+    char *pw_shell;  /* shell program */
+};
+
+struct group {
+    char *gr_name;   /* group name */
+    char *gr_passwd; /* group password */
+    char gr_gid;     /* group id */
+    char **gr_mem;   /* group members */
+};
+
+NOTE:
+
+The pointers returned by getpwent(), getpwnam(), and pwuid()
+all point to internal static data. Thus, you should make a copy
+of their contents if you need to save the information.
+
+The members that represent character strings are pointers; they
+too point at internal static data. and if you're going to copy
+the structure, make sure to copy the data each member points to
+as well.
