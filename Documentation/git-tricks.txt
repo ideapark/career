@@ -1,0 +1,31 @@
+1. Who changed my code?
+
+    git blame [COMMIT-SHA1 --] file-name
+
+2. Review repository log?
+
+    git log --oneline --graph --decorate [--all|COMMIT-SHA1]
+
+3. Partly commit a file?
+
+    git add -p file-name
+
+4. Squash commits?
+
+    git rebase -i HEAD~[n]
+
+5. Stash uncommit change?
+
+    git stash [list|apply|pop]
+
+6. Commit lost+found?
+
+    git fsck --lost-found
+
+7. Choose what to merge?
+
+    git cherry-pick COMMIT-SHA1
+
+8. Checkout to last branch?
+
+    git checkout -
