@@ -1,0 +1,23 @@
+/etc/fstab
+==========
+
+lists filesystem that can be mounted, Most are automatically mounted
+when the system boots. The format is as follows:
+
+device     mount-point    fs-type    options    dump-freq    fsck-pass
+/dev/hda3  /              ext3       defaults   1            1
+/dev/hda5  /d             ext3       defaults   1            2
+
+
+/etc/mtab
+=========
+
+which is the same file format as above, mount writes information about
+filesystems as they are mounted; umount remove information that file
+when filesystem is unmounted.
+
+
+/proc/mounts
+============
+
+/etc/mtab symbolic links to /proc/mounts
