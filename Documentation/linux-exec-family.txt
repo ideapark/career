@@ -1,0 +1,14 @@
+-------------------------------------------------------------------------
+ Function        Path search    Uses environ    Purpose
+-------------------------------------------------------------------------
+ execl()         No             Yes             Execute arg list.
+ execle()        No             No              Execute arg list with
+                                                environment.
+ execlp()        Yes            Yes             Execute arg list by path
+                                                search.
+ execv()                        Yes             Execute with argv.
+ execve()        No             No              Execute with argv and
+                                                environment (system call)
+ execvp()        Yes            Yes             Execute with argv by path
+                                                search.
+-------------------------------------------------------------------------
