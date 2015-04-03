@@ -1,0 +1,23 @@
+                                 LINUX TASK FINITE STATE MACHINE (FSM)
+
+
+                                              fork()
+
+        SIGCONT                                 |                             resource ready
+       wake_up()                               \|/                         wake_up_interruptible()
+   |------------------------------------\                                        wake_up()
+   |                 |------------------>  TASK_RUNNING <---------------------------|
+   |                 | resource ready                                               |
+   |                 |   wake_up()          /|\     |                               |
+   |                 |                       |      | time slice
+   |                 |            schedule() |      | exhausted            TASK_INTERRUPTIBLE
+   |                                         |      |
+   |        TASK_UNINTERRUPTIBLE             |     \|/                             /|\
+   |                                                                                |
+   |  wait for resource /\----------------- Holding CPU ----------------------------|
+   |    sleep_on()                                                            wait for resource
+   |    schedule()                           |      |                      interruptible_sleep_on()
+   |                                         |      |                             schedule()
+   |                             schedule()  |      |
+   |                              ptrace()   |      | do_exit()
+   |----- TASK_STOPPED <---------------------|      |---------------------> TASK_ZOMBIE
