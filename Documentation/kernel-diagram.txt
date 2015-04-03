@@ -1,0 +1,37 @@
+
+              user programs
+                           \
+            trap            ----------------
+              \ ````````\       libraries
+User Level     \         \
+---------------- --------- -----------------------
+Kernel Level
+
+               system call interface
+       -------------------------------------
+
+|                  |    |-------------------------
+|                  |    |
+|                  |    |           inter-process
+|  file subsystem  |    | process   communication
+|                  |    |
+|                  |    | control
+|    ------------- |    |           scheduler
+|     buffer cache |    |
+                        | subsystem
+                        |               memory
+                        |             management
+                        --------------------------
+|                 |
+| character block |
+|-----------------|
+| device drivers  |
+-------------------
+
+                hardware control
+
+Kernel Level
+--------------------------------------------------
+Hardware Level
+
+                    hardware
