@@ -1,0 +1,41 @@
+                       Indirect System Calls
+
+                   "Don't try this at home, kids!"
+                            -Mr. Wizard-
+
+Many system calls, such as open(), read(), and write(), are meant to be called
+directly from user-level application code: in other words, from code that you.
+as a GNU/Linux developer, would write.
+
+However, other system calls exist only to make it possible to implement higher
+level, standard library functions and should *not* be called directly, The
+GNU/Linux getdents() system call is one such; it reads multiple directory
+entries into a buffer provided by the caller -- in this case, the code that
+implements readdir(). The readdir() code then returns valid directory entries
+from the buffer, one at a time, refilling the buffer as needed.
+
+These for-library-use-only system calls can be distinguished from for-user-use
+system calls by their appearance in the manpage. For example, from getdents(2):
+
+NAME
+    getdents - get directory entries
+
+SYNOPSIS
+    #include <unistd.h>
+    #include <linux/types.h>
+    #include <linux/dirent.h>
+    #include <linux/unistd.h>
+
+    _syscall3(int, getdents, uint, fd, struct dirent *, dirp, uint, count);
+
+    int getdents(unsigned int fd, struct dirent *dirp, unsigned int count);
+
+Any system call that uses a _syscallX() macro should *not* be called by
+application code. (More information on these calls can be found in the
+intro(2) manpage; you should read that manpage if you haven't already.)
+
+In the case of getdents(), many other Unix systems have a similar system call;
+sometimes with the same name, sometimes with a different name. Thus, trying to
+use these calls would only lead to a massive portability mess anyway; you're
+much better off in all cases using readdir(), whose interface is well defined,
+standard, and portable.
