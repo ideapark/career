@@ -1,0 +1,22 @@
+[Termination]
+
+    The process is terminated.
+
+[Ignored]
+
+    The signal is ignored, the program is never aware that anything happened.
+
+[Core dump]
+
+    The process is terninated, and the kernel creates a core file (in the
+    process's current directory) containing the image of running program at
+    the time the signal arrived. The core dump can be used later with a
+    debugger for examination of the state of the program.
+
+    By default, GNU/Linux systems create files named core.pid, where pid is
+    the process ID of the killed process.
+
+[Stopped]
+
+    The process is stopped, it may be continued later. (If you've used shell
+    job control with CTRL-Z, fg, and bg, you understood stopping a procss.)
