@@ -1,0 +1,43 @@
+[Git internal]
+
+    Git is designed for #TEXT# file version managment; Binary file is not good
+    for Git, which can slow down git speed heavily.
+
+[What's text file]
+
+    Files that can be open by Notepad++, VIM etc. Most important, can be read
+    and unstandand by human directly. Such as C/C++/Java/C# source code, XML
+    CSS.
+
+[What's binary file]
+
+    All files but text file, such as executable file, picture, tar, rar, zip,
+    word, excel, ppt, chm, pdf, iso, ..., too much, too dangerous.
+
+[HOW-TO]
+
+    Write .gitignore to ignore unwanted files, make the word clean and better.
+
+[.gitignore]
+
+  ----------------------------------------------------------------------
+  |  # Comment - ignore                                                |
+  |                                                                    |
+  |  # ignore all file suffix by .a or .o                              |
+  |  *.[oa]                                                            |
+  |                                                                    |
+  |  # keep lib.a                                                      |
+  |  !lib.a                                                            |
+  |                                                                    |
+  |  # ignore TODO only under root direcotry, no subdir/TODO           |
+  |  /TODO                                                             |
+  |                                                                    |
+  |  # ignore all files under build/ directory                         |
+  |  build/                                                            |
+  |                                                                    |
+  |  # ignore doc/notes.txt, no doc/server/arch.txt                    |
+  |  doc/*.txt                                                         |
+  |                                                                    |
+  |  # ignore all .txt files in the doc/ directory                     |
+  |  doc/**/*.txt                                                      |
+  ----------------------------------------------------------------------
