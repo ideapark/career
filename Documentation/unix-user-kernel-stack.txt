@@ -1,0 +1,37 @@
+
+     User Stack                          Kernel Stack
+---------------------                ----------------------
+| Local    not      |  Direction of  |                    |
+| Vars    shown     |  stack grouth  |         /|\        |
+|-------------------|                |          |         |
+|  Addr of Frame 2  |      /|\       |          |         |
+|-------------------|       |        |          |         |
+|  Ret addr after   |       |        |          |         |
+|    write call     |       |        |          |         |
+|-------------------|       |        |          |         |
+| parms        new  |       |        |          |         |
+|  to        buffer |                |          |         |
+| write      count  |Frame 3         |         \|/        |
+|-------------------|call write()    |                    |
+| Local             |         Frame 3|--------------------|
+| Vars       count  |                | Local Vars         |
+|-------------------|                |--------------------|
+|  Ret addr after   |                |  Ret addr after    |
+|    copy call      |                |     func2 call     |
+|-------------------|                |--------------------|
+|  params to    old |                | params to kernel   |
+|    copy       new |Frame 2  Frame 2|     func2          |
+|-------------------|copy()   func2()|--------------------|
+| Local       fdold |                | Local              |
+| Vars        fdnew |                | Vars               |
+|-------------------|                |--------------------|
+| Addr of Frame 0   |                | Addr of Frame 0    |
+|-------------------|                |--------------------|
+| Ret addr after    |                | Ret addr after     |
+|   main call       |                |   func1 call       |
+|-------------------|                |--------------------|
+|              argc |                | params to kernel   |
+| params to main    |                |    func1           |
+|              argv |Frame 1  Frame 1|                    |
+|-------------------|                |--------------------|
+                     main()   func1()
