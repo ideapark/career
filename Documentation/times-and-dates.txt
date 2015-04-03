@@ -1,0 +1,65 @@
+Time Struct
+===========
+
+    struct tm {
+        int tm_sec;   /* seconds */
+        int tm_min;   /* minutes */
+        int tm_hour;  /* hours */
+        int tm_mday;  /* day of the month */
+        int tm_mon;   /* month */
+        int tm_year;  /* year */
+        int tm_wday;  /* day of the week */
+        int tm_yday;  /* day in the year */
+        int tm_isdst; /* daylight saving time */
+    };
+
+
+
+Formating Time
+==============
+
+
+      0    1    2    3    4    5    6    7    8    9    10   11   12   13   14   15   16   17   18   19   20   21   22   23   24    25
+      '    '    '    '    '    '    '    '    '    '    '    '    '    '    '    '    '    '    '    '    '    '    '    '    '     '
+     'T', 'h', 'u', ' ', 'M', 'a', 'y', ' ', '2', '2', ' ', '1', '5', ':', '4', '4', ':', '2', '1', ' ', '2', '0', '0', '3', '\n', '\0'
+
+
+strftime() fmt
+==============
+
+    %a            The locale's abbreviated weekday name.
+    %A            The locale's full weekday name.
+    %b            The locale's abbreviated month name.
+    %B            The locale's full month name.
+    %c,%Ec        The locale's "appropriate" date and time representation.
+    %C,%EC        The century (00-99). (C99)
+    %d,%Od        The day of the month (01-31).
+    %D            Same as %m/%d/%y. (C99)
+    %e,%Oe        The day of the month. A single digit is preceded with a space (1-31). (C99)
+    %F            Same as %Y-%m-%d (ISO 8601 date format). (C99)
+    %g            The last two digits of week-based year (00-99). (C99)
+    %G            The ISO 8601 week-based year. (C99)
+    %h            Same as %b. (C99)
+    %H,%OH        The hour in a 24-hour clock (00-23).
+    %I,%OI        The hour in a 12-hour clock (01-12).
+    %j            The day of the year (001-366).
+    %m,%Om        The month as a number (01-12).
+    %M,%OM        The minute as a number (00-59).
+    %n            A newline character ('\n'). (C99)
+    %p            The locale's a.m/p.m. designation.
+    %r            The locale's 12-hour clock time. (C99)
+    %R            Same as %H:%M. (C99)
+    %S,%OS        The second as a number (00-60).
+    %t            A TAB character ('\t'). (C99)
+    %T            Same as %H:%M:%S (ISO 8601 time format). (C99)
+    %u,%Ou        ISO 8601 weekday number, Monday = 1 (1-7). (C99)
+    %U,%OU        Week number, first Sunday is first day of week 1 (00-53).
+    %V,%OV        ISO 8601 week number (01-53). (C99)
+    %w,%Ow        The weekday as a number, Sunday = 0 (0-6).
+    %W,%OW        Week number, first Monday is first day of week 1 (0-6).
+    %x,%Ex        The locale's "appropriate" date representation.
+    %X,%EX        The locale's "appropriate" time representation.
+    %y,%Ey,%Oy    The last two digits of the year (00-99).
+    %Y,%EY        The year as a number.
+    %Z            The locale's time zone, or no characters if no time-zone information is available.
+    %%            A single %.
