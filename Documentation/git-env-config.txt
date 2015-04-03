@@ -1,0 +1,18 @@
+[global]
+
+    git config --global user.name "Zhou Peng"
+    git config --global user.email "lockrecv@gmail.com"
+
+    git config --global color.ui auto
+    git config --global core.editor vim
+
+    git config --global merge.tool vimdiff
+    git config --global mergetool.prompt false
+
+[project]
+
+    git config core.autocrlf false
+
+[env]
+
+    git config --list
