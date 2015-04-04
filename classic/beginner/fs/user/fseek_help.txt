@@ -1,0 +1,6 @@
+#include <stdio.h>
+
+int fseek(FILE *stream, long int offset, int whense);
+
+
+refer to kernel system call lseek

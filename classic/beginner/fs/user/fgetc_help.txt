@@ -1,0 +1,11 @@
+#include <stdio.h>
+
+int fgetc(FILE *stream);
+int getc(FILE *stream);
+int getchar();
+
+
+getc() just like fgetc(), but may be implemented by macro, so
+it cannot have side effect; getchar() equals to:
+
+    int getc(stdin);

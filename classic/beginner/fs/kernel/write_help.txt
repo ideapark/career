@@ -1,0 +1,10 @@
+#include <unistd.h>
+
+size_t write(int fd, const void *buf, size_t nbytes);
+
+
+when return n:
+
+    n == -1: some error occourred, check global var error
+    n < nbytes: fd error or device driver is sensitive to data block length
+    n == nbytes: write successfully

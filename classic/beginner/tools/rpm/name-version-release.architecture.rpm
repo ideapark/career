@@ -1,0 +1,12 @@
+MySQL-5.0.41-0.9.1.i386.rpm
+  |     \       \     \
+  |      |       |     \______
+name   version  release      |
+                         architecture
+
+
+# install & upgrade
+rpm -Uhv MySQL-server-5.0.41-0.glibc23.i386.rpm
+
+# check installation status
+rpm -qa xinetd

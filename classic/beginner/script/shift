@@ -1,0 +1,11 @@
+#!/bin/bash
+
+while [ "$1" != "" ]; do
+    echo "$1" # first arg
+    echo "$@" # arg list
+    echo "$*" # arg list
+    echo "$#" # arg count
+    shift     # shift left arg list
+done
+
+exit 0

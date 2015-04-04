@@ -1,0 +1,9 @@
+grep [options] PATTERN [FILES]
+
+  Option       Function
+    -c    print match number
+    -E    enable extend re
+    -h    no file names print
+    -i    case insensitive
+    -l    print only file name
+    -v    do NOT match pattern

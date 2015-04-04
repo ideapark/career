@@ -1,0 +1,16 @@
+#include <stdio.h>
+
+int scanf(const char *format, ...);
+int fscanf(FILE *stream, const char *format, ...);
+int sscanf(const char *s, const char *format, ...);
+
+
+format:
+
+    %d: read decimal int
+    %o, %x: read octal, hexidecimal int
+    %f, %e, %g: read float point
+    %c: read character
+    %s: read a string
+    %[]: read character collection
+    %%: read character %

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo The current directory is $PWD
+
+whoisthere=$(who)
+echo The current users are $whoisthere
+
+exit 0

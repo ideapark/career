@@ -1,0 +1,2 @@
+patch file1 diffs      # apply patch
+patch -R file1 diffs   # revert patch

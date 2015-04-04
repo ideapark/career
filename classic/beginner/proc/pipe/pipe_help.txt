@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+FILE *popen(const char *command, const char *open_mode);
+int pclose(FILE *stream_to_close);
+
+
+#include <unistd.h>
+
+int pipe(int file_descriptor[2]);
+
+ret -1 when failed:
+
+    errno:
+        EMFILE: process fd too many
+        ENFILE: system file table full
+        EFAULT: fd invalid
+
+
+#include <unistd.h>
+
+int dup(int file_descriptor);
+int dup2(int file_descriptor_one, int file_descriptor_two);
+
+close() and dup()
+---------------------------------------------------
+  fd      default value      close(0)      dup()
+---------------------------------------------------
+   0         stdin           (closed)      pipe fd
+   1         stdout          stdout        stdout
+   2         stderr          stderr        stderr
+   3         pipe fd         pipe fd       pipe fd
+---------------------------------------------------

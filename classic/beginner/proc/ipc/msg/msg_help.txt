@@ -1,0 +1,12 @@
+#include <sys/msg.h>
+
+int msgctl(int msqid, int cmd, struct msqid_ds *buf);
+int msgget(key_t key, int msgflg);
+int msgrcv(int msgid, void *msg_ptr, size_t msg_sz, long int msgtype, int msgflg);
+int msgsnd(int msgid, const void *msg_ptr, size_t msg_sz, int msgflg);
+
+struct msgqid_ds {
+    uid_t msg_perm.uid;
+    uid_t msg_perm.gid;
+    mode_t msg_perm.mode;
+};

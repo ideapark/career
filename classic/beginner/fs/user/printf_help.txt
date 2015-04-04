@@ -1,0 +1,16 @@
+#include <stdio.h>
+
+int printf(const char *format, ...);
+int sprintf(char *s, const char *format, ...);
+int fprintf(FILE *stream, const char *format, ...);
+
+
+format:
+
+    %d, %i: decimal format output int
+    %o, %x: octal and hexidecimal format output int
+    %c: character output
+    %s: string output
+    %f: float output
+    %e: scientific format double output
+    %g: general format double output

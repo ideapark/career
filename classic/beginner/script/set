@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo "command line: $@"
+echo the date is $(date)
+
+set $(date)
+echo "command line: $@"
+echo The month is $2
+
+exit 0

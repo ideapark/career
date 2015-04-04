@@ -1,0 +1,45 @@
+#include <sys/sem.h>
+
+int semctl(int sem_id, int sem_num, int command, ...);
+int semget(key_t key, int num_sems, int sem_flags);
+int semop(int sem_id, struct sembuf *sem_ops, size_t num_sem_ops);
+
+struct sembuf {
+    short sem_num;
+    short sem_op;
+    short sem_flg;
+};
+
+
+-----------------------------------------------------------
+|  P(sv) |   if (sv > 0) {                                |
+|        |       sv -= 1;                                 |
+|        |   }                                            |
+|        |   if (sv == 0) {                               |
+|        |       wait();                                  |
+|        |   }                                            |
+|---------------------------------------------------------|
+|  V(sv) |   if (process(es) paused) {                    |
+|        |       resume one of them;                      |
+|        |   } else {                                     |
+|        |       sv += 1;                                 |
+|        |   }                                            |
+-----------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------
+| PROCESS A EXECUTING THREAD      -------------------       PROCESS B EXECUTING THREAD               |
+|            ----------------->   |  P(signal var)  |    <----------------                           |
+|            |                    -------------------                    |                           |
+|            |                             |                             |                           |
+|            |                             |- - - - - -                  |                           |
+|           \|/                           \|/         ~                 \|/                          |
+|  --------------------------      -----------------  ~      --------------------------              |
+|  | PROCESS A NON-CRITICAL |      | CRITICAL AREA |  ~      | PROCESS B NON-CRITICAL |              |
+|  |        AREA            |      -----------------  ~      |        AREA            |              |
+|  --------------------------              |          ~      --------------------------              |
+|           /|\                            |          ~                 /|\                          |
+|            |                            \|/         - - - - - - - - - -| ONLY ONE EXECUTING THREAD |
+|            |                    -------------------                    | ENTERY CRITICAL AREA AT   |
+|            ---------------------|  V(signal var)  |--------------------- ANY TIME.                 |
+|                                 -------------------                                                |
+------------------------------------------------------------------------------------------------------

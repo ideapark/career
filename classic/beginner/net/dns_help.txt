@@ -1,0 +1,37 @@
+Network Infromation Service (Yellow Pages/Domain Name Service)
+
+#include <netdb.h>
+
+struct hostent *gethostbyaddr(const void *addr, size_t len, int type);
+struct hostent *gethostbyname(const char *name);
+
+struct hostent {
+    char *h_name;       /* name of the host */
+    char **h_aliases;   /* list of aliases (nicknames) */
+    int h_addrtype;     /* address type */
+    int h_length;       /* length in bytes of the address */
+    char **h_addr_list; /* list of address (network order) */
+};
+
+
+#include <netdb.h>
+
+struct servent *getservbyname(const char *name, const char *proto);
+struct servent *getservbyport(int port, const char *proto);
+
+struct servent {
+    char *s_name;     /* name of the service */
+    char **s_aliases; /* list of aliases (alternative names) */
+    int s_port;       /* the IP port number */
+    char *s_proto;    /* the service type, unually "tcp" or "udp" */
+};
+
+
+#include <arpa/inet.h>
+
+char *inet_ntoa(struct in_addr in);
+
+
+#include <unistd.h>
+
+int gethostname(char *name, int namelength);

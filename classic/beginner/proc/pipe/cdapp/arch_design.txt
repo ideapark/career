@@ -1,0 +1,18 @@
+
+    CLIENT                  SERVER
+
+   app_ui.c                cd_dbm.c
+
+    |    |\                 |    |\
+   \|    |                 \|    |
+
+   client_if.c             server.c
+
+    |    |\                 |    |\
+   \|    |                 \|    |
+
+   pipe_imp.c             pipe_imp.c
+    {    }                  {    }
+    {    }------------------{    }
+    {            PIPE            }
+    {----------------------------}

@@ -1,0 +1,11 @@
+#include <stdio.h>
+
+char *fgets(char *s, int n, FILE *stream);
+char *gets(char *s);
+
+
+fgets stop when:
+    newline char, n-1 character readed, EOF;
+
+gets stop only read a newline char, and it will discard the newline character,
+now maximum character num limit which can be very dangerous.

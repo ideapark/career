@@ -1,0 +1,12 @@
+-----------------------------------------------------------------------------
+    Command Option        set Option        Explanation
+-----------------------------------------------------------------------------
+    sh -n <script>        set -o noexec     check syntax only
+                          set -n
+    sh -v <script>        set -o verbose    display command before executing
+                          set -v
+    sh -x <script>        set -o xtrace     display command after executing
+                          set -x
+    sh -u <script>        set -o nounset    display error if using undefined
+                          set -u            variable
+-----------------------------------------------------------------------------

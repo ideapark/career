@@ -1,0 +1,76 @@
+#include <signal.h>
+
+typedef void (*sighandler_t)(int);
+sighandler_t signal(int signum, sighandler_t handler);
+
+
+#include <sys/types.h>
+#include <signal.h>
+
+int kill(pid_t pid, int sig);
+
+ret: -1
+    errno: EINVAL: signal invalid
+           EPERM: permission error
+           ESRCH: target process does not exist
+
+
+#include <unistd.h>
+
+unsigned int alarm(unsigned int seconds);
+int pause(void);
+
+
+#include <signal.h>
+
+int sigaction(int sig, const struct sigaction *act, struct sigaction *oact);
+
+struct sigaction:
+
+    void (*)(int) sa_handler   /* function, SIG_DFL, or SIG_IGN */
+    sigset_t sa_mask           /* signals to block in sa_handler */
+    int sa_flags               /* signal action modifiers */
+
+
+----------------------------------------------------------------------------
+    SIGNAL                             DESCRIPTION
+----------------------------------------------------------------------------
+   SIGABORT                  process abort abnormally
+   SIGALRM                   timeout alarm
+   SIGFPE                    floating point arithmetic abnormal
+   SIGHUP                    disconnection
+   SIGILL                    illegal instruction
+   SIGINT                    terminal interruption
+   SIGKILL                   kill process (CAN NOT BE CAUGHT OR IGNORED)
+   SIGPIPE                   write to no read process pipe
+   SIGQUIT                   terminal quit
+   SIGSEGV                   invalid memory access
+   SIGTERM                   terminated
+   SIGUSR1                   user defined signal 1
+   SIGUSR2                   user defined signal 2
+   SIGCHLD                   child process stopped or exited
+   SIGCOND                   continue suspended process
+   SIGSTOP                   stop execution (CAN NOT BE CAUGHT OR IGNORED)
+   SIGTSTP                   terminal hang-up
+   SIGTTIN                   background process attempt to read
+   SIGTTOU                   background process attempt to write
+----------------------------------------------------------------------------
+
+
+#include <signal.h>
+
+int sigaddset(sigset_t *set, int signo);
+int sigemptyset(sigset_t *set);
+int sigfillset(sigset_t *set);
+int sigdelset(sigset_t *set, int signo);
+
+int sigismember(sigset_t *set, int signo);
+int sigprocmask(int how, const sigset_t *set, sigset_t *oset);
+
+how:
+    SIG_BLOCK
+    SIG_SETMASK
+    SIG_UNBLOCK
+
+int sigpending(sigset_t *set);
+int sigsuspend(const sigset_t *sigmask);

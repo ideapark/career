@@ -1,0 +1,7 @@
+#!/bin/bash
+
+for file in $(ls f*.sh); do
+    cat -n $file
+done
+
+exit 0

@@ -1,0 +1,3 @@
+#include <unistd.h>
+
+int rmdir(const char *path);

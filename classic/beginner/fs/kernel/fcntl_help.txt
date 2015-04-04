@@ -1,0 +1,4 @@
+#include <fcntl.h>
+
+int fcntl(int fd, int cmd);
+int fcnlt(int fd, int cmd, long arg);

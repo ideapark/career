@@ -1,0 +1,29 @@
+#include <unistd.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+
+int fstat(int fd, struct stat *buf);
+int stat(const char *path, struct stat *buf);
+int lstat(const char *path, struct stat *buf);
+
+
+struct stat:
+
+    st_mode: file perm and type
+        S_IFBLK: special block device
+        S_IFDIR: file is directory
+        S_IFCHR: special character device
+        S_IFIFO: file is FIFO (named pipe)
+        S_IFREG: regular file
+        S_ILNK: symbolic link file
+        S_ISUID: SUID set
+        S_ISGID: SGID set
+
+    st_ino: file inode
+    st_dev: file physical device
+    st_uid: file user id
+    st_gid: file group id
+    st_atime: last access time
+    st_ctime: file perm, owner, group, content last modified time
+    st_mtime: file content last modified time
+    st_nlink: hard link number

@@ -1,0 +1,17 @@
+#include <unistd.h>
+
+int gethostname(char *name, size_t namelen);
+
+
+#include <sys/utsname.h>
+
+int uname(struct utsname *name);
+
+
+struct utsname:
+
+    char sysname[]: operating system name
+    char nodename[]: host name
+    char release[]: system release level
+    char version[]: system version
+    char machine[]: hardware type

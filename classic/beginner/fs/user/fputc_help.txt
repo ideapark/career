@@ -1,0 +1,9 @@
+#include <stdio.h>
+
+int fputc(int c, FILE *stream);
+int putc(int c, FILE *stream);
+int putchar(int c);
+
+
+the same to fgetc function family, all characters are treated to
+int type, so EOF (-1) can work to flag end of file stream.

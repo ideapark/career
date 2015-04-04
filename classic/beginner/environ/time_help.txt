@@ -1,0 +1,39 @@
+#inlcude <time.h>
+
+time_t time(time_t *tloc);
+double difftime(time_t time1, time_t time2);
+struct tm *gmtime(const time_t timeval);
+struct tm *localtime(const time_t *timeval);
+time_t mktime(struct tm *timptr);
+char *asctime(const struct tm *timeptr);
+char *ctime(const time_t *timeval);
+size_t strftime(char *s, size_t maxsize, const char *format, struc tm *timeptr);
+char *strptime(const char *buf, const char *format, struct tm *timeptr);
+
+struct tm {
+    int tm_sec;   /* seconds, 0-61             */
+    int tm_min;   /* minute, 0-59              */
+    int tm_hour;  /* hour, 0-23                */
+    int tm_mday;  /* day of month, 1-31        */
+    int tm_mon;   /* month, 0-11               */
+    int tm_year;  /* year from 1900            */
+    int tm_wday;  /* weekday, 0-6              */
+    int tm_yday;  /* day of year, 0-365        */
+    int tm_isdst; /* daylight saving time flag */
+};
+
+format:
+
+    %a: weekday abbressive          %u: day of week, 1-7 (1 monday)
+    %A: weekday quanified           %w: day of week, 0-6 (0 sunday)
+    %b: month abbressive            %U: week of year, 01-53 (week starts from sunday)
+    %B: month quanified             %V: week of year, 01-53 (week starts from monday)
+    %c: date and time               %x: locale format date
+    %d: day of month, 01-31         %X: locale format time
+    %H: hour, 00-23                 %y: year minus 1900
+    %I: hour, 01-12                 %Y: year
+    %j: day of year, 001-366        %Z: timezone
+    %m: month of year, 01-12        %%: char %
+    %M: minute, 00-59
+    %p: am, pm
+    %S: seconds, 00-61

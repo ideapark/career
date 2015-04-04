@@ -1,0 +1,17 @@
+#include <unistd.h>
+#include <sys/types.h>
+
+off_t lseek(int fd, off_t offset, int whence);
+
+
+whence:
+
+    SEEK_SET: offset is an absolute position
+    SEEK_CUR: offset is relative to current position
+    SEEK_END: offset is relative to end of file
+
+
+when return off_t:
+
+    off_t = -1: failed to seek postion
+    off_t: byte offset from start of file to file pointer

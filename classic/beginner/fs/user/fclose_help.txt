@@ -1,0 +1,9 @@
+#include <stdio.h>
+
+int fclose(FILE *stream);
+
+
+steam:
+    file stream to close
+
+ensure buffered data write to harddisk, release file descriptor

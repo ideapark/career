@@ -1,0 +1,8 @@
+---------------------------------------------------------------
+  COMPILE MACRO                      DESCRIPTION
+---------------------------------------------------------------
+   __LINE__            current line number (decimal)
+   __FILE__            current file name string
+   __DATE__            mmm dd yyyy format string, current date
+   __TIME__            hh:mm:ss format string, current time
+---------------------------------------------------------------
