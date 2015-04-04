@@ -1,0 +1,7 @@
+int i = 1; // OK
+i = i++;   // Error: modify two times, result undefined
+
+SEQUENCE POINT: 
+    expression side effect should have finished
+
+PROGRAMMER SHOULD ENSURE RESULT OF EXPRESSION IS INDEPENDENT WITH CALC ORDER

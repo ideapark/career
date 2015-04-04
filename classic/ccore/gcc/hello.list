@@ -1,0 +1,465 @@
+GAS LISTING C:\Users\lockrecv\AppData\Local\Temp\ccsYM9J7.s 			page 1
+
+
+   1              		.file	"hello.c"
+   2              		.text
+   3              	Ltext0:
+   4              		.def	___main;	.scl	2;	.type	32;	.endef
+   5              		.section .rdata,"dr"
+   6              	LC0:
+   7 0000 48656C6C 		.ascii "Hello, world.\0"
+   7      6F2C2077 
+   7      6F726C64 
+   7      2E00
+   8 000e 0000     		.text
+   9              		.globl	_main
+  10              		.def	_main;	.scl	2;	.type	32;	.endef
+  11              	_main:
+  12              	LFB6:
+  13              		.file 1 "hello.c"
+   1:hello.c       **** #include <stdio.h>
+   2:hello.c       **** 
+   3:hello.c       **** int main(void)
+   4:hello.c       **** {
+  14              		.loc 1 4 0
+  15              		.cfi_startproc
+  16 0000 55       		pushl	%ebp
+  17              		.cfi_def_cfa_offset 8
+  18              		.cfi_offset 5, -8
+  19 0001 89E5     		movl	%esp, %ebp
+  20              		.cfi_def_cfa_register 5
+  21 0003 83E4F0   		andl	$-16, %esp
+  22 0006 83EC20   		subl	$32, %esp
+  23              		.loc 1 4 0
+  24 0009 E8000000 		call	___main
+  24      00
+   5:hello.c       ****     int i;
+   6:hello.c       ****     for (i = 0; i < 10; i++)
+  25              		.loc 1 6 0
+  26 000e C744241C 		movl	$0, 28(%esp)
+  26      00000000 
+  27 0016 EB11     		jmp	L2
+  28              	L3:
+   7:hello.c       ****         printf("%s", "Hello, world.\n");
+  29              		.loc 1 7 0 discriminator 2
+  30 0018 C7042400 		movl	$LC0, (%esp)
+  30      000000
+  31 001f E8000000 		call	_puts
+  31      00
+   6:hello.c       ****     for (i = 0; i < 10; i++)
+  32              		.loc 1 6 0 discriminator 2
+  33 0024 8344241C 		addl	$1, 28(%esp)
+  33      01
+  34              	L2:
+   6:hello.c       ****     for (i = 0; i < 10; i++)
+  35              		.loc 1 6 0 is_stmt 0 discriminator 1
+  36 0029 837C241C 		cmpl	$9, 28(%esp)
+  36      09
+  37 002e 7EE8     		jle	L3
+   8:hello.c       ****     return 0;
+  38              		.loc 1 8 0 is_stmt 1
+GAS LISTING C:\Users\lockrecv\AppData\Local\Temp\ccsYM9J7.s 			page 2
+
+
+  39 0030 B8000000 		movl	$0, %eax
+  39      00
+   9:hello.c       **** }
+  40              		.loc 1 9 0
+  41 0035 C9       		leave
+  42              		.cfi_restore 5
+  43              		.cfi_def_cfa 4, 4
+  44 0036 C3       		ret
+  45              		.cfi_endproc
+  46              	LFE6:
+  47              	Letext0:
+  48              		.file 2 "c:/mingw/include/stdio.h"
+  49 0037 90       		.section	.debug_info,"dr"
+  50              	Ldebug_info0:
+  51 0000 9B010000 		.long	0x19b
+  52 0004 0400     		.word	0x4
+  53 0006 00000000 		.secrel32	Ldebug_abbrev0
+  54 000a 04       		.byte	0x4
+  55 000b 01       		.uleb128 0x1
+  56 000c 474E5520 		.ascii "GNU C 4.8.1 -mtune=generic -march=pentiumpro -g\0"
+  56      4320342E 
+  56      382E3120 
+  56      2D6D7475 
+  56      6E653D67 
+  57 003c 01       		.byte	0x1
+  58 003d 68656C6C 		.ascii "hello.c\0"
+  58      6F2E6300 
+  59 0045 643A5C67 		.ascii "d:\\git-repos\\ccore\\gcc\0"
+  59      69742D72 
+  59      65706F73 
+  59      5C63636F 
+  59      72655C67 
+  60 005c 00000000 		.long	Ltext0
+  61 0060 37000000 		.long	Letext0-Ltext0
+  62 0064 00000000 		.secrel32	Ldebug_line0
+  63 0068 02       		.uleb128 0x2
+  64 0069 04       		.byte	0x4
+  65 006a 07       		.byte	0x7
+  66 006b 756E7369 		.ascii "unsigned int\0"
+  66      676E6564 
+  66      20696E74 
+  66      00
+  67 0078 02       		.uleb128 0x2
+  68 0079 02       		.byte	0x2
+  69 007a 07       		.byte	0x7
+  70 007b 73686F72 		.ascii "short unsigned int\0"
+  70      7420756E 
+  70      7369676E 
+  70      65642069 
+  70      6E7400
+  71 008e 02       		.uleb128 0x2
+  72 008f 01       		.byte	0x1
+  73 0090 06       		.byte	0x6
+  74 0091 63686172 		.ascii "char\0"
+  74      00
+  75 0096 03       		.uleb128 0x3
+  76 0097 5F696F62 		.ascii "_iobuf\0"
+GAS LISTING C:\Users\lockrecv\AppData\Local\Temp\ccsYM9J7.s 			page 3
+
+
+  76      756600
+  77 009e 20       		.byte	0x20
+  78 009f 02       		.byte	0x2
+  79 00a0 87       		.byte	0x87
+  80 00a1 1D010000 		.long	0x11d
+  81 00a5 04       		.uleb128 0x4
+  82 00a6 5F707472 		.ascii "_ptr\0"
+  82      00
+  83 00ab 02       		.byte	0x2
+  84 00ac 89       		.byte	0x89
+  85 00ad 1D010000 		.long	0x11d
+  86 00b1 00       		.byte	0
+  87 00b2 04       		.uleb128 0x4
+  88 00b3 5F636E74 		.ascii "_cnt\0"
+  88      00
+  89 00b8 02       		.byte	0x2
+  90 00b9 8A       		.byte	0x8a
+  91 00ba 23010000 		.long	0x123
+  92 00be 04       		.byte	0x4
+  93 00bf 04       		.uleb128 0x4
+  94 00c0 5F626173 		.ascii "_base\0"
+  94      6500
+  95 00c6 02       		.byte	0x2
+  96 00c7 8B       		.byte	0x8b
+  97 00c8 1D010000 		.long	0x11d
+  98 00cc 08       		.byte	0x8
+  99 00cd 04       		.uleb128 0x4
+ 100 00ce 5F666C61 		.ascii "_flag\0"
+ 100      6700
+ 101 00d4 02       		.byte	0x2
+ 102 00d5 8C       		.byte	0x8c
+ 103 00d6 23010000 		.long	0x123
+ 104 00da 0C       		.byte	0xc
+ 105 00db 04       		.uleb128 0x4
+ 106 00dc 5F66696C 		.ascii "_file\0"
+ 106      6500
+ 107 00e2 02       		.byte	0x2
+ 108 00e3 8D       		.byte	0x8d
+ 109 00e4 23010000 		.long	0x123
+ 110 00e8 10       		.byte	0x10
+ 111 00e9 04       		.uleb128 0x4
+ 112 00ea 5F636861 		.ascii "_charbuf\0"
+ 112      72627566 
+ 112      00
+ 113 00f3 02       		.byte	0x2
+ 114 00f4 8E       		.byte	0x8e
+ 115 00f5 23010000 		.long	0x123
+ 116 00f9 14       		.byte	0x14
+ 117 00fa 04       		.uleb128 0x4
+ 118 00fb 5F627566 		.ascii "_bufsiz\0"
+ 118      73697A00 
+ 119 0103 02       		.byte	0x2
+ 120 0104 8F       		.byte	0x8f
+ 121 0105 23010000 		.long	0x123
+ 122 0109 18       		.byte	0x18
+ 123 010a 04       		.uleb128 0x4
+ 124 010b 5F746D70 		.ascii "_tmpfname\0"
+GAS LISTING C:\Users\lockrecv\AppData\Local\Temp\ccsYM9J7.s 			page 4
+
+
+ 124      666E616D 
+ 124      6500
+ 125 0115 02       		.byte	0x2
+ 126 0116 90       		.byte	0x90
+ 127 0117 1D010000 		.long	0x11d
+ 128 011b 1C       		.byte	0x1c
+ 129 011c 00       		.byte	0
+ 130 011d 05       		.uleb128 0x5
+ 131 011e 04       		.byte	0x4
+ 132 011f 8E000000 		.long	0x8e
+ 133 0123 02       		.uleb128 0x2
+ 134 0124 04       		.byte	0x4
+ 135 0125 05       		.byte	0x5
+ 136 0126 696E7400 		.ascii "int\0"
+ 137 012a 06       		.uleb128 0x6
+ 138 012b 46494C45 		.ascii "FILE\0"
+ 138      00
+ 139 0130 02       		.byte	0x2
+ 140 0131 91       		.byte	0x91
+ 141 0132 96000000 		.long	0x96
+ 142 0136 02       		.uleb128 0x2
+ 143 0137 08       		.byte	0x8
+ 144 0138 05       		.byte	0x5
+ 145 0139 6C6F6E67 		.ascii "long long int\0"
+ 145      206C6F6E 
+ 145      6720696E 
+ 145      7400
+ 146 0147 02       		.uleb128 0x2
+ 147 0148 04       		.byte	0x4
+ 148 0149 05       		.byte	0x5
+ 149 014a 6C6F6E67 		.ascii "long int\0"
+ 149      20696E74 
+ 149      00
+ 150 0153 02       		.uleb128 0x2
+ 151 0154 02       		.byte	0x2
+ 152 0155 05       		.byte	0x5
+ 153 0156 73686F72 		.ascii "short int\0"
+ 153      7420696E 
+ 153      7400
+ 154 0160 07       		.uleb128 0x7
+ 155 0161 6D61696E 		.ascii "main\0"
+ 155      00
+ 156 0166 01       		.byte	0x1
+ 157 0167 03       		.byte	0x3
+ 158 0168 23010000 		.long	0x123
+ 159 016c 00000000 		.long	LFB6
+ 160 0170 37000000 		.long	LFE6-LFB6
+ 161 0174 01       		.uleb128 0x1
+ 162 0175 9C       		.byte	0x9c
+ 163 0176 87010000 		.long	0x187
+ 164 017a 08       		.uleb128 0x8
+ 165 017b 6900     		.ascii "i\0"
+ 166 017d 01       		.byte	0x1
+ 167 017e 05       		.byte	0x5
+ 168 017f 23010000 		.long	0x123
+ 169 0183 02       		.uleb128 0x2
+ 170 0184 74       		.byte	0x74
+GAS LISTING C:\Users\lockrecv\AppData\Local\Temp\ccsYM9J7.s 			page 5
+
+
+ 171 0185 1C       		.sleb128 28
+ 172 0186 00       		.byte	0
+ 173 0187 09       		.uleb128 0x9
+ 174 0188 2A010000 		.long	0x12a
+ 175 018c 92010000 		.long	0x192
+ 176 0190 0A       		.uleb128 0xa
+ 177 0191 00       		.byte	0
+ 178 0192 0B       		.uleb128 0xb
+ 179 0193 5F696F62 		.ascii "_iob\0"
+ 179      00
+ 180 0198 02       		.byte	0x2
+ 181 0199 98       		.byte	0x98
+ 182 019a 87010000 		.long	0x187
+ 183 019e 00       		.byte	0
+ 184              		.section	.debug_abbrev,"dr"
+ 185              	Ldebug_abbrev0:
+ 186 0000 01       		.uleb128 0x1
+ 187 0001 11       		.uleb128 0x11
+ 188 0002 01       		.byte	0x1
+ 189 0003 25       		.uleb128 0x25
+ 190 0004 08       		.uleb128 0x8
+ 191 0005 13       		.uleb128 0x13
+ 192 0006 0B       		.uleb128 0xb
+ 193 0007 03       		.uleb128 0x3
+ 194 0008 08       		.uleb128 0x8
+ 195 0009 1B       		.uleb128 0x1b
+ 196 000a 08       		.uleb128 0x8
+ 197 000b 11       		.uleb128 0x11
+ 198 000c 01       		.uleb128 0x1
+ 199 000d 12       		.uleb128 0x12
+ 200 000e 06       		.uleb128 0x6
+ 201 000f 10       		.uleb128 0x10
+ 202 0010 17       		.uleb128 0x17
+ 203 0011 00       		.byte	0
+ 204 0012 00       		.byte	0
+ 205 0013 02       		.uleb128 0x2
+ 206 0014 24       		.uleb128 0x24
+ 207 0015 00       		.byte	0
+ 208 0016 0B       		.uleb128 0xb
+ 209 0017 0B       		.uleb128 0xb
+ 210 0018 3E       		.uleb128 0x3e
+ 211 0019 0B       		.uleb128 0xb
+ 212 001a 03       		.uleb128 0x3
+ 213 001b 08       		.uleb128 0x8
+ 214 001c 00       		.byte	0
+ 215 001d 00       		.byte	0
+ 216 001e 03       		.uleb128 0x3
+ 217 001f 13       		.uleb128 0x13
+ 218 0020 01       		.byte	0x1
+ 219 0021 03       		.uleb128 0x3
+ 220 0022 08       		.uleb128 0x8
+ 221 0023 0B       		.uleb128 0xb
+ 222 0024 0B       		.uleb128 0xb
+ 223 0025 3A       		.uleb128 0x3a
+ 224 0026 0B       		.uleb128 0xb
+ 225 0027 3B       		.uleb128 0x3b
+ 226 0028 0B       		.uleb128 0xb
+GAS LISTING C:\Users\lockrecv\AppData\Local\Temp\ccsYM9J7.s 			page 6
+
+
+ 227 0029 01       		.uleb128 0x1
+ 228 002a 13       		.uleb128 0x13
+ 229 002b 00       		.byte	0
+ 230 002c 00       		.byte	0
+ 231 002d 04       		.uleb128 0x4
+ 232 002e 0D       		.uleb128 0xd
+ 233 002f 00       		.byte	0
+ 234 0030 03       		.uleb128 0x3
+ 235 0031 08       		.uleb128 0x8
+ 236 0032 3A       		.uleb128 0x3a
+ 237 0033 0B       		.uleb128 0xb
+ 238 0034 3B       		.uleb128 0x3b
+ 239 0035 0B       		.uleb128 0xb
+ 240 0036 49       		.uleb128 0x49
+ 241 0037 13       		.uleb128 0x13
+ 242 0038 38       		.uleb128 0x38
+ 243 0039 0B       		.uleb128 0xb
+ 244 003a 00       		.byte	0
+ 245 003b 00       		.byte	0
+ 246 003c 05       		.uleb128 0x5
+ 247 003d 0F       		.uleb128 0xf
+ 248 003e 00       		.byte	0
+ 249 003f 0B       		.uleb128 0xb
+ 250 0040 0B       		.uleb128 0xb
+ 251 0041 49       		.uleb128 0x49
+ 252 0042 13       		.uleb128 0x13
+ 253 0043 00       		.byte	0
+ 254 0044 00       		.byte	0
+ 255 0045 06       		.uleb128 0x6
+ 256 0046 16       		.uleb128 0x16
+ 257 0047 00       		.byte	0
+ 258 0048 03       		.uleb128 0x3
+ 259 0049 08       		.uleb128 0x8
+ 260 004a 3A       		.uleb128 0x3a
+ 261 004b 0B       		.uleb128 0xb
+ 262 004c 3B       		.uleb128 0x3b
+ 263 004d 0B       		.uleb128 0xb
+ 264 004e 49       		.uleb128 0x49
+ 265 004f 13       		.uleb128 0x13
+ 266 0050 00       		.byte	0
+ 267 0051 00       		.byte	0
+ 268 0052 07       		.uleb128 0x7
+ 269 0053 2E       		.uleb128 0x2e
+ 270 0054 01       		.byte	0x1
+ 271 0055 3F       		.uleb128 0x3f
+ 272 0056 19       		.uleb128 0x19
+ 273 0057 03       		.uleb128 0x3
+ 274 0058 08       		.uleb128 0x8
+ 275 0059 3A       		.uleb128 0x3a
+ 276 005a 0B       		.uleb128 0xb
+ 277 005b 3B       		.uleb128 0x3b
+ 278 005c 0B       		.uleb128 0xb
+ 279 005d 27       		.uleb128 0x27
+ 280 005e 19       		.uleb128 0x19
+ 281 005f 49       		.uleb128 0x49
+ 282 0060 13       		.uleb128 0x13
+ 283 0061 11       		.uleb128 0x11
+GAS LISTING C:\Users\lockrecv\AppData\Local\Temp\ccsYM9J7.s 			page 7
+
+
+ 284 0062 01       		.uleb128 0x1
+ 285 0063 12       		.uleb128 0x12
+ 286 0064 06       		.uleb128 0x6
+ 287 0065 40       		.uleb128 0x40
+ 288 0066 18       		.uleb128 0x18
+ 289 0067 9642     		.uleb128 0x2116
+ 290 0069 19       		.uleb128 0x19
+ 291 006a 01       		.uleb128 0x1
+ 292 006b 13       		.uleb128 0x13
+ 293 006c 00       		.byte	0
+ 294 006d 00       		.byte	0
+ 295 006e 08       		.uleb128 0x8
+ 296 006f 34       		.uleb128 0x34
+ 297 0070 00       		.byte	0
+ 298 0071 03       		.uleb128 0x3
+ 299 0072 08       		.uleb128 0x8
+ 300 0073 3A       		.uleb128 0x3a
+ 301 0074 0B       		.uleb128 0xb
+ 302 0075 3B       		.uleb128 0x3b
+ 303 0076 0B       		.uleb128 0xb
+ 304 0077 49       		.uleb128 0x49
+ 305 0078 13       		.uleb128 0x13
+ 306 0079 02       		.uleb128 0x2
+ 307 007a 18       		.uleb128 0x18
+ 308 007b 00       		.byte	0
+ 309 007c 00       		.byte	0
+ 310 007d 09       		.uleb128 0x9
+ 311 007e 01       		.uleb128 0x1
+ 312 007f 01       		.byte	0x1
+ 313 0080 49       		.uleb128 0x49
+ 314 0081 13       		.uleb128 0x13
+ 315 0082 01       		.uleb128 0x1
+ 316 0083 13       		.uleb128 0x13
+ 317 0084 00       		.byte	0
+ 318 0085 00       		.byte	0
+ 319 0086 0A       		.uleb128 0xa
+ 320 0087 21       		.uleb128 0x21
+ 321 0088 00       		.byte	0
+ 322 0089 00       		.byte	0
+ 323 008a 00       		.byte	0
+ 324 008b 0B       		.uleb128 0xb
+ 325 008c 34       		.uleb128 0x34
+ 326 008d 00       		.byte	0
+ 327 008e 03       		.uleb128 0x3
+ 328 008f 08       		.uleb128 0x8
+ 329 0090 3A       		.uleb128 0x3a
+ 330 0091 0B       		.uleb128 0xb
+ 331 0092 3B       		.uleb128 0x3b
+ 332 0093 0B       		.uleb128 0xb
+ 333 0094 49       		.uleb128 0x49
+ 334 0095 13       		.uleb128 0x13
+ 335 0096 3F       		.uleb128 0x3f
+ 336 0097 19       		.uleb128 0x19
+ 337 0098 3C       		.uleb128 0x3c
+ 338 0099 19       		.uleb128 0x19
+ 339 009a 00       		.byte	0
+ 340 009b 00       		.byte	0
+GAS LISTING C:\Users\lockrecv\AppData\Local\Temp\ccsYM9J7.s 			page 8
+
+
+ 341 009c 00       		.byte	0
+ 342              		.section	.debug_aranges,"dr"
+ 343 0000 1C000000 		.long	0x1c
+ 344 0004 0200     		.word	0x2
+ 345 0006 00000000 		.secrel32	Ldebug_info0
+ 346 000a 04       		.byte	0x4
+ 347 000b 00       		.byte	0
+ 348 000c 0000     		.word	0
+ 349 000e 0000     		.word	0
+ 350 0010 00000000 		.long	Ltext0
+ 351 0014 37000000 		.long	Letext0-Ltext0
+ 352 0018 00000000 		.long	0
+ 353 001c 00000000 		.long	0
+ 354              		.section	.debug_line,"dr"
+ 355              	Ldebug_line0:
+ 356 0000 62000000 		.section	.debug_str,"dr"
+ 356      02003A00 
+ 356      00000101 
+ 356      FB0E0D00 
+ 356      01010101 
+ 357              		.ident	"GCC: (GNU) 4.8.1"
+ 358              		.def	_puts;	.scl	2;	.type	32;	.endef
+GAS LISTING C:\Users\lockrecv\AppData\Local\Temp\ccsYM9J7.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 hello.c
+C:\Users\lockrecv\AppData\Local\Temp\ccsYM9J7.s:3      .text:0000000000000000 Ltext0
+C:\Users\lockrecv\AppData\Local\Temp\ccsYM9J7.s:6      .rdata:0000000000000000 LC0
+C:\Users\lockrecv\AppData\Local\Temp\ccsYM9J7.s:11     .text:0000000000000000 _main
+C:\Users\lockrecv\AppData\Local\Temp\ccsYM9J7.s:12     .text:0000000000000000 LFB6
+C:\Users\lockrecv\AppData\Local\Temp\ccsYM9J7.s:34     .text:0000000000000029 L2
+C:\Users\lockrecv\AppData\Local\Temp\ccsYM9J7.s:28     .text:0000000000000018 L3
+C:\Users\lockrecv\AppData\Local\Temp\ccsYM9J7.s:46     .text:0000000000000037 LFE6
+C:\Users\lockrecv\AppData\Local\Temp\ccsYM9J7.s:47     .text:0000000000000037 Letext0
+C:\Users\lockrecv\AppData\Local\Temp\ccsYM9J7.s:50     .debug_info:0000000000000000 Ldebug_info0
+C:\Users\lockrecv\AppData\Local\Temp\ccsYM9J7.s:185    .debug_abbrev:0000000000000000 Ldebug_abbrev0
+C:\Users\lockrecv\AppData\Local\Temp\ccsYM9J7.s:355    .debug_line:0000000000000000 Ldebug_line0
+
+UNDEFINED SYMBOLS
+___main
+_puts

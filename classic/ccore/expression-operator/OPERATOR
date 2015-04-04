@@ -1,0 +1,19 @@
+precedence  operator                          association (L: left R: right)
+ 1          [] () . -> ++ -- (class) {column}    L->R
+ 2          ++ -- ! ~ + - * & sizeof             R->L
+ 3          (class name)                         R->L
+ 4          * / %                                L->R
+ 5          + -                                  L->R
+ 6          << >>                                L->R
+ 7          < <= > >=                            L->R
+ 8          == !=                                L->R
+ 9          bit AND: &                           L->R
+ 10         bit XOR: ^                           L->R
+ 11         bit OR: |                            L->R
+ 12         AND: &&                              L->R
+ 13         OR: ||                               L->R
+ 14         ?:                                   R->L
+ 15          = += -= *=
+            /= %= &= ^=
+            |= <<= >>=                           R->L
+ 16         ,                                    L->R
