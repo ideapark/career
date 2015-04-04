@@ -1,0 +1,3 @@
+#ifdef <platform-specific-symbol>
+    #pragma ...
+#endif

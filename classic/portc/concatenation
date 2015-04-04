@@ -1,0 +1,5 @@
+#ifdef __STDC__
+#  define CLUE(a,b) a##b
+#else
+#  define CLUE(a,b) a/**/b
+#endif

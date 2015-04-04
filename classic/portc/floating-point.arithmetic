@@ -1,0 +1,33 @@
+It is rather better to use expressions such as
+         |float_expr1 - float_expr2| <= K
+or
+         |\float_expr1/float_expr2\ - 1.0| <= K (if float_expr2 != 0.0),
+where 0 < K < 1 is a function of:
+
+1. The floating type, e.g., float or double,
+
+2. the machine architecture (the machine constants defined in the previous
+   section), and
+
+3. the precision of the input values and the rounding errors introduced by
+   the numerical method used.
+
+===
+
+#1#
+    Keep in mind that the double representation does not necessarily
+    increase the precision. Actually, in some implementations the precision
+    decreases, but the range increases.
+
+#2#
+    Do not use double unnecessarily, since in many cases there is a large
+    performance penalty. Furthermore, there is no point in using higher
+    precision, if the additional bits that would be computed are garbage
+    anyway. The precision one needs depends mostly on the precision of the
+    input data and the numerical method used.
+
+===
+
+exceptions:
+    Always enable floating-point exceptions (overflow, underflow,
+    division by zero, etc).

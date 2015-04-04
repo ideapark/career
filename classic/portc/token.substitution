@@ -1,0 +1,5 @@
+#ifdef __STDC__
+#  define MAKESTRING(s) # s
+#else
+#  define MAKESTRING(s) "s"
+#endif
