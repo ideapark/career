@@ -3,8 +3,8 @@
 
 #define MAXVAL  100   /* maximum stack size */
 
-int sp = 0;           /* next empty stack pos */
-double val[MAXVAL];   /* value stack */
+static int sp = 0;         /* next empty stack pos */
+static double val[MAXVAL]; /* value stack */
 
 void push(double f)
 {
