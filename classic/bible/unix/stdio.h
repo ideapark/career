@@ -13,6 +13,17 @@ typedef struct _iobuf {
 
 extern FILE _iob[OPEN_MAX];
 
+/*
+ * file: stdio.c
+ *
+ * FILE _iob[OPEN_MAX] = {
+ *    {0, (char *)0, (char *)0, _READ, 0},
+ *    {0, (char *)0, (char *)0, _WRITE, 1},
+ *    {0, (char *)0, (char *)0, _WRITE | _UNBUF, 2}
+ * };
+ *
+ */
+
 #define stdin   (&_iob[0])
 #define stdout  (&_iob[1])
 #define stderr  (&_iob[2])
