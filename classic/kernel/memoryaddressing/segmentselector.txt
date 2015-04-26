@@ -1,0 +1,27 @@
+segment selector format
+=======================
+
+                  15        3  2 1 0
+                  +-----------------+
+                  |          |  |   | TI = Table Indicator
+ Segment Selector |   index  |TI|RPL|
+                  |          |  |   | RPL = Requestor Privilege Level
+                  +-----------------+
+
+segment registers
+=================
+
+ cs  The code segment register, which points to a segment containing
+     program instructions
+
+ ss  The stack segment register, which points to a segment containing
+     the current program stack
+
+ ds  The data segment register, which points to a segment containing
+     global and static data
+
+The cs register has another important function: it includes a 2-bit field
+that specifies the Current Privilege Level (CPL) of the CPU. The value 0
+denotes the highest privilege leve, while the value 3 denotes the lowest
+one. Linux uses only levels 0 and 3, which are respectively called Kernel
+Mode and User Mode.

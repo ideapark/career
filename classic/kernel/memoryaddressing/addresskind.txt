@@ -23,3 +23,13 @@ Used to address memory cells in memory chips. They correspond to the elect-
 rical signals sent along the address spins of the microprocessor to the
 memory bus. Physical addresses are represented as 32-bit or 36-bit unsigned
 integers.
+
+logical address translation
+===========================
+
+                     +-----------------+
+logical address ===> |SEGMENTATION UNIT| ===> linear address ====++
+                     +-----------------+                         ++
+                                               +-----------+     ++
+                         physical address <=== |PAGING UNIT| <===++
+                                               +-----------+

@@ -1,0 +1,47 @@
+segment descriptor fields
+=========================
+
+------------------------------------------------------------------------
+ Field name     Description
+------------------------------------------------------------------------
+ Base           Contains the linear address of the first byte of the
+                segment
+
+ G              Granularity flag: if it is cleared (equal to 0), the
+                segment size is expressed in bytes; otherwise, it is
+                expressed in multiples of 4096 bytes.
+
+ Limit          Holds the offset of the last memory cell in the segment,
+                thus binding the segment length. When G is set to 0, the
+                size of a segment may vary between 1 byte and 1 MB;
+                otherwise, it may vary between 4KB and 4GB.
+
+ S              System flag: if it is cleared, the segment is a system
+                segment that stores critical data structures such as the
+                Local Descriptor Table; otherwise, it is a normal code
+                or data segment.
+
+ Type           Characterizes the segment type and its access rights
+
+ DPL            Descriptor Privilege Level: used to restrict accesses
+                to the segment. It represents the minimal CPU privilege
+                level requested for accessing the segment. Therefore,
+                a segment with its DPL set to 0 is accessible only when
+                the CPL is 0 -- that is, in Kernel Mode -- while a
+                segment with its DPL set to 3 is accessible with every
+                CPL value.
+
+ P              Segment-Present flag: is equal to 0 if the segment is
+                not stored currently in main memory. Linux always sets
+                this flag (bit 47) to 1, because it never swaps out
+                whole segments to disk.
+
+ D or B         Called D or B depending on whether the segment contains
+                code or data. Its meaning is slightly different in the
+                two cases, but it is basically set (equal to 1) if the
+                addresses used as segment offsets are 32 bits long, and
+                is cleared if they are 16 bits long.
+
+ AVL            May be used by the operating system, but it is ignored
+                by Linux.
+------------------------------------------------------------------------
