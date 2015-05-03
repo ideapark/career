@@ -1,0 +1,78 @@
+a doubly linked listed with three elements
+==========================================
+
+      +---------------------------------------------------------------------+
+      |                                                                     |
+      |         data structure 1    data structure 2    data structure 3    |
+      |           +---------+         +---------+         +---------+       |
+      |           |         |         |         |         |         |       |
+      |           |         |         |         |         |         |       |
+      |           |         |         |         |         |         |       |
+      |           |         |         |         |         |         |       |
+      |           |list_head|         |list_head|         |list_head|       |
+     \|/       +->+---------+<--+  +->+---------+<--+  +->+---------+<---+  |
+               |  |   next -+---+--+  |   next -+---+--+  |   next -+----+--+
+   list_head   |  +---------+   |     +---------+   |     +---------+    |
+   +-------+ <-+--+-  prev  |   +-----+-  prev  |   +-----+-  prev  |    |
+   |  next +---+  +---------+         +---------+         +---------+    |
+   +-------+      |         |         |         |         |         |    |
+   |  prev |      |         |         |         |         |         |    |
+   +--+----+      |         |         |         |         |         |    |
+      |           |         |         |         |         |         |    |
+      |           |         |         |         |         |         |    |
+      |           +---------+         +---------+         +---------+    |
+      |                                                                  |
+      +------------------------------------------------------------------+
+
+
+an empty doubly linked list
+===========================
+
+ +-------+    +----+
+ |       |    |    |
+ |      \|/  \|/   |
+ |                 |
+ |    list_head    |
+ |    +--------+   |
+ |    |  next -+---+
+ |    +--------+
+ +----+- prev  |
+      +--------+
+
+
+list handling functions and macros
+==================================
+
+--------------------------------------------------------------------------
+ Name                       Description
+--------------------------------------------------------------------------
+ list_add(n,p)              inserts an element pointed to by n right after
+                            the specified element pointed to by p. (to
+                            insert n at the beginning of the list, set p
+                            to the address of the list head.)
+
+ list_add_tail(n,p)         inserts an element pointed to by n right before
+                            the specified element pointed to by p. (to
+                            insert n at the end of the list, set p to the
+                            address of the list head.)
+
+ list_del(p)                deletes an element pointed to by p. (there is
+                            no need to specify the head of the list.)
+
+ list_empty(p)              checks if the list specified by the address p
+                            of its head is empty.
+
+ list_entry(p,t,m)          returns the address of the data structure of
+                            type t in which the list_head field that has
+                            the name m and the address p is included.
+
+ list_for_each(p,h)         scans the elements of the list specified by the
+                            address of the head; in each iteration, a
+                            pointer to the list_head structure of the list
+                            element is returned in p.
+
+ list_for_each_entry(p,h,m) similar to list_for_each, but returns the
+                            address of the data structure embedding the
+                            list_head structure rather than the address of
+                            the list_head structure itself.
+--------------------------------------------------------------------------
