@@ -1,0 +1,51 @@
+resource limits
+===============
+
+------------------------------------------------------------------------------
+ Field name         Description
+------------------------------------------------------------------------------
+ RLIMIT_AS          the maximum size of process address space, in bytes.
+                    the kernel checks this value when the process uses
+                    malloc() or a related function to enlarge its address
+                    space
+
+ RLIMIT_CORE        the maximum core dump size, in bytes. the kernel checks
+                    this value when process is aborted, before creating a
+                    core file in the current directory of the process. if
+                    the limit is 0, the kernel won't create the file.
+
+ RLIMIT_CPU         the maximum CPU time for the process, in seconds. if
+                    the process exceeds the limit, the kernel sends it a
+                    SIGXCPU signal, and then, if the process doesn't
+                    terminate, the SIGKILL signal.
+
+ RLIMIT_DATA        the maximum heap size, in bytes. the kernel checks this
+                    value before expanding the heap of the process.
+
+ RLIMIT_FSIZE       the maximum file size allowed, in bytes. if the process
+                    tries to enlarge a file to a size greater than this
+                    value, the kernel sends it a SIGXFSZ signal.
+
+ RLIMIT_LOCKS       maximum number of file locks (currently, not enforced).
+
+ RLIMIT_MEMLOCK     the maximum size of nonswappable memory, in bytes. the
+                    kernel checks this value when the process tries to lock
+                    a page frame in memory using the mlock() or mlockall()
+                    system calls.
+
+ RLIMIT_MSGQUEUE    maximum number of bytes in POSIX message queues.
+
+ RLIMIT_NOFILE      the maximum number of open file descriptors. the kernel
+                    checks this value when opening a new file or duplicating
+                    a file descriptor.
+
+ RLIMIT_NPROC       the maximum number of processes that the user can own.
+
+ RLIMIT_RSS         the maximum number of page frames owned by the process (
+                    currently, not enforced).
+
+ RLIMIT_SIGPENDING  the maximum number of pending signals for the process.
+
+ RLIMIT_STACK       the maximum stack size, in bytes. the kernel check this
+                    value before expanding the User Mode stack of the process.
+------------------------------------------------------------------------------
