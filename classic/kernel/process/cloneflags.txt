@@ -1,0 +1,72 @@
+------------------------------------------------------------------------
+ Flag name              Description
+------------------------------------------------------------------------
+ CLONE_VM               Shares the memory descriptor and all page tables.
+
+ CLONE_FS               Shares the table that identifies the root
+                        directory and the current working directory, as
+                        well as the value of the bitmask used to mask the
+                        initial file permissions of a new file (the so-
+                        called file umask).
+
+ CLONE_FILES            Shares the table that identifies the open files.
+
+ CLONE_SIGHAND          Shares the tables that identify the signal
+                        handlers and the blocked and pending signals. if
+                        this flag is true, the CLONE_VM flag must also
+                        be set.
+
+ CLONE_PTRACE           if traced, the parent wants the child to be
+                        traced too. furthermore, the debugger may want
+                        to trace the child on its own; in this case, the
+                        kernel forces the flat to 1.
+
+ CLONE_VFORK            set when the system call issued is a vfork().
+
+ CLONE_PARENT           sets the parent of the child (parent and
+                        real_parent fields in the process descriptor) to
+                        the parent of the calling process.
+
+ CLONE_THREAD           inserts the child into the same thread group of
+                        the parent, and forces the child to share the
+                        signal descriptor of the parent. the child's tgid
+                        and group_leader fields are set accordingly. if
+                        this flag is true, the CLONE_SIGHAND flag must
+                        also be set.
+
+ CLONE_NEWNS            set if the clone needs its own namespace, that is,
+                        its own view of the mounted filesystem; it is not
+                        possible to specify both CLONE_NEWNS and CLONE_FS.
+
+ CLONE_SYSVSEM          shares the System V IPC undoable semaphore
+                        operations.
+
+ CLONE_SETTLS           creates a new thread local storage (TLS) segment
+                        for the lightweight process; the segment is
+                        described in the structure pointed to by the tls
+                        parameter.
+
+ CLONE_PARENT_SETTID    write the pid of the child into the user mode
+                        variable of the parent pointed to by the ptid
+                        parameter.
+
+ CLONE_CHILD_CLEARTID   when set, the kernel sets up a mechanism to be
+                        triggered when the child process will exit or
+                        when it will start executing a new program. in
+                        these cases, the kernel will clear the user mode
+                        variable pointed to by the ctid parameter and
+                        will awaken any process waiting for this event.
+
+ CLONE_DETACHED         a legacy flag ignored by the kernel.
+
+ CLONE_UNTRACED         set by the kernel to override the value of the
+                        CLONE_PTRACE flag (used for disabling tracing of
+                        kernel threads).
+
+ CLONE_CHILD_SETTID     writes the PID of the child into the user mode
+                        variable of the child pointed to by the ctid
+                        parameter.
+
+ CLONE_STOPPED          forces the child to start in the TASK_STOPPED
+                        state.
+------------------------------------------------------------------------
