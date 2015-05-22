@@ -1,0 +1,162 @@
+IRQ Descriptors
+===============
+
+            0              i          NR_IRQS-1
+          +----+--------+-----+--------+----+
+ irq_desc |    |        |     |        |    |
+          +----+--------+-----+--------+----+
+                       /  | |  \                        hw_irq_controller
+                      /   | |   \           +---------> +---------------+
+                     /    | |    \          |           |               |
+                    /     | |     \         |           |               |
+                   /      \ /      \        |           |               |
+                   +---------------+        |           +---------------+
+        irq_desc_t |               |        |
+                   +---------------+        |
+                   |    handler    |--------+
+                   +---------------+
+                   |               |
+                   |               |
+                   +---------------+
+                   |     action    |--------+
+                   +---------------+        |       irqaction                irqaction
+                   |               |        +---> +------------+    +---> +-------------+
+                   |               |              |            |    |     |             |
+                   +---------------+              |            |    |     |             |
+                                                  +------------+    |     +-------------+
+                                                  |    next    |----+     |     next    |---|
+                                                  +------------+          +-------------+
+
+
+irq_desc_t descriptor
+=====================
+
+-----------------------------------------------------------------------------
+ Field                     Description
+-----------------------------------------------------------------------------
+ handler                   Points to the PIC object (hw_irq_controller
+                           descriptor) that services the IRQ line.
+
+ handler_data              Pointer to data used by the PIC methods.
+
+ action                    Identifies the interrupt service routines to be
+                           invoked when the IRQ occurs. The field points to
+                           the first element of the list of irqaction
+                           descriptors associated with the IRQ.
+
+ status                    A set of flags describing the IRQ line status.
+
+ depth                     Shows 0 if the IRQ line is enabled and a
+                           positive value if it has been disabled at least
+                           once.
+
+ irq_count                 Counter of interrupt occurrences on the IRQ line (
+                           for diagnostic use only).
+
+ irqs_unhandled            Counter of unhandled interrupt occurrences on the
+                           IRQ line (for diagnostic use only).
+
+ lock                      A spin lock used to serialize the accesses to the
+                           IRQ descriptor and to the PIC.
+-----------------------------------------------------------------------------
+
+
+Flags describing the IRQ line status
+====================================
+
+----------------------------------------------------------------------------
+ Flag name             Description
+----------------------------------------------------------------------------
+ IRQ_INPROGRESS        A handler for the IRQ is being executed.
+
+ IRQ_DISABLED          The IRQ line has been deliberately disabled by a
+                       device driver.
+
+ IRQ_PENDING           An IRQ has occurred on the line; its occurrence has
+                       been acknowledged to the PIC, but it has not yet been
+                       serviced by the kernel.
+
+ IRQ_REPlAY            The IRQ line has been disabled but the previous IRQ
+                       occurrence has not yet been acknowledged to the PIC.
+
+ IRQ_AUTODETECT        The kernel is using the IRQ line while performing a
+                       hardware device probe.
+
+ IRQ_WAITING           The kernel is using the IRQ line while performing a
+                       hardware probe; moreover, the corresponding interrupt
+                       has not been raised.
+
+ IRQ_LEVEL             Not used on the 80x86 architecture.
+
+ IRQ_MASKED            Not used.
+
+ IRQ_PER_CPU           Not used on the 80x86 architecture.
+----------------------------------------------------------------------------
+
+
+irqaction descriptor
+====================
+
+----------------------------------------------------------------------------
+ Field name            Description
+----------------------------------------------------------------------------
+ handler               Points to the interrupt service routine for an I/O
+                       device. This is the key field that allows many devices
+                       to share the same IRQ.
+
+ flags                 This field includes a few fields that describe the
+                       relationships between the IRQ line and the I/O device.
+
+ mask                  Not used.
+
+ name                  The name of the I/O device (shown when listing the
+                       serviced IRQs by reading the /proc/interrupts file).
+
+ dev_id                A private field for the I/O device. Typically, it
+                       identifies the I/O device itself (for instance, it
+                       could be equal to its major and minor numbers), or it
+                       points to the device driver's data.
+
+ next                  Points the next element of a list of irqaction
+                       descriptors. The elements in the list refer to
+                       hardware devices that share the same IRQ.
+
+ dir                   Points the descriptor of the /proc/irq/n directory
+                       associated with the IRQn.
+----------------------------------------------------------------------------
+
+
+Flags of the irqaction descriptor
+=================================
+
+----------------------------------------------------------------------------
+ Flag name             Description
+----------------------------------------------------------------------------
+ SA_INTERRUPT          The handler must execute with interrupts disabled.
+
+ SA_SHIRQ              The device permits its IRQ line to be shared with
+                       other devices.
+
+ SA_SAMPLE_RANDOM      The device may be considered a source of events that
+                       occurs randomly; it can thus be used by the kernel
+                       random number generator. (Users can access this
+                       feature by taking random numbers from the /dev/random
+                       and /dev/urandom device files.)
+----------------------------------------------------------------------------
+
+
+Fields of the irq_cpustat_t structure
+=====================================
+
+----------------------------------------------------------------------------
+ Field name            Description
+----------------------------------------------------------------------------
+ __softirq_pending     Set of flags denoting the pending softirqs.
+
+ idle_timestamp        Time when the CPU became idle (significant only if
+                       the CPU is currently idle).
+
+ __nmi_count           Number of occurrences of NMI interrupts.
+
+ apic_timer_irqs       Number of occurrences of local APIC timer interrupts.
+----------------------------------------------------------------------------
