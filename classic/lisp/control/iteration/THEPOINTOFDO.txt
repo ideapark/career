@@ -1,0 +1,23 @@
+THE POINT OF DO
+===============
+
+In "The Evolution of Lisp," Steele and Gabriel express the point of do so
+well that the passage is worth quoting in its entirety:
+
+Arguments over syntax aside, there is something to be said for recognizing
+that a loop that steps only one variable is pretty useless, in any progra-
+mming language. It is almost always the case that one variable is used to
+generate successive values while another is used to accumulate a result.
+If the loop syntax steps only the generating variable, then the accumulating
+variable must be stepped "manually" by using assignment statements...or
+some other side effect. The multiple-variable do loop reflects an essential
+symmetry between generation and accumuation, allowing iteration to be
+expressed without explicit side effects:
+
+    (defun factorial (n)
+      (do ((j n (- j 1))
+           (f 1 (* j f)))
+          ((= j 0) f)))
+
+It is indeed not unusual for a do loop of this form to have an empty body,
+performing all its real work in the step forms.
