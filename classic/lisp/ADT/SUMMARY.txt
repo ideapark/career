@@ -1,0 +1,22 @@
+SUMMARY
+=======
+
+1. Common Lisp supports arrays of at least 7 dimensions. One-dimensional
+   arrays are called vectors.
+
+2. Strings are vectors of characters. Characters are objects in their own
+   right.
+
+3. Sequences include lists and vectors. Many sequence functions take
+   keyword arguments from a standard set.
+
+4. Parsing is easy in Lisp because it has so many functions that work on
+   strings.
+
+5. Calling defstruct defines a structure named fields. It is good example
+   of a program that writes programs.
+
+6. Binary search trees are useful for maintaining a sorted collection of
+   objects.
+
+7. Hash tables provide a more efficient way to represent sets and mappings.
