@@ -1,0 +1,11 @@
+A pathname is a portable way of specifying a file. A pathname has
+six components: host, device, directory, name, type, and version.
+You can make one by calling make-pathname with one or more of the
+corresponding keyword arguments. In the simplest case, you could
+just specify the name and let the rest of the pathname default:
+
+    (setf path (make-pathname :name "myfile"))
+    (setf str (open path :direction :output
+                         :if-exists :supersede))
+    (format str "Something~%")
+    (close str)

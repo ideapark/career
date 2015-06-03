@@ -1,0 +1,19 @@
+Streams
+=======
+
+Streams are Lisp objects representing sources and/or destinations of
+characters. To read from or write to a file, you open it as a stream.
+But streams are not identical with files. When you read or print at
+the toplevel, you also use a stream. You can even create streams that
+read from or write to strings.
+
+By default, input is read from the stream *standard-input*. The
+default place for output is *standard-output*. Initially thay will
+probably be the same place: a stream representing the toplevel.
+
+Already we have seen read and format used to read from and print to
+the toplevel. The former takes an optional argument, which should be
+a stream, and defaults to *standard-input*. The first argument to
+format can also be a stream, but when it is t, the output is sent to
+*standard-output*. So what we have been doing as far is using the
+defaults. We could do the same I/O operations on any stream.
