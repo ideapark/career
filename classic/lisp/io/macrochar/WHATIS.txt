@@ -1,0 +1,52 @@
+A macro character is a character that gets special treatment from read. A
+lowercase a, for example, is ordinarily handled just like a lowercase b,
+but a left parenthesis is something different: it tells Lisp to begin
+reading a list.
+
+A macro character or combination of macro characters is also known as a
+read-macro. Many of Common Lisp's predefined read-macros are abbreviations.
+Quote, for example: as an expression like 'a is read, it is expanded by
+the reader into a list, (quote a). When you type quoted expressions into
+the toplevel, they are evaluated as soon as they are read, so ordinarily
+you never see this transformation. You make is visible by invoking read
+explicitly:
+
+> (car (read-from-string "'a"))
+QUOTE
+
+Quote is unusual for a read-macro in that it's expressed as a single char-
+acter. With a limited character set, you can only have so many one-character
+read-macros; most of the read-macros in Common Lisp are expressed using
+two or more characters.
+
+Such read-macros are called dispatching read-macros, and the first character
+is called the dispatching character. All the predefined dispatching
+read-macros use the sharp sign, #, as the dispatching character. We have
+seen quite a few of them already. For example, #' is an abbreviation for
+(function ...) in the same way that ' is an abbreviation for (quite ...).
+
+Other dispatching read-macros we've seen include #(...), which yields a
+vector; #nA(...) which yields an array; #\, which yields a character; and
+#S(n ...), which yields a structure. When objects of each of these types
+corresponding read-macros. This means that you can write each objects out
+and read them back in:
+
+> (let ((*print-array* t))
+    (vectorp (read-from-string (format nil "~S"
+                                       (vector 1 2)))))
+T
+
+Of course, what we get back is not the same vector, but a new one with the
+same elements.
+
+Not all objects are displayed in a distinct, readable form. Both functions
+and hash tables, for example, tend to be displayed as #<...>. In fact, #<
+is also a read-macro, but one that exists specifically to cause an error if
+it is encountered by read. Functions and hash tables can't be written out
+and read back in, and this read-macro ensoures that users will have no
+illusions on this point.
+
+When you're difining your own representations for things (the
+print-functions of structures, for example), you should keep this
+principle in mind. Either use a representation that can be read back in,
+or use #<...>.
