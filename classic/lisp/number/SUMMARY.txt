@@ -1,0 +1,23 @@
+Summary
+=======
+
+1. Common Lisp provides integers, ratios, floating-point numbers, and
+   complex numbers.
+
+2. Numbers can be simplified and converted, and their components can
+   be extracted.
+
+3. Predicates for comparing numbers take any number of arguments, and
+   compare successive pairs ---- except /=, which compares all pairs.
+
+4. Common Lisp provides roughly the numerical functions you might see
+   on a low-end scientific calculator. The same functions generally
+   apply to numbers of several types.
+
+5. Fixnums are integers small enough to fit in one word. The are
+   quietly but expensively converted to bignums when necessary. Common
+   Lisp provides for up to four types of floating-point number. The
+   limits of each representation are implementation-dependent constants.
+
+6. A ray-tracer generates an image by tracing the light that makes
+   each pixel back into a simulated world.
