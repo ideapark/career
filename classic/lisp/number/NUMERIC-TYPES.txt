@@ -1,0 +1,16 @@
+                                   ratio
+                                 /
+                                /
+                       rational                bignum
+                     /          \            /
+                    /            \          /
+               real                 integer
+             /      \                       \
+            /        \          short-float  \
+           /          \       /                fixnum
+          /             float - single-float          \
+         /                    |\                       \
+  number                      |  double-float            bit
+         \                    \
+          \                    - long-float
+            complex
