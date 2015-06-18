@@ -19,3 +19,11 @@ Shared Tail
                   |
                   \/
                   2
+
+
+Lisp Code
+=========
+
+(setf part   (1ist 'b 'c)
+      whole1 (cons 1 part)
+      whole2 (cons 2 part))
