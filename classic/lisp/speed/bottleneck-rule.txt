@@ -1,0 +1,26 @@
+The most important thing to understand about optimization is
+that programs tend to have a few bottlenecks that account for
+a great part of the execution time. According to Knuth, "most
+of the running time in non-IO-bound programs is concentrated in
+about 3% of the source text." Optimizaing these parts of the
+program will make it run noticeably faster; optimizing the rest
+of the program will be a waste of time in comparison.
+
+A corollary of the bottleneck rule is that one should not put
+too much effort into optimization early in a program's life.
+Knuth puts the point even more strongly: "Premature optimization
+is the root of all evil (or at least most of it) in programming."
+It's hard to see where the real bottlenecks will be when you've
+just started writing a program, so there's more chance you'll be
+wasting your time. Optimizations also tend to make a program
+harder to change, so trying to write a program and optimize it
+at the same time can be like trying to paint a picture with paint
+that dries too fast.
+
+When you do turn to optimization, begin at the top. That is, make
+sure that you're using the most efficient algorithm before you
+resort to low-level coding tricks. The potential gains are greater
+-- perhaps great enough that you won't have to resort to coding
+tricks after all. This rule has to be balanced against the
+preceding one, though. Sometimes decisions about algorithms have
+to be made early.
