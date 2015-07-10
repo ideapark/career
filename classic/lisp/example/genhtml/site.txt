@@ -1,0 +1,13 @@
+                  section         item
+                /               /      \
+               /               /        \
+              /      |        /     |    \
+             /       |       /      |     \
+            /               /              \
+  contents +----- section  +----- item ----+ index
+            \               \              /
+             \       |       \      |     /
+              \      |        \     |    /
+               \               \        /
+                \               \      /
+                  section         item
