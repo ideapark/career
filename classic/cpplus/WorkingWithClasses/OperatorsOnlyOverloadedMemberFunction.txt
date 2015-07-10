@@ -1,0 +1,10 @@
+ Operator        Description
+-----------------------------------------------------
+ =            Assignment operator
+
+ ()           Function call operator
+
+ []           Subscripting operator
+
+ ->           Class member access by pointer operator
+-----------------------------------------------------

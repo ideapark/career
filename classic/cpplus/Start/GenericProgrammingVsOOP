@@ -1,0 +1,10 @@
+Similarities:
+
+    aim of makeing it simpler to resue code and the technique 
+    of abstracting general concepts.
+
+Differences:
+
+    OOP: emphasizes the data aspect of programming.
+
+    GP: emphasizes the independence from the paraticular data type.

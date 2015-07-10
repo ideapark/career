@@ -1,0 +1,25 @@
+C++ Escape Sequence Codes
+-------------------------------------------------------------------------------
+Character           ASCII        C++      ASCII Decimal       ASCII Hex
+Name                Symbol       Code     Code                Code
+
+Newline             NL(LF)       \n       10                  0xA
+
+Horizontal tab      HT           \t       9                   0x9
+
+Vertical tab        VT           \v       11                  0xB
+
+Backspace           BS           \b       8                   0x8
+
+Carriage return     CR           \r       13                  0xD
+
+Alert               BEL          \a       7                   0x7
+
+Backslash           \            \\       92                  0x5C
+
+Question mark       ?            \?       63                  0x3F
+
+Single quote        '            \'       39                  0x27
+
+Double quote        "            \"       34                  0x22
+-------------------------------------------------------------------------------

@@ -1,0 +1,34 @@
+ Operators and Functor Equivalents
+ ------------------------------------------------------------------------------
+  Operator                               Function Equivalent
+
+  +                                      plus
+
+  -                                      minus
+
+  *                                      multiplies
+
+  /                                      divides
+
+  %                                      modulus
+
+  -                                      negate
+
+  ==                                     equal_to
+
+  !=                                     not_queal_to
+
+  >                                      greater
+
+  <                                      less
+
+  >=                                     greater_equal
+
+  <=                                     less_equal
+
+  &&                                     logical_and
+
+  ||                                     logical_or
+
+  !                                      logical_not
+ ------------------------------------------------------------------------------

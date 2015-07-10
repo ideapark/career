@@ -1,0 +1,36 @@
+* Returning a Reference to a const Object
+
+  The usual reason for using a const reference is efficiency, but 
+  there are restrictions on when this choice can be used. If a function
+  returns an object that is passed to it, either by object invocation
+  or as a method argument, you can increase the efficiency of the method
+  by having it return a reference.
+
+* Returning a Reference to a Non-const Object
+
+  Two common examples of returning a non-const object are overloading the
+  assignment operator and overloading the << operator for use with cout.
+  The first is done for reasons of efficiency, and the second for reasons
+  of necessity.
+
+* Returning an Object
+
+  If the objects being returned is local to the called function, then it
+  should not be returned by reference because the local object has its
+  destructor called when the function terminates. Thus, when control re-
+  turns to the calling function, there is no object left to which the r-
+  eference can refer. In these circumstances, you should return an object
+  not a reference. Typically, overloaded arithmetic operators fall into
+  this category.
+
+* Returning a const Object
+
+  If you are concerned about the potential for misuse and abuse created,
+  you should declare the return type as a const object.
+
+* In summary, if a method or function returns a local object, it should re-
+  turn an object, not a reference. If a method of function returns an 
+  object of a class for which there is no public copy constructor, such as
+  the ostream class, it must return a reference to an object. Finally,
+  some methods and functions, such as the overloaded assignment operator,
+  can return either an object or a reference to an object.

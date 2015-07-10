@@ -1,0 +1,17 @@
+#1
+    Function prototypes
+
+#2
+    Symbolic constants defined using #define or const
+
+#3
+    Structure declarations
+
+#4
+    Class declarations
+
+#5
+    Template declarations
+
+#6
+    Inline functions

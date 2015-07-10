@@ -1,0 +1,15 @@
+Combined Assignment Operators
+
+--------------------------------------------------------------------
+ Operator               Effect(L=left operand, R=right operand)
+
+ +=                     Assigns L + R to L
+
+ -=                     Assigns L - R to L
+
+ *=                     Assigns L * R to L
+
+ /=                     Assigns L / R to L
+
+ %=                     Assigns L % R to L
+--------------------------------------------------------------------

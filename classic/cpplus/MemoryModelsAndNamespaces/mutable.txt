@@ -1,0 +1,17 @@
+// Your can use it to indicate that a particular
+// member of a structure (or class) can be altered
+// even if a particular structure (or class)
+// variable is a const.
+
+struct Data {
+    char Name[30];
+    mutable int Accesses;
+};
+
+const struct Data Veep = {
+    "Claybourne Clodde",
+    0
+};
+
+strcpy(Veep.Name, "Joye Joux"); // not allowed
+Veep.Accesses++;                // allowed

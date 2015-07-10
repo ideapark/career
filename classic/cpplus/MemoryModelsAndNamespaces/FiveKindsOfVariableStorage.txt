@@ -1,0 +1,21 @@
+-------------------------------------------------------------------------------
+ Storage Description     Duration      Scope      Linkage      How Declared
+
+ Automatic               Automatic     Block      None         In a block
+
+ Register                Automatic     Block      None         In a block with
+                                                               the keyword 
+                                                               register
+
+ Static with no          Static        Block      None         In a block with
+ linkage                                                       the keyword
+                                                               static
+
+ Static with external    Static        File       External     Outside all 
+ linkage                                                       functions
+
+ Static with internal    Static        File       Internal     Outside all
+ linkage                                                       functions with
+                                                               the keyword
+                                                               static
+ -------------------------------------------------------------------------------

@@ -1,0 +1,40 @@
+Symbolic Constants from climits
+-------------------------------------------------------------------------------
+Symbolic Constant                Represents
+
+CHAR_BIT                         Number of bits in a char
+
+CHAR_MAX                         Maximum char value
+
+CHAR_MIN                         Minimum char value
+
+SCHAR_MAX                        Maximum signed char value
+
+SCHAR_MIN                        Minimum signed char value
+
+UCHAR_MAX                        Maximum unsigned char value
+
+SHRT_MAX                         Maximum short value
+
+SHRT_MIN                         Minimum short value
+
+USHRT_MAX                        Maximum unsigned short value
+
+INT_MAX                          Maximum int value
+
+INT_MIN                          Minimum int value
+
+UINT_MAX                         Maximum unsigned int value
+
+LONG_MAX                         Maximum long value
+
+LONG_MIN                         Minimum long value
+
+ULONG_MAX                        Maximum unsigned long value
+
+LLONG_MAX                        Maximum long long value
+
+LLONG_MIN                        Minimum long long value
+
+ULLONG_MAX                       Maximum unsigned long long value
+-------------------------------------------------------------------------------

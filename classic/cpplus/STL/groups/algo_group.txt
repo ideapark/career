@@ -1,0 +1,7 @@
+* Nonmodifying sequence operations
+
+* Mutating sequence operations
+
+* Sorting and related operations
+
+* Generalized numeric operations

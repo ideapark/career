@@ -1,0 +1,14 @@
+-------------------------------------------------------------------------------
+Kind of Header   Convention        Example         Comments
+
+C++ old style    Ends in .h        iostream.h      Usable by C++ programs
+
+C old style      Ends in .h        math.h          Usable by C and C++ Programs
+
+C++ new style    No extension      iostream        Usable by C++ programs, uses
+                                                   namespace std
+
+Converted C      c prefix, no      cmath           Usable by C++ programs, might
+                 extension                         use non-C features, such as
+                                                   namespace std
+-------------------------------------------------------------------------------
