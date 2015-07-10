@@ -1,0 +1,18 @@
+@@@@@@@@
+WARNING:
+^^^^^^^^
+
+    CAN NOT COMPILED, NEED TO FIX IT.
+        ^^^
+        ^^^
+
+------------------------------------------------\
+|                            Query               |
+|                           ^     ^              |
+|                          /       \             |
+|                         /         \            |
+|             BinaryQuery             NameQuery  | ====> UserQuery
+|           ^      ^     ^                       |
+|          /       |       \                     |
+|     OrQuery    AndQuery   NotQuery             |
+------------------------------------------------/
