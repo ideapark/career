@@ -1,0 +1,10 @@
+(defmacro defmeth (name obj parms &rest body)
+  (let ((gobj (gensym)))
+    '(let ((,gobj ,obj))
+       (setf (gethash ',name ,gobj)
+             (labels ((next () (get-next ,gobj ',name)))
+               #'(lambda ,parms ,@body))))))
+
+(defun get-next (obj name)
+  (some #'(lambda (x) (gethash name x))
+        (cdr (gethash :preclist obj))))
