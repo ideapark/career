@@ -1,0 +1,74 @@
+Process Management
+==================
+
+pid = fork();                         /* create a process the same as parent */
+pid = waitpid(pid, &statloc, opts);   /* wait child process to exit */
+s = wait(&status);                    /* old version of waitpid */
+s = execve(name, argv, envp);         /* repalce process executable image */
+exit(status);                         /* terminate process with status code */
+size = brk(addr);                     /* set data segment size */
+pid = getpid();                       /* return process pid */
+pid = getpgrp();                      /* return process group id */
+pid = setid();                        /* create new session and return sessionid */
+
+Signal
+======
+
+s = sigaction(sig, &act, &oldact);    /* setup signal action */
+s = sigreturn(&context);              /* return from signal */
+s = sigprocmask(how, &set, &old);     /* check/modify signal mask */
+s = sigpending(set);                  /* get blocked signal set */
+s = kill(pid, sig);                   /* replace signal mask and pending process */
+residual = alarm(setconds);           /* setup signal alarm */
+s = pause();                          /* pending process until next signal */
+
+File Management
+===============
+
+fd = creat(name, mode);               /* create new file */
+fd = mknod(name, mode, addr);         /* create regular/device/directory/inode */
+fd = open(file, how, ...);            /* open file for r/w/rw */
+s = close(fd);                        /* close file */
+n = read(fd, buffer, nbytes);         /* read file data to buffer */
+n = write(fd, buffer, nbytes);        /* write buffer data to file */
+pos = lseek(fd, offset, whence);      /* move file pointer to specified postion */
+s = stat(name, &buf);                 /* get file status info by file name*/
+s = fstat(fd, &buf);                  /* get file status info by file descriptor */
+fd = dup(fd);                         /* allocate new file descriptor for an open file */
+s = pipe(&fd[0]);                     /* create pipe file */
+s = ioctl(fd, request, argp);         /* specifial file access control */
+s = access(name, amode);              /* check file access permission */
+s = rename(old, new);                 /* rename file */
+s = fcntl(fd, cmd, ...);              /* lock file or other manipulation */
+
+Directory & Filesystem
+========================
+
+s = mkdir(name, mode);                /* create empty directory */
+s = rmdir(name);                      /* remove empty directory */
+s = link(name1, name2);               /* create new file name2 point to file name1 */
+s = unlink(special, name, flag);      /* delete file entry */
+s = mount(special, name, flag);       /* mount filesystem */
+s = umount(special);                  /* umount filesystem */
+s = sync();                           /* synchronize buffer to disk */
+s = chdir(dirname);                   /* change work directory */
+s = chroot(dirname);                  /* change root directory */
+
+Permission Management
+=====================
+
+s = chmod(name, mode);                /* change file protection bit */
+uid = getuid();                       /* get process uid */
+gid = getgid();                       /* get process gid */
+s = setuid(uid);                      /* set process uid */
+s = setgid(gid);                      /* set process gid */
+s = chown(name, owner, group);        /* change file owner and group */
+oldmask = umask(complmode);           /* change file mode mask */
+
+Time Management
+===============
+
+seconds = time(&seconds);             /* get time start from 1970-01-01 00:00:00 */
+s = stime(tp);                        /* set time start from 1970-01-01 00:00:00 */
+s = utime(file, timep);               /* set file last access time */
+s = times(buffer);                    /* get user+system time until now */
