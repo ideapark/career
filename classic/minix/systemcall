@@ -18,9 +18,9 @@ s = sigaction(sig, &act, &oldact);    /* setup signal action */
 s = sigreturn(&context);              /* return from signal */
 s = sigprocmask(how, &set, &old);     /* check/modify signal mask */
 s = sigpending(set);                  /* get blocked signal set */
-s = kill(pid, sig);                   /* replace signal mask and pending process */
+s = kill(pid, sig);                   /* replace signal mask and suspending process */
 residual = alarm(setconds);           /* setup signal alarm */
-s = pause();                          /* pending process until next signal */
+s = pause();                          /* suspending process until next signal */
 
 File Management
 ===============
