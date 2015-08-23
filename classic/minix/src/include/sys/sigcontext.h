@@ -25,41 +25,41 @@
  * be added in a different struct.
  */
 struct sigregs {
-    short sr_gs;
-    short sr_fs;
-    short sr_es;
-    short sr_ds;
-    int   sr_di;
-    int   sr_si;
-    int   sr_bp;
-    int   sr_st;   /* stack top -- used in kernel */
-    int   sr_bx;
-    int   sr_dx;
-    int   sr_cx;
-    int   sr_retreg;
-    int   sr_retadr; /* return address to caller of save -- used in kernel */
+  short sr_gs;
+  short sr_fs;
+  short sr_es;
+  short sr_ds;
+  int   sr_di;
+  int   sr_si;
+  int   sr_bp;
+  int   sr_st;   /* stack top -- used in kernel */
+  int   sr_bx;
+  int   sr_dx;
+  int   sr_cx;
+  int   sr_retreg;
+  int   sr_retadr; /* return address to caller of save -- used in kernel */
 
-    int   sr_pc;
-    int   sr_cs;
-    int   sr_psw;
-    int   sr_sp;
-    int   sr_ss;
+  int   sr_pc;
+  int   sr_cs;
+  int   sr_psw;
+  int   sr_sp;
+  int   sr_ss;
 };
 
 struct sigframe {  /* stack frame created for signalled process */
-    _PROTOTYPE(void (*sf_retadr), (void));
-    int sf_signo;
-    int sf_code;
-    struct sigcontext *sf_scp;
-    int sf_fp;
-    _PROTOTYPE(void (*sf_retadr2), (void));
-    struct sigcontext *sf_scpcopy;
+  _PROTOTYPE(void (*sf_retadr), (void));
+  int sf_signo;
+  int sf_code;
+  struct sigcontext *sf_scp;
+  int sf_fp;
+  _PROTOTYPE(void (*sf_retadr2), (void));
+  struct sigcontext *sf_scpcopy;
 };
 
 struct sigcontext {
-    int sc_flags;           /* sigstack state to restore */ 
-    long sc_mask;           /* signal mask to restore */
-    struct sigregs sc_reg;  /* register set to restore */
+  int sc_flags;           /* sigstack state to restore */
+  long sc_mask;           /* signal mask to restore */
+  struct sigregs sc_reg;  /* register set to restore */
 };
 
 #define sc_gs sc_regs.sr_gs
