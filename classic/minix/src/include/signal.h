@@ -81,9 +81,9 @@ typedef void _PROTOTYPE((*__sighandler_t), (int));
 
 #ifdef _POSIX_SOURCE
 struct sigaction {
-    __sighandler_t sa_handler;  /* SIG_DEL, SIG_IGN, or pointer to function */
-    sigset_t sa_mask;           /* signals to be blocked during handler */
-    int sa_flags;               /* special flags */
+  __sighandler_t sa_handler;  /* SIG_DEL, SIG_IGN, or pointer to function */
+  sigset_t sa_mask;           /* signals to be blocked during handler */
+  int sa_flags;               /* special flags */
 };
 
 /* Fields for sa_flags. */

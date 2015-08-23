@@ -23,9 +23,9 @@ struct timer;
 typedef void (*tmr_func_t)(struct timer *tp);
 
 typedef union {
-    int ta_int;
-    long ta_long;
-    void *ta_ptr;
+  int ta_int;
+  long ta_long;
+  void *ta_ptr;
 } tmr_arg_t;
 
 /*
@@ -34,10 +34,10 @@ typedef union {
  * by the library function tmrs_settimer, but its argument is not.
  */
 typedef struct timer {
-    struct timer *tmr_next;      /* next in a timer chain */
-    clock_t      tmr_expt_time;  /* expiration time */
-    tmr_func_t   tmr_func;       /* function to call when expired */
-    tmr_arg_t    tmr_arg;        /* random argument */
+  struct timer *tmr_next;      /* next in a timer chain */
+  clock_t      tmr_expt_time;  /* expiration time */
+  tmr_func_t   tmr_func;       /* function to call when expired */
+  tmr_arg_t    tmr_arg;        /* random argument */
 } timer_t;
 
 /* Used when the timer is not active. */
@@ -57,7 +57,7 @@ typedef struct timer {
  * will be broken.
  */
 #define tmr_inittimer(tp) (void)((tp)->tmr_expt_time = TMR_NEVER, \
-                                 (tp)->tmr_next = NULL)
+    (tp)->tmr_next = NULL)
 
 /*
  * The following generic timer management functions are available. They
@@ -67,7 +67,7 @@ typedef struct timer {
 _PROTOTYPE(clock_t tmrs_clrtimer, (timer_t **tmrs, timer_t *tp, clock_t *now));
 _PROTOTYPE(void tmrs_exptimers, (timer_t **tmrs, clock_t now, clock_t *new));
 _PROTOTYPE(clock_t tmrs_settimer, (timer_t **tmrs, timer_t *tp,
-                                   clock_t exp_time, tmr_func_t watchdog,
-                                   clock_t *new_head));
+           clock_t exp_time, tmr_func_t watchdog,
+           clock_t *new_head));
 
 #endif /* _TIMERS_H */
