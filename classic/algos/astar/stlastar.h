@@ -2,20 +2,20 @@
  *  A* Algorithm Implementation using STL is
  *  Copyright (C)2001-2005 Justin Heyes-Jones
  *
- *  Permission is given by the author to freely redistribute and 
- *  include this code in any program as long as this credit is 
+ *  Permission is given by the author to freely redistribute and
+ *  include this code in any program as long as this credit is
  *  given where due.
  *
- *  COVERED CODE IS PROVIDED UNDER THIS LICENSE ON AN "AS IS" BASIS, 
- *  WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, 
- *  INCLUDING, WITHOUT LIMITATION, WARRANTIES THAT THE COVERED CODE 
+ *  COVERED CODE IS PROVIDED UNDER THIS LICENSE ON AN "AS IS" BASIS,
+ *  WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED,
+ *  INCLUDING, WITHOUT LIMITATION, WARRANTIES THAT THE COVERED CODE
  *  IS FREE OF DEFECTS, MERCHANTABLE, FIT FOR A PARTICULAR PURPOSE
- *  OR NON-INFRINGING. THE ENTIRE RISK AS TO THE QUALITY AND 
- *  PERFORMANCE OF THE COVERED CODE IS WITH YOU. SHOULD ANY COVERED 
- *  CODE PROVE DEFECTIVE IN ANY RESPECT, YOU (NOT THE INITIAL 
- *  DEVELOPER OR ANY OTHER CONTRIBUTOR) ASSUME THE COST OF ANY 
- *  NECESSARY SERVICING, REPAIR OR CORRECTION. THIS DISCLAIMER OF 
- *  WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS LICENSE. NO USE 
+ *  OR NON-INFRINGING. THE ENTIRE RISK AS TO THE QUALITY AND
+ *  PERFORMANCE OF THE COVERED CODE IS WITH YOU. SHOULD ANY COVERED
+ *  CODE PROVE DEFECTIVE IN ANY RESPECT, YOU (NOT THE INITIAL
+ *  DEVELOPER OR ANY OTHER CONTRIBUTOR) ASSUME THE COST OF ANY
+ *  NECESSARY SERVICING, REPAIR OR CORRECTION. THIS DISCLAIMER OF
+ *  WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS LICENSE. NO USE
  *  OF ANY COVERED CODE IS AUTHORIZED HEREUNDER EXCEPT UNDER
  *  THIS DISCLAIMER.
  *
@@ -113,7 +113,7 @@ public:
     // Initialise the AStar specific parts of the Start Node
     // The user only needs fill out the state information
 
-    m_Start->g = 0; 
+    m_Start->g = 0;
     m_Start->h = m_Start->m_UserState.GoalDistanceEstimate(m_Goal->m_UserState);
     m_Start->f = m_Start->g + m_Start->h;
     m_Start->parent = 0;
@@ -126,7 +126,7 @@ public:
   unsigned int SearchStep() {
     assert((m_State > SEARCH_STATE_NOT_INITIALISED) && (m_State < SEARCH_STATE_INVALID));
     if ((m_State == SEARCH_STATE_SUCCEEDED) || (m_State == SEARCH_STATE_FAILED))
-      return m_State; 
+      return m_State;
     if (m_OpenList.empty() || m_CancelRequest) {
       FreeAllNodes();
       m_State = SEARCH_STATE_FAILED;
@@ -157,7 +157,7 @@ public:
       return m_State;
     } else {
       m_Successors.clear();
-      bool ret = n->m_UserState.GetSuccessors(this, n->parent ? &n->parent->m_UserState : NULL); 
+      bool ret = n->m_UserState.GetSuccessors(this, n->parent ? &n->parent->m_UserState : NULL);
       if (!ret) {
         typename vector<Node*>::iterator successor;
         for (successor = m_Successors.begin(); successor != m_Successors.end(); successor++) {
@@ -174,7 +174,7 @@ public:
         typename vector<Node*>::iterator openlist_result;
         for (openlist_result = m_OpenList.begin(); openlist_result != m_OpenList.end(); openlist_result++) {
           if ((*openlist_result)->m_UserState.IsSameState((*successor)->m_UserState)) {
-            break;					
+            break;
           }
         }
         if (openlist_result != m_OpenList.end()) {
@@ -187,7 +187,7 @@ public:
         typename vector<Node*>::iterator closedlist_result;
         for (closedlist_result = m_ClosedList.begin(); closedlist_result != m_ClosedList.end(); closedlist_result++) {
           if ((*closedlist_result)->m_UserState.IsSameState((*successor)->m_UserState)) {
-            break;					
+            break;
           }
         }
 
@@ -204,12 +204,12 @@ public:
         (*successor)->f = (*successor)->g + (*successor)->h;
 
         if (closedlist_result != m_ClosedList.end()) {
-          FreeNode((*closedlist_result)); 
+          FreeNode((*closedlist_result));
           m_ClosedList.erase(closedlist_result);
         }
 
-        if (openlist_result != m_OpenList.end()) {	   
-          FreeNode((*openlist_result)); 
+        if (openlist_result != m_OpenList.end()) {
+          FreeNode((*openlist_result));
           m_OpenList.erase(openlist_result);
           make_heap(m_OpenList.begin(), m_OpenList.end(), HeapCompare_f());
         }
@@ -438,7 +438,7 @@ private:
 
 private:
   vector<Node*> m_OpenList;
-  vector<Node*> m_ClosedList; 
+  vector<Node*> m_ClosedList;
   vector<Node*> m_Successors;
   unsigned int m_State;
   int m_Steps;

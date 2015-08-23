@@ -52,7 +52,7 @@ int GetMap(int x, int y) {
 class MapSearchNode {
   public:
     int x;
-    int y;	
+    int y;
 
     MapSearchNode() { x = y = 0; }
     MapSearchNode(int px, int py) { x = px; y = py; }
@@ -62,7 +62,7 @@ class MapSearchNode {
     bool GetSuccessors(AStarSearch<MapSearchNode> *astarsearch, MapSearchNode *parent_node);
     float GetCost(MapSearchNode &successor);
     bool IsSameState(MapSearchNode &rhs);
-    void PrintNodeInfo(); 
+    void PrintNodeInfo();
 };
 
 bool MapSearchNode::IsSameState(MapSearchNode &rhs) {
@@ -79,7 +79,7 @@ void MapSearchNode::PrintNodeInfo() {
 }
 
 // Here's the heuristic function that estimates the distance from a Node
-// to the Goal. 
+// to the Goal.
 float MapSearchNode::GoalDistanceEstimate(MapSearchNode &nodeGoal) {
   float xd = float(((float)x - (float)nodeGoal.x));
   float yd = float(((float)y - (float)nodeGoal.y));
@@ -98,8 +98,8 @@ bool MapSearchNode::IsGoal(MapSearchNode &nodeGoal) {
 // is specific to the application
 bool MapSearchNode::GetSuccessors(AStarSearch<MapSearchNode> *astarsearch,
                                   MapSearchNode *parent_node) {
-  int parent_x = -1; 
-  int parent_y = -1; 
+  int parent_x = -1;
+  int parent_y = -1;
   if (parent_node) {
     parent_x = parent_node->x;
     parent_y = parent_node->y;
@@ -111,25 +111,25 @@ bool MapSearchNode::GetSuccessors(AStarSearch<MapSearchNode> *astarsearch,
   if ((GetMap(x-1, y) < 9) && !((parent_x == x-1) && (parent_y == y))) {
     NewNode = MapSearchNode(x-1, y);
     astarsearch->AddSuccessor(NewNode);
-  }	
+  }
   if ((GetMap(x, y-1) < 9) && !((parent_x == x) && (parent_y == y-1))) {
     NewNode = MapSearchNode(x, y-1);
     astarsearch->AddSuccessor(NewNode);
-  }	
+  }
   if ((GetMap(x+1, y) < 9) && !((parent_x == x+1) && (parent_y == y))) {
     NewNode = MapSearchNode( x+1, y );
     astarsearch->AddSuccessor(NewNode);
-  }	
+  }
   if ((GetMap(x, y+1) < 9) && !((parent_x == x) && (parent_y == y+1))) {
     NewNode = MapSearchNode(x, y+1);
     astarsearch->AddSuccessor(NewNode);
-  }	
+  }
 
   return true;
 }
 
 // given this node, what does it cost to move to successor. In the case
-// of our map the answer is the map terrain value at this node since that is 
+// of our map the answer is the map terrain value at this node since that is
 // conceptually where we're moving
 
 float MapSearchNode::GetCost(MapSearchNode &successor) {
@@ -140,9 +140,9 @@ int main(int argc, char *argv[]) {
   cout << "STL A* Search implementation\n(C)2001 Justin Heyes-Jones\n";
 
   // Our sample problem defines the world as a 2d array representing a terrain
-  // Each element contains an integer from 0 to 5 which indicates the cost 
-  // of travel across the terrain. Zero means the least possible difficulty 
-  // in travelling (think ice rink if you can skate) whilst 5 represents the 
+  // Each element contains an integer from 0 to 5 which indicates the cost
+  // of travel across the terrain. Zero means the least possible difficulty
+  // in travelling (think ice rink if you can skate) whilst 5 represents the
   // most difficult. 9 indicates that we cannot pass.
 
   AStarSearch<MapSearchNode> astarsearch;
@@ -152,11 +152,11 @@ int main(int argc, char *argv[]) {
   while (SearchCount < NumSearches) {
     MapSearchNode nodeStart;
     nodeStart.x = rand() % MAP_WIDTH;
-    nodeStart.y = rand() % MAP_HEIGHT; 
+    nodeStart.y = rand() % MAP_HEIGHT;
 
     MapSearchNode nodeEnd;
-    nodeEnd.x = rand() % MAP_WIDTH;						
-    nodeEnd.y = rand() % MAP_HEIGHT; 
+    nodeEnd.x = rand() % MAP_WIDTH;
+    nodeEnd.y = rand() % MAP_HEIGHT;
 
     astarsearch.SetStartAndGoalStates(nodeStart, nodeEnd);
 
@@ -173,7 +173,7 @@ int main(int argc, char *argv[]) {
       MapSearchNode *p = astarsearch.GetOpenListStart();
       while (p) {
         len++;
-#if !DEBUG_LIST_LENGTHS_ONLY			
+#if !DEBUG_LIST_LENGTHS_ONLY
         ((MapSearchNode*)p)->PrintNodeInfo();
 #endif
         p = astarsearch.GetOpenListNext();
@@ -184,9 +184,9 @@ int main(int argc, char *argv[]) {
       p = astarsearch.GetClosedListStart();
       while (p) {
         len++;
-#if !DEBUG_LIST_LENGTHS_ONLY			
+#if !DEBUG_LIST_LENGTHS_ONLY
         p->PrintNodeInfo();
-#endif			
+#endif
         p = astarsearch.GetClosedListNext();
       }
       cout << "Closed list has " << len << " nodes\n";
