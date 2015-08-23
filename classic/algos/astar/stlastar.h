@@ -1,25 +1,25 @@
 /**
- *  A* Algorithm Implementation using STL is
- *  Copyright (C)2001-2005 Justin Heyes-Jones
+ * A* Algorithm Implementation using STL is
+ * Copyright (C)2001-2005 Justin Heyes-Jones
  *
- *  Permission is given by the author to freely redistribute and
- *  include this code in any program as long as this credit is
- *  given where due.
+ * Permission is given by the author to freely redistribute and
+ * include this code in any program as long as this credit is
+ * given where due.
  *
- *  COVERED CODE IS PROVIDED UNDER THIS LICENSE ON AN "AS IS" BASIS,
- *  WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED,
- *  INCLUDING, WITHOUT LIMITATION, WARRANTIES THAT THE COVERED CODE
- *  IS FREE OF DEFECTS, MERCHANTABLE, FIT FOR A PARTICULAR PURPOSE
- *  OR NON-INFRINGING. THE ENTIRE RISK AS TO THE QUALITY AND
- *  PERFORMANCE OF THE COVERED CODE IS WITH YOU. SHOULD ANY COVERED
- *  CODE PROVE DEFECTIVE IN ANY RESPECT, YOU (NOT THE INITIAL
- *  DEVELOPER OR ANY OTHER CONTRIBUTOR) ASSUME THE COST OF ANY
- *  NECESSARY SERVICING, REPAIR OR CORRECTION. THIS DISCLAIMER OF
- *  WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS LICENSE. NO USE
- *  OF ANY COVERED CODE IS AUTHORIZED HEREUNDER EXCEPT UNDER
- *  THIS DISCLAIMER.
+ * COVERED CODE IS PROVIDED UNDER THIS LICENSE ON AN "AS IS" BASIS,
+ * WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED,
+ * INCLUDING, WITHOUT LIMITATION, WARRANTIES THAT THE COVERED CODE
+ * IS FREE OF DEFECTS, MERCHANTABLE, FIT FOR A PARTICULAR PURPOSE
+ * OR NON-INFRINGING. THE ENTIRE RISK AS TO THE QUALITY AND
+ * PERFORMANCE OF THE COVERED CODE IS WITH YOU. SHOULD ANY COVERED
+ * CODE PROVE DEFECTIVE IN ANY RESPECT, YOU (NOT THE INITIAL
+ * DEVELOPER OR ANY OTHER CONTRIBUTOR) ASSUME THE COST OF ANY
+ * NECESSARY SERVICING, REPAIR OR CORRECTION. THIS DISCLAIMER OF
+ * WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS LICENSE. NO USE
+ * OF ANY COVERED CODE IS AUTHORIZED HEREUNDER EXCEPT UNDER
+ * THIS DISCLAIMER.
  *
- *  Use at your own risk!
+ * Use at your own risk!
  */
 
 #ifndef STLASTAR_H
@@ -38,19 +38,19 @@ using namespace std;
 
 #include "fsa.h"
 
-// Fixed size memory allocator can be disabled to compare performance
-// Uses std new and delete instead if you turn it off
+/* Fixed size memory allocator can be disabled to compare performance
+   Uses std new and delete instead if you turn it off */
 #define USE_FSA_MEMORY 1
 
-// disable warning that debugging information has lines that are truncated
-// occurs in stl headers
+/* disable warning that debugging information has lines that are truncated
+   occurs in stl headers */
 #if defined(WIN32) && defined(_WINDOWS)
 #pragma warning(disable:4786)
 #endif
 
 template <class T> class AStarState;
 
-// The AStar search class. UserState is the users state space type
+/* The AStar search class. UserState is the users state space type */
 template <class UserState>
 class AStarSearch {
 public:
@@ -65,20 +65,23 @@ public:
 
 public:
   class Node {
-    public:
-      Node *parent; // used during the search to record the parent of successor nodes
-      Node *child;  // used after the search for the application to view the search in reverse
+  public:
+    Node *parent; /* used during the search to record the parent of
+                     successor nodes */
+    Node *child;  /* used after the search for the application to
+                     view the search in reverse */
 
-      float g; // cost of this node + it's predecessors
-      float h; // heuristic estimate of distance to goal
-      float f; // sum of cumulative cost of predecessors and self and heuristic
+    float g; /* cost of this node + it's predecessors */
+    float h; /* heuristic estimate of distance to goal */
+    float f; /* sum of cumulative cost of predecessors
+                and self and heuristic */
 
-      Node() : parent(0), child(0), g(0.0f), h(0.0f), f(0.0f) {}
-      UserState m_UserState;
+    Node() : parent(0), child(0), g(0.0f), h(0.0f), f(0.0f) {}
+    UserState m_UserState;
   };
 
-  // For sorting the heap the STL needs compare function that lets us compare
-  // the f value of two nodes
+  /* For sorting the heap the STL needs compare function that lets us
+     compare the f value of two nodes */
   class HeapCompare_f {
   public:
     bool operator()(const Node *x, const Node *y) const {
@@ -87,19 +90,25 @@ public:
   };
 
 public:
-  AStarSearch() : m_State(SEARCH_STATE_NOT_INITIALISED), m_CurrentSolutionNode(NULL),
+  AStarSearch()
+    : m_State(SEARCH_STATE_NOT_INITIALISED),
+      m_CurrentSolutionNode(NULL),
 #if USE_FSA_MEMORY
-  m_FixedSizeAllocator(1000),
+      m_FixedSizeAllocator(1000),
 #endif
-  m_AllocateNodeCount(0), m_CancelRequest(false) {}
+      m_AllocateNodeCount(0),
+      m_CancelRequest(false) {}
 
-  AStarSearch(int MaxNodes) : m_State(SEARCH_STATE_NOT_INITIALISED), m_CurrentSolutionNode(NULL),
+  AStarSearch(int MaxNodes)
+    : m_State(SEARCH_STATE_NOT_INITIALISED),
+      m_CurrentSolutionNode(NULL),
 #if USE_FSA_MEMORY
-  m_FixedSizeAllocator(MaxNodes),
+      m_FixedSizeAllocator(MaxNodes),
 #endif
-  m_AllocateNodeCount(0), m_CancelRequest(false) {}
+      m_AllocateNodeCount(0),
+      m_CancelRequest(false) {}
 
-  void CancelSearch() { m_CancelRequest = true; }
+  void CancelSearch() {m_CancelRequest = true;}
 
   void SetStartAndGoalStates(UserState &Start, UserState &Goal) {
     m_CancelRequest = false;
@@ -110,8 +119,8 @@ public:
     m_Goal->m_UserState = Goal;
     m_State = SEARCH_STATE_SEARCHING;
 
-    // Initialise the AStar specific parts of the Start Node
-    // The user only needs fill out the state information
+    /* Initialise the AStar specific parts of the Start Node
+       The user only needs fill out the state information */
 
     m_Start->g = 0;
     m_Start->h = m_Start->m_UserState.GoalDistanceEstimate(m_Goal->m_UserState);
@@ -124,7 +133,9 @@ public:
   }
 
   unsigned int SearchStep() {
-    assert((m_State > SEARCH_STATE_NOT_INITIALISED) && (m_State < SEARCH_STATE_INVALID));
+    assert((m_State > SEARCH_STATE_NOT_INITIALISED) &&
+           (m_State < SEARCH_STATE_INVALID));
+
     if ((m_State == SEARCH_STATE_SUCCEEDED) || (m_State == SEARCH_STATE_FAILED))
       return m_State;
     if (m_OpenList.empty() || m_CancelRequest) {
@@ -157,43 +168,57 @@ public:
       return m_State;
     } else {
       m_Successors.clear();
-      bool ret = n->m_UserState.GetSuccessors(this, n->parent ? &n->parent->m_UserState : NULL);
+      bool ret = n->m_UserState.GetSuccessors(this,
+                                              n->parent
+                                            ? &n->parent->m_UserState
+                                            : NULL);
       if (!ret) {
-        typename vector<Node*>::iterator successor;
-        for (successor = m_Successors.begin(); successor != m_Successors.end(); successor++) {
-          FreeNode((*successor));
+        typename vector<Node*>::iterator iter = m_Successors.begin(),
+                                          end = m_Successors.end();
+        while (iter != end) {
+          FreeNode((*iter));
+          iter++;
         }
         m_Successors.clear();
         FreeAllNodes();
         m_State = SEARCH_STATE_OUT_OF_MEMORY;
         return m_State;
       }
-      for (typename vector<Node*>::iterator successor = m_Successors.begin(); successor != m_Successors.end(); successor++) {
+
+      typename vector<Node*>::iterator successor = m_Successors.begin(),
+                                   successor_end = m_Successors.end();
+      while (successor != successor_end) {
         float newg = n->g + n->m_UserState.GetCost((*successor)->m_UserState);
 
-        typename vector<Node*>::iterator openlist_result;
-        for (openlist_result = m_OpenList.begin(); openlist_result != m_OpenList.end(); openlist_result++) {
+        typename vector<Node*>::iterator openlist_result = m_OpenList.begin(),
+                                     openlist_result_end = m_OpenList.end();
+        while (openlist_result != openlist_result_end) {
           if ((*openlist_result)->m_UserState.IsSameState((*successor)->m_UserState)) {
             break;
           }
+          openlist_result++;
         }
         if (openlist_result != m_OpenList.end()) {
           if ((*openlist_result)->g <= newg) {
             FreeNode((*successor));
+            successor++;
             continue;
           }
         }
 
-        typename vector<Node*>::iterator closedlist_result;
-        for (closedlist_result = m_ClosedList.begin(); closedlist_result != m_ClosedList.end(); closedlist_result++) {
+        typename vector<Node*>::iterator closedlist_result = m_ClosedList.begin(),
+                                     closedlist_result_end = m_ClosedList.end();
+        while (closedlist_result != closedlist_result_end) {
           if ((*closedlist_result)->m_UserState.IsSameState((*successor)->m_UserState)) {
             break;
           }
+          closedlist_result++;
         }
 
         if (closedlist_result != m_ClosedList.end()) {
           if ((*closedlist_result)->g <= newg) {
             FreeNode((*successor));
+            successor++;
             continue;
           }
         }
@@ -215,6 +240,8 @@ public:
         }
         m_OpenList.push_back((*successor));
         push_heap(m_OpenList.begin(), m_OpenList.end(), HeapCompare_f());
+
+        successor++;
       }
       m_ClosedList.push_back(n);
     }
@@ -377,11 +404,12 @@ private:
     }
     m_OpenList.clear();
 
-    typename vector<Node*>::iterator iterClosed;
-
-    for (iterClosed = m_ClosedList.begin(); iterClosed != m_ClosedList.end(); iterClosed++) {
+    typename vector<Node*>::iterator iterClosed = m_ClosedList.begin(),
+                                 iterClosed_end = m_ClosedList.end();
+    while (iterClosed != iterClosed_end) {
       Node *n = (*iterClosed);
       FreeNode(n);
+      iterClosed++;
     }
     m_ClosedList.clear();
     FreeNode(m_Goal);
@@ -400,13 +428,15 @@ private:
     }
     m_OpenList.clear();
 
-    typename vector<Node*>::iterator iterClosed;
-    for (iterClosed = m_ClosedList.begin(); iterClosed != m_ClosedList.end(); iterClosed++) {
+    typename vector<Node*>::iterator iterClosed = m_ClosedList.begin(),
+                                 iterClosed_end = m_ClosedList.end();
+    while (iterClosed != iterClosed_end) {
       Node *n = (*iterClosed);
       if (!n->child) {
         FreeNode(n);
         n = NULL;
       }
+      iterClosed++;
     }
     m_ClosedList.clear();
   }
@@ -460,15 +490,22 @@ private:
 };
 
 template <class T>
-class AStarState
-{
+class AStarState {
 public:
   virtual ~AStarState() {}
-  virtual float GoalDistanceEstimate(T &nodeGoal) = 0; // Heuristic function which computes the estimated cost to the goal node
-  virtual bool IsGoal(T &nodeGoal) = 0;                // Returns true if this node is the goal node
-  virtual bool GetSuccessors(AStarSearch<T> *astarsearch, T *parent_node) = 0; // Retrieves all successors to this node and adds them via astarsearch.addSuccessor()
-  virtual float GetCost(T &successor) = 0;             // Computes the cost of travelling from this node to the successor node
-  virtual bool IsSameState(T &rhs) = 0;                // Returns true if this node is the same as the rhs node
+  /* Heuristic function which computes the estimated cost to
+     the goal node */
+  virtual float GoalDistanceEstimate(T &nodeGoal) = 0;
+  /* Returns true if this node is the goal node */
+  virtual bool IsGoal(T &nodeGoal) = 0;
+  /* Retrieves all successors to this node and adds them via
+     astarsearch.addSuccessor() */
+  virtual bool GetSuccessors(AStarSearch<T> *astarsearch, T *parent_node) = 0;
+  /* Computes the cost of travelling from this node to the
+     successor node */
+  virtual float GetCost(T &successor) = 0;
+  /* Returns true if this node is the same as the rhs node */
+  virtual bool IsSameState(T &rhs) = 0;
 };
 
-#endif // STLASTAR_H
+#endif /* STLASTAR_H */
