@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) Zhou Peng <lockrecv@gmail.com>
+ */
+
 #ifndef BFS_IMPL_H
 #define BFS_IMPL_H
 

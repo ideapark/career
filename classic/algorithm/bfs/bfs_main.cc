@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) Zhou Peng <lockrecv@gmail.com>
+ */
+
 #include <assert.h>
 #include <fstream>
 #include <iostream>
