@@ -16,6 +16,7 @@ int main(int argc, char *argv[])
       printf(".");
       sleep(1);
       }, loop_cnt);
+  fflush(stdout);
 
   fprintf(stderr, "\n");
 
