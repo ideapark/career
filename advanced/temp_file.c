@@ -8,7 +8,6 @@ typedef int temp_file_handle;
 /* Writes LENGTH bytes from BUFFER into a temporary file. The
    temporary file is immediately unlinked. Returns a handle to the
    temporary file. */
-
 temp_file_handle write_tmp_file(char *buffer, size_t length)
 {
   /* Create the filename and file. The XXXXXX will be replaced with
