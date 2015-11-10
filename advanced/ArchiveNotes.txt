@@ -1,0 +1,42 @@
+When the linker encounters an archive on the command line, it searches the
+archive for all definitions of symbols (functions or variables) that are
+referenced from the object files that it has already processed but not yet
+defined.The object files that define those symbols are extracted from the
+archive and included in the final executable. Because the linker searches
+the archive when it is encountered on the command line, it usually makes
+sense to put archives at the end of the command line.
+
+For example:
+
+test.c
+
+int f()
+{
+  return 3;
+}
+
+app.c
+
+int main()
+{
+  return f();
+}
+
+Now suppose that test.o is combined with some other object files to produce
+the libtest.a archive.The following command line will not work:
+
+  % gcc -o app -L. -ltest app.o
+  app.o: In function ‘main’:
+  app.o(.text+0x4): undefined reference to ‘f’
+  collect2: ld returned 1 exit status
+
+The error message indicates that even though libtest.a contains a definition
+of f, the linker did not find it. That’s because libtest.a was searched when
+it was first encountered, and at that point the linker hadn’t seen any
+references to f. On the other hand, if we use this line, no error messages
+are issued:
+
+  % gcc -o app app.o -L. –ltest
+
+The reason is that the reference to f in app.o causes the linker to include
+the test.o object file from the libtest.a archive.
