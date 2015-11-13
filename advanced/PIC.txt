@@ -27,7 +27,7 @@ like linking with a static archive. For example, the following line will link
 with libtest.so if it is in the current directory, or one of the standard
 library search directories on the system:
 
-  % gcc -o app app.o -L. –ltest
+  % gcc -o app app.o -L. -ltest
 
 Suppose that both libtest.a and libtest.so are available.Then the linker must
 choose one of the libraries and not the other.The linker searches each directory
@@ -40,9 +40,9 @@ use the -static option to demand static archives. For example, the following lin
 will use the libtest.a archive, even if the libtest.so shared library is also
 available:
 
-  % gcc -static -o app app.o -L. –ltest
+  % gcc -static -o app app.o -L. -ltest
 
 The ldd command displays the shared libraries that are linked into an executable.
 These libraries need to be available when the executable is run. Note that ldd
-will list an additional library called ld-linux.so, which is a part of GNU/Linux’s
+will list an additional library called ld-linux.so, which is a part of GNU/Linux's
 dynamic linking mechanism.

@@ -1,5 +1,5 @@
-You might invoke the command “sort input.txt > output.txt”, a long
-sorting operation, with a reduced priority so that it doesn’t slow
+You might invoke the command "sort input.txt > output.txt", a long
+sorting operation, with a reduced priority so that it doesn't slow
 down the system too much:
 
   % nice -n 10 sort input.txt > output.txt
