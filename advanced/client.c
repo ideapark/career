@@ -10,6 +10,6 @@ int main()
 
   printf("accessing server %s\n", server_name);
   /* Access the server herer... */
-  
+
   return 0;
 }

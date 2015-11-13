@@ -11,7 +11,7 @@
 int spawn(char *program, char **arg_list)
 {
   pid_t child_pid;
-  
+
   /* Duplicate this process. */
   child_pid = fork();
   if (child_pid != 0) {
@@ -20,7 +20,7 @@ int spawn(char *program, char **arg_list)
   } else {
     /* Now execute PROGRAM, searching for it in the path. */
     execvp(program, arg_list);
-    
+
     /* The execvp function returns only if an error occurs. */
     fprintf(stderr, "an error occurred in execvp\n");
     abort();
@@ -36,12 +36,12 @@ int main()
     "/",
     NULL  /* The argument list must end with NULL */
   };
-  
+
   /* Spawn a child process running the "ls" comamnd. Ignore the
      returned child process ID. */
   spawn("ls", arg_list);
-  
+
   printf("done with main program\n");
-  
+
   return 0;
 }

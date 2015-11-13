@@ -9,12 +9,12 @@ char *read_from_file(const char *filename, size_t length)
   char *buffer;
   int fd;
   ssize_t bytes_read;
-  
+
   /* Allocate the buffer. */
   buffer = (char *) malloc(length);
   if (buffer == NULL)
     return NULL;
-  
+
   /* Open the file. */
   fd = open(filename, O_RDONLY);
   if (fd == -1) {
@@ -22,7 +22,7 @@ char *read_from_file(const char *filename, size_t length)
     free(buffer);
     return NULL;
   }
-  
+
   /* Read the data. */
   bytes_read = read(fd, buffer, length);
   if (bytes_read != length) {
@@ -31,7 +31,7 @@ char *read_from_file(const char *filename, size_t length)
     close(fd);
     return NULL;
   }
-  
+
   /* Everything's fine. Close the file and return the buffer. */
   close(fd);
   return buffer;
