@@ -1,3 +1,7 @@
+/*
+ * Using fork to duplicate a program's process
+ */
+
 #include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>

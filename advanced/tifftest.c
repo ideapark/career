@@ -1,3 +1,7 @@
+/*
+ * Using libtiff
+ */
+
 #include <stdio.h>
 #include <tiffio.h>
 

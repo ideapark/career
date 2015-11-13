@@ -1,3 +1,7 @@
+/*
+ * Using a signal handler
+ */
+
 #include <signal.h>
 #include <stdio.h>
 #include <string.h>

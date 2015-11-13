@@ -1,3 +1,7 @@
+/*
+ * Printing the execution environment
+ */
+
 #include <stdio.h>
 
 /* The ENVIRON variable contains the environment. */

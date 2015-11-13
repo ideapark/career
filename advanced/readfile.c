@@ -1,3 +1,7 @@
+/*
+ * Freeing resources during abnormal conditions
+ */
+
 #include <fcntl.h>
 #include <stdlib.h>
 #include <sys/stat.h>
