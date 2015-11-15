@@ -13,10 +13,10 @@ struct char_print_parms
 
   /* The number of times to print */
   int count;
-}
+};
 
 /* Prints a number of characters to stderr, as given by PARAMETERS,
-   which is a pointer to a struct char_print_parms.*/
+   which is a pointer to a struct char_print_parms. */
 void *char_print(void *parameters)
 {
   /* Cast the cookie pointer to the right type. */
