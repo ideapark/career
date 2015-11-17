@@ -14,30 +14,29 @@ export ccflags include
 extralib := -lbfd -lsqlite3 -liberty -lpopt -lstdc++ -ldl -lz -lpthread -lintl
 
 all: objects
-        g++ $(shell find . -type f -name '*.o' | grep -v callgraph.exe) $(extralib) -o target/reporter.exe
-        g++ $(shell find . -type f -name '*.o' | grep -v reporter.exe) $(extralib) -o target/callgraph.exe
+	g++ $(shell find . -type f -name '*.o' | grep -v callgraph.exe) $(extralib) -o target/reporter.exe
+	g++ $(shell find . -type f -name '*.o' | grep -v reporter.exe) $(extralib) -o target/callgraph.exe
 
 release: all
-        strip target/reporter.exe
-        strip target/callgraph.exe
+	strip target/reporter.exe
+	strip target/callgraph.exe
 
 objects: help
-        $(MAKE) -C ./libpp
-        $(MAKE) -C ./libutil
-        $(MAKE) -C ./libopt++
-        $(MAKE) -C ./libutil++
-        $(MAKE) -C ./reporter.exe
-        $(MAKE) -C ./callgraph.exe
+	$(MAKE) -C ./libpp
+	$(MAKE) -C ./libutil
+	$(MAKE) -C ./libopt++
+	$(MAKE) -C ./libutil++
+	$(MAKE) -C ./reporter.exe
+	$(MAKE) -C ./callgraph.exe
 
 help:
-        @echo "---------------------------------------------------"
-        @echo "           ADVANCED PERFORMANCE SOLUTION           "
-        @echo "                                                   "
-        @echo " Copyright (C) Huawei Technologies Co,. Ltd.       "
-        @echo " Copyright (C) Zhou Peng <lockrecv@gmail.com>      "
-        @echo "                                                   "
-        @echo " reporter.exe  - data parsing tool                 "
-        @echo " callgraph.exe - callgraph tool                    "
-        @echo "                                                   "
-        @echo " PLEASE REFER TO [Documentation/*.txt] FOR HELP.   "
-        @echo "---------------------------------------------------"
+	@echo "---------------------------------------------------"
+	@echo "           ADVANCED PERFORMANCE SOLUTION           "
+	@echo "                                                   "
+	@echo " Copyright (C) Zhou Peng <lockrecv@gmail.com>      "
+	@echo "                                                   "
+	@echo " reporter.exe  - data parsing tool                 "
+	@echo " callgraph.exe - callgraph tool                    "
+	@echo "                                                   "
+	@echo " PLEASE REFER TO [Documentation/*.txt] FOR HELP.   "
+	@echo "---------------------------------------------------"
