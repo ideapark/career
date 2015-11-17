@@ -15,56 +15,56 @@ EXTRA_LIBS += -lpthread -ldl -lsqlite3
 all: sysstat sysparser
 
 clean:
-        rm -f $(SYSSTAT_OBJS) sysstat
-        rm -f $(PARSER_OBJS) sysparser
+	rm -f $(SYSSTAT_OBJS) sysstat
+	rm -f $(PARSER_OBJS) sysparser
 
 sysstat: clean $(SYSSTAT_OBJS)
-        $(CC) $(SYSSTAT_OBJS) -o sysstat
+	$(CC) $(SYSSTAT_OBJS) -o sysstat
 
 sysparser: clean $(PARSER_OBJS)
-        $(CC) $(PARSER_OBJS) $(EXTRA_LIBS) -o sysparser
+	$(CC) $(PARSER_OBJS) $(EXTRA_LIBS) -o sysparser
 
 
 ####################
 
 main.o: core/main.c
-        $(CC) $(cflag) $(cinc) -c core/main.c
+	$(CC) $(cflag) $(cinc) -c core/main.c
 
 irq.o: irq/irq.c
-        $(CC) $(cflag) $(cinc) -c irq/irq.c
+  $(CC) $(cflag) $(cinc) -c irq/irq.c
 
 sys.o: sys/sys.c
-        $(CC) $(cflag) $(cinc) -c sys/sys.c
+  $(CC) $(cflag) $(cinc) -c sys/sys.c
 
 proc.o: proc/proc.c
-        $(CC) $(cflag) $(cinc) -c proc/proc.c
+	$(CC) $(cflag) $(cinc) -c proc/proc.c
 
 task.o: task/task.c
-        $(CC) $(cflag) $(cinc) -c task/task.c
+	$(CC) $(cflag) $(cinc) -c task/task.c
 
 mapped_helper.o: util/mapped_helper.c
-        $(CC) $(cflag) $(cinc) -c util/mapped_helper.c
+	$(CC) $(cflag) $(cinc) -c util/mapped_helper.c
 
 misc_helper.o: util/misc_helper.c
-        $(CC) $(cflag) $(cinc) -c util/misc_helper.c
+	$(CC) $(cflag) $(cinc) -c util/misc_helper.c
 
 
 main_parser.o: core/main_parser.c
-        $(CC) $(cflag) $(cinc) -c core/main_parser.c
+	$(CC) $(cflag) $(cinc) -c core/main_parser.c
 
 irq_parser.o: irq/irq_parser.c
-        $(CC) $(cflag) $(cinc) -c irq/irq_parser.c
+	$(CC) $(cflag) $(cinc) -c irq/irq_parser.c
 
 sys_parser.o: sys/sys_parser.c
-        $(CC) $(cflag) $(cinc) -c sys/sys_parser.c
+	$(CC) $(cflag) $(cinc) -c sys/sys_parser.c
 
 proc_parser.o: proc/proc_parser.c
-        $(CC) $(cflag) $(cinc) -c proc/proc_parser.c
+	$(CC) $(cflag) $(cinc) -c proc/proc_parser.c
 
 task_parser.o: task/task_parser.c
-        $(CC) $(cflag) $(cinc) -c task/task_parser.c
+	$(CC) $(cflag) $(cinc) -c task/task_parser.c
 
 sqlite_helper.o: util/sqlite_helper.c
-        $(CC) $(cflag) $(cinc) -c util/sqlite_helper.c
+	$(CC) $(cflag) $(cinc) -c util/sqlite_helper.c
 
 ####################
