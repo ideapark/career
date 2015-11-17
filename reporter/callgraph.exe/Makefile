@@ -10,13 +10,13 @@ objs += callgraph_sqlite.o
 all: $(objs)
 
 callgraph_main.o: callgraph_main.cpp
-        $(CC) $(ccflags) $(include) -c $< -o $@
+	$(CC) $(ccflags) $(include) -c $< -o $@
 
 callgraph_options.o: callgraph_options.cpp
-        $(CC) $(ccflags) $(include) -c $< -o $@
+	$(CC) $(ccflags) $(include) -c $< -o $@
 
 callgraph_painter.o: callgraph_painter.cpp
-        $(CC) $(ccflags) $(include) -c $< -o $@
+	$(CC) $(ccflags) $(include) -c $< -o $@
 
 callgraph_sqlite.o: callgraph_sqlite.cpp
-        $(CC) $(ccflags) $(include) -c $< -o $@
+	$(CC) $(ccflags) $(include) -c $< -o $@
