@@ -9,13 +9,13 @@
 #include <sqlite3.h>
 
 typedef enum {
-    F_CLOSED = 0,
-    F_OPEN   = 1,
+  F_CLOSED = 0,
+  F_OPEN   = 1,
 } openflag_t;
 
 typedef struct {
-    openflag_t status;
-    sqlite3 *sqlitedb;
+  openflag_t status;
+  sqlite3 *sqlitedb;
 } sqlite_t;
 
 /*

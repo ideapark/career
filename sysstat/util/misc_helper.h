@@ -27,8 +27,8 @@ float cpu_hz();
 int8_t cpu_cores();
 
 enum space {
-    SPACE_KERNEL,
-    SPACE_USER,
+  SPACE_KERNEL,
+  SPACE_USER,
 };
 
 /*
