@@ -31,10 +31,10 @@ main.o: core/main.c
 	$(CC) $(cflag) $(cinc) -c core/main.c
 
 irq.o: irq/irq.c
-  $(CC) $(cflag) $(cinc) -c irq/irq.c
+	$(CC) $(cflag) $(cinc) -c irq/irq.c
 
 sys.o: sys/sys.c
-  $(CC) $(cflag) $(cinc) -c sys/sys.c
+	$(CC) $(cflag) $(cinc) -c sys/sys.c
 
 proc.o: proc/proc.c
 	$(CC) $(cflag) $(cinc) -c proc/proc.c
