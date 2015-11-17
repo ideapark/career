@@ -1,0 +1,36 @@
+RATIO CALCULATION FORMULA
+=========================
+
+Author: Zhou Peng <lockrecv@gmail.com>
+Date: 2015-08-11
+
+
+Terms
+=====
+
+       cpu_frequency: CPU Frequency (Hz)
+          start_time: Sample Start Time (s)
+            end_time: Sample End Time (s)
+        elapsed_time: Total Sample Time (s)
+          theory_cps: Theory Count Per Second
+            theory_c: Theory Total Count
+       event_counter: How Many Count Per Event
+         theory_cpse: Theory Count Per Second by Event
+           theory_ce: Theory Total Count by Event
+      e_sample_count: Sample Count by Event
+      e_sample_ratio: Sample Ratio by Event
+e_sample_count_slice: Sample Count Per Slice by Event
+e_sample_ratio_slice: Sample Ratio Per Slice by Event
+
+
+Formula
+=======
+
+                 1Hz = 10^6
+        elapsed_time = end_time - start_time
+          theory_cps = cpu_frequency * 10^6
+            theory_c = theory_cps * elapsed_time
+         theory_cpse = theory_cps / event_counter
+           theory_ce = theory_c / event_counter
+      e_sample_ratio = (e_sample_count / theory_ce) * 100%
+e_sample_ratio_slice = (e_sample_count_slice / theory_cpse) * 100%
