@@ -1,0 +1,50 @@
+# ----------------------------------------------
+# Copyright (C) Zhou Peng <lockrecv@gmail.com>
+# ----------------------------------------------
+
+objs += op_deviceio.o
+objs += op_lockfile.o
+objs += op_file.o
+objs += op_fileio.o
+objs += op_get_time.o
+objs += op_libiberty.o
+objs += op_popt.o
+objs += op_string.o
+objs += op_cpufreq.o
+objs += op_version.o
+objs += op_growable_buffer.o
+
+all: $(objs)
+
+op_deviceio.o: op_deviceio.c
+        $(CC) $(ccflags) $(include) -c $< -o $@
+
+op_lockfile.o: op_lockfile.c
+        $(CC) $(ccflags) $(include) -c $< -o $@
+
+op_file.o: op_file.c
+        $(CC) $(ccflags) $(include) -c $< -o $@
+
+op_fileio.o: op_fileio.c
+        $(CC) $(ccflags) $(include) -c $< -o $@
+
+op_get_time.o: op_get_time.c
+        $(CC) $(ccflags) $(include) -c $< -o $@
+
+op_libiberty.o: op_libiberty.c
+        $(CC) $(ccflags) $(include) -c $< -o $@
+
+op_popt.o: op_popt.c
+        $(CC) $(ccflags) $(include) -c $< -o $@
+
+op_string.o: op_string.c
+        $(CC) $(ccflags) $(include) -c $< -o $@
+
+op_cpufreq.o: op_cpufreq.c
+        $(CC) $(ccflags) $(include) -c $< -o $@
+
+op_version.o: op_version.c
+        $(CC) $(ccflags) $(include) -c $< -o $@
+
+op_growable_buffer.o: op_growable_buffer.c
+        $(CC) $(ccflags) $(include) -c $< -o $@
