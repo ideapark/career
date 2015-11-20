@@ -8,14 +8,16 @@
 
 ccflags := -Wall -g -O2 -fno-common -DHAVE_CONFIG_H
 include := -I. -I.. -I../libutil -I../libopt++ -I../libutil++ -I../libop -I../libpp
+cc := gcc
+CC := g++
 
-export ccflags include
+export ccflags include cc CC
 
 extralib := -lbfd -lsqlite3 -liberty -lpopt -lstdc++ -ldl -lz -lpthread -lintl
 
 all: objects
-	g++ $(shell find . -type f -name '*.o' | grep -v callgraph.exe) $(extralib) -o target/reporter.exe
-	g++ $(shell find . -type f -name '*.o' | grep -v reporter.exe) $(extralib) -o target/callgraph.exe
+	$(CC) $(shell find . -type f -name '*.o' | grep -v callgraph.exe) $(extralib) -o target/reporter.exe
+	$(CC) $(shell find . -type f -name '*.o' | grep -v reporter.exe) $(extralib) -o target/callgraph.exe
 
 release: all
 	strip target/reporter.exe
