@@ -79,7 +79,7 @@ vma_node *avl_tree::lr_rotation(vma_node *parent)
 
 vma_node *avl_tree::rl_rotation(vma_node *parent)
 {
-  struct vma_node *temp;
+  vma_node *temp;
 
   temp = parent->right;
   parent->right = ll_rotation(temp);
