@@ -6,7 +6,7 @@
 #
 # --------------------------------------------------------------
 
-ccflags := -Wall -g -O2 -fno-common -DHAVE_CONFIG_H
+ccflags := -Wall -O2 -fno-common -DHAVE_CONFIG_H
 include := -I. -I.. -I../libutil -I../libopt++ -I../libutil++ -I../libop -I../libpp
 cc := gcc
 CC := g++
