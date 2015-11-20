@@ -66,22 +66,22 @@
 #define OP_DATADIR "/usr/local/share/oprofile/"
 
 /* Name of package */
-#define PACKAGE "aps"
+#define PACKAGE "APS"
 
 /* Define to the address where bug reports for this package should be sent. */
 #define PACKAGE_BUGREPORT ""
 
 /* Define to the full name of this package. */
-#define PACKAGE_NAME "aps"
+#define PACKAGE_NAME "APS"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "aps-20150824"
+#define PACKAGE_STRING "APS-20150824"
 
 /* Define to the one symbol short name of this package. */
-#define PACKAGE_TARNAME "aps"
+#define PACKAGE_TARNAME "APS"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "20150824"
+#define PACKAGE_VERSION "20151120"
 
 /* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1
@@ -93,7 +93,7 @@
 /* #undef TRUE_FALSE_ALREADY_DEFINED */
 
 /* Version number of package */
-#define VERSION "20150824"
+#define VERSION "201511202155"
 
 /* Define to 1 if the X Window System is missing or not being used. */
 #define X_DISPLAY_MISSING 1
