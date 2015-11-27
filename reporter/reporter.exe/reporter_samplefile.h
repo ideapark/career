@@ -64,7 +64,7 @@ struct vma_head {
 
 struct vma_entry {
   int pid;
-  int is_sre;                        /* is Huawei SRE */
+  int is_sre;                        /* is sre */
   uint32_t vm_start;                 /* mapped text section vma start */
   uint32_t vm_end;                   /* mapped text section vma start */
   char vm_file[MAX_PATH_LENGTH];     /* process disk file or so */

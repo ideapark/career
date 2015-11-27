@@ -321,7 +321,7 @@ class op_bfd {
     std::string get_symname(symbol_index_t index) const;
 
   private:
-    bool is_sre;     /* Huawei SRE */
+    bool is_sre;     /* sre */
     bool is_libso;   /* dynamic library */
     bool is_vmlinux; /* vmlinux */
 };
