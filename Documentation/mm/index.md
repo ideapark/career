@@ -29,7 +29,7 @@ A program's VMAs are stored in its memory descriptor both as a linked list in
 the mmap field, ordered by starting virtual address, and as a red-block tree
 rooted at the mm_rb field. The red-black tree allows the kernel to search quickly
 for the memory area covering a given virtual address. When you read file
-/proc/<PID>/maps, the kernel is simply going through the linked list of VMAs for
+/proc/PID/maps, the kernel is simply going through the linked list of VMAs for
 the process and printing each one.
 
 In Windows, the EPROCESS block is roughly a mix of task_struct and mm_struct. The
