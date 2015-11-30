@@ -1,6 +1,8 @@
 How the Kernel Manages Your Memory
 ==================================
 
+#Gustavo Duarte
+
 ![](mm_struct.png)
 
 Linux processes are implemented in the kernel as instances of task_struct, the
