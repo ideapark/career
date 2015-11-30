@@ -1,7 +1,7 @@
 How the Kernel Manages Your Memory
 ==================================
 
-![][mm_struct.png]
+![](mm_struct.png)
 
 Linux processes are implemented in the kernel as instances of task_struct, the
 process descriptor. The mm field in task_struct points to the memory descriptor,
@@ -12,7 +12,7 @@ virtual address space used, and other tidbits. Within the memory descriptor we
 also find the two work horses for managing program memory: the set of virtual
 memory areas and the page tables. Gonzo's memory areas are shown below:
 
-![][memoryDescriptorAndMemoryAreas.png]
+![](memoryDescriptorAndMemoryAreas.png)
 
 Each virtual memory area (VMA) is a contiguous range of virtual addresses; these
 areas never overlap. An instance of vm_area_struct fully describes a memory area,
@@ -41,7 +41,7 @@ portion of the virtual address space using 4KB pages. Bytes 0-4095 fall in page
 0, bytes 4096-8191 fall in page 1, and so on. The size of a VMA must be a
 multiple of page size. Here's 3GB of user space in 4KB pages:
 
-![][pagedVirtualSpace.png]
+![](pagedVirtualSpace.png)
 
 The processor consults page tables to translate a virtual address into a physical
 memory address. Each process has its own set of page tables; whenever a process
@@ -50,7 +50,7 @@ pointer to a process' page tables in the pgd field of the memory descriptor. To
 each virtual page there corresponds one page table entry (PTE) in the page tables,
 which in regular x86 paging is a single 4-byte record shown below:
 
-![][x86PageTableEntry4KB.png]
+![](x86PageTableEntry4KB.png)
 
 Linux has functions to read and set each flag in a PTE. Bit P tells the processor
 whether the virtual page is present in physical memory. If clear (equal to 0),
@@ -88,7 +88,7 @@ about frames, yet thay are crucial to the kernel because the page frame is the
 unit of physical memory management. Both Linux and Windows use 4KB page frames in
 32-bit mode; here is an example of a machine with 2GB of RAM:
 
-![][physicalAddressSpace.png]
+![](physicalAddressSpace.png)
 
 In Linux each page frame is tracked by a descriptor and several flags. Together
 these descriptors track the entire physical memory in the computer; the precise
@@ -102,7 +102,7 @@ Windows has an analogous Page Frame Number (PFN) database to track physical memo
 Lte's put together virtual memory areas, page table entries and page frames to
 understand how this all works, Below is an example of a user heap:
 
-![][heapMapped.png]
+![](heapMapped.png)
 
 Blue rectangles represent pages in the VMA range, while arrows represent page table
 entries mapping pages onto page frames. Some virtual pages lack arrows; this means
@@ -123,7 +123,7 @@ done by the lazy kernel. These two data structures together manage a program's m
 both play a role in resolving page fault, freeing memory, swapping memory out, and
 so on. Let's take the simple case of memory allocation:
 
-![][heapAllocation.png]
+![](heapAllocation.png)
 
 When the program asks fo more mmeory via the brk() system call, the kernel simply
 updates the heap VMA and calls it good. No page frames are actually allocated at this
