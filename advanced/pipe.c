@@ -46,7 +46,7 @@ int main()
   pipe(fds);
   /* Fork a child process. */
   pid = fork();
-  if (pid != (pid_t) 0) {
+  if (pid == (pid_t) 0) {
     FILE *stream;
     /* This is the child process. close our copy of the write end of
        the file descriptor. */
