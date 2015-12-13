@@ -8,8 +8,8 @@
 cflag = -O2 -Wall -Werror
 cinc = -I.
 
-SYSSTAT_OBJS += main.o irq.o sys.o task.o proc.o misc_helper.o mapped_helper.o
-PARSER_OBJS += main_parser.o irq_parser.o sys_parser.o task_parser.o proc_parser.o sqlite_helper.o
+SYSSTAT_OBJS += main.o irq.o sys.o task.o vm.o misc_helper.o mapped_helper.o
+PARSER_OBJS += main_parser.o irq_parser.o sys_parser.o task_parser.o vm_parser.o sqlite_helper.o
 EXTRA_LIBS += -lpthread -ldl -lsqlite3
 
 all: sysstat sysparser
@@ -36,8 +36,8 @@ irq.o: irq/irq.c
 sys.o: sys/sys.c
 	$(CC) $(cflag) $(cinc) -c sys/sys.c
 
-proc.o: proc/proc.c
-	$(CC) $(cflag) $(cinc) -c proc/proc.c
+vm.o: vm/vm.c
+	$(CC) $(cflag) $(cinc) -c vm/vm.c
 
 task.o: task/task.c
 	$(CC) $(cflag) $(cinc) -c task/task.c
@@ -58,8 +58,8 @@ irq_parser.o: irq/irq_parser.c
 sys_parser.o: sys/sys_parser.c
 	$(CC) $(cflag) $(cinc) -c sys/sys_parser.c
 
-proc_parser.o: proc/proc_parser.c
-	$(CC) $(cflag) $(cinc) -c proc/proc_parser.c
+vm_parser.o: vm/vm_parser.c
+	$(CC) $(cflag) $(cinc) -c vm/vm_parser.c
 
 task_parser.o: task/task_parser.c
 	$(CC) $(cflag) $(cinc) -c task/task_parser.c

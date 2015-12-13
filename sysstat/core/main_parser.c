@@ -13,7 +13,7 @@
 #include "irq/irq.h"
 #include "sys/sys.h"
 #include "task/task.h"
-#include "proc/proc.h"
+#include "vm/vm.h"
 
 static parser_entry g_parserqueue[CALLBACKQUEUE_LEN] = {{
   .file   = NULL,
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
   g_parserqueue[2].parser = sys_parser;
   g_parserqueue[2].taken = taken;
 
-  g_parserqueue[3].file = PROC_SAMPLEFILE;
+  g_parserqueue[3].file = VM_SAMPLEFILE;
   g_parserqueue[3].parser = proc_parser;
   g_parserqueue[3].taken = taken;
 

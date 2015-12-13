@@ -13,7 +13,7 @@
 
 #define IRQ_SAMPLEFILE          "irq.data"
 #define SYS_SAMPLEFILE          "sys.data"
-#define PROC_SAMPLEFILE         "proc.data"
+#define VM_SAMPLEFILE           "vm.data"
 #define TASK_SAMPLEFILE         "task.data"
 
 #endif /* SYSSTAT_CONFIG_H */

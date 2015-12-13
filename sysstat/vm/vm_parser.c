@@ -9,7 +9,7 @@
 #include <unistd.h>
 
 #include "core/config.h"
-#include "proc/proc.h"
+#include "vm/vm.h"
 #include "util/sqlite_helper.h"
 #include "util/endian_helper.h"
 

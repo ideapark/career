@@ -15,7 +15,7 @@
 
 #include "core/config.h"
 #include "core/main.h"
-#include "proc/proc.h"
+#include "vm/vm.h"
 #include "util/misc_helper.h"
 #include "util/mapped_helper.h"
 
@@ -128,7 +128,7 @@ static int write_procheader(proc_header *header)
 {
   int fd;
 
-  if ((fd = open(PROC_SAMPLEFILE, O_RDWR, 0644)) == -1)
+  if ((fd = open(VM_SAMPLEFILE, O_RDWR, 0644)) == -1)
     goto fail;
 
   if (write(fd, header, sizeof(*header)) < 0)
@@ -155,7 +155,7 @@ void proc_init(void)
   for (i = 0; i < PROC_NR; i++)
     memset(&g_header.proc_names[i][0], '\0', PROC_NAMELEN);
 
-  mapped_open(&g_procfile, PROC_SAMPLEFILE);
+  mapped_open(&g_procfile, VM_SAMPLEFILE);
   mapped_write(&g_procfile, &g_header, sizeof(g_header));
 
   if ((g_buffer = (char *)malloc(PROCFILE_BUFSIZE)) == NULL) {

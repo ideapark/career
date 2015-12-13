@@ -18,7 +18,7 @@
 #include "core/main.h"
 #include "irq/irq.h"
 #include "sys/sys.h"
-#include "proc/proc.h"
+#include "vm/vm.h"
 #include "task/task.h"
 
 long g_timestamp     = 0;
