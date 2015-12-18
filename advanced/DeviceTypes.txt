@@ -1,0 +1,13 @@
+Character Device
+================
+
+A hardware device that reads or writes a serial stream of data bytes.
+Serial and parallel ports, tape drives, terminal devices, and sound
+cards are examples of character devices.
+
+Block Device
+============
+
+A hardware device that reads or writes data in fixed-size blocks. Unlike
+a character device, a block device provides random access to data stored
+on the device. A disk is an example of a block device.
