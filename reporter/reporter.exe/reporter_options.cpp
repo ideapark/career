@@ -22,9 +22,9 @@ namespace options {
 
 namespace {
   popt::option options_array[] = {
-    popt::option(options::data_dir, "data_dir", 'd', "aps sample data directory", "path string"),
-    popt::option(options::image_dir, "image_dir", 'i', "aps sample elf directory", "path string"),
-    popt::option(options::output_dir, "output_dir", 'o', "directory to store result database", "path string"),
+    popt::option(options::data_dir, "data_dir", 'd', "aps sample data directory", "string"),
+    popt::option(options::image_dir, "image_dir", 'i', "aps sample elf directory", "string"),
+    popt::option(options::output_dir, "output_dir", 'o', "directory to store result database", "string"),
     popt::option(options::cpu_frequency, "cpu_frequency", 'f', "sample host cpu frequency", "integer"),
   };
 }
