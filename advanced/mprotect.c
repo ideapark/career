@@ -17,7 +17,7 @@ static char *memory;
 void segv_handler(int signal_number)
 {
   printf("memory accessed!\n");
-  mprotect(memory, alloc_size, PROT_READ|PROT|WRITE);
+  mprotect(memory, alloc_size, PROT_READ|PROT_WRITE);
 }
 
 int main()
