@@ -1,0 +1,23 @@
+Syntax of asm Assembler Instructions
+====================================
+
+    asm("shrl $8, %0" : "=r" (answer) : "r" (operand) : "cc");
+
+The keyword asm is followed by a parenthetic expression consisting of
+sections separated by colons. The first section contains an assembler
+instruction and its operands. In this example, shrl right-shifts the
+bits in its first operand. Its first operand is represented by %0. Its
+second operand is the immediate constant $8.
+
+The second section specifies the outputs.The instruction’s one output
+will be placed in the C variable answer, which must be an lvalue.The
+string “=r” contains an equals sign indicating an output operand and
+an r indicating that answer is stored in a register.
+
+The third section specifies the inputs.The C variable operand specifies
+the value to shift. The string “r” indicates that it is stored in a
+register but omits an equals sign because it is an input operand, not
+an output operand.
+
+The fourth section indicates that the instruction changes the value in
+the condition code cc register.
