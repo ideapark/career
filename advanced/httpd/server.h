@@ -22,7 +22,7 @@ extern int verbose;
 extern void *xmalloc(size_t size);
 
 /* Like realloc, except aborts the program if allocation fails. */
-extern xrealloc(void *ptr, size_t size);
+extern void *xrealloc(void *ptr, size_t size);
 
 /* Like strdup, except aborts the program if allocation fails. */
 extern char *xstrdup(const char *s);
