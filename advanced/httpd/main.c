@@ -35,10 +35,10 @@ static const char *const short_options = "a:hm:p:v";
 static const char *const usage_template =
 "Usage: %s [ options ]\n"
 "  -a, --address ADDR    Bind to local address (by default, bind\n"
-"                        to all local addresses).\n"
+"                          to all local addresses).\n"
 "  -h, --help            Print this information.\n"
 "  -m, --module-dir DIR  Load modules from specified directory\n"
-"                        (by default, use executable directory).\n"
+"                          (by default, use executable directory).\n"
 "  -p, --port PORT       Bind to specified port.\n"
 "  -v, --verbose         Print verbose messages.\n";
 

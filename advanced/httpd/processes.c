@@ -32,7 +32,6 @@ static int get_uid_gid(pid_t pid, uid_t *uid, gid_t *gid)
 
   /* Obtain information about the directory. */
   rval = stat(dir_name, &dir_info);
-
   if (rval != 0)
     return 1; /* Couldn't find it; perhaps this process no longer exists. */
 
@@ -94,6 +93,7 @@ static char *get_program_name(pid_t pid)
   /* Generate the name of the "stat" file in the process's /proc
      directory, and open it. */
   snprintf(file_name, sizeof(file_name), "/proc/%d/stat", (int)pid);
+
   fd = open(file_name, O_RDONLY);
   if (fd == -1)
     return NULL; /* Couldn't open the stat file for this process.
@@ -114,8 +114,8 @@ static char *get_program_name(pid_t pid)
     return NULL;
 
   result = (char *)xmalloc(close_paren - open_paren);
-  strncpy(result, open_paren+1, close_paren - open_paren -1);
-  result[close_paren - open_paren - 1] = '\0';
+  strncpy(result, open_paren+1, close_paren-open_paren-1);
+  result[close_paren-open_paren-1] = '\0';
 
   return result;
 }
@@ -133,6 +133,7 @@ static int get_rss(pid_t pid)
   int rss;
 
   snprintf(file_name, sizeof(file_name), "/proc/%d/statm", (int)pid);
+
   fd = open(file_name, O_RDONLY);
   if (fd == -1)
     return -1;
@@ -183,17 +184,17 @@ static char *format_process_info(pid_t pid)
   group_name = get_group_name(gid);
 
   result_length = strlen(program_name) + strlen(user_name)
-    + strlen(group_name) + 128;
+                  + strlen(group_name) + 128;
   result = (char *)xmalloc(result_length);
   snprintf(result, result_length,
-      "<tr>\n"
-      "  <td align=\"right\">%d</td>\n"
-      "  <td>\n<tt>%s</tt></td>\n"
-      "  <td>%s</td>\n"
-      "  <td>%s</td>\n"
-      "  <td align=\"right\">%d</td>\n"
-      "</tr>\n",
-      (int)pid, program_name, user_name, group_name, rss);
+           "<tr>\n"
+           "  <td align=\"right\">%d</td>\n"
+           "  <td>\n<tt>%s</tt></td>\n"
+           "  <td>%s</td>\n"
+           "  <td>%s</td>\n"
+           "  <td align=\"right\">%d</td>\n"
+           "</tr>\n",
+           (int)pid, program_name, user_name, group_name, rss);
 
   free(program_name);
   free(user_name);
@@ -263,7 +264,7 @@ void module_generate(int fd)
     pid = (pid_t)atoi(name);
     process_info = format_process_info(pid);
     if (process_info == NULL)
-      process_info = "<tr><td colspan=\"5\">ERROR</td></tr>";
+      process_info = "<tr><td colspan=\"5\">ERROR</td></tr>\n";
 
     if (vec_length == vec_size - 1) {
       vec_size *= 2;
