@@ -1,0 +1,48 @@
+Name                Description
+----------------------------------------------------------------------------
+ SIGINT             Linux sends a process this signal when the user tries to
+                    end it by pressing CTRL+C
+
+ SIGILL             A process gets this signal when it attempts to execute
+                    an illegal instruction. This could indicate that the
+                    program's stack is corrupted.
+
+SIGABRT             The abort function causes the process to receive this
+                    signal.
+
+SIGFPE              The process has executed an invalid floating-point math
+                    instruction. Depending on how the CPU is configured, an
+                    invalid floating-point operation may return a special
+                    non-number value such as inf (infinity) or NaN (not a
+                    number) instead of raising SIGFPE.
+
+SIGKILL             This signal ends a process immediately and cannot be
+                    handled.
+
+SIGUSR1             This signal is reserved for application use.
+
+SIGUSR2             This signal is reserved for application user.
+
+SIGSEGV             The program attempted an invalid memory access. The
+                    asscess may be to an address that is invalid in the
+                    process's virtual memory space, or the access may be
+                    forbidden by the target memory's permissions. Dereferencing
+                    a "whild pointer" can cause a SIGSEGV.
+
+SIGPIPE             The program has attempted to access a broken data stream,
+                    such as a socket connection that has been closed by the
+                    other party.
+
+SIGALRM             The alarm system call schedules the dielivery of this signal
+                    at a later time.
+
+SIGTERM             This signal requests that a process terminate. This is the
+                    default signal sent by kill command.
+
+SIGCHLD             Linux sends a process this signal when a child process exits.
+
+SIGXCPU             Linux sends a process this signal when it exceeds the limit
+                    of CPU time that it can consume.
+
+SIGVTALRM           The setitimer schedules the delivery of this signal at a
+                    future time.
