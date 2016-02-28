@@ -1,4 +1,4 @@
 GOT
 ===
 
-A brief (and hurriedly handwritten) note
+Reading notes by [lockrecv](lockrecv@qq.com)
