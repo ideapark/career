@@ -48,8 +48,10 @@ the first character scanned is 'a'. 'a' is added to the Postfix string. The
 next character scanned is '+'. It being an operator, it is pushed to the stack.
 
 ![Stack](infix-postfix.stack.1.gif)
+Stack
 
 ![Postfix String](infix-postfix.string.1.gif)
+Postfix String
 
 Next character scanned is 'b' which will be placed in the Postfix string.
 Next character is '*' which is an operator. Now, the top element of the
