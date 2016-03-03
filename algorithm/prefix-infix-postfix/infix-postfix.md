@@ -57,8 +57,10 @@ stack is '+' which has lower precedence than '*', so '*' will be pushed
 to the stack.
 
 ![Stack](infix-postfix.stack.2.gif)
+Stack
 
 ![Postfix String](infix-postfix.string.2.gif)
+Postfix String
 
 The next character is 'c' which is placed in the Postfix string. Next character
 scanned is '-'. The topmost character in the stack is '*' which has a higher
@@ -68,8 +70,10 @@ of the stack is '+' which has equal priority to '-'. So pop the '+' from the
 stack and add it to the Postfix string. The '-' will be pushed to the stack.
 
 ![Stack](infix-postfix.stack.3.gif)
+Stack
 
 ![Postfix String](infix-postfix.string.3.gif)
+Postfix String
 
 Next character is 'd' which is added to Postfix string. Now all characters have
 been scanned so we must pop the remaining elements from the stack and add it to
@@ -78,8 +82,10 @@ out and added to the Postfix string. So, after all characters are scanned, this
 is how the stack and Postfix string will be :
 
 ![Stack](infix-postfix.stack.4.gif)
+Stack
 
 ![Postfix String](infix-postfix.string.4.gif)
+Postfix String
 
 
 End result:
