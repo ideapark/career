@@ -1,5 +1,7 @@
 /**
  * Copyright (C) Zhou Peng <lockrecv@gmail.com>
+ *
+ * Dijkstra's algorithm
  */
 #include <set>
 #include <map>
@@ -77,7 +79,7 @@ void Dijkstra(vector<Edge> &Graph, Vertex src)
             cout << endl;
         }
 
-        // If u can not be reached, no need to check its neighbors
+        // u can not be reached
         if (Distance[u] == ~0)
             continue;
 
