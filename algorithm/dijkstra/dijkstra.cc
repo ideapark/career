@@ -54,6 +54,8 @@ void Dijkstra(vector<Edge> &Graph, Vertex src)
 
         Vertex u = *minIter;
 
+        Q.erase(minIter);
+
         // Print out shortest path
         {
             stack<Vertex> S;
@@ -75,7 +77,9 @@ void Dijkstra(vector<Edge> &Graph, Vertex src)
             cout << endl;
         }
 
-        Q.erase(minIter);
+        // If u can not be reached, no need to check its neighbors
+        if (Distance[u] == ~0)
+            continue;
 
         for (EdgeIter iter = Graph.begin(); iter != Graph.end(); ++iter) {
             if (iter->src == u) {
@@ -93,31 +97,16 @@ void Dijkstra(vector<Edge> &Graph, Vertex src)
 
 int main(int argc, char *argv[])
 {
-    Edge testEdges[] = {
-        {1,2,10},
-        {1,3,20},
-        {1,4,15},
-        {2,5,13},
-        {2,6,1},
-        {2,7,8},
-        {3,8,10},
-        {3,9,20},
-        {3,10,15},
-        {3,12,1},
-        {4,13,12},
-    };
-
-    cout << "==Graph==" << endl;
-
-    for (int i = 0; i < sizeof(testEdges)/sizeof(testEdges[0]); i++) {
-        Graph.push_back(testEdges[i]);
-        cout << " s: " << testEdges[i].src
-             << " d: " << testEdges[i].dst
-             << " w: " << testEdges[i].weight
+    for (int i = 0; i < 20; i++) {
+        Edge edge = {i, i+1, i};
+        Graph.push_back(edge);
+        cout << " S:" << edge.src
+             << " D:" << edge.dst
+             << " W:" << edge.weight
              << endl;
     }
 
-    Dijkstra(Graph, 2);
+    Dijkstra(Graph, 5);
 
     return 0;
 }
