@@ -79,7 +79,7 @@ void Dijkstra(vector<Edge> &Graph, Vertex src)
             cout << endl;
         }
 
-        // u can not be reached
+        // Vertex u can not be reached
         if (Distance[u] == ~0)
             continue;
 
@@ -99,8 +99,8 @@ void Dijkstra(vector<Edge> &Graph, Vertex src)
 
 int main(int argc, char *argv[])
 {
-    for (int i = 0; i < 20; i++) {
-        Edge edge = {i, i+1, i};
+    for (int i = 0; i < 50; i++) {
+        Edge edge = {i, i+3, i+i};
         Graph.push_back(edge);
         cout << " S:" << edge.src
              << " D:" << edge.dst
