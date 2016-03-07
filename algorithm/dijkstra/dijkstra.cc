@@ -23,10 +23,10 @@ typedef struct {
 
 static vector<Edge> Graph;
 
-typedef vector<Edge>::iterator EdgeIter;
-typedef set<Vertex>::iterator VertexIter;
+typedef vector<Edge>::const_iterator EdgeIter;
+typedef set<Vertex>::const_iterator VertexIter;
 
-void Dijkstra(vector<Edge> &Graph, Vertex src)
+void Dijkstra(const vector<Edge> &Graph, Vertex src)
 {
     map<Vertex, Weight> Distance;
     map<Vertex, Vertex> Previous;
