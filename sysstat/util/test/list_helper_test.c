@@ -1,7 +1,7 @@
 /*
  * sysstat/util/test/list_helper_test.c - list unit test
  *
- * Copyright (C) Zhou Peng <lockrecv@gmail.com>
+ * Copyright (C) Zhou Peng <lockrecv@qq.com>
  */
 #include <stdlib.h>
 #include <stdio.h>

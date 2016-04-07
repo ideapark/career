@@ -1,7 +1,7 @@
 /*
  * sysstat/util/misc_helper.h - some useful helpers
  *
- * Copyright (C) Zhou Peng <lockrecv@gmail.com>
+ * Copyright (C) Zhou Peng <lockrecv@qq.com>
  */
 #ifndef MISC_HELPER_H
 #define MISC_HELPER_H

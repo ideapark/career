@@ -1,7 +1,7 @@
 /*
  * sysstat/sys/sys.h - sysstat system info sample
  *
- * Copyright (C) Zhou Peng <lockrecv@gmail.com>
+ * Copyright (C) Zhou Peng <lockrecv@qq.com>
  */
 #ifndef SYSSTAT_SYS_H
 #define SYSSTAT_SYS_H

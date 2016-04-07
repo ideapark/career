@@ -1,7 +1,7 @@
 /*
  * sysstat/util/mapped_helper.c - Linux mapped memory file I/O
  *
- * Copyright (C) Zhou Peng <lockrecv@gmail.com>
+ * Copyright (C) Zhou Peng <lockrecv@qq.com>
  */
 #include <fcntl.h>
 #include <unistd.h>

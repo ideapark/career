@@ -1,7 +1,7 @@
 /*
  * sysstat/util/misc_helper.c - some useful helpers
  *
- * Copyright (C) Zhou Peng <lockrecv@gmail.com>
+ * Copyright (C) Zhou Peng <lockrecv@qq.com>
  */
 #include <unistd.h>
 #include <inttypes.h>

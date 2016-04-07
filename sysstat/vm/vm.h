@@ -1,7 +1,7 @@
 /*
  * sysstat/proc/proc.h - sysstat process sample
  *
- * Copyright (C) Zhou Peng <lockrecv@gmail.com>
+ * Copyright (C) Zhou Peng <lockrecv@qq.com>
  */
 #ifndef SYSSTAT_PROC_H
 #define SYSSTAT_PROC_H

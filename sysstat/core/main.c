@@ -1,7 +1,7 @@
 /*
  * sysstat/core/main.c - sysstat main engine
  *
- * Copyright (C) Zhou Peng <lockrecv@gmail.com>
+ * Copyright (C) Zhou Peng <lockrecv@qq.com>
  */
 #include <stdio.h>
 #include <stdlib.h>

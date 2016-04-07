@@ -1,7 +1,7 @@
 /*
  * sysstat/core/config.h - sysstat macro defines and constants
  *
- * Copyright (C) Zhou Peng <lockrecv@gmail.com>
+ * Copyright (C) Zhou Peng <lockrecv@qq.com>
  */
 #ifndef SYSSTAT_CONFIG_H
 #define SYSSTAT_CONFIG_H

@@ -2,7 +2,7 @@
 # sysstat   - system performance sample tool
 # sysparser - system performance data parsing tool
 #
-# Copyright (C) Zhou Peng <lockrecv@gmail.com>
+# Copyright (C) Zhou Peng <lockrecv@qq.com>
 # --------------------------------------------------------------
 
 cflag = -O2 -Wall -Werror
