@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Zhou Peng <lockrecv@gmail.com>
+ * Copyright (C) Zhou Peng <lockrecv@qq.com>
  */
 #ifndef CALLGRAPH_PAINTER_H
 #define CALLGRAPH_PAINTER_H

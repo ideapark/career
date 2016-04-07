@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Zhou Peng <lockrecv@gmail.com>
+ * Copyright (C) Zhou Peng <lockrecv@qq.com>
  */
 #include "callgraph_options.h"
 #include "callgraph_painter.h"
