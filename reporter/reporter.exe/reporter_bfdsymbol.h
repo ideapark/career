@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Zhou Peng <lockrecv@gmail.com>
+ * Copyright (C) Zhou Peng <lockrecv@qq.com>
  */
 #ifndef REPORTER_BFDSYMBOL_H
 #define REPORTER_BFDSYMBOL_H

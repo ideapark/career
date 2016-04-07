@@ -1,8 +1,8 @@
 /*
- * Copyright (C) Zhou Peng <lockrecv@gmail.com>
+ * Copyright (C) Zhou Peng <lockrecv@qq.com>
  */
-#ifndef REPORTER_CONFIG_H
-#define REPORTER_CONFIG_H
+#ifndef REPORTER_UTILITY_H
+#define REPORTER_UTILITY_H
 
 #include <unistd.h>
 #include <inttypes.h>
@@ -96,4 +96,4 @@ inline uint64_t op_htonl64(uint64_t x, int cflag)
   }
 }
 
-#endif /* REPORTER_CONFIG_H */
+#endif /* REPORTER_UTILITY_H */
