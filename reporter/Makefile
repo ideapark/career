@@ -2,7 +2,7 @@
 # reporter.exe  - aps performance tool sample data parsing tool
 # callgraph.exe - aps performance tool callgraph tool
 #
-# Copyright (C) Zhou Peng <lockrecv@gmail.com>
+# Copyright (C) Zhou Peng <lockrecv@qq.com>
 #
 # --------------------------------------------------------------
 
