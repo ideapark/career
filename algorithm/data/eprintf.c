@@ -60,6 +60,14 @@ char *progname(void)
     return name;
 }
 
+/* usage: print usage message and exit */
+void usage(void)
+{
+    fprintf(stderr, "usage: %s [-d] [-n nwords]"
+            " [-s seed] [files ...]\n", progname());
+    exit(2);
+}
+
 int main(int argc, char *argv[])
 {
     setprogname("markov");
