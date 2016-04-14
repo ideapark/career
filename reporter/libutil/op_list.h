@@ -145,26 +145,26 @@ static __inline__ void list_splice(struct list_head * list, struct list_head * h
 
 /**
  * list_entry - get the struct for this entry
- * @param ptr   the &struct list_head pointer.
- * @param type  the type of the struct this is embedded in.
- * @param member        the name of the list_struct within the struct.
+ * @param ptr 	the &struct list_head pointer.
+ * @param type 	the type of the struct this is embedded in.
+ * @param member 	the name of the list_struct within the struct.
  */
 #define list_entry(ptr, type, member) \
   ((type *)((char *)(ptr)-(unsigned long)(&((type *)0)->member)))
 
 /**
  * list_for_each - iterate over a list
- * @param pos   the &struct list_head to use as a loop counter.
- * @param head  the head for your list.
+ * @param pos 	the &struct list_head to use as a loop counter.
+ * @param head 	the head for your list.
  */
 #define list_for_each(pos, head) \
   for (pos = (head)->next; pos != (head); pos = pos->next)
 
 /**
  * list_for_each_safe - iterate over a list safe against removal of list entry
- * @param pos   the &struct list_head to use as a loop counter.
- * @param n             another &struct list_head to use as temporary storage
- * @param head  the head for your list.
+ * @param pos 	the &struct list_head to use as a loop counter.
+ * @param n 		another &struct list_head to use as temporary storage
+ * @param head 	the head for your list.
  */
 #define list_for_each_safe(pos, n, head) \
   for (pos = (head)->next, n = pos->next; pos != (head); \

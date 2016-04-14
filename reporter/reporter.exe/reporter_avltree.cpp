@@ -19,7 +19,7 @@ static int cmp_node(const vma_node *left, const vma_node *right)
 static void print_node(const vma_node *node)
 {
   std::cout << "[" << node->vma_begin << ", " << node->vma_end << "] -> "
-            << node->unix_path << std::endl;
+            << node->unix_path << " (" << node->bfd_key << ")" << std::endl;
 }
 
 avl_tree::avl_tree()
@@ -79,7 +79,7 @@ vma_node *avl_tree::lr_rotation(vma_node *parent)
 
 vma_node *avl_tree::rl_rotation(vma_node *parent)
 {
-  vma_node *temp;
+  struct vma_node *temp;
 
   temp = parent->right;
   parent->right = ll_rotation(temp);
@@ -168,6 +168,17 @@ vma_node *avl_tree::rightmost(vma_node *root)
     return rightmost(root->right);
   else
     return root;
+}
+
+void avl_tree::flat(const vma_node *root,
+                    std::list<const vma_node *> &flat_tree) const
+{
+  if (root == 0)
+    return;
+
+  flat(root->left, flat_tree);
+  flat_tree.push_back(root);
+  flat(root->right, flat_tree);
 }
 
 void avl_tree::debug_print(const vma_node *root) const

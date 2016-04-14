@@ -70,7 +70,7 @@ painter::~painter()
   callgraph_info.close();
 
   /*
-   * delete callgraph_entry
+   * Delete callgraph_entry
    */
   std::map<int, callgraph_entry *>::iterator iter = callgraph.begin(),
                                               end = callgraph.end();
@@ -236,7 +236,7 @@ void painter::caller_callee_callgraph(int func_key)
     }
 
     /*
-     * graph edge
+     * Graph edge
      */
     switch (options::func_who) {
       case E_CALLEE:
@@ -274,7 +274,7 @@ void painter::whole_callgraph()
     }
 
     /*
-     * graph node
+     * Graph node
      */
     callgraph_dot << "\"" << cg_entry->func_key << "\""
                   << " [color=\"" << get_color(cg_entry->total_ratio) << "\", "

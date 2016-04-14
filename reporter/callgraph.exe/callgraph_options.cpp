@@ -15,8 +15,8 @@
 namespace callgraph {
 
 namespace options {
-  std::string database = "";
-  std::string output   = "";
+  std::string database = "./default.db";
+  std::string output   = ".";
 
   int event_key        = -1;
   int vcpu             = -1;
@@ -40,8 +40,8 @@ namespace options {
 namespace {
 
 popt::option options_array[] = {
-  popt::option(options::database,         "database",    '\0', "database path",     "path"),
-  popt::option(options::output,           "output",      '\0', "output directory",  "path"),
+  popt::option(options::database,         "database",    '\0', "database path",     "database path"),
+  popt::option(options::output,           "output",      '\0', "output directory",  "directory path"),
   popt::option(options::event_key,        "event_key",   '\0', "event key",         "number"),
   popt::option(options::vcpu,             "vcpu",        '\0', "vcpu limitation",   "number"),
   popt::option(options::pid,              "pid",         '\0', "process id",        "number"),

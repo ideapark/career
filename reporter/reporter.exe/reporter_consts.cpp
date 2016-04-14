@@ -13,8 +13,9 @@ namespace reporter {
 typedef std::map<uint32_t, std::string> EventNameMap;
 
 static const EventNameMap::value_type event_names[] = {
-  EventNameMap::value_type(17, "CPU_CLK_UNHALTED"),
-  EventNameMap::value_type(21, "CACHE_MISSES"),
+  EventNameMap::value_type(3, "L1D_CACHE_REFILL"),
+  EventNameMap::value_type(5, "L1D_TLB_REFILL"),
+  EventNameMap::value_type(17, "CPU_CYCLES"),
   /* Add event_id : event_name Here */
 };
 
@@ -28,7 +29,7 @@ std::string lookup_event_name(uint32_t event_id)
   if (iter != end)
     return iter->second;
   else
-    return "APS_INVALID_EVENT_NAME";
+    return "event@" + to_string(event_id);
 }
 
 } /* namespace reporter */

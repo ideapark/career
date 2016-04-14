@@ -188,6 +188,7 @@ op_bfd::op_bfd(string const & fname, string_filter const & symbol_filter,
 out:
   add_symbols(symbols, symbol_filter);
   return;
+
 out_fail:
   ibfd.close();
   dbfd.close();
@@ -236,10 +237,7 @@ void op_bfd::get_symbols(op_bfd::symbols_found_t & symbols)
              ibfd.syms[i]->section) != filtered_section.end())
       continue;
 
-    if (is_sre && string(ibfd.syms[i]->section->name) == ".text")
-      symbols.push_back(op_bfd_symbol(ibfd.syms[i]));
-    else
-      symbols.push_back(op_bfd_symbol(ibfd.syms[i]));
+    symbols.push_back(op_bfd_symbol(ibfd.syms[i]));
   }
 
   for (i = 0; i < dbfd.nr_syms; ++i) {
@@ -254,10 +252,7 @@ void op_bfd::get_symbols(op_bfd::symbols_found_t & symbols)
     if (filepos != 0)
       dbfd.syms[i]->section->filepos = filepos;
 
-    if (is_sre && string(ibfd.syms[i]->section->name) == ".text")
-      symbols.push_back(op_bfd_symbol(ibfd.syms[i]));
-    else
-      symbols.push_back(op_bfd_symbol(ibfd.syms[i]));
+    symbols.push_back(op_bfd_symbol(ibfd.syms[i]));
   }
 
   symbols.sort();
@@ -295,16 +290,16 @@ void op_bfd::get_symbols(op_bfd::symbols_found_t & symbols)
 
   if (is_libso) {
     filepos_map_t::iterator iter_text = filepos_map.find(".text"),
-      iter_plt = filepos_map.find(".plt"),
-      end = filepos_map.end();
+                             iter_plt = filepos_map.find(".plt"),
+                                  end = filepos_map.end();
     if (iter_text != end &&
         iter_plt  != end &&
         iter_text->second > iter_plt->second) {
 
       op_bfd_symbol artifical_symb(iter_plt->second,
-          iter_plt->second,
-          (iter_text->second - iter_plt->second),
-          ".plt");
+                                   iter_plt->second,
+                                   (iter_text->second - iter_plt->second),
+                                   ".plt");
       symbols.push_back(artifical_symb);
     }
   }
@@ -324,8 +319,7 @@ void op_bfd::add_symbols(op_bfd::symbols_found_t & symbols,
         << dec << symbols.size() << hex << endl;
 
   symbols_found_t::iterator it;
-  it = remove_if(symbols.begin(), symbols.end(),
-                 remove_filter(symbol_filter));
+  it = remove_if(symbols.begin(), symbols.end(), remove_filter(symbol_filter));
 
   copy(symbols.begin(), it, back_inserter(syms));
 
@@ -517,10 +511,11 @@ size_t op_bfd::bfd_arch_bits_per_address() const
 
 op_bfd::op_bfd(const std::string image_path, bool is_sre)
   : extra_found_images(extra_images()),
+    file_size(-1),
+    anon_obj(false),
     is_libso(false),
     is_vmlinux(false)
 {
-
   int fd;
   struct stat st;
 
@@ -602,17 +597,17 @@ op_bfd::op_bfd(const std::string image_path, bool is_sre)
 out:
   add_symbols(symbols, string_filter());
   return;
+
 out_fail:
   ibfd.close();
   dbfd.close();
   // make the fake symbol fit within the fake file
   file_size = -1;
   goto out;
-
 }
 
 
-symbol_index_t op_bfd::get_symindex(uint32_t vma) const
+symbol_index_t op_bfd::get_symindex(unsigned long long file_offset) const
 {
   int l = 0;
   int h = this->syms.size()-1;
@@ -621,13 +616,13 @@ symbol_index_t op_bfd::get_symindex(uint32_t vma) const
   while (l <= h) {
     symbol_index_t mid = (l + h)/2;
 
-    unsigned long long vma_start, vma_end;
-    get_symbol_range(mid, vma_start, vma_end);
+    unsigned long long fileoffset_start, fileoffset_end;
+    get_symbol_range(mid, fileoffset_start, fileoffset_end);
 
-    if (vma < vma_start) {
+    if (file_offset < fileoffset_start) {
       h = mid - 1;
       continue;
-    } else if (vma > vma_end) {
+    } else if (file_offset > fileoffset_end) {
       l = mid + 1;
       continue;
     } else {
@@ -644,6 +639,20 @@ unsigned long op_bfd::start_vma(symbol_index_t index) const
     return APS_INVALID_VMA;
 
   return this->syms[index].vma();
+}
+
+
+unsigned long op_bfd::objdump_vma(unsigned long long file_offset) const
+{
+  symbol_index_t index = get_symindex(file_offset);
+
+  if (index == APS_INVALID_SYMBOL_INDEX)
+    return APS_INVALID_VMA;
+
+  op_bfd_symbol symbol = this->syms[index];
+
+  unsigned long objdump_vma = file_offset - symbol.filepos() + symbol.vma();
+  return objdump_vma;
 }
 
 

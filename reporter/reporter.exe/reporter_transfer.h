@@ -54,13 +54,14 @@ class transfer {
     std::map<std::string, func_info *> func_infos;
     std::map<std::string, callgraph_info *> callgraph_infos;
     std::map<std::string, func_sample *> func_samples;
-    std::map<std::string, cachemiss_sample *> cachemiss_samples;
+    std::map<std::string, srcline_sample *> srcline_samples;
 
     std::map<std::string, cpu_slice *> cpu_slices;
     std::map<std::string, process_slice *> process_slices;
     std::map<std::string, task_slice *> task_slices;
     std::map<std::string, func_slice *> func_slices;
     std::map<std::string, callgraph_slice *> callgraph_slices;
+    std::map<std::string, process_imagefile *> process_imagefiles;
 };
 
 } /* namespace reporter */

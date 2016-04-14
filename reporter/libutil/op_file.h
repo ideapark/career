@@ -76,13 +76,13 @@ extern "C" {
    * @param base_dir directory from where lookup starts
    * @param filter a pathname filter
    * @param recursion recursion_type -- see above enum and following description:
-   *    NO_RECURSION:  Find matching files from passed base_dir and call
+   *	NO_RECURSION:  Find matching files from passed base_dir and call
    *          get_pathname_callback to add entry to name_list to be returned.
-   *    MATCH_ANY_ENTRY_RECURSION: Starting at base_dir, for each entry in the
-   *       dir that matches the filter: if entry is of type 'dir', recurse;
+   *	MATCH_ANY_ENTRY_RECURSION: Starting at base_dir, for each entry in the
+   *	   dir that matches the filter: if entry is of type 'dir', recurse;
    *         else call get_pathname_callback to add entry to name_list to be
    *         returned.
-   *    MATCH_DIR_ONLY_RECURSION: Starting at base_dir, if an entry in the
+   *	MATCH_DIR_ONLY_RECURSION: Starting at base_dir, if an entry in the
    *         dir is of type 'dir' and its complete pathname contains a match to
    *         the filter, call get_pathname_callback to add entry to name_list to
    *         be returned; else recurse.

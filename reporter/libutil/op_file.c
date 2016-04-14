@@ -93,7 +93,7 @@ static char * make_pathname_from_dirent(char const * basedir,
   char * name;
   name_len = strlen(basedir) + strlen("/") + strlen(ent->d_name) + 1;
   name = xmalloc(name_len);
-  sprintf(name, "%s/%s", basedir,       ent->d_name);
+  sprintf(name, "%s/%s", basedir,	ent->d_name);
   if (stat(name, st_buf) != 0)
   {
     struct stat lstat_buf;

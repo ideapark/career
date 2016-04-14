@@ -4,11 +4,12 @@
 #ifndef CALLGRAPH_SQLITE_H
 #define CALLGRAPH_SQLITE_H
 
-#include <sqlite3.h>
-
 #include <map>
 #include <vector>
 #include <string>
+
+#include <sqlite3.h>
+
 
 namespace callgraph {
 

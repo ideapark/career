@@ -17,4 +17,4 @@ void get_options(int argc, const char *argv[]);
 
 } /* namespace reporter */
 
-#endif // REPORTER_OPTIONS_H
+#endif /* REPORTER_OPTIONS_H */

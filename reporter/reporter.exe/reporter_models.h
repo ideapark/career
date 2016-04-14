@@ -100,13 +100,12 @@ class image_info {
 
   public:
     image_info() {
-        image_private_key = image_info::genkey();
-        unix_path         = "";
-        win_path          = "";
+      image_private_key = -1;
+      unix_path         = "";
+      win_path          = "";
     }
 
   public:
-    static int genkey(){static int key = 0; return key++;}
     static std::string create_table_sql(){return IMAGE_INFO_CREATE_TABLE_SQL;}
     std::string insert_entry_sql() const;
 };
@@ -115,6 +114,7 @@ class image_info {
   "CREATE TABLE IF NOT EXISTS event_info_table(\n" \
   "    event_private_key  INTEGER PRIMARY KEY, \n" \
   "    event_name         TEXT,                \n" \
+  "    event_id           INTEGER,             \n" \
   "    sample_count       INTEGER,             \n" \
   "    sample_reset_value INTEGER              \n" \
   ");\n"
@@ -123,11 +123,13 @@ class image_info {
   "INSERT INTO event_info_table(\n" \
   "    event_private_key,       \n" \
   "    event_name,              \n" \
+  "    event_id,                \n" \
   "    sample_count,            \n" \
   "    sample_reset_value       \n" \
   ") VALUES (                   \n" \
   "    %d,                      \n" \
   "    '%s',                    \n" \
+  "    %d,                      \n" \
   "    %d,                      \n" \
   "    %d                       \n" \
   ");\n"
@@ -136,6 +138,7 @@ class event_info {
   public:
     int event_private_key;
     std::string event_name;
+    int event_id;
     int sample_count;
     int sample_reset_value;
 
@@ -143,6 +146,7 @@ class event_info {
     event_info() {
       event_private_key  = event_info::genkey();
       event_name         = "";
+      event_id           = -1;
       sample_count       = 0;
       sample_reset_value = 0;
     }
@@ -302,7 +306,7 @@ class task_info {
   ") VALUES (                  \n" \
   "    %d,                     \n" \
   "    %d,                     \n" \
-  "    %u,                     \n" \
+  "    %lu,                    \n" \
   "    '%s',                   \n" \
   "    '%s',                   \n" \
   "    %u                      \n" \
@@ -321,7 +325,7 @@ class func_info {
     func_info() {
       func_private_key   = func_info::genkey();
       image_private_key  = -1;
-      func_vma           = -1;
+      func_vma           = 0;
       func_name          = "";
       file_path          = "";
       line               = 0;
@@ -723,61 +727,102 @@ class func_sample {
     std::string insert_entry_sql() const;
 };
 
-#define CACHEMISS_SAMPLE_CREATE_TABLE_SQL \
-  "CREATE TABLE IF NOT EXISTS cachemiss_sample_table(\n" \
-  "    event_private_key        INTEGER,             \n" \
-  "    process_private_key      INTEGER,             \n" \
-  "    task_private_key         INTEGER,             \n" \
-  "    image_private_key        INTEGER,             \n" \
-  "    offset                   INTEGER,             \n" \
-  "    sample_count             INTEGER,             \n" \
-  "    UNIQUE(                                       \n" \
-  "        event_private_key,                        \n" \
-  "        process_private_key,                      \n" \
-  "        task_private_key,                         \n" \
-  "        image_private_key,                        \n" \
-  "        offset                                    \n" \
-  "    )                                             \n" \
+#define SRCLINE_SAMPLE_CREATE_TABLE_SQL \
+  "CREATE TABLE IF NOT EXISTS srcline_sample_table(\n" \
+  "    event_private_key        INTEGER,           \n" \
+  "    process_private_key      INTEGER,           \n" \
+  "    task_private_key         INTEGER,           \n" \
+  "    image_private_key        INTEGER,           \n" \
+  "    objdump_vma              INTEGER,           \n" \
+  "    sample_count             INTEGER,           \n" \
+  "    UNIQUE(                                     \n" \
+  "        event_private_key,                      \n" \
+  "        process_private_key,                    \n" \
+  "        task_private_key,                       \n" \
+  "        image_private_key,                      \n" \
+  "        objdump_vma                             \n" \
+  "    )                                           \n" \
   ");\n"
 
-#define CACHEMISS_SAMPLE_INSERT_TABLE_SQL \
-  "INSERT INTO cachemiss_sample_table(\n" \
-  "    event_private_key,             \n" \
-  "    process_private_key,           \n" \
-  "    task_private_key,              \n" \
-  "    image_private_key,             \n" \
-  "    offset,                        \n" \
-  "    sample_count                   \n" \
-  ") VALUES (                         \n" \
-  "    %d,                            \n" \
-  "    %d,                            \n" \
-  "    %d,                            \n" \
-  "    %d,                            \n" \
-  "    %d,                            \n" \
-  "    %d                             \n" \
+#define SRCLINE_SAMPLE_INSERT_TABLE_SQL \
+  "INSERT INTO srcline_sample_table(\n" \
+  "    event_private_key,           \n" \
+  "    process_private_key,         \n" \
+  "    task_private_key,            \n" \
+  "    image_private_key,           \n" \
+  "    objdump_vma,                 \n" \
+  "    sample_count                 \n" \
+  ") VALUES (                       \n" \
+  "    %d,                          \n" \
+  "    %d,                          \n" \
+  "    %d,                          \n" \
+  "    %d,                          \n" \
+  "    %lu,                         \n" \
+  "    %d                           \n" \
   ");\n"
 
-class cachemiss_sample {
+class srcline_sample {
   public:
     int event_private_key;
     int process_private_key;
     int task_private_key;
     int image_private_key;
-    int offset;
+    unsigned long objdump_vma;
     int sample_count;
 
   public:
-    cachemiss_sample() {
+    srcline_sample() {
       event_private_key   = -1;
       process_private_key = -1;
       task_private_key    = -1;
       image_private_key   = -1;
-      offset              = -1;
+      objdump_vma         = 0;
       sample_count        = 0;
     }
 
   public:
-    static std::string create_table_sql(){return CACHEMISS_SAMPLE_CREATE_TABLE_SQL;}
+    static std::string create_table_sql(){return SRCLINE_SAMPLE_CREATE_TABLE_SQL;}
+    std::string insert_entry_sql() const;
+};
+
+#define PROCESS_IMAGEFILE_CREATE_TABLE_SQL \
+  "CREATE TABLE IF NOT EXISTS process_imagefile_table(\n" \
+  "    pid                      INTEGER,              \n" \
+  "    image_private_key        INTEGER,              \n" \
+  "    vma_start                INTEGER,              \n" \
+  "    vma_end                  INTEGER               \n" \
+  ");\n"
+
+#define PROCESS_IMAGEFILE_INSERT_TABLE_SQL \
+  "INSERT INTO process_imagefile_table(\n" \
+  "    pid,                            \n" \
+  "    image_private_key,              \n" \
+  "    vma_start,                      \n" \
+  "    vma_end                         \n" \
+  ") VALUES (                          \n" \
+  "    %d,                             \n" \
+  "    %d,                             \n" \
+  "    %lu,                            \n" \
+  "    %lu                             \n" \
+  ");\n"
+
+class process_imagefile {
+  public:
+    int pid;
+    int image_private_key;
+    unsigned long vma_start;
+    unsigned long vma_end;
+
+  public:
+    process_imagefile() {
+      pid               = -1;
+      image_private_key = -1;
+      vma_start         = 0;
+      vma_end           = 0;
+    }
+
+  public:
+    static std::string create_table_sql(){return PROCESS_IMAGEFILE_CREATE_TABLE_SQL;}
     std::string insert_entry_sql() const;
 };
 

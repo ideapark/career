@@ -5,7 +5,9 @@
 #define REPORTER_AVLTREE_H
 
 #include <inttypes.h>
+#include <list>
 #include <iostream>
+
 #include "reporter_bfdsupport.h"
 
 namespace reporter {
@@ -23,6 +25,8 @@ class avl_tree
     vma_node *find(vma_node *root, uint32_t vma);
     vma_node *insert(vma_node *&root, vma_node *node);
     vma_node *rmnode(vma_node *&root);
+    void flat(const vma_node *root,
+              std::list<const vma_node *> &flat_tree) const;
     void debug_print(const vma_node *root) const;
 
   private:

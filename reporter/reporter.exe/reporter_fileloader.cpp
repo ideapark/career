@@ -64,7 +64,7 @@ void file_loader::load_images(const std::string image_dir,
     if (fname == "." || fname == "..")
       continue;
 
-    std::string win_path = image_dir + "\\" + fname;
+    std::string win_path = image_dir + "/" + fname;
     std::string unix_path = unix_dir + "/" + fname;
 
     if (ent->d_type == DT_REG) {

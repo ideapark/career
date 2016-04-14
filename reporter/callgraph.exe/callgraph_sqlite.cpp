@@ -1,12 +1,12 @@
 /*
  * Copyright (C) Zhou Peng <lockrecv@qq.com>
  */
-#include <sqlite3.h>
-
 #include <map>
 #include <cstdlib>
 #include <string>
 #include <iostream>
+
+#include <sqlite3.h>
 
 #include "callgraph_sqlite.h"
 #include "callgraph_options.h"

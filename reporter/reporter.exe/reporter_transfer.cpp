@@ -3,6 +3,7 @@
  */
 #include <unistd.h>
 #include <stdio.h>
+#include <list>
 #include <functional>
 
 #include "reporter_utility.h"
@@ -17,11 +18,12 @@ namespace reporter {
 
 /*
  * SOME USEFUL TEMPLATE METHODS FOR CODE GENERATION, WHICH CAN SAVE
- * PLENTY OF BUSINESS CODE.
+ * PLENTY OF DUPLICATE CODE.
  *
  * NOTE:
  *   gcc does *NOT* support tempalte method declaration and definition
- *   are distributed across two different files, so we put them togethor.
+ *   being distributed across two different source files, so I have to
+ *   put them together.
  */
 
 template <typename T>
@@ -89,8 +91,8 @@ transfer::transfer(std::string data_dir, std::string image_dir,
 
     if (create) {
       const key_path &key_path = iter->second;
-      image_info->image_private_key = key_path.bfd_key;
       image_info->unix_path         = unix_path;
+      image_info->image_private_key = key_path.bfd_key;
       image_info->win_path          = key_path.win_path;
     }
     iter++;
@@ -100,7 +102,7 @@ transfer::transfer(std::string data_dir, std::string image_dir,
 transfer::~transfer()
 {
   /*
-   * delete all 'new'ed objects
+   * Delete all `newed` objects
    */
   for_each_map_value(image_infos, delete_object<image_info>);
   for_each_map_value(event_infos, delete_object<event_info>);
@@ -109,13 +111,14 @@ transfer::~transfer()
   for_each_map_value(func_infos, delete_object<func_info>);
   for_each_map_value(callgraph_infos, delete_object<callgraph_info>);
   for_each_map_value(func_samples, delete_object<func_sample>);
-  for_each_map_value(cachemiss_samples, delete_object<cachemiss_sample>);
+  for_each_map_value(srcline_samples, delete_object<srcline_sample>);
 
   for_each_map_value(cpu_slices, delete_object<cpu_slice>);
   for_each_map_value(process_slices, delete_object<process_slice>);
   for_each_map_value(task_slices, delete_object<task_slice>);
   for_each_map_value(func_slices, delete_object<func_slice>);
   for_each_map_value(callgraph_slices, delete_object<callgraph_slice>);
+  for_each_map_value(process_imagefiles, delete_object<process_imagefile>);
 }
 
 void transfer::transfer_engine()
@@ -136,6 +139,42 @@ void transfer::transfer_engine()
 
     while (curr_sample_file->record_entry(record))
       do_transfer(vcpu, record);
+
+    /*
+     * Collect process image files
+     */
+    const std::map<int, avl_tree> &pid_trees = curr_bfd_symbol->get_pid_tree();
+
+    std::map<int, avl_tree>::const_iterator pid_tree_iter = pid_trees.begin(),
+                                             pid_tree_end = pid_trees.end();
+    while (pid_tree_iter != pid_tree_end) {
+      int pid = pid_tree_iter->first;
+
+      std::list<const vma_node *> vma_nodes;
+      const avl_tree &tree = pid_tree_iter->second;
+      tree.flat(tree.root_node,  vma_nodes);
+
+      bool create;
+
+      /*
+       * execfile and dynamic link libraries (*.so)
+       */
+      std::list<const vma_node *>::const_iterator vma_iter = vma_nodes.begin(),
+                                                   vma_end = vma_nodes.end();
+      while (vma_iter != vma_end) {
+        std::string key = to_string(pid) + "|" + to_string((*vma_iter)->bfd_key);
+        process_imagefile *process_imagefile = get_or_create(key, process_imagefiles, create);
+        if (create) {
+          process_imagefile->pid               = pid;
+          process_imagefile->image_private_key = (*vma_iter)->bfd_key;
+          process_imagefile->vma_start         = (*vma_iter)->vma_begin;
+          process_imagefile->vma_end           = (*vma_iter)->vma_end;
+        }
+        vma_iter++;
+      }
+
+      pid_tree_iter++;
+    }
 
     delete curr_sample_file;
     delete curr_bfd_symbol;
@@ -187,7 +226,8 @@ void transfer::transfer_record(int vcpu, const sym_info &sym_info,
 
   event_info *event_info = get_or_create(key, event_infos, create);
   if (create) {
-    event_info->event_name = lookup_event_name(record.event);
+    event_info->event_name         = lookup_event_name(record.event);
+    event_info->event_id           = record.event;
     event_info->sample_reset_value = curr_sample_file->get_reset_value();
   }
 
@@ -263,6 +303,29 @@ void transfer::transfer_record(int vcpu, const sym_info &sym_info,
   func_sample->total_count++;
 
   if (!deduced) {
+    /*
+     * srcline_sample
+     */
+    key = to_string(event_info->event_private_key)     + "|" +
+          to_string(process_info->process_private_key) + "|" +
+          to_string(task_info->task_private_key)       + "|" +
+          to_string(sym_info.bfd_key)                  + "|" +
+          to_string(sym_info.objdump_vma);
+
+    srcline_sample *srcline_sample = get_or_create(key, srcline_samples, create);
+
+    if (create) {
+      srcline_sample->event_private_key   = event_info->event_private_key;
+      srcline_sample->process_private_key = process_info->process_private_key;
+      srcline_sample->task_private_key    = task_info->task_private_key;
+      srcline_sample->image_private_key   = sym_info.bfd_key;
+      srcline_sample->objdump_vma         = sym_info.objdump_vma;
+    }
+    srcline_sample->sample_count++;
+
+    /*
+     * increase sample count
+     */
     event_info->sample_count++;
     process_info->sample_count++;
     task_info->sample_count++;
@@ -270,7 +333,7 @@ void transfer::transfer_record(int vcpu, const sym_info &sym_info,
   }
 
   /*
-   * do not count first and last slice, because they
+   * Do not count first and last slice, because they
    * may be not complete one sample interval.
    */
   if (record.time_diff == 0 ||
@@ -408,7 +471,7 @@ void transfer::transfer_callgraph(int vcpu,
   callgraph_info->call_count++;
 
   /*
-   * do not count first and last slice, because they
+   * Do not count first and last slice, because they
    * may be not complete one sample interval.
    */
   if (record.time_diff == 0 ||
@@ -439,8 +502,8 @@ void transfer::transfer_callgraph(int vcpu,
 }
 
 /*
- * please refer to [Documentation/ratio-calculation-formula.txt]
- * for how calculation happens.
+ * Please refer to [Documentation/ratio-calculation-formula.txt]
+ * for how calculation works.
  */
 void transfer::do_calculate()
 {
@@ -467,11 +530,9 @@ void transfer::do_calculate()
       cpu_slice *cpu_slice = cs_iter->second;
 
       if (cpu_slice->event_private_key == event_info->event_private_key) {
-        cpu_slice->sample_ratio =
-          (cpu_slice->sample_count * 100.0) / theory_cpse;
+        cpu_slice->sample_ratio = (cpu_slice->sample_count * 100.0) / theory_cpse;
 
-        summaryInfo.cpu_peak = std::max(summaryInfo.cpu_peak,
-                                        cpu_slice->sample_ratio);
+        summaryInfo.cpu_peak = std::max(summaryInfo.cpu_peak, cpu_slice->sample_ratio);
       }
       cs_iter++;
     }
@@ -576,13 +637,13 @@ void transfer::do_calculate()
 void transfer::do_output()
 {
   sqlite_t database;
+
   std::string temp_database = options::output_dir + "/" + tmpname();
-  std::string dest_database = options::output_dir + "/" +
-                              to_dbname(summaryInfo.start_time);
+  std::string dest_database = options::output_dir + "/" + to_dbname(summaryInfo.start_time);
 
   sqlite_open(&database, temp_database.c_str());
 
-  /* create table */
+  /* Create table */
   sqlite_exec(&database, summary_info::create_table_sql().c_str());
   sqlite_exec(&database, image_info::create_table_sql().c_str());
   sqlite_exec(&database, event_info::create_table_sql().c_str());
@@ -591,15 +652,16 @@ void transfer::do_output()
   sqlite_exec(&database, func_info::create_table_sql().c_str());
   sqlite_exec(&database, callgraph_info::create_table_sql().c_str());
   sqlite_exec(&database, func_sample::create_table_sql().c_str());
-  sqlite_exec(&database, cachemiss_sample::create_table_sql().c_str());
+  sqlite_exec(&database, srcline_sample::create_table_sql().c_str());
 
   sqlite_exec(&database, cpu_slice::create_table_sql().c_str());
   sqlite_exec(&database, process_slice::create_table_sql().c_str());
   sqlite_exec(&database, task_slice::create_table_sql().c_str());
   sqlite_exec(&database, func_slice::create_table_sql().c_str());
   sqlite_exec(&database, callgraph_slice::create_table_sql().c_str());
+  sqlite_exec(&database, process_imagefile::create_table_sql().c_str());
 
-  /* insert data */
+  /* Insert data */
   sqlite_exec(&database, summaryInfo.insert_entry_sql().c_str());
 
   for_each_map_value(image_infos, std::bind1st(std::ptr_fun(exec_sql<image_info>), &database));
@@ -609,13 +671,14 @@ void transfer::do_output()
   for_each_map_value(func_infos, std::bind1st(std::ptr_fun(exec_sql<func_info>), &database));
   for_each_map_value(callgraph_infos, std::bind1st(std::ptr_fun(exec_sql<callgraph_info>), &database));
   for_each_map_value(func_samples, std::bind1st(std::ptr_fun(exec_sql<func_sample>), &database));
-  for_each_map_value(cachemiss_samples, std::bind1st(std::ptr_fun(exec_sql<cachemiss_sample>), &database));
+  for_each_map_value(srcline_samples, std::bind1st(std::ptr_fun(exec_sql<srcline_sample>), &database));
 
   for_each_map_value(cpu_slices, std::bind1st(std::ptr_fun(exec_sql<cpu_slice>), &database));
   for_each_map_value(process_slices, std::bind1st(std::ptr_fun(exec_sql<process_slice>), &database));
   for_each_map_value(task_slices, std::bind1st(std::ptr_fun(exec_sql<task_slice>), &database));
   for_each_map_value(func_slices, std::bind1st(std::ptr_fun(exec_sql<func_slice>), &database));
   for_each_map_value(callgraph_slices, std::bind1st(std::ptr_fun(exec_sql<callgraph_slice>), &database));
+  for_each_map_value(process_imagefiles, std::bind1st(std::ptr_fun(exec_sql<process_imagefile>), &database));
 
   sqlite_close(&database);
 

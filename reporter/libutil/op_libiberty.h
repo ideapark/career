@@ -18,7 +18,7 @@
 #include "config.h"
 
 #ifdef MALLOC_ATTRIBUTE_OK
-#define OP_ATTRIB_MALLOC        __attribute__((malloc))
+#define OP_ATTRIB_MALLOC	__attribute__((malloc))
 #else
 #define OP_ATTRIB_MALLOC
 #endif
@@ -61,7 +61,7 @@ extern "C" {
    */
   void * xmemdup(void const *, size_t, size_t) OP_ATTRIB_MALLOC;
 
-#endif  /* !HAVE_LIBIBERTY_H */
+#endif	/* !HAVE_LIBIBERTY_H */
 
 #ifdef __cplusplus
 }

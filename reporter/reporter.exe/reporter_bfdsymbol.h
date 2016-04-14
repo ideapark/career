@@ -30,6 +30,11 @@ class bfd_symbol
                      std::string &filename, unsigned int &linenr);
     bool demangle_symbol(const struct record_entry &record, sym_info &sym_info);
 
+  public:
+    const std::map<int, avl_tree> &get_pid_tree(){return pid_vmatree;}
+    const std::list<module_node *> &get_modules(){return module_lst;}
+
+  public:
     void debug_print_vmatree();
     void debug_print_moduleinfo();
     void debug_print_syminfo(const sym_info &sym_info);

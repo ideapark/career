@@ -34,7 +34,7 @@ class bfd_node {
   public:
     bool is_sre;
     std::string win_path;
-    op_bfd *pbfd; /* this member must be 'new'ed, NOT 'malloc'ed */
+    op_bfd *pbfd; /* This member must be `newed`, NOT `malloced` */
 
   public:
     virtual ~bfd_node() {
@@ -56,6 +56,7 @@ class sym_info {
     int bfd_key;
     uint32_t sym_index;
     uint32_t vma_start;
+    uint32_t objdump_vma;
 };
 
 } /* namespace reporter */

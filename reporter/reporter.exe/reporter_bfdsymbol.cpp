@@ -30,6 +30,11 @@ bfd_symbol::bfd_symbol(reporter::sample_file &sample_file,
 
 bfd_symbol::~bfd_symbol()
 {
+#if DEBUG
+  debug_print_vmatree();
+  debug_print_moduleinfo();
+#endif
+
   std::list<module_node *>::iterator m_iter = module_lst.begin(),
                                       m_end = module_lst.end();
   while (m_iter != m_end) {
@@ -95,8 +100,8 @@ void bfd_symbol::add_module_entry(const module_entry &module,
   node->bfd_key   = get_module_bfd_key(module, images);
 
   /*
-   * some module have more than one module_entry (like 'vmlinux'),
-   * we should only keep biggest one
+   * Some module have more than one module_entry (like 'vmlinux'),
+   * we only keep the biggest one
    */
   std::list<module_node *>::iterator iter = std::find_if(module_lst.begin(),
                                                          module_lst.end(),
@@ -109,7 +114,7 @@ void bfd_symbol::add_module_entry(const module_entry &module,
     module_lst.insert(module_lst.end(), node);
   }
 
-  /* sort nodes by vma_begin/vma_end */
+  /* Sort nodes by vma_begin/vma_end */
   module_lst.sort(VmaBeginEndCmp);
 }
 
@@ -145,7 +150,7 @@ int bfd_symbol::get_vma_bfd_key(const vma_entry &vma,
   std::string elf_path = vma.vm_file;
 
   /*
-   * NOTE: Linux path char ':' will be replaced by '_' on windows.
+   * WARNING: Linux path char ':' will be replaced by '_' on windows.
    */
   for (unsigned int i = 0; i < elf_path.size(); i++)
     if (elf_path[i] == ':')
@@ -175,7 +180,7 @@ void bfd_symbol::put_bfd(const key_path &key_path, bool is_sre)
 }
 
 /*
- * This method based on the fact that:
+ * This method is based on the fact below:
  *    On linux system, our main exec('/path/to/exectuable/file') always
  *    has the lowest virtual memory address mapping.
  */
@@ -240,8 +245,11 @@ bool bfd_symbol::demangle_user_symbol(const struct record_entry &record,
   if (bfd_node->pbfd == 0)
     bfd_node->pbfd = new op_bfd(bfd_node->win_path, bfd_node->is_sre);
 
-  uint32_t sym_index = bfd_node->pbfd->get_symindex(record.pc - vma_node->vma_begin);
+  unsigned long long file_offset = record.pc - vma_node->vma_begin + 1;
+
+  uint32_t sym_index = bfd_node->pbfd->get_symindex(file_offset);
   uint32_t vma_start = bfd_node->pbfd->start_vma(sym_index);
+  uint32_t objdump_vma = bfd_node->pbfd->objdump_vma(file_offset);
 
   if (sym_index == APS_INVALID_SYMBOL_INDEX || vma_start == APS_INVALID_VMA)
     return false;
@@ -249,6 +257,7 @@ bool bfd_symbol::demangle_user_symbol(const struct record_entry &record,
   sym_info.bfd_key = vma_node->bfd_key;
   sym_info.sym_index = sym_index;
   sym_info.vma_start = vma_start;
+  sym_info.objdump_vma = objdump_vma;
 
   return true;
 }
@@ -276,12 +285,15 @@ bool bfd_symbol::demangle_kernel_symbol(const struct record_entry &record,
   if (bfd_node->pbfd == 0)
     bfd_node->pbfd = new op_bfd(bfd_node->win_path, false);
 
-  uint32_t vma = (module_node->unix_path.rfind(vmlinux) != std::string::npos)
-               ? record.pc
-               : (record.pc - module_node->vma_begin);
+  unsigned long long file_offset = (module_node->unix_path.rfind(vmlinux) != std::string::npos)
+                                 ? record.pc
+                                 : (record.pc - module_node->vma_begin + 1);
 
-  uint32_t sym_index = bfd_node->pbfd->get_symindex(vma);
+  uint32_t sym_index = bfd_node->pbfd->get_symindex(file_offset);
   uint32_t vma_start = bfd_node->pbfd->start_vma(sym_index);
+  uint32_t objdump_vma = (module_node->unix_path.rfind(vmlinux) != std::string::npos)
+                       ? file_offset
+                       : bfd_node->pbfd->objdump_vma(file_offset);
 
   if (sym_index == APS_INVALID_SYMBOL_INDEX || vma_start == APS_INVALID_VMA)
     return false;
@@ -289,6 +301,7 @@ bool bfd_symbol::demangle_kernel_symbol(const struct record_entry &record,
   sym_info.bfd_key = module_node->bfd_key;
   sym_info.sym_index = sym_index;
   sym_info.vma_start = vma_start;
+  sym_info.objdump_vma = objdump_vma;
 
   return true;
 }
@@ -319,7 +332,7 @@ void bfd_symbol::debug_print_moduleinfo()
   while (iter != end) {
     std::cout << "[" << (*iter)->vma_begin << ", "
               << (*iter)->vma_end << "] -> "
-              << (*iter)->unix_path << std::endl;
+              << (*iter)->unix_path << " (" << (*iter)->bfd_key << ")" << std::endl;
     iter++;
   }
 }

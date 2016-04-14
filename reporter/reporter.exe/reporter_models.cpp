@@ -64,6 +64,7 @@ std::string event_info::insert_entry_sql() const
   return vfmt_sql(EVENT_INFO_INSERT_TABLE_SQL,
                   this->event_private_key,
                   this->event_name.c_str(),
+                  this->event_id,
                   this->sample_count,
                   this->sample_reset_value);
 }
@@ -182,15 +183,24 @@ std::string func_sample::insert_entry_sql() const
                   this->total_ratio);
 }
 
-std::string cachemiss_sample::insert_entry_sql() const
+std::string srcline_sample::insert_entry_sql() const
 {
-  return vfmt_sql(CACHEMISS_SAMPLE_INSERT_TABLE_SQL,
+  return vfmt_sql(SRCLINE_SAMPLE_INSERT_TABLE_SQL,
                   this->event_private_key,
                   this->process_private_key,
                   this->task_private_key,
                   this->image_private_key,
-                  this->offset,
+                  this->objdump_vma,
                   this->sample_count);
+}
+
+std::string process_imagefile::insert_entry_sql() const
+{
+  return vfmt_sql(PROCESS_IMAGEFILE_INSERT_TABLE_SQL,
+                  this->pid,
+                  this->image_private_key,
+                  this->vma_start,
+                  this->vma_end);
 }
 
 } /* namespace reporter */

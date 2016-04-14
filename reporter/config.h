@@ -4,8 +4,7 @@
 /* whether popt prototype takes a const char ** */
 #define CONST_POPT 1
 
-/* Define to 1 if you have the declaration of `basename', and to 0 if you
-   don't. */
+/* Define to 1 if you have the declaration of `basename', and to 0 if you don't. */
 #define HAVE_DECL_BASENAME 1
 
 /* Define to 1 if you have the <dlfcn.h> header file. */
@@ -56,6 +55,10 @@
 /* Define to 1 if you have the `xmemdup' function. */
 #define HAVE_XMEMDUP 1
 
+/*
+ * Copyright (C) Zhou Peng <lockrecv@gmail.com>
+ */
+
 /* whether malloc attribute is understood */
 /* #undef MALLOC_ATTRIBUTE_OK */
 
@@ -66,22 +69,22 @@
 #define OP_DATADIR "/usr/local/share/oprofile/"
 
 /* Name of package */
-#define PACKAGE "APS"
+#define PACKAGE "aps"
 
 /* Define to the address where bug reports for this package should be sent. */
 #define PACKAGE_BUGREPORT ""
 
 /* Define to the full name of this package. */
-#define PACKAGE_NAME "APS"
+#define PACKAGE_NAME "aps"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "APS-20150824"
+#define PACKAGE_STRING "aps-20150824"
 
 /* Define to the one symbol short name of this package. */
-#define PACKAGE_TARNAME "APS"
+#define PACKAGE_TARNAME "aps"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "20151120"
+#define PACKAGE_VERSION "20150824"
 
 /* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1
@@ -93,7 +96,7 @@
 /* #undef TRUE_FALSE_ALREADY_DEFINED */
 
 /* Version number of package */
-#define VERSION "201511202155"
+#define VERSION "20150824"
 
 /* Define to 1 if the X Window System is missing or not being used. */
 #define X_DISPLAY_MISSING 1

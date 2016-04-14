@@ -316,12 +316,13 @@ class op_bfd {
     op_bfd(const std::string image_path, bool is_sre);
 
   public:
-    symbol_index_t get_symindex(uint32_t vma) const;
+    symbol_index_t get_symindex(unsigned long long file_offset) const;
     unsigned long start_vma(symbol_index_t index) const;
+    unsigned long objdump_vma(unsigned long long file_offset) const;
     std::string get_symname(symbol_index_t index) const;
 
   private:
-    bool is_sre;     /* sre */
+    bool is_sre;     /* SRE */
     bool is_libso;   /* dynamic library */
     bool is_vmlinux; /* vmlinux */
 };
