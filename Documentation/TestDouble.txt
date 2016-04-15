@@ -1,11 +1,14 @@
-Four particular kinds of double
-===============================
+Test Double
+===========
+
+Test Double is a generic term for any case where you replace a production
+object for testing purposes.
 
 [Dummy] objects are passed around but never actually used. Usually they are
         just used to fill parameter lists.
 
 [Fake]  objects actually have working implementations, but usually take some
-        shortcut which makes them not suitable for production (an in memory
+        shortcut which makes them not suitable for production (an in-memory
         database is a good example).
 
 [Stubs] provide canned answers to calls made during the test, usually not
@@ -14,6 +17,11 @@ Four particular kinds of double
         gateway stub that remembers the messages it 'sent', or maybe only
         how many messages it 'sent'.
 
-[Mocks] are what we are talking about here: objects pre-programmed with
-        expectations which form a specification of the calls they are expected
-        to receive.
+[Spies] are stubs that also record some information based on how they were
+        called. One form of this might be an email service that records how
+        many messages it was sent.
+
+[Mocks] are pre-programmed with expectations which form a specification of the
+        the calls they are expected to receive. They can throw an exception
+        if they receive a call they don't expect and are checked during
+        verification to ensure they got all the calls they were expecting.
