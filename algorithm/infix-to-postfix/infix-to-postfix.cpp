@@ -1,4 +1,6 @@
 /*
+ * Copyright (C) Zhou Peng <lockrecv@qq.com> 
+ *
  * Infix to postfix expression
  */
 #include <stack>
@@ -12,11 +14,13 @@ using namespace std;
 #define IS_MINUS(ch)     ((ch) == "-")
 #define IS_MULTIPLY(ch)  ((ch) == "*")
 #define IS_DIVIDE(ch)    ((ch) == "/")
-
 #define IS_OPERATOR(ch)  (IS_ADD(ch) || IS_MINUS(ch) || IS_MULTIPLY(ch) || IS_DIVIDE(ch))
-#define PRECEDENCE_HIGHER(op1, op2)  (op1 == op2)
 
-string infixToPostfix(string expression)
+#define PRECEDENCE_LEVEL1(op)        (IS_ADD(op) || IS_MINUS(op))
+#define PRECEDENCE_LEVEL2(op)        (IS_MULTIPLY(op) || IS_DIVIDE(op))
+#define PRECEDENCE_HIGHER(op1, op2)  (PRECEDENCE_LEVEL2(op1) && PRECEDENCE_LEVEL1(op2))
+
+string infixToPostfix(const string expression)
 {
     ostringstream infixExpressoinWriter;
 
@@ -56,6 +60,11 @@ string infixToPostfix(string expression)
     }
 
     return postfixExpressionWriter.str();
+}
+
+string calcPostfixExpression(const string postfixExpression)
+{
+    return "Not implemented yet!";
 }
 
 #define TEST(expression)  do {                   \
