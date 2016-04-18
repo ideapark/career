@@ -3,6 +3,7 @@
  *
  * Infix to postfix expression
  */
+#include <cstdlib>
 #include <stack>
 #include <string>
 #include <sstream>
@@ -62,14 +63,61 @@ string infixToPostfix(const string expression)
     return postfixExpressionWriter.str();
 }
 
-string calcPostfixExpression(const string postfixExpression)
+static string doCalculation(const string leftOperand,
+                            const string rightOperand,
+                            const string operatorString)
 {
-    return "Not implemented yet!";
+    unsigned int left = atoi(leftOperand.c_str());
+    unsigned int right = atoi(rightOperand.c_str());
+    unsigned int result = 0;
+
+    if (IS_ADD(operatorString))
+        result = left + right;
+
+    if (IS_MINUS(operatorString))
+        result = left - right;
+
+    if (IS_MULTIPLY(operatorString))
+        result = left * right;
+
+    if (IS_DIVIDE(operatorString))
+        result = left / right;
+
+    ostringstream stringWriter;
+
+    stringWriter << result;
+
+    return stringWriter.str();
 }
 
-#define TEST(expression)  do {                   \
-    cout << expression << ": ";                  \
-    cout << infixToPostfix(expression) << endl;  \
+string calcPostfixExpression(const string postfixExpression)
+{
+    string token;
+    stack<string> calculationStack;
+    istringstream postfixExpressionReader(postfixExpression);
+
+    while (postfixExpressionReader >> token) {
+        if (IS_OPERATOR(token)) {
+            const string rightOperand = calculationStack.top();
+            calculationStack.pop();
+            const string leftOperand = calculationStack.top();
+            calculationStack.pop();
+
+            string result = doCalculation(leftOperand, rightOperand, token);
+            calculationStack.push(result);
+        } else {
+            calculationStack.push(token);
+        }
+    }
+
+    return calculationStack.top();
+}
+
+#define TEST(expression)  do {                                 \
+    string postfixExpression = infixToPostfix(expression);     \
+    cout << expression << ": ";                                \
+    cout << postfixExpression  << ": ";                        \
+    cout << calcPostfixExpression(postfixExpression) << endl;  \
 } while (0)
 
 int main(void)
