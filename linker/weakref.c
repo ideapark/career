@@ -2,7 +2,7 @@
  * Copyright (C) Zhou Peng <lockrecv@qq.com>
  *
  * Compile this source with or without libpthread, and
- * you will unstandard what it is saying.
+ * you will understand what it is saying.
  *
  *     gcc -Wall weakref.c
  *
