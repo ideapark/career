@@ -12,7 +12,7 @@ int main()
     reverse(myints, myints+3);
 
     do {
-        cout << myints[0] << " " << myints[1] << " " << myints[2] << endl;    
+        cout << myints[0] << " " << myints[1] << " " << myints[2] << endl;
     } while (prev_permutation(myints, myints+3));
 
     return 0;
