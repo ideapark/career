@@ -56,7 +56,7 @@
 #define HAVE_XMEMDUP 1
 
 /*
- * Copyright (C) Zhou Peng <lockrecv@gmail.com>
+ * Copyright (C) Zhou Peng <lockrecv@qq.com>
  */
 
 /* whether malloc attribute is understood */
