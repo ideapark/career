@@ -1,3 +1,5 @@
+extern int PrintDigit(int i);
+
 /* Print nonnegative N */
 void PrintOut(unsigned int N)
 {
