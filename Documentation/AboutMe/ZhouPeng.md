@@ -5,10 +5,11 @@ Basic Information
 -----------------
 
 ![Zhou Peng](./avatar.jpg)
-Name: Zhou Peng <lockrecv@qq.com>
-Age: 26
-Marital Status: Married
-Contact: +8615008287847
+
+- Name: Zhou Peng <lockrecv@qq.com>
+- Age: 26
+- Marital Status: Married
+- Contact: +8615008287847
 
 
 Languages
@@ -29,17 +30,17 @@ Skills
 Education
 ---------
 
-Chongqing University of Post and Telecommunications
-Bachelor's degree, Computer Science
-2008 - 2012
+- Chongqing University of Post and Telecommunications
+- Bachelor's degree, Computer Science
+- 2008 - 2012
 
 
 Work Experience
 ---------------
 
-Software Engineer
-Huawei Technologies
-July 2012 - Present (4 years) | Chendu, Sichuan, China
+- Software Engineer
+- Huawei Technologies
+- July 2012 - Present (4 years) | Chendu, Sichuan, China
 
 - OSGi and RESTful testing
 - Requirement sorting website
