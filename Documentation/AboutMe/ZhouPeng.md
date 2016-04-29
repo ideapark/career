@@ -14,7 +14,7 @@
 - 邮箱: lockrecv@qq.com
 
 
-语言能力
+英语能力
 --------
 
 - CET-6
@@ -40,14 +40,22 @@
 工作经历
 --------
 
-- Software Engineer
-- Huawei Technologies
-- July 2012 - Present (4 years) | Chendu, Sichuan, China
+- 软件工程师A
+- 华为成都研究所
+- 2012年07月 - 现在 (4 years) | 成都
 
 - OSGi and RESTful testing
 - Requirement sorting website
 - Advanced performance solution tool
 - Molint static checker
+
+
+自我评价
+--------
+
+- 新技术学习能力强
+- 做事最求极致
+- 善于沟通, 乐于分享
 
 
 兴趣爱好
