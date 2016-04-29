@@ -1,42 +1,44 @@
-Zhou Peng's Resume
-==================
-
-Basic Information
------------------
-
-![Zhou Peng](./avatar.jpg)
-
-- Name: Zhou Peng <lockrecv@qq.com>
-- Age: 26
-- Marital Status: Married
-- Contact: +8615008287847
+简历
+====
 
 
-Languages
----------
+基本信息
+--------
+
+![周朋](./avatar.jpg)
+
+- 姓名: 周朋
+- 年龄: 26
+- 婚姻状况: 已婚
+- 联系方式: +8615008287847
+- 邮箱: lockrecv@qq.com
+
+
+语言能力
+--------
 
 - CET-6
 - Good english reading capabilities
 
 
-Skills
-------
+技能
+----
 
-- Linux, C/C++, Testing, Git
-- Python, Javascript, HTML/CSS, Shell
-- Java
+- 擅长: Linux, C/C++, Testing, Git
+- 熟练: Python, Javascript, HTML/CSS, Shell
+- 了解: Java
 
 
-Education
----------
+教育情况
+--------
 
-- Chongqing University of Post and Telecommunications
-- Bachelor's degree, Computer Science
+- 重庆邮电大学
+- 本科, 计算机科学与技术专业
 - 2008 - 2012
 
 
-Work Experience
----------------
+工作经历
+--------
 
 - Software Engineer
 - Huawei Technologies
@@ -48,9 +50,9 @@ Work Experience
 - Molint static checker
 
 
-Interests
----------
+兴趣爱好
+--------
 
-- Open source
-- C tricks
-- Linux related technologies
+- 开源
+- C语言和算法相关
+- Linux相关技术
