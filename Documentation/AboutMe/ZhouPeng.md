@@ -106,6 +106,7 @@
 >   领导和合作: Molint开发过程中,负责带领5个合作方同事,澄清用户需求,评审
 >   实现方案,check合作方同事的交付质量.
 
+
 自我评价
 --------
 
@@ -121,8 +122,16 @@
 - C语言和算法相关
 - Linux相关技术
 
+
 获奖荣誉
 --------
 
 - 成都研究所2014年7月编程大赛第2名
 - 无线网络2014年9月编程大赛第4名
+
+
+My Works
+--------
+
+- [reporter](https://github.com/lockrecv/got/tree/master/reporter)
+- [sysstat](https://github.com/lockrecv/got/tree/master/sysstat)
