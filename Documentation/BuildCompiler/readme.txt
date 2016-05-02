@@ -48,7 +48,6 @@ you, prior to printing.
 I hope you like the tutorials.  Much thought went into them.
 
 
-									Jack W. Crenshaw
+							Jack W. Crenshaw
 
-								CompuServe 72325,1327
-
+						CompuServe 72325,1327
