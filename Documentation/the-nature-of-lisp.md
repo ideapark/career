@@ -307,3 +307,109 @@ trouble of interpreting XML. Don't try to look for the answer on its
 website either - you'll find nothing of value. Nothing relevant to our
 discussion, anyway. Let's take another step. It's time to find out why.
 
+
+Why XML?
+--------
+
+Sometimes right decisions are made without full conscious understanding
+of all the issues involved. I'm not sure if James knew why he chose XML,
+it was likely a subconscious decision. At the very least, the reasons I
+saw on Ant's website for using XML are all the wrong reasons. It appears
+that the main concerns revolved around portability and extensibility. I
+fail to see how XML helps advance these goals in Ant's case. What is the
+advantage of using interpreted XML over simple Java source code? Why not
+create a set of classes with a nice API for commonly used tasks (copying
+directories, compiling, etc.) and using those directly from Java source
+code? This would run on every platform that runs Java (which Ant
+requires anyway), it's infinitely extensible, and it has the benefit of
+having a more pleasant, familiar syntax. So why XML? Can we find a good
+reason for using it?
+
+It turns out that we can (although as I mentioned earlier I'm not sure
+if James was consciously aware of it). XML has the property of being
+far more flexible in terms of introduction of semantic consructs than
+Java could ever hope to be. Don't worry, I'm not falling into the trap
+of using big words to describe incomprehensible concepts. This is
+actually a relatively simple idea, though it may take some effort to
+explain. Buckle your seat-belt. We're about to make a giant leap towards
+achieving nirvana.
+
+How can we represent 'copy' example above in Java code? Here's one way
+to do it:
+
+```
+CopyTask copy = new CopyTask();
+Fileset fileset = new Fileset();
+
+fileset.setDir("src_dir");
+copy.setToDir("../new/dir");
+copy.setFileset(fileset);
+
+copy.execute();
+```
+
+The code is almost the same, albeit a little longer than the original
+XML. So what's different? The answer is that the XML snippet introduces
+a special semantic contruct for copying. If we could do it in Java it
+would look like this:
+
+```
+copy("../new/dir")
+{
+    fileset("src_dir");
+}
+```
+
+Can you see the difference? The code above (it it possible in Java) is a
+special operator for copying files - similar to a for loop or a new
+foreach construct introduced in Java 5. If we had an automatic converter
+from XML to Java it would likely produce the above gibberish. The reason
+for this is that Java's accepted syntax tree grammar is fixed by the
+language specification - we have no way of modifying it. We can add
+packages, classes, methods, but we cannot extend Java to make addition
+of new operators possible. Yet we can do it to our heart's content in
+XML - its syntax tree isn't restricted by anything except our interpreter!
+If the idea is still unclear, consider introducing a special operator
+'unless' to Java:
+
+```
+unless(someObject.canFly())
+{
+    someObject.transportByGround();
+}
+```
+
+In the previous two examples we extend the Java language to introduce an
+operator for copying files and a conditional operator unless. We would
+do this by modifying the abstract syntax tree grammar that Java compiler
+accepts. Naturally we cannot do it with standard Java facilities, but
+we can easily do it in XML. Because our XML interpreter parses the
+abstract syntax tree that results from it, we can extend it to include
+any operator we like.
+
+For complex operators this ability provides tremendous benefits. Can
+you imaging writing special operators for checking out source code,
+compiling files, running unit testing, sending email? Try to come up
+with some. If you're dealing with a specialized problem (in our case
+it's building projects) these operators can do wonders to decrease the
+amount of code you have to type and to increase clarity and code reuse.
+Interpreted XML makes this extremely easy to accomplish because it's a
+simple data file that stores hierarchical data. We do not have this
+option in Java because it's hierarchical structure is fixed (as you
+will soon find out, we do have this option in Lisp). Perhaps this is one
+of the reasons why Ant is so successful?
+
+I urge you to take a look at recent evolution of Java and C# (especially
+the recently released specification for C# 3.0). The languages are being
+evolved by abstracting away commonly used functionality and adding it in
+the form of operators. New C# operators for built-in queries is one
+example. This is accomplished by relatively traditional means: language
+creators modify the accepted abstract syntax tree and add implementations
+of certain features. Imaging the possiblities if the programmer could
+modify the abstract syntax tree himself! Whole new sub-languages could
+be built for specialized domains (for example a language for building
+projects, like Ant). Can you come up with other examples? Think about
+these concepts for a bit, but don't worry about them too much. We'll
+came back to these issues after introducing a few more ideas. By then
+things will be a little more clear.
+
