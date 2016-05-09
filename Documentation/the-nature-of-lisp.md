@@ -237,3 +237,73 @@ people would disagree. You're likely encountered and used their work
 at least once in your career, too. Do I have you out on the edge of
 your seat? If so, let's move on!
 
+
+Ant Reloaded
+------------
+
+Now that we've made the trip to the dark side of the moon, let's not
+leave quite yet. We may still learn something by exploring it a little
+more, so let's take another step. We begin by closing our eyes and
+remembering a cold rainy night in the winter of 2000. A prominent
+developer by the name of James Duncan Davidson was hacking his way
+throught Tomecat servlet container. As the time came to build the
+changes he carefully saved all his files and ran make. Errors. Lots of
+errors. Something was wrong. After careful examination James exclaimed:
+"Is my command not executing because I have a space in front of my
+tab?!" Indeed, this was the problem. Again. James has had enough. He
+could sense the full moon through the clouds and it made him
+adventurous. He created a fresh Java project and quickly hacked
+together a simple but surprisingly useful utility. This spark of
+genius used Java property files for infromation on how to build the
+project. James could now write the equivalent of the makefile in a nice
+fromat without worrying about the damned spaces ever again. His utility
+did all the hard work by interpreting the property file and taking
+appropriate actions to build the project. It was neat, Another Neat
+Tool. Ant.
+
+After using Ant to build Tomcat for a few months it became clear that
+Java property files are not sufficient to express complicated build
+instructions. Files needed to be checked out, copied, compiled, sent
+to another machine, and unit tested. In case of failure e-mails needed
+to be sent out to appropriate people. In case of success "Bad to the
+Bone" needed to be played at the highest possible volume. At the end
+of the track volumne had to be restored to its original level. Yes,
+Java property files didn't cut it anymore. James needed a more
+flexible solution. He didn't feel like writing his own parser (
+especially since he wanted an industry standard solution). XML seemed
+like a reasonable alternative. In a couple of days Ant was ported to
+XML. It was the best thing since sliced bread.
+
+So how does Ant work? It's pretty simple. It takes an XML file with
+specific build instructions (you decide if they're data or data) and
+interprets them by running specialized Java code for each XML element.
+It's actually equivalent name to be loaded and its code to be executed.
+
+```
+<copy todir="../new/dir">
+    <fileset dir="src_dir"/>
+</copy>
+```
+
+The snippet above copies a source directory to a destination directory.
+Ant locates a "copy" task (a Java class, really), sets appropriate
+parameters (todir and fileset) by calling appropriate Java methods and
+then executes the task. Ant comes with a set of core tasks and anyone
+can extend it with tasks of their own simply by writing Java classes
+that follow certain conventions. Ant finds these classes and executes
+them whenever XML elements with appropriate names that are encountered.
+Pretty simple. Effectively Ant accomplishes what we were talking about
+in the previous section: it acts as an interpreter for a language that
+uses XML as its syntax by translating XML elements to appropriate Java
+instructions. We could write an "add" task and have Ant execute it when
+it encounters the XML snippet for addition presented in the previous
+section! Considering that ant is an extremely popular project, the
+ideas presented in the previous section start looking more sane. After
+all, they're being used every day in what probably amounts to thousands
+of companies!
+
+So far I've said nothing about why Ant actually goes throught all the
+trouble of interpreting XML. Don't try to look for the answer on its
+website either - you'll find nothing of value. Nothing relevant to our
+discussion, anyway. Let's take another step. It's time to find out why.
+
