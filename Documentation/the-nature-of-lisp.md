@@ -101,4 +101,139 @@ Prepare to be blown away. Oh, and may the Force be with you.
 XML Reloaded
 ------------
 
+A thousand mile journey starts with a single step. A journey to
+enlightenment is no exception and our first step just happens to be
+XML. What more could possibly be said about XML that hasn't already
+been said? It turns out, quite a bit. While there's nothing
+particularly interesting about XML itself, its relationship to Lisp
+is fascinating to regular programmers. So let's revive the dead horse,
+take out the stick, and venture into XML wilderness that no one dared
+venture into before us. It's time to see the all too familiar moon
+from the other side.
+
+Superficially XML is nothing more than a standardized syntax used to
+express arbitrary hierarchical data in human readable form. To-do
+lists, web pages, medical records, auto insurance claims,
+configuration files are all examples of potential XML use. Let's use
+a simple to-do list as an example (in a couple of sections you'll
+see it in a whole new light):
+
+```
+<todo name="housework">
+    <item priority="high">Clean the house.</item>
+    <item priority="medium">Wash the dishes.</item>
+    <item priority="medium"></item>
+</todo>
+```
+
+What happens if we unleash our favorite XML parser on this to-do list?
+Once the data is parsed, how is it represented in memory? The most
+natural representation is, of course, a tree - a perfect data structure
+for hierarchical in memory? The most natural representation is, of
+course, a tree - a perfect data structure for hierarchical data. After
+all is said and done, XML is really just a tree serialized to a human
+readable form. Anything that can be represented in a tree can be
+represented in XML and vice versa. I hope you understand this idea.
+It's very important for what's coming next.
+
+Let's make this a little further. What other type of data is often
+represented as a tree? At this point the list is as good as infinite so
+I'll give you a hint at what I'm getting at - try to remember your old
+compiler course. If you have a vague recollection that source code is
+stored in a tree after it's parsed, you're on the right track. Any
+compiler inevitably parses the source code into an abstract syntax
+tree. This isn't surprising since source code is hierarchical:
+functions contain arguments and blocks of code. Blocks of code contain
+expressions and statements. Expressions contain variables and
+operators. And so it goes.
+
+Let's apply our corollary that any tree can easily be serialized into
+XML to this idea. If all source code is eventually represented as a
+tree, and any tree can be serialized into XML, then all source code
+can be converted to XML, right? Let's illustrate this interesting
+property by a simple example. Consider the function below:
+
+```
+int add(int arg1, int arg2)
+{
+    return arg1 + arg2;
+}
+```
+
+Can you convert this function definition to its XML equivalent? Turns
+out, it's reasonably simple. Naturally there are many ways to do this.
+Here is one way the resulting XML can look like:
+
+```
+<define-function return-type="int" name="add">
+    <arguments>
+        <argument type="int">arg1</argument>
+        <argument type="int">arg2</argument>
+    </arguments>
+    <body>
+        <return>
+            <add value1="arg1" value2="arg2"/>
+        </return>
+    </body>
+</define-function>
+```
+
+We can go through this relatively simple exercise with any language. We
+can turn any source code into XML, and we can transform the resulting
+XML back to original source code. We can write a converter that turns
+Java into XML and a converter that turns XML back to Java. We could do
+the same for C++. (In case you're wondering if anyone is crazy enough
+to do it, take a look at GCC-XML). Furthermore, for languages that share
+common features but use different syntax (which to some extent is true
+about most mainstream languages) we could convert source code from one
+language to another using XML as an intermediary representation. We
+could use our Java2XML converter to convert a Java program to XML. We
+could then run XML2CPP converter on the resulting XML and turn it into
+C++ code. With any luck (if we avoid using features of Java that don't
+exist in C++) we'll get a working C++ program. Neat, eh?
+
+All this effectively means that we can use XML for generic storage of
+source code. We'd be able to create a whole class of programming
+languages that use uniform syntax, as well as write transformers that
+convert existing source code to XML. If we were to actually adopt this
+idea, compilers for different languages wouldn't need to implement
+parsers for their specific grammars - they'd simply use an XML parser
+to turn XML directly into an abstract syntax tree.
+
+By now you're probably wondering why I've embarked on the XML crusade
+and what is has to do with Lisp (after all, Lisp was created about
+thirty years before XML). I promise that everyting will become clear
+soon enough. But before we take our second step, let's go through a
+small philosophical exercise. Take a good look at the XML version of
+our "add" function above. How would you classify it? It is data or
+code? If you think about it for a moment you'll realize that there
+are good reasons to put this XML snippet into both categories. It's
+XML and it's just information encoded in a standardized format. We've
+already determined that it can be generated from a tree data structure
+in memory (that's effectively what GCC-XML does). It's lying around
+in a file with no apparent way to execute it. We can parse it into a
+tree of XML nodes and do various transformations on it. It's data.
+But wait a moment! When all is said and done it's the same "add"
+function written with a different syntax, right? Once parsed, its tree
+could be fed into a compiler and we could execute it. We could easily
+write a small interpreter for this XML code and we could execute it
+directly. Alternatively, we could transform it into Java or C++ code,
+compile it, and run it. It's code.
+
+So, where are we? Looks like we've just arrived to an interesting
+point. A concept that has traditionally been so hard to understand is
+now amazingly simple and intuitive. Code is also always data! Does it
+mean that data is also always code? As crazy as this sounds this very
+well might be the case. Remember how I promised that you'll see our
+to-do list in a whole new light? Let me reiterate on that promise. But
+we aren't ready to discuss this just yet. For now let's continue
+walking down our path.
+
+A little earlier I mentioned that we could easily write an interpreter
+to execute our XML snippet of the add function. Of course this sounds
+like a purely theoretical exercise. Who in their right mind would want
+to do that for practical purposes? Well, it turns out quite a few
+people would disagree. You're likely encountered and used their work
+at least once in your career, too. Do I have you out on the edge of
+your seat? If so, let's move on!
 
