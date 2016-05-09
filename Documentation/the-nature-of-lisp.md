@@ -451,3 +451,111 @@ You're looking at Lisp code. What on Earth am I talking about? It
 doesn't look anything like Lisp? Don't worry, we'll fix that in a bit.
 Confused? Good. Let's clear it all up!
 
+
+A Better XML
+------------
+
+I mentioned in the previous section that self-extending Ant wouldn't be
+very useful. The reason for that XML's verbosity. It's not too bad for
+data files but the moment you try writing reasonably complex code the
+amount of typing you have to do quickly starts to get in the way and
+progresses to becoming unusable for any real project. Have you ever tried
+writing Ant build scripts? I have, and once they get complex enough
+having to do it in XML becomes really annoying. Imagine having to type
+almost everything in Java twice because you have to close every element.
+Wouldn't that drive you nuts?
+
+The solution to this problem involves using a less verbose alternative
+to XML. Remember, XML is just a format for representing hierarchical data.
+We don't have to use XML's angle brackets to serialize trees. We could
+come up with many other formats. One such format (incidentally, the one
+Lisp uses) is called an s-expression. S-expressions accomplish the same
+goals as XML. They're just a lot less verbose, which makes them much
+better suited for typing code. I will explain s-expression in a little
+while, but before I do I have to clear up a few things about XML. Let's
+consider our XML example for copying files:
+
+```
+<copy todir="../new/dir">
+    <fileset dir="src_dir"/>
+</copy>
+```
+
+Think of what the parse tree of this snippet would look like in memory.
+We'd have a 'copy' node that contains a fileset node. But what about
+attributes? How do they fit into our picture? If you've ever used XML
+to describe data and wondered whether you should use an element or an
+attribute, you're not alone. Nobody can really figure this out and doing
+it right tends to be black magic rather than science. The reason for
+that is that attributes are really subsets of elements. Anything
+attributes can do, elements can do as well. The reason attributes were
+introduced is to curb XML's verbosity. Take a look at another version
+of our 'copy' snippet.
+
+```
+<copy>
+    <todir>../new/dir</todir>
+    <fileset>
+        <dir>src_dir</dir>
+    </fileset>
+</copy>
+```
+
+The two snippets hold exactly the same information. However, we use
+attributes to avoid typing the same thing more than once. Imagine if
+attributes weren't part of XML specification. Writing anything in XML
+would drive us nuts!
+
+Now that we got attributes out of the way, let's look at s-expressions.
+The reason we took this detour is that s-expression do not have
+attributes. Because they're a lot less verbose, attributes are simply
+unnecessary. This is one thing we need to keep in mind when transforming
+XML to s-expressions. Let's take a look at an example. We could translate
+above snippet to s-expressions like this:
+
+```
+(copy
+    (todir "../new/dir"
+    (fileset (dir "src_dir")))
+```
+
+Take a look at this representation. What's different? Angle brackets seem
+to be replaced by parentheses. Instead of enclosing each element into a
+pair of parentheses and then closing each element with a "(/element)" we
+simply skip the second parenthesis in "(element" and proceed. The element
+is then closed like this: ")". That's it! The translation is natural and
+very simple. It's also a lot easier to type. Do parentheses blind first
+time users? Maybe, but now that we're understand the reasoning behind them
+they're a lot easier to handle. At the very least they're better than
+arthritis inducing verbosity of XML. After you get used to s-expressions
+writing code in them is not only doable but very pleasant. And they
+provide all the benefits of writing code in XML (many of which we're yet
+to explore). Let's take a look at our 'task' code in something that looks
+a lot more like lisp:
+
+```
+(task (name "Test")
+    (echo (message "Hello World!"))
+(Test)
+```
+
+S-expressions are called lists in Lisp lingo. Consider our 'task element'
+above. If we rewrite it without a line break and with comas instead of
+spaces it's starting to look surprisingly like a list of elements and
+other lists (the formatting is added to make it easier to see nested lists):
+
+```
+(task, (name, "test"), (echo, (message, "Hello World!")))
+```
+
+We could do the same with XML. Of course the line above isn't really a list,
+it's a tree, just like its XML-alternative. Don't let references to lists
+confuse you, its' just that lists that contain other lists and trees are
+effectively the same thing. Lisp may stand for Lisp Processing, but it's
+really tree processing - no different than processing XML nodes.
+
+Whew. After much rambling we finally got to something that looks like Lisp
+(and is Lisp, really). By now the mysterious Lisp parentheses as well as
+some claims made by Lisp advocates should become more clear. But we still
+have a lot of ground to cover. Ready? Let's move on!
+
