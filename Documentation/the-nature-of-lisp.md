@@ -413,3 +413,41 @@ these concepts for a bit, but don't worry about them too much. We'll
 came back to these issues after introducing a few more ideas. By then
 things will be a little more clear.
 
+
+Almost Lisp
+-----------
+
+Let's forget about the operator business for the moment and try to expand
+our horizons beyond the constraints of Ant's design. I mentioned earlier
+that Ant can be extended by writing cnventional Java classes. Ant
+interpreter then attempts to match XML elements to appropriately named
+Java classes and if the match is found the task is executed. An
+interesting question begs to be asked. Why not extend Ant in Ant itself?
+After all, core tasks contain a lot of conventional programming language
+constructs ('if' being a perfect example). If Ant provided constructs to
+develop tasks (a standard library, if you will) and we wouldn't care if
+Java runtime is present: the core set could be implemented in anything.
+The rest of the tasks would be built on top of the core using Ant-XML
+itself. Ant would then become a generic, extensible, XML-based programming
+language. Consider the possibilities:
+
+```
+<task name="Test">
+    <echo message="Hello World!"/>
+</task>
+<Test/>
+```
+
+If ant supported the "task" construct, the example above would print "Hello
+World!". In fact, we could write a "task" task in Java and make Ant able to
+extend itself using Ant-XML! Ant would then be able to build more
+complicated primitives on top of simple ones, just like any other
+programming language! This is an example of "XML" based programming
+language we were talking about in the beginning of this tutorial. Not
+very useful (can you tell why?) but pretty damn cool.
+
+By the way, take a look at out 'Test' task once again. Congratulations.
+You're looking at Lisp code. What on Earth am I talking about? It
+doesn't look anything like Lisp? Don't worry, we'll fix that in a bit.
+Confused? Good. Let's clear it all up!
+
