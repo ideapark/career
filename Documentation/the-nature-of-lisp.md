@@ -559,3 +559,176 @@ Whew. After much rambling we finally got to something that looks like Lisp
 some claims made by Lisp advocates should become more clear. But we still
 have a lot of ground to cover. Ready? Let's move on!
 
+
+C Macros Reloaded
+------------------
+
+By now you must be tried of all the XML talk. I'm tired of it as well.
+It's time to take a break from all the trees, s-expressions, and Ant
+business. Instead, let's go back to every programmer's roots. It's time
+to talk about C preprocessor. What's C got to do with anything, I hear
+you ask? Well, we now know enough to get into metaprogramming and discuss
+code that writes other code. Understanding this tends to be hard since
+all tutorials discuss it in terms of languages that you don't know. But
+there is nothing hard about the concept. I believe that a metaprogramming
+discussion based on C will make the whole thing much easier to understand.
+So, let's see (pun intended).
+
+Why would anyone want to write a program that writes programs? How can
+we use something like this in the real world? What on earth is
+metaprogramming, anyway? You already know all the answers, you just don't
+know it yet. In order to unlock the hidden vault of divine knowledge
+let's consider a rather mundane task of simple database access from code.
+We've all been there. Writing SQL queries all over the code to modify
+data within tables turns into repetitive hell soon enough. Even with
+the new C# 3.0 LINQ stuff this is a huge pain. Writing a full SQL query
+(albeit with a nice built in syntax) to get someone's name or to modify
+someone's address isn't exactly a programmer's idea of comfort. What do
+we do to solve these problems? Enter data access layers.
+
+The idea is simple enough. You abstract database access (at least trivial
+queries, anyway) by creating a set of classes that mirror the tables in
+the database and use accessor methods to execute actual queries. This
+simplifies development tremendously - instead of writing SQL queries we
+make simple method calls (or property assignments, depending on your
+language of choice). Anyone who has ever used even the simplest of data
+access layers knows how much time it can save. Of course anyone who has
+ever written one knows how much time it can kill - writing a set of
+classes that mirror tables and convert accessors to SQL queries takes a
+considerable chunk of time. This seems especially silly since most of
+the work is manual: once you figure out the design and develop a template
+for you typical data access class you don't need to do any thinking.
+You just write code based on the same template over and over and over
+and over again. Many people figured out that there is a better way -
+there are plenty of tools that connect to the database, grab the schema,
+and write code for you based on a predefined (or a custom) template.
+
+Anyone who has ever used such a tool knows what an amazing time saver
+it can be. In a few clicks you connect the tool to the database, get
+it to generate the data access layer source code, add the files to your
+project and voila - ten minutes worth of work do a better job than
+hundreds of man-huours that were required previously. What happens if
+your database schema changes? Well, you just have to go through this
+short process again. Of course some of the best tools let you automate
+this - you simply add them as a part of your build step and every time
+you compile your project everything is done for you automatically. This
+is perfect! You barely have to do anything at all. If the schema ever
+changes your data access layer code updates automatically at compile
+time and any obsolete access in your code will result in compiler errors!
+
+Data access layers are one good example, but there are plenty of others.
+From boilerplate GUI code, to web code, to COM and CORBA stubs, to MFC
+and ATL, - there are plenty of examples where the same code is written
+over and over again. Since writing this code is a task that can be
+automated completely and a programmer's time is far more expensive than
+CPU time, plenty of tools have been created that generate this biolerplate
+code automatically. What are these tools, exactly? Well, they are programs
+that write programs. They perform a simple task that has a mysterious
+name of metaprogramming. That's all there is to it.
+
+We could create and use such tools in millions of scenarios but more
+often than not we don't. What it boils down to is a subconscious
+caculation - is it worth it for me to create a separate project, write
+a whole tool to generate something, and then use it, if I only have to
+write very similar pieces about seven times? Of course not. Data access
+layers and COM stubs are written hundres, thousands of times. This is
+why there are tools for them. For similar pieces of code that repeat
+only a few times, or even a few dozen times, writing code generation
+tools isn't even considered. The trouble to create such a tool more
+often than not far outweighs the benefit of using one. If only creating
+such tools much easier, we could use them more often, and perhaps save
+many hours of our time. Let's see if we can accomplish this in a
+reasonable manner.
+
+Surprisingly C preprocessor comes to the rescue. We've all used it in C
+and C++. On occasion we all wish Java had it. We ust it to execute simple
+instructions at compile time to make small changes to our code (like
+selectively removing debug statements). Let's look at a quick example:
+
+```
+#define triple(X)  X + X + X
+```
+
+What does this line do? It's a simple instruction written in the
+preprocessor language that instructs it to replace all instances of
+triple(X) with X + X + X. For example all instances of 'triple(5)'
+will be replaced with '5 + 5 + 5' and the resulting code will be
+compiled by the C compiler. We're really doing a very primitive
+version of code generation here. If only C preprocessor was a little
+more powerful and included ways to connect to the database and a
+few more simple constructs, we could use it to deveop our data access
+layer right here, from within our program! Consider the following
+example that uses an imaginary extension of the C preprocessor:
+
+```
+#get-db-schema("127.0.0.1, un, pwd")
+#iterate-through-tables
+#for-each-table
+    class #table-name
+    {
+    };
+#end-for-each
+```
+
+We've just connected to the database schema, iterated through all the
+tables, and created an empty class for each. All in a couple of lines
+right within our source code! Now every time we recompile the file
+where above code appears we'll get a freshly built set of classes that
+automatically update based on the schema. With a little imagination
+you can see how we could build a full data access layer straight from
+within our program, without the use of any external tools! Of course
+this has a certain disadvantage (aside from the fact that such an
+advanced version of C preprocessor doesn't exits) - we'd have to learn
+a whole new "compile-time language" to do this sort of work. For
+complex code generation this language would have to be very complex as
+well, it would have to support many libraries and language constructs.
+For example, if our generated code depended on some file located at
+some ftp server the preprocessor would have to be able to connect to
+ftp. It's a shame to create and learn a new language just to do this.
+Expecially since there are so many nice languages already out here.
+Of course if we add a little creativity we can easily avoid this pitfall.
+
+Why not replace the preprocessor language with C/C++ itself? We'd have
+full power of the language at compile time and we'd only need to learn
+a few simple directives to differentiate between compile time and
+runtime code!
+
+```
+<%
+    cout << "Enter a number:";
+    cin >> n;
+%>
+for (int = 0; i < <%= n %>; i++)
+{
+    cout << "hello" << endl;
+}
+```
+
+Can you see what happens here? Everything that's between <% and %> tags
+runs when the program is compiled. Anything outside of this tags is
+normal code. In the example above you'd start compiling your program in
+the development environment. The code between the tags would be compiled
+and then run. You'd get a prompt to enter a number. You'd enter one and
+it would be placed inside the for loop. The for loop would then be
+compiled as usual and you'd be able to execute it. For example, if you'd
+enter 5 during the compilation of your program, the resulting code would
+look like this:
+
+```
+for (int i = 1; i < 5; i++)
+{
+    cout << "hello" << endl;
+}
+```
+
+Simple and effective. No need for a special preprocessor language. We get
+full power of our host language (in this case C/C++) at compile time. We
+could easily connect to a database and generate our data access layer
+source code at compile time in the same JSP or ASP generate HTML! Creating
+such tools would also be tremendously quick and simple. We'd never have
+to create new projects with specialized CPUs. We could inline our tools
+right into our programs. We wouldn't have to worry about whether writing
+such tools is worth it because writing them would be so fast - we could
+save tremendous amounts of time by creating simple bits of code that do
+mundane code generation for us!
+
