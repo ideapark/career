@@ -8,57 +8,57 @@ Introduction
 ------------
 
 When I first stumbled into lisp advocacy on various corners of the web
-I was already an experienced programmer.  At that point I  had grokked
-what seemed at the time a wide range of programming languages.  I  was
-proud to have the usual suspects (C++, Java, C#, etc.) on  my  service
+I was already an experienced programmer. At that point I had grokked
+what seemed at the time a wide range of programming languages. I was
+proud to have the usual suspects (C++, Java, C#, etc.) on my service
 record and was under impression that I know everything there is to know
-about programming languages. I couldn't have  possibly been more wrong.
+about programming languages. I couldn't have possibly been more wrong.
 
 My initial attempt to learn Lisp came to a crashing halt as soon as I
-saw some sample  code. I suppose the same thought ran through my mind
-that  ran  through thousands of other minds who were ever in my shoes:
-"Why on Earth would  anyone want to use a language with such horrific
-syntax?!" I couldn't be bothered  to learn a language if its creators
-couldn't be bothered  to give it a  pleasant syntax. After all, I was
+saw some sample code. I suppose the same thought ran through my mind
+that ran through thousands of other minds who were ever in my shoes:
+"Why on Earth would anyone want to use a language with such horrific
+syntax?!" I couldn't be bothered to learn a language if its creators
+couldn't be bothered to give it a pleasant syntax. After all, I was
 almost blinded by the infamous Lisp parentheses!
 
 The moment I regained my sight I communicated my frustrations to some
-members of the  Lisp sect.  Almost  immediately  I was bombarded by a
-standard set of  responses: Lisp's parentheses are only a superficial
-matter,  Lisp has a huge benefit of code and data being  expressed in
-the same manner (which,  obviously, is  a huge improvement over XML),
-Lisp has tremendously powerful  metaprogramming facilities  that allow
+members of the Lisp sect. Almost immediately I was bombarded by a
+standard set of responses: Lisp's parentheses are only a superficial
+matter, Lisp has a huge benefit of code and data being expressed in
+the same manner (which, obviously, is a huge improvement over XML),
+Lisp has tremendously powerful metaprogramming facilities that allow
 programs to write code and modify themselves, Lisp allows for creation
-of mini-languages specific to  the  problem  at  hand,  Lisp blurs the
-distinction between  run  time  and  compile time, Lisp, Lisp, Lisp...
-The list was very  impressive.  Needless to say none of it made sense.
+of mini-languages specific to the problem at hand, Lisp blurs the
+distinction between run time and compile time, Lisp, Lisp, Lisp...
+The list was very impressive. Needless to say none of it made sense.
 Nobody could illustrate the usefulness of these features with specific
 examples because these techniques are supposedly only userful in large
-software  systems.  After  many  hours  of debating that conventional
+software systems. After many hours of debating that conventional
 programming languages do the job just fine. I gave up. I wasn't about
-to invest months into  learning a language  with a terrible syntax in
-order to  understand obscure features that had no useful examples. My
+to invest months into learning a language with a terrible syntax in
+order to understand obscure features that had no useful examples. My
 time was not yet come.
 
-For many months  the Lisp advocates pressed on. I  was  baffled. Many
-extremely  intelligent  people  I  knew and had much respect for ware
-praising  Lisp  with  almost  religious  dedication.  There had to be
-something there, something  I couldn't afford not to get my hands on!
-Eventually my thrist for knowledge won me over.  I  took  the plunge,
+For many months the Lisp advocates pressed on. I was baffled. Many
+extremely intelligent people I knew and had much respect for ware
+praising Lisp with almost religious dedication. There had to be
+something there, something I couldn't afford not to get my hands on!
+Eventually my thrist for knowledge won me over. I took the plunge,
 bit the bullet, got my hands dirty, and began months of mind bending
-exercises. It was a journey on  an  endless  lake  of frustration. I
-turned my mind inside out, rinsed it, and  put  it back  in place. I
-went through seven rings of hell  and  came  back. And them I got it.
+exercises. It was a journey on an endless lake of frustration. I
+turned my mind inside out, rinsed it, and put it back in place. I
+went through seven rings of hell and came back. And them I got it.
 
 The elightenment came instantaneously. One moment I understood nothing,
-and the next memont  everything  clicked  into  place. I've achieved
-nirvana. Dozens of times  I heard  Eric Raymond's statment quoted by
-different  people: "Lisp  is   worth   learning   for  the  profound
+and the next memont everything clicked into place. I've achieved
+nirvana. Dozens of times I heard Eric Raymond's statment quoted by
+different people: "Lisp is  worth  learning  for the profound
 enlightenment experience you will have when you finally get it; that
-experience will make you a  better  programmer for  the rest of your
-days, even  if  you  never  actually use Lisp itself a lot." I never
-understood  this  statment.  I  never believed it could be true. And
-finally, after  all  the pain,  it  made sense! There was more truth
+experience will make you a better programmer for the rest of your
+days, even if you never actually use Lisp itself a lot." I never
+understood this statment. I never believed it could be true. And
+finally, after all the pain, it made sense! There was more truth
 to it than I ever could have imagined. I've achieved an almost divine
 state of mind, an instantaneous enlightenment experience that truend
 my view of computer science on its head in less than a single second.
@@ -1052,3 +1052,59 @@ We've just created a very small and limited language for managing to-do list
 embedded in Lisp. Such languages are very specific to a particular problem
 domain and are often referred to as domain specific languages or DSLs.
 
+
+Domain Specific Languages
+-------------------------
+
+In this article we've already encountered two domain specific languages: Ant
+(specific to dealing with project builds) and our unnamed mini-language for
+dealing with to-do lists. The difference is that Ant was written form scratch
+using XML, and XML parser, and Java while our language is embedded into Lisp
+is easily created within a couple of minutes.
+
+We've already discussed the benefits of DSLs, mainly why Ant is using XML,
+not Java source code. Lisp lets us create as many DSLs as we need for our
+problem. We can create domain specific langauges for creating web applications,
+writing massively multiplayer games, doing fixed income trading, solving
+the protein folding problem, dealing with transactions, etc. We can layer
+these langauges on top of each other and create a language for writing we-based
+trading applications by taking advantage of our web application language
+and bond trading langauge. Every day we'd reap the benefits of this approach,
+much like we reap the benefits of Ant.
+
+Using DSLs to solve problems results in much more compact, maintainable,
+flexible programs. In a way we create them in Java by creating classes that
+help us solve the problem. The difference is that Lisp allows us to take
+this abstraction to the next level: we're not limited by Java's parser.
+Think of writing build scripts in Java itself using some supporting
+library. Compare it to using Ant. Now apply this same comparison to every
+single problem you're ever worked on and you'll begin to glimpse a small
+share of the benefits offered by Lisp.
+
+
+What's next?
+------------
+
+Learning Lisp is an uphill battle. Even though in Computer Science terms
+Lisp is an acient language, few people to data figured out how to teach it
+well enough to make it accessible. Despite greate efforts by many Lisp advocates,
+learning Lisp today is still hard. The good news is that this won't reamain
+the case forever since the amount of Lisp-related resources is rapidly
+increasing. Time is on Lisp's side.
+
+Lisp is a way to escape mediocrity and to get ahead of the pack. Learning
+Lisp means you can get a better job today, because you can impress any
+reasonably intelligent interviewer with fresh insight into most aspects
+of software engineering. It also means you're likely to get fired tomorrow
+because everone is tired of you constantly mentioning how much better the
+company could be doing if only its software was written in Lisp. Is it
+worth the effort? Everyone who has ever learned Lisp says yes. The choice,
+of course, remains yours.
+
+
+Comments?
+---------
+
+Whew. That's enough. I've been writing this article, on and off, for months.
+If you find it interesing, have any questions, comments, or suggestions,
+please drop a not at coffeemug@gmail.com. I'll be glad to hear your feedback.
