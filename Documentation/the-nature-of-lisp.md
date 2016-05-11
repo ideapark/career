@@ -910,3 +910,145 @@ times-two example. Lisp comes with a very compact set of built in functions,
 the necessary minimum. The rest of the language is implemented as a
 standard library in Lisp itself.
 
+
+Lisp Macros
+-----------
+
+So far we've looked at metaprogramming in terms of a simple templating
+engine similar to JSP. We've done code generation using simple string
+manipulations. This is generally how most code generation tools go about
+doing this task. But we can do much better. To get on the right track,
+let's start off with a question. How would we write a tool that
+automatically generates Ant build scripts by looking at source files in
+the directory structure?
+
+We could take the easy way out and generate Ant XML by manipulating strings.
+Of course a such more abstract, expressive and extensible way is to work
+with XML processing libraries to generate XML nodes directly in memory.
+The nodes can then be serialized to strings automatically. Futhermore,
+out tool would be able to analyze and transform existing Ant build scripts
+by loading them and dealing with the XML nodes directly. We would abstract
+ourselves from strings and deal with higher level concepts with let us
+get the job done faster and easier.
+
+Of course we could write Ant tasks that allow dealing with XML transformations
+and write our generation tool in Ant itself. Or we could just use Lisp.
+As we saw earlier, a list is a built in Lisp data structure and Lisp has
+a number of facilities for processing lists quickly and effectively (head
+and tail being the simplest ones). Additionally Lisp has no semantic
+constraints - you can have your code (and data) have any structure you want.
+
+Metaprogramming in Lisp is done using a construct called a "macro". Let's
+try to develop a set of macros that transform data like, say, a to-do list
+(surprised?), into a language for dealing with to-do lists.
+
+Let's recall our to-do list example. The XML looks like this:
+
+```
+<todo name="housework">
+    <item priority="high">Clean the house.</item>
+    <item priority="medium">Wash the dishes.</item>
+    <item priority="medium">Buy more soap.</item>
+</todo>
+```
+
+The corresponding s-expression version looks like this:
+
+```
+(todo "housework"
+    (item (priority high) "Clean the house.")
+    (item (priority medium) "Wash the dishes.")
+    (item (priority medium) "Buy more soap."))
+```
+
+Suppose we're writing a to-do manager application. We keep our to-do items
+serialized in a set of files and when the program starts up we want to read
+them and display them to the user. How would we do this with XML and some
+other language (say, Java)? We'd parse our XML files with the to-do lists
+using some XML parser, write the code that walks the XML tree and converts
+it to a Java data structure (because frankly, processing DOM in Java is a
+pain in the neck), and then use this data structure to display the data.
+Now, how would we do the same thing in Lisp?
+
+If we were to adopt the same approach we'd parse the files using Lisp libraries
+responsible for parsing XML. The XML would then be presented to us as a Lisp
+list (an s-expression) and we'd walk the list and present relevant data to
+the user. Of course if we used Lisp it would make sense to persist the data
+as s-expressions directly as there's no reason to do an XML conversion. We
+wouldn't need special parsing libraries since data persisted as a set of
+s-expression is valid Lisp and we could use Lisp compiler to parse it and
+store it in memory as a Lisp list. Note that Lisp compiler (much like .NET
+compiler) is available to a Lisp program at runtime.
+
+But we can do better. Instead of writing code to walk the s-expression that
+stores data we could write a macro that allows us treat data as code! How
+do macros work? Pretty simple, really. Recall that a Lisp function is called
+like this:
+
+```
+(function-name arg1 arg2 arg3)
+```
+
+Where each argument is a valid Lisp expression that's evaluated and passed to
+the function. For example if we replace arg1 above with (+ 4 5), it will be
+evaluated and 9 would be passed to the function. A macro works the same way
+as a function, except its arguments are not evaluated.
+
+```
+(macro-name (+ 4 5))
+```
+
+In this case, (+ 4 5) is not evaluated and is passed to the macro as a list.
+The macro is then free to do what it likes with it, including evaluating it.
+The return value of a macro is a Lisp list that's treated as code. The original
+place with the macro is replaced with this code. For example, we could define
+a macro plus that takes two arguments and puts in the code that adds them.
+
+What does it have to do with the metaprogramming and our to-do list problem?
+Well, for one, macros are little bits of code that generate code using a list
+abstraction. Also, we could create macros named to-do and item that replace
+our data with whatever code we like, for instance code that displays the item
+to the user.
+
+What benefits does this approach offer? We don't have to walk the list. The
+compiler will do it for us and will invoke appropriate macors. All we need
+to do is create the macros that convert our data to appropriate code!
+
+For example, a macro similar to our triple C macro we showed earlier looks
+like this:
+
+```
+(defmacro triple (x)
+    '(+ ~X ~X ~X))
+```
+
+The quote prevents evaluation while the tilde allows it. Now every time triple
+is encountered in list code:
+
+```
+(triple 4)
+```
+
+it is replaced with the follow code:
+
+```
+(+ 4 4 4)
+```
+
+We can create macros for our to-do list items that will get called by list
+compiler and will transform the to-do list into code. Now our to-do list will
+be treated as code and will be executed. Suppose all we want to do is print
+it to standard output for the user to read:
+
+```
+(defmacro item (priority note)
+    '(block
+         (print stdout tab "Priority: "
+             ~(head (tail priority)) endl)
+         (print stdout tab "Note: " ~note endl endl)))
+```
+
+We've just created a very small and limited language for managing to-do list
+embedded in Lisp. Such languages are very specific to a particular problem
+domain and are often referred to as domain specific languages or DSLs.
+
