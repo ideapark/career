@@ -1,7 +1,7 @@
 TUTOR.ZIP
 
 This file contains all of the installments of Jack Crenshaw's
-tutorial on compiler construction, including the new Installment 15.
+tutorial on compiler construction, including the new Installment.
 The intended audience is those folks who are not computer scientists,
 but who enjoy computing and have always wanted to know how compilers
 work. A lot of compiler theory has been left out, but the practical
