@@ -14,7 +14,7 @@ void *threadA()
 {
     int i = 0, loopNum;
 
-    while (i < 5) {
+    while (i < 3) {
         /* Wait for state A*/
         pthread_mutex_lock(&mutex);
 
@@ -23,7 +23,7 @@ void *threadA()
         pthread_mutex_unlock(&mutex);
 
         /* do stuff */
-        for (loopNum = 1; loopNum <= 5; loopNum++)
+        for (loopNum = 0; loopNum < 2; loopNum++)
             printf("A: Hello %d\n", loopNum);
 
         /* Set state to B and wake up thread B */
@@ -42,7 +42,7 @@ void *threadB()
 {
     int n = 0;
 
-    while (n < 5) {
+    while (n < 3) {
         /* Wait for state B */
         pthread_mutex_lock(&mutex);
         while (state != STATE_B)
