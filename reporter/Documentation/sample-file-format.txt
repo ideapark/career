@@ -1,7 +1,7 @@
 APS SAMPLE FILE FORMAT DESCRIPTION
 ==================================
 
-Author: Zhou Peng <lockrecv@gmail.com>
+Author: Zhou Peng <lockrecv@qq.com>
 Date: 2015-08-11
 
 +-----------------------------------------+
