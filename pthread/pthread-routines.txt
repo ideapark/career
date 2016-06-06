@@ -1,0 +1,229 @@
+pthread Routines Summary
+========================
+
+-------------------------------------------------------------------------------
+ Routine                           Description
+-------------------------------------------------------------------------------
+              General Threads Routines
+-------------------------------------------------------------------------------
+ pthread_atfork()                  Declares fork handler routines to be called
+ pthread_create()                  Creates a thread object and thread
+ pthread_detach()                  Marks a thread object for deletion
+ pthread_equal()                   Compares one thread identifier to another
+                                   thread identifier
+ pthread_exit()                    Terminates the calling thread
+ pthread_join()                    Causes the calling thread to wait for the
+                                   Termination of a specified thread and detach
+                                   it
+ pthread_kill()                    Delivers a signal to a specified thread
+ pthread_once()                    Calls an initialization routine to be executed
+                                   only once
+ pthread_self()                    Obtains the identifier of the calling thread
+ pthread_sigmask()                 Examines or changes the calling thread's
+                                   signal mask
+-------------------------------------------------------------------------------
+              Thread Attributes Object Routines
+-------------------------------------------------------------------------------
+ pthread_attr_destory()            Destroys a thread attributes object
+ pthread_attr_getdetachstate()     Obtains the detachstate attribute of the
+                                   specified thread attributes object
+ pthread_attr_getquardsize()       Obtains the quardsize attribute of the
+                                   specified thread attributes object
+ pthread_attr_getinheritsched()    Obtains the inherit scheduling attribute of
+                                   the specified thread attributes object
+ pthread_attr_getschedparam()      Obtains the inherit scheduling parameters for
+                                   the scheduling policy attribute of the
+                                   specified thread attributes object
+ pthread_attr_getschedpolicy()     Obtains the scheduling policy attribute of
+                                   the specified thread attributes object
+ pthread_attr_getscope()           Obtains the contention-scope attribute of
+                                   the specified thread attributes object
+ pthread_attr_getstackaddr()       Obtains the stackaddr attribute of the the
+                                   specified thread attributes object
+ pthread_attr_getstacksize()       Obtains the stacksize attribute of the
+                                   specified thread attributes object
+ pthread_attr_init()               Initializes a thread attributes object
+ pthread_attr_setdetachstate()     Changes the detachstate attribute of the
+                                   specified thread attributes object
+ pthread_attr_setguardsize()       Changes the guardsize attribute of the
+                                   specified thread attributes object
+ pthread_attr_setinheritsched()    Changes the inherit scheduling attribute of
+                                   the specified thread attributes object
+ pthread_attr_setschedparam()      Changes the values of the parameters
+                                   associated with the scheduling policy attribute
+                                   of the specified thread attributes object
+ pthread_attr_setschedpolicy()     Changes the scheduling policy attribute of
+                                   the specified thread attributes object
+ pthread_attr_setscope()           Changes the contention-scope attribute of
+                                   the specified thread attributes object
+ pthread_attr_setstackaddr()       Changes the stackaddr attribute of the
+                                   specified thread attributes object
+ pthread_attr_setstacksize()       Changes the stacksize attribute of the
+                                   specified thread attributes object
+-------------------------------------------------------------------------------
+              Thread Cancelation Routines
+-------------------------------------------------------------------------------
+ pthread_cancel()                  Allows a thread to request that it, or
+                                   another thread, terminate execution
+ pthread_cleanup_pop()             Removes a cleanup handler routine from the
+                                   top of the "cleanup stack" and optionally
+                                   executes it
+ pthread_cleanup_push()            Establishes a cleanup handler routine to be
+                                   executed when the thread exits or is canceled
+                                   while the handler is on the "cleanup stack"
+ pthread_setcancelstate()          Sets the calling thread's cancelability state
+                                   to enable or disable the delivery of cancelation
+                                   requests
+ pthread_setcanceltype()           Sets the calling thread's cancelability type
+                                   to enable or disable the delivery of cancelation
+                                   requests
+ pthread_testcancel()              Requests delivery of any pending cancelation
+                                   request to the calling thread
+-------------------------------------------------------------------------------
+              Thread Priority, Concurrency, and Scheduling Routines
+-------------------------------------------------------------------------------
+ pthread_getconcurrency()          Obtains the current concurrency level
+                                   parameter for the process
+ pthread_getschedparam()           Obtains the current scheduling policy and
+                                   scheduling parameters of a thread
+ pthread_setconcurrency()          Changes the current concurrency level
+                                   parameter for the process
+ pthread_setschedparam()           Changes the current scheduling policy and
+                                   scheduling parameters of a thread
+-------------------------------------------------------------------------------
+              Thread-Specific Data Routines
+-------------------------------------------------------------------------------
+ pthread_getspecific()             Obtains the thread-specific data value
+                                   associated with the specified key
+ pthread_key_create()              Generates a unique thread-specific data key
+                                   for the calling thread
+ pthread_key_delete()              Deletes a thread-specific data key
+ pthread_setspecific()             Changes the thread-specific data value
+                                   associated with the specified key for the
+                                   calling thread
+-------------------------------------------------------------------------------
+              Mutex Routines
+-------------------------------------------------------------------------------
+ pthread_mutex_destroy()           Destroy a mutex
+ pthread_mutex_init()              Initializes a mutex with attributes specified
+                                   by the attributes argument
+ pthread_mutex_lock()              Locks an unlocked mutex; if locked, the caller
+                                   waits for the mutex to become available before
+                                   locking it
+ pthread_mutex_trylock()           Attempts to lock a mutex; returns immediately
+                                   if mutex is already locked
+ pthread_mutex_unlock()            Unlocks a mutex locked by the calling thread
+-------------------------------------------------------------------------------
+              Mutex Attributes Object Routines
+-------------------------------------------------------------------------------
+ pthread_mutexattr_destroy()       Destroys a mutex attributes object
+ pthread_mutexattr_getpshared()    Obtains the process-shared attribute from
+                                   the specified mutex attributes object
+ pthread_mutexattr_gettype()       Obtains the mutex type attribute from the
+                                   specified mutex attributes object
+ pthread_mutexattr_init()          Changes the process-shared attribute in the
+                                   specified mutex attributes object
+ pthread_mutexattr_settype()       Changes the mutex type attribute in the
+                                   specified mutex attributes object
+-------------------------------------------------------------------------------
+              Condition Variable Routines
+-------------------------------------------------------------------------------
+ pthread_cond_broadcast()          Wakes all threads currently waiting on a
+                                   condition variable
+ pthread_cond_destroy()            Destroys a condition variable
+ pthread_cond_init()               Initializes a condition variable
+ pthread_cond_signal()             Wakes at least one thread that is waiting on
+                                   a condition variable
+ pthread_cond_timedwait()          Causes a thread to wait a specified period of
+                                   time for a condition variable to be signaled
+                                   or broadcast
+ pthread_cond_wait()               Causes a thread to wait for a condition variable
+                                   to be signaled or broadcast
+-------------------------------------------------------------------------------
+              Condition Variable Attributes Object Routines
+-------------------------------------------------------------------------------
+ pthread_condattr_destroy()        Destroys a condition variable attributes object
+ pthread_condattr_getpshared()     Obtains the process-shared attribute from
+                                   the specified condition variable attributes
+                                   object
+ pthread_condattr_init()           Initializes a condition varaible attributes object
+ pthread_condattr_setpshared()     Changes the process-shared attribute in the
+                                   specified condition varaible attributes object
+-------------------------------------------------------------------------------
+              Read-Write Lock Routines
+-------------------------------------------------------------------------------
+ pthread_rwlock_destory()          Destroys a read-write lock object
+ pthread_rwlock_init()             Initializes a read-write lock object
+ pthread_rwlock_rdlock()           Acquires a read-write lock for read access; if
+                                   locked, the caller waits for the lock to
+                                   become avarialbe before locking it
+ pthread_rwlock_tryrdlock()        Acquires a read-write lock for read access
+                                   without waiting
+ pthread_rwlock_trywrlock()        Acquires a read-write lock for write access
+                                   without waiting
+ pthread_rwlock_unlock()           Releases a read-write lock previously acquired
+                                   by the calling thread
+ pthread_rwlock_wrlock()           Acquires a read-write lock for write access; if
+                                   locked, the caller waits for the lock to become
+                                   available before locking it
+-------------------------------------------------------------------------------
+              Read-Write Lock Attributes Object Routines
+-------------------------------------------------------------------------------
+ pthread_rwlockattr_destroy()      Destroys a read-write lock attributes object
+ pthread_rwlockattr_getpshared()   Obtains the process-shared attribute from
+                                   the specified read-write lock attributes object
+ pthread_rwlockattr_init()         Initializes a read-write lock attributes object
+ pthread_rwlockattr_setpshared()   Changes the process-shared attribute in the
+                                   specified read-write lock attributes object
+-------------------------------------------------------------------------------
+              Nonportable Extensions
+-------------------------------------------------------------------------------
+ pthread_delay_np()                Pauses the calling thread's execution for the
+                                   specified time interval
+ pthread_get_expiration_np()       Calculates a timeout for a timed condition
+                                   variable wait
+ pthread_getsequence_np()          Gets a small integer specific to the calling
+                                   thread
+ pthread_attr_getstackaddr_np()    Obtains the address and size of the specified
+                                   thread attributes object
+ pthread_attr_setstackaddr_np()    Sets the address and size of the specified
+                                   thread attributes object
+ pthread_lock_global_np()          Locks the global mutex
+ pthread_unlock_global_np()        Unlocks the global mutex
+ pthread_cond_signal_int_np()      Requests condition variable signal from
+                                   software interrupt routine
+ pthread_cond_sig_preempt_int_np() Wakes one thread that is waiting on the specified
+                                   condition variable; called from software
+                                   interrupt routine
+ pthread_attr_getname_np()         Gets/sets name associated with specific objects
+ pthread_attr_setname_np()         for debugging
+ pthread_cond_getname_np()
+ pthread_cond_setname_np()
+ pthread_getname_np()
+ pthread_key_getname_np()
+ pthread_key_setname_np()
+ pthread_mutex_getname_np()
+ pthread_mutex_setname_np()
+ pthread_rwlock_getname_np()
+ pthread_rwlock_setname_np()
+ pthread_setname_np()
+ pthread_exc_get_status_np()       Exception object routines (some are macros)
+ pthread_exc_matches_np()
+ pthread_exc_report_np()
+ pthread_exc_set_status_np()
+ pthread_yield_np()                Notifies the scheduler that the current thread
+                                   is willing to release its processor to other
+                                   threads of the same or higher priority (alias
+                                   for sched_yield())
+-------------------------------------------------------------------------------
+              Related Standard Routines
+-------------------------------------------------------------------------------
+ sched_get_priority_max()          Returns the maximum priority for the specified
+                                   scheduling policy
+ sched_get_priority_min()          Returns the minimum priority for the specified
+                                   scheduling policy
+ sched_yield()                     Notifies the scheduler that the calling thread
+                                   is willing to release its processor to other
+                                   threads of the same or higher priority
+ sigwait()                         Suspends a calling thread until a signal arrives
+-------------------------------------------------------------------------------
