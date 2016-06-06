@@ -20,7 +20,7 @@
 #define check(status, string)                                                    \
     if (status != 0) {                                                           \
         errno = status;                                                          \
-        fprintf(stderr, "%s status %d: %s\n", status, string, strerror(status)); \
+        fprintf(stderr, "%s status %d: %s\n", string, status, strerror(status)); \
     }
 
 /*
@@ -176,7 +176,7 @@ int main(void)
         else if (exit_value == PTHREAD_CANCELED)
             printf("Thread %d was canceled\n", worker_num);
         else
-            printf("Thread %d terminated unexpectedly with %#lx\n", worker_num, exit_value);
+            printf("Thread %d terminated unexpectedly with #%p\n", worker_num, exit_value);
         /*
          * Upon normal termination the exit_value is equivalent to worker_num
          */
