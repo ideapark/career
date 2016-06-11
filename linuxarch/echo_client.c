@@ -14,11 +14,11 @@ int main() {
 
 	/* Set address of server to be connected */
 	server->sin_family = AF_INET;
-	server->sin_port = htons(echo_port);      // Note network byte order!
+	server->sin_port = htons(echo_port); // Note network byte order!
 	server->sin_addr.s_addr = inet_addr(echo_host);
 
 	/* Create a socket (Internet address family, stream socket and
-     default protocol) */
+	   default protocol) */
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
 	/* Connect to server */
