@@ -4,7 +4,8 @@
 #include<sys/types.h>
 #include<string.h>
 
-int main() {
+int main()
+{
 	/* Host and port number of the echo server */
 	char* echo_host = "192.168.1.20";
 	int echo_port = 7;

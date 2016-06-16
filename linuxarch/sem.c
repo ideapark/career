@@ -13,7 +13,8 @@ struct sembuf op_up[1] = { 0, 1 , 0 };
 int semid = -1;   /* Semaphore identifier */
 int res;          /* Result of semaphore operations */
 
-void init_sem() {
+void init_sem()
+{
 	/* Test whether semaphore already exists */
 	semid = semget(SEMKEY, 0, IPC_CREAT | PERMS);
 	if (semid < 0) {
@@ -30,18 +31,21 @@ void init_sem() {
 	}
 }
 
-void down() {
+void down()
+{
 	/* Perform down operation */
 	res = semop(semid, &op_down[0], 1);
 }
 
-void up() {
+void up()
+{
 	/* Perform up operation */
 	res = semop(semid, &op_up[0], 1);
 }
 
 
-int main(){
+int main()
+{
 	init_sem();
 	/* Normal program code. */
 

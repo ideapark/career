@@ -1,4 +1,5 @@
-int main() {
+int main()
+{
 	int val1 = 33;
 	int val2 = 18;
 

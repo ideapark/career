@@ -1,6 +1,7 @@
 #include <stdio.h>
 
-int main() {
+int main()
+{
 	int val1 = 4;
 	int val2 = 8;
 

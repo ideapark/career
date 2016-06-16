@@ -1,6 +1,7 @@
 #include<stdio.h>
 
-int main() {
+int main()
+{
 	unsigned int val = 49;
 	unsigned int res;
 

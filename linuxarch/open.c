@@ -3,7 +3,8 @@
 #include<unistd.h>
 #include<malloc.h>
 
-int main() {
+int main()
+{
 	int handle, bytes;
 	void* ptr;
 

@@ -10,7 +10,8 @@
 
 static long pid;
 
-int upeek(int pid, long off, long *res) {
+int upeek(int pid, long off, long *res)
+{
 	long val;
 
 	val = ptrace(PTRACE_PEEKUSER, pid, off, 0);
@@ -23,7 +24,8 @@ int upeek(int pid, long off, long *res) {
 	return 0;
 }
 
-void trace_syscall() {
+void trace_syscall()
+{
 	long res;
 
 	res = ptrace(PTRACE_SYSCALL, pid, (char*) 1, 0);
@@ -32,7 +34,8 @@ void trace_syscall() {
 	}
 }
 
-void sigchld_handler (int signum) {
+void sigchld_handler(int signum)
+{
 	long scno;
 	int res;
 
@@ -50,7 +53,8 @@ void sigchld_handler (int signum) {
 	trace_syscall();
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
 	int res;
 
 	/* Check the number of arguments */

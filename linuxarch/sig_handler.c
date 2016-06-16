@@ -4,12 +4,14 @@
 
 volatile int signaled = 0;
 
-void handler(int signum) {
+void handler(int signum)
+{
 	printf("signaled called\n");
 	signaled = 1;
 }
 
-int main() {
+int main()
+{
 	char ch;
 	struct sigaction sigact;
 	sigact.sa_handler = handler;
