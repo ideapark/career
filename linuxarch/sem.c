@@ -1,8 +1,8 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<sys/types.h>
-#include<sys/ipc.h>
-#include<sys/sem.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/ipc.h>
+#include <sys/sem.h>
 
 #define SEMKEY 1234L      /* Identifier */
 #define PERMS  0666       /* Access permission: rwrwrw */
@@ -16,11 +16,11 @@ int res;          /* Result of semaphore operations */
 void init_sem()
 {
 	/* Test whether semaphore already exists */
-	semid = semget(SEMKEY, 0, IPC_CREAT | PERMS);
+	semid = semget(SEMKEY, 0, IPC_CREAT|PERMS);
 	if (semid < 0) {
 		printf("Create the semaphore\n");
 
-		semid = semget(SEMKEY, 1, IPC_CREAT | PERMS);
+		semid = semget(SEMKEY, 1, IPC_CREAT|PERMS);
 		if (semid < 0) {
 			printf("Couldn't create semaphore!\n");
 			exit(-1);
@@ -44,7 +44,7 @@ void up()
 }
 
 
-int main()
+int main(void)
 {
 	init_sem();
 	/* Normal program code. */

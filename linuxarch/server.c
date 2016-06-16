@@ -1,10 +1,10 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<netinet/in.h>
-#include<sys/types.h>
-#include<string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <netinet/in.h>
+#include <sys/types.h>
+#include <string.h>
 
-int main()
+int main(void)
 {
 	char *echo_host = "192.168.1.20";
 	int echo_port = 7777;
@@ -30,10 +30,10 @@ int main()
 
 	/* ...and wait for incoming data */
 	int clientfd;
-	struct sockaddr_in* client = 
-		(struct sockaddr_in*)malloc(sizeof(struct sockaddr_in));
+	struct sockaddr_in *client =
+		(struct sockaddr_in *)malloc(sizeof(struct sockaddr_in));
 	int client_size = sizeof(*client);
-	char *buf = (char*)malloc(1000);
+	char *buf = (char *)malloc(1000);
 	int bytes;
 
 	printf("Wait for connection to port %u\n", echo_port);
