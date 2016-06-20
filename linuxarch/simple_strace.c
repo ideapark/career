@@ -1,12 +1,12 @@
 /* Simple replacement for strace(1) */
 
-#include<stdio.h>
-#include<stdlib.h>
-#include<signal.h>
-#include<unistd.h>
-#include<sys/ptrace.h>
-#include<sys/wait.h>
-#include<asm/ptrace.h>    /* for ORIG_EAX */
+#include <stdio.h>
+#include <stdlib.h>
+#include <signal.h>
+#include <unistd.h>
+#include <sys/ptrace.h>
+#include <sys/wait.h>
+#include <asm/ptrace.h> /* for ORIG_EAX */
 
 static long pid;
 
@@ -28,7 +28,7 @@ void trace_syscall()
 {
 	long res;
 
-	res = ptrace(PTRACE_SYSCALL, pid, (char*) 1, 0);
+	res = ptrace(PTRACE_SYSCALL, pid, (char *)1, 0);
 	if (res < 0) {
 		printf("Failed to execute until next syscall: %d\n", res);
 	}
@@ -53,7 +53,7 @@ void sigchld_handler(int signum)
 	trace_syscall();
 }
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
 	int res;
 

@@ -10,7 +10,7 @@ void handler(int signum)
 	signaled = 1;
 }
 
-int main()
+int main(void)
 {
 	char ch;
 	struct sigaction sigact;

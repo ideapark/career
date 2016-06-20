@@ -1,6 +1,6 @@
-#include<stdio.h>
+#include <stdio.h>
 
-int main()
+int main(void)
 {
 	unsigned int val = 1;
 	unsigned int count;
