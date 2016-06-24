@@ -1,8 +1,8 @@
-KISS
-====
+LIBKISS
+=======
 
 - Author: Zhou Peng
-- Email: lockrecv@gmail.com
+- Email: lockrecv@qq.com
 - License: MIT
 
 Philosophy
