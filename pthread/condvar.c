@@ -12,67 +12,67 @@ pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void *threadA()
 {
-    int i = 0, loopNum;
+	int i = 0, loopNum;
 
-    while (i < 3) {
-        /* Wait for state A*/
-        pthread_mutex_lock(&mutex);
+	while (i < 3) {
+		/* Wait for state A*/
+		pthread_mutex_lock(&mutex);
 
-        while (state != STATE_A)
-            pthread_cond_wait(&condA, &mutex);
-        pthread_mutex_unlock(&mutex);
+		while (state != STATE_A)
+			pthread_cond_wait(&condA, &mutex);
+		pthread_mutex_unlock(&mutex);
 
-        /* do stuff */
-        for (loopNum = 0; loopNum < 2; loopNum++)
-            printf("A: Hello %d\n", loopNum);
+		/* do stuff */
+		for (loopNum = 0; loopNum < 2; loopNum++)
+			printf("A: Hello %d\n", loopNum);
 
-        /* Set state to B and wake up thread B */
-        pthread_mutex_lock(&mutex);
-        state = STATE_B;
-        pthread_cond_signal(&condB);
-        pthread_mutex_unlock(&mutex);
+		/* Set state to B and wake up thread B */
+		pthread_mutex_lock(&mutex);
+		state = STATE_B;
+		pthread_cond_signal(&condB);
+		pthread_mutex_unlock(&mutex);
 
-        i++;
-    }
+		i++;
+	}
 
-    return NULL;
+	return NULL;
 }
 
 void *threadB()
 {
-    int n = 0;
+	int n = 0;
 
-    while (n < 3) {
-        /* Wait for state B */
-        pthread_mutex_lock(&mutex);
-        while (state != STATE_B)
-            pthread_cond_wait(&condB, &mutex);
-        pthread_mutex_unlock(&mutex);
+	while (n < 3) {
+		/* Wait for state B */
+		pthread_mutex_lock(&mutex);
+		while (state != STATE_B)
+			pthread_cond_wait(&condB, &mutex);
+		pthread_mutex_unlock(&mutex);
 
-        /* do stuff */
-        printf("B: Goodbye\n");
+		/* do stuff */
+		printf("B: Goodbye\n");
 
-        /* Set state to A and wake up thread A */
-        pthread_mutex_lock(&mutex);
-        state = STATE_A;
-        pthread_cond_signal(&condA);
-        pthread_mutex_unlock(&mutex);
+		/* Set state to A and wake up thread A */
+		pthread_mutex_lock(&mutex);
+		state = STATE_A;
+		pthread_cond_signal(&condA);
+		pthread_mutex_unlock(&mutex);
 
-        n++;
-    }
+		n++;
+	}
 
-    return NULL;
+	return NULL;
 }
 
 int main(int argc, char *argv[])
 {
-    pthread_t a, b;
+	pthread_t a, b;
 
-    pthread_create(&a, NULL, threadA, NULL);
-    pthread_create(&b, NULL, threadB, NULL);
+	pthread_create(&a, NULL, threadA, NULL);
+	pthread_create(&b, NULL, threadB, NULL);
 
-    pthread_join(a, NULL);
-    pthread_join(b, NULL);
+	pthread_join(a, NULL);
+	pthread_join(b, NULL);
 
-    return 0;
+	return 0;
 }
