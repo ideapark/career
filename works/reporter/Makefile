@@ -9,8 +9,8 @@
 ccflags := -Wall -O2 -fno-common -DHAVE_CONFIG_H -DDEBUG=0
 include := -I. -I.. -I../libutil -I../libopt++ -I../libutil++ -I../libop -I../libpp
 
-cc := gcc
-CC := g++
+cc := clang
+CC := clang++
 
 export ccflags include
 export cc CC
