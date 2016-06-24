@@ -1,5 +1,5 @@
-GOT
-===
+LESS IS MORE
+============
 
 [lockrecv](lockrecv@qq.com)
 
