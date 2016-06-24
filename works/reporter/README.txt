@@ -1,5 +1,5 @@
 #### -------------------------------------------
-####  Copyright (C) Zhou Peng <lockrecv@qq.com>
+####  Copyright (c) Zhou Peng <lockrecv@qq.com>
 #### -------------------------------------------
 
 reporter.exe
