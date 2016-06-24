@@ -1,8 +1,9 @@
 /*
  * sysstat/util/mapped_helper.h - Linux mapped memory file I/O
  *
- * Copyright (C) Zhou Peng <lockrecv@qq.com>
+ * Copyright (c) Zhou Peng <lockrecv@qq.com>
  */
+
 #ifndef MAPPED_HELPER_H
 #define MAPPED_HELPER_H
 
@@ -11,10 +12,10 @@
 #define MAPPED_PAGES  8
 
 typedef struct {
-  int  fd;        /* mmaped memory file descriptor */
-  void *addr;     /* start memory address of the maped memory */
-  int  used_size; /* used size */
-  int  page_size; /* system page size */
+	int  fd;        /* mmaped memory file descriptor */
+	void *addr;     /* start memory address of the maped memory */
+	int  used_size; /* used size */
+	int  page_size; /* system page size */
 } mapfile_t;
 
 /*

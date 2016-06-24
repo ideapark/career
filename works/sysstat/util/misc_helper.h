@@ -1,8 +1,9 @@
 /*
  * sysstat/util/misc_helper.h - some useful helpers
  *
- * Copyright (C) Zhou Peng <lockrecv@qq.com>
+ * Copyright (c) Zhou Peng <lockrecv@qq.com>
  */
+
 #ifndef MISC_HELPER_H
 #define MISC_HELPER_H
 
@@ -27,8 +28,8 @@ float cpu_hz();
 int8_t cpu_cores();
 
 enum space {
-  SPACE_KERNEL,
-  SPACE_USER,
+	SPACE_KERNEL,
+	SPACE_USER,
 };
 
 /*

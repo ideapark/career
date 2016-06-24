@@ -1,21 +1,22 @@
 /*
  * sysstat/util/sqlite_helper.h - sqlite database helper
  *
- * Copyright (C) Zhou Peng <lockrecv@qq.com>
+ * Copyright (c) Zhou Peng <lockrecv@qq.com>
  */
+
 #ifndef SQLITE_HELPER_H
 #define SQLITE_HELPER_H
 
 #include <sqlite3.h>
 
 typedef enum {
-  F_CLOSED = 0,
-  F_OPEN   = 1,
+	F_CLOSED = 0,
+	F_OPEN   = 1,
 } openflag_t;
 
 typedef struct {
-  openflag_t status;
-  sqlite3 *sqlitedb;
+	openflag_t status;
+	sqlite3 *sqlitedb;
 } sqlite_t;
 
 /*

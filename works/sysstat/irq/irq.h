@@ -1,8 +1,9 @@
 /*
  * sysstat/irq/irq.h - sysstat interrupts sample
  *
- * Copyright (C) Zhou Peng <lockrecv@qq.com>
+ * Copyright (c) Zhou Peng <lockrecv@qq.com>
  */
+
 #ifndef SYSSTAT_IRQ_H
 #define SYSSTAT_IRQ_H
 
@@ -23,23 +24,23 @@
 #pragma pack(1)
 
 typedef enum {
-  HARD_IRQ = 0,
-  SOFT_IRQ = 1,
+	HARD_IRQ = 0,
+	SOFT_IRQ = 1,
 } irq_t;
 
 typedef struct {
-  int32_t magic;
-  int8_t  cpu_cores;
-  int32_t count;
-  char    irq_names[IRQ_MAXNO][IRQ_NAMELEN];
+	int32_t magic;
+	int8_t  cpu_cores;
+	int32_t count;
+	char    irq_names[IRQ_MAXNO][IRQ_NAMELEN];
 } irq_header;
 
 typedef struct {
-  int32_t timestamp;
-  int8_t  cpu;
-  int8_t  irq_type;
-  int16_t name_idx;
-  int32_t irq_num;
+	int32_t timestamp;
+	int8_t  cpu;
+	int8_t  irq_type;
+	int16_t name_idx;
+	int32_t irq_num;
 } irq_entry;
 
 #pragma pack(pop)
@@ -49,35 +50,35 @@ void irq_run(void);
 void irq_exit(void);
 
 #define IRQ_CREATE_TABLE_SQL  \
-  "CREATE TABLE IF NOT EXISTS irq_table(" \
-  "    private_key   INTEGER,           " \
-  "    timestamp     INTEGER,           " \
-  "    cpu           INTEGER,           " \
-  "    irq_type      TEXT,              " \
-  "    name          TEXT,              " \
-  "    irq_num       INTEGER            " \
-  ");"
+"CREATE TABLE IF NOT EXISTS irq_table(" \
+"    private_key   INTEGER,           " \
+"    timestamp     INTEGER,           " \
+"    cpu           INTEGER,           " \
+"    irq_type      TEXT,              " \
+"    name          TEXT,              " \
+"    irq_num       INTEGER            " \
+");"
 
 #define IRQ_INSERT_TABLE_SQL  \
-  "INSERT INTO irq_table(" \
-  "    private_key,      " \
-  "    timestamp,        " \
-  "    cpu,              " \
-  "    irq_type,         " \
-  "    name,             " \
-  "    irq_num           " \
-  ") VALUES (            " \
-  "    %d,               " \
-  "    %"PRId32",        " \
-  "    %d,               " \
-  "    '%s',             " \
-  "    '%s',             " \
-  "    %"PRId32"         " \
-  ");"
+"INSERT INTO irq_table(" \
+"    private_key,      " \
+"    timestamp,        " \
+"    cpu,              " \
+"    irq_type,         " \
+"    name,             " \
+"    irq_num           " \
+") VALUES (            " \
+"    %d,               " \
+"    %"PRId32",        " \
+"    %d,               " \
+"    '%s',             " \
+"    '%s',             " \
+"    %"PRId32"         " \
+");"
 
 typedef struct {
-  irq_entry entry;
-  struct list_head list;
+	irq_entry entry;
+	struct list_head list;
 } irq_list;
 
 int irq_parser(const char *datafile, const char *dbname);
