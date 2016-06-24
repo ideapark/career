@@ -1,4 +1,6 @@
 GOT
 ===
 
-Reading notes by [lockrecv](lockrecv@qq.com)
+[lockrecv](lockrecv@qq.com)
+
+At sixes and sevens
