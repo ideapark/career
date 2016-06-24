@@ -435,7 +435,7 @@ void op_bfd::get_symbol_range(symbol_index_t sym_idx,
 {
   op_bfd_symbol const & sym = syms[sym_idx];
 
-  bool const verbose = cverb << (vbfd & vlevel1);
+  bool const verbose = (cverb << (vbfd & vlevel1)).good();
 
   if (anon_obj || is_vmlinux)
     start = sym.vma();
