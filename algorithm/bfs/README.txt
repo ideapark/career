@@ -1,7 +1,7 @@
 Breadth First Search (BFS) Algorithm
 ====================================
 
-Author: Zhou Peng <lockrecv@gmail.com>
+Author: Zhou Peng <lockrecv@qq.com>
 
 
 Graph
