@@ -3,10 +3,10 @@
 /* sizeof: display sizes of basic types */
 int main(void)
 {
-    printf("char %lu, short %lu, int %lu, long %lu,",
-            sizeof(char), sizeof(short),
-            sizeof(int), sizeof(long));
-    printf(" float %lu, double %lu, void* %lu\n",
-            sizeof(float), sizeof(double), sizeof(void *));
-    return 0;
+	printf("char %lu, short %lu, int %lu, long %lu,",
+			sizeof(char), sizeof(short),
+			sizeof(int), sizeof(long));
+	printf(" float %lu, double %lu, void* %lu\n",
+			sizeof(float), sizeof(double), sizeof(void *));
+	return 0;
 }
