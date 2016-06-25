@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 - 2015, Zhou Peng
+ * Copyright (c) 2014 - 2015, Zhou Peng
  *        ALL RIGHTS RESERVED
  */
 
@@ -7,20 +7,20 @@
 
 int uniq(char *str)
 {
-    int start, next, cnt;
+	int start, next, cnt;
 
-    start = cnt = 0;
-    next = 1;
+	start = cnt = 0;
+	next = 1;
 
-    sort(str);
+	sort(str);
 
-    while (str[start] != '\0') {
-        if (str[start] == str[next])
-            cnt++;
-        else
-            str[++start] = str[next];
-        next++;
-    }
+	while (str[start] != '\0') {
+		if (str[start] == str[next])
+			cnt++;
+		else
+			str[++start] = str[next];
+		next++;
+	}
 
-    return cnt;
+	return cnt;
 }
