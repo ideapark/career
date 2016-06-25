@@ -2,6 +2,7 @@
  * procfs.c - create a "file" in /proc, use the file_operation way
  *            to manage the file.
  */
+
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/proc_fs.h>
@@ -15,46 +16,46 @@ static unsigned long procfs_buffer_size = 0;
 static struct proc_dir_entry *our_proc_file;
 
 static ssize_t procfs_read(struct file *filp, char *buffer,
-                           size_t length, loff_t *offset)
+		size_t length, loff_t *offset)
 {
-    static int finished = 0;
+	static int finished = 0;
 
-    if (finished) {
-        printk(KERN_INFO "procfs_read: END\n");
-        finished = 0;
-        return 0;
-    }
+	if (finished) {
+		printk(KERN_INFO "procfs_read: END\n");
+		finished = 0;
+		return 0;
+	}
 
-    finished = 1;
+	finished = 1;
 
-    /*
-     * we use put_to_user to copy the string from the kernel's
-     * memory segment to the memory segment of the process
-     * that called use. get_from_user, BTW, is used for the
-     * reverse.
-     */
-    if (copy_to_user(buffer, procfs_buffer, procfs_buffer_size))
-        return -EFAULT;
+	/*
+	 * we use put_to_user to copy the string from the kernel's
+	 * memory segment to the memory segment of the process
+	 * that called use. get_from_user, BTW, is used for the
+	 * reverse.
+	 */
+	if (copy_to_user(buffer, procfs_buffer, procfs_buffer_size))
+		return -EFAULT;
 
-    printk(KERN_INFO "procfs_read: read %lu bytes\n", procfs_buffer_size);
+	printk(KERN_INFO "procfs_read: read %lu bytes\n", procfs_buffer_size);
 
-    return procfs_buffer_size;
+	return procfs_buffer_size;
 }
 
 static ssize_t procfs_write(struct file *file, const char *buffer,
-                            size_t len, loff_t *off)
+		size_t len, loff_t *off)
 {
-    if (len > PROCFS_MAX_SIZE)
-        procfs_buffer_size = PROCFS_MAX_SIZE;
-    else
-        procfs_buffer_size = len;
+	if (len > PROCFS_MAX_SIZE)
+		procfs_buffer_size = PROCFS_MAX_SIZE;
+	else
+		procfs_buffer_size = len;
 
-    if (copy_from_user(procfs_buffer, buffer, procfs_buffer_size))
-        return -EFAULT;
+	if (copy_from_user(procfs_buffer, buffer, procfs_buffer_size))
+		return -EFAULT;
 
-    printk(KERN_INFO "procfs_write: write %lu bytes\n", procfs_buffer_size);
+	printk(KERN_INFO "procfs_write: write %lu bytes\n", procfs_buffer_size);
 
-    return procfs_buffer_size;
+	return procfs_buffer_size;
 }
 
 /*
@@ -73,17 +74,17 @@ static ssize_t procfs_write(struct file *file, const char *buffer,
  */
 static int module_permission(struct inode *inode, int op, struct nameidata *foo)
 {
-    /*
-     * We allow everybody to read from our module, but only root
-     * (uid 0) may write to it
-     */
-    if (op == 4 || (op == 2 && current->euid) == 0)
-        return 0;
+	/*
+	 * We allow everybody to read from our module, but only root
+	 * (uid 0) may write to it
+	 */
+	if (op == 4 || (op == 2 && current->euid) == 0)
+		return 0;
 
-    /*
-     * If it's anything else, access is denied
-     */
-    return -EACCES;
+	/*
+	 * If it's anything else, access is denied
+	 */
+	return -EACCES;
 }
 
 /*
@@ -93,8 +94,8 @@ static int module_permission(struct inode *inode, int op, struct nameidata *foo)
  */
 int procfs_open(struct inode *inode, struct file *file)
 {
-    try_module_get(THIS_MODULE);
-    return 0;
+	try_module_get(THIS_MODULE);
+	return 0;
 }
 
 /*
@@ -103,15 +104,15 @@ int procfs_open(struct inode *inode, struct file *file)
  */
 int procfs_close(struct inode *inode, struct file *file)
 {
-    module_get(THIS_MODULE);
-    return 0;
+	module_get(THIS_MODULE);
+	return 0;
 }
 
 static struct file_operations fops = {
-    .read    = procfs_read,
-    .write   = procfs_write,
-    .open    = procfs_ open,
-    .release = procfs_close,
+	.read    = procfs_read,
+	.write   = procfs_write,
+	.open    = procfs_ open,
+	.release = procfs_close,
 };
 
 /*
@@ -123,35 +124,35 @@ static struct file_operations fops = {
  * we just put NULL).
  */
 static struct inode_operations iops = {
-    .permission = module_permission,
+	.permission = module_permission,
 };
 
 int init_module(void)
 {
-    our_proc_file = create_proc_entry(PROC_ENTRY_FILENAME, 0644, NULL);
+	our_proc_file = create_proc_entry(PROC_ENTRY_FILENAME, 0644, NULL);
 
-    if (our_proc_file == NULL) {
-        printk(KERN_ALERT "Error: Could not initialize /proc/%s\n",
-                PROC_ENTRY_FILENAME);
-        return -ENOMEM;
-    }
+	if (our_proc_file == NULL) {
+		printk(KERN_ALERT "Error: Could not initialize /proc/%s\n",
+				PROC_ENTRY_FILENAME);
+		return -ENOMEM;
+	}
 
-    our_proc_file->owner     = THIS_MODULE;
-    our_proc_file->proc_iops = &iops;
-    our_proc_file->proc_fops = &fops;
-    our_proc_file->mode      = S_IFREG | S_IRUGO | S_IWUSR;
-    our_proc_file->uid       = 0;
-    our_proc_file->gid       = 0;
-    our_proc_file->size      = 80;
+	our_proc_file->owner     = THIS_MODULE;
+	our_proc_file->proc_iops = &iops;
+	our_proc_file->proc_fops = &fops;
+	our_proc_file->mode      = S_IFREG | S_IRUGO | S_IWUSR;
+	our_proc_file->uid       = 0;
+	our_proc_file->gid       = 0;
+	our_proc_file->size      = 80;
 
-    printk(KERN_INFO "/proc/%s created\n", PROC_ENTRY_FILENAME);
+	printk(KERN_INFO "/proc/%s created\n", PROC_ENTRY_FILENAME);
 
-    return 0;
+	return 0;
 }
 
 void cleanup_module(void)
 {
-    remove_proc_entry(PROC_ENTRY_FILENAME, &proc_root);
+	remove_proc_entry(PROC_ENTRY_FILENAME, &proc_root);
 
-    printk(KERN_INFO "/proc/%s removed\n", PROC_ENTRY_FILENAME);
+	printk(KERN_INFO "/proc/%s removed\n", PROC_ENTRY_FILENAME);
 }

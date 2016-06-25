@@ -1,6 +1,7 @@
 /*
  * hello.c - Demonstrates command line argument passing to a module
  */
+
 #include <linux/module.h>
 #include <linux/moduleparam.h>
 #include <linux/kernel.h>
@@ -52,23 +53,23 @@ MODULE_PARM_DESC(myintArray, "An array of integers");
 
 static int __init hello_init(void)
 {
-    int i;
+	int i;
 
-    printk(KERN_INFO "\n------------------------------\n");
-    printk(KERN_INFO "myshort is a short integer: %hd\n", myshort);
-    printk(KERN_INFO "myint is an integer: %d\n", myint);
-    printk(KERN_INFO "mylong is a long integer: %ld\n", mylong);
-    printk(KERN_INFO "mystring is a string: %s\n", mystring);
-    for (i = 0; i < sizeof(myintArray)/sizeof(int); i++)
-        printk(KERN_INFO "myintArray[%d] = %d\n", i, myintArray[i]);
-    printk(KERN_INFO "got %d arguments for myintArray.\n", arr_argc);
+	printk(KERN_INFO "\n------------------------------\n");
+	printk(KERN_INFO "myshort is a short integer: %hd\n", myshort);
+	printk(KERN_INFO "myint is an integer: %d\n", myint);
+	printk(KERN_INFO "mylong is a long integer: %ld\n", mylong);
+	printk(KERN_INFO "mystring is a string: %s\n", mystring);
+	for (i = 0; i < sizeof(myintArray)/sizeof(int); i++)
+		printk(KERN_INFO "myintArray[%d] = %d\n", i, myintArray[i]);
+	printk(KERN_INFO "got %d arguments for myintArray.\n", arr_argc);
 
-    return 0;
+	return 0;
 }
 
 static void __exit hello_exit(void)
 {
-    printk(KERN_INFO "Goodbye, world.\n");
+	printk(KERN_INFO "Goodbye, world.\n");
 }
 
 module_init(hello_init);

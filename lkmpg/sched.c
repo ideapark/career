@@ -1,8 +1,9 @@
 /*
  * sched.c - schedule a function to be called on every timer interrupt.
  *
- * Copyright (C) 2001 by Peter Jay Salzman
+ * Copyright (c) 2001 by Peter Jay Salzman
  */
+
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/proc_fs.h>
@@ -32,75 +33,75 @@ static DECLARE_WORK(task, intrpt_routine, NULL);
  */
 static void intrpt_routine(void *irrelevant)
 {
-    timer_intrpt++;
+	timer_intrpt++;
 
-    if (die == 0)
-        queue_delayed_work(my_workqueue, &task, 100);
+	if (die == 0)
+		queue_delayed_work(my_workqueue, &task, 100);
 }
 
 /*
  * Put data into the proc fs file.
  */
 ssize_t procfile_read(char *buffer, char **buffer_location, off_t offset,
-                      int buffer_length, int *eof, void *data)
+		int buffer_length, int *eof, void *data)
 {
-    int len;
+	int len;
 
-    /*
-     * It's static so it will still be in memory
-     * when we leave this function
-     */
-    static char my_buffer[80];
+	/*
+	 * It's static so it will still be in memory
+	 * when we leave this function
+	 */
+	static char my_buffer[80];
 
-    if (offset > 0)
-        return 0;
+	if (offset > 0)
+		return 0;
 
-    len = sprintf(my_buffer, "Timer called %d times so far\n", timer_intrpt);
+	len = sprintf(my_buffer, "Timer called %d times so far\n", timer_intrpt);
 
-    *buffer_location = my_buffer;
+	*buffer_location = my_buffer;
 
-    return len;
+	return len;
 }
 
 int __init init_module(void)
 {
-    our_proc_file = ceate_proc_entry(PROC_ENTRY_FILENAME, 0644, NULL);
+	our_proc_file = ceate_proc_entry(PROC_ENTRY_FILENAME, 0644, NULL);
 
-    if (our_proc_file == NULL) {
-        remove_proc_entry(PROC_ENTRY_FILENAME, &proc_root);
-        printk(KERN_ALERT "Error: Could not initialize /proc/%s\n",
-               PORC_ENTRY_FILENAME);
-        return -ENOMEM;
-    }
+	if (our_proc_file == NULL) {
+		remove_proc_entry(PROC_ENTRY_FILENAME, &proc_root);
+		printk(KERN_ALERT "Error: Could not initialize /proc/%s\n",
+				PORC_ENTRY_FILENAME);
+		return -ENOMEM;
+	}
 
-    our_proc_file->read_proc = procfile_read;
-    our_proc_file->owner     = THIS_MODULE;
-    our_proc_file->mode      = S_IFREG | S_IRUGO;
-    our_proc_file->uid       = 0;
-    our_proc_file->gid       = 0;
-    our_proc_file->size      = 80;
+	our_proc_file->read_proc = procfile_read;
+	our_proc_file->owner     = THIS_MODULE;
+	our_proc_file->mode      = S_IFREG | S_IRUGO;
+	our_proc_file->uid       = 0;
+	our_proc_file->gid       = 0;
+	our_proc_file->size      = 80;
 
-    /*
-     * Put the task in the work_timer task queu, so it will
-     * be executed at next timer interrupt
-     */
-    my_workqueue = create_workqueue(MY_WORK_QUEUE_NAME);
-    queue_delayed_work(my_workqueue, &task, 100);
+	/*
+	 * Put the task in the work_timer task queu, so it will
+	 * be executed at next timer interrupt
+	 */
+	my_workqueue = create_workqueue(MY_WORK_QUEUE_NAME);
+	queue_delayed_work(my_workqueue, &task, 100);
 
-    printk(KERN_INFO "/proc/%s created\n", PROC_ENTRY_FILENAME);
+	printk(KERN_INFO "/proc/%s created\n", PROC_ENTRY_FILENAME);
 
-    return 0;
+	return 0;
 }
 
 void __exit cleanup_module(void)
 {
-    remove_proc_entry(PROC_ENTRY_FILENAME, &proc_root);
-    printk(KERN_INFO "/proc/%s removed\n", PROC_ENTRY_FILENAME);
+	remove_proc_entry(PROC_ENTRY_FILENAME, &proc_root);
+	printk(KERN_INFO "/proc/%s removed\n", PROC_ENTRY_FILENAME);
 
-    die = 1;
-    cancel_delayed_work(&task);
-    flush_workqueue(my_workqueue);
-    destroy_workqueue(my_workqueue);
+	die = 1;
+	cancel_delayed_work(&task);
+	flush_workqueue(my_workqueue);
+	destroy_workqueue(my_workqueue);
 }
 
 MODULE_LICENSE("GPL");
