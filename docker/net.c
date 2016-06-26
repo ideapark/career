@@ -18,55 +18,57 @@ int checkpoint[2];
 static char child_stack[STACK_SIZE];
 
 char *const child_args[] = {
-  "/bin/bash",
-  NULL
+	"/bin/bash",
+	NULL
 };
 
-int child_main(void *arg) {
-  int c;
+int child_main(void *arg)
+{
+	int c;
 
-  // init sync primitive
-  close(checkpoint[1]);
+	// init sync primitive
+	close(checkpoint[1]);
 
-  // setup hostname
-  printf(" - [%5d] World!\n", getpid());
-  sethostname("In Namespace", 12);
+	// setup hostname
+	printf(" - [%5d] World!\n", getpid());
+	sethostname("In Namespace", 12);
 
-  // remount "/proc" to get accurate "top" && "ps" output
-  mount("proc", "/proc", "proc", 0, NULL);
+	// remount "/proc" to get accurate "top" && "ps" output
+	mount("proc", "/proc", "proc", 0, NULL);
 
-  // wait for network setup in parent
-  read(checkpoint[0], &c, 1);
+	// wait for network setup in parent
+	read(checkpoint[0], &c, 1);
 
-  // setupt network
-  system("ip link set lo up");
-  system("ip link set veth1 up");
-  system("ip addr add 169.254.1.2/30 dev veth1");
+	// setupt network
+	system("ip link set lo up");
+	system("ip link set veth1 up");
+	system("ip addr add 169.254.1.2/30 dev veth1");
 
-  execv(child_args[0], child_args);
-  printf("Ooops\n");
-  return 1;
+	execv(child_args[0], child_args);
+	printf("Ooops\n");
+	return 1;
 }
 
-int main() {
-  // init sync primitive
-  pipe(checkpoint);
-  printf(" - [%5d] Hello?\n", getpid());
-  int child_pid = clone(child_main, child_stack + STACK_SIZE,
-                        CLONE_NEWUTS|CLONE_NEWIPC|CLONE_NEWPID|
-                        CLONE_NEWNS|CLONE_NEWNET|SIGCHLD, NULL);
+int main()
+{
+	// init sync primitive
+	pipe(checkpoint);
+	printf(" - [%5d] Hello?\n", getpid());
+	int child_pid = clone(child_main, child_stack + STACK_SIZE,
+			CLONE_NEWUTS|CLONE_NEWIPC|CLONE_NEWPID|
+			CLONE_NEWNS|CLONE_NEWNET|SIGCHLD, NULL);
 
-  // further init: create a veth pair
-  char *cmd;
-  asprintf(&cmd, "ip link set veth1 netns %d", child_pid);
-  system("ip link add veth0 type veth peer name veth1");
-  system(cmd);
-  system("ip link set veth0 up");
-  system("ip addr add 169.254.1.1/30 dev veth0");
-  free(cmd);
+	// further init: create a veth pair
+	char *cmd;
+	asprintf(&cmd, "ip link set veth1 netns %d", child_pid);
+	system("ip link add veth0 type veth peer name veth1");
+	system(cmd);
+	system("ip link set veth0 up");
+	system("ip addr add 169.254.1.1/30 dev veth0");
+	free(cmd);
 
-  // signal "done"
-  close(checkpoint[1]);
-  waitpid(child_pid, NULL, 0);
-  return 0;
+	// signal "done"
+	close(checkpoint[1]);
+	waitpid(child_pid, NULL, 0);
+	return 0;
 }
