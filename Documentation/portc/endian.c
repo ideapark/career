@@ -2,9 +2,9 @@
 
 int main(int argc, char *argv[])
 {
-    long int str[2] = { 0x41424344, 0x0 }; /* ASCII "ABCD" */
-    printf("%s\n", (char*)&str);
-    return 0;
+	long int str[2] = { 0x41424344, 0x0 }; /* ASCII "ABCD" */
+	printf("%s\n", (char*)&str);
+	return 0;
 }
 
 /// NOTE:
