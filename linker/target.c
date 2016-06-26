@@ -4,10 +4,10 @@
 
 int main()
 {
-    const char **t = bfd_target_list();
-    while (*t) {
-        printf("%s\n", *t);
-        t++;
-    }
-    return 0;
+	const char **t = bfd_target_list();
+	while (*t) {
+		printf("%s\n", *t);
+		t++;
+	}
+	return 0;
 }
