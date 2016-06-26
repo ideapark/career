@@ -56,7 +56,7 @@
 #define HAVE_XMEMDUP 1
 
 /*
- * Copyright (C) Zhou Peng <lockrecv@qq.com>
+ * Copyright (c) Zhou Peng <lockrecv@qq.com>
  */
 
 /* whether malloc attribute is understood */
@@ -84,7 +84,7 @@
 #define PACKAGE_TARNAME "aps"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "20150824"
+#define PACKAGE_VERSION "20160623"
 
 /* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1
@@ -96,7 +96,7 @@
 /* #undef TRUE_FALSE_ALREADY_DEFINED */
 
 /* Version number of package */
-#define VERSION "20150824"
+#define VERSION "20160623"
 
 /* Define to 1 if the X Window System is missing or not being used. */
 #define X_DISPLAY_MISSING 1
