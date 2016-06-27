@@ -19,7 +19,8 @@ char *const child_args[] = {
 	NULL
 };
 
-int child_main(void *arg) {
+int child_main(void *arg)
+{
 	char c;
 
 	// init sync primitive
@@ -34,7 +35,8 @@ int child_main(void *arg) {
 	return 1;
 }
 
-int main() {
+int main()
+{
 	// init sync primitive
 	pipe(checkpoint);
 	printf(" - Hello?\n");
