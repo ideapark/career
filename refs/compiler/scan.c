@@ -43,7 +43,7 @@ static int getNextChar(void)
 			return lineBuf[linepos++];
 		} else {
 			EOF_flag = TRUE;
-			return EOF:
+			return EOF;
 		}
 	} else {
 		return lineBuf[linepos++];
@@ -151,7 +151,7 @@ TokenType getToken(void)
 					currentToken = SEMI;
 					break;
 				default:
-					currentToken = ERROR:
+					currentToken = ERROR;
 						break;
 				}
 			}

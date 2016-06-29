@@ -113,8 +113,9 @@ void printSymTab(FILE *listing)
 		if (hashTable[i] != NULL) {
 			BucketList l = hashTable[i];
 			while (l != NULL) {
-				fprintf(listing, "%-14s ", t->name);
-				fprintf(listing, "%-8d  ", t->memloc);
+				LineList t = l->lines;
+				fprintf(listing, "%-14s ", l->name);
+				fprintf(listing, "%-8d  ", l->memloc);
 				while (t != NULL) {
 					fprintf(listing, "%4d ", t->lineno);
 					t = t->next;
