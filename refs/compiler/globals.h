@@ -69,7 +69,7 @@ typedef struct treeNode {
 	union {
 		StmtKind stmt;
 		ExpKind exp;
-	} Kind;
+	} kind;
 	union {
 		TokenType op;
 		int val;

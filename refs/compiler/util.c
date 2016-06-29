@@ -1,4 +1,4 @@
-#include "global.h"
+#include "globals.h"
 #include "util.h"
 
 /*
@@ -80,7 +80,7 @@ TreeNode *newStmtNode(StmtKind kind)
 		for (i = 0; i < MAXCHILDREN; i++)
 			t->child[i] = NULL;
 		t->sibling = NULL;
-		t->nodekind = StmtK;
+		t->nodeKind = StmtK;
 		t->kind.stmt = kind;
 		t->lineno = lineno;
 	}
@@ -102,7 +102,7 @@ TreeNode *newExpNode(ExpKind kind)
 		for (i = 0; i < MAXCHILDREN; i++)
 			t->child[i] = NULL;
 		t->sibling = NULL;
-		t->nodekind = ExpK;
+		t->nodeKind = ExpK;
 		t->kind.exp = kind;
 		t->lineno = lineno;
 		t->type = Void;
@@ -123,7 +123,7 @@ char *copyString(char *s)
 		return NULL;
 	n = strlen(s) + 1;
 	t = malloc(n);
-	if (t = NULL)
+	if (t == NULL)
 		fprintf(listing, "Out of memory error at line %d\n", lineno);
 	else
 		strcpy(t, s);
@@ -134,7 +134,7 @@ char *copyString(char *s)
  * Variable indentno is used by printTree to
  * store current number of spaces ot indent
  */
-static indentno = 0;
+static int indentno = 0;
 
 /*
  * macros to increase/decrease indentation
@@ -164,7 +164,7 @@ void printTree(TreeNode *tree)
 	INDENT();
 	while (tree != NULL) {
 		printSpaces();
-		if (tree->nodekind == StmtK) {
+		if (tree->nodeKind == StmtK) {
 			switch (tree->kind.stmt) {
 			case IfK:
 				fprintf(listing, "If\n");
@@ -185,7 +185,7 @@ void printTree(TreeNode *tree)
 				fprintf(listing, "Unknown ExpNode kind\n");
 				break;
 			}
-		} else if (tree->nodekind == ExpK) {
+		} else if (tree->nodeKind == ExpK) {
 			switch (tree->kind.exp) {
 			case OpK:
 				fprintf(listing, "Op: ");
