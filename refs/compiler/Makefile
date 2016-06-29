@@ -2,7 +2,7 @@
 #  Copyright (c) Zhou Peng <lockrecv@qq.com>
 # ------------------------------------------
 
-CC := clang
+CC := gcc
 CFLAG := -Wall
 
 tcc-objs += util.o \
@@ -15,6 +15,8 @@ tcc-objs += util.o \
 	    main.o
 
 tm-objs += tm.o
+
+.PHONY: all
 
 %.o: %.c
 	$(CC) $(CFLAG) -c $< -o $@
