@@ -5,7 +5,8 @@
 /*
  * states in scanner DFA
  */
-typedef enum {
+typedef enum
+{
 	START, INASSIGN, INCOMMENT,
 	INNUM, INID, DONE
 } StateType;
