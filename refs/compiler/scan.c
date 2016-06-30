@@ -23,7 +23,7 @@ char tokenString[MAXTOKENLEN+1];
 #define BUFLEN  256
 
 static char lineBuf[BUFLEN];  /* holds the current line */
-static int linepos = 0;       /* current position in LineBuf */
+static int linepos = 0;       /* current position in lineBuf */
 static int bufsize = 0;       /* current size of buffer string */
 static int EOF_flag = FALSE;  /* corrects ungetNextChar behavior on EOF */
 
@@ -68,7 +68,7 @@ static struct {
 	char *str;
 	TokenType tok;
 } reservedWords[MAXRESERVED] = {
-	{"IF",     IF    },
+	{"if",     IF    },
 	{"then",   THEN  },
 	{"else",   ELSE  },
 	{"end",    END   },
@@ -114,7 +114,7 @@ TokenType getToken(void)
 				state = INASSIGN;
 			else if (c == ' ' || c == '\t' || c == '\n')
 				save = FALSE;
-			else if (c == '(') {
+			else if (c == '{') {
 				save = FALSE;
 				state = INCOMMENT;
 			} else {
