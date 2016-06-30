@@ -19,13 +19,15 @@
 #define LINESIZE  121
 #define WORDSIZE  20
 
-typedef enum {
+typedef enum
+{
 	opclRR, /* reg operands r,s,t */
 	opclRM, /* reg r, mem d+s */
 	opclRA  /* reg r, int d+s */
 } OPCLASS;
 
-typedef enum {
+typedef enum
+{
 	/* RR instructions */
 	opHALT,  /* RR  halt, operands are ignored */
 	opIN,    /* RR  read into reg(r); s and t are ignored */
@@ -53,7 +55,8 @@ typedef enum {
 	opRALim  /* limit of RA opcodes */
 } OPCODE;
 
-typedef enum {
+typedef enum
+{
 	srOKAY,
 	srHALT,
 	srIMEM_ERR,
@@ -61,7 +64,8 @@ typedef enum {
 	srZERODIVIDE
 } STEPRESULT;
 
-typedef struct {
+typedef struct
+{
 	int iop;
 	int iarg1;
 	int iarg2;
