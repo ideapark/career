@@ -16,7 +16,8 @@
 
 #define MAXRESERVED  8
 
-typedef enum {
+typedef enum
+{
 	/* book-keeping tokens */
 	ENDFILE, ERROR,
 	/* reserved words */
@@ -33,12 +34,14 @@ extern FILE *code;  /* code text file for TM simulator */
 
 extern int lineno;  /* source line number for listing */
 
-typedef enum {
+typedef enum
+{
 	StmtK,
 	ExpK
 } NodeKind;
 
-typedef enum {
+typedef enum
+{
 	IfK,
 	RepeatK,
 	AssignK,
@@ -46,14 +49,16 @@ typedef enum {
 	WriteK
 } StmtKind;
 
-typedef enum {
+typedef enum
+{
 	OpK,
 	ConstK,
 	IdK
 } ExpKind;
 
 /* ExpType is used for type checking */
-typedef enum {
+typedef enum
+{
 	Void,
 	Integer,
 	Boolean
@@ -61,7 +66,8 @@ typedef enum {
 
 #define MAXCHILDREN  3
 
-typedef struct treeNode {
+typedef struct treeNode
+{
 	struct treeNode *child[MAXCHILDREN];
 	struct treeNode *sibling;
 	int lineno;

@@ -6,25 +6,26 @@ CC := gcc
 CFLAG := -Wall
 
 tcc-objs += util.o \
-	    symtab.o \
-	    cgen.o \
-	    code.o \
-	    parse.o \
-	    scan.o \
-	    analyze.o \
-	    main.o
+		symtab.o \
+		cgen.o \
+		code.o \
+		parse.o \
+		scan.o \
+		analyze.o \
+		main.o
 
 tm-objs += tm.o
 
-.PHONY: all
+all: clean tcc tm
 
 %.o: %.c
 	$(CC) $(CFLAG) -c $< -o $@
 
 tcc: $(tcc-objs)
-	$(CC) $(tcc-objs) -o $@
+	$(CC) $(CFLAG) $(tcc-objs) -o $@
 
 tm: $(tm-objs)
-	$(CC) $(tm-objs) -o $@
+	$(CC) $(CFLAG) $(tm-objs) -o $@
 
-all: tcc tm
+clean:
+	@rm -f $(tcc-objs) $(tm-objs) tcc tm
