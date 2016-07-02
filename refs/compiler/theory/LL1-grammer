@@ -1,0 +1,21 @@
+(* assumes $ marks the bottom of the stack and the end of the input *)
+push the start symbol onto the top of the parsing stack;
+WHILE the top of the parsing stack != $ AND the next input token != $ DO
+	IF the top of the parsing stack is terminal a
+		AND the next input token == a
+	THEN (* match *)
+		pop the parsing stack;
+		advance the input;
+	ELES IF the top of the parsing is nonterminal A
+		AND the next input token is terminal a
+		AND parsing table entry M[A, a] contains
+			production A --> X1,X2...Xn
+	THEN (* generate *)
+		pop the parsing stack;
+		FOR i := n DOWNTO 1 DO
+			push Xi onto the parsing stack;
+	ELSE error;
+IF the top of the parsing stack == $
+	AND the next input token == $
+THEN accept
+ELSE error;
