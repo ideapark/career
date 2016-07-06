@@ -1,6 +1,7 @@
 /*
- * Copyright (C) Zhou Peng <lockrecv@qq.com>
+ * Copyright (c) Zhou Peng <lockrecv@qq.com>
  */
+
 #ifndef CALLGRAPH_UTILITY_H
 #define CALLGRAPH_UTILITY_H
 

@@ -1,6 +1,7 @@
 /*
- * Copyright (C) Zhou Peng <lockrecv@qq.com>
+ * Copyright (c) Zhou Peng <lockrecv@qq.com>
  */
+
 #include <map>
 #include <cstdlib>
 #include <string>
