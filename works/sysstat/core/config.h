@@ -3,6 +3,7 @@
  *
  * Copyright (c) Zhou Peng <lockrecv@qq.com>
  */
+
 #ifndef SYSSTAT_CONFIG_H
 #define SYSSTAT_CONFIG_H
 

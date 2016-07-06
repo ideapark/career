@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 - 2015, Zhou Peng
+ * Copyright (c) 2014 - 2015, Zhou Peng
  *        ALL RIGHTS RESERVED
  */
 
@@ -10,16 +10,16 @@
  * boolean values
  */
 typedef enum {
-    false = 0,
-    true  = 1,
+	false = 0,
+	true  = 1,
 } bool;
 
 /*
  * [begin, end)
  */
 struct range {
-    unsigned short begin; /* include */
-    unsigned short end;   /* exclude */
+	unsigned short begin; /* include */
+	unsigned short end;   /* exclude */
 };
 
 /*
