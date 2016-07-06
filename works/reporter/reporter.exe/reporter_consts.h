@@ -1,6 +1,7 @@
 /*
- * Copyright (C) Zhou Peng <lockrecv@qq.com>
+ * Copyright (c) Zhou Peng <lockrecv@qq.com>
  */
+
 #ifndef REPORTER_CONSTS_H
 #define REPORTER_CONSTS_H
 
