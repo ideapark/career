@@ -1,5 +1,7 @@
 /*
  * KWP Search Algorithm
+ *
+ * TODO: bigfix 2016-07-10
  */
 
 #include <assert.h>
@@ -32,7 +34,7 @@ void kmp_table(const char *W, int *T)
 int kmp_search(const char *S, const char *W)
 {
 	int m = 0, i = 0;
-	int T[256], s_len, w_len;
+	int T[MAXWSIZE] = {0}, s_len, w_len;
 
 	s_len = strlen(S);
 	w_len = strlen(W);
