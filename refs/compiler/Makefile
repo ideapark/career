@@ -5,7 +5,7 @@
 CC := gcc
 CFLAG := -Wall
 
-cc-objs += util.o \
+tc-objs += util.o \
 	symtab.o \
 	cgen.o \
 	code.o \
@@ -16,16 +16,16 @@ cc-objs += util.o \
 
 tm-objs += tm.o
 
-all: clean cc tm
+all: clean tc tm
 
 %.o: %.c
 	$(CC) $(CFLAG) -c $< -o $@
 
-cc: $(cc-objs)
-	$(CC) $(CFLAG) $(cc-objs) -o $@
+tc: $(tc-objs)
+	$(CC) $(CFLAG) $(tc-objs) -o $@
 
 tm: $(tm-objs)
 	$(CC) $(CFLAG) $(tm-objs) -o $@
 
 clean:
-	@rm -f $(cc-objs) $(tm-objs) cc tm
+	@rm -f $(tc-objs) $(tm-objs) tc tm
