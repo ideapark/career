@@ -1,3 +1,9 @@
+/*
+ * Revised: bugly
+ *
+ * This algorithm described by Wikipedia may be bugly.
+ */
+
 algorithm kmp_search:
 	input:
 		an array of characters, S (the text to be searched)
