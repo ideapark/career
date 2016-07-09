@@ -1,7 +1,5 @@
 /*
  * KWP Search Algorithm
- *
- * TODO: bigfix 2016-07-10
  */
 
 #include <assert.h>
@@ -17,9 +15,9 @@ void kmp_table(const char *W, int *T)
 	len = strlen(W);
 	while (pos < len) {
 		if (W[pos-1] == W[cnd]) {
-			T[pos] = cnd + 1;
-			cnd = cnd + 1;
-			pos = pos + 1;
+			cnd++;
+			T[pos] = cnd;
+			pos++;
 		} else if (cnd > 0) {
 			cnd = T[cnd];
 		} else {
@@ -44,15 +42,16 @@ int kmp_search(const char *S, const char *W)
 
 	while (m + i < s_len) {
 		if (W[i] == S[m+i]) {
-			if (i == w_len - 1)
+			if (i == (w_len-1))
 				return m;
-			i++;
+			else
+				i++;
 		} else {
 			if (T[i] > -1) {
 				m = m + i - T[i];
 				i = T[i];
 			} else {
-				m += i;
+				m++;
 				i = 0;
 			}
 		}

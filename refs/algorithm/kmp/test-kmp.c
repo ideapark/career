@@ -8,10 +8,10 @@ int main(void)
 	const char *expect3 = "ABCDEF";
 	const char *expect4 = "ABCFIK";
 
-	assert(kmp_search(origin, expect1) > 0);
-	assert(kmp_search(origin, expect2) < 0);
-	assert(kmp_search(origin, expect3) > 0);
-	assert(kmp_search(origin, expect4) < 0);
+	assert(kmp_search(origin, expect1) == 14);
+	assert(kmp_search(origin, expect2) == -1);
+	assert(kmp_search(origin, expect3) == 26);
+	assert(kmp_search(origin, expect4) == -1);
 
 	return 0;
 }
