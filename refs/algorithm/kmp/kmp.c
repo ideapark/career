@@ -1,5 +1,5 @@
 /*
- * KWP Search Algorithm
+ * KMP String Match Algorithm
  */
 
 #include <assert.h>
