@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) Zhou Peng <lockrecv@qq.com>
+ *
+ * Quick sort test cases
+ */
+
 #include <assert.h>
 
 #define LEN(arr)  (sizeof(arr)/sizeof(arr[0]))
