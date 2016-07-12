@@ -21,7 +21,7 @@ void make_delta1(int *delta1, uint8_t *pat, int32_t patlen)
 	for (i = 0; i < ALPHABET_LEN; i++)
 		delta1[i] = NOT_FOUND;
 	for (i = 0; i < patlen-1; i++)
-		delta1[pat[i]] = patlen-1 -i;
+		delta1[pat[i]] = patlen-1 - i;
 }
 
 /*
