@@ -1,7 +1,7 @@
 /*
- * Copyright (c) Zhou Peng <lockrecv@qq.com>
+ * Quick Sort Tests
  *
- * Quick sort test cases
+ * Copyright (c) Zhou Peng <lockrecv@qq.com>
  */
 
 #include <assert.h>
