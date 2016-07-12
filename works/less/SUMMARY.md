@@ -1,4 +1,4 @@
-# KISS
+# LESS IS MORE
 
 ## Frequently-used
 
