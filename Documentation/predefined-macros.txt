@@ -1,0 +1,14 @@
+Command-Line Options to List Predefined Macros
+==============================================
+
+ Compiler              C macros                         C++ macros
+----------------------------------------------------------------------------------------
+ Clang/LLVM            clang -dM -E -x c /dev/null      clang++ -dM -E -x c++ /dev/null
+ GNU GCC/G++           gcc -dM -E -x c /dev/null        g++ -dM -E -x c++ /dev/null
+----------------------------------------------------------------------------------------
+
+ "-dM"  dumps a list of macros.
+ "-E"   prints results to stdout instead of a file.
+ "-x c" and "-x c++" select the programming language when using a file without
+        a filename extension, such as /dev/null. If you instead compile "dummy.c"
+        and "dummy.cpp" files, these options aren't needed.
