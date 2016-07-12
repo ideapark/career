@@ -1,3 +1,9 @@
+/*
+ * Boyer-Moore Search
+ *
+ * Copyright (c) Zhou Peng <lockrecv@qq.com>
+ */
+
 #include <assert.h>
 #include <string.h>
 
