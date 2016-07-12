@@ -19,7 +19,7 @@ HTTP request sent, awaiting response... 200 OK
 Length: 2478 (2.4K) [text/plain]
 Saving to: 'msync.c'
 
-msync.c    100%[==================================>]   2.42K  --.-KB/s    in 0s
+msync.c  100%[==================================>] 2.42K --.-KB/s  in 0s
 
 2016-06-20 20:17:22 (229 MB/s) - 'msync.c' saved [2478/2478]
 ```
