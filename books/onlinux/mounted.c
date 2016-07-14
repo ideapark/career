@@ -12,51 +12,51 @@ char *myname;
 
 int main(int argc, char **argv)
 {
-    int c;
-    char *file = "/etc/mtab"; /* default file to read */
+	int c;
+	char *file = "/etc/mtab"; /* default file to read */
 
-    myname = argv[0];
+	myname = argv[0];
 
-    while ((c = getopt(argc, argv, "f:")) != -1) {
-        switch (c) {
-            case 'f':
-                file = optarg;
-                break;
-            default:
-                fprintf(stderr, "usage: %s [-f fstab-file]\n", argv[0]);
-                exit(1);
-        }
-    }
+	while ((c = getopt(argc, argv, "f:")) != -1) {
+		switch (c) {
+			case 'f':
+				file = optarg;
+				break;
+			default:
+				fprintf(stderr, "usage: %s [-f fstab-file]\n", argv[0]);
+				exit(1);
+		}
+	}
 
-    process(file);
-    return 0;
+	process(file);
+	return 0;
 }
 
 void process(const char *filename)
 {
-    FILE *fp;
-    struct mntent *fs;
+	FILE *fp;
+	struct mntent *fs;
 
-    fp = setmntent(filename, "r"); /* read only */
-    if (fp == NULL) {
-        fprintf(stderr, "%s: %s could not open: %s\n",
-                myname, filename, strerror(errno));
-        exit(1);
-    }
+	fp = setmntent(filename, "r"); /* read only */
+	if (fp == NULL) {
+		fprintf(stderr, "%s: %s could not open: %s\n",
+				myname, filename, strerror(errno));
+		exit(1);
+	}
 
-    while ((fs = getmntent(fp)) != NULL)
-        print_mount(fs);
+	while ((fs = getmntent(fp)) != NULL)
+		print_mount(fs);
 
-    endmntent(fp);
+	endmntent(fp);
 }
 
 void print_mount(const struct mntent *fs)
 {
-    printf("%s %s %s %s %d %d\n",
-            fs->mnt_fsname,
-            fs->mnt_dir,
-            fs->mnt_type,
-            fs->mnt_opts,
-            fs->mnt_freq,
-            fs->mnt_passno);
+	printf("%s %s %s %s %d %d\n",
+			fs->mnt_fsname,
+			fs->mnt_dir,
+			fs->mnt_type,
+			fs->mnt_opts,
+			fs->mnt_freq,
+			fs->mnt_passno);
 }

@@ -39,104 +39,104 @@ char *myname;
 
 int main(int argc, char *argv[])
 {
-    int c;
-    char *file = "/etc/mtab"; /* default file to read */
+	int c;
+	char *file = "/etc/mtab"; /* default file to read */
 
-    myname = argv[0];
-    while ((c = getopt(argc, argv, "f:")) != -1) {
-        switch (c) {
-            case 'f':
-                file = optarg;
-                break;
-            default:
-                fprintf(stderr, "usage: %s [-f fstab-file]\n", argv[0]);
-                exit(1);
-        }
-    }
+	myname = argv[0];
+	while ((c = getopt(argc, argv, "f:")) != -1) {
+		switch (c) {
+		case 'f':
+			file = optarg;
+			break;
+		default:
+			fprintf(stderr, "usage: %s [-f fstab-file]\n", argv[0]);
+			exit(1);
+		}
+	}
 
-    process(file);
-    return (errors != 0);
+	process(file);
+	return (errors != 0);
 }
 
 void process(const char *filename)
 {
-    FILE *fp;
-    struct mntent *fs;
+	FILE *fp;
+	struct mntent *fs;
 
-    fp = setmntent(filename, "r"); /* read only */
-    if (fp == NULL) {
-        fprintf(stderr, "%s: %s: could not open: %s\n",
-                myname, filename, strerror(errno));
-        exit(1);
-    }
+	fp = setmntent(filename, "r"); /* read only */
+	if (fp == NULL) {
+		fprintf(stderr, "%s: %s: could not open: %s\n",
+				myname, filename, strerror(errno));
+		exit(1);
+	}
 
-    while ((fs = getmntent(fp)) != NULL)
-        do_statfs(fs);
+	while ((fs = getmntent(fp)) != NULL)
+		do_statfs(fs);
 
-    endmntent(fp);
+	endmntent(fp);
 }
 
 const char *type2str(long type)
 {
-    static struct fsname {
-        long type;
-        const char *name;
-    } table[] = {
-        {AFFS_SUPER_MAGIC, "AFFS"},
-        {COH_SUPER_MAGIC, "COH"},
-        {EXT2_OLD_SUPER_MAGIC, "OLD EXT2"},
-        {EXT2_SUPER_MAGIC, "EXT2"},
-        {HPFS_SUPER_MAGIC, "HPFS"},
-        {ISOFS_SUPER_MAGIC, "ISOFS"},
-        {MINIX2_SUPER_MAGIC, "MINIX V2"},
-        {MINIX2_SUPER_MAGIC2, "MINIX V2 30 char"},
-        {MINIX_SUPER_MAGIC, "MINIX"},
-        {MINIX_SUPER_MAGIC, "MINIX 30 char"},
-        {MSDOS_SUPER_MAGIC, "MSDOS"},
-        {NCP_SUPER_MAGIC, "NCP"},
-        {NFS_SUPER_MAGIC, "NFS"},
-        {PROC_SUPER_MAGIC, "PROC"},
-        {SMB_SUPER_MAGIC, "SMB"},
-        {SYSV2_SUPER_MAGIC, "SYSV2"},
-        {SYSV4_SUPER_MAGIC, "SYSV4"},
-        {UFS_MAGIC, "UFS"},
-        {XENIX_SUPER_MAGIC, "XENIX"},
-        {_XIAFS_SUPER_MAGIC, "XIAFS"},
-        {0, NULL},
-    };
-    static char unknown[100];
-    int i;
+	static struct fsname {
+		long type;
+		const char *name;
+	} table[] = {
+		{AFFS_SUPER_MAGIC, "AFFS"},
+		{COH_SUPER_MAGIC, "COH"},
+		{EXT2_OLD_SUPER_MAGIC, "OLD EXT2"},
+		{EXT2_SUPER_MAGIC, "EXT2"},
+		{HPFS_SUPER_MAGIC, "HPFS"},
+		{ISOFS_SUPER_MAGIC, "ISOFS"},
+		{MINIX2_SUPER_MAGIC, "MINIX V2"},
+		{MINIX2_SUPER_MAGIC2, "MINIX V2 30 char"},
+		{MINIX_SUPER_MAGIC, "MINIX"},
+		{MINIX_SUPER_MAGIC, "MINIX 30 char"},
+		{MSDOS_SUPER_MAGIC, "MSDOS"},
+		{NCP_SUPER_MAGIC, "NCP"},
+		{NFS_SUPER_MAGIC, "NFS"},
+		{PROC_SUPER_MAGIC, "PROC"},
+		{SMB_SUPER_MAGIC, "SMB"},
+		{SYSV2_SUPER_MAGIC, "SYSV2"},
+		{SYSV4_SUPER_MAGIC, "SYSV4"},
+		{UFS_MAGIC, "UFS"},
+		{XENIX_SUPER_MAGIC, "XENIX"},
+		{_XIAFS_SUPER_MAGIC, "XIAFS"},
+		{0, NULL},
+	};
+	static char unknown[100];
+	int i;
 
-    for (i = 0; table[i].type != 0; i++)
-        if (table[i].type == type)
-            return table[i].name;
+	for (i = 0; table[i].type != 0; i++)
+		if (table[i].type == type)
+			return table[i].name;
 
-    sprintf(unknown, "unknown type: %ld", type);
-    return unknown;
+	sprintf(unknown, "unknown type: %ld", type);
+	return unknown;
 }
 
 void do_statfs(const struct mntent *fs)
 {
-    struct statfs vfs;
+	struct statfs vfs;
 
-    if (fs->mnt_fsname[0] != '/') /* skip nonreal filesystem */
-        return;
+	if (fs->mnt_fsname[0] != '/') /* skip nonreal filesystem */
+		return;
 
-    if (statfs(fs->mnt_dir, &vfs) != 0) {
-        fprintf(stderr, "%s: %s: statfs failed: %s\n",
-                myname, fs->mnt_dir, strerror(errno));
-        errors++;
-        return;
-    }
+	if (statfs(fs->mnt_dir, &vfs) != 0) {
+		fprintf(stderr, "%s: %s: statfs failed: %s\n",
+				myname, fs->mnt_dir, strerror(errno));
+		errors++;
+		return;
+	}
 
-    printf("%s, mounted on %s:\n", fs->mnt_dir, fs->mnt_fsname);
+	printf("%s, mounted on %s:\n", fs->mnt_dir, fs->mnt_fsname);
 
-    printf("\tf_type: %s\n", type2str(vfs.f_type));
-    printf("\tf_bsize: %ld\n", vfs.f_bsize);
-    printf("\tf_blocks: %ld\n", vfs.f_blocks);
-    printf("\tf_bfree: %ld\n", vfs.f_bfree);
-    printf("\tf_bavail: %ld\n", vfs.f_bavail);
-    printf("\tf_files: %ld\n", vfs.f_files);
-    printf("\tf_ffree: %ld\n", vfs.f_ffree);
-    printf("\tf_namelen: %ld\n", vfs.f_namelen);
+	printf("\tf_type: %s\n", type2str(vfs.f_type));
+	printf("\tf_bsize: %ld\n", vfs.f_bsize);
+	printf("\tf_blocks: %ld\n", vfs.f_blocks);
+	printf("\tf_bfree: %ld\n", vfs.f_bfree);
+	printf("\tf_bavail: %ld\n", vfs.f_bavail);
+	printf("\tf_files: %ld\n", vfs.f_files);
+	printf("\tf_ffree: %ld\n", vfs.f_ffree);
+	printf("\tf_namelen: %ld\n", vfs.f_namelen);
 }

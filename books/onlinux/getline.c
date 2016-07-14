@@ -6,12 +6,12 @@
 
 int main(void)
 {
-    char *line = NULL;
-    size_t size = 0;
-    ssize_t ret;
+	char *line = NULL;
+	size_t size = 0;
+	ssize_t ret;
 
-    while ((ret = getline(&line, &size, stdin)) != -1)
-        printf("(%lu) %s", size, line);
+	while ((ret = getline(&line, &size, stdin)) != -1)
+		printf("(%lu) %s", size, line);
 
-    return 0;
+	return 0;
 }

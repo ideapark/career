@@ -7,16 +7,16 @@
 
 int main(void)
 {
-    char buf[PATH_MAX];
+	char buf[PATH_MAX];
 
-    (void)getcwd(buf, sizeof(buf));
-    printf("Current dir: %s\n", buf);
+	(void)getcwd(buf, sizeof(buf));
+	printf("Current dir: %s\n", buf);
 
-    printf("Changing to ..\n");
-    chdir(".."); /* `cd ..` */
+	printf("Changing to ..\n");
+	chdir(".."); /* `cd ..` */
 
-    (void)getcwd(buf, sizeof(buf));
-    printf("Current dir is now: %s\n", buf);
+	(void)getcwd(buf, sizeof(buf));
+	printf("Current dir is now: %s\n", buf);
 
-    return 0;
+	return 0;
 }

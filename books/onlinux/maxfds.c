@@ -5,7 +5,7 @@ int getdtablesize(void);
 
 int main(int argc, char *argv[])
 {
-    printf("max file descriptors: %d\n", getdtablesize());
+	printf("max file descriptors: %d\n", getdtablesize());
 
-    return 0;
+	return 0;
 }

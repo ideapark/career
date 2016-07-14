@@ -15,16 +15,17 @@
  *  |     3     |   00000011   |    00000000   |
  *  --------------------------------------------
  */
+
 #include <stdio.h>
 
 int main(void)
 {
-    int x = 1;
+	int x = 1;
 
-    if (*(char *)&x == 1)
-        printf("little-endian\n");
-    else
-        printf("big-endian\n");
+	if (*(char *)&x == 1)
+		printf("little-endian\n");
+	else
+		printf("big-endian\n");
 
-    return 0;
+	return 0;
 }
