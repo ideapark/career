@@ -8,10 +8,10 @@
 
 int main()
 {
-  uid_t uid = geteuid();
-  gid_t gid = getegid();
+	uid_t uid = geteuid();
+	gid_t gid = getegid();
 
-  printf("uid=%d gid=%d\n", (int)uid, (int)gid);
+	printf("uid=%d gid=%d\n", (int)uid, (int)gid);
 
-  return 0;
+	return 0;
 }

@@ -46,12 +46,12 @@ extern char *get_self_executable_directory();
 
 /* An instance of a loaded server module. */
 struct server_module {
-  /* The shared library handle corresponding to the loaded module. */
-  void *handle;
-  /* A name describing the module. */
-  const char *name;
-  /* The function that generates the HTML result for this module. */
-  void (*generate_function)(int);
+	/* The shared library handle corresponding to the loaded module. */
+	void *handle;
+	/* A name describing the module. */
+	const char *name;
+	/* The function that generates the HTML result for this module. */
+	void (*generate_function)(int);
 };
 
 /* The directory from which modules are loaded. */

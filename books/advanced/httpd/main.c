@@ -17,11 +17,11 @@
  * Description of long options for getopt_long
  */
 static const struct option long_options[] = {
-  {"address",    1, NULL, 'a'},
-  {"help",       0, NULL, 'h'},
-  {"module-dir", 1, NULL, 'm'},
-  {"port",       1, NULL, 'p'},
-  {"verbose",    0, NULL, 'v'},
+	{"address",    1, NULL, 'a'},
+	{"help",       0, NULL, 'h'},
+	{"module-dir", 1, NULL, 'm'},
+	{"port",       1, NULL, 'p'},
+	{"verbose",    0, NULL, 'v'},
 };
 
 /*
@@ -49,92 +49,92 @@ static const char *const usage_template =
  */
 static void print_usage(int is_error)
 {
-  fprintf(is_error ? stderr : stdout, usage_template, program_name);
-  exit(is_error ? 1 : 0);
+	fprintf(is_error ? stderr : stdout, usage_template, program_name);
+	exit(is_error ? 1 : 0);
 }
 
 int main(int argc, char *const argv[])
 {
-  struct in_addr local_address;
-  uint16_t port;
-  int next_option;
+	struct in_addr local_address;
+	uint16_t port;
+	int next_option;
 
-  program_name = argv[0];
+	program_name = argv[0];
 
-  local_address.s_addr = INADDR_ANY;
-  port = 0;
+	local_address.s_addr = INADDR_ANY;
+	port = 0;
 
-  verbose = 0;
-  module_dir = get_self_executable_directory();
-  assert(module_dir != NULL);
+	verbose = 0;
+	module_dir = get_self_executable_directory();
+	assert(module_dir != NULL);
 
-  do {
-    next_option = getopt_long(argc, argv, short_options, long_options, NULL);
-    switch (next_option) {
-      case 'a': {
-                  struct hostent *local_host_name;
+	do {
+		next_option = getopt_long(argc, argv, short_options, long_options, NULL);
+		switch (next_option) {
+		case 'a': {
+				  struct hostent *local_host_name;
 
-                  local_host_name = gethostbyname(optarg);
-                  if (local_host_name == NULL || local_host_name->h_length == 0)
-                    error(optarg, "invalid host name");
-                  else
-                    local_address.s_addr = *((int*)(local_host_name->h_addr_list[0]));
-                }
-                break;
+				  local_host_name = gethostbyname(optarg);
+				  if (local_host_name == NULL || local_host_name->h_length == 0)
+					  error(optarg, "invalid host name");
+				  else
+					  local_address.s_addr = *((int*)(local_host_name->h_addr_list[0]));
+			  }
+			  break;
 
-      case 'h':
-                print_usage(0);
+		case 'h':
+			  print_usage(0);
 
-      case 'm': {
-                  struct stat dir_info;
+		case 'm': {
+				  struct stat dir_info;
 
-                  if (access(optarg, F_OK) != 0)
-                    error(optarg, "module directory does not exist");
+				  if (access(optarg, F_OK) != 0)
+					  error(optarg, "module directory does not exist");
 
-                  if (access(optarg, R_OK|X_OK) != 0)
-                    error(optarg, "module directory is not accessible");
+				  if (access(optarg, R_OK|X_OK) != 0)
+					  error(optarg, "module directory is not accessible");
 
-                  if (stat(optarg, &dir_info) != 0 || !S_ISDIR(dir_info.st_mode))
-                    error(optarg, "not a directory");
+				  if (stat(optarg, &dir_info) != 0 || !S_ISDIR(dir_info.st_mode))
+					  error(optarg, "not a directory");
 
-                  module_dir = strdup(optarg);
-                }
-                break;
+				  module_dir = strdup(optarg);
+			  }
+			  break;
 
-      case 'p': {
-                  long value;
-                  char *end;
+		case 'p': {
+				  long value;
+				  char *end;
 
-                  value = strtol(optarg, &end, 10);
-                  if (*end != '\0')
-                    print_usage(1);
+				  value = strtol(optarg, &end, 10);
+				  if (*end != '\0')
+					  print_usage(1);
 
-                  port = (uint16_t)htons(value);
-                }
-                break;
+				  port = (uint16_t)htons(value);
+			  }
+			  break;
 
-      case 'v':
-                verbose = 1;
-                break;
+		case 'v':
+			  verbose = 1;
+			  break;
 
-      case '?':
-                print_usage(1);
+		case '?':
+			  print_usage(1);
 
-      case -1:
-                break;
+		case -1:
+			  break;
 
-      default:
-                abort();
-    }
-  } while (next_option != -1);
+		default:
+			  abort();
+		}
+	} while (next_option != -1);
 
-  if (optind != argc)
-    print_usage(1);
+	if (optind != argc)
+		print_usage(1);
 
-  if (verbose)
-    printf("modules will be loaded from %s\n", module_dir);
+	if (verbose)
+		printf("modules will be loaded from %s\n", module_dir);
 
-  server_run(local_address, port);
+	server_run(local_address, port);
 
-  return 0;
+	return 0;
 }

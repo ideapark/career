@@ -12,9 +12,9 @@ const char *journal_filename = "journal.log";
 
 void write_journal_entry(char *entry)
 {
-  int fd = open(journal_filename, O_WRONLY|O_CREAT|O_APPEND, 0660);
-  write(fd, entry, strlen(entry));
-  write(fd, "\n", 1);
-  fsync(fd);
-  close(fd);
+	int fd = open(journal_filename, O_WRONLY|O_CREAT|O_APPEND, 0660);
+	write(fd, entry, strlen(entry));
+	write(fd, "\n", 1);
+	fsync(fd);
+	close(fd);
 }

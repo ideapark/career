@@ -45,40 +45,40 @@ static char *error_message = "Error reading /proc/issue.";
 
 void module_generate(int fd)
 {
-  int input_fd;
-  struct stat file_info;
-  int rval;
+	int input_fd;
+	struct stat file_info;
+	int rval;
 
-  /* Open /etc/issue. */
-  input_fd = open("/etc/issue", O_RDONLY);
+	/* Open /etc/issue. */
+	input_fd = open("/etc/issue", O_RDONLY);
 
-  if (input_fd == -1)
-    system_error("open");
+	if (input_fd == -1)
+		system_error("open");
 
-  /* Obtain file information about it. */
-  rval = fstat(input_fd, &file_info);
+	/* Obtain file information about it. */
+	rval = fstat(input_fd, &file_info);
 
-  if (rval == -1) {
-    /* Either we couldn't open the file or we couldn't read from it. */
-    write(fd, error_page, strlen(error_page));
-  } else {
-    int rval;
-    off_t offset = 0;
+	if (rval == -1) {
+		/* Either we couldn't open the file or we couldn't read from it. */
+		write(fd, error_page, strlen(error_page));
+	} else {
+		int rval;
+		off_t offset = 0;
 
-    /* Write the start of the page. */
-    write(fd, page_start, strlen(page_start));
+		/* Write the start of the page. */
+		write(fd, page_start, strlen(page_start));
 
-    /* Copy from /proc/issue to the client socket. */
-    rval = sendfile(fd, input_fd, &offset, file_info.st_size);
+		/* Copy from /proc/issue to the client socket. */
+		rval = sendfile(fd, input_fd, &offset, file_info.st_size);
 
-    if (rval == -1)
-      /* Something went wrong sending the contents of /proc/issue.
-         Write an error message. */
-      write(fd, error_message, strlen(error_message));
+		if (rval == -1)
+			/* Something went wrong sending the contents of /proc/issue.
+			   Write an error message. */
+			write(fd, error_message, strlen(error_message));
 
-    /* End the page. */
-    write(fd, page_end, strlen(page_end));
-  }
+		/* End the page. */
+		write(fd, page_end, strlen(page_end));
+	}
 
-  close(input_fd);
+	close(input_fd);
 }

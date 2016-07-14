@@ -12,16 +12,16 @@
  */
 int grep_for_word(const char *word)
 {
-  size_t length;
-  char *buffer;
-  int exit_code;
+	size_t length;
+	char *buffer;
+	int exit_code;
 
-  length = strlen("grep -x") + strlen(word) + strlen(" /usr/dict/words") + 1;
-  buffer = (char *)malloc(length);
-  sprintf(buffer, "grep -x %s /usr/dict/word", word);
+	length = strlen("grep -x") + strlen(word) + strlen(" /usr/dict/words") + 1;
+	buffer = (char *)malloc(length);
+	sprintf(buffer, "grep -x %s /usr/dict/word", word);
 
-  exit_code = system(buffer);
-  free(buffer);
+	exit_code = system(buffer);
+	free(buffer);
 
-  return exit_code == 0;
+	return exit_code == 0;
 }

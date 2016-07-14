@@ -11,12 +11,12 @@
 
 int main(int argc, char *argv[])
 {
-  /* Open a file descriptor to the device specified on the command line. */
-  int fd = open(argv[1], O_RDONLY);
-  /* Eject the CD-ROM. */
-  ioctl(fd, CDROMEJECT);
-  /* Close the file descriptor. */
-  close(fd);
+	/* Open a file descriptor to the device specified on the command line. */
+	int fd = open(argv[1], O_RDONLY);
+	/* Eject the CD-ROM. */
+	ioctl(fd, CDROMEJECT);
+	/* Close the file descriptor. */
+	close(fd);
 
-  return 0;
+	return 0;
 }

@@ -6,20 +6,20 @@
 
 int main(int argc, char *argv[])
 {
-  int zero = 0;
-  const int megabyte = 1024 * 1024;
-  char *filename = argv[1];
-  
-  size_t length = (size_t)atoi(argv[2]) * megabyte;
-  
-  /* Open a new file. */
-  int fd = open(filename, O_WRONLY|O_CREAT|O_EXCL, 0666);
-  /* Jump to 1 byte short of where we want the file to end. */
-  lseek(fd, length - 1, SEEK_SET);
-  /* Write a single 0 bytes. */
-  write(fd, &zero, 1);
-  
-  close(fd);
+	int zero = 0;
+	const int megabyte = 1024 * 1024;
+	char *filename = argv[1];
 
-  return 0;
+	size_t length = (size_t)atoi(argv[2]) * megabyte;
+
+	/* Open a new file. */
+	int fd = open(filename, O_WRONLY|O_CREAT|O_EXCL, 0666);
+	/* Jump to 1 byte short of where we want the file to end. */
+	lseek(fd, length - 1, SEEK_SET);
+	/* Write a single 0 bytes. */
+	write(fd, &zero, 1);
+
+	close(fd);
+
+	return 0;
 }

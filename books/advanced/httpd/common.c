@@ -16,79 +16,79 @@ int verbose;
 
 void *xmalloc(size_t size)
 {
-  void *ptr = malloc(size);
+	void *ptr = malloc(size);
 
-  /* Abort if the allocation failed. */
-  if (ptr == NULL)
-    abort();
-  else
-    return ptr;
+	/* Abort if the allocation failed. */
+	if (ptr == NULL)
+		abort();
+	else
+		return ptr;
 }
 
 void *xrealloc(void *ptr, size_t size)
 {
-  ptr = realloc(ptr, size);
+	ptr = realloc(ptr, size);
 
-  /* Abort if the allocation failed. */
-  if (ptr == NULL)
-    abort();
-  else
-    return ptr;
+	/* Abort if the allocation failed. */
+	if (ptr == NULL)
+		abort();
+	else
+		return ptr;
 }
 
 char *xstrdup(const char *s)
 {
-  char *copy = strdup(s);
+	char *copy = strdup(s);
 
-  /* Abort if the allocation failed. */
-  if (copy == NULL)
-    abort();
-  else
-    return copy;
+	/* Abort if the allocation failed. */
+	if (copy == NULL)
+		abort();
+	else
+		return copy;
 }
 
 void system_error(const char *operation)
 {
-  /* Generate an error message for errno. */
-  error(operation, strerror(errno));
+	/* Generate an error message for errno. */
+	error(operation, strerror(errno));
 }
 
 void error(const char *cause, const char *message)
 {
-  /* Print an error message to stderr. */
-  fprintf(stderr, "%s: error: (%s) %s\n", program_name, cause, message);
-  /* End the program. */
-  exit(1);
+	/* Print an error message to stderr. */
+	fprintf(stderr, "%s: error: (%s) %s\n", program_name, cause, message);
+	/* End the program. */
+	exit(1);
 }
 
 char *get_self_executable_directory()
 {
-  int rval;
-  char link_target[1024];
-  char *last_slash;
-  size_t result_length;
-  char *result;
+	int rval;
+	char link_target[1024];
+	char *last_slash;
+	size_t result_length;
+	char *result;
 
-  /* Read the target of the symbolic link /proc/self/exe */
-  rval = readlink("/proc/self/exe", link_target, sizeof(link_target));
-  if (rval == -1)
-    abort(); /* The call to readlink failed, so bail. */
-  else
-    link_target[rval] = '\0'; /* NUL-terminate the target. */
+	/* Read the target of the symbolic link /proc/self/exe */
+	rval = readlink("/proc/self/exe", link_target, sizeof(link_target));
+	if (rval == -1)
+		abort(); /* The call to readlink failed, so bail. */
+	else
+		link_target[rval] = '\0'; /* NUL-terminate the target. */
 
-  /* We want to trim the name of the executable file, to obtain the
-     directory that contains it. Find the rightmost slash. */
-  last_slash = strrchr(link_target, '/');
-  if (last_slash == NULL || last_slash == link_target)
-    abort(); /* Something strange is going on. */
+	/* We want to trim the name of the executable file, to obtain the
+	   directory that contains it. Find the rightmost slash. */
+	last_slash = strrchr(link_target, '/');
+	if (last_slash == NULL || last_slash == link_target)
+		abort(); /* Something strange is going on. */
 
-  /* Allocate a buffer to hold the resulting path. */
-  result_length = last_slash - link_target;
-  result = (char *)xmalloc(result_length + 1);
+	/* Allocate a buffer to hold the resulting path. */
+	result_length = last_slash - link_target;
+	result = (char *)xmalloc(result_length + 1);
 
-  /* Copy the result. */
-  strncpy(result, link_target, result_length);
-  result[result_length] = '\0';
+	/* Copy the result. */
+	strncpy(result, link_target, result_length);
+	result[result_length] = '\0';
 
-  return result;
+	return result;
 }

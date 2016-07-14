@@ -17,34 +17,34 @@
  */
 int random_range(unsigned const low, unsigned const high)
 {
-  unsigned const range = high - low + 1;
-  return low + (int) (((double) range) * rand() / (RAND_MAX + 1.0));
+	unsigned const range = high - low + 1;
+	return low + (int) (((double) range) * rand() / (RAND_MAX + 1.0));
 }
 
 int main(int argc, char *argv[])
 {
-  int fd;
-  void *file_memory;
+	int fd;
+	void *file_memory;
 
-  /* Seed the random number generator. */
-  srand(time(NULL));
+	/* Seed the random number generator. */
+	srand(time(NULL));
 
-  /* Prepare a file large enough to hold an unsigned integer. */
-  fd = open(argv[1], O_RDWR|O_CREAT, S_IRUSR|S_IWUSR);
-  lseek(fd, FILE_LENGTH+1, SEEK_SET);
+	/* Prepare a file large enough to hold an unsigned integer. */
+	fd = open(argv[1], O_RDWR|O_CREAT, S_IRUSR|S_IWUSR);
+	lseek(fd, FILE_LENGTH+1, SEEK_SET);
 
-  write(fd, "", 1);
-  lseek(fd, 0, SEEK_SET);
+	write(fd, "", 1);
+	lseek(fd, 0, SEEK_SET);
 
-  /* Create the memory mapping. */
-  file_memory = mmap(0, FILE_LENGTH, PROT_WRITE, MAP_SHARED, fd, 0);
-  close(fd);
+	/* Create the memory mapping. */
+	file_memory = mmap(0, FILE_LENGTH, PROT_WRITE, MAP_SHARED, fd, 0);
+	close(fd);
 
-  /* Write a random integer to memory-mapped area. */
-  sprintf((char *)file_memory, "%d\n", random_range(-100, 100));
+	/* Write a random integer to memory-mapped area. */
+	sprintf((char *)file_memory, "%d\n", random_range(-100, 100));
 
-  /* Release file memory (unnecessary because the program exits). */
-  munmap(file_memory, FILE_LENGTH);
+	/* Release file memory (unnecessary because the program exits). */
+	munmap(file_memory, FILE_LENGTH);
 
-  return 0;
+	return 0;
 }

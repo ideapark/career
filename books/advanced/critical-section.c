@@ -14,21 +14,21 @@ float *account_balances;
    too small. */
 int process_transaction(int from_acct, int to_acct, float dollars)
 {
-  int old_cancel_state;
+	int old_cancel_state;
 
-  /* Check the balance in FROM_ACCT. */
-  if (account_balances[from_acct] < dollars)
-    return 1;
+	/* Check the balance in FROM_ACCT. */
+	if (account_balances[from_acct] < dollars)
+		return 1;
 
-  /* Begin critical section */
-  pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, &old_cancel_state);
+	/* Begin critical section */
+	pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, &old_cancel_state);
 
-  /* Move the money. */
-  account_balances[to_acct] += dollars;
-  account_balances[from_acct] -= dollars;
+	/* Move the money. */
+	account_balances[to_acct] += dollars;
+	account_balances[from_acct] -= dollars;
 
-  /* End critical section. */
-  pthread_setcancelstate(old_cancel_state, NULL);
+	/* End critical section. */
+	pthread_setcancelstate(old_cancel_state, NULL);
 
-  return 0;
+	return 0;
 }

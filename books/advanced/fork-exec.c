@@ -15,49 +15,49 @@
    the spawned process. */
 int spawn(char *program, char **arg_list)
 {
-  pid_t child_pid;
+	pid_t child_pid;
 
-  /* Duplicate this process. */
-  child_pid = fork();
-  if (child_pid != 0) {
-    /* This is the parent process. */
-    return child_pid;
-  } else {
-    /* Now execute PROGRAM, searching for it in the path. */
-    execvp(program, arg_list);
+	/* Duplicate this process. */
+	child_pid = fork();
+	if (child_pid != 0) {
+		/* This is the parent process. */
+		return child_pid;
+	} else {
+		/* Now execute PROGRAM, searching for it in the path. */
+		execvp(program, arg_list);
 
-    /* The execvp function returns only if an error occurs. */
-    fprintf(stderr, "an error occurred in execvp\n");
-    abort();
-  }
+		/* The execvp function returns only if an error occurs. */
+		fprintf(stderr, "an error occurred in execvp\n");
+		abort();
+	}
 }
 
 int main()
 {
-  int child_status;
+	int child_status;
 
-  /* The argument list to pass to the "ls" command. */
-  char *arg_list[] = {
-    "ls", /* argv[0], the name of the program. */
-    "-l",
-    "/",
-    NULL  /* The argument list must end with NULL */
-  };
+	/* The argument list to pass to the "ls" command. */
+	char *arg_list[] = {
+		"ls", /* argv[0], the name of the program. */
+		"-l",
+		"/",
+		NULL  /* The argument list must end with NULL */
+	};
 
-  /* Spawn a child process running the "ls" comamnd. Ignore the
-     returned child process ID. */
-  spawn("ls", arg_list);
+	/* Spawn a child process running the "ls" comamnd. Ignore the
+	   returned child process ID. */
+	spawn("ls", arg_list);
 
-  /* Wait for the child process to complete. */
-  wait(&child_status);
+	/* Wait for the child process to complete. */
+	wait(&child_status);
 
-  if (WIFEXITED(child_status))
-    printf("the child process exited normally, with exit code %d\n",
-        WEXITSTATUS(child_status));
-  else
-    printf("the child process exited abnormally\n");
+	if (WIFEXITED(child_status))
+		printf("the child process exited normally, with exit code %d\n",
+				WEXITSTATUS(child_status));
+	else
+		printf("the child process exited abnormally\n");
 
-  printf("done with main program\n");
+	printf("done with main program\n");
 
-  return 0;
+	return 0;
 }

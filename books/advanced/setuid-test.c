@@ -7,7 +7,7 @@
 
 int main()
 {
-  printf("uid=%d euid=%d\n", (int)getuid(), (int)geteuid());
+	printf("uid=%d euid=%d\n", (int)getuid(), (int)geteuid());
 
-  return 0;
+	return 0;
 }
