@@ -10,7 +10,7 @@ extern char* csvfield(int n);     /* return field n */
 extern int csvnfield(void);       /* return number of fields */
 
 enum {
-    NOMEM = -2; /* out of memory signal */
+	NOMEM = -2; /* out of memory signal */
 };
 
 #endif // CSV_INCLUDE_

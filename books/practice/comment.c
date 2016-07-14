@@ -11,5 +11,5 @@
  */
 static void idct(int b[8*8])
 {
-    // ...
+	// ...
 }
