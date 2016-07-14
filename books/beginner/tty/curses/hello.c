@@ -3,13 +3,13 @@
 #include <curses.h>
 
 int main(void) {
-    initscr();
+	initscr();
 
-    move(5, 15);
-    printw("%s", "Hello World");
-    refresh();
-    sleep(2);
+	move(5, 15);
+	printw("%s", "Hello World");
+	refresh();
+	sleep(2);
 
-    endwin();
-    return 0;
+	endwin();
+	return 0;
 }

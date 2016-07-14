@@ -4,18 +4,18 @@
 
 void ouch(int sig)
 {
-    printf("OUCH! - I got signal %d\n", sig);
-    (void) signal(SIGINT, SIG_DFL);
+	printf("OUCH! - I got signal %d\n", sig);
+	(void) signal(SIGINT, SIG_DFL);
 }
 
 int main(void)
 {
-    (void) signal(SIGINT, ouch);
+	(void) signal(SIGINT, ouch);
 
-    while (1) {
-        printf("Hello World\n");
-        sleep(1);
-    }
+	while (1) {
+		printf("Hello World\n");
+		sleep(1);
+	}
 
-    return 0;
+	return 0;
 }

@@ -5,31 +5,31 @@
 
 int main(void)
 {
-    pid_t pid;
-    char *message;
-    int n;
+	pid_t pid;
+	char *message;
+	int n;
 
-    printf("fork program starting\n");
-    pid = fork();
+	printf("fork program starting\n");
+	pid = fork();
 
-    switch (pid) {
-        case -1:
-            perror("fork failed");
-            exit(1);
-        case 0:
-            message = "This is the child";
-            n = 10;
-            break;
-        default:
-            message = "This is the parent";
-            n = 2;
-            break;
-    }
+	switch (pid) {
+	case -1:
+		perror("fork failed");
+		exit(1);
+	case 0:
+		message = "This is the child";
+		n = 10;
+		break;
+	default:
+		message = "This is the parent";
+		n = 2;
+		break;
+	}
 
-    for (; n > 0; n--) {
-        puts(message);
-        sleep(1);
-    }
+	for (; n > 0; n--) {
+		puts(message);
+		sleep(1);
+	}
 
-    return 0;
+	return 0;
 }
