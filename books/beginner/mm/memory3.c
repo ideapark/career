@@ -4,7 +4,8 @@
 
 #define ONE_K (1024)
 
-int main(void) {
+int main(void)
+{
 	char *some_memory;
 	size_t size_to_allocate = ONE_K;
 	int megs_obtained = 0;

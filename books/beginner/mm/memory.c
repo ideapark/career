@@ -4,7 +4,8 @@
 
 #define A_MEGABYTE (1024*1024)
 
-int main(void) {
+int main(void)
+{
 	char *some_memory;
 	int megabyte = A_MEGABYTE;
 	int exit_code = EXIT_FAILURE;

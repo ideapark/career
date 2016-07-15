@@ -2,7 +2,8 @@
 
 #define ONE_K (1024)
 
-int main(void) {
+int main(void)
+{
 	char *some_memory;
 	char *scan_ptr;
 
