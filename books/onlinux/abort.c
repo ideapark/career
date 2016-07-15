@@ -1,6 +1,7 @@
 /*
  * produce a core dump
  */
+
 #include <stdio.h>
 #include <stdlib.h>
 

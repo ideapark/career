@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <klee/klee.h>
 
 #define H 7
 #define W 11
@@ -39,6 +40,8 @@ int main(int argc, char *argv[])
 	maze[y][x] = 'X';
 
 	read(0, program, ITERS);
+
+	klee_make_symbolic(program, ITERS, "program");
 
 	while (i < ITERS) {
 		ox = x;
