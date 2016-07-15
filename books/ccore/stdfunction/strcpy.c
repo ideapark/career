@@ -3,19 +3,19 @@
 
 int main(void)
 {
-    struct guest {
-        char name[64];
-        int age;
-        _Bool male;
-        _Bool smoking;
-        _Bool discount;
-    } this;
-    int result;
+	struct guest {
+		char name[64];
+		int age;
+		_Bool male;
+		_Bool smoking;
+		_Bool discount;
+	} this;
+	int result;
 
-    printf("Last name: ");
-    result = scanf("%s[^\n]", this.name);
-    if (result < 1)
-        strcpy(this.name, "[not available]");
+	printf("Last name: ");
+	result = scanf("%s[^\n]", this.name);
+	if (result < 1)
+		strcpy(this.name, "[not available]");
 
-    return 0;
+	return 0;
 }

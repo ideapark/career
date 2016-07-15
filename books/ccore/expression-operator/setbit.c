@@ -5,8 +5,8 @@
 //         mask
 unsigned int setBit(unsigned int mask, unsigned int p)
 {
-    if (p >= CHART_BIT * sizeof(int))
-        return mask;
-    else
-        return mask | (1 << p);
+	if (p >= CHART_BIT * sizeof(int))
+		return mask;
+	else
+		return mask | (1 << p);
 }

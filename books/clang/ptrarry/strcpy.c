@@ -1,8 +1,8 @@
 void strcpy(char *s, char *t)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while ((s[i] = t[i]) != '\0')
-        i++;
+	i = 0;
+	while ((s[i] = t[i]) != '\0')
+		i++;
 }

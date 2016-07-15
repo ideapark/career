@@ -6,9 +6,9 @@
  */
 const char *dateAsString(struct Date d)
 {
-    static char strDate[12];
-    sprintf(strDate, "%02d/%02d%04d", d.month, d.day, d.year);
-    return strDate;
+	static char strDate[12];
+	sprintf(strDate, "%02d/%02d%04d", d.month, d.day, d.year);
+	return strDate;
 }
 
 /*
@@ -16,14 +16,14 @@ const char *dateAsString(struct Date d)
  */
 void printSong(const Song_t *pSong)
 {
-    int m = pSong->duration / 60;
-    int s = pSong->duration % 60;
-    printf("-------------------------------------------\n"
-            "Title:         %s\n"
-            "Artist:        %s\n"
-            "Composer:      %s\n"
-            "Playing time:  %d:%02d\n"
-            "Date:          %s\n",
-            pSong->title, pSong->artist, pSong->composer, m, s,
-            dateAsString(pSong->published));
+	int m = pSong->duration / 60;
+	int s = pSong->duration % 60;
+	printf("-------------------------------------------\n"
+		"Title:         %s\n"
+		"Artist:        %s\n"
+		"Composer:      %s\n"
+		"Playing time:  %d:%02d\n"
+		"Date:          %s\n",
+		pSong->title, pSong->artist, pSong->composer, m, s,
+		dateAsString(pSong->published));
 }

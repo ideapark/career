@@ -3,20 +3,20 @@
 
 int main(void)
 {
-    FILE *fp = tmpfile();
-    char *iobuffer = malloc(BUFSIZ);
+	FILE *fp = tmpfile();
+	char *iobuffer = malloc(BUFSIZ);
 
-    if (iobuffer != NULL) {
-        /* NOTE:
-         *       setbuf should be called after file open 
-         *       successfull and before any I/O operation 
-         *       occur
-         */
-        setbuf(fp, iobuffer); /* ensure temp file have a buffer */
-    }
+	if (iobuffer != NULL) {
+		/* NOTE:
+		 *       setbuf should be called after file open
+		 *       successfull and before any I/O operation
+		 *       occur
+		 */
+		setbuf(fp, iobuffer); /* ensure temp file have a buffer */
+	}
 
-    /* use temp file */
+	/* use temp file */
 
-    fclose(fp);
-    return 0;
+	fclose(fp);
+	return 0;
 }

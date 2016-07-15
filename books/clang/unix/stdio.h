@@ -4,11 +4,11 @@
 #define OPEN_MAX  20
 
 typedef struct _iobuf {
-    int  cnt;   /* available char */
-    char *ptr;  /* next char address */
-    char *base; /* buffer */
-    int  flag;  /* file access mode */
-    int  fd;    /* file descriptor */
+	int  cnt;   /* available char */
+	char *ptr;  /* next char address */
+	char *base; /* buffer */
+	int  flag;  /* file access mode */
+	int  fd;    /* file descriptor */
 } FILE;
 
 extern FILE _iob[OPEN_MAX];
@@ -29,11 +29,11 @@ extern FILE _iob[OPEN_MAX];
 #define stderr  (&_iob[2])
 
 enum _flags {
-    _READ  = 01,  /* read only mode */
-    _WRITE = 02,  /* write mode */
-    _UNBUF = 04,  /* no buffer */
-    _EOF   = 010, /* end of file */
-    _ERR   = 020, /* error occurred */
+	_READ  = 01,  /* read only mode */
+	_WRITE = 02,  /* write mode */
+	_UNBUF = 04,  /* no buffer */
+	_EOF   = 010, /* end of file */
+	_ERR   = 020, /* error occurred */
 };
 
 int _fillbuf(FILE *);

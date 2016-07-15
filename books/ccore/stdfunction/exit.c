@@ -3,30 +3,30 @@
 
 int main(int argc, char *argv[])
 {
-    FILE *f_in, *f_out;
-    enum { X_OK = 0, X_ARGS, X_NOIN, X_NOOUT };
+	FILE *f_in, *f_out;
+	enum { X_OK = 0, X_ARGS, X_NOIN, X_NOOUT };
 
-    if (argc != 3) {
-        fprintf(stderr, "Usage: program input-file output-file\n");
-        exit(X_ARGS);
-    }
+	if (argc != 3) {
+		fprintf(stderr, "Usage: program input-file output-file\n");
+		exit(X_ARGS);
+	}
 
-    f_in = fopen(argv[1], "r");
-    if (f_in == NULL) {
-        fprintf(stderr, "Unable to open input file.\n");
-        exit(X_NOIN);
-    }
+	f_in = fopen(argv[1], "r");
+	if (f_in == NULL) {
+		fprintf(stderr, "Unable to open input file.\n");
+		exit(X_NOIN);
+	}
 
-    f_out = fopen(argv[2], "a+");
-    if (f_out == NULL) {
-        fprintf(stderr, "Unable to open output file.\n");
-        fclose(f_in); /* NOTE: f_in is OPEN */
-        exit(X_NOOUT);
-    }
+	f_out = fopen(argv[2], "a+");
+	if (f_out == NULL) {
+		fprintf(stderr, "Unable to open output file.\n");
+		fclose(f_in); /* NOTE: f_in is OPEN */
+		exit(X_NOOUT);
+	}
 
-    /* do your own bussiness */
+	/* do your own bussiness */
 
-    fclose(f_in);
-    fclose(f_out);
-    return 0;
+	fclose(f_in);
+	fclose(f_out);
+	return 0;
 }
