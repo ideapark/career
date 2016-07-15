@@ -1,8 +1,8 @@
 #include "list.h"
 
 struct Node {
-    ElementType Element;
-    Position    Next;
+	ElementType Element;
+	Position    Next;
 };
 
 /*
@@ -10,7 +10,7 @@ struct Node {
  */
 int IsEmpty(List L)
 {
-    return L->Next == NULL;
+	return L->Next == NULL;
 }
 
 /*
@@ -19,7 +19,7 @@ int IsEmpty(List L)
  */
 int IsLast(Position P, Last L)
 {
-    return P->Next == NULL;
+	return P->Next == NULL;
 }
 
 /*
@@ -27,13 +27,13 @@ int IsLast(Position P, Last L)
  */
 Position Find(ElementType X, List L)
 {
-    Position P;
+	Position P;
 
-    P = L->Next;
-    while (P != NULL && P->Element != X)
-        P = P->Next;
+	P = L->Next;
+	while (P != NULL && P->Element != X)
+		P = P->Next;
 
-    return P;
+	return P;
 }
 
 /*
@@ -41,15 +41,15 @@ Position Find(ElementType X, List L)
  */
 void Delete(ElementType X, List L)
 {
-    Position P, TmpCell;
+	Position P, TmpCell;
 
-    P = FindPrevious(X, L);
+	P = FindPrevious(X, L);
 
-    if (!IsLast(P, L)) {
-        TmpCell = P->Next;
-        P->Next = TmpCell->Next;  /* Bypass deleted cell */
-        free(TmpCell);
-    }
+	if (!IsLast(P, L)) {
+		TmpCell = P->Next;
+		P->Next = TmpCell->Next;  /* Bypass deleted cell */
+		free(TmpCell);
+	}
 }
 
 /*
@@ -59,13 +59,13 @@ void Delete(ElementType X, List L)
  */
 Position FindPrevious(ElementType X, List L)
 {
-    Position P;
+	Position P;
 
-    P = L;
-    while (P->Next != NULL && P->Next->Element != X)
-        P = P->Next;
+	P = L;
+	while (P->Next != NULL && P->Next->Element != X)
+		P = P->Next;
 
-    return P;
+	return P;
 }
 
 /*
@@ -75,15 +75,15 @@ Position FindPrevious(ElementType X, List L)
  */
 void Insert(ElementType X, List L, Position P)
 {
-    Position TmpCell;
+	Position TmpCell;
 
-    TmpCell = malloc(sizeof(struct Node));
-    if (TmpCell == NULL)
-        FatalError("Out of space!!!");
+	TmpCell = malloc(sizeof(struct Node));
+	if (TmpCell == NULL)
+		FatalError("Out of space!!!");
 
-    TmpCell->Element = X;
-    TmpCell->Next = P->Next;
-    P->Next = TmpCell;
+	TmpCell->Element = X;
+	TmpCell->Next = P->Next;
+	P->Next = TmpCell;
 }
 
 /*
@@ -91,13 +91,13 @@ void Insert(ElementType X, List L, Position P)
  */
 void DeleteList(List L)
 {
-    Position P, Tmp;
+	Position P, Tmp;
 
-    P = L->Next;  /* Header assumed */
-    L->Next = NULL;
-    while (P != NULL) {
-        Tmp = P->Next;
-        free(p);
-        P = Tmp;
-    }
+	P = L->Next;  /* Header assumed */
+	L->Next = NULL;
+	while (P != NULL) {
+		Tmp = P->Next;
+		free(p);
+		P = Tmp;
+	}
 }
