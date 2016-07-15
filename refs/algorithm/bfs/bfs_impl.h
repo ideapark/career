@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Zhou Peng <lockrecv@gmail.com>
+ * Copyright (c) Zhou Peng <lockrecv@qq.com>
  */
 
 #ifndef BFS_IMPL_H
@@ -14,7 +14,7 @@ typedef bool (*FoundAssert)(const struct point &p);
 
 
 void bfs_search_all(const struct point start,
-                    std::list<std::list<struct point> > &all_path,
-                    PathAssert PA, FoundAssert FA);
+		std::list<std::list<struct point> > &all_path,
+		PathAssert PA, FoundAssert FA);
 
 #endif /* BFS_IMPL_H */

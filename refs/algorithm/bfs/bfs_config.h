@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Zhou Peng <lockrecv@gmail.com>
+ * Copyright (c) Zhou Peng <lockrecv@qq.com>
  */
 
 #ifndef BFS_CONFIG_H
