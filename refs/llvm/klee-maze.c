@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 		if (maze[y][x] == '#') {
 			printf("You win!\n");
 			printf("Your solution %s\n", program);
-			exit(1);
+			exit(0);
 		}
 		if (maze[y][x] != ' ' && !((y == 2 && maze[y][x] == '|' && x > 0 && x < W))) {
 			x = ox;
