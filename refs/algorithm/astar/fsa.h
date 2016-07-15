@@ -26,108 +26,108 @@
 template <class USER_TYPE>
 class FixedSizeAllocator {
 public:
-  enum { FSA_DEFAULT_SIZE = 100 };
+	enum { FSA_DEFAULT_SIZE = 100 };
 
-  struct FSA_ELEMENT {
-    USER_TYPE UserType;
-    FSA_ELEMENT *pPrev;
-    FSA_ELEMENT *pNext;
-  };
+	struct FSA_ELEMENT {
+		USER_TYPE UserType;
+		FSA_ELEMENT *pPrev;
+		FSA_ELEMENT *pNext;
+	};
 
 public:
-  FixedSizeAllocator(unsigned int MaxElements = FSA_DEFAULT_SIZE)
-    : m_pFirstUsed(NULL), m_MaxElements(MaxElements) {
-      char *pMem = new char[m_MaxElements * sizeof(FSA_ELEMENT)];
-      m_pMemory = (FSA_ELEMENT*) pMem;
-      memset(m_pMemory, 0, sizeof(FSA_ELEMENT) * m_MaxElements);
-      m_pFirstFree = m_pMemory;
-      m_pFirstFree->pPrev = NULL;
-      FSA_ELEMENT *pElement = m_pFirstFree;
-      for (unsigned int i = 0; i < m_MaxElements; i++) {
-        pElement->pPrev = pElement-1;
-        pElement->pNext = pElement+1;
-        pElement++;
-      }
-      (pElement-1)->pNext = NULL;
-    }
+	FixedSizeAllocator(unsigned int MaxElements = FSA_DEFAULT_SIZE)
+		: m_pFirstUsed(NULL), m_MaxElements(MaxElements) {
+			char *pMem = new char[m_MaxElements * sizeof(FSA_ELEMENT)];
+			m_pMemory = (FSA_ELEMENT*) pMem;
+			memset(m_pMemory, 0, sizeof(FSA_ELEMENT) * m_MaxElements);
+			m_pFirstFree = m_pMemory;
+			m_pFirstFree->pPrev = NULL;
+			FSA_ELEMENT *pElement = m_pFirstFree;
+			for (unsigned int i = 0; i < m_MaxElements; i++) {
+				pElement->pPrev = pElement-1;
+				pElement->pNext = pElement+1;
+				pElement++;
+			}
+			(pElement-1)->pNext = NULL;
+		}
 
-  ~FixedSizeAllocator() {
-    delete [] (char*) m_pMemory;
-  }
+	~FixedSizeAllocator() {
+		delete [] (char*) m_pMemory;
+	}
 
-  USER_TYPE *alloc() {
-    FSA_ELEMENT *pNewNode = NULL;
-    if (!m_pFirstFree) {
-      return NULL;
-    } else {
-      pNewNode = m_pFirstFree;
-      m_pFirstFree = pNewNode->pNext;
-      if (pNewNode->pNext) {
-        pNewNode->pNext->pPrev = NULL;
-      }
-      pNewNode->pPrev = NULL;
-      if (m_pFirstUsed == NULL) {
-        pNewNode->pNext = NULL;
-      } else {
-        m_pFirstUsed->pPrev = pNewNode;
-        pNewNode->pNext = m_pFirstUsed;
-      }
-      m_pFirstUsed = pNewNode;
-    }
-    return reinterpret_cast<USER_TYPE*>(pNewNode);
-  }
+	USER_TYPE *alloc() {
+		FSA_ELEMENT *pNewNode = NULL;
+		if (!m_pFirstFree) {
+			return NULL;
+		} else {
+			pNewNode = m_pFirstFree;
+			m_pFirstFree = pNewNode->pNext;
+			if (pNewNode->pNext) {
+				pNewNode->pNext->pPrev = NULL;
+			}
+			pNewNode->pPrev = NULL;
+			if (m_pFirstUsed == NULL) {
+				pNewNode->pNext = NULL;
+			} else {
+				m_pFirstUsed->pPrev = pNewNode;
+				pNewNode->pNext = m_pFirstUsed;
+			}
+			m_pFirstUsed = pNewNode;
+		}
+		return reinterpret_cast<USER_TYPE*>(pNewNode);
+	}
 
-  void free(USER_TYPE *user_data) {
-    FSA_ELEMENT *pNode = reinterpret_cast<FSA_ELEMENT*>(user_data);
-    if (pNode->pPrev) {
-      pNode->pPrev->pNext = pNode->pNext;
-    } else {
-      m_pFirstUsed = pNode->pNext;
-    }
-    if (pNode->pNext) {
-      pNode->pNext->pPrev = pNode->pPrev;
-    }
-    if (m_pFirstFree == NULL) {
-      m_pFirstFree = pNode;
-      pNode->pPrev = NULL;
-      pNode->pNext = NULL;
-    } else {
-      m_pFirstFree->pPrev = pNode;
-      pNode->pNext = m_pFirstFree;
-      m_pFirstFree = pNode;
-    }
-  }
+	void free(USER_TYPE *user_data) {
+		FSA_ELEMENT *pNode = reinterpret_cast<FSA_ELEMENT*>(user_data);
+		if (pNode->pPrev) {
+			pNode->pPrev->pNext = pNode->pNext;
+		} else {
+			m_pFirstUsed = pNode->pNext;
+		}
+		if (pNode->pNext) {
+			pNode->pNext->pPrev = pNode->pPrev;
+		}
+		if (m_pFirstFree == NULL) {
+			m_pFirstFree = pNode;
+			pNode->pPrev = NULL;
+			pNode->pNext = NULL;
+		} else {
+			m_pFirstFree->pPrev = pNode;
+			pNode->pNext = m_pFirstFree;
+			m_pFirstFree = pNode;
+		}
+	}
 
-  void Debug() {
-    printf("free list ");
-    FSA_ELEMENT *p = m_pFirstFree;
-    while (p) {
-      printf("%x!%x ", p->pPrev, p->pNext);
-      p = p->pNext;
-    }
-    printf("\n");
-    printf("used list ");
-    p = m_pFirstUsed;
-    while (p) {
-      printf("%x!%x ", p->pPrev, p->pNext);
-      p = p->pNext;
-    }
-    printf("\n");
-  }
+	void Debug() {
+		printf("free list ");
+		FSA_ELEMENT *p = m_pFirstFree;
+		while (p) {
+			printf("%x!%x ", p->pPrev, p->pNext);
+			p = p->pNext;
+		}
+		printf("\n");
+		printf("used list ");
+		p = m_pFirstUsed;
+		while (p) {
+			printf("%x!%x ", p->pPrev, p->pNext);
+			p = p->pNext;
+		}
+		printf("\n");
+	}
 
-  USER_TYPE *GetFirst() {
-    return reinterpret_cast<USER_TYPE*>(m_pFirstUsed);
-  }
+	USER_TYPE *GetFirst() {
+		return reinterpret_cast<USER_TYPE*>(m_pFirstUsed);
+	}
 
-  USER_TYPE *GetNext(USER_TYPE *node) {
-    return reinterpret_cast<USER_TYPE*>((reinterpret_cast<FSA_ELEMENT*>(node))->pNext);
-  }
+	USER_TYPE *GetNext(USER_TYPE *node) {
+		return reinterpret_cast<USER_TYPE*>((reinterpret_cast<FSA_ELEMENT*>(node))->pNext);
+	}
 
 private:
-  FSA_ELEMENT *m_pFirstFree;
-  FSA_ELEMENT *m_pFirstUsed;
-  FSA_ELEMENT *m_pMemory;
-  unsigned int m_MaxElements;
+	FSA_ELEMENT *m_pFirstFree;
+	FSA_ELEMENT *m_pFirstUsed;
+	FSA_ELEMENT *m_pMemory;
+	unsigned int m_MaxElements;
 };
 
 #endif // FSA_H
