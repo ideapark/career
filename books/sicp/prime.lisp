@@ -1,3 +1,8 @@
+; Fermat's little theorem
+;
+; If `p` is a prime number, then for any integer `a < p`, the
+; number `a^p % p == a % p`.
+;
 (define (expmod base exp m)
     (cond ((= exp 0) 1)
           ((even? exp)
