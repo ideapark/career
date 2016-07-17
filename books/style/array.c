@@ -46,7 +46,7 @@ int delname(char *name)
 	for (i = 0; i < nvtab.nval; i++)
 		if (strcmp(nvtab.nameval[i].name, name) == 0) {
 			memmove(nvtab.nameval+i, nvtab.nameval+i+1,
-					(nvtab.nval-(i+1)) * sizeof(Nameval));
+				(nvtab.nval-(i+1)) * sizeof(Nameval));
 			nvtab.nval--;
 			return 1;
 		}
