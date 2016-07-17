@@ -20,3 +20,7 @@
                    ((and (negative? b-value) (positive? a-value))
                     (search f b a))
                    (else (error "Values are not of opposite sign" a b)))))
+
+; PI
+; sin x = 0  x in [2, 4]
+(half-interval-method sin 2.0 4.0)
