@@ -9,9 +9,9 @@ namespace reporter {
 
 static int cmp_node(const vma_node *left, const vma_node *right)
 {
-  if (left->vma_end <= right->vma_begin)
+  if (left->vma_end < right->vma_begin)
     return -1;
-  else if (left->vma_begin >= right->vma_end)
+  else if (left->vma_begin > right->vma_end)
     return 1;
   else
     return 0;
