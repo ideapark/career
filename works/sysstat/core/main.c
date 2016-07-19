@@ -40,7 +40,7 @@ static queue_entry g_callbackqueue[CALLBACKQUEUE_LEN] = {{
 		.run  = NULL,
 		.exit = NULL,
 	},
-		.taken = untaken,
+	.taken = untaken,
 }};
 
 static void reset_timestamp(void)
