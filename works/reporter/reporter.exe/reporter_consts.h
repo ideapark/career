@@ -12,7 +12,7 @@
 
 namespace reporter {
 
-  std::string lookup_event_name(uint32_t event_id);
+std::string lookup_event_name(uint32_t event_id);
 
 } /* namespace reporter */
 
