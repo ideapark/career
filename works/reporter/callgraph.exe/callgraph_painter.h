@@ -15,23 +15,23 @@ namespace callgraph {
 
 class painter
 {
-  public:
-    painter();
-    ~painter();
+public:
+	painter();
+	~painter();
 
-  public:
-    void do_work();
+public:
+	void do_work();
 
-  private:
-    void query_database();
-    void paint_dotfile();
-    void whole_callgraph();
-    void caller_callee_callgraph(int func_key);
+private:
+	void query_database();
+	void paint_dotfile();
+	void whole_callgraph();
+	void caller_callee_callgraph(int func_key);
 
-  private:
-    std::map<int, callgraph_entry *> callgraph;
-    std::ofstream callgraph_dot;
-    std::ofstream callgraph_info;
+private:
+	std::map<int, callgraph_entry *> callgraph;
+	std::ofstream callgraph_dot;
+	std::ofstream callgraph_info;
 };
 
 } /* namespace callgraph */
