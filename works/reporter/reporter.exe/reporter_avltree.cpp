@@ -132,9 +132,13 @@ vma_node *avl_tree::insert(vma_node *&root, vma_node *node)
     root->left = insert(root->left, node);
     root = balance(root);
   } else {
+    /* merge node */
+    if (root->vma_begin == node->vma_end)
+      root->vma_begin = node->vma_begin;
+    if (root->vma_end == node->vma_begin)
+      root->vma_end = node->vma_end;
     return root;
   }
-
   return root;
 }
 
