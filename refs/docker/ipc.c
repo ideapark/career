@@ -9,7 +9,7 @@
 
 #define STACK_SIZE (1024 * 1024)
 
-// sync primitive
+/* sync primitive */
 int checkpoint[2];
 
 static char child_stack[STACK_SIZE];
@@ -23,10 +23,10 @@ int child_main(void *arg)
 {
 	char c;
 
-	// init sync primitive
+	/* init sync primitive */
 	close(checkpoint[1]);
 
-	// wait...
+	/* wait... */
 	read(checkpoint[0], &c, 1);
 	printf(" - World!\n");
 	sethostname("In Namespace", 12);
@@ -35,18 +35,18 @@ int child_main(void *arg)
 	return 1;
 }
 
-int main()
+int main(void)
 {
-	// init sync primitive
+	/* init sync primitive */
 	pipe(checkpoint);
 	printf(" - Hello?\n");
 	int child_pid = clone(child_main, child_stack + STACK_SIZE,
 			CLONE_NEWUTS|CLONE_NEWIPC|SIGCHLD, NULL);
 
-	// some damn long init job
+	/* some damn long init job */
 	sleep(4);
 
-	// signal "done"
+	/* signal "done" */
 	close(checkpoint[1]);
 	waitpid(child_pid, NULL, 0);
 	return 0;

@@ -10,9 +10,9 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-#define STACK_SIZE (1024 * 1024)
+#define STACK_SIZE (1024*1024)
 
-// sync primitive
+/* sync primitive */
 int checkpoint[2];
 
 static char child_stack[STACK_SIZE];
@@ -26,20 +26,20 @@ int child_main(void *arg)
 {
 	int c;
 
-	// init sync primitive
+	/* init sync primitive */
 	close(checkpoint[1]);
 
-	// setup hostname
+	/* setup hostname */
 	printf(" - [%5d] World!\n", getpid());
 	sethostname("In Namespace", 12);
 
-	// remount "/proc" to get accurate "top" && "ps" output
+	/* remount "/proc" to get accurate "top" && "ps" output */
 	mount("proc", "/proc", "proc", 0, NULL);
 
-	// wait for network setup in parent
+	/* wait for network setup in parent */
 	read(checkpoint[0], &c, 1);
 
-	// setupt network
+	/* setupt network */
 	system("ip link set lo up");
 	system("ip link set veth1 up");
 	system("ip addr add 169.254.1.2/30 dev veth1");
@@ -49,16 +49,16 @@ int child_main(void *arg)
 	return 1;
 }
 
-int main()
+int main(void)
 {
-	// init sync primitive
+	/* init sync primitive */
 	pipe(checkpoint);
 	printf(" - [%5d] Hello?\n", getpid());
 	int child_pid = clone(child_main, child_stack + STACK_SIZE,
 			CLONE_NEWUTS|CLONE_NEWIPC|CLONE_NEWPID|
 			CLONE_NEWNS|CLONE_NEWNET|SIGCHLD, NULL);
 
-	// further init: create a veth pair
+	/* further init: create a veth pair */
 	char *cmd;
 	asprintf(&cmd, "ip link set veth1 netns %d", child_pid);
 	system("ip link add veth0 type veth peer name veth1");
@@ -67,7 +67,7 @@ int main()
 	system("ip addr add 169.254.1.1/30 dev veth0");
 	free(cmd);
 
-	// signal "done"
+	/* signal "done" */
 	close(checkpoint[1]);
 	waitpid(child_pid, NULL, 0);
 	return 0;

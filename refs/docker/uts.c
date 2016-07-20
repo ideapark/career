@@ -7,7 +7,7 @@
 #include <signal.h>
 #include <unistd.h>
 
-#define STACK_SIZE (1024 * 1024)
+#define STACK_SIZE (1024*1024)
 
 static char child_stack[STACK_SIZE];
 
@@ -25,7 +25,7 @@ int child_main(void *arg)
 	return 1;
 }
 
-int main()
+int main(void)
 {
 	printf(" - Hello?\n");
 	int child_pid = clone(child_main, child_stack + STACK_SIZE,
