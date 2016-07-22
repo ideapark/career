@@ -90,18 +90,18 @@ void callgraph_sqlite::query_callgraph_entry(const std::string &sql,
 		return;
 
 	for (int i = 1; i <= rows; i++) {
-		int func_private_key  = atoi(table[i*cols + 0]);
+		int func_private_key = atoi(table[i*cols + 0]);
 		std::string func_name = std::string(table[i*cols + 1]);
-		float sample_ratio    = atof(table[i*cols+2]);
-		float total_ratio     = atof(table[i*cols+3]);
+		float sample_ratio = atof(table[i*cols+2]);
+		float total_ratio = atof(table[i*cols+3]);
 
 		std::map<int, callgraph_entry *>::iterator
-			iter = callgraph.find(func_private_key),
-			     end = callgraph.end();
+				iter = callgraph.find(func_private_key),
+				end = callgraph.end();
 
 		if (iter == end) {
 			callgraph_entry *entry = new callgraph_entry(func_private_key, func_name,
-					sample_ratio, total_ratio);
+								sample_ratio, total_ratio);
 			callgraph.insert(std::make_pair(func_private_key, entry));
 		}
 	}
@@ -123,7 +123,7 @@ void callgraph_sqlite::query_callee_entry(const std::string &sql,
 	for (int i = 1; i <= rows; i++) {
 		int caller_func_private_key = atoi(table[i*cols + 0]);
 		int callee_func_private_key = atoi(table[i*cols + 1]);
-		float call_ratio            = atof(table[i*cols + 2]);
+		float call_ratio = atof(table[i*cols + 2]);
 
 		int func_key;
 		callee_entry *entry;
@@ -166,7 +166,7 @@ void callgraph_sqlite::query_callee_entry(const std::string &sql,
 
 		std::map<int, callgraph_entry *>::iterator
 			iter = callgraph.find(func_key),
-			     end = callgraph.end();
+			end = callgraph.end();
 
 		if (iter != end) {
 			callgraph_entry *callgraph_entry = iter->second;

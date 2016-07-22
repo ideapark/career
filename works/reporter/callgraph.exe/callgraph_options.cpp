@@ -85,7 +85,7 @@ static void check_func_who_and_key(int who, int key)
 	}
 }
 
-static void check_slice_start_end(int start, int end)
+static void check_slice_range(int start, int end)
 {
 	if ((start == -1 && end == -1) || (start >= 0 && end >= start))
 		/* valid status, fall through */;
@@ -106,7 +106,7 @@ void get_options(int argc, const char *argv[])
 	check_file(options::database);
 	check_dir(options::output);
 	check_func_who_and_key(options::func_who, options::func_key);
-	check_slice_start_end(options::slice_start, options::slice_end);
+	check_slice_range(options::slice_start, options::slice_end);
 
 	std::cout << std::endl << "------- callgraph.exe -------" << std::endl;
 	std::cout << "   database: " << options::database << std::endl;

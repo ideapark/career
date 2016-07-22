@@ -74,7 +74,7 @@ painter::~painter()
 	 * Delete callgraph_entry
 	 */
 	std::map<int, callgraph_entry *>::iterator iter = callgraph.begin(),
-		end = callgraph.end();
+						end = callgraph.end();
 	while (iter != end) {
 		callgraph_entry *entry = iter->second;
 
@@ -155,28 +155,28 @@ void painter::query_database()
 	std::ostringstream callgraph_entry_sql;
 
 	callgraph_entry_sql << "SELECT fit.func_private_key,\n"
-		<< "       fit.func_name,\n"
-		<< "       fst.sample_ratio,\n"
-		<< "       fst.total_ratio\n"
-		<< "FROM (" << fst.str() << ") AS fst\n"
-		<< "LEFT JOIN\n"
-		<< "  func_info_table AS fit\n"
-		<< "ON fit.func_private_key = fst.func_private_key;\n";
+			<< "       fit.func_name,\n"
+			<< "       fst.sample_ratio,\n"
+			<< "       fst.total_ratio\n"
+			<< "FROM (" << fst.str() << ") AS fst\n"
+			<< "LEFT JOIN\n"
+			<< "  func_info_table AS fit\n"
+			<< "ON fit.func_private_key = fst.func_private_key;\n";
 
 	callgraph_sqlite.query_callgraph_entry(callgraph_entry_sql.str(), callgraph);
 
 	std::ostringstream callee_entry_sql;
 
 	callee_entry_sql << "SELECT caller_func_private_key,\n"
-		<< "       callee_func_private_key,\n"
-		<< "       ROUND(SUM(call_count) * 100.0 / " << sample_count_sum << ", 4) AS call_ratio\n"
-		<< "FROM callgraph_slice_table\n"
-		<< "WHERE 1 = 1\n"
-		<< where_between("slice_index", options::slice_start, options::slice_end, -1)
-		<< where_in("process_private_key", process_keys_sql.str())
-		<< where_in("task_private_key", task_keys_sql.str())
-		<< "GROUP BY caller_func_private_key,\n"
-		<< "         callee_func_private_key;\n";
+			<< "       callee_func_private_key,\n"
+			<< "       ROUND(SUM(call_count) * 100.0 / " << sample_count_sum << ", 4) AS call_ratio\n"
+			<< "FROM callgraph_slice_table\n"
+			<< "WHERE 1 = 1\n"
+			<< where_between("slice_index", options::slice_start, options::slice_end, -1)
+			<< where_in("process_private_key", process_keys_sql.str())
+			<< where_in("task_private_key", task_keys_sql.str())
+			<< "GROUP BY caller_func_private_key,\n"
+			<< "         callee_func_private_key;\n";
 
 	callgraph_sqlite.query_callee_entry(callee_entry_sql.str(), callgraph);
 }
