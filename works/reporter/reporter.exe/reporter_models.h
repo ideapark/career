@@ -59,15 +59,15 @@ public:
 
 public:
 	summary_info() {
-		data_dir      = "";
-		image_dir     = "";
+		data_dir = "";
+		image_dir = "";
 		cpu_frequency = -1;
-		start_time    = -1;
-		end_time      = -1;
-		task_num      = 0;
-		func_num      = 0;
-		cpu_peak      = 0.0;
-		cpu_avg       = 0.0;
+		start_time = -1;
+		end_time = -1;
+		task_num = 0;
+		func_num = 0;
+		cpu_peak = 0.0;
+		cpu_avg = 0.0;
 	}
 
 public:
@@ -102,8 +102,8 @@ public:
 public:
 	image_info() {
 		image_private_key = -1;
-		unix_path         = "";
-		win_path          = "";
+		unix_path = "";
+		win_path = "";
 	}
 
 public:
@@ -145,10 +145,10 @@ public:
 
 public:
 	event_info() {
-		event_private_key  = event_info::genkey();
-		event_name         = "";
-		event_id           = -1;
-		sample_count       = 0;
+		event_private_key = event_info::genkey();
+		event_name = "";
+		event_id = -1;
+		sample_count = 0;
 		sample_reset_value = 0;
 	}
 
@@ -205,13 +205,13 @@ public:
 public:
 	process_info() {
 		process_private_key = process_info::genkey();
-		event_private_key   = -1;
-		pid                 = -1;
-		vcpu                = -1;
-		process_name        = "";
-		sample_count        = 0;
-		sample_ratio        = 0.0;
-		peak_ratio          = 0.0;
+		event_private_key = -1;
+		pid = -1;
+		vcpu = -1;
+		process_name = "";
+		sample_count = 0;
+		sample_ratio = 0.0;
+		peak_ratio = 0.0;
 	}
 
 public:
@@ -270,14 +270,14 @@ public:
 
 public:
 	task_info() {
-		task_private_key     = task_info::genkey();
-		event_private_key    = -1;
-		process_private_key  = -1;
-		tid                  = -1;
-		task_name            = "";
-		sample_count         = 0;
-		sample_ratio         = 0.0;
-		peak_ratio           = 0.0;
+		task_private_key = task_info::genkey();
+		event_private_key = -1;
+		process_private_key = -1;
+		tid = -1;
+		task_name = "";
+		sample_count = 0;
+		sample_ratio = 0.0;
+		peak_ratio = 0.0;
 	}
 
 public:
@@ -324,12 +324,12 @@ public:
 
 public:
 	func_info() {
-		func_private_key   = func_info::genkey();
-		image_private_key  = -1;
-		func_vma           = 0;
-		func_name          = "";
-		file_path          = "";
-		line               = 0;
+		func_private_key = func_info::genkey();
+		image_private_key = -1;
+		func_vma = 0;
+		func_name = "";
+		file_path = "";
+		line = 0;
 	}
 
 public:
@@ -386,13 +386,13 @@ public:
 
 public:
 	callgraph_info() {
-		event_private_key       = -1;
-		process_private_key     = -1;
-		task_private_key        = -1;
+		event_private_key = -1;
+		process_private_key = -1;
+		task_private_key = -1;
 		caller_func_private_key = -1;
 		callee_func_private_key = -1;
-		call_count              = 0;
-		call_ratio              = 0.0;
+		call_count = 0;
+		call_ratio = 0.0;
 	}
 
 public:
@@ -430,10 +430,10 @@ public:
 
 public:
 	cpu_slice() {
-		slice_index       = -1;
+		slice_index = -1;
 		event_private_key = -1;
-		sample_count      = 0;
-		sample_ratio      = 0.0;
+		sample_count = 0;
+		sample_ratio = 0.0;
 	}
 
 public:
@@ -475,10 +475,10 @@ public:
 
 public:
 	process_slice() {
-		slice_index         = -1;
-		event_private_key   = -1;
+		slice_index = -1;
+		event_private_key = -1;
 		process_private_key = -1;
-		sample_count        = 0;
+		sample_count = 0;
 	}
 
 public:
@@ -525,11 +525,11 @@ public:
 
 public:
 	task_slice() {
-		slice_index         = -1;
-		event_private_key   = -1;
+		slice_index = -1;
+		event_private_key = -1;
 		process_private_key = -1;
-		task_private_key    = -1;
-		sample_count        = 0;
+		task_private_key = -1;
+		sample_count = 0;
 	}
 
 public:
@@ -585,13 +585,13 @@ public:
 
 public:
 	func_slice() {
-		slice_index         = -1;
-		event_private_key   = -1;
+		slice_index = -1;
+		event_private_key = -1;
 		process_private_key = -1;
-		task_private_key    = -1;
-		func_private_key    = -1;
-		sample_count        = 0;
-		total_count         = 0;
+		task_private_key = -1;
+		func_private_key = -1;
+		sample_count = 0;
+		total_count = 0;
 	}
 
 public:
@@ -648,13 +648,13 @@ public:
 
 public:
 	callgraph_slice() {
-		slice_index             = -1;
-		event_private_key       = -1;
-		process_private_key     = -1;
-		task_private_key        = -1;
+		slice_index = -1;
+		event_private_key = -1;
+		process_private_key = -1;
+		task_private_key = -1;
 		caller_func_private_key = -1;
 		callee_func_private_key = -1;
-		call_count              = 0;
+		call_count = 0;
 	}
 
 public:
@@ -713,14 +713,14 @@ public:
 
 public:
 	func_sample() {
-		func_private_key    = -1;
-		event_private_key   = -1;
+		func_private_key = -1;
+		event_private_key = -1;
 		process_private_key = -1;
-		task_private_key    = -1;
-		sample_count        = 0;
-		sample_ratio        = 0.0;
-		total_count         = 0;
-		total_ratio         = 0.0;
+		task_private_key = -1;
+		sample_count = 0;
+		sample_ratio = 0.0;
+		total_count = 0;
+		total_ratio = 0.0;
 	}
 
 public:
@@ -773,12 +773,12 @@ public:
 
 public:
 	srcline_sample() {
-		event_private_key   = -1;
+		event_private_key = -1;
 		process_private_key = -1;
-		task_private_key    = -1;
-		image_private_key   = -1;
-		objdump_vma         = 0;
-		sample_count        = 0;
+		task_private_key = -1;
+		image_private_key = -1;
+		objdump_vma = 0;
+		sample_count = 0;
 	}
 
 public:
@@ -816,10 +816,10 @@ public:
 
 public:
 	process_imagefile() {
-		pid               = -1;
+		pid = -1;
 		image_private_key = -1;
-		vma_start         = 0;
-		vma_end           = 0;
+		vma_start = 0;
+		vma_end = 0;
 	}
 
 public:

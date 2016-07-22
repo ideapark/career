@@ -20,13 +20,12 @@ static const EventNameMap::value_type event_names[] = {
 	/* Add event_id : event_name Here */
 };
 
-static const EventNameMap APS_EVENT_NAMES(event_names,
-		event_names + ARRAY_LENGTH(event_names));
+static const EventNameMap APS_EVENT_NAMES(event_names, event_names + ARRAY_LENGTH(event_names));
 
 std::string lookup_event_name(uint32_t event_id)
 {
 	EventNameMap::const_iterator iter = APS_EVENT_NAMES.find(event_id),
-		end = APS_EVENT_NAMES.end();
+					end = APS_EVENT_NAMES.end();
 	if (iter != end)
 		return iter->second;
 	else

@@ -92,9 +92,9 @@ transfer::transfer(std::string data_dir, std::string image_dir,
 
 		if (create) {
 			const key_path &key_path = iter->second;
-			image_info->unix_path         = unix_path;
+			image_info->unix_path = unix_path;
 			image_info->image_private_key = key_path.bfd_key;
-			image_info->win_path          = key_path.win_path;
+			image_info->win_path = key_path.win_path;
 		}
 		iter++;
 	}
@@ -164,12 +164,13 @@ void transfer::transfer_engine()
 									vma_end = vma_nodes.end();
 			while (vma_iter != vma_end) {
 				std::string key = to_string(pid) + "|" + to_string((*vma_iter)->bfd_key);
-				process_imagefile *process_imagefile = get_or_create(key, process_imagefiles, create);
+				process_imagefile *process_imagefile =
+						get_or_create(key, process_imagefiles, create);
 				if (create) {
-					process_imagefile->pid               = pid;
+					process_imagefile->pid = pid;
 					process_imagefile->image_private_key = (*vma_iter)->bfd_key;
-					process_imagefile->vma_start         = (*vma_iter)->vma_begin;
-					process_imagefile->vma_end           = (*vma_iter)->vma_end;
+					process_imagefile->vma_start = (*vma_iter)->vma_begin;
+					process_imagefile->vma_end = (*vma_iter)->vma_end;
 				}
 				vma_iter++;
 			}
@@ -233,7 +234,9 @@ void transfer::transfer_record(int vcpu, const sym_info &sym_info,
 	/*
 	 * process_info
 	 */
-	key = to_string(vcpu) + "|" + to_string(record.pid) + "|" + to_string(event_info->event_private_key);
+	key = to_string(vcpu) + "|" +
+		to_string(record.pid) + "|" +
+		to_string(event_info->event_private_key);
 
 	process_info *process_info = get_or_create(key, process_infos, create);
 
@@ -241,13 +244,16 @@ void transfer::transfer_record(int vcpu, const sym_info &sym_info,
 		process_info->event_private_key = event_info->event_private_key;
 		process_info->pid = record.pid;
 		process_info->vcpu = vcpu;
-		process_info->process_name = curr_bfd_symbol->get_execfile(record.pid) + "@" + to_string(record.pid);
+		process_info->process_name =
+			curr_bfd_symbol->get_execfile(record.pid) + "@" + to_string(record.pid);
 	}
 
 	/*
 	 * task_info
 	 */
-	key = to_string(process_info->process_private_key) + "|" + to_string(record.tid) + "|" + to_string(event_info->event_private_key);
+	key = to_string(process_info->process_private_key) + "|" +
+		to_string(record.tid) + "|" +
+		to_string(event_info->event_private_key);
 
 	task_info *task_info = get_or_create(key, task_infos, create);
 
@@ -270,9 +276,9 @@ void transfer::transfer_record(int vcpu, const sym_info &sym_info,
 		func_info->image_private_key = sym_info.bfd_key;
 		func_info->func_vma = sym_info.vma_start;
 		curr_bfd_symbol->get_syminfo(sym_info,
-				func_info->func_name,
-				func_info->file_path,
-				func_info->line);
+					func_info->func_name,
+					func_info->file_path,
+					func_info->line);
 		summaryInfo.func_num++;
 	}
 
@@ -299,10 +305,10 @@ void transfer::transfer_record(int vcpu, const sym_info &sym_info,
 		/*
 		 * srcline_sample
 		 */
-		key = to_string(event_info->event_private_key)     + "|" +
+		key = to_string(event_info->event_private_key) + "|" +
 			to_string(process_info->process_private_key) + "|" +
-			to_string(task_info->task_private_key)       + "|" +
-			to_string(sym_info.bfd_key)                  + "|" +
+			to_string(task_info->task_private_key) + "|" +
+			to_string(sym_info.bfd_key) + "|" +
 			to_string(sym_info.objdump_vma);
 
 		srcline_sample *srcline_sample = get_or_create(key, srcline_samples, create);
@@ -335,7 +341,8 @@ void transfer::transfer_record(int vcpu, const sym_info &sym_info,
 	/*
 	 * cpu_slice
 	 */
-	key = to_string(record.time_diff) + "|" + to_string(event_info->event_private_key);
+	key = to_string(record.time_diff) + "|" +
+		to_string(event_info->event_private_key);
 
 	cpu_slice *cpu_slice = get_or_create(key, cpu_slices, create);
 
@@ -419,7 +426,9 @@ void transfer::transfer_callgraph(int vcpu,
 	key = to_string(record.event);
 	event_info *event_info = get_or_create(key, event_infos, create);
 
-	key = to_string(vcpu) + "|" + to_string(record.pid) + "|" + to_string(event_info->event_private_key);
+	key = to_string(vcpu) + "|" +
+		to_string(record.pid) + "|" +
+		to_string(event_info->event_private_key);
 
 	process_info *process_info = get_or_create(key, process_infos, create);
 
@@ -429,11 +438,13 @@ void transfer::transfer_callgraph(int vcpu,
 
 	task_info *task_info = get_or_create(key, task_infos, create);
 
-	key = to_string(caller_sym_info.bfd_key) + "|" + to_string(caller_sym_info.vma_start);
+	key = to_string(caller_sym_info.bfd_key) + "|" +
+		to_string(caller_sym_info.vma_start);
 
 	func_info *caller_func_info = get_or_create(key, func_infos, create);
 
-	key = to_string(callee_sym_info.bfd_key) + "|" + to_string(callee_sym_info.vma_start);
+	key = to_string(callee_sym_info.bfd_key) + "|" +
+		to_string(callee_sym_info.vma_start);
 
 	func_info *callee_func_info = get_or_create(key, func_infos, create);
 
@@ -548,7 +559,7 @@ void transfer::do_calculate()
 					process_slice *process_slice = ps_iter->second;
 
 					if (process_slice->event_private_key == event_info->event_private_key &&
-							process_slice->process_private_key == process_info->process_private_key) {
+						process_slice->process_private_key == process_info->process_private_key) {
 
 						process_info->peak_ratio = std::max<float>(process_info->peak_ratio,
 									(process_slice->sample_count * 100.0) / theory_cpse);
@@ -567,7 +578,7 @@ void transfer::do_calculate()
 					task_info *task_info = ti_iter->second;
 
 					if (task_info->event_private_key == event_info->event_private_key &&
-							task_info->process_private_key == process_info->process_private_key) {
+						task_info->process_private_key == process_info->process_private_key) {
 
 						task_info->sample_ratio = (task_info->sample_count * 100.0) / theory_ce;
 

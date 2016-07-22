@@ -72,11 +72,11 @@ void bfd_symbol::add_vma_entry(const vma_entry &vma,
 	reporter::vma_node *node = new reporter::vma_node();
 
 	node->vma_begin = vma.vm_start;
-	node->vma_end   = vma.vm_end;
+	node->vma_end = vma.vm_end;
 	node->unix_path = vma.vm_file;
-	node->left      = 0;
-	node->right     = 0;
-	node->bfd_key   = get_vma_bfd_key(vma, images);
+	node->left = 0;
+	node->right = 0;
+	node->bfd_key = get_vma_bfd_key(vma, images);
 
 	std::map<int, avl_tree>::iterator iter = pid_vmatree.find(vma.pid),
 					end = pid_vmatree.end();
@@ -96,9 +96,9 @@ void bfd_symbol::add_module_entry(const module_entry &module,
 	reporter::module_node *node = new reporter::module_node();
 
 	node->vma_begin = module.start;
-	node->vma_end   = module.end;
+	node->vma_end = module.end;
 	node->unix_path = module.module_name;
-	node->bfd_key   = get_module_bfd_key(module, images);
+	node->bfd_key = get_module_bfd_key(module, images);
 
 	/*
 	 * Some module have more than one module_entry (like 'vmlinux'),
@@ -126,8 +126,8 @@ int bfd_symbol::get_module_bfd_key(const module_entry &module,
 
 	std::string name = std::string(module.module_name);
 	std::string ko_name = (name != vmlinux)
-		? (name + ".ko") /* append suffix .ko */
-		: vmlinux;
+				? (name + ".ko") /* append suffix .ko */
+				: vmlinux;
 
 	std::map<std::string, key_path>::const_iterator iter = images.begin(),
 							end = images.end();
@@ -226,7 +226,7 @@ bool bfd_symbol::demangle_user_symbol(const struct record_entry &record,
 		sym_info &sym_info)
 {
 	const std::map<int, avl_tree>::iterator tree_iter = pid_vmatree.find(record.pid),
-	tree_end = pid_vmatree.end();
+						tree_end = pid_vmatree.end();
 	if (tree_iter == tree_end)
 		return false; /* process vma tree not found */
 
@@ -287,14 +287,14 @@ bool bfd_symbol::demangle_kernel_symbol(const struct record_entry &record,
 		bfd_node->pbfd = new op_bfd(bfd_node->win_path, false);
 
 	unsigned long long file_offset = (module_node->unix_path.rfind(vmlinux) != std::string::npos)
-		? record.pc
-		: (record.pc - module_node->vma_begin + 1);
+					? record.pc
+					: (record.pc - module_node->vma_begin + 1);
 
 	uint32_t sym_index = bfd_node->pbfd->get_symindex(file_offset);
 	uint32_t vma_start = bfd_node->pbfd->start_vma(sym_index);
 	uint32_t objdump_vma = (module_node->unix_path.rfind(vmlinux) != std::string::npos)
-		? file_offset
-		: bfd_node->pbfd->objdump_vma(file_offset);
+				? file_offset
+				: bfd_node->pbfd->objdump_vma(file_offset);
 
 	if (sym_index == APS_INVALID_SYMBOL_INDEX || vma_start == APS_INVALID_VMA)
 		return false;

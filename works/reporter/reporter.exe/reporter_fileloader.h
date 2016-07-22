@@ -21,7 +21,7 @@ public:
 public:
 	std::string get_thread_name(int tid) {
 		std::map<int, std::string>::const_iterator iter = threads.find(tid),
-			end = threads.end();
+							end = threads.end();
 		if (iter != end)
 			return "#" + iter->second;
 		else

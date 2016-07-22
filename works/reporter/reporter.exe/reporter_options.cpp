@@ -15,10 +15,10 @@
 namespace reporter {
 
 namespace options {
-	std::string data_dir   = ".";
-	std::string image_dir  = ".";
+	std::string data_dir = ".";
+	std::string image_dir = ".";
 	std::string output_dir = ".";
-	int cpu_frequency      = -1;
+	int cpu_frequency = -1;
 }
 
 namespace {
