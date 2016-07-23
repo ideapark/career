@@ -34,8 +34,8 @@ callgraph_sqlite::~callgraph_sqlite()
 }
 
 bool callgraph_sqlite::get_table(const std::string &sql,
-		char **&table,
-		int &rows, int &cols)
+				char **&table,
+				int &rows, int &cols)
 {
 	int rc;
 	char *errmsg = 0;
@@ -96,8 +96,8 @@ void callgraph_sqlite::query_callgraph_entry(const std::string &sql,
 		float total_ratio = atof(table[i*cols+3]);
 
 		std::map<int, callgraph_entry *>::iterator
-				iter = callgraph.find(func_private_key),
-				end = callgraph.end();
+			iter = callgraph.find(func_private_key),
+			end = callgraph.end();
 
 		if (iter == end) {
 			callgraph_entry *entry = new callgraph_entry(func_private_key, func_name,
@@ -110,7 +110,7 @@ void callgraph_sqlite::query_callgraph_entry(const std::string &sql,
 }
 
 void callgraph_sqlite::query_callee_entry(const std::string &sql,
-		std::map<int, callgraph_entry *> &callgraph)
+					std::map<int, callgraph_entry *> &callgraph)
 {
 	char **table = 0;
 	int rows = 0, cols = 0;

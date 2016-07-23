@@ -16,7 +16,7 @@ namespace callgraph {
 
 enum e_status {
 	E_UNVISITED = 0,
-	E_VISITED   = 1
+	E_VISITED = 1
 };
 
 class callee_entry
@@ -63,7 +63,8 @@ public:
 			std::map<int, callgraph_entry *> &callgraph);
 
 private:
-	bool get_table(const std::string &sql, char **&table, int &rows, int &cols);
+	bool get_table(const std::string &sql, char **&table,
+			int &rows, int &cols);
 
 private:
 	sqlite3 *sqlite_db;

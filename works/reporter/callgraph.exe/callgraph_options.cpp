@@ -39,7 +39,6 @@ namespace options {
 } /* namespace options */
 
 namespace {
-
 	popt::option options_array[] = {
 		popt::option(options::database,         "database",    '\0', "database path",     "database path"),
 		popt::option(options::output,           "output",      '\0', "output directory",  "directory path"),
@@ -53,7 +52,6 @@ namespace {
 		popt::option(options::slice_end,        "slice_end",   '\0', "end slice index",   "number"),
 		popt::option(options::threshold_string, "threshold",   '\0', "ratio threshold",   "float"),
 	};
-
 }
 
 static void check_file(const std::string file)
