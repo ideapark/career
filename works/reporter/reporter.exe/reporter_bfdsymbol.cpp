@@ -67,7 +67,7 @@ bfd_symbol::~bfd_symbol()
 }
 
 void bfd_symbol::add_vma_entry(const vma_entry &vma,
-		const std::map<std::string, key_path> &images)
+			const std::map<std::string, key_path> &images)
 {
 	reporter::vma_node *node = new reporter::vma_node();
 
@@ -91,7 +91,7 @@ void bfd_symbol::add_vma_entry(const vma_entry &vma,
 }
 
 void bfd_symbol::add_module_entry(const module_entry &module,
-		const std::map<std::string, key_path> &images)
+			const std::map<std::string, key_path> &images)
 {
 	reporter::module_node *node = new reporter::module_node();
 
@@ -120,7 +120,7 @@ void bfd_symbol::add_module_entry(const module_entry &module,
 }
 
 int bfd_symbol::get_module_bfd_key(const module_entry &module,
-		const std::map<std::string, key_path> &images)
+				const std::map<std::string, key_path> &images)
 {
 	const std::string vmlinux = "vmlinux"; /* has no suffix .ko */
 
@@ -146,7 +146,7 @@ int bfd_symbol::get_module_bfd_key(const module_entry &module,
 }
 
 int bfd_symbol::get_vma_bfd_key(const vma_entry &vma,
-		const std::map<std::string, key_path> &images)
+				const std::map<std::string, key_path> &images)
 {
 	std::string elf_path = vma.vm_file;
 

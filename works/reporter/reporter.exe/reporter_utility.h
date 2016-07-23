@@ -12,7 +12,7 @@
 #include <string>
 #include <sstream>
 
-#define ARRAY_LENGTH(arr)   (sizeof(arr) / sizeof(arr[0]))
+#define ARRAY_LENGTH(arr)   (sizeof(arr)/sizeof(arr[0]))
 
 template <class T>
 inline std::string to_string(const T &t)
