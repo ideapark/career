@@ -91,7 +91,7 @@ static bool can_cross(const struct point &p)
 struct PrintPoint
 {
 	void operator()(const struct point &p) {
-		std::cout << "(" << p.x << "," << p.y << ")";
+		std::cout << "(" << p.y << "," << p.x << ")";
 	}
 };
 
@@ -109,7 +109,7 @@ int main(int argc, char *argv[])
 
 	std::cout << std::endl << std::endl;
 
-	const struct point start = {.x=10, .y=10};
+	const struct point start = {.y=0, .x=0};
 
 	std::list<std::list<struct point> > box_pathes;
 	bfs_search_all(start, box_pathes, can_cross, is_box);
