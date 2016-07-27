@@ -1,7 +1,7 @@
 # ---------------------------------------------
 #      BREADTH FIRST SEARCH AlGORITHM
 #
-# Copyright (C) Zhou Peng <lockrecv@gmail.com>
+# Copyright (c) Zhou Peng <lockrecv@qq.com>
 #
 # ---------------------------------------------
 
