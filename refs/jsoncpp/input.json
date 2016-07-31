@@ -1,9 +1,20 @@
 {
 	"encoding": "UTF-8",
 	"plug-ins": [
-		"python",
-		"c++",
-		"ruby"
+		"C",
+		"C++",
+		"SHELL",
+		"LISP",
+		"SCHEME",
+		"JAVA",
+		"PYTHON",
+		"RUBY",
+		"C#",
+		"GO",
+		"JAVASCRIPT",
+		"HTML",
+		"CSS",
+		"PHP"
 	],
 	"indent": {"length": 3, "use_space": true}
 }
