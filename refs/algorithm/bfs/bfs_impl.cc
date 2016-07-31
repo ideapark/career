@@ -51,7 +51,7 @@ void bfs_search_all(const struct point start,
 			RIGHT(front)
 		};
 
-		for (unsigned int i = 0; i < BFS_ARRAY_LENGTH(neighbors); i++) {
+		for (unsigned int i = 0; i < ARRAY_LENGTH(neighbors); i++) {
 			int neighbor_uuid = UUID(neighbors[i]);
 
 			if (!PA(neighbors[i]) && !FA(neighbors[i]))

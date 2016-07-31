@@ -6,7 +6,7 @@
 # ---------------------------------------------
 
 CC = g++
-cflag = -Wall
+cflag = -Wall -DBFS_DEBUG
 
 objs += bfs_main.o
 objs += bfs_impl.o
