@@ -164,12 +164,12 @@ static Array *search(Node *current, int dst, Set *open_set, Set *close_set, void
 	for (j = 0; j < adjs->len; j++) {
 		int i = adjs->arr[j];
 
-		if (i == dst) {
+		if (i == dst)
 			return path_backtrace(current, dst);
-		}
 
 		if (set_find(close_set, i) != -1)
 			continue;
+
 		int new_g = gscore(ud, i) + current->g;
 
 		int index;
@@ -194,7 +194,8 @@ static Array *search(Node *current, int dst, Set *open_set, Set *close_set, void
 }
 
 typedef struct AStarInfo {
-	Set *open_set, *close_set;
+	Set *open_set;
+	Set *close_set;
 } AStarInfo;
 
 static AStarInfo *create_info()

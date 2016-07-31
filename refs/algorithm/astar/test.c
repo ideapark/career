@@ -4,7 +4,7 @@
 #include <time.h>
 
 #define MAX 0
-#define N 16
+#define N   16
 
 typedef struct Node {
 	int index;
@@ -56,7 +56,7 @@ int main(int argc, char **argv)
 	}
 
 	srand(time(NULL));
-	Map *map = (Map *)malloc(sizeof(*map));
+	Map *map = malloc(sizeof(*map));
 	int i, j;
 	for (i = 0; i < N; i++) {
 		for (j = 0; j < N; j++) {
