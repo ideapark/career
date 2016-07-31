@@ -35,12 +35,11 @@ objects: copyright
 
 copyright:
 	@echo "@-------------------------------------------------------------------@"
-	@echo "@                    ADVANCED PERFORMANCE SOLUTION                  @"
 	@echo "@                                                                   @"
 	@echo "@ Copyright (C) Zhou Peng <lockrecv@qq.com>                         @"
 	@echo "@                                                                   @"
 	@echo "@ reporter.exe  - data parsing tool                                 @"
 	@echo "@ callgraph.exe - callgraph tool                                    @"
 	@echo "@                                                                   @"
-	@echo "@ PLEASE REFER TO [Documentation/*.txt] FOR HELP.                   @"
+	@echo "@ Please refer to [Documentation/*.txt] for help.                   @"
 	@echo "@-------------------------------------------------------------------@"
