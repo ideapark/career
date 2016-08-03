@@ -57,7 +57,7 @@ void logger_setlog(FILE *stream)
 
 int logger_info(const char *fmt, ...)
 {
-	static const char *bule = "\e[00;36m";
+	static const char *blue = "\e[00;36m";
 	static const char *info = "[info] ";
 
 	int cnt;
