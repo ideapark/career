@@ -1,5 +1,5 @@
 /*
- * Tank War Server
+ * server.c
  *
  * Copyright (c) Zhou Peng <lockrecv@qq.com>
  */
