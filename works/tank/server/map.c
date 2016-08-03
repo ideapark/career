@@ -1,5 +1,10 @@
+/*
+ * map.c
+ *
+ * Copyright (c) Zhou Peng <lockrecv@qq.com>
+ */
+
 #include "map.h"
-#include "server.h"
 
 /* map point */
 static const char *BRICK = "#";

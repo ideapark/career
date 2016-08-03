@@ -1,5 +1,11 @@
-#ifndef LOGER_H
-#define LOGER_H
+/*
+ * logger.h
+ *
+ * Copyright (c) Zhou Peng <lockrecv@qq.com>
+ */
+
+#ifndef LOGGER_H
+#define LOGGER_H
 
 #include <stdio.h>
 
@@ -8,4 +14,4 @@ int logger_info(const char *fmt, ...);
 int logger_warning(const char *fmt, ...);
 int logger_error(const char *fmt, ...);
 
-#endif /* LOGER_H */
+#endif /* LOGGER_H */
