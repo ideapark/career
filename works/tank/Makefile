@@ -4,17 +4,11 @@
 # Copyright (c) Zhou Peng <lockrecv@qq.com>
 # -----------------------------------------
 
-cc = gcc
-cflag = -Wall
+CC = gcc
+CFLAGS = -Wall
 
-export cc cflag
+export CC CFLAGS
 
-all: server client
-
-server:
+all:
 	$(MAKE) -C server
-
-client:
 	$(MAKE) -C client
-
-%.o: %.c
