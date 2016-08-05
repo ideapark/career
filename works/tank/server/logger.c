@@ -11,7 +11,7 @@
 
 #include "logger.h"
 
-static FILE *log_stream= NULL;
+static FILE *logger_cache= NULL;
 static int tty_cache = 0;
 
 static const char *strnow()
@@ -35,24 +35,37 @@ static int logger(const char *color, const char *level,
 
 	int cnt = 0;
 
-	if (!log_stream)
+	if (!logger_cache)
 		return cnt;
 
 	if (tty_cache)
-		cnt += fprintf(log_stream, "%s", color);
-	cnt += fprintf(log_stream, "%s", strnow());
-	cnt += fprintf(log_stream, "%s", level);
-	cnt += vfprintf(log_stream, fmt, args);
+		cnt += fprintf(logger_cache, "%s", color);
+	cnt += fprintf(logger_cache, "%s", strnow());
+	cnt += fprintf(logger_cache, "%s", level);
+	cnt += vfprintf(logger_cache, fmt, args);
 	if (tty_cache)
-		cnt += fprintf(log_stream, "%s", end);
+		cnt += fprintf(logger_cache, "%s", end);
 	return cnt;
 }
 
-void logger_setlog(FILE *stream)
+int logger_open(const char *logfile)
 {
-	int fd = fileno(stream);
+	FILE *log = fopen(logfile, "a+");
+	if (!log)
+		return 0;
+	int fd = fileno(log);
 	tty_cache = isatty(fd);
-	log_stream = stream;
+	logger_cache = log;
+	return 1;
+}
+
+int logger_close()
+{
+	if (!logger_cache) {
+		fclose(logger_cache);
+		return 1;
+	} else
+		return 0;
 }
 
 int logger_info(const char *fmt, ...)

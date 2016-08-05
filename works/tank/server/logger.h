@@ -9,7 +9,8 @@
 
 #include <stdio.h>
 
-void logger_setlog(FILE *stream);
+int logger_open(const char *logfile);
+int logger_close();
 int logger_info(const char *fmt, ...);
 int logger_warning(const char *fmt, ...);
 int logger_error(const char *fmt, ...);
