@@ -14,17 +14,16 @@
 static FILE *logger_cache= NULL;
 static int tty_cache = 0;
 
-static const char *strnow()
+static const char *strnow(char *buffer, size_t bufsize)
 {
 	static const char *timefmt = "[%Y-%m-%d %H:%M:%S]";
-	static char buffer[32];
 
 	time_t now;
 	struct tm *timeinfo;
 
 	time(&now);
 	timeinfo = localtime(&now);
-	strftime(buffer, 32, timefmt, timeinfo);
+	strftime(buffer, bufsize, timefmt, timeinfo);
 	return buffer;
 }
 
@@ -32,15 +31,17 @@ static int logger(const char *color, const char *level,
 		  const  char *fmt, va_list args)
 {
 	static const char *end = "\e[00m";
+	static const int bufsize = 32;
 
 	int cnt = 0;
+	char buffer[bufsize];
 
 	if (!logger_cache)
 		return cnt;
 
 	if (tty_cache)
 		cnt += fprintf(logger_cache, "%s", color);
-	cnt += fprintf(logger_cache, "%s", strnow());
+	cnt += fprintf(logger_cache, "%s", strnow(buffer, bufsize));
 	cnt += fprintf(logger_cache, "%s", level);
 	cnt += vfprintf(logger_cache, fmt, args);
 	if (tty_cache)
