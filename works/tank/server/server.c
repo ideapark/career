@@ -57,11 +57,15 @@ int main(int argc, char *argv[])
 	}
 
 	/* logger setup */
-	FILE *log_stream = fopen(server_log, "w+");
+	FILE *log_stream = fopen(server_log, "a+");
 	if (log_stream != NULL)
 		logger_setlog(log_stream);
 	else
 		exit(-2);
+
+	/* load map */
+	if (!map_load(server_map))
+		exit(-3);
 
 	return 0;
 }
