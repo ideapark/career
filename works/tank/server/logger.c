@@ -39,12 +39,12 @@ static int logger(const char *color, const char *level,
 		return cnt;
 
 	if (tty_cache)
-		cnt += fprintf(log_stream, color);
-	cnt += fprintf(log_stream, strnow());
-	cnt += fprintf(log_stream, level);
+		cnt += fprintf(log_stream, "%s", color);
+	cnt += fprintf(log_stream, "%s", strnow());
+	cnt += fprintf(log_stream, "%s", level);
 	cnt += vfprintf(log_stream, fmt, args);
 	if (tty_cache)
-		cnt += fprintf(log_stream, end);
+		cnt += fprintf(log_stream, "%s", end);
 	return cnt;
 }
 
