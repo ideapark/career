@@ -4,6 +4,7 @@
  * Copyright (c) Zhou Peng <lockrecv@qq.com>
  */
 
+#include <assert.h>
 #include <stdio.h>
 #include "map.h"
 #include "logger.h"
@@ -57,4 +58,18 @@ int map_load(const char *map)
 	fclose(f);
 	map_print();
 	return 1;
+}
+
+char map_get(short y, short x)
+{
+	assert(y >= 0 && y < Y_MAX && x >= 0 && x < X_MAX);
+	return MAP[y][x];
+}
+
+char map_set(short y, short x, char ch)
+{
+	assert(y >= 0 && y < Y_MAX && x >= 0 && x < X_MAX);
+	char old = MAP[y][x];
+	MAP[y][x] = ch;
+	return old;
 }

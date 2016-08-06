@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
 		exit(-3);
 
 	/*
-	 * game data initlization
+	 * game initialization
 	 */
 	game.leg_remain = LEG_MAX;
 	game.round_remain = ROUND_MAX;
@@ -81,6 +81,18 @@ int main(int argc, char *argv[])
 		for (tk = 0; tk < TANK_MAX; tk++) {
 			game.teams[tm].tanks[tk].id = tm + tk;
 			game.teams[tm].tanks[tk].star_count = 0;
+
+			/* random tank first postion */
+			short y, x;
+			for (y = 0; y < Y_MAX; y++) {
+				for (x = 0; x < X_MAX; x++) {
+					if (map_get(y, x) == AREA) {
+						game.teams[tm].tanks[tk].pos.y = y;
+						game.teams[tm].tanks[tk].pos.x = x;
+						map_set(y, x, TANK);
+					}
+				}
+			}
 		}
 	}
 

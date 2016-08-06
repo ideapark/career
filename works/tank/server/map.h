@@ -22,7 +22,21 @@
 #define COIN5 '5'
 #define STAR  '*'
 #define AREA  '-'
+#define TANK  '!'
 
+/*
+ * read map from  file
+ */
 int map_load(const char *map);
+
+/*
+ * get map point
+ */
+char map_get(short y, short x);
+
+/*
+ * set map point, return old point
+ */
+char map_set(short y, short x, char ch);
 
 #endif /* MAP_H */

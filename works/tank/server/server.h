@@ -8,16 +8,31 @@
 #define SERVER_H
 
 /* game limits */
-#define TANK_MAX 4
-#define LIFE_MAX 4
-#define LEG_MAX  2
-#define ROUND_MAX 150
-#define TEAM_MAX 2
-#define NAME_MAX 16
+#define TANK_MAX    4
+#define LIFE_MAX    4
+#define LEG_MAX     2
+#define ROUND_MAX   150
+#define TEAM_MAX    2
+#define NAME_MAX    16
+#define OFFLINE_MAX 10
+
+enum direction {
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT,
+	STILL
+};
+
+struct postion {
+	short y;
+	short x;
+};
 
 struct tank {
 	short id;
 	short star_count;
+	struct postion pos;
 };
 
 struct team {
