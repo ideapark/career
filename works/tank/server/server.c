@@ -31,6 +31,11 @@ static struct option server_options[] = {
 	{0,         0,                 0,   0}
 };
 
+/*
+ * our game
+ */
+static struct game game;
+
 int main(int argc, char *argv[])
 {
 	int c;
@@ -62,6 +67,22 @@ int main(int argc, char *argv[])
 	/* load map */
 	if (!map_load(server_map))
 		exit(-3);
+
+	/*
+	 * game data initlization
+	 */
+	game.leg_remain = LEG_MAX;
+	game.round_remain = ROUND_MAX;
+	short tm, tk;
+	for (tm = 0; tm < TEAM_MAX; tm++) {
+		game.teams[tm].id = tm;
+		game.teams[tm].life_remain = LIFE_MAX;
+
+		for (tk = 0; tk < TANK_MAX; tk++) {
+			game.teams[tm].tanks[tk].id = tm + tk;
+			game.teams[tm].tanks[tk].star_count = 0;
+		}
+	}
 
 	logger_close();
 	return 0;

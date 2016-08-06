@@ -9,10 +9,32 @@
 
 #include <stdio.h>
 
+/*
+ * setup logger
+ */
 int logger_open(const char *logfile);
+
+/*
+ * close logger
+ */
 int logger_close();
+
+/*
+ * info level log
+ * return letter count
+ */
 int logger_info(const char *fmt, ...);
+
+/*
+ * warning level log
+ * return letter count
+ */
 int logger_warning(const char *fmt, ...);
+
+/*
+ * error level log
+ * return letter count
+ */
 int logger_error(const char *fmt, ...);
 
 #endif /* LOGGER_H */
