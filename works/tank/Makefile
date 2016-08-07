@@ -5,7 +5,7 @@
 # -----------------------------------------
 
 CC = gcc
-CFLAGS = -Wall -g
+CFLAGS = -Wall -g -I$(shell pwd)/thirdparty/include -I$(shell pwd)/thirdparty/cJSON
 
 export CC CFLAGS
 
