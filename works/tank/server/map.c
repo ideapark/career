@@ -6,6 +6,7 @@
 
 #include <assert.h>
 #include <stdio.h>
+
 #include "map.h"
 #include "logger.h"
 
@@ -15,9 +16,10 @@ static void map_print(void)
 {
 	short y, x;
 	for (y = 0; y < Y_MAX; y++) {
+		char line[X_MAX+1] = {'\0'};
 		for (x = 0; x < X_MAX; x++)
-			printf("%c", MAP[y][x]);
-		printf("\n");
+			line[x] = MAP[y][x];
+		logger_info("%s\n", line);
 	}
 }
 
@@ -25,7 +27,7 @@ int map_load(const char *map)
 {
 	FILE *f = fopen(map, "r");
 	if (!f) {
-		logger_error("map file open failed.\n");
+		logger_error("%s\n", "map file open failed.");
 		return 0;
 	}
 
@@ -33,7 +35,7 @@ int map_load(const char *map)
 	fscanf(f, "%hi", &map_y);
 	fscanf(f, "%hi", &map_x);
 	if (map_y != Y_MAX || map_x != X_MAX) {
-		logger_error("map Y or X does NOT match expected.\n");
+		logger_error("%s\n", "map Y or X does NOT match expected.");
 		fclose(f);
 		return 0;
 	}
@@ -49,7 +51,7 @@ int map_load(const char *map)
 			if (cnt == 1)
 				MAP[y][x] = ch;
 			else {
-				logger_error("map content incomplete\n");
+				logger_error("%s\n", "map content incomplete.");
 				fclose(f);
 				return 0;
 			}
