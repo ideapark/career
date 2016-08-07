@@ -10,5 +10,5 @@ CFLAGS = -Wall -g
 export CC CFLAGS
 
 all:
-	$(MAKE) -C server
-	$(MAKE) -C client
+	$(MAKE) -C server clean srv.out
+	$(MAKE) -C client clean cli.out
