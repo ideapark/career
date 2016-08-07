@@ -10,6 +10,7 @@ CFLAGS = -Wall -g
 export CC CFLAGS
 
 all: copyright
+	$(MAKE) -C thirdparty/cJSON clean all
 	$(MAKE) -C server clean srv.out
 	$(MAKE) -C client clean cli.out
 
