@@ -1,11 +1,11 @@
 # -----------------------------------------
-#                Tank War
+#             Tank War Makefile
 #
 # Copyright (c) Zhou Peng <lockrecv@qq.com>
 # -----------------------------------------
 
 CC = gcc
-CFLAGS = -Wall
+CFLAGS = -Wall -g
 
 export CC CFLAGS
 
