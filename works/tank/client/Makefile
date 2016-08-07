@@ -7,7 +7,7 @@
 client-objs += client.o
 
 cli.out: $(client-objs)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
 
 clean:
 	@rm -rf $(client-objs) cli.out

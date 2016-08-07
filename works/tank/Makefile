@@ -6,8 +6,9 @@
 
 CC = gcc
 CFLAGS = -Wall -g -I$(shell pwd)/thirdparty/include -I$(shell pwd)/thirdparty/cJSON
+LIBS = -L$(shell pwd)/thirdparty/cJSON -lcjson -static
 
-export CC CFLAGS
+export CC CFLAGS LIBS
 
 all: copyright
 	$(MAKE) -C thirdparty/cJSON clean all

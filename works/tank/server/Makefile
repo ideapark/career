@@ -7,7 +7,7 @@
 server-objs += logger.o server.o map.o
 
 srv.out: $(server-objs)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
 
 clean:
 	@rm -rf $(server-objs) srv.out
