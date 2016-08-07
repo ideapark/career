@@ -6,7 +6,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdlib.h>
 #include <getopt.h>
 
 #include "server.h"
@@ -79,10 +78,10 @@ int main(int argc, char *argv[])
 		game.teams[tm].life_remain = LIFE_MAX;
 
 		for (tk = 0; tk < TANK_MAX; tk++) {
-			game.teams[tm].tanks[tk].id = tm + tk;
+			game.teams[tm].tanks[tk].id = tm * TANK_MAX + tk;
 			game.teams[tm].tanks[tk].star_count = 0;
 
-			/* random tank first postion */
+			/* find tank first postion */
 			short y, x;
 			for (y = 0; y < Y_MAX; y++) {
 				for (x = 0; x < X_MAX; x++) {
@@ -90,9 +89,18 @@ int main(int argc, char *argv[])
 						game.teams[tm].tanks[tk].pos.y = y;
 						game.teams[tm].tanks[tk].pos.x = x;
 						map_set(y, x, TANK);
+						goto tank_ok;
 					}
 				}
 			}
+			logger_warning("%s\n", "map area less than tanks.");
+			exit(-4);
+		tank_ok:
+			logger_info("team: %hi, tank: %hi, at position (%hi, %hi)\n",
+				    game.teams[tm].id,
+				    game.teams[tm].tanks[tk].id,
+				    game.teams[tm].tanks[tk].pos.y,
+				    game.teams[tm].tanks[tk].pos.x);
 		}
 	}
 
