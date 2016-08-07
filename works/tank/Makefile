@@ -9,6 +9,12 @@ CFLAGS = -Wall -g
 
 export CC CFLAGS
 
-all:
+all: copyright
 	$(MAKE) -C server clean srv.out
 	$(MAKE) -C client clean cli.out
+
+copyright:
+	@echo "### ----------------------------------------- ###"
+	@echo "###                 Tank War                  ###"
+	@echo "### Copyright (c) Zhou Peng <lockrecv@qq.com> ###"
+	@echo "### ----------------------------------------- ###"
