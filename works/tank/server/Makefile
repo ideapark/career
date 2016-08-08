@@ -4,7 +4,7 @@
 # Copyright (c) Zhou Peng <lockrecv@qq.com>
 # -----------------------------------------
 
-server-objs += logger.o server.o map.o
+server-objs += logger.o server.o map.o link.o
 
 srv.out: $(server-objs)
 	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
