@@ -30,15 +30,13 @@ static struct option server_options[] = {
 };
 
 /*
- * our game
+ * this game
  */
 static struct game game;
 
 int main(int argc, char *argv[])
 {
-	/*
-	 * server options
-	 */
+	/* server options */
 	int c;
 	while ((c = getopt_long(argc, argv, "p:m:t:s", server_options, NULL)) != -1) {
 		switch (c) {
@@ -67,15 +65,18 @@ int main(int argc, char *argv[])
 	if (!map_load(server_map))
 		exit(-3);
 
-	/*
-	 * game initialization
-	 */
+	/* net link open */
+	if (!link_open(server_port))
+		exit(-4);
+
+	/* game initialization */
 	game.leg_remain = LEG_MAX;
 	game.round_remain = ROUND_MAX;
 	short tm, tk;
 	for (tm = 0; tm < TEAM_MAX; tm++) {
 		game.teams[tm].id = tm;
 		game.teams[tm].life_remain = LIFE_MAX;
+		game.teams[tm].sockfd = link_accept();
 
 		for (tk = 0; tk < TANK_MAX; tk++) {
 			game.teams[tm].tanks[tk].id = tm * TANK_MAX + tk;
@@ -104,6 +105,9 @@ int main(int argc, char *argv[])
 		}
 	}
 
+
+	link_close();
 	logger_close();
+
 	return 0;
 }

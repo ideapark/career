@@ -37,6 +37,7 @@ struct tank {
 
 struct team {
 	short id;
+	int sockfd;
 	char name[NAME_MAX];
 	struct tank tanks[TANK_MAX];
 
