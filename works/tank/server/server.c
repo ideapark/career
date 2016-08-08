@@ -37,6 +37,9 @@ static struct game game;
 
 int main(int argc, char *argv[])
 {
+	/*
+	 * server options
+	 */
 	int c;
 	while ((c = getopt_long(argc, argv, "i:p:m:t:s", server_options, NULL)) != -1) {
 		switch (c) {
@@ -63,6 +66,7 @@ int main(int argc, char *argv[])
 	/* logger setup */
 	if (!logger_open(server_log))
 		exit(-2);
+
 	/* load map */
 	if (!map_load(server_map))
 		exit(-3);
@@ -81,7 +85,7 @@ int main(int argc, char *argv[])
 			game.teams[tm].tanks[tk].id = tm * TANK_MAX + tk;
 			game.teams[tm].tanks[tk].star_count = 0;
 
-			/* find tank first postion */
+			/* alloc tank postion */
 			short y, x;
 			for (y = 0; y < Y_MAX; y++) {
 				for (x = 0; x < X_MAX; x++) {
