@@ -175,7 +175,7 @@ example, since these things are very specific):
         sprintf(newprefix, "%s/%s", prefix, item->name);
         int dorecurse = callback(newprefix, item->type, item);
         if (item->child && dorecurse)
-	   parse_and_callback(item->child, newprefix);
+          parse_and_callback(item->child, newprefix);
         item = item->next;
         free(newprefix);
       }
@@ -188,20 +188,20 @@ the item above, your callback might look like this:
 
     int callback(const char *name,int type,cJSON *item)
     {
-	if (!strcmp(name,"name")) {
-	  /* populate name */
-	} else if (!strcmp(name, "format/type") {
-	  /* handle "rect" */
-	} else if (!strcmp(name, "format/width") {
-	  /* 800 */
-	} else if (!strcmp(name, "format/height") {
-	  /* 600 */
-	} else if (!strcmp(name, "format/interlace") {
-	  /* false */
-	} else if (!strcmp(name, "format/frame rate") {
-	  /* 24 */
-	}
-	return 1;
+        if (!strcmp(name,"name")) {
+          /* populate name */
+        } else if (!strcmp(name, "format/type") {
+          /* handle "rect" */
+        } else if (!strcmp(name, "format/width") {
+          /* 800 */
+        } else if (!strcmp(name, "format/height") {
+          /* 600 */
+        } else if (!strcmp(name, "format/interlace") {
+          /* false */
+        } else if (!strcmp(name, "format/frame rate") {
+          /* 24 */
+        }
+        return 1;
     }
 
 Alternatively, you might like to parse iteratively.
@@ -224,7 +224,7 @@ Or, for PROPER manual mode:
       while (subitem) {
         // handle subitem
         if (subitem->child)
-	   parse_object(subitem->child);
+       parse_object(subitem->child);
         subitem = subitem->next;
       }
     }
@@ -251,9 +251,9 @@ For instance, suppose you wanted to build an array of objects?
       cJSON *prev, *root = cJSON_CreateArray();
       for (i = 0 ; i < 24 ; i++) {
         if (!i)
-	   root->child = objects[i];
+       root->child = objects[i];
         else
-	   prev->next = objects[i], objects[i]->prev = prev;
+       prev->next = objects[i], objects[i]->prev = prev;
         prev = objects[i];
       }
       return root;
