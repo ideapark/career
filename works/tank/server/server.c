@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
 					}
 				}
 			}
-			logger_warning("%s\n", "map area less than tanks.");
+			logger_warn("%s\n", "map area less than tanks.");
 			exit(-4);
 		tank_ok:
 			logger_info("team: %hi, tank: %hi, at position (%hi, %hi)\n",

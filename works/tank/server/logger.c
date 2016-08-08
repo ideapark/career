@@ -84,10 +84,10 @@ int logger_info(const char *fmt, ...)
 	return cnt;
 }
 
-int logger_warning(const char *fmt, ...)
+int logger_warn(const char *fmt, ...)
 {
 	static const char *red = "\e[00;33m";
-	static const char *warning = "[warning] ";
+	static const char *warning = "[warn] ";
 
 	int cnt;
 	va_list args;

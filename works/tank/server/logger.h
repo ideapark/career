@@ -26,10 +26,10 @@ int logger_close();
 int logger_info(const char *fmt, ...);
 
 /*
- * warning level log
+ * warn level log
  * return letter count
  */
-int logger_warning(const char *fmt, ...);
+int logger_warn(const char *fmt, ...);
 
 /*
  * error level log
