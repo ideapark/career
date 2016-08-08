@@ -228,4 +228,4 @@ extern void cJSON_Minify(char *json);
  */
 #define cJSON_ArrayForEach(pos,head)  for(pos=(head)->child; pos!= NULL; pos=pos->next)
 
-#endif
+#endif /* CJSON_H */
