@@ -230,7 +230,7 @@ static char *print_number(cJSON *item, printbuffer *p)
 				sprintf(str, "%.0f", d);
 			else if (fabs(d) < 1.0e-6 || fabs(d) > 1.0e9)
 				sprintf(str, "%e", d);
-			else			
+			else
 				sprintf(str, "%f", d);
 		}
 	}
@@ -270,7 +270,7 @@ static unsigned parse_hex4(const char *str)
 		h += 10 + (*str) - 'a';
 	else
 		return 0;
-	
+
 	h = h << 4;
 	str++;
 	if (*str >= '0' && *str <= '9')
@@ -380,7 +380,7 @@ static const char *parse_string(cJSON *item, const char *str, const char **ep)
 				}
 				ptr2 += len;
 				break;
-			default: 
+			default:
 				*ptr2++ = *ptr;
 				break;
 			}
@@ -807,7 +807,7 @@ static char *print_array(cJSON *item, int depth, int fmt, printbuffer *p)
 		*ptr++ = ']';
 		*ptr++ = 0;
 	}
-	return out;	
+	return out;
 }
 
 /* Build an object from the text. */
@@ -1096,7 +1096,7 @@ static cJSON *create_reference(cJSON *item)
 }
 
 /* Add item to array/object. */
-void cJSON_AddItemToArray(cJSON *array, cJSON *item)	
+void cJSON_AddItemToArray(cJSON *array, cJSON *item)
 {
 	cJSON *c = array->child;
 	if (!item)
@@ -1122,7 +1122,7 @@ void cJSON_AddItemToObject(cJSON *object, const char *string, cJSON *item)
 
 void cJSON_AddItemToObjectCS(cJSON *object, const char *string, cJSON *item)
 {
-	if (!item) 
+	if (!item)
 		return;
 	if (!(item->type&cJSON_StringIsConst) && item->string)
 		cJSON_free(item->string);
@@ -1295,7 +1295,7 @@ cJSON *cJSON_CreateArray(void)
 	return item;
 }
 
-cJSON *cJSON_CreateObject(void)			
+cJSON *cJSON_CreateObject(void)
 {
 	cJSON *item = cJSON_New_Item();
 	if (item)
