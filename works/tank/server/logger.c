@@ -11,7 +11,7 @@
 
 #include "logger.h"
 
-static FILE *logger_cache= NULL;
+static FILE *logger_cache = NULL;
 static int tty_cache = 0;
 
 static const char *strnow(char *buffer, size_t bufsize)
