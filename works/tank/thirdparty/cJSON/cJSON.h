@@ -25,13 +25,8 @@
  * THE SOFTWARE.
  */
 
-#ifndef cJSON__h
-#define cJSON__h
-
-#ifdef __cplusplus
-extern "C"
-{
-#endif
+#ifndef CJSON_H
+#define CJSON_H
 
 /* cJSON Types: */
 #define cJSON_False  (1 << 0)
@@ -67,7 +62,7 @@ typedef struct cJSON_Hooks {
 /*
  * Supply malloc, realloc and free functions to cJSON
  */
-extern void cJSON_InitHooks(cJSON_Hooks* hooks);
+extern void cJSON_InitHooks(cJSON_Hooks *hooks);
 
 /*
  * Supply a block of JSON, and this returns a cJSON
@@ -232,9 +227,5 @@ extern void cJSON_Minify(char *json);
  * Macro for iterating over an array
  */
 #define cJSON_ArrayForEach(pos,head)  for(pos=(head)->child; pos!= NULL; pos=pos->next)
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif
