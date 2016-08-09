@@ -6,7 +6,7 @@
 
 CC = gcc
 CFLAGS = -Wall -g -I$(shell pwd)/thirdparty/include -I$(shell pwd)/thirdparty/cJSON
-LIBS = -L$(shell pwd)/thirdparty/cJSON -lcjson -static
+LIBS = -L$(shell pwd)/thirdparty/cJSON -lcjson -lm -static
 
 export CC CFLAGS LIBS
 
