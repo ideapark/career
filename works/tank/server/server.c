@@ -120,7 +120,60 @@ static void leg_end(void)
 
 static int round_step(void)
 {
-	logger_info("%s\n", "round step");
+	cJSON *root, *body;
+	char *msg;
+	size_t len;
+	short tid;
+
+	/* broadcast */
+	root = cJSON_CreateObject();
+	cJSON_AddItemToObject(root, "head", cJSON_CreateString("round step"));
+	cJSON_AddItemToObject(root, "body", body=cJSON_CreateObject());
+	cJSON_AddNumberToObject(body, "leg", game.leg_remain);
+	cJSON_AddNumberToObject(body, "round", game.round_remain);
+	cJSON *teams;
+	cJSON_AddItemToObject(body, "teams", teams=cJSON_CreateArray());
+	for (tid = 0; tid < TEAM_MAX; tid++) {
+		cJSON *team = cJSON_CreateObject();
+		cJSON_AddNumberToObject(team, "id", game.teams[tid].id);
+		cJSON_AddNumberToObject(team, "life_remain", game.teams[tid].life_remain);
+		cJSON *stars;
+		cJSON_AddItemToObject(team, "stars", stars=cJSON_CreateArray());
+		struct star *star;
+		list_for_each_entry(star, &game.teams[tid].stars, list) {
+			cJSON *starjson = cJSON_CreateObject();
+			cJSON_AddItemToObject(starjson, "dir", cJSON_CreateString("up"));
+			cJSON_AddNumberToObject(starjson, "y", star->pos.y);
+			cJSON_AddNumberToObject(starjson, "x", star->pos.x);
+			cJSON_AddItemToArray(stars, starjson);
+		}
+		cJSON *bullets;
+		cJSON_AddItemToObject(team, "bullets", bullets=cJSON_CreateArray());
+		struct bullet *bullet;
+		list_for_each_entry(bullet, &game.teams[tid].bullets, list) {
+			cJSON *bulletjson = cJSON_CreateObject();
+			cJSON_AddItemToObject(bulletjson, "dir", cJSON_CreateString("down"));
+			cJSON_AddNumberToObject(bulletjson, "y", bullet->pos.y);
+			cJSON_AddNumberToObject(bulletjson, "x", bullet->pos.x);
+			cJSON_AddItemToArray(bullets, bulletjson);
+		}
+		cJSON_AddItemToArray(teams, team);
+	}
+	msg = cJSON_Print(root);
+	len = strlen(msg);
+	for (tid = 0; tid < TEAM_MAX; tid++)
+		write(game.teams[tid].sockfd, msg, len);
+	cJSON_Delete(root);
+	free(msg);
+
+	/* player actions */
+	char buf[2048];
+	for (tid = 0; tid < TEAM_MAX; tid++) {
+		read(game.teams[tid].sockfd, buf, len);
+		cJSON *action = cJSON_Parse(buf);
+		/* actions here */
+		cJSON_Delete(action);
+	}
 	return 1;
 }
 
