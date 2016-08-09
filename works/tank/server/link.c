@@ -34,6 +34,7 @@ int link_open(const char *port)
 	}
 	if (listen(server_socket, 5) != 0) {
 		logger_error("link_open: %s\n", strerror(errno));
+		return 0;
 	}
 	return 1;
 }
