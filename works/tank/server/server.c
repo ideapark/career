@@ -22,7 +22,7 @@
 static const char *server_port    = "6000";
 static const char *server_map     = "map.txt";
 static const char *server_timeout = "400";
-static const char *server_log     = "server.log";
+static const char *server_log     = "srv.log";
 
 static struct option server_options[] = {
 	{"port",    required_argument, 0, 'p'},
@@ -39,61 +39,88 @@ static struct game game;
 
 static void game_start(void)
 {
-        logger_info("%s\n", "game start");
+	cJSON *root, *body;
+	char *msg;
+	size_t len;
+	short tid;
 
-        cJSON *root, *body;
-        char *msg;
-        size_t len;
-        short tid;
+	root = cJSON_CreateObject();
+	cJSON_AddItemToObject(root, "head", cJSON_CreateString("game start"));
+	cJSON_AddItemToObject(root, "body", body=cJSON_CreateObject());
+	msg = cJSON_Print(root);
+	len = strlen(msg);
 
-        root = cJSON_CreateObject();
-        cJSON_AddItemToObject(root, "head", cJSON_CreateString("game start"));
-        cJSON_AddItemToObject(root, "body", body=cJSON_CreateObject());
-        msg = cJSON_Print(root);
-        len = strlen(msg);
+	for (tid = 0; tid < TEAM_MAX; tid++)
+		write(game.teams[tid].sockfd, msg, len);
 
-        for (tid = 0; tid < TEAM_MAX; tid++)
-                write(game.teams[tid].sockfd, msg, len);
-
-        cJSON_Delete(root);
-        free(msg);
+	cJSON_Delete(root);
+	free(msg);
 }
 
 static void game_over(void)
 {
-        logger_info("%s\n", "game over");
+	cJSON *root, *body;
+	char *msg;
+	size_t len;
+	short tid;
 
-        cJSON *root, *body;
-        char *msg;
-        size_t len;
-        short tid;
+	root = cJSON_CreateObject();
+	cJSON_AddItemToObject(root, "head", cJSON_CreateString("game over"));
+	cJSON_AddItemToObject(root, "body", body=cJSON_CreateObject());
+	msg = cJSON_Print(root);
+	len = strlen(msg);
 
-        root = cJSON_CreateObject();
-        cJSON_AddItemToObject(root, "head", cJSON_CreateString("game over"));
-        cJSON_AddItemToObject(root, "body", body=cJSON_CreateObject());
-        msg = cJSON_Print(root);
-        len = strlen(msg);
+	for (tid = 0; tid < TEAM_MAX; tid++)
+		write(game.teams[tid].sockfd, msg, len);
 
-        for (tid = 0; tid < TEAM_MAX; tid++)
-                write(game.teams[tid].sockfd, msg, len);
-
-        cJSON_Delete(root);
-        free(msg);
+	cJSON_Delete(root);
+	free(msg);
 }
 
 static void leg_start(void)
 {
-        logger_info("%s\n", "leg start");
+	cJSON *root, *body;
+	char *msg;
+	size_t len;
+	short tid;
+
+	root = cJSON_CreateObject();
+	cJSON_AddItemToObject(root, "head", cJSON_CreateString("leg start"));
+	cJSON_AddItemToObject(root, "body", body=cJSON_CreateObject());
+	msg = cJSON_Print(root);
+	len = strlen(msg);
+
+	for (tid = 0; tid < TEAM_MAX; tid++)
+		write(game.teams[tid].sockfd, msg, len);
+
+	cJSON_Delete(root);
+	free(msg);
 }
 
 static void leg_end(void)
 {
-        logger_info("%s\n", "leg end");
+	cJSON *root, *body;
+	char *msg;
+	size_t len;
+	short tid;
+
+	root = cJSON_CreateObject();
+	cJSON_AddItemToObject(root, "head", cJSON_CreateString("leg end"));
+	cJSON_AddItemToObject(root, "body", body=cJSON_CreateObject());
+	msg = cJSON_Print(root);
+	len = strlen(msg);
+
+	for (tid = 0; tid < TEAM_MAX; tid++)
+		write(game.teams[tid].sockfd, msg, len);
+
+	cJSON_Delete(root);
+	free(msg);
 }
 
-static void round_step(void)
+static int round_step(void)
 {
-        logger_info("%s\n", "round step");
+	logger_info("%s\n", "round step");
+	return 1;
 }
 
 int main(int argc, char *argv[])
@@ -167,16 +194,15 @@ int main(int argc, char *argv[])
 		}
 	}
 
-        /* play game */
-        game_start();
-        while (game.leg_remain-- > 0) {
-                leg_start();
-                while (game.round_remain-- > 0)
-                        round_step();
-                game.round_remain = ROUND_MAX;
-                leg_end();
-        }
-        game_over();
+	/* play game */
+	game_start();
+	while (game.leg_remain-- > 0) {
+		leg_start();
+		while (game.round_remain-- > 0 && round_step());
+		game.round_remain = ROUND_MAX;
+		leg_end();
+	}
+	game_over();
 
 	link_close();
 	logger_close();
