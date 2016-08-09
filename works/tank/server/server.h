@@ -7,6 +7,8 @@
 #ifndef SERVER_H
 #define SERVER_H
 
+#include <string.h>
+
 #include "list.h"
 
 /* game limits */
@@ -17,6 +19,7 @@
 #define ROUND_MAX   150
 #define TEAM_MAX    2
 #define NAME_MAX    16
+#define BUFFER_MAX  2048
 #define OFFLINE_MAX 10
 
 enum direction {
@@ -65,5 +68,35 @@ struct game {
 	int round_remain;
 	struct team teams[TEAM_MAX];
 };
+
+static inline const char *dir2str(enum direction dir)
+{
+	switch (dir) {
+	case UP:
+		return "up";
+	case DOWN:
+		return "down";
+	case LEFT:
+		return "left";
+	case RIGHT:
+		return "right";
+	default:
+		return "";
+	}
+}
+
+static inline enum direction str2dir(const char *str)
+{
+	if (strcmp(str, "up"))
+		return UP;
+	else if (strcmp(str, "down"))
+		return DOWN;
+	else if (strcmp(str, "left"))
+		return LEFT;
+	else if (strcmp(str, "right"))
+		return RIGHT;
+	else
+		return STILL;
+}
 
 #endif /* SERVER_H */

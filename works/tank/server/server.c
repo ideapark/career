@@ -9,6 +9,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <getopt.h>
+#include <assert.h>
 
 #include "server.h"
 #include "logger.h"
@@ -56,6 +57,18 @@ static void game_start(void)
 
 	cJSON_Delete(root);
 	free(msg);
+
+	char buf[BUFFER_MAX];
+	for (tid = 0; tid < TEAM_MAX; tid++) {
+		read(game.teams[tid].sockfd, buf, BUFFER_MAX);
+		cJSON *json_reg = cJSON_Parse(buf);
+		cJSON *json_id = cJSON_GetObjectItem(json_reg, "id");
+		cJSON *json_name = cJSON_GetObjectItem(json_reg, "name");
+		assert(json_id->type == cJSON_Number);
+		assert(json_name->type == cJSON_String);
+		assert(json_id->valueint == game.teams[tid].id);
+		strncpy(game.teams[tid].name, json_name->string, NAME_MAX);
+	}
 }
 
 static void game_over(void)
@@ -142,7 +155,7 @@ static int round_step(void)
 		struct star *star;
 		list_for_each_entry(star, &game.teams[tid].stars, list) {
 			cJSON *starjson = cJSON_CreateObject();
-			cJSON_AddItemToObject(starjson, "dir", cJSON_CreateString("up"));
+			cJSON_AddItemToObject(starjson, "dir", cJSON_CreateString(dir2str(star->dir)));
 			cJSON_AddNumberToObject(starjson, "y", star->pos.y);
 			cJSON_AddNumberToObject(starjson, "x", star->pos.x);
 			cJSON_AddItemToArray(stars, starjson);
@@ -152,7 +165,7 @@ static int round_step(void)
 		struct bullet *bullet;
 		list_for_each_entry(bullet, &game.teams[tid].bullets, list) {
 			cJSON *bulletjson = cJSON_CreateObject();
-			cJSON_AddItemToObject(bulletjson, "dir", cJSON_CreateString("down"));
+			cJSON_AddItemToObject(bulletjson, "dir", cJSON_CreateString(dir2str(bullet->dir)));
 			cJSON_AddNumberToObject(bulletjson, "y", bullet->pos.y);
 			cJSON_AddNumberToObject(bulletjson, "x", bullet->pos.x);
 			cJSON_AddItemToArray(bullets, bulletjson);
@@ -168,9 +181,9 @@ static int round_step(void)
 	free(msg);
 
 	/* player actions */
-	char buf[2048];
+	char buf[BUFFER_MAX];
 	for (tid = 0; tid < TEAM_MAX; tid++) {
-		read(game.teams[tid].sockfd, buf, len);
+		read(game.teams[tid].sockfd, buf, BUFFER_MAX);
 		cJSON *action = cJSON_Parse(buf);
 		/* actions here */
 		cJSON_Delete(action);
