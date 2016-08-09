@@ -4,7 +4,9 @@
  * Copyright (c) Zhou Peng <lockrecv@qq.com>
  */
 
+#include <unistd.h>
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include <getopt.h>
 
@@ -12,6 +14,7 @@
 #include "logger.h"
 #include "map.h"
 #include "link.h"
+#include "cJSON.h"
 
 /*
  * server command line arguments
@@ -33,6 +36,65 @@ static struct option server_options[] = {
  * this game
  */
 static struct game game;
+
+static void game_start(void)
+{
+        logger_info("%s\n", "game start");
+
+        cJSON *root, *body;
+        char *msg;
+        size_t len;
+        short tid;
+
+        root = cJSON_CreateObject();
+        cJSON_AddItemToObject(root, "head", cJSON_CreateString("game start"));
+        cJSON_AddItemToObject(root, "body", body=cJSON_CreateObject());
+        msg = cJSON_Print(root);
+        len = strlen(msg);
+
+        for (tid = 0; tid < TEAM_MAX; tid++)
+                write(game.teams[tid].sockfd, msg, len);
+
+        cJSON_Delete(root);
+        free(msg);
+}
+
+static void game_over(void)
+{
+        logger_info("%s\n", "game over");
+
+        cJSON *root, *body;
+        char *msg;
+        size_t len;
+        short tid;
+
+        root = cJSON_CreateObject();
+        cJSON_AddItemToObject(root, "head", cJSON_CreateString("game over"));
+        cJSON_AddItemToObject(root, "body", body=cJSON_CreateObject());
+        msg = cJSON_Print(root);
+        len = strlen(msg);
+
+        for (tid = 0; tid < TEAM_MAX; tid++)
+                write(game.teams[tid].sockfd, msg, len);
+
+        cJSON_Delete(root);
+        free(msg);
+}
+
+static void leg_start(void)
+{
+        logger_info("%s\n", "leg start");
+}
+
+static void leg_end(void)
+{
+        logger_info("%s\n", "leg end");
+}
+
+static void round_step(void)
+{
+        logger_info("%s\n", "round step");
+}
 
 int main(int argc, char *argv[])
 {
@@ -105,6 +167,16 @@ int main(int argc, char *argv[])
 		}
 	}
 
+        /* play game */
+        game_start();
+        while (game.leg_remain-- > 0) {
+                leg_start();
+                while (game.round_remain-- > 0)
+                        round_step();
+                game.round_remain = ROUND_MAX;
+                leg_end();
+        }
+        game_over();
 
 	link_close();
 	logger_close();
