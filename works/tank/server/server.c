@@ -159,7 +159,7 @@ int main(int argc, char *argv[])
 	if (!link_open(server_port))
 		exit(-4);
 
-	/* game initialization */
+	/* game setup */
 	game.leg_remain = LEG_MAX;
 	game.round_remain = ROUND_MAX;
 	short tm, tk;
@@ -201,8 +201,8 @@ int main(int argc, char *argv[])
 	game_start();
 	while (game.leg_remain-- > 0) {
 		leg_start();
-		while (game.round_remain-- > 0 && round_step());
 		game.round_remain = ROUND_MAX;
+		while (game.round_remain-- > 0 && round_step());
 		leg_end();
 	}
 	game_over();
