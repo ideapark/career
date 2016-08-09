@@ -7,6 +7,8 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include "cJSON.h"
+
 /* map limits */
 #define Y_MAX 15
 #define X_MAX 15
@@ -38,5 +40,10 @@ char map_get(short y, short x);
  * set map point, return old point
  */
 char map_set(short y, short x, char ch);
+
+/*
+ * map serialized to json
+ */
+cJSON *map_json(void);
 
 #endif /* MAP_H */

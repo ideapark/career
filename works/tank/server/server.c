@@ -159,6 +159,7 @@ static int round_step(void)
 		}
 		cJSON_AddItemToArray(teams, team);
 	}
+	cJSON_AddItemToObject(body, "map", map_json());
 	msg = cJSON_Print(root);
 	len = strlen(msg);
 	for (tid = 0; tid < TEAM_MAX; tid++)
