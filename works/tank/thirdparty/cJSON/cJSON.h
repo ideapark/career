@@ -179,7 +179,7 @@ extern void cJSON_ReplaceItemInArray(cJSON *array, int which, cJSON *newitem);
 extern void cJSON_ReplaceItemInObject(cJSON *object, const char *string, cJSON *newitem);
 
 /* Duplicate a cJSON item */
-extern cJSON *cJSON_Duplicate(cJSON *item,int recurse);
+extern cJSON *cJSON_Duplicate(cJSON *item, int recurse);
 
 /*
  * Duplicate will create a new, identical cJSON item to the
