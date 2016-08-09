@@ -15,6 +15,7 @@
 #include "map.h"
 #include "link.h"
 #include "cJSON.h"
+#include "list.h"
 
 /*
  * server command line arguments
@@ -166,6 +167,8 @@ int main(int argc, char *argv[])
 		game.teams[tm].id = tm;
 		game.teams[tm].life_remain = LIFE_MAX;
 		game.teams[tm].sockfd = link_accept();
+		INIT_LIST_HEAD(&game.teams[tm].stars);
+		INIT_LIST_HEAD(&game.teams[tm].bullets);
 
 		for (tk = 0; tk < TANK_MAX; tk++) {
 			game.teams[tm].tanks[tk].id = tm * TANK_MAX + tk;
