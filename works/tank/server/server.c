@@ -62,7 +62,10 @@ static void game_start(void)
 
 	char buf[BUFFER_MAX];
 	for (tid = 0; tid < TEAM_MAX; tid++) {
-		read(game.teams[tid].sockfd, buf, BUFFER_MAX);
+		if (read(game.teams[tid].sockfd, buf, BUFFER_MAX) < 0) {
+			logger_error("team %hi, broken socket.\n", game.teams[tid].id);
+			continue;
+		}
 		cJSON *json_reg = cJSON_Parse(buf);
 		cJSON *json_id = cJSON_GetObjectItem(json_reg, "id");
 		cJSON *json_name = cJSON_GetObjectItem(json_reg, "name");
@@ -205,7 +208,10 @@ static int round_step(void)
 	/* player actions */
 	char buf[BUFFER_MAX];
 	for (tid = 0; tid < TEAM_MAX; tid++) {
-		read(game.teams[tid].sockfd, buf, BUFFER_MAX);
+		if (read(game.teams[tid].sockfd, buf, BUFFER_MAX) < 0) {
+			logger_error("team %hi, broken socket.\n", game.teams[tid].id);
+			continue;
+		}
 		cJSON *action = cJSON_Parse(buf);
 		/*
 		 * actions here
