@@ -54,7 +54,8 @@ static void game_start(void)
 		cJSON_AddNumberToObject(body, "id", game.teams[tid].id);
 		msg = cJSON_Print(root);
 		len = strlen(msg);
-		write(game.teams[tid].sockfd, msg, len);
+		if (write(game.teams[tid].sockfd, msg, len) < 0)
+			logger_error("team %hi, broken socket.\n", game.teams[tid].id);
 		cJSON_Delete(root);
 		free(msg);
 	}
@@ -82,11 +83,17 @@ static void game_over(void)
 	root = cJSON_CreateObject();
 	cJSON_AddItemToObject(root, "head", cJSON_CreateString("game over"));
 	cJSON_AddItemToObject(root, "body", body=cJSON_CreateObject());
+	cJSON_AddItemToObject(body, "message", cJSON_CreateString("Thanks to play."));
 	msg = cJSON_Print(root);
 	len = strlen(msg);
 
-	for (tid = 0; tid < TEAM_MAX; tid++)
-		write(game.teams[tid].sockfd, msg, len);
+	for (tid = 0; tid < TEAM_MAX; tid++) {
+		if (write(game.teams[tid].sockfd, msg, len) < 0)
+			logger_error("team %hi, broken socket.\n", game.teams[tid].id);
+		else
+			close(game.teams[tid].sockfd);
+		game.teams[tid].sockfd = -1;
+	}
 
 	cJSON_Delete(root);
 	free(msg);
@@ -106,7 +113,8 @@ static void leg_start(void)
 	len = strlen(msg);
 
 	for (tid = 0; tid < TEAM_MAX; tid++)
-		write(game.teams[tid].sockfd, msg, len);
+		if (write(game.teams[tid].sockfd, msg, len) < 0)
+			logger_error("team %hi, broken socket.\n", game.teams[tid].id);
 
 	cJSON_Delete(root);
 	free(msg);
@@ -126,31 +134,31 @@ static void leg_end(void)
 	len = strlen(msg);
 
 	for (tid = 0; tid < TEAM_MAX; tid++)
-		write(game.teams[tid].sockfd, msg, len);
+		if (write(game.teams[tid].sockfd, msg, len) < 0)
+			logger_error("team %hi, broken socket.\n", game.teams[tid].id);
 
 	cJSON_Delete(root);
 	free(msg);
 }
 
-static int round_step(void)
+cJSON *game_json(void)
 {
 	cJSON *root, *body;
-	char *msg;
-	size_t len;
 	short tid;
 
-	/* broadcast */
 	root = cJSON_CreateObject();
 	cJSON_AddItemToObject(root, "head", cJSON_CreateString("round step"));
 	cJSON_AddItemToObject(root, "body", body=cJSON_CreateObject());
 	cJSON_AddNumberToObject(body, "leg", game.leg_remain);
 	cJSON_AddNumberToObject(body, "round", game.round_remain);
+
 	cJSON *teams;
 	cJSON_AddItemToObject(body, "teams", teams=cJSON_CreateArray());
 	for (tid = 0; tid < TEAM_MAX; tid++) {
 		cJSON *team = cJSON_CreateObject();
 		cJSON_AddNumberToObject(team, "id", game.teams[tid].id);
 		cJSON_AddNumberToObject(team, "life_remain", game.teams[tid].life_remain);
+
 		cJSON *stars;
 		cJSON_AddItemToObject(team, "stars", stars=cJSON_CreateArray());
 		struct star *star;
@@ -161,6 +169,7 @@ static int round_step(void)
 			cJSON_AddNumberToObject(starjson, "x", star->pos.x);
 			cJSON_AddItemToArray(stars, starjson);
 		}
+
 		cJSON *bullets;
 		cJSON_AddItemToObject(team, "bullets", bullets=cJSON_CreateArray());
 		struct bullet *bullet;
@@ -174,10 +183,22 @@ static int round_step(void)
 		cJSON_AddItemToArray(teams, team);
 	}
 	cJSON_AddItemToObject(body, "map", map_json());
+	return root;
+}
+
+static int round_step(void)
+{
+	char *msg;
+	size_t len;
+	cJSON *root;
+	short tid;
+
+	root = game_json();
 	msg = cJSON_Print(root);
 	len = strlen(msg);
 	for (tid = 0; tid < TEAM_MAX; tid++)
-		write(game.teams[tid].sockfd, msg, len);
+		if (write(game.teams[tid].sockfd, msg, len) < 0)
+			logger_error("team %hi, broken socket.\n", game.teams[tid].id);
 	cJSON_Delete(root);
 	free(msg);
 
@@ -186,7 +207,9 @@ static int round_step(void)
 	for (tid = 0; tid < TEAM_MAX; tid++) {
 		read(game.teams[tid].sockfd, buf, BUFFER_MAX);
 		cJSON *action = cJSON_Parse(buf);
-		/* actions here */
+		/*
+		 * actions here
+		 */
 		cJSON_Delete(action);
 	}
 	return 1;
