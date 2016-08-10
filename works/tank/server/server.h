@@ -87,13 +87,13 @@ static inline const char *dir2str(enum direction dir)
 
 static inline enum direction str2dir(const char *str)
 {
-	if (strcmp(str, "up"))
+	if (strcmp(str, "up") == 0)
 		return UP;
-	else if (strcmp(str, "down"))
+	else if (strcmp(str, "down") == 0)
 		return DOWN;
-	else if (strcmp(str, "left"))
+	else if (strcmp(str, "left") == 0)
 		return LEFT;
-	else if (strcmp(str, "right"))
+	else if (strcmp(str, "right") == 0)
 		return RIGHT;
 	else
 		return STILL;
