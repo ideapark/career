@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <getopt.h>
 #include <assert.h>
+#include <signal.h>
 
 #include "server.h"
 #include "logger.h"
@@ -193,6 +194,8 @@ static int round_step(void)
 
 int main(int argc, char *argv[])
 {
+	signal(SIGPIPE, SIG_IGN);
+
 	/* server options */
 	int c;
 	while ((c = getopt_long(argc, argv, "p:m:t:s", server_options, NULL)) != -1) {
