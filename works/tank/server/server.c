@@ -46,17 +46,17 @@ static void game_start(void)
 	size_t len;
 	short tid;
 
-	root = cJSON_CreateObject();
-	cJSON_AddItemToObject(root, "head", cJSON_CreateString("game start"));
-	cJSON_AddItemToObject(root, "body", body=cJSON_CreateObject());
-	msg = cJSON_Print(root);
-	len = strlen(msg);
-
-	for (tid = 0; tid < TEAM_MAX; tid++)
+	for (tid = 0; tid < TEAM_MAX; tid++) {
+		root = cJSON_CreateObject();
+		cJSON_AddItemToObject(root, "head", cJSON_CreateString("game start"));
+		cJSON_AddItemToObject(root, "body", body=cJSON_CreateObject());
+		cJSON_AddNumberToObject(body, "id", game.teams[tid].id);
+		msg = cJSON_Print(root);
+		len = strlen(msg);
 		write(game.teams[tid].sockfd, msg, len);
-
-	cJSON_Delete(root);
-	free(msg);
+		cJSON_Delete(root);
+		free(msg);
+	}
 
 	char buf[BUFFER_MAX];
 	for (tid = 0; tid < TEAM_MAX; tid++) {
