@@ -47,6 +47,9 @@ static void game_start(void)
 	size_t len;
 	short tid;
 
+	/*
+	 * notify each player game start and their unique IDs.
+	 */
 	for (tid = 0; tid < TEAM_MAX; tid++) {
 		root = cJSON_CreateObject();
 		cJSON_AddItemToObject(root, "head", cJSON_CreateString("game start"));
@@ -60,6 +63,9 @@ static void game_start(void)
 		free(msg);
 	}
 
+	/*
+	 * player register their names
+	 */
 	char buf[BUFFER_MAX];
 	for (tid = 0; tid < TEAM_MAX; tid++) {
 		if (read(game.teams[tid].sockfd, buf, BUFFER_MAX) < 0) {
@@ -69,10 +75,15 @@ static void game_start(void)
 		cJSON *json_reg = cJSON_Parse(buf);
 		cJSON *json_id = cJSON_GetObjectItem(json_reg, "id");
 		cJSON *json_name = cJSON_GetObjectItem(json_reg, "name");
-		assert(json_id->type == cJSON_Number);
-		assert(json_name->type == cJSON_String);
-		assert(json_id->valueint == game.teams[tid].id);
-		strncpy(game.teams[tid].name, json_name->string, NAME_MAX);
+		if (json_id->type == cJSON_Number &&
+		    json_id->valueint == game.teams[tid].id &&
+		    json_name->type == cJSON_String) {
+			strncpy(game.teams[tid].name, json_name->string, NAME_MAX);
+		} else {
+			logger_warn("team %hi, evil player will be punished.\n", game.teams[tid].id);
+			close(game.teams[tid].sockfd);
+			game.teams[tid].sockfd = -1;
+		}
 	}
 }
 
