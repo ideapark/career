@@ -126,12 +126,12 @@ int irq_parser(const char *datafile, const char *dbname)
 		irq_diff(&entry);
 
 		snprintf(sqlbuf, sizeof(sqlbuf), IRQ_INSERT_TABLE_SQL,
-				i,
-				entry.timestamp,
-				entry.cpu,
-				irq_type(&entry),
-				irq_name(&entry, &header),
-				entry.irq_num);
+			 i,
+			 entry.timestamp,
+			 entry.cpu,
+			 irq_type(&entry),
+			 irq_name(&entry, &header),
+			 entry.irq_num);
 		sqlite_exec(&g_irqsqlite, sqlbuf);
 	}
 	sqlite_close(&g_irqsqlite);
