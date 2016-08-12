@@ -36,35 +36,35 @@ void task_init(void);
 void task_run(void);
 void task_exit(void);
 
-#define TASK_CREATE_TABLE_SQL  \
-"CREATE TABLE IF NOT EXISTS task_table(  " \
-"    private_key                INTEGER, " \
-"    timestamp                  INTEGER, " \
-"    pid                        INTEGER, " \
-"    tid                        INTEGER, " \
-"    voluntary_ctxt_switches    INTEGER, " \
-"    nonvoluntary_ctxt_switches INTEGER, " \
-"    cpu_migration              INTEGER  " \
-");"
+#define TASK_CREATE_TABLE_SQL				\
+	"CREATE TABLE IF NOT EXISTS task_table(  "	\
+	"    private_key                INTEGER, "	\
+	"    timestamp                  INTEGER, "	\
+	"    pid                        INTEGER, "	\
+	"    tid                        INTEGER, "	\
+	"    voluntary_ctxt_switches    INTEGER, "	\
+	"    nonvoluntary_ctxt_switches INTEGER, "	\
+	"    cpu_migration              INTEGER  "	\
+	");"
 
-#define TASK_INSERT_TABLE_SQL  \
-"INSERT INTO task_table(         " \
-"    private_key,                " \
-"    timestamp,                  " \
-"    pid,                        " \
-"    tid,                        " \
-"    voluntary_ctxt_switches,    " \
-"    nonvoluntary_ctxt_switches, " \
-"    cpu_migration               " \
-") VALUES (                      " \
-"    %d,                         " \
-"    %"PRId32",                  " \
-"    %"PRId32",                  " \
-"    %"PRId32",                  " \
-"    %"PRId32",                  " \
-"    %"PRId32",                  " \
-"    %"PRId32"                   " \
-");"
+#define TASK_INSERT_TABLE_SQL			\
+	"INSERT INTO task_table(         "	\
+	"    private_key,                "	\
+	"    timestamp,                  "	\
+	"    pid,                        "	\
+	"    tid,                        "	\
+	"    voluntary_ctxt_switches,    "	\
+	"    nonvoluntary_ctxt_switches, "	\
+	"    cpu_migration               "	\
+	") VALUES (                      "	\
+	"    %d,                         "	\
+	"    %"PRId32",                  "	\
+	"    %"PRId32",                  "	\
+	"    %"PRId32",                  "	\
+	"    %"PRId32",                  "	\
+	"    %"PRId32",                  "	\
+	"    %"PRId32"                   "	\
+	");"
 
 typedef struct {
 	task_entry entry;
