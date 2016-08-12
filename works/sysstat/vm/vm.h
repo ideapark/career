@@ -57,65 +57,65 @@ void proc_init(void);
 void proc_run(void);
 void proc_exit(void);
 
-#define PROC_CREATE_TABLE_SQL  \
-"create table if not exists proc_table(" \
-"    private_key              integer, " \
-"    timestamp                integer, " \
-"    pid                      integer, " \
-"    name                     TEXT,    " \
-"    vm_peak                  INTEGER, " \
-"    vm_size                  INTEGER, " \
-"    vm_lck                   INTEGER, " \
-"    vm_hwm                   INTEGER, " \
-"    vm_rss                   INTEGER, " \
-"    vm_data                  INTEGER, " \
-"    vm_stk                   INTEGER, " \
-"    vm_exe                   INTEGER, " \
-"    vm_lib                   INTEGER, " \
-"    vm_pte                   INTEGER, " \
-"    stack_usage              INTEGER, " \
-"    voluntary_ctxt_switch    INTEGER, " \
-"    novoluntary_ctxt_switch  INTEGER  " \
-");"
+#define PROC_CREATE_TABLE_SQL				\
+	"create table if not exists proc_table("	\
+	"    private_key              integer, "	\
+	"    timestamp                integer, "	\
+	"    pid                      integer, "	\
+	"    name                     TEXT,    "	\
+	"    vm_peak                  INTEGER, "	\
+	"    vm_size                  INTEGER, "	\
+	"    vm_lck                   INTEGER, "	\
+	"    vm_hwm                   INTEGER, "	\
+	"    vm_rss                   INTEGER, "	\
+	"    vm_data                  INTEGER, "	\
+	"    vm_stk                   INTEGER, "	\
+	"    vm_exe                   INTEGER, "	\
+	"    vm_lib                   INTEGER, "	\
+	"    vm_pte                   INTEGER, "	\
+	"    stack_usage              INTEGER, "	\
+	"    voluntary_ctxt_switch    INTEGER, "	\
+	"    novoluntary_ctxt_switch  INTEGER  "	\
+	");"
 
-#define PROC_INSERT_TABLE_SQL  \
-"INSERT INTO proc_table(      " \
-"    private_key,             " \
-"    timestamp,               " \
-"    pid,                     " \
-"    name,                    " \
-"    vm_peak,                 " \
-"    vm_size,                 " \
-"    vm_lck,                  " \
-"    vm_hwm,                  " \
-"    vm_rss,                  " \
-"    vm_data,                 " \
-"    vm_stk,                  " \
-"    vm_exe,                  " \
-"    vm_lib,                  " \
-"    vm_pte,                  " \
-"    stack_usage,             " \
-"    voluntary_ctxt_switch,   " \
-"    novoluntary_ctxt_switch  " \
-") VALUES (                   " \
-"    %d,                      " \
-"    %"PRId32",               " \
-"    %"PRId32",               " \
-"    '%s',                    " \
-"    %"PRId32",               " \
-"    %"PRId32",               " \
-"    %"PRId32",               " \
-"    %"PRId32",               " \
-"    %"PRId32",               " \
-"    %"PRId32",               " \
-"    %"PRId32",               " \
-"    %"PRId32",               " \
-"    %"PRId32",               " \
-"    %"PRId32",               " \
-"    %"PRId32",               " \
-"    %"PRId32",               " \
-"    %"PRId32"                " \
-");"
+#define PROC_INSERT_TABLE_SQL			\
+	"INSERT INTO proc_table(      "		\
+	"    private_key,             "		\
+	"    timestamp,               "		\
+	"    pid,                     "		\
+	"    name,                    "		\
+	"    vm_peak,                 "		\
+	"    vm_size,                 "		\
+	"    vm_lck,                  "		\
+	"    vm_hwm,                  "		\
+	"    vm_rss,                  "		\
+	"    vm_data,                 "		\
+	"    vm_stk,                  "		\
+	"    vm_exe,                  "		\
+	"    vm_lib,                  "		\
+	"    vm_pte,                  "		\
+	"    stack_usage,             "		\
+	"    voluntary_ctxt_switch,   "		\
+	"    novoluntary_ctxt_switch  "		\
+	") VALUES (                   "		\
+	"    %d,                      "		\
+	"    %"PRId32",               "		\
+	"    %"PRId32",               "		\
+	"    '%s',                    "		\
+	"    %"PRId32",               "		\
+	"    %"PRId32",               "		\
+	"    %"PRId32",               "		\
+	"    %"PRId32",               "		\
+	"    %"PRId32",               "		\
+	"    %"PRId32",               "		\
+	"    %"PRId32",               "		\
+	"    %"PRId32",               "		\
+	"    %"PRId32",               "		\
+	"    %"PRId32",               "		\
+	"    %"PRId32",               "		\
+	"    %"PRId32",               "		\
+	"    %"PRId32"                "		\
+	");"
 
 typedef struct {
 	proc_entry      entry;
