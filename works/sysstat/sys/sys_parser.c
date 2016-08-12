@@ -114,21 +114,21 @@ int sys_parser(const char *datafile, const char *dbname)
 		sys_diff(&entry);
 
 		snprintf(sqlbuf, sizeof(sqlbuf), SYS_INSERT_TABLE_SQL,
-				i,
-				entry.timestamp,
-				entry.mem.mem_total,
-				entry.mem.mem_free,
-				entry.mem.mem_buffers,
-				entry.mem.mem_cached,
-				entry.mem.mapped,
-				entry.mem.slab,
-				entry.mem.shmem,
-				entry.mem.swap_total,
-				entry.mem.swap_free,
-				entry.mem.vmalloc_total,
-				entry.mem.vmalloc_used,
-				entry.mem.vmalloc_chunk,
-				entry.mem.hugepage_size);
+			 i,
+			 entry.timestamp,
+			 entry.mem.mem_total,
+			 entry.mem.mem_free,
+			 entry.mem.mem_buffers,
+			 entry.mem.mem_cached,
+			 entry.mem.mapped,
+			 entry.mem.slab,
+			 entry.mem.shmem,
+			 entry.mem.swap_total,
+			 entry.mem.swap_free,
+			 entry.mem.vmalloc_total,
+			 entry.mem.vmalloc_used,
+			 entry.mem.vmalloc_chunk,
+			 entry.mem.hugepage_size);
 		sqlite_exec(&g_sysqlite, sqlbuf);
 	}
 	close(fd);
