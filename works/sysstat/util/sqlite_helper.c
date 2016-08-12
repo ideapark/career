@@ -12,9 +12,9 @@
 int sqlite_open(sqlite_t *database, const char *name)
 {
 	if (sqlite3_open_v2(name, &database->sqlitedb,
-				SQLITE_OPEN_READWRITE|SQLITE_OPEN_CREATE, NULL) != SQLITE_OK) {
+			    SQLITE_OPEN_READWRITE|SQLITE_OPEN_CREATE, NULL) != SQLITE_OK) {
 		fprintf(stderr, "open sqlite3 database failed: %s: %s.\n",
-				name, sqlite3_errmsg(database->sqlitedb));
+			name, sqlite3_errmsg(database->sqlitedb));
 		database->status = F_CLOSED;
 		database->sqlitedb = NULL;
 		return -1;
