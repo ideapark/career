@@ -50,7 +50,7 @@ int mapped_open(mapfile_t *mapfile, const char *filename)
 	}
 
 	mapfile->addr = mmap(0, mapfile->page_size, PROT_READ|PROT_WRITE,
-			MAP_SHARED, mapfile->fd, 0);
+			     MAP_SHARED, mapfile->fd, 0);
 
 	if (mapfile->addr == MAP_FAILED) {
 		fprintf(stderr, "mmap file failed: %s\n", filename);
@@ -114,7 +114,7 @@ int mapped_write(mapfile_t *mapfile, const void *data, size_t size)
 	}
 
 	mapfile->addr = mmap(0, mapfile->page_size, PROT_READ|PROT_WRITE,
-			MAP_SHARED, mapfile->fd, stat.st_size);
+			     MAP_SHARED, mapfile->fd, stat.st_size);
 
 	if (mapfile->addr == MAP_FAILED) {
 		fprintf(stderr, "mapped_grow remmap failed!\n");
