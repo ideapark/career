@@ -22,8 +22,8 @@
 #include "vm/vm.h"
 #include "task/task.h"
 
-long g_timestamp     = 0;
-int32_t g_sampcnt    = 0;
+long g_timestamp = 0;
+int32_t g_sampcnt = 0;
 int32_t g_sampcntmax = SAMPLECNT_MAX;
 
 /*
@@ -34,14 +34,16 @@ static char awaittrigger;
 /*
  * callback handler queue
  */
-static queue_entry g_callbackqueue[CALLBACKQUEUE_LEN] = {{
-	.callback = {
-		.init = NULL,
-		.run  = NULL,
-		.exit = NULL,
-	},
-	.taken = untaken,
-}};
+static queue_entry g_callbackqueue[CALLBACKQUEUE_LEN] = {
+	{
+		.callback = {
+			.init = NULL,
+			.run  = NULL,
+			.exit = NULL,
+		},
+		.taken = untaken,
+	}
+};
 
 static void reset_timestamp(void)
 {
