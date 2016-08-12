@@ -156,23 +156,23 @@ int proc_parser(const char *datafile, const char *dbname)
 		proc_diff(&entry);
 
 		snprintf(sqlbuf, sizeof(sqlbuf), PROC_INSERT_TABLE_SQL,
-				i,
-				entry.timestamp,
-				entry.pid,
-				process_name(&entry, &header),
-				entry.mem.vm_peak,
-				entry.mem.vm_size,
-				entry.mem.vm_lck,
-				entry.mem.vm_hwm,
-				entry.mem.vm_rss ,
-				entry.mem.vm_data,
-				entry.mem.vm_stk,
-				entry.mem.vm_exe,
-				entry.mem.vm_lib,
-				entry.mem.vm_pte,
-				entry.mem.stack_usage,
-				entry.ctx.voluntary_ctxt_switch,
-				entry.ctx.novoluntary_ctxt_switch);
+			 i,
+			 entry.timestamp,
+			 entry.pid,
+			 process_name(&entry, &header),
+			 entry.mem.vm_peak,
+			 entry.mem.vm_size,
+			 entry.mem.vm_lck,
+			 entry.mem.vm_hwm,
+			 entry.mem.vm_rss ,
+			 entry.mem.vm_data,
+			 entry.mem.vm_stk,
+			 entry.mem.vm_exe,
+			 entry.mem.vm_lib,
+			 entry.mem.vm_pte,
+			 entry.mem.stack_usage,
+			 entry.ctx.voluntary_ctxt_switch,
+			 entry.ctx.novoluntary_ctxt_switch);
 		sqlite_exec(&g_procsqlite, sqlbuf);
 	}
 	close(fd);
