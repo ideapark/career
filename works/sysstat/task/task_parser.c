@@ -115,13 +115,13 @@ int task_parser(const char *datafile, const char *dbname)
 		task_diff(&entry);
 
 		snprintf(sqlbuf, sizeof(sqlbuf), TASK_INSERT_TABLE_SQL,
-				i,
-				entry.timestamp,
-				entry.pid,
-				entry.tid,
-				entry.voluntary_ctxt_switches,
-				entry.nonvoluntary_ctxt_switches,
-				entry.cpu_migration);
+			 i,
+			 entry.timestamp,
+			 entry.pid,
+			 entry.tid,
+			 entry.voluntary_ctxt_switches,
+			 entry.nonvoluntary_ctxt_switches,
+			 entry.cpu_migration);
 		sqlite_exec(&g_tasksqlite, sqlbuf);
 	}
 
