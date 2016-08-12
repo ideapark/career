@@ -105,11 +105,11 @@ static int task_snapshot(task_header *header)
 			sscanf(task_ent->d_name, "%"SCNu32, &entry.tid);
 
 			snprintf(path, TASKPATH_MAX, "/proc/%s/task/%s/status",
-					proc_ent->d_name, task_ent->d_name);
+				 proc_ent->d_name, task_ent->d_name);
 			task_readstatus(path, &entry);
 
 			snprintf(path, TASKPATH_MAX, "/proc/%s/task/%s/sched",
-					proc_ent->d_name, task_ent->d_name);
+				 proc_ent->d_name, task_ent->d_name);
 			task_readsched(path, &entry);
 
 			mapped_write(&g_taskfile, (void *)&entry, sizeof(entry));
