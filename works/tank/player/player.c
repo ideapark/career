@@ -1,5 +1,5 @@
 /*
- * client.c
+ * player.c
  *
  * Copyright (c) Zhou Peng <lockrecv@qq.com>
  */
@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <getopt.h>
 
-#include "client.h"
+#include "player.h"
 #include "logger.h"
 #include "link.h"
 

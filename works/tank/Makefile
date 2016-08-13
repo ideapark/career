@@ -7,13 +7,13 @@
 export AR = ar
 export CC = gcc
 export ARFLAG = rcs
-export CFLAGS = -Wall -g -I$(shell pwd)/lib
-export LIBS = -L$(shell pwd)/lib/ -lopen -lm
+export CFLAGS = -Wall -g -I$(shell pwd)/libutil
+export LIBS = -L$(shell pwd)/libutil/ -lutil -lm
 
 all: copyright
-	$(MAKE) -C lib clean libopen.a
-	$(MAKE) -C srv clean srv.out
-	$(MAKE) -C cli clean cli.out
+	$(MAKE) -C libutil clean libutil.a
+	$(MAKE) -C server clean srv.out
+	$(MAKE) -C player clean ply.out
 
 copyright:
 	@echo "### ----------------------------------------- ###"

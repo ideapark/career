@@ -1,12 +1,12 @@
 /*
- * client.h
+ * player.h
  *
  * Copyright (c) Zhou Peng <lockrecv@qq.com>
  */
 
-#ifndef CLIENT_H
-#define CLIENT_H
+#ifndef PLAYER_H
+#define PLAYER_H
 
 #define TEAMNAME "GNU/Linux"
 
-#endif /* CLIENT_H */
+#endif /* PLAYER_H */

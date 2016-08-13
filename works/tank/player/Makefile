@@ -1,16 +1,16 @@
 # -----------------------------------------
-#             Library Makefile
+#             Player Makefile
 #
 # Copyright (c) Zhou Peng <lockrecv@qq.com>
 # -----------------------------------------
 
-open-objs += logger.o cJSON.o
+ply-objs += player.o link.o
 
-libopen.a: $(open-objs)
-	$(AR) $(ARFLAG) $@ $^
+ply.out: $(ply-objs)
+	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
 
 clean:
-	@rm -rf $(open-objs) libopen.a
+	@rm -rf $(ply-objs) ply.out
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

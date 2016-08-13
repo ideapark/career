@@ -1,16 +1,16 @@
 # -----------------------------------------
-#             Client Makefile
+#             Library Makefile
 #
 # Copyright (c) Zhou Peng <lockrecv@qq.com>
 # -----------------------------------------
 
-cli-objs += client.o link.o
+util-objs += logger.o cJSON.o
 
-cli.out: $(cli-objs)
-	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
+libutil.a: $(util-objs)
+	$(AR) $(ARFLAG) $@ $^
 
 clean:
-	@rm -rf $(cli-objs) cli.out
+	@rm -rf $(util-objs) libutil.a
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
