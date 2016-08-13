@@ -21,7 +21,7 @@ static const char *server_ip = "127.0.0.1";
 static const char *server_port = "6000";
 static const char *client_log = "cli.log";
 
-static struct option client_options[] = {
+static struct option player_options[] = {
 	{"ip",     required_argument, 0, 'i'},
 	{"port",   required_argument, 0, 'p'},
 	{"stdout", required_argument, 0, 's'},
@@ -29,14 +29,39 @@ static struct option client_options[] = {
 };
 
 static int sockfd = -1;
+static short teamid = -1;
 
 static int do_gamestart(cJSON *body)
 {
+	cJSON *id = cJSON_GetObjectItem(body, "id");
+	if (id->type == cJSON_Number)
+		teamid = id->valueint;
+	else {
+		logger_error("%s\n", "game start get my team id error.");
+		return -1;
+	}
+	cJSON *root = cJSON_CreateObject();
+	cJSON_AddNumberToObject(root, "id", teamid);
+	cJSON_AddItemToObject(root, "name", cJSON_CreateString(TEAMNAME));
+	char *msg;
+	size_t len;
+	msg = cJSON_Print(root);
+	len = strlen(msg);
+	if (write(sockfd, msg, len) < 0)
+		logger_error("player: team %hi, broken socket.\n", teamid);
+	cJSON_Delete(root);
 	return 0;
 }
 
 static int do_gameover(cJSON *body)
 {
+	cJSON *message = cJSON_GetObjectItem(body, "message");
+	if (message->type == cJSON_String)
+		logger_info("player: team %hi, game over: %s\n", teamid,
+			    message->valuestring);
+	else
+		logger_error("player: team %hi, %s\n", teamid,
+			     "server said game over but did not say goodby.");
 	return 0;
 }
 
@@ -52,13 +77,27 @@ static int do_legend(cJSON *body)
 
 static int do_roundstep(cJSON *body)
 {
+	/* get server status */
+
+	/* calc my action strategy */
+
+	/* echo server my actions */
+	cJSON *root = cJSON_CreateObject();
+	cJSON_AddNumberToObject(root, "id", teamid);
+	char *msg;
+	size_t len;
+	msg = cJSON_Print(root);
+	len = strlen(msg);
+	if (write(sockfd, msg, len) < 0)
+		logger_error("player: team %hi, broken socket.\n", teamid);
+	cJSON_Delete(root);
 	return 1;
 }
 
 int main(int argc, char *argv[])
 {
 	int c;
-	while ((c = getopt_long(argc, argv, "i:p:s", client_options, NULL)) != -1) {
+	while ((c = getopt_long(argc, argv, "i:p:s", player_options, NULL)) != -1) {
 		switch (c) {
 		case 'i':
 			server_ip = optarg;
