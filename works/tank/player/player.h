@@ -8,7 +8,7 @@
 #define PLAYER_H
 
 #define TEAMNAME "GNU/Linux"
-#define BUFFER_MAX  2048
+#define BUFFER_MAX  4096
 #define GAME_START "game start"
 #define GAME_OVER  "game over"
 #define LEG_START  "leg start"

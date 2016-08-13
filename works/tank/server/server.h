@@ -19,7 +19,7 @@
 #define ROUND_MAX   150
 #define TEAM_MAX    2
 #define NAME_MAX    16
-#define BUFFER_MAX  2048
+#define BUFFER_MAX  4096
 #define OFFLINE_MAX 10
 
 enum direction {
