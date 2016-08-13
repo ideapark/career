@@ -4,16 +4,16 @@
 # Copyright (c) Zhou Peng <lockrecv@qq.com>
 # -----------------------------------------
 
-CC = gcc
-CFLAGS = -Wall -g -I$(shell pwd)/thirdparty/include -I$(shell pwd)/thirdparty/cJSON
-LIBS = -L$(shell pwd)/thirdparty/cJSON -lcjson -lm -static
-
-export CC CFLAGS LIBS
+export AR = ar
+export CC = gcc
+export ARFLAG = rcs
+export CFLAGS = -Wall -g -I$(shell pwd)/lib
+export LIBS = -L$(shell pwd)/lib/ -lopen -lm
 
 all: copyright
-	$(MAKE) -C thirdparty/cJSON clean all
-	$(MAKE) -C server clean srv.out
-	$(MAKE) -C client clean cli.out
+	$(MAKE) -C lib clean libopen.a
+	$(MAKE) -C srv clean srv.out
+	$(MAKE) -C cli clean cli.out
 
 copyright:
 	@echo "### ----------------------------------------- ###"

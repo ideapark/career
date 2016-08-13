@@ -1,16 +1,16 @@
 # -----------------------------------------
-#             Server Makefile
+#             Library Makefile
 #
 # Copyright (c) Zhou Peng <lockrecv@qq.com>
 # -----------------------------------------
 
-server-objs += logger.o server.o map.o link.o
+open-objs += logger.o cJSON.o
 
-srv.out: $(server-objs)
-	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
+libopen.a: $(open-objs)
+	$(AR) $(ARFLAG) $@ $^
 
 clean:
-	@rm -rf $(server-objs) srv.out
+	@rm -rf $(open-objs) libopen.a
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

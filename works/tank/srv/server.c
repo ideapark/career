@@ -9,7 +9,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <getopt.h>
-#include <assert.h>
 #include <signal.h>
 
 #include "server.h"
@@ -277,6 +276,7 @@ int main(int argc, char *argv[])
 		game.teams[tm].id = tm;
 		game.teams[tm].life_remain = LIFE_MAX;
 		game.teams[tm].sockfd = link_accept();
+		memset(game.teams[tm].name, '\0', NAME_MAX+1);
 		INIT_LIST_HEAD(&game.teams[tm].stars);
 		INIT_LIST_HEAD(&game.teams[tm].bullets);
 

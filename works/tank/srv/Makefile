@@ -1,16 +1,16 @@
 # -----------------------------------------
-#             Client Makefile
+#             Server Makefile
 #
 # Copyright (c) Zhou Peng <lockrecv@qq.com>
 # -----------------------------------------
 
-client-objs += client.o
+srv-objs += server.o map.o link.o
 
-cli.out: $(client-objs)
+srv.out: $(srv-objs)
 	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
 
 clean:
-	@rm -rf $(client-objs) cli.out
+	@rm -rf $(srv-objs) srv.out
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
