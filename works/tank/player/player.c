@@ -19,12 +19,12 @@
  */
 static const char *server_ip = "127.0.0.1";
 static const char *server_port = "6000";
-static const char *client_log = "cli.log";
+static const char *player_log = "ply.log";
 
 static struct option player_options[] = {
 	{"ip",     required_argument, 0, 'i'},
 	{"port",   required_argument, 0, 'p'},
-	{"stdout", required_argument, 0, 's'},
+	{"stdout", no_argument,       0, 's'},
 	{0,        0,                 0,   0}
 };
 
@@ -106,7 +106,7 @@ int main(int argc, char *argv[])
 			server_port = optarg;
 			break;
 		case 's':
-			client_log = "/dev/stdout";
+			player_log = "/dev/stdout";
 			break;
 		default:
 			exit(-1);
@@ -114,7 +114,7 @@ int main(int argc, char *argv[])
 	}
 
 	/* logger setup */
-	if (!logger_open(client_log))
+	if (!logger_open(player_log))
 		exit(-2);
 
 	/* connect server */
