@@ -30,7 +30,7 @@ static const char *strnow(char *buffer, size_t bufsize)
 static int logger(const char *color, const char *level,
 		  const  char *fmt, va_list args)
 {
-	static const char *end = "\e[m";
+	static const char *end = "\e[00m";
 	static const int bufsize = 32;
 
 	int cnt = 0;
