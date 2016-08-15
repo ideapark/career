@@ -312,7 +312,9 @@ int main(int argc, char *argv[])
 	while (game.leg_remain-- > 0) {
 		leg_start();
 		game.round_remain = ROUND_MAX;
-		while (game.round_remain-- > 0 && round_step());
+		while (game.round_remain-- > 0)
+			if (!round_step())
+				break;
 		leg_end();
 	}
 	game_over();
