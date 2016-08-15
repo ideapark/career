@@ -11,7 +11,7 @@ export CFLAGS = -Wall -g -I$(shell pwd)/libutil
 export LIBS = -L$(shell pwd)/libutil/ -lutil -lm
 export SHELL = /bin/sh
 
-all: test
+all: compile
 
 compile: copyright
 	$(MAKE) -C libutil clean libutil.a

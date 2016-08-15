@@ -46,6 +46,7 @@ static int logger(const char *color, const char *level,
 	cnt += vfprintf(logger_cache, fmt, args);
 	if (tty_cache)
 		cnt += fprintf(logger_cache, "%s", end);
+	fflush(logger_cache);
 	return cnt;
 }
 
@@ -71,7 +72,7 @@ int logger_close()
 
 int logger_info(const char *fmt, ...)
 {
-	static const char *blue = "\e[36m";
+	static const char *blue = "\e[32m";
 	static const char *info = "[info] ";
 
 	int cnt;

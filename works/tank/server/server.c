@@ -77,7 +77,7 @@ static void game_start(void)
 		if (json_id->type == cJSON_Number &&
 		    json_id->valueint == game.teams[tid].id &&
 		    json_name->type == cJSON_String) {
-			strncpy(game.teams[tid].name, json_name->string, NAME_MAX);
+			strncpy(game.teams[tid].name, json_name->valuestring, NAME_MAX);
 		} else {
 			logger_warn("team %hi, evil player will be punished.\n", game.teams[tid].id);
 			close(game.teams[tid].sockfd);
