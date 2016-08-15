@@ -20,6 +20,7 @@ compile: copyright
 
 test: compile
 	$(SHELL) -c 'cd server && ./srv.out --port=8080 --stdout &'
+	$(SHELL) -c 'sleep 3'
 	$(SHELL) -c 'cd player && ./ply.out --ip="localhost" --port=8080 --stdout &'
 	$(SHELL) -c 'cd player && ./ply.out --ip="localhost" --port=8080 --stdout &'
 
