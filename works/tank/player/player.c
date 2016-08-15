@@ -45,7 +45,7 @@ static int do_gamestart(cJSON *body)
 	cJSON_AddItemToObject(root, "name", cJSON_CreateString(TEAMNAME));
 	char *msg;
 	size_t len;
-	msg = cJSON_Print(root);
+	msg = cJSON_PrintUnformatted(root);
 	len = strlen(msg);
 	if (write(sockfd, msg, len) < 0)
 		logger_error("player: team %hi, broken socket.\n", teamid);
@@ -86,7 +86,7 @@ static int do_roundstep(cJSON *body)
 	cJSON_AddNumberToObject(root, "id", teamid);
 	char *msg;
 	size_t len;
-	msg = cJSON_Print(root);
+	msg = cJSON_PrintUnformatted(root);
 	len = strlen(msg);
 	if (write(sockfd, msg, len) < 0)
 		logger_error("player: team %hi, broken socket.\n", teamid);

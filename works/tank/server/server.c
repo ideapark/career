@@ -54,7 +54,7 @@ static void game_start(void)
 		cJSON_AddItemToObject(root, "head", cJSON_CreateString("game start"));
 		cJSON_AddItemToObject(root, "body", body=cJSON_CreateObject());
 		cJSON_AddNumberToObject(body, "id", game.teams[tid].id);
-		msg = cJSON_Print(root);
+		msg = cJSON_PrintUnformatted(root);
 		len = strlen(msg);
 		if (write(game.teams[tid].sockfd, msg, len) < 0)
 			logger_error("team %hi, broken socket.\n", game.teams[tid].id);
@@ -97,7 +97,7 @@ static void game_over(void)
 	cJSON_AddItemToObject(root, "head", cJSON_CreateString("game over"));
 	cJSON_AddItemToObject(root, "body", body=cJSON_CreateObject());
 	cJSON_AddItemToObject(body, "message", cJSON_CreateString("Thanks to play."));
-	msg = cJSON_Print(root);
+	msg = cJSON_PrintUnformatted(root);
 	len = strlen(msg);
 
 	for (tid = 0; tid < TEAM_MAX; tid++) {
@@ -122,7 +122,7 @@ static void leg_start(void)
 	root = cJSON_CreateObject();
 	cJSON_AddItemToObject(root, "head", cJSON_CreateString("leg start"));
 	cJSON_AddItemToObject(root, "body", body=cJSON_CreateObject());
-	msg = cJSON_Print(root);
+	msg = cJSON_PrintUnformatted(root);
 	len = strlen(msg);
 
 	for (tid = 0; tid < TEAM_MAX; tid++)
@@ -143,7 +143,7 @@ static void leg_end(void)
 	root = cJSON_CreateObject();
 	cJSON_AddItemToObject(root, "head", cJSON_CreateString("leg end"));
 	cJSON_AddItemToObject(root, "body", body=cJSON_CreateObject());
-	msg = cJSON_Print(root);
+	msg = cJSON_PrintUnformatted(root);
 	len = strlen(msg);
 
 	for (tid = 0; tid < TEAM_MAX; tid++)
@@ -207,7 +207,7 @@ static int round_step(void)
 	short tid;
 
 	root = game_json();
-	msg = cJSON_Print(root);
+	msg = cJSON_PrintUnformatted(root);
 	len = strlen(msg);
 	for (tid = 0; tid < TEAM_MAX; tid++)
 		if (write(game.teams[tid].sockfd, msg, len) < 0)
