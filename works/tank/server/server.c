@@ -154,7 +154,7 @@ static void leg_end(void)
 	free(msg);
 }
 
-cJSON *game_json(void)
+static cJSON *game_json(void)
 {
 	cJSON *root, *body;
 	short tid;
