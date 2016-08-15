@@ -65,7 +65,7 @@ static void game_start(void)
 	/*
 	 * player register their names
 	 */
-	char buf[BUFFER_MAX];
+	char buf[BUFFER_MAX+1] = {'\0'};
 	for (tid = 0; tid < TEAM_MAX; tid++) {
 		if (read(game.teams[tid].sockfd, buf, BUFFER_MAX) < 0) {
 			logger_error("team %hi, broken socket.\n", game.teams[tid].id);
@@ -216,7 +216,7 @@ static int round_step(void)
 	free(msg);
 
 	/* player actions */
-	char buf[BUFFER_MAX];
+	char buf[BUFFER_MAX+1] = {'\0'};
 	for (tid = 0; tid < TEAM_MAX; tid++) {
 		if (read(game.teams[tid].sockfd, buf, BUFFER_MAX) < 0) {
 			logger_error("team %hi, broken socket.\n", game.teams[tid].id);
