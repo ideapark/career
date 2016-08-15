@@ -40,6 +40,9 @@ static int do_gamestart(cJSON *body)
 		logger_error("%s\n", "game start get my team id error.");
 		return -1;
 	}
+	/*
+	 * register player's team name
+	 */
 	cJSON *root = cJSON_CreateObject();
 	cJSON_AddNumberToObject(root, "id", teamid);
 	cJSON_AddItemToObject(root, "name", cJSON_CreateString(TEAMNAME));
