@@ -30,7 +30,7 @@ static const char *strnow(char *buffer, size_t bufsize)
 static int logger(const char *color, const char *level,
 		  const  char *fmt, va_list args)
 {
-	static const char *end = "\e[00m";
+	static const char *end = "\e[0m";
 	static const int bufsize = 32;
 
 	int cnt = 0;
@@ -71,7 +71,7 @@ int logger_close()
 
 int logger_info(const char *fmt, ...)
 {
-	static const char *blue = "\e[00;36m";
+	static const char *blue = "\e[36m";
 	static const char *info = "[info] ";
 
 	int cnt;
@@ -86,7 +86,7 @@ int logger_info(const char *fmt, ...)
 
 int logger_warn(const char *fmt, ...)
 {
-	static const char *yellow = "\e[00;33m";
+	static const char *yellow = "\e[33m";
 	static const char *warning = "[warn] ";
 
 	int cnt;
@@ -101,7 +101,7 @@ int logger_warn(const char *fmt, ...)
 
 int logger_error(const char *fmt, ...)
 {
-	static const char *red = "\e[00;31m";
+	static const char *red = "\e[31m";
 	static const char *error = "[error] ";
 
 	int cnt;
