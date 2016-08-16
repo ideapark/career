@@ -151,9 +151,13 @@ int main(int argc, char *argv[])
 		else if (strcmp(head->valuestring, GAME_OVER) == 0) {
 			do_gameover(body);
 			close(sockfd);
+			cJSON_Delete(root);
 			break;
-		} else
-			logger_error("%s\n", "server JSON message head type error.");
+		} else {
+			logger_error("%s\n", "server JSON message head type invalid.");
+			cJSON_Delete(root);
+			break;
+		}
 		cJSON_Delete(root);
 	}
 
