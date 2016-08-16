@@ -231,6 +231,67 @@ static int round_step(void)
 	return 1;
 }
 
+static int team_setup(void)
+{
+	game.round_remain = ROUND_MAX;
+
+	short tm, tk;
+	for (tm = 0; tm < TEAM_MAX; tm++) {
+		game.teams[tm].life_remain = LIFE_MAX;
+		for (tk = 0; tk < TANK_MAX; tk++) {
+			game.teams[tm].tanks[tk].id = tm * TANK_MAX + tk;
+			game.teams[tm].tanks[tk].star_count = 0;
+
+			/* tank postion */
+			short y, x;
+			for (y = 0; y < Y_MAX; y++) {
+				for (x = 0; x < X_MAX; x++) {
+					if (map_get(y, x) == AREA) {
+						game.teams[tm].tanks[tk].pos.y = y;
+						game.teams[tm].tanks[tk].pos.x = x;
+						map_set(y, x, TANK);
+						goto tank_ok;
+					}
+				}
+			}
+			logger_warn("%s\n", "map area less than tanks.");
+			return 0;
+		tank_ok:
+			logger_info("team: %hi, tank: %hi, at position (%hi, %hi)\n",
+				    game.teams[tm].id,
+				    game.teams[tm].tanks[tk].id,
+				    game.teams[tm].tanks[tk].pos.y,
+				    game.teams[tm].tanks[tk].pos.x);
+		}
+		struct list_head *pos, *n;
+		list_for_each_safe(pos, n, &game.teams[tm].stars) {
+			list_del(pos);
+			struct star *star = list_entry(pos, struct star, list);
+			free(star);
+		}
+		list_for_each_safe(pos, n, &game.teams[tm].bullets) {
+			list_del(pos);
+			struct bullet *bullet = list_entry(pos, struct bullet, list);
+			free(bullet);
+		}
+	}
+	return 1;
+}
+
+static void game_setup(void)
+{
+	game.leg_remain = LEG_MAX;
+	short tm;
+	for (tm = 0; tm < TEAM_MAX; tm++) {
+		game.teams[tm].id = tm;
+		game.teams[tm].life_remain = LIFE_MAX;
+		game.teams[tm].sockfd = link_accept();
+		memset(game.teams[tm].name, '\0', NAME_MAX+1);
+		INIT_LIST_HEAD(&game.teams[tm].stars);
+		INIT_LIST_HEAD(&game.teams[tm].bullets);
+	}
+}
+
 int main(int argc, char *argv[])
 {
 	signal(SIGPIPE, SIG_IGN);
@@ -268,50 +329,13 @@ int main(int argc, char *argv[])
 	if (!link_open(server_port))
 		exit(-4);
 
-	/* game setup */
-	game.leg_remain = LEG_MAX;
-	game.round_remain = ROUND_MAX;
-	short tm, tk;
-	for (tm = 0; tm < TEAM_MAX; tm++) {
-		game.teams[tm].id = tm;
-		game.teams[tm].life_remain = LIFE_MAX;
-		game.teams[tm].sockfd = link_accept();
-		memset(game.teams[tm].name, '\0', NAME_MAX+1);
-		INIT_LIST_HEAD(&game.teams[tm].stars);
-		INIT_LIST_HEAD(&game.teams[tm].bullets);
-
-		for (tk = 0; tk < TANK_MAX; tk++) {
-			game.teams[tm].tanks[tk].id = tm * TANK_MAX + tk;
-			game.teams[tm].tanks[tk].star_count = 0;
-
-			/* alloc tank postion */
-			short y, x;
-			for (y = 0; y < Y_MAX; y++) {
-				for (x = 0; x < X_MAX; x++) {
-					if (map_get(y, x) == AREA) {
-						game.teams[tm].tanks[tk].pos.y = y;
-						game.teams[tm].tanks[tk].pos.x = x;
-						map_set(y, x, TANK);
-						goto tank_ok;
-					}
-				}
-			}
-			logger_warn("%s\n", "map area less than tanks.");
-			exit(-4);
-		tank_ok:
-			logger_info("team: %hi, tank: %hi, at position (%hi, %hi)\n",
-				    game.teams[tm].id,
-				    game.teams[tm].tanks[tk].id,
-				    game.teams[tm].tanks[tk].pos.y,
-				    game.teams[tm].tanks[tk].pos.x);
-		}
-	}
+	game_setup();
 
 	/* play game */
 	game_start();
 	while (game.leg_remain-- > 0) {
 		leg_start();
-		game.round_remain = ROUND_MAX;
+		team_setup();
 		while (game.round_remain-- > 0)
 			if (!round_step())
 				break;
