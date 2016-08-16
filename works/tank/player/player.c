@@ -142,15 +142,17 @@ int main(int argc, char *argv[])
 		}
 		if (strcmp(head->valuestring, GAME_START) == 0)
 			do_gamestart(body);
-		else if (strcmp(head->valuestring, GAME_OVER) == 0)
-			do_gameover(body);
 		else if (strcmp(head->valuestring, LEG_START) == 0)
 			do_legstart(body);
-		else if (strcmp(head->valuestring, LEG_END) == 0)
-			do_legend(body);
 		else if (strcmp(head->valuestring, ROUND_STEP) == 0)
 			do_roundstep(body);
-		else
+		else if (strcmp(head->valuestring, LEG_END) == 0)
+			do_legend(body);
+		else if (strcmp(head->valuestring, GAME_OVER) == 0) {
+			do_gameover(body);
+			close(sockfd);
+			break;
+		} else
 			logger_error("%s\n", "server JSON message head type error.");
 		cJSON_Delete(root);
 	}
