@@ -24,7 +24,7 @@ int link_connect(const char *server_ip, const char *server_port)
 	name.sin_family = AF_INET;
 	hostinfo = gethostbyname(server_ip);
 	if (hostinfo == NULL) {
-		logger_error("%s\n", "query server ip error, quit now!");
+		logger_error("%s\n", "query server ip failed, quit now!");
 		return -1;
 	} else {
 		name.sin_addr = *((struct in_addr *)hostinfo->h_addr);
