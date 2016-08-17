@@ -41,6 +41,7 @@ static struct game game;
 
 static void game_start(void)
 {
+	logger_error("%s\n", "server: game start.");
 	cJSON *root, *body;
 	char *msg;
 	size_t len;
@@ -88,6 +89,7 @@ static void game_start(void)
 
 static void game_over(void)
 {
+	logger_error("%s\n", "server: game over.");
 	cJSON *root, *body;
 	char *msg;
 	size_t len;
@@ -114,6 +116,7 @@ static void game_over(void)
 
 static void leg_start(void)
 {
+	logger_warn("%s\n", "server: leg start.");
 	cJSON *root, *body;
 	char *msg;
 	size_t len;
@@ -135,6 +138,7 @@ static void leg_start(void)
 
 static void leg_end(void)
 {
+	logger_warn("%s\n", "server: leg end.");
 	cJSON *root, *body;
 	char *msg;
 	size_t len;
@@ -201,6 +205,7 @@ static cJSON *game_json(void)
 
 static int round_step(void)
 {
+	logger_info("%s\n", "server: round step.");
 	char *msg;
 	size_t len;
 	cJSON *root;

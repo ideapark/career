@@ -33,10 +33,11 @@ static short teamid = -1;
 
 static int do_gamestart(cJSON *body)
 {
+	logger_error("%s\n", "player: game start.");
 	cJSON *id = cJSON_GetObjectItem(body, "id");
-	if (id->type == cJSON_Number)
+	if (id->type == cJSON_Number) {
 		teamid = id->valueint;
-	else {
+	} else {
 		logger_error("%s\n", "game start get my team id error.");
 		return -1;
 	}
@@ -58,6 +59,7 @@ static int do_gamestart(cJSON *body)
 
 static int do_gameover(cJSON *body)
 {
+	logger_error("%s\n", "player: game over.");
 	cJSON *message = cJSON_GetObjectItem(body, "message");
 	if (message->type == cJSON_String)
 		logger_info("player: team %hi, game over: %s\n", teamid,
@@ -70,16 +72,19 @@ static int do_gameover(cJSON *body)
 
 static int do_legstart(cJSON *body)
 {
+	logger_warn("%s\n", "player: leg start.");
 	return 0;
 }
 
 static int do_legend(cJSON *body)
 {
+	logger_warn("%s\n", "player: leg end.");
 	return 0;
 }
 
 static int do_roundstep(cJSON *body)
 {
+	logger_info("%s\n", "player: round step.");
 	/* get server status */
 
 	/* calc my action strategy */
@@ -132,13 +137,13 @@ int main(int argc, char *argv[])
 			break;
 		}
 		cJSON *head, *body;
-		if (cJSON_HasObjectItem(root, "head") &&
-		    cJSON_HasObjectItem(root, "body")) {
+		if (cJSON_HasObjectItem(root, "head") && cJSON_HasObjectItem(root, "body")) {
 			head = cJSON_GetObjectItem(root, "head");
 			body = cJSON_GetObjectItem(root, "body");
 		} else {
+			logger_error("%s\n", "server JSON message protocol error.");
 			cJSON_Delete(root);
-			continue;
+			break;;
 		}
 		if (strcmp(head->valuestring, GAME_START) == 0)
 			do_gamestart(body);
@@ -150,7 +155,6 @@ int main(int argc, char *argv[])
 			do_legend(body);
 		else if (strcmp(head->valuestring, GAME_OVER) == 0) {
 			do_gameover(body);
-			close(sockfd);
 			cJSON_Delete(root);
 			break;
 		} else {
@@ -160,6 +164,7 @@ int main(int argc, char *argv[])
 		}
 		cJSON_Delete(root);
 	}
+	close(sockfd);
 
 	return 0;
 }
