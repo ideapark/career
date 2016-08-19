@@ -74,7 +74,7 @@ int logger_close()
 int logger_info(const char *fmt, ...)
 {
 	static const char *blue = "\e[32m";
-	static const char *info = "[ info]";
+	static const char *info = "[info]";
 
 	int cnt;
 	va_list args;
@@ -89,7 +89,7 @@ int logger_info(const char *fmt, ...)
 int logger_warn(const char *fmt, ...)
 {
 	static const char *yellow = "\e[33m";
-	static const char *warning = "[ warn]";
+	static const char *warning = "[warn]";
 
 	int cnt;
 	va_list args;
