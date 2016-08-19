@@ -12,11 +12,11 @@
 #include "list.h"
 
 /* game limits */
-#define TANK_MAX    4
-#define LIFE_MAX    4
+#define TANK_MAX    2
+#define LIFE_MAX    2
 #define LEG_MAX     2
 #define STAR_MAX    1
-#define ROUND_MAX   150
+#define ROUND_MAX   32
 #define TEAM_MAX    2
 #define NAME_MAX    16
 #define BUFFER_MAX  4096
