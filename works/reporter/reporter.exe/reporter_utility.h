@@ -42,23 +42,23 @@ inline std::string to_dbname(long l_t)
 	return std::string(buffer);
 }
 
-#define IF_NOT_EQUAL_RETURN(actual, expect) \
-{ \
-	if ((int64_t)(actual) != (int64_t)(expect)) \
-	return; \
-}
+#define IF_NOT_EQUAL_RETURN(actual, expect)			\
+	{							\
+		if ((int64_t)(actual) != (int64_t)(expect))	\
+			return;					\
+	}
 
-#define IF_NOT_EQUAL_RETURN_VAL(actual, expect, retval) \
-{ \
-	if ((int64_t)(actual) != (int64_t)(expect)) \
-	return retval; \
-}
+#define IF_NOT_EQUAL_RETURN_VAL(actual, expect, retval)		\
+	{							\
+		if ((int64_t)(actual) != (int64_t)(expect))	\
+			return retval;				\
+	}
 
-#define IF_EQUAL_RETURN_VAL(actual, expect, retval) \
-{ \
-	if ((int64_t)(actual) == (int64_t)(expect)) \
-	return retval; \
-}
+#define IF_EQUAL_RETURN_VAL(actual, expect, retval)		\
+	{							\
+		if ((int64_t)(actual) == (int64_t)(expect))	\
+			return retval;				\
+	}
 
 inline uint16_t op_htons(uint16_t x, int cflag)
 {

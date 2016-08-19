@@ -20,7 +20,7 @@ static int cmp_node(const vma_node *left, const vma_node *right)
 static void print_node(const vma_node *node)
 {
 	std::cout << "[" << node->vma_begin << ", " << node->vma_end << "] -> "
-		<< node->unix_path << " (" << node->bfd_key << ")" << std::endl;
+		  << node->unix_path << " (" << node->bfd_key << ")" << std::endl;
 }
 
 avl_tree::avl_tree()

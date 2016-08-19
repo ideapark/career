@@ -29,7 +29,7 @@ namespace reporter {
 
 template <typename T>
 static T *get_or_create(const std::string &key, std::map<std::string, T*> &infos,
-		bool &create)
+			bool &create)
 {
 	typename std::map<std::string, T*>::iterator iter = infos.find(key),
 							end = infos.end();
@@ -55,7 +55,7 @@ static void delete_object(T *ptr) {delete ptr;}
 
 template <typename T, typename UnaryPredicate>
 static void for_each_map_value(std::map<std::string, T *> infos,
-		UnaryPredicate traverse)
+			       UnaryPredicate traverse)
 {
 	typename std::map<std::string, T *>::iterator iter = infos.begin(),
 							end = infos.end();
@@ -67,7 +67,7 @@ static void for_each_map_value(std::map<std::string, T *> infos,
 }
 
 transfer::transfer(std::string data_dir, std::string image_dir,
-		std::string output_dir, int cpu_frequency)
+		   std::string output_dir, int cpu_frequency)
 	: fileLoader(data_dir, image_dir)
 {
 	summaryInfo.data_dir = data_dir;
@@ -213,8 +213,8 @@ void transfer::do_transfer(int vcpu, struct record_entry &record)
 }
 
 void transfer::transfer_record(int vcpu, const sym_info &sym_info,
-		const struct record_entry &record,
-		bool deduced /* deduced from call stack? */)
+			       const struct record_entry &record,
+			       bool deduced /* deduced from call stack? */)
 {
 	bool create;
 	std::string key;
@@ -276,9 +276,9 @@ void transfer::transfer_record(int vcpu, const sym_info &sym_info,
 		func_info->image_private_key = sym_info.bfd_key;
 		func_info->func_vma = sym_info.vma_start;
 		curr_bfd_symbol->get_syminfo(sym_info,
-					func_info->func_name,
-					func_info->file_path,
-					func_info->line);
+					     func_info->func_name,
+					     func_info->file_path,
+					     func_info->line);
 		summaryInfo.func_num++;
 	}
 
@@ -416,9 +416,9 @@ void transfer::transfer_record(int vcpu, const sym_info &sym_info,
 }
 
 void transfer::transfer_callgraph(int vcpu,
-		const struct record_entry &record,
-		const sym_info &caller_sym_info,
-		const sym_info &callee_sym_info)
+				  const struct record_entry &record,
+				  const sym_info &caller_sym_info,
+				  const sym_info &callee_sym_info)
 {
 	bool create;
 	std::string key;

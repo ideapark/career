@@ -17,7 +17,7 @@
 namespace reporter {
 
 bfd_symbol::bfd_symbol(reporter::sample_file &sample_file,
-		const std::map<std::string, key_path> &images)
+		       const std::map<std::string, key_path> &images)
 {
 	struct module_entry module;
 	struct vma_entry vma;
@@ -37,7 +37,7 @@ bfd_symbol::~bfd_symbol()
 #endif
 
 	std::list<module_node *>::iterator m_iter = module_lst.begin(),
-					m_end = module_lst.end();
+		m_end = module_lst.end();
 	while (m_iter != m_end) {
 		delete (*m_iter);
 		m_iter++;
@@ -45,7 +45,7 @@ bfd_symbol::~bfd_symbol()
 	module_lst.clear();
 
 	std::map<int, avl_tree>::iterator t_iter = pid_vmatree.begin(),
-					t_end = pid_vmatree.end();
+		t_end = pid_vmatree.end();
 	while (t_iter != t_end) {
 		avl_tree &tree = t_iter->second;
 		vma_node *temp;
@@ -58,7 +58,7 @@ bfd_symbol::~bfd_symbol()
 	pid_vmatree.clear();
 
 	std::map<int, bfd_node *>::iterator b_iter = bfd_objects.begin(),
-					b_end = bfd_objects.end();
+		b_end = bfd_objects.end();
 	while (b_iter != b_end) {
 		delete b_iter->second;
 		b_iter++;
@@ -67,7 +67,7 @@ bfd_symbol::~bfd_symbol()
 }
 
 void bfd_symbol::add_vma_entry(const vma_entry &vma,
-			const std::map<std::string, key_path> &images)
+			       const std::map<std::string, key_path> &images)
 {
 	reporter::vma_node *node = new reporter::vma_node();
 
@@ -79,7 +79,7 @@ void bfd_symbol::add_vma_entry(const vma_entry &vma,
 	node->bfd_key = get_vma_bfd_key(vma, images);
 
 	std::map<int, avl_tree>::iterator iter = pid_vmatree.find(vma.pid),
-					end = pid_vmatree.end();
+		end = pid_vmatree.end();
 	if (iter != end) {
 		avl_tree &tree = iter->second;
 		tree.insert(tree.root_node, node);
@@ -91,7 +91,7 @@ void bfd_symbol::add_vma_entry(const vma_entry &vma,
 }
 
 void bfd_symbol::add_module_entry(const module_entry &module,
-			const std::map<std::string, key_path> &images)
+				  const std::map<std::string, key_path> &images)
 {
 	reporter::module_node *node = new reporter::module_node();
 
@@ -105,8 +105,8 @@ void bfd_symbol::add_module_entry(const module_entry &module,
 	 * we only keep the biggest one
 	 */
 	std::list<module_node *>::iterator iter = std::find_if(module_lst.begin(),
-							module_lst.end(),
-							ModuleNodeBfdKeyFinder(node->bfd_key));
+							       module_lst.end(),
+							       ModuleNodeBfdKeyFinder(node->bfd_key));
 	if (iter != module_lst.end()) { /* update */
 		(*iter)->vma_begin = std::min((*iter)->vma_begin, node->vma_begin);
 		(*iter)->vma_end = std::max((*iter)->vma_end, node->vma_end);
@@ -120,17 +120,17 @@ void bfd_symbol::add_module_entry(const module_entry &module,
 }
 
 int bfd_symbol::get_module_bfd_key(const module_entry &module,
-				const std::map<std::string, key_path> &images)
+				   const std::map<std::string, key_path> &images)
 {
 	const std::string vmlinux = "vmlinux"; /* has no suffix .ko */
 
 	std::string name = std::string(module.module_name);
 	std::string ko_name = (name != vmlinux)
-				? (name + ".ko") /* append suffix .ko */
-				: vmlinux;
+		? (name + ".ko") /* append suffix .ko */
+		: vmlinux;
 
 	std::map<std::string, key_path>::const_iterator iter = images.begin(),
-							end = images.end();
+		end = images.end();
 	while (iter != end) {
 		std::string unix_path = iter->first;
 
@@ -158,7 +158,7 @@ int bfd_symbol::get_vma_bfd_key(const vma_entry &vma,
 			elf_path[i] = '_';
 
 	std::map<std::string, key_path>::const_iterator iter = images.find(elf_path),
-							end = images.end();
+		end = images.end();
 	if (iter != end) {
 		const key_path &key_path = iter->second;
 		put_bfd(key_path, vma.is_sre);
@@ -170,7 +170,7 @@ int bfd_symbol::get_vma_bfd_key(const vma_entry &vma,
 void bfd_symbol::put_bfd(const key_path &key_path, bool is_sre)
 {
 	std::map<int, bfd_node *>::iterator bfd_iter = bfd_objects.find(key_path.bfd_key),
-						bfd_end = bfd_objects.end();
+		bfd_end = bfd_objects.end();
 	if (bfd_iter == bfd_end) {
 		reporter::bfd_node *bfd_node = new reporter::bfd_node();
 		bfd_node->pbfd = 0;
@@ -188,7 +188,7 @@ void bfd_symbol::put_bfd(const key_path &key_path, bool is_sre)
 std::string bfd_symbol::get_execfile(int pid)
 {
 	std::map<int, avl_tree>::iterator iter = pid_vmatree.find(pid),
-					end = pid_vmatree.end();
+		end = pid_vmatree.end();
 	if (iter != end) {
 		avl_tree &tree = iter->second;
 		vma_node *vma_node = tree.leftmost(tree.root_node);
@@ -199,22 +199,22 @@ std::string bfd_symbol::get_execfile(int pid)
 }
 
 bool bfd_symbol::get_syminfo(const sym_info &sym_info, std::string &symbname,
-		std::string &filename, unsigned int &linenr)
+			     std::string &filename, unsigned int &linenr)
 {
 	std::map<int, bfd_node *>::iterator iter = bfd_objects.find(sym_info.bfd_key),
-						end = bfd_objects.end();
+		end = bfd_objects.end();
 	if (iter == end)
 		return false;
 
 	bfd_node *bfd_node = iter->second;
 	bfd_node->pbfd->get_linenr(sym_info.sym_index, sym_info.vma_start,
-				filename, linenr);
+				   filename, linenr);
 	symbname = bfd_node->pbfd->get_symname(sym_info.sym_index);
 	return true;
 }
 
 bool bfd_symbol::demangle_symbol(const struct record_entry &record,
-		sym_info &sym_info)
+				 sym_info &sym_info)
 {
 	if (record.user)
 		return demangle_user_symbol(record, sym_info);
@@ -223,10 +223,10 @@ bool bfd_symbol::demangle_symbol(const struct record_entry &record,
 }
 
 bool bfd_symbol::demangle_user_symbol(const struct record_entry &record,
-		sym_info &sym_info)
+				      sym_info &sym_info)
 {
 	const std::map<int, avl_tree>::iterator tree_iter = pid_vmatree.find(record.pid),
-						tree_end = pid_vmatree.end();
+		tree_end = pid_vmatree.end();
 	if (tree_iter == tree_end)
 		return false; /* process vma tree not found */
 
@@ -237,7 +237,7 @@ bool bfd_symbol::demangle_user_symbol(const struct record_entry &record,
 		return false; /* vma tree has no such vma node */
 
 	std::map<int, bfd_node *>::iterator bfd_iter = bfd_objects.find(vma_node->bfd_key),
-						bfd_end = bfd_objects.end();
+		bfd_end = bfd_objects.end();
 	if (bfd_iter == bfd_end)
 		return false; /* no such bfd node */
 
@@ -264,20 +264,20 @@ bool bfd_symbol::demangle_user_symbol(const struct record_entry &record,
 }
 
 bool bfd_symbol::demangle_kernel_symbol(const struct record_entry &record,
-		sym_info &sym_info)
+					sym_info &sym_info)
 {
 	const std::string vmlinux = "vmlinux";
 
 	std::list<module_node *>::iterator iter = std::find_if(module_lst.begin(),
-							module_lst.end(),
-							ModuleNodeVmaFinder(record.pc));
+							       module_lst.end(),
+							       ModuleNodeVmaFinder(record.pc));
 	if (iter == module_lst.end())
 		return false;
 
 	module_node *module_node = *iter;
 
 	std::map<int, bfd_node *>::iterator bfd_iter = bfd_objects.find(module_node->bfd_key),
-						bfd_end = bfd_objects.end();
+		bfd_end = bfd_objects.end();
 	if (bfd_iter == bfd_end)
 		return false; /* no such bfd node */
 
@@ -287,14 +287,14 @@ bool bfd_symbol::demangle_kernel_symbol(const struct record_entry &record,
 		bfd_node->pbfd = new op_bfd(bfd_node->win_path, false);
 
 	unsigned long long file_offset = (module_node->unix_path.rfind(vmlinux) != std::string::npos)
-					? record.pc
-					: (record.pc - module_node->vma_begin + 1);
+		? record.pc
+		: (record.pc - module_node->vma_begin + 1);
 
 	uint32_t sym_index = bfd_node->pbfd->get_symindex(file_offset);
 	uint32_t vma_start = bfd_node->pbfd->start_vma(sym_index);
 	uint32_t objdump_vma = (module_node->unix_path.rfind(vmlinux) != std::string::npos)
-				? file_offset
-				: bfd_node->pbfd->objdump_vma(file_offset);
+		? file_offset
+		: bfd_node->pbfd->objdump_vma(file_offset);
 
 	if (sym_index == APS_INVALID_SYMBOL_INDEX || vma_start == APS_INVALID_VMA)
 		return false;
@@ -312,7 +312,7 @@ void bfd_symbol::debug_print_vmatree()
 	std::cout << "------- reporter.exe -------" << std::endl;
 	std::cout << "---------- out/so address mapping ----------" << std::endl;
 	std::map<int, avl_tree>::iterator iter = pid_vmatree.begin(),
-					end = pid_vmatree.end();
+		end = pid_vmatree.end();
 	while (iter != end) {
 		int pid = iter->first;
 		const avl_tree &tree = iter->second;
@@ -329,11 +329,11 @@ void bfd_symbol::debug_print_moduleinfo()
 	std::cout << "------- reporter.exe -------" << std::endl;
 	std::cout << "---------- module address mapping ----------" << std::endl;
 	std::list<module_node *>::iterator iter = module_lst.begin(),
-					end = module_lst.end();
+		end = module_lst.end();
 	while (iter != end) {
 		std::cout << "[" << (*iter)->vma_begin << ", "
-			<< (*iter)->vma_end << "] -> "
-			<< (*iter)->unix_path << " (" << (*iter)->bfd_key << ")" << std::endl;
+			  << (*iter)->vma_end << "] -> "
+			  << (*iter)->unix_path << " (" << (*iter)->bfd_key << ")" << std::endl;
 		iter++;
 	}
 }
@@ -341,11 +341,11 @@ void bfd_symbol::debug_print_moduleinfo()
 void bfd_symbol::debug_print_syminfo(const sym_info &sym_info)
 {
 	std::map<int, bfd_node *>::iterator iter = bfd_objects.find(sym_info.bfd_key),
-					end = bfd_objects.end();
+		end = bfd_objects.end();
 	if (iter !=  end) {
 		const bfd_node *bfd_node = iter->second;
 		std::cout << bfd_node->pbfd->get_symname(sym_info.sym_index)
-			<< std::endl;
+			  << std::endl;
 	} else {
 		std::cout << "symbol info invalid." << std::endl;
 	}

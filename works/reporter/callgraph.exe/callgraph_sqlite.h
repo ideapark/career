@@ -35,7 +35,7 @@ class callgraph_entry
 public:
 	callgraph_entry(int k, std::string n, float sr, float tr)
 		: func_key(k), name(n), sample_ratio(sr),
-			total_ratio(tr), status(E_UNVISITED) {}
+		total_ratio(tr), status(E_UNVISITED) {}
 
 public:
 	int func_key;

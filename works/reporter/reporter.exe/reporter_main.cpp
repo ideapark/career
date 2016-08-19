@@ -15,9 +15,9 @@ int main(int argc, char const * argv[])
 	reporter::get_options(argc, argv);
 
 	reporter::transfer transfer(reporter::options::data_dir,
-				reporter::options::image_dir,
-				reporter::options::output_dir,
-				reporter::options::cpu_frequency);
+				    reporter::options::image_dir,
+				    reporter::options::output_dir,
+				    reporter::options::cpu_frequency);
 
 	transfer.transfer_engine();
 

@@ -19,7 +19,7 @@ namespace reporter {
 class transfer {
 public:
 	transfer(std::string data_dir, std::string image_dir,
-			std::string output_dir, int cpu_frequency);
+		 std::string output_dir, int cpu_frequency);
 	~transfer();
 
 public:
@@ -29,13 +29,13 @@ private:
 	void do_transfer(int vcpu, struct record_entry &record);
 
 	void transfer_record(int vcpu, const sym_info &sym_info,
-			const struct record_entry &record,
-			bool deduced=false /* deduced from call stack? */);
+			     const struct record_entry &record,
+			     bool deduced=false /* deduced from call stack? */);
 
 	void transfer_callgraph(int vcpu,
-			const struct record_entry &record,
-			const sym_info &caller_sym_info,
-			const sym_info &callee_sym_info);
+				const struct record_entry &record,
+				const sym_info &caller_sym_info,
+				const sym_info &callee_sym_info);
 
 	void do_calculate();
 	void do_output();

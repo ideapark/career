@@ -44,7 +44,7 @@ static std::string where_between(const std::string &column,
 
 	if (start != initial && end != initial && start <= end) {
 		cond << "  AND " << column << " >= " << start << "\n"
-			<< "  AND " << column << " <= " << end   << "\n";
+		     << "  AND " << column << " <= " << end   << "\n";
 		return cond.str();
 	} else {
 		return " AND 1 = 1\n";
@@ -74,7 +74,7 @@ painter::~painter()
 	 * Delete callgraph_entry
 	 */
 	std::map<int, callgraph_entry *>::iterator iter = callgraph.begin(),
-						end = callgraph.end();
+		end = callgraph.end();
 	while (iter != end) {
 		callgraph_entry *entry = iter->second;
 
@@ -82,7 +82,7 @@ painter::~painter()
 		 * delete callee_entry
 		 */
 		std::vector<callee_entry *>::iterator c_iter = entry->callees.begin(),
-							c_end = entry->callees.end();
+			c_end = entry->callees.end();
 		while (c_iter != c_end) {
 			delete *c_iter;
 			c_iter++;
@@ -110,30 +110,30 @@ void painter::query_database()
 	std::ostringstream process_keys_sql;
 
 	process_keys_sql << "SELECT process_private_key\n"
-			<< "FROM process_info_table\n"
-			<< "WHERE 1 = 1\n"
-			<< where_and("event_private_key", options::event_key, -1)
-			<< where_and("vcpu", options::vcpu, -1)
-			<< where_and("pid", options::pid, -1);
+			 << "FROM process_info_table\n"
+			 << "WHERE 1 = 1\n"
+			 << where_and("event_private_key", options::event_key, -1)
+			 << where_and("vcpu", options::vcpu, -1)
+			 << where_and("pid", options::pid, -1);
 
 	std::ostringstream task_keys_sql;
 
 	task_keys_sql << "SELECT task_private_key\n"
-			<< "FROM task_info_table\n"
-			<< "WHERE 1 = 1\n"
-			<< where_and("event_private_key", options::event_key, -1)
-			<< where_and("tid", options::tid, -1)
-			<< where_in("process_private_key", process_keys_sql.str());
+		      << "FROM task_info_table\n"
+		      << "WHERE 1 = 1\n"
+		      << where_and("event_private_key", options::event_key, -1)
+		      << where_and("tid", options::tid, -1)
+		      << where_in("process_private_key", process_keys_sql.str());
 
 	std::ostringstream sample_count_sum_sql;
 
 	sample_count_sum_sql << "SELECT SUM(sample_count) AS sample_count_sum\n"
-			<< "FROM task_slice_table\n"
-			<< "WHERE 1 = 1\n"
-			<< where_between("slice_index", options::slice_start, options::slice_end, -1)
-			<< where_and("event_private_key", options::event_key, -1)
-			<< where_in("process_private_key", process_keys_sql.str())
-			<< where_in("task_private_key", task_keys_sql.str());
+			     << "FROM task_slice_table\n"
+			     << "WHERE 1 = 1\n"
+			     << where_between("slice_index", options::slice_start, options::slice_end, -1)
+			     << where_and("event_private_key", options::event_key, -1)
+			     << where_in("process_private_key", process_keys_sql.str())
+			     << where_in("task_private_key", task_keys_sql.str());
 
 	long sample_count_sum = callgraph_sqlite.query_sample_count_sum(sample_count_sum_sql.str());
 
@@ -143,40 +143,40 @@ void painter::query_database()
 	std::ostringstream fst;
 
 	fst << "SELECT func_private_key,\n"
-		<< "       ROUND(SUM(sample_count) * 100.0 / " << sample_count_sum << ", 4) AS sample_ratio,\n"
-		<< "       ROUND(SUM(total_count) * 100.0 / " << sample_count_sum << ", 4) AS total_ratio\n"
-		<< "FROM func_slice_table\n"
-		<< "WHERE 1 = 1\n"
-		<< where_between("slice_index", options::slice_start, options::slice_end, -1)
-		<< where_in("process_private_key", process_keys_sql.str())
-		<< where_in("task_private_key", task_keys_sql.str())
-		<< "GROUP BY func_private_key\n";
+	    << "       ROUND(SUM(sample_count) * 100.0 / " << sample_count_sum << ", 4) AS sample_ratio,\n"
+	    << "       ROUND(SUM(total_count) * 100.0 / " << sample_count_sum << ", 4) AS total_ratio\n"
+	    << "FROM func_slice_table\n"
+	    << "WHERE 1 = 1\n"
+	    << where_between("slice_index", options::slice_start, options::slice_end, -1)
+	    << where_in("process_private_key", process_keys_sql.str())
+	    << where_in("task_private_key", task_keys_sql.str())
+	    << "GROUP BY func_private_key\n";
 
 	std::ostringstream callgraph_entry_sql;
 
 	callgraph_entry_sql << "SELECT fit.func_private_key,\n"
-			<< "       fit.func_name,\n"
-			<< "       fst.sample_ratio,\n"
-			<< "       fst.total_ratio\n"
-			<< "FROM (" << fst.str() << ") AS fst\n"
-			<< "LEFT JOIN\n"
-			<< "  func_info_table AS fit\n"
-			<< "ON fit.func_private_key = fst.func_private_key;\n";
+			    << "       fit.func_name,\n"
+			    << "       fst.sample_ratio,\n"
+			    << "       fst.total_ratio\n"
+			    << "FROM (" << fst.str() << ") AS fst\n"
+			    << "LEFT JOIN\n"
+			    << "  func_info_table AS fit\n"
+			    << "ON fit.func_private_key = fst.func_private_key;\n";
 
 	callgraph_sqlite.query_callgraph_entry(callgraph_entry_sql.str(), callgraph);
 
 	std::ostringstream callee_entry_sql;
 
 	callee_entry_sql << "SELECT caller_func_private_key,\n"
-			<< "       callee_func_private_key,\n"
-			<< "       ROUND(SUM(call_count) * 100.0 / " << sample_count_sum << ", 4) AS call_ratio\n"
-			<< "FROM callgraph_slice_table\n"
-			<< "WHERE 1 = 1\n"
-			<< where_between("slice_index", options::slice_start, options::slice_end, -1)
-			<< where_in("process_private_key", process_keys_sql.str())
-			<< where_in("task_private_key", task_keys_sql.str())
-			<< "GROUP BY caller_func_private_key,\n"
-			<< "         callee_func_private_key;\n";
+			 << "       callee_func_private_key,\n"
+			 << "       ROUND(SUM(call_count) * 100.0 / " << sample_count_sum << ", 4) AS call_ratio\n"
+			 << "FROM callgraph_slice_table\n"
+			 << "WHERE 1 = 1\n"
+			 << where_between("slice_index", options::slice_start, options::slice_end, -1)
+			 << where_in("process_private_key", process_keys_sql.str())
+			 << where_in("task_private_key", task_keys_sql.str())
+			 << "GROUP BY caller_func_private_key,\n"
+			 << "         callee_func_private_key;\n";
 
 	callgraph_sqlite.query_callee_entry(callee_entry_sql.str(), callgraph);
 }
@@ -200,7 +200,7 @@ void painter::paint_dotfile()
 void painter::caller_callee_callgraph(int func_key)
 {
 	std::map<int, callgraph_entry *>::iterator iter = callgraph.find(func_key),
-						end = callgraph.end();
+		end = callgraph.end();
 	if (iter == end)
 		return;
 
@@ -215,19 +215,19 @@ void painter::caller_callee_callgraph(int func_key)
 		return;
 
 	callgraph_dot << "\"" << cg_entry->func_key << "\""
-			<< " [color=\"" << get_color(cg_entry->total_ratio) << "\", "
-			<< " label=\""<< dot_length_limited(cg_entry->name) << "\"];"
-			<< std::endl;
+		      << " [color=\"" << get_color(cg_entry->total_ratio) << "\", "
+		      << " label=\""<< dot_length_limited(cg_entry->name) << "\"];"
+		      << std::endl;
 
 	callgraph_info << cg_entry->func_key << "|"
-			<< cg_entry->name << "|"
-			<< std::fixed << std::setprecision(4)
-			<< cg_entry->sample_ratio << "|"
-			<< std::fixed << std::setprecision(4)
-			<< cg_entry->total_ratio << std::endl;
+		       << cg_entry->name << "|"
+		       << std::fixed << std::setprecision(4)
+		       << cg_entry->sample_ratio << "|"
+		       << std::fixed << std::setprecision(4)
+		       << cg_entry->total_ratio << std::endl;
 
 	std::vector<callee_entry *>::iterator c_iter = cg_entry->callees.begin(),
-						c_end = cg_entry->callees.end();
+		c_end = cg_entry->callees.end();
 	while (c_iter != c_end) {
 		callee_entry *ce_entry = *c_iter;
 
@@ -242,17 +242,17 @@ void painter::caller_callee_callgraph(int func_key)
 		switch (options::func_who) {
 		case E_CALLEE:
 			callgraph_dot << "\"" << cg_entry->func_key << "\" -> "
-				<< "\"" << ce_entry->func_key << "\" "
-				<< "[label=\""
-				<< std::fixed << std::setprecision(4) << ce_entry->call_ratio
-				<< "\"];" << std::endl;
+				      << "\"" << ce_entry->func_key << "\" "
+				      << "[label=\""
+				      << std::fixed << std::setprecision(4) << ce_entry->call_ratio
+				      << "\"];" << std::endl;
 			break;
 		case E_CALLER:
 			callgraph_dot << "\"" << ce_entry->func_key << "\" -> "
-				<< "\"" << cg_entry->func_key << "\" "
-				<< "[label=\""
-				<< std::fixed << std::setprecision(4) << ce_entry->call_ratio
-				<< "\"];" << std::endl;
+				      << "\"" << cg_entry->func_key << "\" "
+				      << "[label=\""
+				      << std::fixed << std::setprecision(4) << ce_entry->call_ratio
+				      << "\"];" << std::endl;
 			break;
 		default:
 			break;
@@ -265,7 +265,7 @@ void painter::caller_callee_callgraph(int func_key)
 void painter::whole_callgraph()
 {
 	std::map<int, callgraph_entry *>::iterator iter = callgraph.begin(),
-						end = callgraph.end();
+		end = callgraph.end();
 	while (iter != end) {
 		callgraph_entry *cg_entry = iter->second;
 
@@ -278,19 +278,19 @@ void painter::whole_callgraph()
 		 * graph node
 		 */
 		callgraph_dot << "\"" << cg_entry->func_key << "\""
-			<< " [color=\"" << get_color(cg_entry->total_ratio) << "\", "
-			<< " label=\"" << dot_length_limited(cg_entry->name) << "\"];"
-			<< std::endl;
+			      << " [color=\"" << get_color(cg_entry->total_ratio) << "\", "
+			      << " label=\"" << dot_length_limited(cg_entry->name) << "\"];"
+			      << std::endl;
 
 		callgraph_info << cg_entry->func_key << "|"
-			<< cg_entry->name << "|"
-			<< std::fixed << std::setprecision(4)
-			<< cg_entry->sample_ratio << "|"
-			<< std::fixed << std::setprecision(4)
-			<< cg_entry->total_ratio << std::endl;
+			       << cg_entry->name << "|"
+			       << std::fixed << std::setprecision(4)
+			       << cg_entry->sample_ratio << "|"
+			       << std::fixed << std::setprecision(4)
+			       << cg_entry->total_ratio << std::endl;
 
 		std::vector<callee_entry *>::iterator c_iter = cg_entry->callees.begin(),
-							c_end = cg_entry->callees.end();
+			c_end = cg_entry->callees.end();
 		while (c_iter != c_end) {
 			callee_entry *ce_entry = *c_iter;
 
@@ -303,10 +303,10 @@ void painter::whole_callgraph()
 			 * graph edge
 			 */
 			callgraph_dot << "\"" << cg_entry->func_key << "\" -> "
-				<< "\"" << ce_entry->func_key << "\" "
-				<< "[label=\""
-				<< std::fixed << std::setprecision(4) << ce_entry->call_ratio
-				<< "\"];" << std::endl;
+				      << "\"" << ce_entry->func_key << "\" "
+				      << "[label=\""
+				      << std::fixed << std::setprecision(4) << ce_entry->call_ratio
+				      << "\"];" << std::endl;
 
 			c_iter++;
 		}

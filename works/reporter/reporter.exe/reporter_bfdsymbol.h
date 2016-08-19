@@ -22,13 +22,13 @@ class bfd_symbol
 {
 public:
 	bfd_symbol(reporter::sample_file &sample_file,
-			const std::map<std::string, key_path> &images);
+		   const std::map<std::string, key_path> &images);
 	~bfd_symbol();
 
 public:
 	std::string get_execfile(int pid);
 	bool get_syminfo(const sym_info &sym_info, std::string &symbname,
-			std::string &filename, unsigned int &linenr);
+			 std::string &filename, unsigned int &linenr);
 	bool demangle_symbol(const struct record_entry &record, sym_info &sym_info);
 
 public:
@@ -42,22 +42,22 @@ public:
 
 private:
 	bool demangle_user_symbol(const struct record_entry &record,
-			sym_info &sym_info);
+				  sym_info &sym_info);
 
 	bool demangle_kernel_symbol(const struct record_entry &record,
-			sym_info &sym_info);
+				    sym_info &sym_info);
 
 	void add_vma_entry(const struct vma_entry &vma,
-			const std::map<std::string, key_path> &images);
+			   const std::map<std::string, key_path> &images);
 
 	void add_module_entry(const struct module_entry &module,
-			const std::map<std::string, key_path> &images);
+			      const std::map<std::string, key_path> &images);
 
 	int get_module_bfd_key(const struct module_entry &module,
-			const std::map<std::string, key_path> &images);
+			       const std::map<std::string, key_path> &images);
 
 	int get_vma_bfd_key(const struct vma_entry &vma,
-			const std::map<std::string, key_path> &images);
+			    const std::map<std::string, key_path> &images);
 
 	void put_bfd(const key_path &key_path, bool is_sre);
 

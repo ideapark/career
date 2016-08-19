@@ -19,7 +19,7 @@
 namespace reporter {
 
 file_loader::file_loader(const std::string data_dir,
-		const std::string image_dir)
+			 const std::string image_dir)
 {
 	this->load_threads(data_dir + "/pid_info");
 	this->load_images(image_dir);
@@ -49,7 +49,7 @@ void file_loader::load_threads(const std::string pid_info)
 }
 
 void file_loader::load_images(const std::string image_dir,
-		const std::string unix_dir)
+			      const std::string unix_dir)
 {
 	DIR *dir;
 	struct dirent *ent;

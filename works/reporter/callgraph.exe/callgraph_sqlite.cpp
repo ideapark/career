@@ -23,7 +23,7 @@ callgraph_sqlite::callgraph_sqlite(const std::string &database)
 	if (rc) {
 		std::cerr << "------- callgraph.exe -------" << std::endl;
 		std::cerr << "open database failed: "
-			<< sqlite3_errmsg(sqlite_db) << std::endl;
+			  << sqlite3_errmsg(sqlite_db) << std::endl;
 		std::exit(-1);
 	}
 }
@@ -72,14 +72,14 @@ long callgraph_sqlite::query_sample_count_sum(const std::string &sql)
 	} else {
 		std::cerr << "------- callgraph.exe -------" << std::endl;
 		std::cerr << "query_sample_count_sum() failed:" << std::endl
-			<< sql << std::endl;
+			  << sql << std::endl;
 	}
 
 	return result;
 }
 
 void callgraph_sqlite::query_callgraph_entry(const std::string &sql,
-		std::map<int, callgraph_entry *> &callgraph)
+					     std::map<int, callgraph_entry *> &callgraph)
 {
 	char **table = 0;
 	int rows = 0, cols = 0;
@@ -101,7 +101,7 @@ void callgraph_sqlite::query_callgraph_entry(const std::string &sql,
 
 		if (iter == end) {
 			callgraph_entry *entry = new callgraph_entry(func_private_key, func_name,
-								sample_ratio, total_ratio);
+								     sample_ratio, total_ratio);
 			callgraph.insert(std::make_pair(func_private_key, entry));
 		}
 	}
@@ -110,7 +110,7 @@ void callgraph_sqlite::query_callgraph_entry(const std::string &sql,
 }
 
 void callgraph_sqlite::query_callee_entry(const std::string &sql,
-					std::map<int, callgraph_entry *> &callgraph)
+					  std::map<int, callgraph_entry *> &callgraph)
 {
 	char **table = 0;
 	int rows = 0, cols = 0;
