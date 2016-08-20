@@ -31,7 +31,7 @@ static struct option player_options[] = {
 static int sockfd = -1;
 static short teamid = -1;
 
-static int do_gamestart(cJSON *body)
+static int on_gamestart(cJSON *body)
 {
 	logger_error("%s\n", "player: game start.");
 	cJSON *id = cJSON_GetObjectItem(body, "id");
@@ -57,7 +57,7 @@ static int do_gamestart(cJSON *body)
 	return 0;
 }
 
-static int do_gameover(cJSON *body)
+static int on_gameover(cJSON *body)
 {
 	logger_error("%s\n", "player: game over.");
 	cJSON *message = cJSON_GetObjectItem(body, "message");
@@ -70,19 +70,19 @@ static int do_gameover(cJSON *body)
 	return 0;
 }
 
-static int do_legstart(cJSON *body)
+static int on_legstart(cJSON *body)
 {
 	logger_warn("%s\n", "player: leg start.");
 	return 0;
 }
 
-static int do_legend(cJSON *body)
+static int on_legend(cJSON *body)
 {
 	logger_warn("%s\n", "player: leg end.");
 	return 0;
 }
 
-static int do_roundstep(cJSON *body)
+static int on_roundstep(cJSON *body)
 {
 	logger_info("%s\n", "player: round step.");
 	/* get server status */
@@ -146,15 +146,15 @@ int main(int argc, char *argv[])
 			break;
 		}
 		if (strcmp(head->valuestring, GAME_START) == 0)
-			do_gamestart(body);
+			on_gamestart(body);
 		else if (strcmp(head->valuestring, LEG_START) == 0)
-			do_legstart(body);
+			on_legstart(body);
 		else if (strcmp(head->valuestring, ROUND_STEP) == 0)
-			do_roundstep(body);
+			on_roundstep(body);
 		else if (strcmp(head->valuestring, LEG_END) == 0)
-			do_legend(body);
+			on_legend(body);
 		else if (strcmp(head->valuestring, GAME_OVER) == 0) {
-			do_gameover(body);
+			on_gameover(body);
 			cJSON_Delete(root);
 			break;
 		} else {
