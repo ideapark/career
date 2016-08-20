@@ -121,11 +121,9 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	/* logger setup */
 	if (logger_open(player_log) != 0)
 		exit(-2);
 
-	/* connect server */
 	if ((sockfd = link_connect(server_ip, server_port)) == -1)
 		exit(-3);
 

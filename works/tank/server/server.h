@@ -16,7 +16,7 @@
 #define LIFE_MAX    2
 #define LEG_MAX     2
 #define STAR_MAX    1
-#define ROUND_MAX   32
+#define ROUND_MAX   16
 #define TEAM_MAX    2
 #define NAME_MAX    16
 #define BUFFER_MAX  4096
