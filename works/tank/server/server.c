@@ -238,9 +238,10 @@ static int round_step(void)
 
 static int team_setup(void)
 {
+	short tm, tk;
+
 	game.round_remain = ROUND_MAX;
 
-	short tm, tk;
 	for (tm = 0; tm < TEAM_MAX; tm++) {
 		game.teams[tm].life_remain = LIFE_MAX;
 		for (tk = 0; tk < TANK_MAX; tk++) {
@@ -262,7 +263,7 @@ static int team_setup(void)
 			logger_warn("%s\n", "map area less than tanks.");
 			return -1;
 		tank_ok:
-			logger_info("team: %hi, tank: %hi, at position (%hi, %hi)\n",
+			logger_info("team: %hi, tank: %hi, at position (y:%hi, x:%hi)\n",
 				    game.teams[tm].id,
 				    game.teams[tm].tanks[tk].id,
 				    game.teams[tm].tanks[tk].pos.y,
@@ -288,6 +289,7 @@ static void game_setup(void)
 	short tm;
 
 	game.leg_remain = LEG_MAX;
+
 	for (tm = 0; tm < TEAM_MAX; tm++) {
 		game.teams[tm].id = tm;
 		game.teams[tm].life_remain = LIFE_MAX;
@@ -323,28 +325,23 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	/* logger setup */
 	if (logger_open(server_log) != 0)
 		exit(-2);
-
-	/* load map */
 	if (map_load(server_map) != 0)
 		exit(-3);
-
-	/* net link open */
 	if (link_open(server_port) != 0)
 		exit(-4);
 
-	game_setup();
-
 	/* play game */
+	game_setup();	
 	game_start();
 	while (game.leg_remain-- > 0) {
-		leg_start();
 		team_setup();
-		while (game.round_remain-- > 0)
+		leg_start();
+		while (game.round_remain-- > 0) {
 			if (round_step() != 0)
 				break;
+		}
 		leg_end();
 	}
 	game_over();
