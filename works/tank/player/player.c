@@ -99,7 +99,7 @@ static int do_roundstep(cJSON *body)
 	if (write(sockfd, msg, len) < 0)
 		logger_error("player: team %hi, broken socket.\n", teamid);
 	cJSON_Delete(root);
-	return 1;
+	return 0;
 }
 
 int main(int argc, char *argv[])
@@ -122,7 +122,7 @@ int main(int argc, char *argv[])
 	}
 
 	/* logger setup */
-	if (!logger_open(player_log))
+	if (logger_open(player_log) != 0)
 		exit(-2);
 
 	/* connect server */
@@ -143,7 +143,7 @@ int main(int argc, char *argv[])
 		} else {
 			logger_error("%s\n", "server JSON message protocol error.");
 			cJSON_Delete(root);
-			break;;
+			break;
 		}
 		if (strcmp(head->valuestring, GAME_START) == 0)
 			do_gamestart(body);

@@ -29,7 +29,7 @@ int map_load(const char *map)
 	FILE *f = fopen(map, "r");
 	if (!f) {
 		logger_error("%s\n", "map file open failed.");
-		return 0;
+		return -1;
 	}
 
 	short map_y, map_x;
@@ -38,7 +38,7 @@ int map_load(const char *map)
 	if (map_y != Y_MAX || map_x != X_MAX) {
 		logger_error("%s\n", "map Y or X does NOT match expected.");
 		fclose(f);
-		return 0;
+		return -1;
 	}
 
 	short y, x;
@@ -54,13 +54,13 @@ int map_load(const char *map)
 			else {
 				logger_error("%s\n", "map content incomplete.");
 				fclose(f);
-				return 0;
+				return -1;
 			}
 		}
 	}
 	fclose(f);
 	map_print();
-	return 1;
+	return 0;
 }
 
 char map_get(short y, short x)

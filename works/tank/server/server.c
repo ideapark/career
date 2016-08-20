@@ -64,7 +64,7 @@ static void game_start(void)
 	}
 
 	/*
-	 * player register their names
+	 * all player register their names
 	 */
 	char buf[BUFFER_MAX+1] = {'\0'};
 	for (tid = 0; tid < TEAM_MAX; tid++) {
@@ -233,7 +233,7 @@ static int round_step(void)
 		 */
 		cJSON_Delete(action);
 	}
-	return 1;
+	return 0;
 }
 
 static int team_setup(void)
@@ -260,7 +260,7 @@ static int team_setup(void)
 				}
 			}
 			logger_warn("%s\n", "map area less than tanks.");
-			return 0;
+			return -1;
 		tank_ok:
 			logger_info("team: %hi, tank: %hi, at position (%hi, %hi)\n",
 				    game.teams[tm].id,
@@ -280,13 +280,14 @@ static int team_setup(void)
 			free(bullet);
 		}
 	}
-	return 1;
+	return 0;
 }
 
 static void game_setup(void)
 {
-	game.leg_remain = LEG_MAX;
 	short tm;
+
+	game.leg_remain = LEG_MAX;
 	for (tm = 0; tm < TEAM_MAX; tm++) {
 		game.teams[tm].id = tm;
 		game.teams[tm].life_remain = LIFE_MAX;
@@ -342,7 +343,7 @@ int main(int argc, char *argv[])
 		leg_start();
 		team_setup();
 		while (game.round_remain-- > 0)
-			if (!round_step())
+			if (round_step() != 0)
 				break;
 		leg_end();
 	}

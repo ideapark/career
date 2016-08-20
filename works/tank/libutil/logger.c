@@ -55,18 +55,18 @@ int logger_open(const char *logfile)
 {
 	FILE *log = fopen(logfile, "a+");
 	if (!log)
-		return 0;
+		return -1;
 	int fd = fileno(log);
 	tty_cache = isatty(fd);
 	logger_cache = log;
-	return 1;
+	return 0;
 }
 
 int logger_close()
 {
 	if (!logger_cache) {
 		fclose(logger_cache);
-		return 1;
+		return -1;
 	} else
 		return 0;
 }
