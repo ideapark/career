@@ -324,15 +324,15 @@ int main(int argc, char *argv[])
 	}
 
 	/* logger setup */
-	if (!logger_open(server_log))
+	if (logger_open(server_log) != 0)
 		exit(-2);
 
 	/* load map */
-	if (!map_load(server_map))
+	if (map_load(server_map) != 0)
 		exit(-3);
 
 	/* net link open */
-	if (!link_open(server_port))
+	if (link_open(server_port) != 0)
 		exit(-4);
 
 	game_setup();
