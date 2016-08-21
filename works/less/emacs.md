@@ -1,11 +1,8 @@
-Emacs
-=====
+# Emacs
 
-Emacs is the extensible, customizable, self-documenting real-time
-display editor.
+### The editor's God
 
-Emacs Key Notation
-------------------
+> Emacs Key Notation
 
 +------------------------------------------------------------+
 | Prefix                     Meaning                         |
@@ -28,8 +25,7 @@ Emacs Key Notation
 | TAB        the TAB key                                     |
 +------------------------------------------------------------+
 
-Key Binding Remember Rules
---------------------------
+> Key Binding Remember Rules
 
 C-x
 
@@ -52,8 +48,7 @@ C-1, C-2... is similar to C-u, but passing a number to
 a command. Usually, the number specifies how many times you
 want to repeat a command.
 
-Built-in Help System
---------------------
+> Built-in Help System
 
 C-h m
 
@@ -99,8 +94,7 @@ press C-h, Emacs will list available commands for that prefix.
 Prefix C-h is no exception. C-h C-h simply returns all key
 bindings and command of prefix C-h.
 
-Buffer
-------
+> Buffer
 
 +------------------------------------------------------------+
 |  Key                  Binding                              |
@@ -119,8 +113,7 @@ Buffer
 |             one                                            |
 +------------------------------------------------------------+
 
-Bookmark: Save Locations across Emacs Sessions
-----------------------------------------------
+> Bookmark: Save Locations across Emacs Sessions
 
 +------------------------------------------------------------+
 |  Key            Binding                                    |
@@ -138,8 +131,7 @@ Bookmark: Save Locations across Emacs Sessions
 |             Open the list of all bookmarks.                |
 +------------------------------------------------------------+
 
-Basic Motion Commands
----------------------
+> Basic Motion Commands
 
 Move forward one char: C-f (f stands for forward)
 Move backward one char: C-b (b stands for backward)
@@ -162,8 +154,7 @@ Move to end of the buffer: M->
 Move to the nth character: M-g c (c stands for character)
 Move to the nth line: M-g l for Emacs < 23.2, M-g g for emacs >= 23.2 (l/g stands for line)
 
-Basic Editing Commands
-----------------------
+> Basic Editing Commands
 
 Kill a character at the point: C-d
 Kill entire line: C-S-DEL (remember, DEL is your <backspace> key)
@@ -174,8 +165,7 @@ Kill all spaces except one at point: M-SPC
 Kill to the end of line: C-k
 Kill a sentence: M-k
 
-Useful Built-in Key Bindings for Navigating pairs
--------------------------------------------------
+> Useful Built-in Key Bindings for Navigating pairs
 
 C-M-f
 
@@ -197,8 +187,7 @@ C-M-<SPC> or C-M-@
 
 binds to mark-sexp, put mark after following expression.
 
-Basic Editing Commands
-----------------------
+> Basic Editing Commands
 
 Kill a character at the point: C-d
 Kill entire line: C-S-DEL (remember, DEL is your <backspace> key)
@@ -214,25 +203,21 @@ code with M-;
     If you do not highlight a text region, M-; adds a comment to the end of line.
     If you highlight  a region, M-; comments out the region.
 
-Dynamic Abbreviations
----------------------
+> Dynamic Abbreviations
 
 Completion in emacs: M-/
 
-Mark and Region
----------------
+> Mark and Region
 
 Place a mark in bufer with: C-SPC C-SPC
 Go back to previous mark: C-u C-SPC
 Cycle the global mark ring: C-x C-SPC
 
-Undo/redo
----------
+> Undo/redo
 
 To undo: C-/ or C-x u
 
-Search for Text
----------------
+> Search for Text
 
 C-s
 
@@ -260,12 +245,11 @@ M-x rgrep
 Search for text with external grep command and displays the
 results in a buffer.
 
-Modeline
---------
+> Modeline
 
-
-         cs:ch-fr | buf | pos line | (major minor)
-
+```
+cs:ch-fr | buf | pos line | (major minor)
+```
 
    cs: describes the character set of the text in the buffer.
    ch: describes editing state of current buffer.
@@ -280,8 +264,7 @@ Modeline
 major: displays the current major mode.
 minor: displays the current minor mode.
 
-Frame
------
+> Frame
 
 +----------------------------------------------------------+
 |  Key            Binding                                  |
@@ -321,8 +304,7 @@ Frame
 |               Open file for read only in another frame   |
 +----------------------------------------------------------+
 
-Window
-------
+> Window
 
 C-x 2
 
@@ -399,8 +381,7 @@ common prefix for opening things in other buffer.
 |             Scroll other window backward.                |
 +----------------------------------------------------------+
 
-Macro
------
+> Macro
 
 +----------------------------------------------------------+
 |  Key             Binding                                 |
@@ -412,8 +393,7 @@ Macro
 | F4 or C-x e    Playback macro                            |
 +----------------------------------------------------------+
 
-Versoin Control
----------------
+> Versoin Control
 
 +----------------------------------------------------------+
 |  Key                     Binding                         |
