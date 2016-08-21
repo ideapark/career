@@ -9,6 +9,7 @@
 * [grep](grep.md)
 * [pipe](pipe.md)
 * [tmux](tmux.md)
+* [emacs](emacs.md)
 * [vim](vim.md)
 
 ## C Programming
