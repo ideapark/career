@@ -333,7 +333,7 @@ int main(int argc, char *argv[])
 		exit(-4);
 
 	/* play game */
-	game_setup();	
+	game_setup();
 	game_start();
 	while (game.leg_remain-- > 0) {
 		team_setup();
