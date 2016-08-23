@@ -36,7 +36,7 @@ objects: copyright
 copyright:
 	@echo "@-------------------------------------------------------------------@"
 	@echo "@                                                                   @"
-	@echo "@ Copyright (C) Zhou Peng <lockrecv@qq.com>                         @"
+	@echo "@ Copyright (c) Zhou Peng <lockrecv@qq.com>                         @"
 	@echo "@                                                                   @"
 	@echo "@ reporter.exe  - data parsing tool                                 @"
 	@echo "@ callgraph.exe - callgraph tool                                    @"
