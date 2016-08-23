@@ -19,7 +19,7 @@ Nameval* insert(Nameval* treep, Nameval* newp)
 		treep->left = insert(treep->left, newp);
 	else
 		treep->right = insert(treep->right, newp);
-	return treep
+	return treep;
 }
 
 /* lookup: look up name in tree treep */

@@ -13,7 +13,7 @@ int main(void)
 	for (c = 0; c <= UCHAR_MAX; c++) {
 		if (count[c] != 0) {
 			printf("%.2x %c %lu\n",
-					c, isprint(c) ? c : '-', count[c]);
+			       c, isprint(c) ? c : '-', count[c]);
 		}
 	}
 	return 0;

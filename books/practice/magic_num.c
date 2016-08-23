@@ -13,13 +13,13 @@ fac = (lim + HEIGHT-1)/HEIGHT; /* set scale factor */
 if (fac < 1)
 	fac = 1;
 
-	for (i = 0; i < NLET; i++) { /* generate histogram */
-		if (let[i] == 0)
-			continue;
-		for (j = HEIGHT-let[i]/fac; j < HEIGHT; j++)
-			draw(j+1+LABELROW, (i+1)*WIDTH, '*');
-	}
+for (i = 0; i < NLET; i++) { /* generate histogram */
+	if (let[i] == 0)
+		continue;
+	for (j = HEIGHT-let[i]/fac; j < HEIGHT; j++)
+		draw(j+1+LABELROW, (i+1)*WIDTH, '*');
+}
 draw(MAXROW-1, MINCOL+1, ' '); /* label x axis */
 
 for (i = 'A'; i <= 'Z'; i++)
-printf("%c ", i);
+	printf("%c ", i);
