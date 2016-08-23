@@ -20,7 +20,7 @@ enum {  /* operation codes, Tree.op */
 	ADD,
 	DIVIDE,
 	/* ... */
-}
+};
 
 /* eval: version 1: evaluate tree expression */
 int eval(Tree *t)

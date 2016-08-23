@@ -64,7 +64,7 @@ char *progname(void)
 void usage(void)
 {
 	fprintf(stderr, "usage: %s [-d] [-n nwords]"
-			" [-s seed] [files ...]\n", progname());
+		" [-s seed] [files ...]\n", progname());
 	exit(2);
 }
 

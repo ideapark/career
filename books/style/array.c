@@ -29,7 +29,7 @@ int addname(Nameval newname)
 		nvtab.nval = 0;
 	} else if (nvtab.nval >= nvtab.max) { /* grow */
 		nvp = (Nameval *) realloc(nvtab.nameval,
-				(NVGROW * nvtab.max) * sizeof(Nameval));
+					  (NVGROW * nvtab.max) * sizeof(Nameval));
 		if (nvp == NULL)
 			return -1;
 		nvtab.max *= NVGROW;
