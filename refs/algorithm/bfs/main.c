@@ -3,137 +3,132 @@
  */
 
 #include <assert.h>
-#include <fstream>
-#include <iostream>
-#include <algorithm>
+#include <stdio.h>
 
 #include "config.h"
+#include "list.h"
 #include "bfs.h"
 #include "point.h"
 
-#define BFS_GRAPH_X  30
-#define BFS_GRAPH_Y  30
+#define X_MAX 30
+#define Y_MAX 30
 
-#define BFS_GRAPH_GRASS    '+'
-#define BFS_GRAPH_WALL     '#'
-#define BFS_GRAPH_BOX      '$'
-#define BFS_GRAPH_BOMB     '@'
-#define BFS_GRAPH_PLAYER_A 'A'
-#define BFS_GRAPH_PLAYER_B 'B'
+#define GRAPH_GRASS    '+'
+#define GRAPH_WALL     '#'
+#define GRAPH_BOX      '$'
+#define GRAPH_BOMB     '@'
+#define GRAPH_PLAYER_A 'A'
+#define GRAPH_PLAYER_B 'B'
 
-char bfs_graph[BFS_GRAPH_Y][BFS_GRAPH_X];
-int bfs_graph_y;
-int bfs_graph_x;
-
+char GRAPH[Y_MAX][X_MAX];
+int GRAPH_Y;
+int GRAPH_X;
 
 static void load_graph(const char *graph)
 {
-	std::ifstream in(graph, std::ios::in);
+	FILE *f = fopen(graph, "r");
 
-	in >> bfs_graph_y;
-	in >> bfs_graph_x;
+	fscanf(f, "%d", &GRAPH_Y);
+	fscanf(f, "%d", &GRAPH_X);
 
-	assert(bfs_graph_y <= BFS_GRAPH_Y);
-	assert(bfs_graph_x <= BFS_GRAPH_X);
+	assert(GRAPH_Y <= Y_MAX);
+	assert(GRAPH_X <= X_MAX);
 
-	for (int y = 0; y < bfs_graph_y; y++) {
-		for (int x = 0; x < bfs_graph_x; x++) {
-			char ch;
+	for (int y = 0; y < GRAPH_Y; y++) {
+		for (int x = 0; x < GRAPH_X; x++) {
+			int ch;
 			do {
-				ch = in.get();
+				ch = fgetc(f);
 #if BFS_DEBUG
-				std::cout << ch;
+				printf("%c", ch);
 #endif
 			} while (ch != EOF && ch == '\n');
-			bfs_graph[y][x] = ch;
+			GRAPH[y][x] = (char)ch;
 		}
 	}
 
-	in.close();
+	fclose(f);
 }
 
-static bool in_graph(const struct point &p)
+static int in_graph(const struct point *p)
 {
-	return p.x >= 0 && p.x < bfs_graph_x &&
-		p.y >= 0 && p.y < bfs_graph_y;
+	return p->x >= 0 && p->x < GRAPH_X &&
+		p->y >= 0 && p->y < GRAPH_Y;
 }
 
-static bool is_grass(const struct point &p)
+static int is_grass(const struct point *p)
 {
-	return in_graph(p) && (bfs_graph[p.y][p.x] == BFS_GRAPH_GRASS);
+	return in_graph(p) && (GRAPH[p->y][p->x] == GRAPH_GRASS);
 }
 
-static bool is_wall(const struct point &p)
+static int is_wall(const struct point *p)
 {
-	return in_graph(p) && (bfs_graph[p.y][p.x] == BFS_GRAPH_WALL);
+	return in_graph(p) && (GRAPH[p->y][p->x] == GRAPH_WALL);
 }
 
-static bool is_box(const struct point &p)
+static int is_box(const struct point *p)
 {
-	return in_graph(p) && (bfs_graph[p.y][p.x] == BFS_GRAPH_BOX);
+	return in_graph(p) && (GRAPH[p->y][p->x] == GRAPH_BOX);
 }
 
-static bool is_bomb(const struct point &p)
+static int is_bomb(const struct point *p)
 {
-	return in_graph(p) && (bfs_graph[p.y][p.x] == BFS_GRAPH_BOMB);
+	return in_graph(p) && (GRAPH[p->y][p->x] == GRAPH_BOMB);
 }
 
-static bool is_player_b(const struct point &p)
+static int is_player_b(const struct point *p)
 {
-	return in_graph(p) && (bfs_graph[p.y][p.x] == BFS_GRAPH_PLAYER_B);
+	return in_graph(p) && (GRAPH[p->y][p->x] == GRAPH_PLAYER_B);
 }
 
-static bool can_cross(const struct point &p)
+static int can_cross(const struct point *p)
 {
 	return is_grass(p);
 }
 
-struct PrintPoint
+int print_node(struct list_head *node_head)
 {
-	void operator()(const struct point &p) {
-		std::cout << "(" << p.y << "," << p.x << ")";
+	int nrnode = 0;
+	struct node *node;
+	list_for_each_entry(node, node_head, list) {
+		nrnode++;
+		printf("(y:%d,x:%d)", node->p.y, node->p.x);
 	}
-};
+	return nrnode;
+}
 
-struct PrintPath
+int print_path(struct list_head *path_head)
 {
-	void operator()(const std::list<struct point> &path) {
-		std::for_each(path.begin(), path.end(), PrintPoint());
-		std::cout << std::endl;
+	int nrpath = 0;
+	struct path *path;
+	list_for_each_entry(path, path_head, list) {
+		nrpath++;
+		print_node(&path->list);
+		printf("\n");
 	}
-};
+	return nrpath;
+}
 
 int main(int argc, char *argv[])
 {
 	load_graph(BFS_GRAPH);
 
-	std::cout << std::endl << std::endl;
-
 	const struct point start = {.y=0, .x=0};
 
-	std::list<std::list<struct point> > box_pathes;
-	bfs_search_all(start, box_pathes, can_cross, is_box);
-	std::cout << "box path: " << box_pathes.size() << std::endl;
-	std::for_each(box_pathes.begin(), box_pathes.end(), PrintPath());
-	std::cout << std::endl;
+	struct list_head path_head;
+	int nr;
+	
+	nr = bfs(&path_head, &start, can_cross, is_box);
+	printf("box path: %d\n", nr);
 
-	std::list<std::list<struct point> > wall_pathes;
-	bfs_search_all(start, wall_pathes, can_cross, is_wall);
-	std::cout << "wall path: " << wall_pathes.size() << std::endl;
-	std::for_each(wall_pathes.begin(), wall_pathes.end(), PrintPath());
-	std::cout << std::endl;
+	nr = bfs(&path_head, &start, can_cross, is_wall);
+	printf("wall path: %d\n", nr);
 
-	std::list<std::list<struct point> > bomb_pathes;
-	bfs_search_all(start, bomb_pathes, can_cross, is_bomb);
-	std::cout << "bomb path: " << bomb_pathes.size() << std::endl;
-	std::for_each(bomb_pathes.begin(), bomb_pathes.end(), PrintPath());
-	std::cout << std::endl;
+	nr = bfs(&path_head, &start, can_cross, is_bomb);
+	printf("bomb path: %d\n", nr);
 
-	std::list<std::list<struct point> > player_pathes;
-	bfs_search_all(start, player_pathes, can_cross, is_player_b);
-	std::cout << "player B path: " << player_pathes.size() << std::endl;
-	std::for_each(player_pathes.begin(), player_pathes.end(), PrintPath());
-	std::cout << std::endl;
+	nr = bfs(&path_head, &start, can_cross, is_player_b);
+	printf("player B path: %d\n", nr);
 
 	return 0;
 }

@@ -2,74 +2,84 @@
  * Copyright (c) Zhou Peng <lockrecv@qq.com>
  */
 
+#include <stdlib.h>
+
 #include "config.h"
+#include "list.h"
 #include "bfs.h"
 #include "point.h"
 
-#include <map>
-#include <list>
-#include <algorithm>
-
-void bfs_search_all(const struct point start,
-		std::list<std::list<struct point> > &all_path,
-		PathAssert PA, FoundAssert FA)
+int bfs(struct list_head *path, const struct point *start, Pass Pfn, Target Tfn)
 {
-	std::map<int, int> came_from;
-	std::list<int> open_list;
-	std::list<int> close_list;
-	std::list<int> target_found;
+	int found = 0;	
+	
+	LIST_HEAD(open_list);
+	LIST_HEAD(close_list);
+	LIST_HEAD(target_found);
 
-	open_list.push_back(UUID(start));
+	INIT_LIST_HEAD(path);
 
-	while (!open_list.empty()) {
-		int front_uuid = open_list.front();
-		const struct point front = POINT(front_uuid);
+	struct node *start_node = malloc(sizeof(struct node));
+	start_node->p = *start;
+	INIT_LIST_HEAD(&start_node->list);
 
-		/* found a new target path */
-		if (std::find(target_found.begin(), target_found.end(), front_uuid)
-				== target_found.end() && FA(front)) {
+	list_add_tail(&start_node->list, &open_list);
 
-			std::list<struct point> path;
-			std::map<int, int>::const_iterator it;
-			std::map<int, int>::const_iterator end = came_from.end();
-			int back_start_uuid = open_list.front();
+	while (!list_empty(&open_list)) {
+		struct node *node = list_entry(open_list.next, struct node, list);
+		struct point front = node->p;
 
-			while ((it = came_from.find(back_start_uuid)) != end) {
-				path.push_back(POINT(it->first));
-				back_start_uuid = it->second;
-			}
-			std::reverse(path.begin(), path.end());
-
-			all_path.push_back(path);
-			target_found.push_back(front_uuid);
+		/* backtrace path */
+		if (Tfn && Tfn(&front)) {
+			found++;
 		}
 
 		const struct point neighbors[] = {
-			UP(front),
-			DOWN(front),
-			LEFT(front),
-			RIGHT(front)
+			UP(&front),
+			DOWN(&front),
+			LEFT(&front),
+			RIGHT(&front)
 		};
 
-		for (unsigned int i = 0; i < ARRAY_LENGTH(neighbors); i++) {
-			int neighbor_uuid = UUID(neighbors[i]);
+		/* breadth first */
+		for (unsigned i = 0; i < ARRAY_LENGTH(neighbors); /*NULL*/) {
+			if (Pfn && !Pfn(&neighbors[i]) && Tfn && !Tfn(&neighbors[i]))
+				goto next;
 
-			if (!PA(neighbors[i]) && !FA(neighbors[i]))
-				continue;
+			struct node *pos;
+			list_for_each_entry(pos, &open_list, list) {
+				if (neighbors[i].y == pos->p.y && neighbors[i].x == pos->p.x)
+					goto next;
+			}
+			list_for_each_entry(pos, &close_list, list) {
+				if (neighbors[i].y == pos->p.y && neighbors[i].x == pos->p.x)
+					goto next;
+			}
 
-			if (std::find(open_list.begin(), open_list.end(), neighbor_uuid)
-					!= open_list.end())
-				continue;
-
-			if (std::find(close_list.begin(), close_list.end(), neighbor_uuid)
-					!= close_list.end())
-				continue;
-
-			came_from[neighbor_uuid] = front_uuid;
-			open_list.push_back(neighbor_uuid);
+			struct node *new_node = malloc(sizeof(struct node));
+			new_node->p = neighbors[i];
+			INIT_LIST_HEAD(&new_node->list);
+			list_add_tail(&new_node->list, &open_list);
+		next:
+			i++;
 		}
 
-		close_list.push_back(front_uuid);
-		open_list.pop_front();
+		list_add_tail(open_list.next, &close_list);
+		list_del(open_list.next);
 	}
+
+	/* free list */
+	struct list_head *pos, *n;
+	list_for_each_safe(pos, n, &open_list) {
+		list_del(pos);
+		struct node *node = list_entry(pos, struct node, list);
+		free(node);
+	}
+	list_for_each_safe(pos, n, &close_list) {
+		list_del(pos);
+		struct node *node = list_entry(pos, struct node, list);
+		free(node);
+	}
+	
+	return found;
 }

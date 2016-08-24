@@ -5,7 +5,7 @@
 #
 # ---------------------------------------------
 
-CC = g++
+CC = gcc
 cflag = -Wall -DBFS_DEBUG
 
 objs += main.o

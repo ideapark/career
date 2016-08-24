@@ -5,16 +5,46 @@
 #ifndef BFS_H
 #define BFS_H
 
+#include "list.h"
 #include "point.h"
 
-#include <list>
+/* node of one path */
+struct node {
+	struct point p;
+	struct list_head list;
+};
 
-typedef bool (*PathAssert)(const struct point &p);
-typedef bool (*FoundAssert)(const struct point &p);
+/* path from start to target */
+struct path {
+	struct list_head path;
+	struct list_head list;
+};
 
+/*
+ * test if point can pass
+ */
+typedef int (*Pass)(const struct point *p);
 
-void bfs_search_all(const struct point start,
-		std::list<std::list<struct point> > &all_path,
-		PathAssert PA, FoundAssert FA);
+/*
+ * test if point is target
+ */
+typedef int (*Target)(const struct point *p);
+
+/*
+ * @desc
+ *           breadth first search algorithm
+ *
+ * @arg path
+ *           path list head
+ * @arg start
+ *           search start point
+ * @arg Pfn
+ *           function tests if point can be passed
+ * @arg Tfn
+ *           function tests if point is target
+ * @ret int
+ *           path number found
+ */
+int bfs(struct list_head *path, const struct point *start, Pass Pfn, Target Tfn);
 
 #endif /* BFS_H */
