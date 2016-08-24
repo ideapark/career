@@ -2,9 +2,9 @@
  * Copyright (c) Zhou Peng <lockrecv@qq.com>
  */
 
-#include "bfs_config.h"
-#include "bfs_impl.h"
-#include "bfs_point.h"
+#include "config.h"
+#include "bfs.h"
+#include "point.h"
 
 #include <map>
 #include <list>

@@ -2,8 +2,8 @@
  * Copyright (c) Zhou Peng <lockrecv@qq.com>
  */
 
-#ifndef BFS_POINT_H
-#define BFS_POINT_H
+#ifndef POINT_H
+#define POINT_H
 
 #include <iostream>
 
@@ -69,4 +69,4 @@ inline struct point RIGHT(const struct point &p)
 	return right;
 }
 
-#endif /* BFS_POINT_H */
+#endif /* POINT_H */

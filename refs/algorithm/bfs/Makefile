@@ -8,15 +8,15 @@
 CC = g++
 cflag = -Wall -DBFS_DEBUG
 
-objs += bfs_main.o
-objs += bfs_impl.o
+objs += main.o
+objs += bfs.o
 
 bfs.out: $(objs)
 	$(CC) $(objs) -o $@
 
-bfs_main.o: bfs_main.cc
+main.o: main.c
 	$(CC) $(cflag) -c $< -o $@
 
-bfs_impl.o: bfs_impl.cc
+bfs.o: bfs.c
 	$(CC) $(cflag) -c $< -o $@
 

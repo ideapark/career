@@ -2,10 +2,10 @@
  * Copyright (c) Zhou Peng <lockrecv@qq.com>
  */
 
-#ifndef BFS_IMPL_H
-#define BFS_IMPL_H
+#ifndef BFS_H
+#define BFS_H
 
-#include "bfs_point.h"
+#include "point.h"
 
 #include <list>
 
@@ -17,4 +17,4 @@ void bfs_search_all(const struct point start,
 		std::list<std::list<struct point> > &all_path,
 		PathAssert PA, FoundAssert FA);
 
-#endif /* BFS_IMPL_H */
+#endif /* BFS_H */

@@ -7,9 +7,9 @@
 #include <iostream>
 #include <algorithm>
 
-#include "bfs_config.h"
-#include "bfs_impl.h"
-#include "bfs_point.h"
+#include "config.h"
+#include "bfs.h"
+#include "point.h"
 
 #define BFS_GRAPH_X  30
 #define BFS_GRAPH_Y  30
