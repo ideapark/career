@@ -6,7 +6,7 @@
 # ---------------------------------------------
 
 CC = gcc
-cflag = -Wall -DBFS_DEBUG
+cflag = -Wall -g -DBFS_DEBUG
 
 objs += main.o
 objs += bfs.o
@@ -19,4 +19,3 @@ main.o: main.c
 
 bfs.o: bfs.c
 	$(CC) $(cflag) -c $< -o $@
-

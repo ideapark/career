@@ -5,13 +5,14 @@
 #include <assert.h>
 #include <stdio.h>
 
-#include "config.h"
 #include "list.h"
 #include "bfs.h"
-#include "point.h"
 
 #define X_MAX 30
 #define Y_MAX 30
+
+#define BFS_DEBUG  1
+#define BFS_GRAPH  "graph.txt"
 
 #define GRAPH_GRASS    '+'
 #define GRAPH_WALL     '#'

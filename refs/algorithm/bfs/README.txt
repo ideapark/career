@@ -1,10 +1,11 @@
-Breadth First Search (BFS) Algorithm
-====================================
+Breadth First Search (BFS) Algorithm Implemented in C
+=====================================================
 
-Author: Zhou Peng <lockrecv@qq.com>
+Copyright (c) Zhou Peng <lockrecv@qq.com>
 
 
 Graph
+-----
 
      (0,0)                      X Axis
           +------------------------->
@@ -33,7 +34,8 @@ Graph
   Y Axis \|/
 
 
-Terms
+Tokens
+------
 
   +: Grass
   $: Box

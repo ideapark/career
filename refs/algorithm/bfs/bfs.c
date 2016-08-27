@@ -4,10 +4,10 @@
 
 #include <stdlib.h>
 
-#include "config.h"
 #include "list.h"
 #include "bfs.h"
-#include "point.h"
+
+#define LEN(arr) (sizeof(arr)/sizeof(arr[0]))
 
 int bfs(struct list_head *path, const struct point *start, Pass Pfn, Target Tfn)
 {
@@ -42,7 +42,7 @@ int bfs(struct list_head *path, const struct point *start, Pass Pfn, Target Tfn)
 		};
 
 		/* breadth first */
-		for (unsigned i = 0; i < ARRAY_LENGTH(neighbors); /*NULL*/) {
+		for (unsigned i = 0; i < LEN(neighbors); /*NULL*/) {
 			if (Pfn && !Pfn(&neighbors[i]) && Tfn && !Tfn(&neighbors[i]))
 				goto next;
 
