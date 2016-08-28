@@ -58,7 +58,7 @@ struct node {
 	struct list_head list;
 };
 
-/* one path start to target */
+/* path to target */
 struct path {
 	struct list_head path;
 	struct list_head list;

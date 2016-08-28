@@ -11,7 +11,6 @@
 #define X_MAX 30
 #define Y_MAX 30
 
-#define BFS_DEBUG  1
 #define BFS_GRAPH  "graph.txt"
 
 #define GRAPH_GRASS    '+'
@@ -40,13 +39,12 @@ static void load_graph(const char *graph)
 			int ch;
 			do {
 				ch = fgetc(f);
-#if BFS_DEBUG
 				printf("%c", ch);
-#endif
 			} while (ch != EOF && ch == '\n');
 			GRAPH[y][x] = (char)ch;
 		}
 	}
+	printf("\n\n");
 
 	fclose(f);
 }
@@ -114,10 +112,10 @@ int main(int argc, char *argv[])
 {
 	load_graph(BFS_GRAPH);
 
-	const struct point start = {.y=0, .x=0};
+	const struct point start = {.y=19, .x=0};
 
-	struct list_head path_head;
 	int nr;
+	struct list_head path_head;
 	
 	nr = bfs(&path_head, &start, can_cross, is_box);
 	printf("box path: %d\n", nr);

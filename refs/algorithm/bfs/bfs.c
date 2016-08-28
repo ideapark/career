@@ -9,7 +9,7 @@
 
 #define LEN(arr) (sizeof(arr)/sizeof(arr[0]))
 
-int bfs(struct list_head *path, const struct point *start, Pass Pfn, Target Tfn)
+int bfs(struct list_head *path, const struct point *start, Pass pfn, Target tfn)
 {
 	int found = 0;	
 	
@@ -20,55 +20,55 @@ int bfs(struct list_head *path, const struct point *start, Pass Pfn, Target Tfn)
 	INIT_LIST_HEAD(path);
 
 	struct node *start_node = malloc(sizeof(struct node));
-	start_node->p = *start;
 	INIT_LIST_HEAD(&start_node->list);
-
-	list_add_tail(&start_node->list, &open_list);
+	start_node->p = *start;
+	list_add(&start_node->list, &open_list);
 
 	while (!list_empty(&open_list)) {
 		struct node *node = list_entry(open_list.next, struct node, list);
-		struct point front = node->p;
-
-		/* backtrace path */
-		if (Tfn && Tfn(&front)) {
-			found++;
-		}
 
 		const struct point neighbors[] = {
-			UP(&front),
-			DOWN(&front),
-			LEFT(&front),
-			RIGHT(&front)
+			UP(&node->p),
+			DOWN(&node->p),
+			LEFT(&node->p),
+			RIGHT(&node->p)
 		};
 
-		/* breadth first */
 		for (unsigned i = 0; i < LEN(neighbors); /*NULL*/) {
-			if (Pfn && !Pfn(&neighbors[i]) && Tfn && !Tfn(&neighbors[i]))
+			/* backstrace */
+			if (tfn && tfn(&neighbors[i])) {
+				found++;
+				goto next;
+			}
+			if (pfn && !pfn(&neighbors[i]))
 				goto next;
 
 			struct node *pos;
+			/* visiting */
 			list_for_each_entry(pos, &open_list, list) {
 				if (neighbors[i].y == pos->p.y && neighbors[i].x == pos->p.x)
 					goto next;
 			}
+			/* visited */
 			list_for_each_entry(pos, &close_list, list) {
 				if (neighbors[i].y == pos->p.y && neighbors[i].x == pos->p.x)
 					goto next;
 			}
 
-			struct node *new_node = malloc(sizeof(struct node));
-			new_node->p = neighbors[i];
-			INIT_LIST_HEAD(&new_node->list);
-			list_add_tail(&new_node->list, &open_list);
+			struct node *new = malloc(sizeof(struct node));
+			INIT_LIST_HEAD(&new->list);
+			new->p = neighbors[i];
+			list_add(&new->list, &open_list);
 		next:
 			i++;
 		}
 
-		list_add_tail(open_list.next, &close_list);
-		list_del(open_list.next);
+		struct list_head *tmp = open_list.next;
+		list_del(tmp);
+		list_add(tmp, &close_list);
 	}
 
-	/* free list */
+	/* clean */
 	struct list_head *pos, *n;
 	list_for_each_safe(pos, n, &open_list) {
 		list_del(pos);
