@@ -9,77 +9,95 @@
 
 #define LEN(arr) (sizeof(arr)/sizeof(arr[0]))
 
-int bfs(struct list_head *path, const struct point *start, Pass pfn, Target tfn)
+int bfs(struct list_head *path, const struct point *startp, Pass pfn, Target tfn)
 {
-	int found = 0;	
-	
-	LIST_HEAD(open_list);
-	LIST_HEAD(close_list);
-	LIST_HEAD(target_found);
+	int found = 0;
+
+	LIST_HEAD(openlist);
+	LIST_HEAD(closelist);
+	LIST_HEAD(backtrace);
 
 	INIT_LIST_HEAD(path);
 
-	struct node *start_node = malloc(sizeof(struct node));
-	INIT_LIST_HEAD(&start_node->list);
-	start_node->p = *start;
-	list_add(&start_node->list, &open_list);
+	struct node *start = new_node();
+	start->p = *startp;
 
-	while (!list_empty(&open_list)) {
-		struct node *node = list_entry(open_list.next, struct node, list);
+	list_add(&start->list, &openlist);
+
+	while (!list_empty(&openlist)) {
+
+		struct node *node = list_entry(openlist.next, struct node, list);
 
 		const struct point neighbors[] = {
-			UP(&node->p),
-			DOWN(&node->p),
-			LEFT(&node->p),
-			RIGHT(&node->p)
+			U(&node->p), D(&node->p),
+			L(&node->p), R(&node->p)
 		};
 
 		for (unsigned i = 0; i < LEN(neighbors); /*NULL*/) {
+
 			/* backstrace */
 			if (tfn && tfn(&neighbors[i])) {
+				struct path *path = new_path();
+				list_add(&path->link, path);
+
 				found++;
 				goto next;
 			}
+
 			if (pfn && !pfn(&neighbors[i]))
 				goto next;
 
 			struct node *pos;
-			/* visiting */
-			list_for_each_entry(pos, &open_list, list) {
-				if (neighbors[i].y == pos->p.y && neighbors[i].x == pos->p.x)
+			list_for_each_entry(pos, &openlist, list) {
+				if (EQ(&pos->p, &neighbors[i]))
 					goto next;
 			}
-			/* visited */
-			list_for_each_entry(pos, &close_list, list) {
-				if (neighbors[i].y == pos->p.y && neighbors[i].x == pos->p.x)
+			list_for_each_entry(pos, &closelist, list) {
+				if (EQ(&pos->p, &neighbors[i]))
 					goto next;
+			}
+			/* remember clue */
+			struct node *btnode = new_node();
+			btnode->p = neighbors[i];
+
+			struct trace *trace;
+			list_for_each_entry(trace, &backtrace, link) {
+				if (EQ(&node->p, &trace->p)) {
+					list_add(&btnode->list, &trace->list);
+					goto open;
+				}
 			}
 
-			struct node *new = malloc(sizeof(struct node));
-			INIT_LIST_HEAD(&new->list);
+			/* new trace */
+			trace = new_trace();
+			trace->p = node->p;
+			list_add(&trace->link, &backtrace);
+			list_add(&node->list, &trace->list);
+open:
+			struct node *new = new_node();
 			new->p = neighbors[i];
-			list_add(&new->list, &open_list);
-		next:
+			list_add(&new->list, &openlist);
+next:
 			i++;
 		}
 
-		struct list_head *tmp = open_list.next;
+		struct list_head *tmp = openlist.next;
 		list_del(tmp);
-		list_add(tmp, &close_list);
+		list_add(tmp, &closelist);
 	}
 
 	/* clean */
 	struct list_head *pos, *n;
-	list_for_each_safe(pos, n, &open_list) {
+	list_for_each_safe(pos, n, &openlist) {
 		list_del(pos);
 		struct node *node = list_entry(pos, struct node, list);
 		free(node);
 	}
-	list_for_each_safe(pos, n, &close_list) {
+	list_for_each_safe(pos, n, &closelist) {
 		list_del(pos);
 		struct node *node = list_entry(pos, struct node, list);
 		free(node);
 	}
-	
+
 	return found;
 }

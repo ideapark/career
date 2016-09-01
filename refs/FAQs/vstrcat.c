@@ -3,6 +3,9 @@
 #include <stdarg.h>
 #include <string.h>
 
+/*
+ * strcat variable argument version
+ */
 char *vstrcat(const char *first, ...)
 {
         size_t len;
