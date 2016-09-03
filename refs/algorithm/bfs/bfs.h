@@ -98,6 +98,38 @@ static inline struct trace *malloc_trace(void)
 	return trace;
 }
 
+static inline void free_nodelist(struct list_head *nodelist)
+{
+	struct list_head *pos, *n;
+	list_for_each_safe(pos, n, nodelist) {
+		list_del(pos);
+		struct node *node = list_entry(pos, struct node, list);
+		free(node);
+	}
+}
+
+static inline void free_pathlist(struct list_head *pathlist)
+{
+	struct list_head *pos, *n;
+	list_for_each_safe(pos, n, pathlist) {
+		list_del(pos);
+		struct path *path = list_entry(pos, struct path, link);
+		free_nodelist(&path->list);
+		free(path);
+	}
+}
+
+static inline void free_tracelist(struct list_head *tracelist)
+{
+	struct list_head *pos, *n;
+	list_for_each_safe(pos, n, tracelist) {
+		list_del(pos);
+		struct trace *trace = list_entry(pos, struct trace, link);
+		free_nodelist(&trace->list);
+		free(trace);
+	}
+}
+
 /* pass predicate */
 typedef int (*Pass)(const struct point *p);
 

@@ -25,37 +25,39 @@ int bfs(struct list_head *path, const struct point *startp, Pass pfn, Target tfn
 
 		struct node *front_node = list_entry(openlist.next, struct node, list);
 
-		const struct point adjacent[] = {
+		const struct point adjs[] = {
 			U(&front_node->p),
 			D(&front_node->p),
 			L(&front_node->p),
 			R(&front_node->p)
 		};
 
-		for (unsigned i = 0; i < LEN(adjacent); i++) {
+		for (unsigned i = 0; i < LEN(adjs); i++) {
 
 			/* backstrace */
-			if (tfn && tfn(&adjacent[i])) {
+			if (tfn && tfn(&adjs[i])) {
 				struct path *new_path = malloc_path();
 				list_add(&new_path->link, path);
 
-				struct node *n = malloc_node();
-				n->p = adjacent[i];
-				list_add(&n->list, &new_path->list);
+				struct node *back_node;
 
-				n = malloc_node();
-				n->p = front_node->p;
-				list_add(&n->list, &new_path->list);
+				back_node = malloc_node();
+				back_node->p = adjs[i];
+				list_add(&back_node->list, &new_path->list);
 
-				struct trace *trace;
-				while (!EQ(&n->p, &start_node->p)) {
+				back_node = malloc_node();
+				back_node->p = front_node->p;
+				list_add(&back_node->list, &new_path->list);
+
+				while (!EQ(&back_node->p, &start_node->p)) {
+					struct trace *trace;
 					list_for_each_entry(trace, &backtrace, link) {
 						struct node *node;
 						list_for_each_entry(node, &trace->list, list) {
-							if (EQ(&node->p, &n->p)) {
-								n = malloc_node();
-								n->p = trace->p;
-								list_add(&n->list, &new_path->list);
+							if (EQ(&node->p, &back_node->p)) {
+								back_node = malloc_node();
+								back_node->p = trace->p;
+								list_add(&back_node->list, &new_path->list);
 								break;
 							}
 						}
@@ -66,14 +68,14 @@ int bfs(struct list_head *path, const struct point *startp, Pass pfn, Target tfn
 				continue;
 			}
 
-			if (pfn && !pfn(&adjacent[i]))
+			if (pfn && !pfn(&adjs[i]))
 				continue;
 
 			int exists = 0;
 
 			struct node *open_node;
 			list_for_each_entry(open_node, &openlist, list) {
-				if (EQ(&open_node->p, &adjacent[i])) {
+				if (EQ(&open_node->p, &adjs[i])) {
 					exists = 1;
 					break;
 				}
@@ -83,7 +85,7 @@ int bfs(struct list_head *path, const struct point *startp, Pass pfn, Target tfn
 
 			struct node *close_node;
 			list_for_each_entry(close_node, &closelist, list) {
-				if (EQ(&close_node->p, &adjacent[i])) {
+				if (EQ(&close_node->p, &adjs[i])) {
 					exists = 1;
 					break;
 				}
@@ -92,7 +94,7 @@ int bfs(struct list_head *path, const struct point *startp, Pass pfn, Target tfn
 				continue;
 
 			struct node *backtrace_node = malloc_node();
-			backtrace_node->p = adjacent[i];
+			backtrace_node->p = adjs[i];
 
 			struct trace *exist_trace;
 			list_for_each_entry(exist_trace, &backtrace, link) {
@@ -111,7 +113,7 @@ int bfs(struct list_head *path, const struct point *startp, Pass pfn, Target tfn
 			}
 
 			struct node *open_newnode = malloc_node();
-			open_newnode->p = adjacent[i];
+			open_newnode->p = adjs[i];
 			list_add(&open_newnode->list, &openlist);
 		}
 
@@ -120,22 +122,9 @@ int bfs(struct list_head *path, const struct point *startp, Pass pfn, Target tfn
 		list_add(front_openhead, &closelist);
 	}
 
-	struct list_head *pos, *pos2, *n, *n2;
-	list_for_each_safe(pos, n, &closelist) {
-		list_del(pos);
-		struct node *n = list_entry(pos, struct node, list);
-		free(n);
-	}
-	list_for_each_safe(pos, n, &backtrace) {
-		list_del(pos);
-		struct trace *t = list_entry(pos, struct trace, link);
-		list_for_each_safe(pos2, n2, &t->list) {
-			list_del(pos2);
-			struct node *n = list_entry(pos2, struct node, list);
-			free(n);
-		}
-		free(t);
-	}
+	free_nodelist(&openlist);
+	free_nodelist(&closelist);
+	free_tracelist(&backtrace);
 
 	return nrpath;
 }

@@ -34,18 +34,23 @@ static void load_graph(const char *graph)
 	assert(GRAPH_Y <= Y_MAX);
 	assert(GRAPH_X <= X_MAX);
 
+	int ch;
+
 	for (int y = 0; y < GRAPH_Y; y++) {
 		for (int x = 0; x < GRAPH_X; x++) {
-			int ch;
-			do {
-				ch = fgetc(f);
-				printf("%c", ch);
-			} while (ch != EOF && ch == '\n');
+			while ((ch = fgetc(f)) && ch == '\n')
+				if (ch == EOF)
+					goto end;
 			GRAPH[y][x] = (char)ch;
+			printf("%c", GRAPH[y][x]);
 		}
+		while ((ch = fgetc(f)) && ch != '\n')
+			if (ch == EOF)
+				goto end;
+		printf("\n");
 	}
-	printf("\n\n");
-
+	printf("\n");
+end:
 	fclose(f);
 }
 
@@ -91,7 +96,7 @@ int print_node(struct list_head *node_head)
 	struct node *node;
 	list_for_each_entry(node, node_head, list) {
 		nrnode++;
-		printf("(y:%d,x:%d)", node->p.y, node->p.x);
+		printf("(%d,%d)", node->p.y, node->p.x);
 	}
 	return nrnode;
 }
@@ -112,26 +117,30 @@ int main(int argc, char *argv[])
 {
 	load_graph(BFS_GRAPH);
 
-	const struct point start = {.y=19, .x=0};
+	const struct point start = {.y=0, .x=0};
 
 	int nr;
 	struct list_head path_head;
-	
+
 	nr = bfs(&path_head, &start, can_cross, is_box);
 	printf("box path: %d\n", nr);
 	print_path(&path_head);
+	free_pathlist(&path_head);
 
 	nr = bfs(&path_head, &start, can_cross, is_wall);
 	printf("wall path: %d\n", nr);
 	print_path(&path_head);
+	free_pathlist(&path_head);
 
 	nr = bfs(&path_head, &start, can_cross, is_bomb);
 	printf("bomb path: %d\n", nr);
 	print_path(&path_head);
+	free_pathlist(&path_head);
 
 	nr = bfs(&path_head, &start, can_cross, is_player_b);
 	printf("player B path: %d\n", nr);
 	print_path(&path_head);
+	free_pathlist(&path_head);
 
 	return 0;
 }
