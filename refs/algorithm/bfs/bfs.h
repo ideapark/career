@@ -75,22 +75,22 @@ struct trace {
 	struct list_head list;
 };
 
-static inline struct node *new_node(void)
+static inline struct node *malloc_node(void)
 {
 	struct node *node = malloc(sizeof(struct node));
 	INIT_LIST_HEAD(&node->list);
 	return node;
 }
 
-static inline struct path *new_path(void)
+static inline struct path *malloc_path(void)
 {
-	struct node *path = malloc(sizeof(struct path));
+	struct path *path = malloc(sizeof(struct path));
 	INIT_LIST_HEAD(&path->link);
 	INIT_LIST_HEAD(&path->list);
 	return path;
 }
 
-static inline struct trace *new_trace(void)
+static inline struct trace *malloc_trace(void)
 {
 	struct trace *trace = malloc(sizeof(struct trace));
 	INIT_LIST_HEAD(&trace->link);

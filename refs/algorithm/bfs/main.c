@@ -100,7 +100,7 @@ int print_path(struct list_head *path_head)
 {
 	int nrpath = 0;
 	struct path *path;
-	list_for_each_entry(path, path_head, list) {
+	list_for_each_entry(path, path_head, link) {
 		nrpath++;
 		print_node(&path->list);
 		printf("\n");
@@ -119,15 +119,19 @@ int main(int argc, char *argv[])
 	
 	nr = bfs(&path_head, &start, can_cross, is_box);
 	printf("box path: %d\n", nr);
+	print_path(&path_head);
 
 	nr = bfs(&path_head, &start, can_cross, is_wall);
 	printf("wall path: %d\n", nr);
+	print_path(&path_head);
 
 	nr = bfs(&path_head, &start, can_cross, is_bomb);
 	printf("bomb path: %d\n", nr);
+	print_path(&path_head);
 
 	nr = bfs(&path_head, &start, can_cross, is_player_b);
 	printf("player B path: %d\n", nr);
+	print_path(&path_head);
 
 	return 0;
 }
