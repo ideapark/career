@@ -5,6 +5,7 @@
 #ifndef BFS_H
 #define BFS_H
 
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "list.h"
@@ -128,6 +129,18 @@ static inline void free_tracelist(struct list_head *tracelist)
 		free_nodelist(&trace->list);
 		free(trace);
 	}
+}
+
+static inline int PRINT(struct list_head *nodelist)
+{
+	int nrnode = 0;
+	struct node *node;
+	list_for_each_entry(node, nodelist, list) {
+		nrnode++;
+		printf("(%d,%d)", node->p.y, node->p.x);
+	}
+	printf("\n");
+	return nrnode;
 }
 
 /* pass predicate */

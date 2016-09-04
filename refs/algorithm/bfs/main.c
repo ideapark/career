@@ -54,40 +54,40 @@ end:
 	fclose(f);
 }
 
-static int in_graph(const struct point *p)
+static int graph_predicate(const struct point *p)
 {
-	return p->x >= 0 && p->x < GRAPH_X &&
-		p->y >= 0 && p->y < GRAPH_Y;
+	return (p->x >= 0 && p->x < GRAPH_X) &&
+		(p->y >= 0 && p->y < GRAPH_Y);
 }
 
-static int is_grass(const struct point *p)
+static int grass_predicate(const struct point *p)
 {
-	return in_graph(p) && (GRAPH[p->y][p->x] == GRAPH_GRASS);
+	return graph_predicate(p) && (GRAPH[p->y][p->x] == GRAPH_GRASS);
 }
 
-static int is_wall(const struct point *p)
+static int wall_predicate(const struct point *p)
 {
-	return in_graph(p) && (GRAPH[p->y][p->x] == GRAPH_WALL);
+	return graph_predicate(p) && (GRAPH[p->y][p->x] == GRAPH_WALL);
 }
 
-static int is_box(const struct point *p)
+static int box_predicate(const struct point *p)
 {
-	return in_graph(p) && (GRAPH[p->y][p->x] == GRAPH_BOX);
+	return graph_predicate(p) && (GRAPH[p->y][p->x] == GRAPH_BOX);
 }
 
-static int is_bomb(const struct point *p)
+static int bomb_predicate(const struct point *p)
 {
-	return in_graph(p) && (GRAPH[p->y][p->x] == GRAPH_BOMB);
+	return graph_predicate(p) && (GRAPH[p->y][p->x] == GRAPH_BOMB);
 }
 
-static int is_player_b(const struct point *p)
+static int playerb_predicate(const struct point *p)
 {
-	return in_graph(p) && (GRAPH[p->y][p->x] == GRAPH_PLAYER_B);
+	return graph_predicate(p) && (GRAPH[p->y][p->x] == GRAPH_PLAYER_B);
 }
 
-static int can_cross(const struct point *p)
+static int across_predicate(const struct point *p)
 {
-	return is_grass(p);
+	return grass_predicate(p);
 }
 
 int print_node(struct list_head *node_head)
@@ -107,8 +107,8 @@ int print_path(struct list_head *path_head)
 	struct path *path;
 	list_for_each_entry(path, path_head, link) {
 		nrpath++;
-		print_node(&path->list);
-		printf("\n");
+		int nrnode = print_node(&path->list);
+		printf("[%d]\n", nrnode);
 	}
 	return nrpath;
 }
@@ -122,22 +122,22 @@ int main(int argc, char *argv[])
 	int nr;
 	struct list_head path_head;
 
-	nr = bfs(&path_head, &start, can_cross, is_box);
+	nr = bfs(&path_head, &start, across_predicate, box_predicate);
 	printf("box path: %d\n", nr);
 	print_path(&path_head);
 	free_pathlist(&path_head);
 
-	nr = bfs(&path_head, &start, can_cross, is_wall);
+	nr = bfs(&path_head, &start, across_predicate, wall_predicate);
 	printf("wall path: %d\n", nr);
 	print_path(&path_head);
 	free_pathlist(&path_head);
 
-	nr = bfs(&path_head, &start, can_cross, is_bomb);
+	nr = bfs(&path_head, &start, across_predicate, bomb_predicate);
 	printf("bomb path: %d\n", nr);
 	print_path(&path_head);
 	free_pathlist(&path_head);
 
-	nr = bfs(&path_head, &start, can_cross, is_player_b);
+	nr = bfs(&path_head, &start, across_predicate, playerb_predicate);
 	printf("player B path: %d\n", nr);
 	print_path(&path_head);
 	free_pathlist(&path_head);
