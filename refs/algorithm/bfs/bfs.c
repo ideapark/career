@@ -37,27 +37,27 @@ int bfs(struct list_head *path, const struct point *startp, Pass pfn, Target tfn
 			/* backstrace path */
 			if (tfn && tfn(&adjs[i])) {
 				struct path *new_path = malloc_path();
-				list_add_tail(&new_path->link, path);
+				list_add_tail(&new_path->list, path);
 
 				struct node *back_node;
 
 				back_node = malloc_node();
 				back_node->p = adjs[i];
-				list_add(&back_node->list, &new_path->list);
+				list_add(&back_node->list, &new_path->node);
 
 				back_node = malloc_node();
 				back_node->p = front_node->p;
-				list_add(&back_node->list, &new_path->list);
+				list_add(&back_node->list, &new_path->node);
 
 				while (!EQ(&back_node->p, &start_node->p)) {
 					struct trace *trace;
-					list_for_each_entry(trace, &backtrace, link) {
+					list_for_each_entry(trace, &backtrace, list) {
 						struct node *node;
-						list_for_each_entry(node, &trace->list, list) {
+						list_for_each_entry(node, &trace->node, list) {
 							if (EQ(&node->p, &back_node->p)) {
 								back_node = malloc_node();
 								back_node->p = trace->p;
-								list_add(&back_node->list, &new_path->list);
+								list_add(&back_node->list, &new_path->node);
 								break;
 							}
 						}
@@ -103,9 +103,9 @@ int bfs(struct list_head *path, const struct point *startp, Pass pfn, Target tfn
 			backtrace_node->p = adjs[i];
 
 			struct trace *exist_trace;
-			list_for_each_entry(exist_trace, &backtrace, link) {
+			list_for_each_entry(exist_trace, &backtrace, list) {
 				if (EQ(&exist_trace->p, &front_node->p)) {
-					list_add(&backtrace_node->list, &exist_trace->list);
+					list_add(&backtrace_node->list, &exist_trace->node);
 					exists = 1;
 					break;
 				}
@@ -114,8 +114,8 @@ int bfs(struct list_head *path, const struct point *startp, Pass pfn, Target tfn
 			if (!exists) {
 				struct trace *new_trace = malloc_trace();
 				new_trace->p = front_node->p;
-				list_add(&new_trace->link, &backtrace);
-				list_add(&backtrace_node->list, &new_trace->list);
+				list_add(&new_trace->list, &backtrace);
+				list_add(&backtrace_node->list, &new_trace->node);
 			}
 		}
 

@@ -105,9 +105,9 @@ int print_path(struct list_head *path_head)
 {
 	int nrpath = 0;
 	struct path *path;
-	list_for_each_entry(path, path_head, link) {
+	list_for_each_entry(path, path_head, list) {
 		nrpath++;
-		int nrnode = print_node(&path->list);
+		int nrnode = print_node(&path->node);
 		printf("[%d]\n", nrnode);
 	}
 	return nrpath;

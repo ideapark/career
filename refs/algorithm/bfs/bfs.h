@@ -66,14 +66,14 @@ struct node {
 };
 
 struct path {
-	struct list_head link;
 	struct list_head list;
+	struct list_head node;
 };
 
 struct trace {
 	struct point p;
-	struct list_head link;
 	struct list_head list;
+	struct list_head node;
 };
 
 static inline struct node *malloc_node(void)
@@ -86,16 +86,16 @@ static inline struct node *malloc_node(void)
 static inline struct path *malloc_path(void)
 {
 	struct path *path = malloc(sizeof(struct path));
-	INIT_LIST_HEAD(&path->link);
 	INIT_LIST_HEAD(&path->list);
+	INIT_LIST_HEAD(&path->node);
 	return path;
 }
 
 static inline struct trace *malloc_trace(void)
 {
 	struct trace *trace = malloc(sizeof(struct trace));
-	INIT_LIST_HEAD(&trace->link);
 	INIT_LIST_HEAD(&trace->list);
+	INIT_LIST_HEAD(&trace->node);
 	return trace;
 }
 
@@ -114,8 +114,8 @@ static inline void free_pathlist(struct list_head *pathlist)
 	struct list_head *pos, *n;
 	list_for_each_safe(pos, n, pathlist) {
 		list_del(pos);
-		struct path *path = list_entry(pos, struct path, link);
-		free_nodelist(&path->list);
+		struct path *path = list_entry(pos, struct path, list);
+		free_nodelist(&path->node);
 		free(path);
 	}
 }
@@ -125,8 +125,8 @@ static inline void free_tracelist(struct list_head *tracelist)
 	struct list_head *pos, *n;
 	list_for_each_safe(pos, n, tracelist) {
 		list_del(pos);
-		struct trace *trace = list_entry(pos, struct trace, link);
-		free_nodelist(&trace->list);
+		struct trace *trace = list_entry(pos, struct trace, list);
+		free_nodelist(&trace->node);
 		free(trace);
 	}
 }
