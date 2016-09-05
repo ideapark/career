@@ -41,7 +41,7 @@ int main(void)
 	pipe(checkpoint);
 	printf(" - Hello?\n");
 	int child_pid = clone(child_main, child_stack + STACK_SIZE,
-			CLONE_NEWUTS|CLONE_NEWIPC|SIGCHLD, NULL);
+			      CLONE_NEWUTS|CLONE_NEWIPC|SIGCHLD, NULL);
 
 	/* some damn long init job */
 	sleep(4);

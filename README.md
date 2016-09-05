@@ -1,6 +1,6 @@
 LESS IS MORE
 ============
 
-Zhou Peng <lockrecv@qq.com>
+Copyright (c) 2013 Zhou Peng <lockrecv@qq.com>
 
 At sixes and sevens

@@ -29,7 +29,7 @@ int main(void)
 {
 	printf(" - Hello?\n");
 	int child_pid = clone(child_main, child_stack + STACK_SIZE,
-			CLONE_NEWUTS|SIGCHLD, NULL);
+			      CLONE_NEWUTS|SIGCHLD, NULL);
 	waitpid(child_pid, NULL, 0);
 	return 0;
 }

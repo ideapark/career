@@ -55,8 +55,8 @@ int main(void)
 	pipe(checkpoint);
 	printf(" - [%5d] Hello?\n", getpid());
 	int child_pid = clone(child_main, child_stack + STACK_SIZE,
-			CLONE_NEWUTS|CLONE_NEWIPC|CLONE_NEWPID|
-			CLONE_NEWNS|CLONE_NEWNET|SIGCHLD, NULL);
+			      CLONE_NEWUTS|CLONE_NEWIPC|CLONE_NEWPID|
+			      CLONE_NEWNS|CLONE_NEWNET|SIGCHLD, NULL);
 
 	/* further init: create a veth pair */
 	char *cmd;
