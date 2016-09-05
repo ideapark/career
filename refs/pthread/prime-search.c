@@ -17,9 +17,9 @@
 /*
  * Macros
  */
-#define check(status, string) \
-	if (status != 0) { \
-		errno = status; \
+#define check(status, string)						\
+	if (status != 0) {						\
+		errno = status;						\
 		fprintf(stderr, "%s status %d: %s\n", string, status, strerror(status)); \
 	}
 

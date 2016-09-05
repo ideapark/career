@@ -7,8 +7,8 @@
 #include <stdio.h>
 #include <time.h>
 
-#define check(status, string) \
-	if (status != 0) { \
+#define check(status, string)						\
+	if (status != 0) {						\
 		fprintf(stderr, "%s status %d: %s\n", string, status, strerror(status)); \
 	}
 

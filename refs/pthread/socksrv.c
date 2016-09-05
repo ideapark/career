@@ -171,7 +171,7 @@ int main(int argc, char *argv[])
 	if (argc >= 4)
 		SPAWN = atoi(argv[4]);
 	printf("TCP_PORT = %d SLEEP (ms) = %d SPIN (us) = %d SPAWN = %d\n",
-			TCP_PORT, SLEEP, SPIN, SPAWN);
+	       TCP_PORT, SLEEP, SPIN, SPAWN);
 
 	if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
 		fprintf(stderr, "server: can't open stream socket\n");

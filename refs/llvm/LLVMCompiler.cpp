@@ -32,7 +32,8 @@ static std::string IdentifierStr; // Filled in if tok_identifier
 static double NumVal;             // Filled in if tok_number
 
 /// gettok - Return the next token from standard input.
-static int gettok() {
+static int gettok()
+{
 	static int LastChar = ' ';
 
 	// Skip any whitespace.
@@ -89,50 +90,55 @@ static int gettok() {
 namespace {
 
 	/// ExprAST - Base class for all expression nodes.
-	class ExprAST {
-		public:
-			virtual ~ExprAST() {}
-			virtual Value *codegen() = 0;
+	class ExprAST
+	{
+	public:
+		virtual ~ExprAST() {}
+		virtual Value *codegen() = 0;
 	};
 
 	/// NumberExprAST - Expression class for numeric literals like "1.0".
-	class NumberExprAST : public ExprAST {
+	class NumberExprAST : public ExprAST
+	{
 		double Val;
 
-		public:
+	public:
 		NumberExprAST(double Val) : Val(Val) {}
 		Value *codegen() override;
 	};
 
 	/// VariableExprAST - Expression class for referencing a variable, like "a".
-	class VariableExprAST : public ExprAST {
+	class VariableExprAST : public ExprAST
+	{
 		std::string Name;
 
-		public:
+	public:
 		VariableExprAST(const std::string &Name) : Name(Name) {}
 		Value *codegen() override;
 	};
 
 	/// BinaryExprAST - Expression class for a binary operator.
-	class BinaryExprAST : public ExprAST {
+	class BinaryExprAST : public ExprAST
+	{
 		char Op;
 		std::unique_ptr<ExprAST> *LHS, *RHS;
 
-		public:
+	public:
 		BinaryExprAST(char Op, std::unique_ptr<ExprAST> LHS,
-				std::unique_ptr<ExprAST> RHS)
+			      std::unique_ptr<ExprAST> RHS)
 			: Op(Op), LHS(std::move(LHS)), RHS(std::move(RHS)) {}
 		Value *codegen() override;
 	};
 
 	/// CallExprAST - Expression class for function calls.
-	class CallExprAST : public ExprAST {
+	class CallExprAST : public ExprAST
+	{
 		std::string Callee;
 		std::vector<std::unique_ptr<ExprAST>> Args;
 
-		public:
+	public:
 		CallExprAST(const std::string &Callee,
-				std::vector<std::unique_ptr<ExprAST>> Args)
+			    std::vector<std::unique_ptr<ExprAST>> Args)
 			: Callee(Callee), Args(std::move(Args)) {}
 		Value *codegen() override;
 	};
@@ -140,11 +146,12 @@ namespace {
 	/// PrototypeAST - This class represents the "prototype" for a function,
 	/// which captures its name, and its argument names (thus implicitly the
 	/// number of arguments the function takes).
-	class PrototypeAST {
+	class PrototypeAST
+	{
 		std::string Name;
 		std::vector<std::string> Args;
 
-		public:
+	public:
 		PrototypeAST(const std::string &Name, std::vector<std::string> Args)
 			: Name(Name), Args(std::move(Args)) {}
 
@@ -153,13 +160,14 @@ namespace {
 	};
 
 	/// FunctionAST - This class represents a function definition iteself.
-	class FunctionAST {
+	class FunctionAST
+	{
 		std::unique_ptr<PrototypeAST> Proto;
 		std::unique_ptr<ExprAST> Body;
 
-		public:
+	public:
 		FunctionAST(std::unique_ptr<PrototypeAST> Proto,
-				std::unique_ptr<ExprAST> Body)
+			    std::unique_ptr<ExprAST> Body)
 			: Proto(std::move(Proto)), Body(std::move(Body)) {}
 		Function *codegen();
 	};
@@ -181,7 +189,8 @@ static int getNextToken() { return CurTok = gettok(); }
 static std::map<char, int> BinopPrecedence;
 
 /// GetTokPrecedence - Get the precedence of the pending binary operator token.
-static int GetTokPrecedence() {
+static int GetTokPrecedence()
+{
 	if (!isascii(CurTok))
 		return -1;
 
@@ -193,12 +202,14 @@ static int GetTokPrecedence() {
 }
 
 /// Error* - These are little helper functions for error handling.
-std::unique_ptr<ExprAST> Error(const char *Str) {
+std::unique_ptr<ExprAST> Error(const char *Str)
+{
 	fprintf(stderr, "Error: %s\n", Str);
 	return nullptr;
 }
 
-std::unique_ptr<PrototypeAST> ErrorP(const char *Str) {
+std::unique_ptr<PrototypeAST> ErrorP(const char *Str)
+{
 	Error(Str);
 	return nullptr;
 }
@@ -206,14 +217,16 @@ std::unique_ptr<PrototypeAST> ErrorP(const char *Str) {
 static std::unique_ptr<ExprAST> ParseExpression();
 
 /// numberexpr ::= number
-static std::unique_ptr<ExprAST> ParseNumberExpr() {
+static std::unique_ptr<ExprAST> ParseNumberExpr()
+{
 	auto Result = llvm::make_unique<NumberExprAST>(NumVal);
 	getNextToken(); // consume the number
 	return std::move(Result);
 }
 
 /// parenexpr ::= '(' expression ')'
-static ExprAST *ParseParenExpr() {
+static ExprAST *ParseParenExpr()
+{
 	getNextToken(); // eat (.
 	auto V = ParseExpression();
 	if (!V)
@@ -228,7 +241,8 @@ static ExprAST *ParseParenExpr() {
 /// identifier
 ///   ::= identifier
 ///   ::= identifier '(' expression* ')'
-static std::unique_ptr<ExprAST> ParseIdentifierExpr() {
+static std::unique_ptr<ExprAST> ParseIdentifierExpr()
+{
 	std::string IdName = IdentifierStr;
 
 	getNextToken(); // eat identifier.
@@ -265,7 +279,8 @@ static std::unique_ptr<ExprAST> ParseIdentifierExpr() {
 ///   ::= identifier
 ///   ::= numberexpr
 ///   ::= parenexpr
-static std::unique_ptr<ExprAST> ParsePrimary() {
+static std::unique_ptr<ExprAST> ParsePrimary()
+{
 	switch (CurTok) {
 	default:
 		return Error("unknown token when expecting an expression");
@@ -281,7 +296,8 @@ static std::unique_ptr<ExprAST> ParsePrimary() {
 /// binoprhs
 ///   ::= ('+' primary)*
 static std::unique_ptr<ExprAST> ParseBinOpRHS(int ExprPrec,
-		std::unique_ptr<ExprAST> LHS) {
+					      std::unique_ptr<ExprAST> LHS)
+{
 	// If this is a binop, find its precedence.
 	while (1) {
 		int TokPrec = GetTokPrecedence();
@@ -316,7 +332,8 @@ static std::unique_ptr<ExprAST> ParseBinOpRHS(int ExprPrec,
 
 /// expression
 ///   ::= primary binoprhs
-static std::unique_ptr<ExprAST> ParseExpression() {
+static std::unique_ptr<ExprAST> ParseExpression()
+{
 	auto LHS = ParsePrimary();
 	if (!LHS)
 		return nullptr;
@@ -326,7 +343,8 @@ static std::unique_ptr<ExprAST> ParseExpression() {
 
 /// prototype
 ///   ::= id '(' id* ')'
-static std::unique_ptr<PrototypeAST> ParsePrototype() {
+static std::unique_ptr<PrototypeAST> ParsePrototype()
+{
 	if (CurTok != tok_identifier)
 		return ErrorP("Expected function name in prototype");
 
@@ -349,7 +367,8 @@ static std::unique_ptr<PrototypeAST> ParsePrototype() {
 }
 
 /// definition ::= 'def' prototype expression
-static std::unique_ptr<FunctionAST> ParseDefinition() {
+static std::unique_ptr<FunctionAST> ParseDefinition()
+{
 	getNextToken(); // eat def.
 	auto Proto = ParsePrototype();
 	if (!Proto)
@@ -361,18 +380,20 @@ static std::unique_ptr<FunctionAST> ParseDefinition() {
 }
 
 /// toplevelexpr ::= expression
-static std::unique_ptr<FunctionAST> ParseTopLevelExpr() {
+static std::unique_ptr<FunctionAST> ParseTopLevelExpr()
+{
 	if (auto E = ParseExpression()) {
 		// Make an anonymous proto.
 		auto Proto = llvm::make_unique<PrototypeAST>("__anon_expr",
-				std::vector<std::string>());
+							     std::vector<std::string>());
 		return llvm::make_unique<FunctionAST>(std::move(Proto), std::move(E));
 	}
 	return nullptr;
 }
 
 /// external ::= 'extern' prototype
-static std::unique_ptr<PrototypeAST> ParseExtern() {
+static std::unique_ptr<PrototypeAST> ParseExtern()
+{
 	getNextToken(); // eat extern.
 	return ParsePrototype();
 }
@@ -386,16 +407,19 @@ static std::unique_ptr<Module> TheModule;
 static IRBuilder<> Builder(getGlobalContext());
 static std::map<std::string, Value*> NamedValues;
 
-Value *ErrorV(const char *Str) {
+Value *ErrorV(const char *Str)
+{
 	Error(Str);
 	return nullptr;
 }
 
-Value *NumberExprAST::codegen() {
+Value *NumberExprAST::codegen()
+{
 	return ConstantFP::get(getGlobalContext(), APFloat(Val));
 }
 
-Value *VariableExprAST::codegen() {
+Value *VariableExprAST::codegen()
+{
 	// Look this variable up in the function
 	Value *V = NameValues[Name];
 	if (!V)
@@ -403,7 +427,8 @@ Value *VariableExprAST::codegen() {
 	return V;
 }
 
-Value *BinaryExprAST::codegen() {
+Value *BinaryExprAST::codegen()
+{
 	Value *L = LHS->Codegen();
 	Value *R = RHS->Codegen();
 	if (!L || !R)
@@ -420,13 +445,14 @@ Value *BinaryExprAST::codegen() {
 		L = Builder.CreateFCmpULT(L, R, "cmptmp");
 		// Convert bool 0/1 to double 0.0 or 1.0
 		return Builder.CreateUIToFP(L, Type::getDoubleTy(getGlobalContext()),
-				"booltmp");
+					    "booltmp");
 	default:
 		return ErrorV("invalid binary operator");
 	}
 }
 
-Value *CallExprAST::codegen() {
+Value *CallExprAST::codegen()
+{
 	// Look up the name in the global module table.
 	Function *CalleeF = TheModule->getFunction(Callee);
 	if (!CalleeF)
@@ -446,10 +472,11 @@ Value *CallExprAST::codegen() {
 	return Builder.CreateCall(CalleeF, ArgsV, "calltmp");
 }
 
-Function *PrototypeAST::codegen() {
+Function *PrototypeAST::codegen()
+{
 	// Make the function type: double(double, double) etc.
 	std::vector<Type*> Doubles(Args.size(),
-			Type::getDoubleTy(getGlobalContext()));
+				   Type::getDoubleTy(getGlobalContext()));
 	FunctionType *FT =
 		FunctionType::get(Type::getDoubleTy(getGlobalContext()), Doubles, false);
 
@@ -464,7 +491,8 @@ Function *PrototypeAST::codegen() {
 	return F;
 }
 
-Function *FunctionAST::codegen() {
+Function *FunctionAST::codegen()
+{
 	// First, check for an existing function from a previous 'extern' declaration.
 	Function *TheFunction = TheModule->getFunction(Proto->getName());
 
@@ -502,7 +530,8 @@ Function *FunctionAST::codegen() {
 // Top-Level parsing and JIT Driver
 //===----------------------------------------------------------------------===//
 
-static void HandleDefinition() {
+static void HandleDefinition()
+{
 	if (auto FnAST = ParseDefinition()) {
 		if (auto *FnIR = FnAST->codegen()) {
 			fprintf(stderr, "Read function definition:");
@@ -514,7 +543,8 @@ static void HandleDefinition() {
 	}
 }
 
-static void HandleExtern() {
+static void HandleExtern()
+{
 	if (auto ProtoAST = ParseExtern()) {
 		if (auto *FnIR = ProtoAST->codegen()) {
 			fprintf(stderr, "Read extern: ");
@@ -526,7 +556,8 @@ static void HandleExtern() {
 	}
 }
 
-static void HandleTopLevelExpression() {
+static void HandleTopLevelExpression()
+{
 	// Evaluate a top-level expression into an anonymous function.
 	if (auto FnAST = ParseTopLevelExpr()) {
 		if (auto *FnIR = FnAST->codegen()) {
@@ -540,7 +571,8 @@ static void HandleTopLevelExpression() {
 }
 
 /// top ::= definition | external | expression | ';'
-static void MainLoop() {
+static void MainLoop()
+{
 	while (1) {
 		fprintf(stderr, "ready> ");
 		switch (CurTok) {
@@ -566,7 +598,8 @@ static void MainLoop() {
 // Main driver code.
 //===----------------------------------------------------------------------===//
 
-int main() {
+int main()
+{
 	// Install standard binary operators.
 	// 1 is lowest precedence.
 	BinopPrecedence['<'] = 10;

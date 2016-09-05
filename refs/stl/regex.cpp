@@ -6,11 +6,11 @@
 int main()
 {
 	std::string s = "Some people, when confronted with a problem, think "
-		        "\"I know, I'll use regular expressions.\" "
-		        "Now they have two problems.";
+		"\"I know, I'll use regular expressions.\" "
+		"Now they have two problems.";
 
 	std::regex self_regex("REGULAR EXPRESSIONS",
-			std::regex_constants::ECMAScript | std::regex_constants::icase);
+			      std::regex_constants::ECMAScript | std::regex_constants::icase);
 	if (std::regex_search(s, self_regex)) {
 		std::cout << "Text contains the phrase 'regular expressions'\n";
 	}
