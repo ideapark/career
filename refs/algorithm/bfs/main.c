@@ -92,11 +92,24 @@ static int across_predicate(const struct point *p)
 
 int print_node(struct list_head *node_head)
 {
+	int y, x;
+	char PG[Y_MAX][X_MAX];	
+
+	for (y = 0; y < GRAPH_Y; y++)
+		for (x = 0; x < GRAPH_X; x++)
+			PG[y][x] = '.';
+
 	int nrnode = 0;
 	struct node *node;
 	list_for_each_entry(node, node_head, list) {
 		nrnode++;
-		printf("(%d,%d)", node->p.y, node->p.x);
+		PG[node->p.y][node->p.x] = '*';
+	}
+
+	for (y = 0; y < GRAPH_Y; y++) {
+		for (x = 0; x < GRAPH_X; x++)
+			printf("%c", PG[y][x]);
+		printf("\n");
 	}
 	return nrnode;
 }
@@ -108,7 +121,7 @@ int print_path(struct list_head *path_head)
 	list_for_each_entry(path, path_head, list) {
 		nrpath++;
 		int nrnode = print_node(&path->node);
-		printf("[%d]\n", nrnode);
+		printf("steps: [%d]\n\n", nrnode);
 	}
 	return nrpath;
 }
