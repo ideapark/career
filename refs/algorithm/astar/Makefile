@@ -1,13 +1,13 @@
-all: test.out
+all: astar.out
 
 CC = gcc
 CFLAGS = -Wall -g
 
-test.out: astar.o test.o
+astar.out: astar.o main.o
 	$(CC) $(CFLAGS) -o $@ $^
 
 astar.o: astar.c
-test.o: test.c
+main.o: main.c
 
 clean:
-	rm -f *.o test.out
+	rm -f *.o astar.out
