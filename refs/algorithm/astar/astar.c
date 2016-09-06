@@ -1,6 +1,7 @@
-#include "astar.h"
 #include <stdlib.h>
 #include <assert.h>
+
+#include "astar.h"
 
 static GScoreFunc gscore;
 static HScoreFunc hscore;
