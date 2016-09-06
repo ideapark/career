@@ -14,7 +14,7 @@ static int location = 0;
  * in postOrder to tree pointed to by t
  */
 static void traverse(TreeNode *t, void (*preProc)(TreeNode *),
-		void (*postProc)(TreeNode *))
+		     void (*postProc)(TreeNode *))
 {
 	if (t != NULL) {
 		preProc(t);

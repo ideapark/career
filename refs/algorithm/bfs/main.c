@@ -35,9 +35,9 @@ static void load_graph(const char *graph)
 	assert(GRAPH_X <= X_MAX);
 
 	int ch;
-
-	for (int y = 0; y < GRAPH_Y; y++) {
-		for (int x = 0; x < GRAPH_X; x++) {
+	int y, x;
+	for (y = 0; y < GRAPH_Y; y++) {
+		for (x = 0; x < GRAPH_X; x++) {
 			while ((ch = fgetc(f)) && ch == '\n')
 				if (ch == EOF)
 					goto end;

@@ -32,7 +32,8 @@ int bfs(struct list_head *path, const struct point *startp, Pass pfn, Target tfn
 			R(&front_node->p)
 		};
 
-		for (unsigned i = 0; i < LEN(adjs); i++) {
+		unsigned i;
+		for (i = 0; i < LEN(adjs); i++) {
 
 			/* backstrace path */
 			if (tfn && tfn(&adjs[i])) {

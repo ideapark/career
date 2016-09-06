@@ -153,7 +153,7 @@ TokenType getToken(void)
 					break;
 				default:
 					currentToken = ERROR;
-						break;
+					break;
 				}
 			}
 			break;

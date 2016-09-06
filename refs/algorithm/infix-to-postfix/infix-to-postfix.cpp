@@ -64,8 +64,8 @@ string infixToPostfix(const string expression)
 }
 
 static string doCalculation(const string leftOperand,
-		const string rightOperand,
-		const string operatorString)
+			    const string rightOperand,
+			    const string operatorString)
 {
 	unsigned int left = atoi(leftOperand.c_str());
 	unsigned int right = atoi(rightOperand.c_str());
@@ -113,12 +113,12 @@ string calcPostfixExpression(const string postfixExpression)
 	return calculationStack.top();
 }
 
-#define TEST(expression)  do { \
-	string postfixExpression = infixToPostfix(expression); \
-	cout << expression << ": "; \
-	cout << postfixExpression  << ": "; \
-	cout << calcPostfixExpression(postfixExpression) << endl; \
-} while (0)
+#define TEST(expression)  do {						\
+		string postfixExpression = infixToPostfix(expression);	\
+		cout << expression << ": ";				\
+		cout << postfixExpression  << ": ";			\
+		cout << calcPostfixExpression(postfixExpression) << endl; \
+	} while (0)
 
 int main(void)
 {
