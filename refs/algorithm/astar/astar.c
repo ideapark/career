@@ -19,8 +19,6 @@ typedef struct Set {
 	Node **arr;
 } Set;
 
-static Set *open_set, *close_set;
-
 static Node *create_node(void *ud, int index, int dst, Node *parent)
 {
 	Node *node = (Node *)malloc(sizeof(*node));
