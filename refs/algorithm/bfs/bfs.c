@@ -120,9 +120,9 @@ int bfs(struct list_head *pathlist, const struct point *startp, Pass pfn, Target
 			}
 		}
 
-		struct list_head *front_openhead = openlist.next;
-		list_del(front_openhead);
-		list_add(front_openhead, &closelist);
+		struct list_head *front_head = openlist.next;
+		list_del(front_head);
+		list_add(front_head, &closelist);
 	}
 
 	free_nodelist(&closelist);
