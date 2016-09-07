@@ -130,30 +130,30 @@ int main(int argc, char *argv[])
 {
 	load_graph(BFS_GRAPH);
 
-	const struct point start = {.y=0, .x=0};
+	const struct point startp = {.y=0, .x=0};
 
 	int nr;
-	struct list_head path_head;
+	struct list_head pathlist;
 
-	nr = bfs(&path_head, &start, across_predicate, box_predicate);
+	nr = bfs(&pathlist, &startp, across_predicate, box_predicate);
 	printf("box path: %d\n", nr);
-	print_path(&path_head);
-	free_pathlist(&path_head);
+	print_path(&pathlist);
+	free_pathlist(&pathlist);
 
-	nr = bfs(&path_head, &start, across_predicate, wall_predicate);
+	nr = bfs(&pathlist, &startp, across_predicate, wall_predicate);
 	printf("wall path: %d\n", nr);
-	print_path(&path_head);
-	free_pathlist(&path_head);
+	print_path(&pathlist);
+	free_pathlist(&pathlist);
 
-	nr = bfs(&path_head, &start, across_predicate, bomb_predicate);
+	nr = bfs(&pathlist, &startp, across_predicate, bomb_predicate);
 	printf("bomb path: %d\n", nr);
-	print_path(&path_head);
-	free_pathlist(&path_head);
+	print_path(&pathlist);
+	free_pathlist(&pathlist);
 
-	nr = bfs(&path_head, &start, across_predicate, playerb_predicate);
+	nr = bfs(&pathlist, &startp, across_predicate, playerb_predicate);
 	printf("player B path: %d\n", nr);
-	print_path(&path_head);
-	free_pathlist(&path_head);
+	print_path(&pathlist);
+	free_pathlist(&pathlist);
 
 	return 0;
 }
