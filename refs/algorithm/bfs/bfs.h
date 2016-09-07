@@ -149,6 +149,6 @@ typedef int (*Pass)(const struct point *p);
 /* target predicate */
 typedef int (*Target)(const struct point *p);
 
-int bfs(struct list_head *path, const struct point *start, Pass Pfn, Target Tfn);
+int bfs(struct list_head *pathlist, const struct point *start, Pass Pfn, Target Tfn);
 
 #endif /* BFS_H */

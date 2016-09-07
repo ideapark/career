@@ -7,11 +7,11 @@
 
 #define LEN(arr) (sizeof(arr)/sizeof(arr[0]))
 
-int bfs(struct list_head *path, const struct point *startp, Pass pfn, Target tfn)
+int bfs(struct list_head *pathlist, const struct point *startp, Pass pfn, Target tfn)
 {
 	int nrpath = 0;
 
-	INIT_LIST_HEAD(path);
+	INIT_LIST_HEAD(pathlist);
 
 	LIST_HEAD(openlist);
 	LIST_HEAD(closelist);
@@ -38,7 +38,7 @@ int bfs(struct list_head *path, const struct point *startp, Pass pfn, Target tfn
 			/* backstrace path */
 			if (tfn && tfn(&adjs[i])) {
 				struct path *new_path = malloc_path();
-				list_add_tail(&new_path->list, path);
+				list_add_tail(&new_path->list, pathlist);
 
 				struct node *back_node;
 
