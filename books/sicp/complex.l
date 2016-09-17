@@ -15,7 +15,7 @@
 		       (- (angle z1) (angle z2))))
 
 ;;
-;; Triangular Coordination
+;; Rectangular Coordination
 ;;
 (define (real-part z) (car z))
 
