@@ -1,11 +1,12 @@
-; DATA ABSTRACT
-;
-; [1]-------- Program using Rational -----
-; [2]-------- add-rat sub-rat ... --------
-; [3]-------- make-rat numer denom -------
-; [4]-------- cons car cdr ---------------
-;
-; Rational ADD/SUB/MUL/DIV/EQ
+;; DATA ABSTRACT
+;;
+;; [1]-------- Program using Rational -----
+;; [2]-------- add-rat sub-rat ... --------
+;; [3]-------- make-rat numer denom -------
+;; [4]-------- cons car cdr ---------------
+;;
+;; Rational ADD/SUB/MUL/DIV/EQ
+
 (define (add-rat x y)
   (make-rat (+ (* (numer x) (denom y))
 	       (* (numer y) (denom x)))
@@ -41,7 +42,7 @@
   (display "/")
   (display (denom x)))
 
-; TEST
+;; TEST
 (define one-half (make-rat 1 2))
 (define one-third (make-rat 1 3))
 
