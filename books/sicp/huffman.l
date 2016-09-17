@@ -26,7 +26,7 @@
 (define (weight tree)
   (if (leaf? tree)
       (weight-leaf tree)
-    (caddr tree)))
+    (cadddr tree)))
 
 (define (decode bits tree)
   (define (decode-1 bits current-branch)
