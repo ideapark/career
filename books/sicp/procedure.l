@@ -3,19 +3,19 @@
       0
     (+ (term a)
        (sum term (next a) next b))))
-; sum of cube
+;; sum of cube
 (define (inc n) (+ n 1))
 (define (sum-cubes a b)
   (sum cube a inc b))
 (sum-cubes 1 10)
 
-; sum of integers
+;; sum of integers
 (define (identity x) x)
 (define (sum-integers a b)
   (sum identity a inc b))
 (sum-integers 1 10)
 
-; sum of pi
+;; sum of pi
 (define (pi-sum a b)
   (define (pi-term x)
     (/ 1.0 (* x (+ x 2))))
