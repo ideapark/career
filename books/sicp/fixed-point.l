@@ -10,17 +10,17 @@
 	(try next))))
   (try fist-guess))
 
-; cos
+;; cos
 (fixed-point cos 1.0)
 
-; y = sin y + cos y
+;; y = sin y + cos y
 (fixed-point (lambda (y) (+ (sin y) (cos y)))
              1.0)
 
 (define (average-damp f)
   (lambda (x) (average x (f x))))
 
-; y = x^3
+;; y = x^3
 (define (cube-root x)
   (fixed-point (average-damp (lambda (y) (/ x (square))))
 	       1.0))
