@@ -25,4 +25,3 @@
       true
     (begin (set-car! cell true)
 	   false)))
-
