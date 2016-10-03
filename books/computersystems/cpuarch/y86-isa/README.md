@@ -1,6 +1,8 @@
-# Y86 Instruction-Set Architecture
+Y86 Instruction-Set Architecture
+================================
 
-## Y86 Programmer Status
+Y86 Programmer Status
+---------------------
 
     RF: register              CC: status code           Stat: program status
     +--------+--------+     +------+------+------+    +------------------------+
@@ -13,7 +15,8 @@
     |  %ebx  |  %ebp  |     +--------------------+    |                        |
     +--------+--------+                               +------------------------+
 
-## Y86 Instruction Set
+Y86 Instruction Set
+-------------------
 
     +-----------------------------------------------------------+
     | Byte                  0     1     2     3     4     5     |
@@ -45,7 +48,8 @@
     | popl rA              |B |0 |rA|F |                        |
     +-----------------------------------------------------------+
 
-## Instruction Coding
+Instruction Coding
+------------------
 
             Integer                Branch                 Transfer
 
@@ -65,7 +69,8 @@
        xorl |6|3|         je  |7|3|                  cmove  |2|3|
             +---+             +---+                         +---+
 
-## Y86 Exception
+Y86 Exception
+-------------
 
     +-------+------+----------------------------+
     | Value | Name | Meaning                    |
@@ -79,7 +84,8 @@
     |   4   | INS  | Illegal instruction        |
     +-------+------+----------------------------+
 
-## Y86 Program
+Y86 Program
+-----------
 
 > int Sum(int *Start, int Count)
 > {
