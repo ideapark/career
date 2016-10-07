@@ -1,0 +1,9 @@
+/*
+ * Function used to define new method.
+ */
+Function.prototype.method = function(name, func) {
+    this.prototype[name] = func;
+    return this;
+}
+
+document.writeln('Hello, world!');
