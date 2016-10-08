@@ -145,3 +145,12 @@ var properties = [
 for (i = 0; i < properties.length; i++) {
     document.writeln(properties[i] + ': ' + another_stooge[properties[i]]);
 }
+
+
+/*
+ * Delete
+ */
+
+another_stooge.nickname = 'Moe';  // 'Moe'
+delete another_stooge.nickname;   // expose prototype object's property
+another_stooge.nickname           // 'Curly'
