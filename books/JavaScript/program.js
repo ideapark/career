@@ -9,7 +9,9 @@ Function.prototype.method = function(name, func) {
 document.writeln('Hello, world!');
 
 
-// Object literal
+/*
+ * Object Literals
+ */
 
 var empty_object = {};
 
@@ -32,3 +34,23 @@ var flight = {
 	city: "Los Angeles"
     }
 };
+
+/*
+ * Retrieval
+ */
+
+stooge["first-name"]  // "Jerome"
+flight.departure.IATA // "SYD"
+
+stooge["middle-name"] // undefined
+flight.status         // undefined
+stooge["FIRST-NAME"]  // undefined
+
+// default value using '||'
+var middle = stooge["middle-name"] || "(none)";
+var status = flight.status || "unknown";
+
+// undefined throws TypeError
+flight.equipment                           // undefined
+flight.equipment.model                     // throw "TypeError"
+flight.equipment && flight.equipment.model // undefined
