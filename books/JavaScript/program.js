@@ -54,3 +54,17 @@ var status = flight.status || "unknown";
 flight.equipment                           // undefined
 flight.equipment.model                     // throw "TypeError"
 flight.equipment && flight.equipment.model // undefined
+
+
+/*
+ * Update
+ */
+
+stooge["first-name"] = "Jerome";
+stooge["middle-name"] = "Lester";
+stooge.nickname = "Curly";
+flight.equipment = {
+    model: 'Boeing 777'
+};
+flight.status = 'Overdue';
+
