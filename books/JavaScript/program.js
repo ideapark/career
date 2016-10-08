@@ -103,3 +103,20 @@ another_stooge.nickname = 'Moe';
 stooge.profession = 'actor';
 another_stooge.profession  // 'actor'
 
+
+/*
+ * Reflection
+ */
+
+typeof flight.number   // 'number'
+typeof flight.status   // 'string'
+typeof flight.arrival  // 'object'
+typeof flight.manifest // 'undefined'
+
+// prototype's attributes
+typeof flight.toString    // 'function'
+typeof flight.constructor // 'function'
+
+// only object own attributes
+flight.hasOwnProperty('number')       // true
+flight.hasOwnProperty('constructor')  // false
