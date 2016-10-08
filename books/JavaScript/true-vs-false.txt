@@ -1,0 +1,12 @@
+falsy:
+
+* false
+* null
+* undefined
+* ''
+* 0
+* NaN
+
+true:
+
+* all except false
