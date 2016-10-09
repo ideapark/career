@@ -289,3 +289,10 @@ var sum = function() {
 
 document.writeln(sum(4, 8, 15, 16, 23, 42));  // 108
 
+
+/*
+ * Return
+ */
+
+// return undefined
+// return this
