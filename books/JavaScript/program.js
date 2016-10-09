@@ -48,7 +48,11 @@ var status = flight.status || "unknown";
 
 // undefined throws TypeError
 flight.equipment                           // undefined
-flight.equipment.model                     // throw "TypeError"
+try {
+    flight.equipment.model                     // throw "TypeError"
+} catch (e) {
+    document.writeln(e);
+}
 flight.equipment && flight.equipment.model // undefined
 
 
@@ -310,7 +314,7 @@ var add = function(a, b) {
 var try_it = function() {
     try {
 	add("seven");
-    } catch () {
+    } catch (e) {
 	document.writeln(e.name + ': ' + e.message);
     }
 };
@@ -393,10 +397,8 @@ String.method('deentityify', function(){
 
     return function() {
 	return this.replace(/&([^&;]+);/g, function(a, b) {
-	    function(a, b) {
-		var r = entity[b];
-		return typeof r === 'string' ? r : a;
-	    }
+	    var r = entity[b];
+	    return typeof r === 'string' ? r : a;
 	});
     };
 }());
