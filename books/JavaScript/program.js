@@ -190,3 +190,15 @@ MYAPP.flight = {
 Object.prototype
 Function.prototype
 
+
+/*
+ * Function Literal
+ *
+ * anonymous
+ * closure
+ */
+
+var add = function(a, b) {
+    return a + b;
+};
+
