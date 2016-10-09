@@ -181,3 +181,12 @@ MYAPP.flight = {
 	city: "Los Angeles"
     }
 };
+
+
+/*
+ * Function Objects
+ */
+
+Object.prototype
+Function.prototype
+
