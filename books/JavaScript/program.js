@@ -361,3 +361,42 @@ var factorial = function factorial(i, a) {
 
 document.writeln(factorial(4));  // 24
 
+
+/*
+ * Closure
+ */
+
+var myObject = (function(){
+    var value = 0;
+
+    return {
+	increment: function(inc) {
+	    value += typeof inc === 'number' ? inc : 1;
+	},
+	getValue: function() {
+	    return value;
+	}
+    };
+}());
+
+
+/*
+ * Module
+ */
+
+String.method('deentityify', function(){
+    var entity = {
+	quot: '"',
+	lt: '<',
+	gt: '>'
+    };
+
+    return function() {
+	return this.replace(/&([^&;]+);/g, function(a, b) {
+	    function(a, b) {
+		var r = entity[b];
+		return typeof r === 'string' ? r : a;
+	    }
+	});
+    };
+}());
