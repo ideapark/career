@@ -1,7 +1,7 @@
                                                                                            printf.o
                                                                                               |
                                                                                               |
-    hello.c     ---------      hello.i     ---------      hello.s      --------      hello.o  ----> --------      hello
+    hello.c     +-------+      hello.i     +-------+      hello.s      +------+      hello.o  +---> +------+      hello
 --------------> |  cpp  | ---------------> |  cc1  | ----------------> |  as  | ------------------> |  ld  | ---------------->
-  source file   ---------   modified src   ---------   assembly file   --------   relocatable obj   --------   executable obj
+  source file   +-------+   modified src   +-------+   assembly file   +------+   relocatable obj   +------+   executable obj
      (text)                     (text)                     (text)                     (binary)                   (binary)
