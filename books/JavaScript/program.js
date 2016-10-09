@@ -1,11 +1,6 @@
 /*
- * Function used to define new method.
+ * Hello World from JavaScript
  */
-Function.prototype.method = function(name, func) {
-    this.prototype[name] = func;
-    return this;
-}
-
 document.writeln('Hello, world!');
 
 
@@ -321,3 +316,23 @@ var try_it = function() {
 };
 
 try_it();
+
+
+/*
+ * Argument Types
+ */
+
+Function.prototype.method = function(name, func) {
+    this.prototype[name] = func;
+    return this;
+};
+
+Number.method('integer', function(){
+    return Math[this < 0 ? 'ceil' : 'floor'](this);
+});
+document.writeln((-10 / 3).integer());  // -3
+
+String.method('trim', function(){
+    return this.replace(/^\s+|\s+$/g, '');
+});
+document.writeln('"' + "    neat    ".trim() + '"');
