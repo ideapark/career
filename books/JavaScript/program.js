@@ -416,3 +416,12 @@ Function.method('curry', function() {
 	return that.apply(null, args.concat(slice.apply(arguments)));
     };
 });
+
+
+/*
+ * Regular Expressions
+ */
+
+// 'url', 'scheme', 'slash', 'host', 'port', 'path', 'query', 'hash'
+var url = "http://www.ora.com:80/goodparts?q#fragment";
+var reg = /^(?:([A-Za-z]+):)?(\/{0,3})([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*]))?(?:#(.*))?$/;
