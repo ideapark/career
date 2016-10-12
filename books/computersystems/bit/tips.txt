@@ -1,0 +1,7 @@
+C Pointer
+=========
+
+ pointer = type + value
+
+ value: Address of object
+ type: Object's type like int, float, double
