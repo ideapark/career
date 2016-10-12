@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void show_bytes(unsigned char * start, int len)
+void show_bytes(unsigned char *start, int len)
 {
 	int i;
 
