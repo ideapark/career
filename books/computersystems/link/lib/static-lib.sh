@@ -1,5 +1,9 @@
 #!/bin/sh
 
+#
+# Copyright (c) Zhou Peng <lockrecv@qq.com>
+#
+
 # HOWTO
 #
 # source               main.c   vector.h
