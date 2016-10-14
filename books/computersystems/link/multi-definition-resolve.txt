@@ -4,3 +4,6 @@ Multiple Definition Resolve Rules
 Rule 1: Two strong global symbol not allowed.
 Rule 2: Choose strong one between strong and weak symbols.
 Rule 3: Choose any one among multiple weak symbols.
+
+gcc -fno-common: print warning when came across multiple
+                 definition global variables
