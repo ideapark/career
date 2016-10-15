@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 	fd = open(argv[1], O_RDWR|O_CREAT|O_TRUNC, 0666);
 	if (fd < 0) {
 		fprintf(stderr, "%s: %s: connot open for read/write: %s\n",
-				argv[0], argv[1], strerror(errno));
+			argv[0], argv[1], strerror(errno));
 		return 1;
 	}
 
@@ -38,14 +38,14 @@ int main(int argc, char *argv[])
 	for (i = 0; i < j; i++) {
 		if (lseek(fd, people[i].pos, SEEK_SET) < 0) {
 			fprintf(stderr, "%s: %s: seek error: %s\n",
-					argv[0], argv[1], strerror(errno));
+				argv[0], argv[1], strerror(errno));
 			(void)close(fd);
 			return 1;
 		}
 
 		if (write(fd, &people[i], sizeof(people[i])) != sizeof(people[i])) {
 			fprintf(stderr, "%s: %s: write error: %s\n",
-					argv[0], argv[1], strerror(errno));
+				argv[0], argv[1], strerror(errno));
 			(void)close(fd);
 			return 1;
 		}
