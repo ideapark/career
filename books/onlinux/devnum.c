@@ -27,12 +27,12 @@ int main(int argc, char *argv[])
 		devtype = "block";
 	} else {
 		fprintf(stderr, "%s is not a block or character device\n",
-				argv[1]);
+			argv[1]);
 		exit(1);
 	}
 
 	printf("%s: major: %d, minor: %d\n", devtype,
-			major(sbuf.st_rdev), minor(sbuf.st_rdev));
+	       major(sbuf.st_rdev), minor(sbuf.st_rdev));
 
 	exit(0);
 }
