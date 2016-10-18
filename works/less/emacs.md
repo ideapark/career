@@ -4,6 +4,7 @@
 
 > Emacs Key Notation
 
+```
 +------------------------------------------------------------+
 | Prefix                     Meaning                         |
 +------------------------------------------------------------+
@@ -24,6 +25,7 @@
 +------------------------------------------------------------+
 | TAB        the TAB key                                     |
 +------------------------------------------------------------+
+```
 
 > Key Binding Remember Rules
 
@@ -96,6 +98,7 @@ bindings and command of prefix C-h.
 
 > Buffer
 
+```
 +------------------------------------------------------------+
 |  Key                  Binding                              |
 +------------------------------------------------------------+
@@ -112,9 +115,11 @@ bindings and command of prefix C-h.
 |             Kill a buffer. RET to kill the currently active|
 |             one                                            |
 +------------------------------------------------------------+
+```
 
 > Bookmark: Save Locations across Emacs Sessions
 
+```
 +------------------------------------------------------------+
 |  Key            Binding                                    |
 +------------------------------------------------------------+
@@ -130,6 +135,7 @@ bindings and command of prefix C-h.
 | C-x r l     Command: bookmark-bmenu-list                   |
 |             Open the list of all bookmarks.                |
 +------------------------------------------------------------+
+```
 
 > Basic Motion Commands
 
@@ -266,6 +272,7 @@ minor: displays the current minor mode.
 
 > Frame
 
+```
 +----------------------------------------------------------+
 |  Key            Binding                                  |
 +----------------------------------------------------------+
@@ -303,6 +310,7 @@ minor: displays the current minor mode.
 | C-x 5 r       Command: find-file-read-only-other-frame   |
 |               Open file for read only in another frame   |
 +----------------------------------------------------------+
+```
 
 > Window
 
@@ -326,6 +334,7 @@ C-x 4
 
 common prefix for opening things in other buffer.
 
+```
 +----------------------------------------------------------+
 |  Key            Binding                                  |
 +----------------------------------------------------------+
@@ -380,9 +389,11 @@ common prefix for opening things in other buffer.
 | M-<prior>   Command: scroll-other-window-down            |
 |             Scroll other window backward.                |
 +----------------------------------------------------------+
+```
 
 > Macro
 
+```
 +----------------------------------------------------------+
 |  Key             Binding                                 |
 +----------------------------------------------------------+
@@ -392,9 +403,11 @@ common prefix for opening things in other buffer.
 +----------------------------------------------------------+
 | F4 or C-x e    Playback macro                            |
 +----------------------------------------------------------+
+```
 
 > Versoin Control
 
+```
 +----------------------------------------------------------+
 |  Key                     Binding                         |
 +----------------------------------------------------------+
@@ -428,3 +441,4 @@ common prefix for opening things in other buffer.
 |             identical to the working revision (except for|
 |             keyword expansion)                           |
 +----------------------------------------------------------+
+```
