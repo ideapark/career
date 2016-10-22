@@ -333,7 +333,7 @@ using it?
 
 It turns out that we can (although as I mentioned earlier I'm not sure
 if James was consciously aware of it). XML has the property of being
-far more flexible in terms of introduction of semantic consructs than
+far more flexible in terms of introduction of semantic constructs than
 Java could ever hope to be. Don't worry, I'm not falling into the trap
 of using big words to describe incomprehensible concepts. This is
 actually a relatively simple idea, though it may take some effort to
@@ -356,7 +356,7 @@ copy.execute();
 
 The code is almost the same, albeit a little longer than the original
 XML. So what's different? The answer is that the XML snippet
-introduces a special semantic contruct for copying. If we could do it
+introduces a special semantic construct for copying. If we could do it
 in Java it would look like this:
 
 ```
@@ -366,7 +366,7 @@ copy("../new/dir")
 }
 ```
 
-Can you see the difference? The code above (it it possible in Java) is
+Can you see the difference? The code above (it is possible in Java) is
 a special operator for copying files - similar to a for loop or a new
 foreach construct introduced in Java 5. If we had an automatic
 converter from XML to Java it would likely produce the above
@@ -523,7 +523,7 @@ could translate above snippet to s-expressions like this:
 
 ```
 (copy
-    (todir "../new/dir"
+    (todir "../new/dir")
     (fileset (dir "src_dir")))
 ```
 
@@ -560,7 +560,7 @@ see nested lists):
 
 We could do the same with XML. Of course the line above isn't really a
 list, it's a tree, just like its XML-alternative. Don't let references
-to lists confuse you, its' just that lists that contain other lists
+to lists confuse you, it's just that lists that contain other lists
 and trees are effectively the same thing. Lisp may stand for Lisp
 Processing, but it's really tree processing - no different than
 processing XML nodes.
@@ -621,7 +621,7 @@ Anyone who has ever used such a tool knows what an amazing time saver
 it can be. In a few clicks you connect the tool to the database, get
 it to generate the data access layer source code, add the files to
 your project and voila - ten minutes worth of work do a better job
-than hundreds of man-huours that were required previously. What
+than hundreds of man-hours that were required previously. What
 happens if your database schema changes? Well, you just have to go
 through this short process again. Of course some of the best tools let
 you automate this - you simply add them as a part of your build step
@@ -651,13 +651,13 @@ access layers and COM stubs are written hundres, thousands of
 times. This is why there are tools for them. For similar pieces of
 code that repeat only a few times, or even a few dozen times, writing
 code generation tools isn't even considered. The trouble to create
-such a tool more often than not far outweighs the benefit of using
+such a tool more often than not far outweights the benefit of using
 one. If only creating such tools much easier, we could use them more
 often, and perhaps save many hours of our time. Let's see if we can
 accomplish this in a reasonable manner.
 
 Surprisingly C preprocessor comes to the rescue. We've all used it in
-C and C++. On occasion we all wish Java had it. We ust it to execute
+C and C++. On occasion we all wish Java had it. We use it to execute
 simple instructions at compile time to make small changes to our code
 (like selectively removing debug statements). Let's look at a quick
 example:
@@ -673,7 +673,7 @@ will be replaced with '5 + 5 + 5' and the resulting code will be
 compiled by the C compiler. We're really doing a very primitive
 version of code generation here. If only C preprocessor was a little
 more powerful and included ways to connect to the database and a few
-more simple constructs, we could use it to deveop our data access
+more simple constructs, we could use it to develop our data access
 layer right here, from within our program! Consider the following
 example that uses an imaginary extension of the C preprocessor:
 
@@ -702,7 +702,7 @@ well, it would have to support many libraries and language
 constructs. For example, if our generated code depended on some file
 located at some ftp server the preprocessor would have to be able to
 connect to ftp. It's a shame to create and learn a new language just
-to do this. Expecially since there are so many nice languages already
+to do this. Especially since there are so many nice languages already
 out here. Of course if we add a little creativity we can easily avoid
 this pitfall.
 
@@ -823,6 +823,7 @@ set(+, 1)     // the value of '-' is a built in minus function
               // so now symbol '+' equals to a minus funciton
 +(5, 4)       // since symbol '+' is equal to the minus funciton
               // this results in 1
+```
 
 I've used functions quite liberally in these examples buit I didn't
 describe them yet. A function in Lisp is just a data-type like an
@@ -839,6 +840,7 @@ fn [a]
 {
     return *(a, 2);
 }
+```
 
 This returns a function that takes a single parameter named 'a' and
 doubles it. Note that the function has no name but you can assign it
@@ -874,7 +876,7 @@ comments now):
 ```
 
 When a Lisp system encounters lists in the source code it acts exactly
-like Ant does when it encounters xML - it attempts to execute them. In
+like Ant does when it encounters XML - it attempts to execute them. In
 fact, Lisp source code is only specified using lists, just like Ant
 source code is the name of a function. The rest of the elements are
 treated as functions parameters. If one of the parameters is another
@@ -1041,7 +1043,7 @@ instance code that displays the item to the user.
 
 What benefits does this approach offer? We don't have to walk the
 list. The compiler will do it for us and will invoke appropriate
-macors. All we need to do is create the macros that convert our data
+macros. All we need to do is create the macros that convert our data
 to appropriate code!
 
 For example, a macro similar to our triple C macro we showed earlier
@@ -1090,7 +1092,7 @@ Domain Specific Languages
 In this article we've already encountered two domain specific
 languages: Ant (specific to dealing with project builds) and our
 unnamed mini-language for dealing with to-do lists. The difference is
-that Ant was written form scratch using XML, and XML parser, and Java
+that Ant was written from scratch using XML, and XML parser, and Java
 while our language is embedded into Lisp is easily created within a
 couple of minutes.
 
@@ -1120,8 +1122,8 @@ What's next?
 ------------
 
 Learning Lisp is an uphill battle. Even though in Computer Science
-terms Lisp is an acient language, few people to data figured out how
-to teach it well enough to make it accessible. Despite greate efforts
+terms Lisp is an acient language, few people today figured out how
+to teach it well enough to make it accessible. Despite great efforts
 by many Lisp advocates, learning Lisp today is still hard. The good
 news is that this won't reamain the case forever since the amount of
 Lisp-related resources is rapidly increasing. Time is on Lisp's side.
