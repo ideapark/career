@@ -27,7 +27,7 @@ public:
 	vma_node *insert(vma_node *&root, vma_node *node);
 	vma_node *rmnode(vma_node *&root);
 	void flat(const vma_node *root,
-		std::list<const vma_node *> &flat_tree) const;
+		  std::list<const vma_node *> &flat_tree) const;
 	void debug_print(const vma_node *root) const;
 
 private:

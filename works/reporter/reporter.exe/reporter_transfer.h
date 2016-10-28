@@ -16,7 +16,8 @@
 
 namespace reporter {
 
-class transfer {
+class transfer
+{
 public:
 	transfer(std::string data_dir, std::string image_dir,
 		 std::string output_dir, int cpu_frequency);

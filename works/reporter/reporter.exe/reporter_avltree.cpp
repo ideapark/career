@@ -176,7 +176,7 @@ vma_node *avl_tree::rightmost(vma_node *root)
 }
 
 void avl_tree::flat(const vma_node *root,
-		std::list<const vma_node *> &flat_tree) const
+		    std::list<const vma_node *> &flat_tree) const
 {
 	if (root == 0)
 		return;

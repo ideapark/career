@@ -45,7 +45,8 @@ namespace reporter {
 "    %f                         \n" \
 ");\n"
 
-class summary_info {
+class summary_info
+{
 public:
 	std::string data_dir;
 	std::string image_dir;
@@ -93,7 +94,8 @@ public:
 "    '%s'                     \n" \
 ");\n"
 
-class image_info {
+class image_info
+{
 public:
 	int image_private_key;
 	std::string unix_path;
@@ -135,7 +137,8 @@ public:
 "    %d                       \n" \
 ");\n"
 
-class event_info {
+class event_info
+{
 public:
 	int event_private_key;
 	std::string event_name;
@@ -191,7 +194,8 @@ public:
 "    %f                         \n" \
 ");\n"
 
-class process_info {
+class process_info
+{
 public:
 	int process_private_key;
 	int event_private_key;
@@ -257,7 +261,8 @@ public:
 "    %f                      \n" \
 ");\n"
 
-class task_info {
+class task_info
+{
 public:
 	int task_private_key;
 	int event_private_key;
@@ -313,7 +318,8 @@ public:
 "    %u                      \n" \
 ");\n"
 
-class func_info {
+class func_info
+{
 public:
 	int func_private_key;
 	int image_private_key;
@@ -374,7 +380,8 @@ public:
 "    %f                           \n" \
 ");\n"
 
-class callgraph_info {
+class callgraph_info
+{
 public:
 	int event_private_key;
 	int process_private_key;
@@ -421,7 +428,8 @@ public:
 "    %f                      \n" \
 ");\n"
 
-class cpu_slice {
+class cpu_slice
+{
 public:
 	int slice_index;
 	int event_private_key;
@@ -466,7 +474,8 @@ public:
 "    %d                          \n" \
 ");\n"
 
-class process_slice {
+class process_slice
+{
 public:
 	int slice_index;
 	int event_private_key;
@@ -515,7 +524,8 @@ public:
 "    %d                       \n" \
 ");\n"
 
-class task_slice {
+class task_slice
+{
 public:
 	int slice_index;
 	int event_private_key;
@@ -573,7 +583,8 @@ public:
 "    %d                       \n" \
 ");\n"
 
-class func_slice {
+class func_slice
+{
 public:
 	int slice_index;
 	int event_private_key;
@@ -636,7 +647,8 @@ public:
 "    %d                            \n" \
 ");\n"
 
-class callgraph_slice {
+class callgraph_slice
+{
 public:
 	int slice_index;
 	int event_private_key;
@@ -700,7 +712,8 @@ public:
 "    %f                        \n" \
 ");\n"
 
-class func_sample {
+class func_sample
+{
 public:
 	int func_private_key;
 	int event_private_key;
@@ -762,7 +775,8 @@ public:
 "    %d                           \n" \
 ");\n"
 
-class srcline_sample {
+class srcline_sample
+{
 public:
 	int event_private_key;
 	int process_private_key;
@@ -807,7 +821,8 @@ public:
 "    %lu                             \n" \
 ");\n"
 
-class process_imagefile {
+class process_imagefile
+{
 public:
 	int pid;
 	int image_private_key;
