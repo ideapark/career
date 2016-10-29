@@ -153,7 +153,9 @@ static Array *path_backtrace(Node *node, int dst)
 	return arr;
 }
 
-static Array *search(Node *current, int dst, Set *open_set, Set *close_set, void *ud)
+static Array *search(Node *current, int dst,
+		     Set *open_set, Set *close_set,
+		     void *ud)
 {
 	if (!current)
 		return NULL;
