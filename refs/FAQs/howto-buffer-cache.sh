@@ -1,6 +1,6 @@
 #!/bin/sh
 
-dd if=/dev/zero of=hugefile bs=1M count=100
+dd if=/dev/zero of=hugefile bs=1M count=1000
 
 # drop caches
 echo 3 | tee /proc/sys/vm/drop_caches
