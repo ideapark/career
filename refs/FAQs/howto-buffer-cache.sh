@@ -1,4 +1,4 @@
-# Linux buffer/cache HOWTO
+#!/bin/sh
 
 dd if=/dev/zero of=hugefile bs=2M count=1000
 
