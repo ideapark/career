@@ -58,7 +58,7 @@
 ;; expressions. In the above examples, 1 and 2 are atoms,
 ;; (+ 2 (+ 1 1)) and (+ 1 1) are symbolic expressions.
 
-;; From `Lis--interaction-mode` you can evaluate sexps.
+;; From `Lisp-interaction-mode` you can evaluate sexps.
 ;; Put the cursor right after the closing parenthesis then
 ;; hold down the control and hit the j keys ("C-j" for short).
 
@@ -68,47 +68,47 @@
 
 ;; `C-j` inserts the result of the evaluation in the buffer.
 
-;; `C-xC-e` displays the same result in Emacs bottom line,
-;; called the "minibuffer". We will generally use `C-xC-e`,
+;; `C-x C-e` displays the same result in Emacs bottom line,
+;; called the "minibuffer". We will generally use `C-x C-e`,
 ;; as we don't want to clutter the buffer with useless text.
 
 ;; `setq` stores a value into a variable:
 (setq my-name "Bastien")
-;; `C-xC-e` => "Bastien" (displayed in the mini-buffer)
+;; `C-x C-e` => "Bastien" (displayed in the mini-buffer)
 
 ;; `insert` will insert "Hello!" where the cursor is:
 (insert "Hello!")
-;; `C-xC-e` => "Hello!"
+;; `C-x C-e` => "Hello!"
 
 ;; We used `insert` with only one argument "Hello!", but
 ;; we can pass more arguments -- here we use two:
 
 (insert "Hello" " world!")
-;; `C-xC-e` => "Hello world!"
+;; `C-x C-e` => "Hello world!"
 
 ;; You can use variables instead of strings:
 (insert "Hello, I am " my-name)
-;; `C-xC-e` => "Hello, I am Bastien"
+;; `C-x C-e` => "Hello, I am Bastien"
 
 ;; You can combine sexps into functions:
 (defun hello () (insert "Hello, I am " my-name))
-;; `C-xC-e` => hello
+;; `C-x C-e` => hello
 
 ;; You can evaluate functions:
 (hello)
-;; `C-xC-e` => Hello, I am Bastien
+;; `C-x C-e` => Hello, I am Bastien
 
 ;; The empty parentheses in the function's definition means that
 ;; it does not accept arguments. But always using `my-name` is
 ;; boring, let's tell the function to accept one argument (here
 ;; the argument is called "name"):
 (defun hello (name) (insert "Hello " name))
-;; `C-xC-e` hello
+;; `C-x C-e` hello
 
 ;; Now let's call the function with the string "you" as the value
 ;; for its unique argument:
 (hello "you")
-;; `C-xC-e` => "Hello you"
+;; `C-x C-e` => "Hello you"
 
 ;; Yeah!
 
@@ -119,24 +119,24 @@
 ;; Now switch to a new buffer named "*test*" in another window:
 
 (switch-to-buffer-other-window "*test*")
-;; `C-xC-e`
+;; `C-x C-e`
 ;; => [screen has two windows and cursor is in the *test* buffer]
 
 ;; Mouse over the top window and left-click to go back. Or you can
-;; use `C-xo` (i.e. hold down control-x and hit o) to go to the other
+;; use `C-x o` (i.e. hold down control-x and hit o) to go to the other
 ;; window interactively.
 
 ;; You can combine several sexps with `progn`
 (progn
   (switch-to-buffer-other-window "*test*")
   (hello "you"))
-;; `C-xC-e`
+;; `C-x C-e`
 ;; => [The screen has two windows and cursor is in the *test* buffer]
 
-;; Now if you don't mind, I'll stop asking you to hit `C-xC-e`: do it
+;; Now if you don't mind, I'll stop asking you to hit `C-x C-e`: do it
 ;; for every sexp that follows.
 
-;; Always go back to the *scratch* buffer with mouse or `C-xo`.
+;; Always go back to the *scratch* buffer with mouse or `C-x o`.
 
 ;; It's often useful to earse the buffer:
 (progn
@@ -177,9 +177,9 @@
 (defun greeting (name)
   (let ((your-name "Bastien"))
     (insert (format "Hello %s!\n\nI am %s."
-		    name ; the argument of the function
-		    your-name ; the let-bound variable "Bastien"
-		    ))))
+                    name ; the argument of the function
+                    your-name ; the let-bound variable "Bastien"
+                    ))))
 
 ;; And evaluate it:
 (greeting "you")
@@ -193,9 +193,9 @@
 (defun greeting (from-name)
   (let ((your-name (read-from-minibuffer "Enter your name: ")))
     (insert (format "Hello!\n\nI am %s and you are %s."
-		    from-name  ; the argument of the function
-		    your-name  ; the let-bound var, entered at prompt
-		    ))))
+                    from-name  ; the argument of the function
+                    your-name  ; the let-bound var, entered at prompt
+                    ))))
 
 (greeting "Bastien")
 
@@ -298,8 +298,8 @@
   (goto-char (point-min))
   (while (re-search-forward "Bonjour \\(.+\\)!" nil 't)
     (add-text-properties (match-beginning 1)
-			 (match-end 1)
-			 (list 'face 'bold)))
+                         (match-end 1)
+                         (list 'face 'bold)))
   (other-window 1))
 
 ;; This functions introduces `re-search-forward`: instead of
