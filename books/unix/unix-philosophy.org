@@ -10,11 +10,15 @@ Separate policy from mechanism; separate interfaces from engines
 ** Rule of Simplicity
 Design for simplicity; add complexity only where you must
 ** Rule of Parsimony
-Write a big program only when it is clear by demonstration that nothing else will do
+Write a big program only when it is clear by demonstration that nothing else
+will do
 ** Rule of Transparency
 Design for visibility to make inspection and debuging easier
 ** Rule of Robustness
 Robustness is the child of transparency and simplicity
+Software is transparent when you can look at it and immediately see what
+is going on. It is simple when what is going on is uncomplicated enough
+for a human brain to reason about all the potential cases without strain.
 ** Rule of Representation
 Fold knowledge into data, so program logic can be stupid and robust
 ** Rule of Least Surprise
@@ -22,7 +26,8 @@ In interface design, always do the least surprising thing
 ** Rule of Silence
 When a program has nothing surprising to say, it should say nothing
 ** Rule of Repair
-Repair what you can -- but when you must fail, fail noisily and as soon as possible
+Repair what you can -- but when you must fail, fail noisily and as soon as
+possible
 ** Rule of Economy
 Programmer time is expensive; conserve it in preference to machine time
 ** Rule of Generation
@@ -33,3 +38,6 @@ Prototype before polishing. Get it working before you optimize it
 Distrust all claims for one true way
 ** Rule of Extensibility
 Design for the future, because it will be here sooner than you think
+
+* KISS
+Keep It Simple, Stupid!
