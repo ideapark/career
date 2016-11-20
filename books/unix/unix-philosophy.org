@@ -40,4 +40,14 @@ Distrust all claims for one true way
 Design for the future, because it will be here sooner than you think
 
 * KISS
-Keep It Simple, Stupid!
+** Keep It Simple, Stupid!
+* Applying the Unix Philosophy
+** Everything that can be a source- and destination-independent filter should be one
+** Data streams should if at all possible be textual (so they can be viewed and filtered with standard tools)
+** Database layouts and application protocols should if at all possible be textual (human-readable and human-editable)
+** Complex front ends (user interfaces) should be cleanly separated from complex back ends
+** Whenever possible, prototype in an interpreted language before coding C
+** Mixing languages is better than writing everthing in one, if and only if using only that one is likely to overcomplicate the program
+** Be generous in what you accept, rigorous in what you emit
+** When filtering, never throw away information you don't need to
+** Small is beautiful. Write programs that do as little as is consistent with getting the job done
