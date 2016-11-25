@@ -2,43 +2,45 @@
 #+AUTHOR: Zhou Peng
 #+EMAIL: lockrecv@qq.com
 
+[[file:emacs.png]]
+
 * C/C++ programming
 ** coding
-- auto completion
-- indent/format
-- hightlight
-- searching
-- find file
-- find reference
-- find tags
-- jump to header/source file
+  - auto completion
+  - indent/format
+  - hightlight
+  - searching
+  - find file
+  - find reference
+  - find tags
+  - jump to header/source file
 ** compile
-- jump error to source
-- recompile
+  - jump error to source
+  - recompile
 ** debug
-- gdb
-- source window
-- register window
-- stack window
-- thread window
+  - gdb
+  - source window
+  - register window
+  - stack window
+  - thread window
 ** version control
-- checkout
-- commit
-- diff
-- blame
-- log
+  - checkout
+  - commit
+  - diff
+  - blame
+  - log
 * Documentation
 ** org-mode
-- todo
+  - todo
 
 *** DONE Prepare a orgmode notes
     CLOSED: [2016-11-25 Fri 00:03]
 *** TODO Emacser time
 *** TODO Q/A
 
-- figures
+  - figures
 
-#+BEGIN_SRC ditaa :file ditaa-seqboxes.png
+#+BEGIN_SRC ditaa :file ditaa.png :cmdline -r -s 0.8
 +------+  +-----+  +-----+  +-----+
 |{io}  |  |{d}  |  |{s}  |  |cBLU |
 | Foo  +--+ Bar +--+ Baz +--+ Moo |
@@ -52,7 +54,7 @@
                             +------+
 #+END_SRC
 
-- table
+  - table
 
 | Company | Address  | Stuff | Industry |
 |---------+----------+-------+----------|
@@ -61,19 +63,19 @@
 | Alibaba | Hangzhou | 20000 | IT       |
 
 ** markdown
-- syntax hightlight
+  - syntax hightlight
 * Misc
 ** browser
-- builtin eww
-- host's default browser
+  - builtin eww
+  - host's browser
 ** ssh
-- remote access
+  - remote access
 ** shell
-- local access
+  - local access
 ** theme
-- dark
-- light
-- more
+  - dark
+  - light
+  - more
 ** pdf
-- view
-- export
+  - view
+  - export
