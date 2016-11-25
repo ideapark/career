@@ -37,7 +37,7 @@ inline std::string to_dbname(long l_t)
 	char buffer[64];
 	time_t time = l_t;
 
-	strftime(buffer, 128, "aps-%Y%m%e%H%M%S.db", localtime(&time));
+	strftime(buffer, 64, "aps-%Y%m%e%H%M%S.db", localtime(&time));
 
 	return std::string(buffer);
 }
