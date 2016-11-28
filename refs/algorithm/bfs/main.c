@@ -93,7 +93,7 @@ static int across_predicate(const struct point *p)
 int print_node(struct list_head *node_head)
 {
 	int y, x;
-	char PG[Y_MAX][X_MAX];	
+	char PG[Y_MAX][X_MAX];
 
 	for (y = 0; y < GRAPH_Y; y++)
 		for (x = 0; x < GRAPH_X; x++)
