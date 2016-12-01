@@ -1,6 +1,6 @@
-* What is the advantage of using zero-length arrays in C?
+#+AUTHOR: Robert Love
 
-Robert Love
+* What is the advantage of using zero-length arrays in C?
 
 Zero-length arrays, also known as flexible arrays, are used to
 implement variable-length arrays, primariy in structures.
@@ -8,14 +8,14 @@ implement variable-length arrays, primariy in structures.
 That's a little confusing, so let's look at an example, Say you wanted
 a structure to represent an email:
 
-#SRC_START
+#+BEGIN_SRC c
 struct email {
   time_t send_date;
   int flags;
   int length;
   char body[EMAIL_BODY_MAX];
 };
-#SRC_END
+#+END_SRC
 
 This structure has a problem: Each structure consumes those
 EMAIL_BODY_MAX bytes, even if you have a one-word email. Unfortunately
@@ -27,21 +27,21 @@ we'd prefer not to impose one.
 
 Zero-length arrays solve this:
 
-#SRC_START
+#+BEGIN_SRC c
 struct email {
   time_t send_date;
   int flags;
   int length;
   char body[];
 };
-#SRC_END
+#+END_SRC
 
 If you allocated this structure the usual way, you'd see body doesn't
 consume any memory:
 
-#SRC_START
+#+BEGIN_SRC c
 struct email *email = malloc(sizeof(struct email));
-#SRC_END
+#+END_SRC
 
 Here, body is zero-length. You can't legally access any memory at
 body. In fact, on Linux/x86-32 this structure is just 12 bytes in
@@ -49,11 +49,11 @@ length, the size of the first three fields.
 
 But that isn't how you'd allocate these. Instead, you'd do this:
 
-#SRC_START
+#+BEGIN_SRC c
 /* we have an email of email_length bytes... */
 struct email *email = malloc(sizeof(struct email) + email_length);
 email->length = email_length;
-#SRC_END
+#+END_SRC
 
 Voila. We now have a structure with an extra length bytes on the
 end. You can access body as if it were the length-byte array
@@ -71,7 +71,7 @@ even computer boundaries. For example, I used a zero-length array in
 the Linux kernel's implementation of inotify. It was actually the
 first zero-length array I had ever seen!
 
-#SRC_START
+#+BEGIN_SRC c
 struct inotify_event {
   int wd;
   uint32_t mask;
@@ -79,7 +79,7 @@ struct inotify_event {
   uint32_t len;
   char name[];
 };
-#SRC_END
+#+END_SRC
 
 This structure represents an inotify event, which is an action such as
 was written to and a target filename such as /home/rlove/wolf.txt. You
