@@ -1,0 +1,82 @@
+* Unix Textual File Format Conventions
+** One record per newline-terminated line, if possible.
+ - This makes it easy to extract records with text-stream tools. For data
+   interchange with other operating systems, it's wise to make your file-format
+   parser indifferent to whether the line ending is LF or CR-LF. It's also
+   conventional to ignore trailing whitespace in such formats; this protects
+   against common editor bobbles.
+
+** Less than 80 characters per line, if possible.
+ - This makes the format browseable in an ordinary-sized terminal window. If
+   many records must be longer than 80 characters, consider a stanza format.
+
+** Use # as an introducer for comments.
+ - It is good to have a way to embed annotations and comments in data files.
+   It's best if they're actually part of the file structure, and so will be
+   preserved by tools that know its format. For comments that are not preserved
+   during parsing, # is the conventional start character.
+
+** Support the backslash convention.
+ - The least surprising way to support embedding nonprintable control characters
+   is by parsing C-like backslash escapes -- \n for a newline, \r for a carriage
+   return, \t for a tab, \b for backspace, \f for formfeed, \e for ASCII escape
+   (27), \nnn or \onnn or \0nnn for the character with octal value nnn, \\ for a
+   literal backslash. A newer convention, but one worth following, is the use of
+   \unnnn for a hexadecimal Unicode literal.
+
+** In one-record-per-line formats, use colon or any run of whitespace as a field separator.
+ - The colon convention seems to have originated with the Unix password file. If
+   your fields must contain instances of the separator(s), use a backslash as
+   the prefix to escape them.
+
+** Do not allow the distinction between tab and whitespace to be significant.
+ - This is recipe for serious headaches when the tab settings on your users'
+   editors are different; more generally, it's confusing to the eye. Using tab
+   alone as a field separator is espeially likely to cause problems; allowing
+   any run of tabs and spaces to be a field separator, on the other hand, works
+   well.
+
+** Favor hex over octal.
+ - Hex-digit pairs and quads are easier to eyeball-map into bytes and today's
+   32- and 64-bit words than octal digits of three bits each; also marginally
+   more efficient. This rule needs emphasizing because some older Unix tools
+   such as od violate it; that's a legacy from the instruction field sizes in
+   the machine languages of older PDP minicomputers.
+
+** For complex records, use a 'stanza' format.
+ - multiple lines per record, with a record separator line of %%\n or %\n. The
+   separators make userful visual boundaries for human beings eyeballing the
+   file.
+
+** In stanza formats
+ - either have one record field per line or use a record format resembling RFC
+   822 electronic-mail headers, with colon-terminated field-name keywords
+   leading fields. The second choice is appropriate when fields are often either
+   absent or longer than 80 characters, or when records are sparse (e.g. often
+   with empty fields).
+
+** In stanza formats, support line continuation.
+ - When interpreting the file, either discard backslash followed by whitespace
+   or interpret newline followed by whitespace equivalently to a single space,
+   so that a long logical line can be folded into short (easily editable!)
+   physical lines. It's also conventional to ignore trailing whitespace in these
+   formats; this convention protects against common editor bobbles.
+
+** Either include a version number or design the format as self-describing chunks independent of each other.
+ - If there is even the faintest possibility that the format will have to be
+   changed or extended, include a version number so your code can conditionally
+   do the right thing on all versions. Alternatively, design the format as
+   self-describing chunks so that you can add new chunk types without instantly
+   breaking old code.
+
+** Beware of floating-point round-off problems.
+- Conversion of floating-point numbers from binary to text format and back can
+  lose precision, depending on the quality of the conversion library you are
+  using. If the structure you are marshaling/unmarshaling contains floating
+  point, you should test the conversion in both directions. If it looks
+  conversion in either direction is subject to roundoff errors, be prepared to
+  dump the floating-point field as raw binary instead, or a string encoding
+  thereof. If your're coding in C or some language that has access to C
+  printf/scanf, the C99 %a specifier may solve this problem.
+
+** Don't bother compressing or binary-encoding just part of the file.
