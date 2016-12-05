@@ -1,0 +1,24 @@
+* When designing filters, it is well to bear in mind some rules
+** Be generous in what you accept, rigorous in what you emit
+This is, try to accept as loose and sloppy an input format as you can and emit
+as well-structured and tight an output format as you can. Doing the former
+reduces the odds that the filter will be brittle in the face of unexpected
+inputs, and break in someone's hand (or in the middle of someone's toolchain).
+Doing the latter increases the odds that your filter will someday be useful as
+an input to other programs.
+
+** When filtering, never throw away information you don't need to
+This, too, increases the odds that your filter will someday be useful as an
+input to other programs. Information you discard is information that no later
+state in a pipeline can use.
+
+** When filtering, never add noise
+Avoid adding non-essential information, and avoid reformating in ways that
+minght make the output more difficult for downstream programs to parse. The most
+common offenders are cosmetic touches like headers, footers, blank/ruler lines,
+summaries and conversions like adding aligned columns, or writing a factor of
+"1.5" as "150%". Times and dates are a particular bother beacuse they're hard
+for downstream programs to parse. Any such additions should be optional and
+controlled by switches. If your program emits dates, it's good practiceto have a
+switch that can force them into ISO8601 YYYY-MM-DD and hh:mm:ss formats -- or,
+better yet, use those by default.
