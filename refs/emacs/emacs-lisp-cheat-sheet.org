@@ -1,0 +1,188 @@
+#+TITLE: Emacs Lisp Cheat Sheet
+#+AUTHOR: wikemacs.org/wiki/Emacs_Lisp_Cheat_Sheet
+#+EMAIL: lockrecv@qq.com
+
+* Contents
+** Special form
+** Standard Library
+- Number
+- String and Character
+- List
+- Vector
+- Sequence
+- Hash Tables
+- Symbols
+- Minibuffer
+- Keymaps
+- File
+- Buffer
+- Windows
+- Frames
+- Positions
+- Marker
+- Text
+- Searching and Matching
+- Processes
+- System Interface
+- Display
+** Third party libraries
+- s.el, a string manipulation library
+- dash.el, a modern list library
+- m-buffer.el, functions for operating over the contents of Emacs buffers
+
+* Special form
+special form has its own rule for which arguments are evaluated
+
+				  Special form
+| Purpose                | Forms                                                    |
+|------------------------+----------------------------------------------------------|
+| Definition             | defconst defun defvar                                    |
+| Binding                | let let* function                                        |
+| Conditional evaluation | and cond if or                                           |
+| Sequential evaluation  | prog1 prog2 progn                                        |
+| Iteration              | while function                                           |
+| Syntatic extension     | defmacro                                                 |
+| Quoting                | quote                                                    |
+| Assignment             | setq setq-default                                        |
+| Nonlocal Exits         | catch condition-case unwind-protect                      |
+| Save                   | save-current-buffer save-excursion save-window-excursion |
+| Other                  | interactive track-mouse with-output-to-temp-buffer       |
+
+* Standard Library
+Including function, variable, command, option, macro, Special Form
+** Number
+Emacs supports two numeric data types: integers and floating point numbers
+
+		      Number related function and Variable
+| Category               | Functions Variable                             |
+|------------------------+------------------------------------------------|
+| Integer Basic          | most-positive-fixnum most-negative-fixnum      |
+| Floating Point Basic   | logb float-e float-pi                          |
+| Type Predicate Test    | floatp integerp numberp wholenump zerop        |
+| Comparison             | \= eql /= < <= > >= max min abs                |
+| Conversions            | float truncate floor ceiling round             |
+| Arithmetic Operations  | 1+ 1- + - * / % mod                            |
+| Rounding Operations    | ffloor fceiling ftruncate fround               |
+| Bitwise Operations     | lsh ash logand logior logxor lognot            |
+| Mathematical Functions | sin cos asin acos atan exp log log10 expt sqrt |
+| Random Numbers         | random                                         |
+
+** String and Character
+A string in Emacs Lisp is an array that contains an ordered sequence of characters
+
+	       String and Character related function and Variable
+| Category               | Functions Variable                                                                                                                                                                                                 |
+|------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Predicates for Strings | stringp string-or-null-p char-or-string-p                                                                                                                                                                          |
+| Creating Strings       | make-string string substring substring-no-properties concat split-string split-string-default-separators                                                                                                           |
+| Modifying Strings      | store-substring clear-string                                                                                                                                                                                       |
+| Comparison             | char-equal string= string-equal string< string-lessp compare-strings assoc-string                                                                                                                                  |
+| Conversion             | number-to-string string-to-number char-to-string string-to-char                                                                                                                                                    |
+| Formatting Strings     | format                                                                                                                                                                                                             |
+| Case Conversion        | downcase upcase capitalize upcase-initials                                                                                                                                                                         |
+| The Case Table         | case-table-p set-standard-case-table standard-case-table current-case-table set-case-table with-case-table ascii-case-table set-case-syntax-pair set-case-syntax-delims set-case-syntax descirbe-buffer-case-table |
+Tip: you can also use a modern string manipulation library with 's.el'
+
+** List
+Lists are built up from cons cells
+
+		       List related function and Variable
+| Category                | Functions Variable                                                                                                                    |
+|-------------------------+---------------------------------------------------------------------------------------------------------------------------------------|
+| List-related Predicates | consp atom listp nlistp null                                                                                                          |
+| List Elements           | car cdr car-safe cdr-safe pop nth nthcdr last safe-length caar cadr butlast nbutlast                                                  |
+| Building Lists          | cons list make-list append reverse copy-tree number-sequence                                                                          |
+| List Variables          | push add-to-list add-to-ordered-list                                                                                                  |
+| Modifying Lists         | setcar setcdr nconc nreverse sort                                                                                                     |
+| Sets and Lists          | memq delq remq memql member delete remove member-ignore-case delete-dups                                                              |
+| Association Lists       | assoc rassoc sassq rassq assoc-default copy-alist assq-delete-all rassq-delete-all                                                    |
+| Rings                   | make-ring ring-p ring-size ring-length ring-elements ring-copy ring-empty-p ring-ref ring-insert ring-remove ring-insert-at-beginning |
+Tip: You can benefit from a modern list manipulation api with dash.el
+
+** Vector
+		      Vector related function and Variable
+| Category         | Functions Variable                 |
+|------------------+------------------------------------|
+| Vector Functions | vectorp vector make-vector vconcat |
+| Bool-vectors     | make-bool-vector bool-vector-p     |
+
+** Sequence
+sequence type is the union of two other Lisp types: lists and arrays. While
+array has four types, all one-dimensional: strings, vectors, bool-vectors,
+char-tables.
+
+		     Sequence related function and Variable
+| Category           | Functions Variable                                                                                                                                                                           |
+|--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Sequence Functions | sequencep length elt copy-sequence                                                                                                                                                           |
+| Array Functions    | arrayp aref aset fillarray                                                                                                                                                                   |
+| Char-Tables        | make-char-table char-table-p char-table-subtype char-table-parent set-char-table-parent char-table-extra-slot set-char-table-extra-slot char-table-range set-char-table-range map-char-table |
+
+** Hash Tables
+		   Hash Tables related function and Variable
+| Category      | Functions Variable                                                                                                                                   |
+|---------------+------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Creating Hash | make-hash-table makehash                                                                                                                             |
+| Hash Access   | gethash puthash remhash clrhash maphash                                                                                                              |
+| Defining Hash | define-hash-table-test sxhashsxhash                                                                                                                  |
+| Other Hash    | hash-table-p copy-hash-table hash-table-count hash-table-test hash-table-weakness hash-table-rehash-size hash-table-rehash-threshold hash-table-size |
+
+** Symbols
+		     Symbols related function and Variable
+| Category               | Functions Variable                                                                         |
+|------------------------+--------------------------------------------------------------------------------------------|
+| Predicates for symbols | symbolp                                                                                    |
+| Creating Symbols       | symbol-name make-symbol intern intern-soft obarray mapatoms unintern                       |
+| Property Lists         | symbol-plist setplist get put plist-get plist-put lax-plist-get lax-plist-put plist-member |
+
+** Minibuffer
+A minibuffer is a special buffer that Emacs commands use to read arguments more
+complicated than the single numeric prefix argument.
+
+		    Minibuffer related function and Variable
+| Category               | Functions Variable                                                                                                                                                                                                                                                                                                                                                                                                             |
+|------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Text from Minibuffer   | read-from-minibuffer read-string read-regexp minibuffer-allow-text-properties minibuffer-local-map read-no-blanks-input minibuffer-local-ns-map                                                                                                                                                                                                                                                                                |
+| Object from Minibuffer | read-minibuffer eval-minibuffer edit-and-eval-command                                                                                                                                                                                                                                                                                                                                                                          |
+| Minibuffer History     | add-to-history history-add-new-input history-length history-delete-duplicates minibuffer-history query-replace-history file-name-history buffer-name-history regexp-history extended-command-history shell-command-history read-expression-history                                                                                                                                                                             |
+| Basic Completion       | try-completion all-completions test-completion completion-boundaries completion-ignore-case completion-regexp-list lazy-completion-table completion-in-region                                                                                                                                                                                                                                                                  |
+| Minibuffer Completion  | completing-read                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Completion Commands    | minibuffer-completion-table minibuffer-completion-predicate minibuffer-completion-confirm minibuffer-confirm-exit-commands minibuffer-complete-word minibuffer-complete minibuffer-complete-and-exit minibuffer-completion-help display-completion-list completion-auto-help minibuffer-local-completion-map minibuffer-local-must-match-map minibuffer-local-filename-completion-map minibuffer-local-filename-must-match-map |
+| High-Level Completion  | read-buffer read-buffer-function read-buffer-completion-ignore-case read-command read-variable read-color                                                                                                                                                                                                                                                                                                                      |
+| Reading File Names     | read-file-name read-file-name-function read-file-name-completion-ignore-case read-directory-name insert-default-directory read-shell-command minibuffer-local-shell-command-map                                                                                                                                                                                                                                                |
+| Completion Styles      | completion-styles completion-alist                                                                                                                                                                                                                                                                                                                                                                                             |
+| Programmed Completion  | completion-table-dynamic completion-annotate-function                                                                                                                                                                                                                                                                                                                                                                          |
+| Yes-or-No-Queries      | y-or-n-p y-or-n-p-with-timeout yes-or-no-p                                                                                                                                                                                                                                                                                                                                                                                     |
+| Multiple Queries       | map-y-or-n-p                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Reading a Password     | read-passwd                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| Minibuffer Commands    | exit-minibuffer self-insert-and-exit previous-history-element next-history-element previous-matching-history-element next-matching-history-element                                                                                                                                                                                                                                                                             |
+| Minibuffer Contents    | minibuffer-prompt minibuffer-prompt-end minibuffer-prompt-width minibuffer-contents minibuffer-contents-no-properties minibuffer-completion-contents delete-minibuffer-contents                                                                                                                                                                                                                                                |
+| Minibuffer Windows     | active-minibuffer-window minibuffer-window set-minibuffer-window window-minibuffer-p minibuffer-window-active-p                                                                                                                                                                                                                                                                                                                |
+| Recursive Mini         | minibuffer-depth enable-recursive-minibuffers                                                                                                                                                                                                                                                                                                                                                                                  |
+| Minibuffer Miscellany  | minibufferp minibuffer-setup-hook minibuffer-exit-hook minibuffer-help-form minibuffer-scroll-window minibuffer-selected-window max-mini-window-height                                                                                                                                                                                                                                                                         |
+
+** Keymaps
+		     Keymaps related function and Variable
+| Category                       | Functions Variable                                                                                                                                                                                                                                                                      |
+|--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Key Sequence                   | kbd                                                                                                                                                                                                                                                                                     |
+| Format of Keymaps              | keymapp                                                                                                                                                                                                                                                                                 |
+| Creating Keymaps               | make-sparse-keymap make-keymap copy-keymap                                                                                                                                                                                                                                              |
+| Inheritance and Keymaps        | keymap-parent set-keymap-parent                                                                                                                                                                                                                                                         |
+| Prefix Keys                    | define-prefix-command                                                                                                                                                                                                                                                                   |
+| Active Keymaps                 | current-active-maps key-binding                                                                                                                                                                                                                                                         |
+| Controlling the Active Keymaps | global-map current-global-map current-local-map current-minor-mode-maps use-global-map use-local-map minor-mode-map-alist minor-mode-overriding-map-alist overriding-local-map overriding-terminal-local-map overriding-local-map-menu-flag special-event-map emulation-mode-map-alists |
+| Functions for Key Lookup       | lookup-key undefined local-key-binding global-key-binding minor-mode-key-binding meta-prefix-char                                                                                                                                                                                       |
+| Changing Key Bindings          | define-key substitute-key-definition suppress-keymap                                                                                                                                                                                                                                    |
+| Remapping Commands             | command-remapping                                                                                                                                                                                                                                                                       |
+| Translation Keymaps            | input-decode-map local-function-key-map key-translation-map                                                                                                                                                                                                                             |
+| Key Binding Commands           | global-set-key global-unset-key local-set-key local-unset-key                                                                                                                                                                                                                           |
+| Scanning Keymaps               | accessible-keymaps map-keymap where-is-internal describe-bindings                                                                                                                                                                                                                       |
+| Menu Keymaps                   | keymap-prompt                                                                                                                                                                                                                                                                           |
+| Menus and the Keyboard         | menu-prompt-more-char                                                                                                                                                                                                                                                                   |
+| Menu Bar                       | menu-bar-final-items menu-bar-update-hook                                                                                                                                                                                                                                               |
+| Tool Bar                       | tool-bar-map tool-bar-add-item tool-bar-add-item-from-menu tool-bar-local-item-from-menu auto-resize-tool-bars auto-raise-tool-bar-buttons tool-bar-button-margin tool-bar-relief tool-bar-border                                                                                       |
+| Modifying Menus                | define-key-after                                                                                                                                                                                                                                                                        |
+
+** File
+See: f.el, a modern library for working with files and directories.
