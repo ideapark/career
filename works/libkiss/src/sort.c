@@ -5,7 +5,7 @@
 
 #include "../include/kiss.h"
 
-static void swap(char *str, int i, int j)
+static inline void swap(char *str, int i, int j)
 {
 	char temp;
 
