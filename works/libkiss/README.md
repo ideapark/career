@@ -1,19 +1,16 @@
-LIBKISS
-=======
+# LIBKISS
 
 - Author: Zhou Peng
 - Email: lockrecv@qq.com
 - License: MIT
 
-Philosophy
-==========
+# Philosophy
 
 - Keep It Simple Stupid
 - Easy to Use
 - Similar with Standard Unix Tools
 
-Introduction
-============
+# Introduction
 
 I am a Unix philosophy follower, like bash, ssh, git, diff, uniq, cut,
 grep, ..., are so elegent. I am trying to implement some of them very
