@@ -3,16 +3,16 @@
 # 1 "hello.c"
 # 1 "c:\\mingw\\include\\stdio.h" 1 3
 # 26 "c:\\mingw\\include\\stdio.h" 3
-       
+
 # 27 "c:\\mingw\\include\\stdio.h" 3
 # 1 "c:\\mingw\\include\\_mingw.h" 1 3
 # 33 "c:\\mingw\\include\\_mingw.h" 3
-       
+
 # 34 "c:\\mingw\\include\\_mingw.h" 3
 
 # 1 "c:\\mingw\\include\\sdkddkver.h" 1 3
 # 26 "c:\\mingw\\include\\sdkddkver.h" 3
-       
+
 # 27 "c:\\mingw\\include\\sdkddkver.h" 3
 # 36 "c:\\mingw\\include\\_mingw.h" 2 3
 # 306 "c:\\mingw\\include\\_mingw.h" 3
@@ -261,7 +261,7 @@ typedef long long fpos_t;
 # 520 "c:\\mingw\\include\\stdio.h" 3
 # 1 "c:\\mingw\\include\\sys\\types.h" 1 3
 # 26 "c:\\mingw\\include\\sys\\types.h" 3
-       
+
 # 27 "c:\\mingw\\include\\sys\\types.h" 3
 
 

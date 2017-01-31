@@ -4,14 +4,14 @@
 
 int floatcmp(const void *p1, const void *p2)
 {
-	float x = *(float *)p1;
-	float y = *(float *)p2;
-	return (x < y) ? -1 : ((x == y) ? 0 : 1);
+        float x = *(float *)p1;
+        float y = *(float *)p2;
+        return (x < y) ? -1 : ((x == y) ? 0 : 1);
 }
 
 int main(void)
 {
-	float *pNumbers = malloc(ARR_LEN * sizeof(float));
-	qsort(pNumbers, ARR_LEN, sizeof(float), floatcmp);
-	return 0;
+        float *pNumbers = malloc(ARR_LEN * sizeof(float));
+        qsort(pNumbers, ARR_LEN, sizeof(float), floatcmp);
+        return 0;
 }
