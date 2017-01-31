@@ -35,12 +35,14 @@ static int on_gamestart(cJSON *body)
 {
 	logger_error("%s\n", "player: game start.");
 	cJSON *id = cJSON_GetObjectItem(body, "id");
+
 	if (id->type == cJSON_Number) {
 		teamid = id->valueint;
 	} else {
 		logger_error("%s\n", "game start get my team id error.");
 		return -1;
 	}
+
 	/*
 	 * register player's team name
 	 */
@@ -61,12 +63,14 @@ static int on_gameover(cJSON *body)
 {
 	logger_error("%s\n", "player: game over.");
 	cJSON *message = cJSON_GetObjectItem(body, "message");
+
 	if (message->type == cJSON_String)
 		logger_info("player: team %hi, game over: %s\n", teamid,
 			    message->valuestring);
 	else
 		logger_error("player: team %hi, %s\n", teamid,
 			     "server said game over but did not say goodby.");
+
 	return 0;
 }
 
@@ -130,11 +134,14 @@ int main(int argc, char *argv[])
 	char buf[BUFFER_MAX+1] = {'\0'};
 	while (read(sockfd, buf, BUFFER_MAX) > 0) {
 		cJSON *root = cJSON_Parse(buf);
+
 		if (root == NULL) {
 			logger_error("%s\n", "server JSON message invalid.");
 			break;
 		}
+
 		cJSON *head, *body;
+
 		if (cJSON_HasObjectItem(root, "head") && cJSON_HasObjectItem(root, "body")) {
 			head = cJSON_GetObjectItem(root, "head");
 			body = cJSON_GetObjectItem(root, "body");
@@ -143,6 +150,7 @@ int main(int argc, char *argv[])
 			cJSON_Delete(root);
 			break;
 		}
+
 		if (strcmp(head->valuestring, GAME_START) == 0)
 			on_gamestart(body);
 		else if (strcmp(head->valuestring, LEG_START) == 0)

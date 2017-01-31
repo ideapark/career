@@ -32,10 +32,12 @@ int link_open(const char *port)
 		logger_error("link_open: %s\n", strerror(errno));
 		return -1;
 	}
+
 	if (listen(server_socket, 5) != 0) {
 		logger_error("link_open: %s\n", strerror(errno));
 		return -1;
 	}
+
 	return 0;
 }
 
@@ -52,9 +54,11 @@ int link_accept(void)
 	int client_socket;
 
 	client_socket = accept(server_socket, (struct sockaddr *)&client_addr, &len);
+
 	if (client_socket == -1) {
 		logger_error("link_accept: %s\n", strerror(errno));
 		return -1;
 	}
+
 	return client_socket;
 }

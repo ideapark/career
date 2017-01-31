@@ -35,6 +35,7 @@ int map_load(const char *map)
 	short map_y, map_x;
 	fscanf(f, "%hi", &map_y);
 	fscanf(f, "%hi", &map_x);
+
 	if (map_y != Y_MAX || map_x != X_MAX) {
 		logger_error("%s\n", "map Y or X does NOT match expected.");
 		fclose(f);
