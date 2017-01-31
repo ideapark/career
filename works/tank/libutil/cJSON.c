@@ -148,7 +148,7 @@ static const char *parse_number(cJSON *item,const char *num)
 	return num;
 }
 
-static int pow2gt (int x)
+static int pow2gt(int x)
 {
 	--x;
 	x |= x >> 1;
