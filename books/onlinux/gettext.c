@@ -8,7 +8,7 @@
 
 int main(void)
 {
-	setlocale(LC_ALL, "");
-	printf("%s\n", gettext("hello, world"));
-	return 0;
+        setlocale(LC_ALL, "");
+        printf("%s\n", gettext("hello, world"));
+        return 0;
 }

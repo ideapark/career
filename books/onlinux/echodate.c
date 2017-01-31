@@ -14,25 +14,25 @@
 
 int main(void)
 {
-	struct tm tm;
-	time_t then;
+        struct tm tm;
+        time_t then;
 
-	setlocale(LC_ALL, "");
-	bindtextdomain("echodate", ".");
-	textdomain("echodate");
+        setlocale(LC_ALL, "");
+        bindtextdomain("echodate", ".");
+        textdomain("echodate");
 
-	printf("%s", _("Enter a Date/time as YYYY/MM/DD HH:MM:SS -: "));
-	scanf("%d/%d/%d %d:%d:%d",
-	      &tm.tm_year, &tm.tm_mon, &tm.tm_mday,
-	      &tm.tm_hour, &tm.tm_min, &tm.tm_sec);
+        printf("%s", _("Enter a Date/time as YYYY/MM/DD HH:MM:SS -: "));
+        scanf("%d/%d/%d %d:%d:%d",
+              &tm.tm_year, &tm.tm_mon, &tm.tm_mday,
+              &tm.tm_hour, &tm.tm_min, &tm.tm_sec);
 
-	/* error checking on values omitted for brevity. */
-	tm.tm_year -= 1900;
-	tm.tm_mon--;
-	tm.tm_isdst = -1; /* don't know about DST */
+        /* error checking on values omitted for brevity. */
+        tm.tm_year -= 1900;
+        tm.tm_mon--;
+        tm.tm_isdst = -1; /* don't know about DST */
 
-	then = mktime(&tm);
-	printf(_("Got: %s"), ctime(&then));
+        then = mktime(&tm);
+        printf(_("Got: %s"), ctime(&then));
 
-	return 0;
+        return 0;
 }

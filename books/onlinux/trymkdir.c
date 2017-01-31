@@ -12,30 +12,30 @@
 
 void do_test(const char *path)
 {
-	int retcode;
+        int retcode;
 
-	errno = 0;
-	retcode = mkdir(path, 0755);
-	printf("mkdir(\"%s\") returns %d: errno = %d [%s]\n",
-			path, retcode, errno, strerror(errno));
+        errno = 0;
+        retcode = mkdir(path, 0755);
+        printf("mkdir(\"%s\") returns %d: errno = %d [%s]\n",
+               path, retcode, errno, strerror(errno));
 }
 
 int main(void)
 {
-	do_test("/tmp/t1/t2/t3/t4");
-	do_test("/tmp/t1/t2/t3");
-	do_test("/tmp/t1/t2");
-	do_test("/tmp/t1");
+        do_test("/tmp/t1/t2/t3/t4");
+        do_test("/tmp/t1/t2/t3");
+        do_test("/tmp/t1/t2");
+        do_test("/tmp/t1");
 
-	do_test("/tmp/u1");
-	do_test("/tmp/u1/u2");
-	do_test("/tmp/u1/u2/u3");
-	do_test("/tmp/u1/u2/u3/u4");
+        do_test("/tmp/u1");
+        do_test("/tmp/u1/u2");
+        do_test("/tmp/u1/u2/u3");
+        do_test("/tmp/u1/u2/u3/u4");
 
-	do_test("/tmp/v1/");
-	do_test("/tmp/v1/v2/");
-	do_test("/tmp/v1/v2/v3/");
-	do_test("/tmp/v1/v2/v3/v4/");
+        do_test("/tmp/v1/");
+        do_test("/tmp/v1/v2/");
+        do_test("/tmp/v1/v2/v3/");
+        do_test("/tmp/v1/v2/v3/v4/");
 
-	exit(EXIT_SUCCESS);
+        exit(EXIT_SUCCESS);
 }

@@ -7,10 +7,10 @@
 #include <time.h>
 
 struct employee {
-	char lastname[30];
-	char firstname[30];
-	long emp_id;
-	time_t start_date;
+        char lastname[30];
+        char firstname[30];
+        long emp_id;
+        time_t start_date;
 };
 
 /*
@@ -18,26 +18,26 @@ struct employee {
  */
 int emp_name_id_compare(const void *e1p, const void *e2p)
 {
-	const struct employee *e1, *e2;
-	int last, first;
+        const struct employee *e1, *e2;
+        int last, first;
 
-	e1 = (const struct employee *)e1p;
-	e2 = (const struct employee *)e2p;
+        e1 = (const struct employee *)e1p;
+        e2 = (const struct employee *)e2p;
 
-	if ((last = strcmp(e1->lastname, e2->lastname)) != 0)
-		return last;
+        if ((last = strcmp(e1->lastname, e2->lastname)) != 0)
+                return last;
 
-	/* same last name, check first name */
-	if ((first = strcmp(e1->firstname, e2->firstname)) != 0)
-		return first;
+        /* same last name, check first name */
+        if ((first = strcmp(e1->firstname, e2->firstname)) != 0)
+                return first;
 
-	/* same first name, check ID numbers */
-	if (e1->emp_id < e2->emp_id)
-		return -1;
-	else if (e1->emp_id == e2->emp_id)
-		return 0;
-	else
-		return 1;
+        /* same first name, check ID numbers */
+        if (e1->emp_id < e2->emp_id)
+                return -1;
+        else if (e1->emp_id == e2->emp_id)
+                return 0;
+        else
+                return 1;
 }
 
 /*
@@ -45,18 +45,18 @@ int emp_name_id_compare(const void *e1p, const void *e2p)
  */
 void print_emp(const void *nodep, const VISIT which, const int depth)
 {
-	struct employee *e = *((struct employee **)nodep);
+        struct employee *e = *((struct employee **)nodep);
 
-	switch (which) {
-	case leaf:
-	case postorder:
-		printf("Depth: %d. Employee:\n", depth);
-		printf("\t%s, %s\t%ld\t%s\n", e->lastname, e->firstname,
-				e->emp_id, ctime(&e->start_date));
-		break;
-	default:
-		break;
-	}
+        switch (which) {
+        case leaf:
+        case postorder:
+                printf("Depth: %d. Employee:\n", depth);
+                printf("\t%s, %s\t%ld\t%s\n", e->lastname, e->firstname,
+                       e->emp_id, ctime(&e->start_date));
+                break;
+        default:
+                break;
+        }
 }
 
 /*
@@ -65,24 +65,24 @@ void print_emp(const void *nodep, const VISIT which, const int depth)
 int main(void)
 {
 #define NPRES 10
-	struct employee presidents[NPRES];
-	int i, npres;
-	char buf[BUFSIZ];
-	void *root = NULL;
+        struct employee presidents[NPRES];
+        int i, npres;
+        char buf[BUFSIZ];
+        void *root = NULL;
 
-	/* very simple code to read data */
-	for (npres = 0; npres < NPRES && fgets(buf, BUFSIZ, stdin) != NULL;
-			npres++) {
-		sscanf(buf, "%s %s %ld %ld\n",
-				presidents[npres].lastname,
-				presidents[npres].firstname,
-				&presidents[npres].emp_id,
-				&presidents[npres].start_date);
-	}
+        /* very simple code to read data */
+        for (npres = 0; npres < NPRES && fgets(buf, BUFSIZ, stdin) != NULL;
+             npres++) {
+                sscanf(buf, "%s %s %ld %ld\n",
+                       presidents[npres].lastname,
+                       presidents[npres].firstname,
+                       &presidents[npres].emp_id,
+                       &presidents[npres].start_date);
+        }
 
-	for (i = 0; i < npres; i++)
-		(void)tsearch(&presidents[i], &root, emp_name_id_compare);
+        for (i = 0; i < npres; i++)
+                (void)tsearch(&presidents[i], &root, emp_name_id_compare);
 
-	twalk(root, print_emp);
-	return 0;
+        twalk(root, print_emp);
+        return 0;
 }

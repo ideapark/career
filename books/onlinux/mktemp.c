@@ -12,25 +12,25 @@
 
 int main(void)
 {
-	static char template[] = "/tmp/myfileXXXXXX";
-	char fname[PATH_MAX];
-	static char mesg[] = "Here's lookin' at you, kid!\n"; /* beats "hello, world" */
-	int fd;
+        static char template[] = "/tmp/myfileXXXXXX";
+        char fname[PATH_MAX];
+        static char mesg[] = "Here's lookin' at you, kid!\n"; /* beats "hello, world" */
+        int fd;
 
-	strcpy(fname, template);
-	mktemp(fname);
+        strcpy(fname, template);
+        mktemp(fname);
 
-	/* REACE CONDITION WINDOW OPENS */
+        /* REACE CONDITION WINDOW OPENS */
 
-	printf("Filename is %s\n", fname);
+        printf("Filename is %s\n", fname);
 
-	/* REACE CONDITION WINDOW LASTS TO HERE */
+        /* REACE CONDITION WINDOW LASTS TO HERE */
 
-	fd = open(fname, O_CREAT|O_RDWR|O_TRUNC, 0600);
-	write(fd, mesg, strlen(mesg));
-	close(fd);
+        fd = open(fname, O_CREAT|O_RDWR|O_TRUNC, 0600);
+        write(fd, mesg, strlen(mesg));
+        close(fd);
 
-	unlink(fname);
+        unlink(fname);
 
-	return 0;
+        return 0;
 }

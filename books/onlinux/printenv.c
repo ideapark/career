@@ -4,10 +4,10 @@ extern char **environ;
 
 int main(int argc, char *argv[])
 {
-	int i;
+        int i;
 
-	if (environ != NULL)
-		for (i = 0; environ[i] != NULL; i++)
-			printf("%s\n", environ[i]);
-	return 0;
+        if (environ != NULL)
+                for (i = 0; environ[i] != NULL; i++)
+                        printf("%s\n", environ[i]);
+        return 0;
 }

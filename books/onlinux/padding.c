@@ -8,11 +8,11 @@
 
 int main(void)
 {
-	char wolf[] = "like a wolf";
-	char *p = &wolf[1];
-	unsigned long l = *(unsigned long *)p;
+        char wolf[] = "like a wolf";
+        char *p = &wolf[1];
+        unsigned long l = *(unsigned long *)p;
 
-	printf("long value cast from char: %ld\n", l);
+        printf("long value cast from char: %ld\n", l);
 
-	return 0;
+        return 0;
 }
