@@ -19,14 +19,14 @@ var flight = {
     airline: "Oceanic",
     number: 815,
     departure: {
-	      IATA: "SYD",
-	      time: "2004-09-22 14:55",
-	      city: "Sydney"
+	IATA: "SYD",
+	time: "2004-09-22 14:55",
+	city: "Sydney"
     },
     arrival: {
-	      IATA: "LAX",
-	      time: "2004-09-23 10:42",
-	      city: "Los Angeles"
+	IATA: "LAX",
+	time: "2004-09-23 10:42",
+	city: "Los Angeles"
     }
 };
 
@@ -87,9 +87,9 @@ a = b = c = {};
 
 if (typeof Object.beget !== 'function') {
     Object.create = function(o) {
-	      var F = function(){};
-	      F.prototype = o;
-	      return new F();
+	var F = function(){};
+	F.prototype = o;
+	return new F();
     };
 }
 
@@ -129,7 +129,7 @@ flight.hasOwnProperty('constructor')  // false
 var name;
 for (name in another_stooge) {
     if (typeof another_stooge[name] !== 'function') {
-	      document.writeln(name + ': ' + another_stooge[name]);
+	document.writeln(name + ': ' + another_stooge[name]);
     }
 }
 
@@ -170,14 +170,14 @@ MYAPP.flight = {
     airline: "Oceanic",
     number: 815,
     departure: {
-	      IATA: "SYD",
-	      time: "2004-09-22 14:55",
-	      city: "Sydney"
+	IATA: "SYD",
+	time: "2004-09-22 14:55",
+	city: "Sydney"
     },
     arrival: {
-	      IATA: "LAX",
-	      time: "2004-09-23 10:42",
-	      city: "Los Angeles"
+	IATA: "LAX",
+	time: "2004-09-23 10:42",
+	city: "Los Angeles"
     }
 };
 
@@ -217,7 +217,7 @@ var add = function(a, b) {
 var myObject = {
     value: 0,
     increment: function(inc) {
-	      this.value += typeof inc == 'number' ? inc : 1;
+	this.value += typeof inc == 'number' ? inc : 1;
     }
 };
 
@@ -237,7 +237,7 @@ myObject.double = function() {
     var that = this;
 
     var helper = function() {
-	      that.value = add(that.value, that.value);
+	that.value = add(that.value, that.value);
     };
     helper();
 }
@@ -281,7 +281,7 @@ var status = Quo.prototype.get_status.apply(statusObject);
 var sum = function() {
     var i, sum = 0;
     for (i = 0; i < arguments.length; i++) {
-	      sum += arguments[i];
+	sum += arguments[i];
     }
     return sum;
 };
@@ -303,19 +303,19 @@ document.writeln(sum(4, 8, 15, 16, 23, 42));  // 108
 
 var add = function(a, b) {
     if (typeof a !== 'number' || typeof b !== 'number') {
-	      throw {
-	          name: 'TypeError',
-	          message: 'add needs numbers'
-	      };
+	throw {
+	    name: 'TypeError',
+	    message: 'add needs numbers'
+	};
     }
     return a + b;
 };
 
 var try_it = function() {
     try {
-	      add("seven");
+	add("seven");
     } catch (e) {
-	      document.writeln(e.name + ': ' + e.message);
+	document.writeln(e.name + ': ' + e.message);
     }
 };
 
@@ -348,9 +348,9 @@ document.writeln('"' + "    neat    ".trim() + '"');
 
 var hanoi = function(disc, src, aux, dst) {
     if (disc > 0) {
-	      hanoi(disc - 1, src, dst, aux);
-	      document.writeln('Move disc ' + disc + ' from ' + src + ' to ' + dst);
-	      hanoi(disc - 1, aux, src, dst);
+	hanoi(disc - 1, src, dst, aux);
+	document.writeln('Move disc ' + disc + ' from ' + src + ' to ' + dst);
+	hanoi(disc - 1, aux, src, dst);
     }
 };
 
@@ -359,7 +359,7 @@ hanoi(3, 'Src', 'Aux', 'Dst');
 var factorial = function factorial(i, a) {
     a = a || 1;
     if (i < 2)
-	      return a;
+	return a;
     return factorial(i - 1, a * i);
 };
 
@@ -374,12 +374,12 @@ var myObject = (function(){
     var value = 0;
 
     return {
-	      increment: function(inc) {
-	          value += typeof inc === 'number' ? inc : 1;
-	      },
-	      getValue: function() {
-	          return value;
-	      }
+	increment: function(inc) {
+	    value += typeof inc === 'number' ? inc : 1;
+	},
+	getValue: function() {
+	    return value;
+	}
     };
 }());
 
@@ -390,16 +390,16 @@ var myObject = (function(){
 
 String.method('deentityify', function(){
     var entity = {
-	      quot: '"',
-	      lt: '<',
-	      gt: '>'
+	quot: '"',
+	lt: '<',
+	gt: '>'
     };
 
     return function() {
-	      return this.replace(/&([^&;]+);/g, function(a, b) {
-	          var r = entity[b];
-	          return typeof r === 'string' ? r : a;
-	      });
+	return this.replace(/&([^&;]+);/g, function(a, b) {
+	    var r = entity[b];
+	    return typeof r === 'string' ? r : a;
+	});
     };
 }());
 
@@ -410,10 +410,10 @@ String.method('deentityify', function(){
 
 Function.method('curry', function() {
     var slice = Array.prototype.slice,
-	      args = slice.apply(arguments),
-	      that = this;
+    args = slice.apply(arguments),
+    that = this;
     return function() {
-	      return that.apply(null, args.concat(slice.apply(arguments)));
+	return that.apply(null, args.concat(slice.apply(arguments)));
     };
 });
 
