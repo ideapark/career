@@ -1,0 +1,193 @@
+#+TITLE: Linkers and Loaders
+#+AUTHOR: Zhou Peng
+#+EMAIL: lockrecv@qq.com
+
+Linking is the process of combining various pieces of code and data together to
+form a single executable that can be loaded in memory. Linking can be done at
+compile time, at load time (by loaders) and also at run time (by application
+programs). The process of linking dates back to late 1940s, when it was done
+manually. Now, we have linkers that support complex features, such as
+dynamically linked shared libraries. This article is a succinct discussion of
+all aspects of linking, ranging from relocation and symbol resolution to
+supporting position-independent shared libraries. To keep things simple and
+understandable, I target all my discussions to ELF (executable and linking
+format) executables on the x86 architecture (Linux) and use the GNU compiler
+(GCC) and linker (ld). However, the basic concepts of linking remain the same,
+regardless of the operating system, processor architecture or object file format
+being used.
+
+* Compiler, Linker and Loader in Action: the Basics
+
+Consider two program files, =a.c= and =b.c=. As we invoke the GCC on a.c b.c at
+the shell prompt, the following actions take place:
+
+#+BEGIN_SRC shell-script
+gcc a.c b.c
+#+END_SRC
+
++ Run preprocessor on a.c and store the result in intermediate preprocessed file.
+
+#+BEGIN_SRC shell-script
+cpp other-command-line-options a.c /tmp/a.i
+#+END_SRC
+
++ Run compiler proper on a.i and generate the assembler code in a.s
+
+#+BEGIN_SRC shell-script
+cc1 other-command-line-options /tmp/a.i -o /tmp/a.s
+#+END_SRC
+
++ Run assembler on a.s and generate the object file a.o
+
+#+BEGIN_SRC shell-script
+as otehr-command-line-options /tmp/a.s -o /tmp/a.o
+#+END_SRC
+
+cpp, cc1 and as are the GNU's preprocessor, compiler proper and assembler,
+respectively. The are a part of the standard GCC distribution.
+
+Repeat the above steps for file b.c. Now we have another object file, b.o. The
+linker's job is to take these input object files (a.o and b.o) and generate the
+final executable:
+
+#+BEGIN_SRC shell-script
+ld other-command-line-options /tmp/a.o /tmp/b.o -o a.out
+#+END_SRC
+
+The final executable (=a.out=) the is ready to be loaded. To run the executable,
+we type its name at the shell prompt:
+
+#+BEGIN_SRC shell-script
+./a.out
+#+END_SRC
+
+The shell invokes the loader function, which copies the code and data in the
+executable file =a.out= into memory, and then transfers control to the beginning
+of the program. The loader is a program called =execve=, which loads the code
+and data of the executable object file into memory and then runs the program by
+jumping to the first instruction.
+
+=a.out= was first coined as the Assembler output in =a.out= object files. Since
+then, object formats have changed variedly, but the name continues to be used.
+
+* Linkers vs. Loaders
+
+Linkers and loaders perform various related but conceptually different tasks:
+
++ Program Loading.
+
+This refers to copying a program image from hard disk to the main memory in
+order to put the program in a ready-to-run state. In some cases, program loading
+also might involve allocating storage space or mapping virtual addresses to disk
+pages.
+
++ Relocation.
+
+Compilers and assemblers generate the object code for each input module with a
+starting address of zero. Relocation is the process of assigning load addresses
+to different parts of the program by merging all sections of the same type into
+one section. The code and data section also are adjusted so they point to the
+correct runtime addresses.
+
++ Symbol Resolution.
+
+A program is made up of multiple subprograms; reference of one subprogram to
+another is made through symbols. A linker's job is to resolve the reference by
+noting the symbol's location and patching the caller's object code.
+
+So a considerable overlap exists between the functions of linkers and loaders.
+One way to think of them is: the loader does the program loading; the linker
+does the symbol resolution; the either of them can do the relocation.
+
+* Object Files
+
+Object files comes in three forms:
+
++ Relocatable object file, which contains binary code and data in a form that
+  can be combined with other relocatable object files at compile time to create
+  an executable object file.
+
++ Executable object file, which contains binary code and data in a form that can
+  be directly loaded into memory and executed.
+
++ Shared object file, which is a special type of relocatable object file that
+  can be loaded into memory and linked dynamically, either at load time or at
+  runtime time.
+
+Compilers and assemblers generate relocatable object files (also shared object
+files). Linkers combine these object files together to generate executable
+object files.
+
+Object files vary from system to system. The first UNIX system used the =a.out=
+format. Early versions of System V used the =COFF= (common object file format).
+Windows NT uses a variant of =COFF= called =PE= (portable executable) format;
+IBM uses its own IBM 360 format. Modern UNIX systems, such as Linux and Solaris
+use the UNIX ELF (executable and linking format). This article concentrates
+mainly on ELF.
+
+#+BEGIN_SRC
+
+ELF Header
+
+.text
+
+.rodata
+
+.data
+
+.bss
+
+.symtab
+
+.rel.text
+
+.rel.data
+
+.debug
+
+.line
+
+#+END_SRC
+
+The above figure shows the format of a typical ELF relocatable object file. The
+ELF header starts with a 4-byte magic string, \177ELF. The various sections in
+the ELF relocatable object file are:
+
+- .text
+the machine code of the compiled program.
+
+- .rodata
+read-only data, such as the format strings in =printf= statements.
+
+- .data
+initialized global variables.
+
+- .bss
+uninitialized global variables. BSS stands for block storage start, and this
+section actually occupies no space in the object file; it is merely a placer
+holder.
+
+- .symtab
+a symbol table with information about functions and global variables defined and
+referenced in the program. This table does not contain any entries for local
+variables; those are maintained on the stack.
+
+- .rel.text
+a list of locations in the .text section that need to be modified when the
+linker combines this object file with other object files.
+
+- .rel.data
+relocation information for global variables referenced but not defined in the
+current module.
+
+- .debug
+a debugging symbol table with entries for local and global variables. This
+section is present only if the compiler is invoked with a -g option.
+
+- .line
+a mapping between line numbers in the original C source program and machine code
+instructions int the .text section. This information is required by debugger
+programs.
+
+- .strtab
+a string table for the symbol tables in the .symtab and .debug sections.
