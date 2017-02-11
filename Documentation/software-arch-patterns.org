@@ -1,0 +1,60 @@
+#+TITLE: Software Architecture Patterns
+#+AUTHOR: Mark Richards
+#+AUTHOR: Zhou Peng
+#+EMAIL: lockrecv@qq.com
+
+Understanding Common Architecture Patterns and When to Use Them
+
+* Layered Architecture
+
+** Pattern Description
+
+** Key Concepts
+
+** Pattern Example
+
+** Considerations
+
+** Pattern Analysis
+
+* Event-Driven Architecture
+
+** Mediator Topology
+
+** Broker Topology
+
+** Considerations
+
+** Pattern Analysis
+
+* Microkernel Architecture
+
+** Pattern Description
+
+** Pattern Examples
+
+** Considerations
+
+** Pattern Analysis
+
+* Microservices Architecture Pattern
+
+** Pattern Description
+
+** Pattern Topologies
+
+** Avoid Dependencies and Orchestration
+
+** Considerations
+
+** Pattern Analysis
+
+* Space-Based Architecture
+
+** Pattern Description
+
+** Pattern Dynamics
+
+** Considerations
+
+** Pattern Analysis
