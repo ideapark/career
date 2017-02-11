@@ -8,8 +8,8 @@
 
 - 姓名: 周朋
 - 年龄: 26
-- 婚姻状况: 已婚
-- 联系方式: +8615008287847
+- 婚姻: 已婚
+- 电话: +8615008287847
 - 邮箱: lockrecv@qq.com
 
 * 英语能力
@@ -19,7 +19,7 @@
 
 * 编程技能
 
-- 擅长: Linux, C/C++, Testing, Git
+- 擅长: Linux, C/C++, Testing, Git, Amazon Web Service
 - 熟练: Python, Javascript, HTML/CSS, Shell
 - 了解: Java
 
