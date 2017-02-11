@@ -4,7 +4,7 @@
 
 #  Permission is granted to copy, distribute and/or modify this document
 #  under the terms of the GNU Free Documentation License, Version 1.3 or
-#  any later version published by the Free Software Foundation; with no 
+#  any later version published by the Free Software Foundation; with no
 #  Invariant Sections, with no Front-Cover Texts, and with no Back-Cover
 #  Texts. A copy of the license is included in the section entitled.
 #  GNU Free Documentation License.
@@ -138,7 +138,7 @@ directories.  The main directories are:
                          binutils
                             |
                             |
-    ----------------------------------------------------------
+   +----------------------------------------------------------+
    |       |     |       |      |       |   |     |     |     |
    |       |     |       |      |       |   |     |     |     |
  include  bfd  opcodes  cpu  binutils  gas  ld  gprof  gold  elfcpp
@@ -161,20 +161,20 @@ Here is some brief information on the above directories:
 
  - opcodes:
    The opcodes library.  This contains information on how to assemble
-   and disassemble instructions.  
+   and disassemble instructions.
 
  - cpu:
    Source files for a utility called CGEN.  This is a tool which can
    be used to automatically generated target specific source files for
    the opcodes library as well as for the SIM simulator used by GDB.
-   
- - binutils: 
+
+ - binutils:
    Despite its name this is not the main binutils directory.  Rather
    it is the directory for all of the binutils tools which do not have
    their own top level source directory.  This includes tools such as
    objcopy, objdump and readelf amongst others.
 
- - gas: 
+ - gas:
    The GNU assembler.  Target specific assembler code is held in the
    config sub-directory.
 
@@ -197,12 +197,12 @@ Here is some brief information on the above directories:
 In addition there are a couple of other directories which can be found
 at the top level of a binutils source release.  They are used in the
 binutils build process, but they are not part of the binutils project:
-   
- - intl: 
+
+ - intl:
    GNU gettext library from gettext.
-   
- - libiberty: 
-   Before POSIX and glibc, this was a GNU project to provide a set 
+
+ - libiberty:
+   Before POSIX and glibc, this was a GNU project to provide a set
    of standard functions. It lives on in binutils.  Most valuable are
    its free store management and argument parsing functions.
 
@@ -227,8 +227,7 @@ In the case of the Compact-RISC, 16-bit implementation (which may be a
 COFF or ELF binary), the enumerated constant is bfd_cr16_arch.  This
 can be used to access various structures, for example:
 
-  const bfd_arch_info_type bfd_cr16_arch =
-    {
+  const bfd_arch_info_type bfd_cr16_arch = {
       16,               /* 16 bits in a word.  */
       32,               /* 32 bits in an address.  */
        8,               /*  8 bits in a byte.  */
@@ -239,9 +238,9 @@ can be used to access various structures, for example:
       1,                /* Section alignment power.  */
       TRUE,             /* True if this is the default machine for the architecture.  */
       bfd_default_compatible, /* Function to call to determine if two different architectures are compatible.  */
-      bfd_default_scan, /* Function to call to determine if a given string matches this architecture.  */ 
+      bfd_default_scan, /* Function to call to determine if a given string matches this architecture.  */
       NULL,             /* Pointer to the next CR16 machine architecture.  */
-    };
+  };
 
 This particular structure is defined in a file called cpu-<target>.c
 in the bfd directory.
@@ -256,7 +255,7 @@ information:
 
 2. A reloc_howto_type array with target specific relocations details.
    Here is an example array entry from the cr16 port:
-   
+
   (R_CR16_NONE,              /* Type.  */
    0,                        /* Rightshift.  */
    2,                        /* Size.  */
@@ -274,43 +273,43 @@ information:
 
 3. Define the macros below with settings specific to the target:
 
-#define TARGET_LITTLE_SYM 
+#define TARGET_LITTLE_SYM
 #define TARGET_LITTLE_NAME
 
-#define ELF_ARCH         
-#define ELF_MACHINE_CODE 
-#define ELF_MAXPAGESIZE  
-#define elf_symbol_leading_char 
+#define ELF_ARCH
+#define ELF_MACHINE_CODE
+#define ELF_MAXPAGESIZE
+#define elf_symbol_leading_char
 
-#define elf_info_to_howto              
-#define elf_info_to_howto_rel         
+#define elf_info_to_howto
+#define elf_info_to_howto_rel
 
-#define elf_backend_relocate_section 
-#define elf_backend_gc_mark_hook 
-#define elf_backend_gc_sweep_hook 
-#define elf_backend_can_gc_sections  
-#define elf_backend_rela_normal     
-#define elf_backend_check_relocs   
+#define elf_backend_relocate_section
+#define elf_backend_gc_mark_hook
+#define elf_backend_gc_sweep_hook
+#define elf_backend_can_gc_sections
+#define elf_backend_rela_normal
+#define elf_backend_check_relocs
 #define elf_backend_final_write_processing
-#define elf_backend_object_p 
+#define elf_backend_object_p
 #define elf_backend_create_dynamic_sections
-#define elf_backend_adjust_dynamic_symbol 
-#define elf_backend_size_dynamic_sections 
-#define elf_backend_omit_section_dynsym 
-#define elf_backend_finish_dynamic_sections 
-#define elf_backend_reloc_type_class  
-#define elf_backend_want_got_plt     
-#define elf_backend_plt_readonly    
-#define elf_backend_want_plt_sym   
-#define elf_backend_got_header_size 
+#define elf_backend_adjust_dynamic_symbol
+#define elf_backend_size_dynamic_sections
+#define elf_backend_omit_section_dynsym
+#define elf_backend_finish_dynamic_sections
+#define elf_backend_reloc_type_class
+#define elf_backend_want_got_plt
+#define elf_backend_plt_readonly
+#define elf_backend_want_plt_sym
+#define elf_backend_got_header_size
 
-#define bfd_elf32_bfd_reloc_type_lookup 
-#define bfd_elf32_bfd_reloc_name_lookup 
-#define bfd_elf32_bfd_relax_section 
-#define bfd_elf32_bfd_get_relocated_section_contents 
+#define bfd_elf32_bfd_reloc_type_lookup
+#define bfd_elf32_bfd_reloc_name_lookup
+#define bfd_elf32_bfd_relax_section
+#define bfd_elf32_bfd_get_relocated_section_contents
 #define bfd_elf32_bfd_merge_private_bfd_data
-#define bfd_elf32_bfd_link_hash_table_create 
-#define bfd_elf32_bfd_link_hash_table_free 
+#define bfd_elf32_bfd_link_hash_table_create
+#define bfd_elf32_bfd_link_hash_table_free
 
 
 In addition the files archures.c, config.bfd, Makefile.am and target.c
@@ -367,22 +366,22 @@ The above file should include:
               - Registers
               - Instructions (ie maximum size)
               - Operands
-         - Operand error types                
+         - Operand error types
          - Comment character used in assembly code.
          - Comment character used in assembly code line.
          - Line separator
 
          - Defining the target specific
               - multi-character options, if any.
-              - Process machine-dependent command line options in 
+              - Process machine-dependent command line options in
                 "md_parse_option" function.
-              - Include Machine-dependent usage-output in 
+              - Include Machine-dependent usage-output in
                 "md_show_usage" function.
 
          - Redefine the assemble directive using "md_pseudo_table".
          - Functions for getting registers along with type, size,
            and other information.
-         - md_begin function used to initialize/set-up all the tables, etc 
+         - md_begin function used to initialize/set-up all the tables, etc
            that are machine-dependent items of the assembler.
          - Parse functions:
              - parse_insn
@@ -399,7 +398,7 @@ The above file should include:
 
 In the gas directory itself the configure.tgt and Makefile.am files
 need to be modified to refer to the new files and to add support for
-the new target.         
+the new target.
 
 
 2.2.6 ld:
@@ -417,7 +416,7 @@ used to modify the default linker script file.
 In the ld directory itself the configure.tgt file needs to be updated
 to add your new target information and the Makefile.am with new target
 information build rules.
-  
+
 
 Chapter 3. Build and test
 
@@ -426,40 +425,40 @@ Building binutils tools requires below steps as below:
 
    - Configure:
      Run configure script with target and prefix options.  For ex:
-   
+
       > src/configure --target=cr16-elf --prefix=/local/cr16-bintuils
         Here, target -> target you want to build the binutils tools.
               prefix -> Built binutils tools installation location/directory.
 
    - Build:
-     Run "make" to build the binutils tools for the above configured target.  
+     Run "make" to build the binutils tools for the above configured target.
      For ex:
       > make all
       > make install
           or
       > make all install
 
-   NOTE: With "make" -jN option shall used to build the tools quickly 
-         by using all processors/CPUs on you host PC. For example, 
-         if your host PC has 4 procesors, then "make -j4" could be 
-         used for quick build. 
+   NOTE: With "make" -jN option shall used to build the tools quickly
+         by using all processors/CPUs on you host PC. For example,
+         if your host PC has 4 procesors, then "make -j4" could be
+         used for quick build.
 
 3.2 Test binutils tools
 
-To test above built tools using the binutils test suites like gas, 
-binutls and ld test suites.  Running the binutils testsuite requires 
-that the DejaGNU package (http://www.gnu.org/software/dejagnu/) required 
-and the DEJAGNU environment variable need to be set.  The tests can 
+To test above built tools using the binutils test suites like gas,
+binutls and ld test suites.  Running the binutils testsuite requires
+that the DejaGNU package (http://www.gnu.org/software/dejagnu/) required
+and the DEJAGNU environment variable need to be set.  The tests can
 then be run with:
 
      > make check
 
 The above command runs the binutils, gas and linker testsuites.
-   
+
 With the commands below the user can run the binutils, gas and linker
 testsuites separately:
 
-   > make check-binutils   
+   > make check-binutils
    > make check-gas
    > make check-ld
 
@@ -491,7 +490,7 @@ documents of interest are:
 
    . bfd/doc/bfd.texinfo         This is the BFD manual.
    . binutils/doc/binutils.texi  This is the main Binutils user guide.
-   . ld/ld.texinfo               This is the linker user guide. 
+   . ld/ld.texinfo               This is the linker user guide.
    . gas/doc/as.texinfo          This is the assembler user guide.
 
 The exception to automatic building is with make install. This will
@@ -516,6 +515,3 @@ Activity Log (latest on top):
 
 03 Nov 2009    1.0         Submitted for review on binutils mailing list.
 ----------------------------------------------------------------------------
-
-
-
