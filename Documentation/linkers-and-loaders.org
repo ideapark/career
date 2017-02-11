@@ -11,44 +11,44 @@ dynamically linked shared libraries. This article is a succinct discussion of
 all aspects of linking, ranging from relocation and symbol resolution to
 supporting position-independent shared libraries. To keep things simple and
 understandable, I target all my discussions to ELF (executable and linking
-format) executables on the x86 architecture (Linux) and use the GNU compiler
-(GCC) and linker (ld). However, the basic concepts of linking remain the same,
+format) executables on the x86 architecture (=Linux=) and use the GNU compiler
+(=GCC=) and linker (=ld=). However, the basic concepts of linking remain the same,
 regardless of the operating system, processor architecture or object file format
 being used.
 
 * Compiler, Linker and Loader in Action: the Basics
 
-Consider two program files, =a.c= and =b.c=. As we invoke the GCC on a.c b.c at
-the shell prompt, the following actions take place:
+Consider two program files, =a.c= and =b.c=. As we invoke the GCC on =a.c= =b.c=
+at the shell prompt, the following actions take place:
 
 #+BEGIN_SRC shell-script
 gcc a.c b.c
 #+END_SRC
 
-+ Run preprocessor on a.c and store the result in intermediate preprocessed file.
++ Run preprocessor on =a.c= and store the result in intermediate preprocessed file.
 
 #+BEGIN_SRC shell-script
 cpp other-command-line-options a.c /tmp/a.i
 #+END_SRC
 
-+ Run compiler proper on a.i and generate the assembler code in a.s
++ Run compiler proper on =a.i= and generate the assembler code in =a.s=
 
 #+BEGIN_SRC shell-script
 cc1 other-command-line-options /tmp/a.i -o /tmp/a.s
 #+END_SRC
 
-+ Run assembler on a.s and generate the object file a.o
++ Run assembler on =a.s= and generate the object file =a.o=
 
 #+BEGIN_SRC shell-script
 as otehr-command-line-options /tmp/a.s -o /tmp/a.o
 #+END_SRC
 
-cpp, cc1 and as are the GNU's preprocessor, compiler proper and assembler,
+=cpp=, =cc1= and as are the GNU's preprocessor, compiler proper and assembler,
 respectively. The are a part of the standard GCC distribution.
 
-Repeat the above steps for file b.c. Now we have another object file, b.o. The
-linker's job is to take these input object files (a.o and b.o) and generate the
-final executable:
+Repeat the above steps for file =b.c=. Now we have another object file, b.o. The
+linker's job is to take these input object files (=a.o= and =b.o=) and generate
+the final executable:
 
 #+BEGIN_SRC shell-script
 ld other-command-line-options /tmp/a.o /tmp/b.o -o a.out
@@ -103,14 +103,14 @@ does the symbol resolution; the either of them can do the relocation.
 
 Object files comes in three forms:
 
-+ Relocatable object file, which contains binary code and data in a form that
+- Relocatable object file, which contains binary code and data in a form that
   can be combined with other relocatable object files at compile time to create
   an executable object file.
 
-+ Executable object file, which contains binary code and data in a form that can
+- Executable object file, which contains binary code and data in a form that can
   be directly loaded into memory and executed.
 
-+ Shared object file, which is a special type of relocatable object file that
+- Shared object file, which is a special type of relocatable object file that
   can be loaded into memory and linked dynamically, either at load time or at
   runtime time.
 
@@ -190,17 +190,17 @@ current module.
 - .debug
 
 a debugging symbol table with entries for local and global variables. This
-section is present only if the compiler is invoked with a -g option.
+section is present only if the compiler is invoked with a =-g= option.
 
 - .line
 
 a mapping between line numbers in the original C source program and machine code
-instructions int the .text section. This information is required by debugger
+instructions int the =.text= section. This information is required by debugger
 programs.
 
 - .strtab
 
-a string table for the symbol tables in the .symtab and .debug sections.
+a string table for the symbol tables in the =.symtab= and =.debug= sections.
 
 * Symbols and Symbol Resolution
 
@@ -296,8 +296,8 @@ symbols defined in previous input modules. Initially, all three sets are empty.
 - If input is an archive, it scans through the list of member modules that
   constitute the archive to match any unresolved symbols present in =U=. If some
   archive member defines any unresolved symbol that archive member is added to
-  the list =O=, and U and =D= are updated per symbols found in the archive member.
-  This process is iterated for all member object files.
+  the list =O=, and =U= and =D= are updated per symbols found in the archive
+  member. This process is iterated for all member object files.
 
 - After all the input arguments are processed through the above two steps, if =U=
   is found to be not empty, linker prints an error report and terminates.
@@ -322,13 +322,13 @@ involves the following two steps:
   the same type into a new single section. For example, linker merges all the
   =.data= sections of all the input relocatable object files into a single
   =.data= section for the final executable. A similar process is carried out for
-  the =.code= section. The linker then assigns runtime memory addresses to new
+  the =.text= section. The linker then assigns runtime memory addresses to new
   aggregate sections, to each section defined by the input module and also to
   each symbol. After the completion of this step, every instruction and global
   variable in the program has a unique loadtime address.
 
 - Relocating symbol reference within sections. In this step, linker modifies
-  every symbol reference in the code and data sections so they point to the
+  every symbol reference in the text and data sections so they point to the
   correct loadtime addresses.
 
 Whenever assembler encounters an unresolved symbol, it generates a relocation
@@ -348,8 +348,8 @@ reference. A typical ELF relocation entry contains the following members.
 
 The linker iterates over all the relocation entries present in the relocatable
 object modules and relocates the unresolved symbols depending on the type. For
-R_386_PC32, the relocating address is calculated as =S + A - P=; for R_386_32
-type, the address is calculated as =S + A=. In these calculations, =S= denotes
+R_386_PC32, the relocating address is calculated as =S+A-P=; for R_386_32
+type, the address is calculated as =S+A=. In these calculations, =S= denotes
 the value of the symbol from the relocation entry, =P= denotes the section
 offset or address of the storage unit being relocated (computed using the value
 of offset from relocation entry) and =A= is the address needed to compute the
@@ -358,14 +358,14 @@ value of the relocatable field.
 * Dynamic Linking: Shared Libraries
 
 Static libraries above have some significant disadvantages; for example,
-consider standard functions such as =printf= and =scanf=. The are used almost by
+consider standard functions such as =printf= and =scanf=. They are used almost by
 every application. Now, if a system is running 50-100 processes, each process
 has its own copy of executable code for =printf= and =scanf=. This takes up
 significant space in the memory. Shared libraries, on the other hand, address
 the disadvantages of static libraries. A shared library is an object module that
 can be linked to by a program in memory. Shared libraries often are called as
 shared objects. On most UNIX systems they are denoted with a =.so= suffix; HP-UX
-uses =.sl= suffix and Microsoft refer to them as DLLs (dynamic link libraries).
+uses =.sl= suffix and Microsoft refer to them as =.dll= (dynamic link libraries).
 
 To build a shared object, the compiler driver is invoked with special option:
 
