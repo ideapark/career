@@ -10,6 +10,7 @@ Understanding Common Architecture Patterns and When to Use Them
 ** Overall agility
 
 Rating: Low
+
 Analysis: Overall agility is the ability to respond quickly to a constantly
 changing environment. While change can be isolated through the layers of
 isolation feature of this pattern, it is still cumbersome and time-consuming to
@@ -20,6 +21,7 @@ with this pattern.
 ** Ease of deployment
 
 Rating: Low
+
 Analysis: Depending on how you implement this pattern, deployment can become an
 issue, particularly for larger applications. One small change to a component can
 require a redeployment of the entire application (or a large portion of the
@@ -31,6 +33,7 @@ rating for deployment.
 ** Testability
 
 Rating: High
+
 Analysis: Because components belong to specific layers in the architecture,
 other layers can be mocked or stubbed, making this pattern is relatively easy to
 test. A developer can mock a presentation component or screen to isolate testing
@@ -40,6 +43,7 @@ screen functionality.
 ** Performance
 
 Rating: Low
+
 Analysis: While it is true some layered architecture can perform well, the
 pattern does not lend itself to high-performance application due to the
 inefficiencies of having to go through multiple layers of the architecture to
@@ -48,6 +52,7 @@ fulfill a business request.
 ** Scalability
 
 Rating: Low
+
 Analysis: Because of the trend toward tightly coupled and monolithic
 implementations of this pattern, applications build using this architecture
 pattern are generally difficult to scale. You can scale a layered architecture
@@ -58,13 +63,14 @@ broad, making it expensive to scale.
 ** Ease of development
 
 Rating: High
+
 Analysis: Ease of development gets a relatively high score, mostly because this
 pattern is so well known and is not overly complex to implement. Because most
 companies develop applications by separating skill sets by layers (presentation,
 business, database), this pattern becomes a natural choice for most
 business-application development. The connection between a company's
 communication and organization structure and the way it develops software is
-outlined is what is called Conway's law.
+outlined is what is called =Conway's law=.
 
 * Event-Driven Architecture
 
@@ -83,6 +89,7 @@ broker.
 ** Overall agility
 
 Rating: High
+
 Analysis: Overall agility is the ability to respond quickly to a constantly
 changing environment. Since event-processor components are single-purpose and
 completely decoupled from other event processor components, changes are
@@ -92,6 +99,7 @@ without impacting other components.
 ** Ease of deployment
 
 Rating: High
+
 Analysis: Overall this pattern is relatively easy to deploy due to the decoupled
 nature of the event-processor components. The broker topology tends to be easier
 to deploy than the mediator topology, primarily because the event mediator
@@ -102,6 +110,7 @@ requiring both to be deployed for any given change.
 ** Testability
 
 Rating: Low
+
 Analysis: While individual unit testing is not overly difficult, it does require
 some sort of specialized testing client or testing tool to generate events.
 Testing is also complicated by the asynchronous nature of this pattern.
@@ -109,6 +118,7 @@ Testing is also complicated by the asynchronous nature of this pattern.
 ** Performance
 
 Rating: High
+
 Analysis: While it is certainly possible to implement an event-driven
 architecture that does not perform well due to all the messaging infrastructure
 involved, in general, the pattern achieves high performance through its
@@ -119,6 +129,7 @@ messages.
 ** Scalability
 
 Rating: High
+
 Analysis: Scalability is naturally achieved in this pattern through highly
 independent and decoupled event processors. Each event processor can be scaled
 separately, allowing for fine-grained scalability.
@@ -126,6 +137,7 @@ separately, allowing for fine-grained scalability.
 ** Ease of development
 
 Rating: Low
+
 Analysis: Development can be somewhat complicated due to the asynchronous nature
 of the pattern as well as contract creation and the need for more advanced error
 handling conditions within the code for unresponsive event processors and failed
@@ -139,6 +151,7 @@ components: a core system and plug-in modules.
 ** Overall agility
 
 Rating: High
+
 Analysis: Overall agility is the ability to respond quickly to a constantly
 changing environment. Changes can largely be isolated and implemented quickly
 through loosely coupled plug-in modules. In general, the core system of most
@@ -148,6 +161,7 @@ robust and requires few changes over time.
 ** Ease of deployment
 
 Rating: High
+
 Analysis: Depending on how the pattern is implemented, the plug-in modules can
 be dynamically added to the core system at runtime (e.g., hot-deployed),
 minimizing downtime during deployment.
@@ -155,6 +169,7 @@ minimizing downtime during deployment.
 ** Testability
 
 Rating: High
+
 Analysis: Plug-in modules can be tested in isolation and can be easily mocked by
 the core system to demonstrate or prototype a particular feature with little or
 no change to the core system.
@@ -162,6 +177,7 @@ no change to the core system.
 ** Performance
 
 Rating: High
+
 Analysis: While the microkernel pattern does not naturally lend itself to
 high-performance application, in general, most applications built using the
 microkernel architecture pattern perform well because you can customize and
@@ -174,6 +190,7 @@ consume memory, CPU, and threads and slow down the app server.
 ** Scalability
 
 Rating: Low
+
 Analysis: Because most microkernel architecture implementations are product
 based and are generally smaller in size, they are implemented as single units
 and hence not highly scalable. Depending on how you implement the plug-in
@@ -183,6 +200,7 @@ scalable application.
 ** Ease of development
 
 Rating: Low
+
 Analysis: The microkernel architecture requires thoughtful design and contract
 governance, making it rather complex to implement. Contract versioning, internal
 plug-in registries, plug-in granularity, and the wide choice available for
@@ -196,6 +214,7 @@ Separately deployed units.
 ** Overall agility
 
 Rating: High
+
 Analysis: Overall agility is the ability to respond quickly to a constantly
 changing environment. Due to the notion of separately deployed units, change is
 generally isolated to individual service components, which allows for fast and
@@ -205,6 +224,7 @@ loosely coupled, which also helps facilitate change.
 ** Ease of deployment
 
 Rating: High
+
 Analysis: Overall this pattern is relatively easy to deploy due to the decoupled
 nature of the event-processor components. The broker topology tends to be easier
 to deploy than the mediator topology, primarily because the event-mediator
@@ -215,6 +235,7 @@ requiring both to be deployed for any given change.
 ** Testability
 
 Rating: High
+
 Analysis: Due to the separation and isolation of business functionality into
 independent applications, testing can be scoped, allowing for more targeted
 testing efforts. Regression testing for a particular service component is much
@@ -227,6 +248,7 @@ of having to test the entire application for one small change.
 ** Performance
 
 Rating: Low
+
 Analysis: While you can create applications implemented from this pattern that
 perform very well, overall this pattern does not naturally lend itself to
 high-performance applications due to the distributed nature of the microservices
@@ -235,6 +257,7 @@ architecture pattern.
 ** Scalability
 
 Rating: High
+
 Analysis: Because the application is split into separately deployed units, each
 service component can be individually scaled, allowing for fine-tuned scaling of
 the application. For example, the admin area of a stock-trading application may
@@ -245,6 +268,7 @@ nature of the microservices architecture pattern.
 ** Scalability
 
 Rating: High
+
 Analysis: Because the application is split into separately deployed units, each
 service component can be individually scaled, allowing for fine-tuned scaling of
 the application. For example, the admin area of a stock-trading application may
@@ -255,6 +279,7 @@ needed by most trading applications for this functionality.
 ** Ease of development
 
 Rating: High
+
 Analysis: Because functionality is isolated into separate and distinct service
 components, development becomes easier due to the smaller and isolated scope.
 There is much less chance a developer will make a change in one service
@@ -266,6 +291,7 @@ coordination needed among developers or development teams.
 ** Overall agility
 
 Rating: High
+
 Analysis: Overall agility is the ability to respond quickly to a constantly
 changing environment. Because processing units (deployed instances of the
 application) can be brought up and down quickly, applications respond well to
@@ -276,6 +302,7 @@ changes due to the small application size and dynamic nature of the pattern.
 ** Ease of deployment
 
 Rating: High
+
 Analysis: Although space-based architectures are generally not decoupled and
 distributed, they are dynamic, and sophisticated cloud-based tools allow for
 applications to easily be "pushed" out to servers, simplifying deployment.
@@ -283,6 +310,7 @@ applications to easily be "pushed" out to servers, simplifying deployment.
 ** Testability
 
 Rating: Low
+
 Analysis: Achieving very high user loads in a test environment is both expensive
 and time consuming, making it difficult to test the scalability aspects of the
 application.
@@ -290,12 +318,14 @@ application.
 ** Performance
 
 Rating: High
+
 Analysis: High performance is achieved through the in-memory data access and
 caching mechanisms build into this pattern.
 
 ** Scalability
 
 Rating: High
+
 Analysis: High scalability come from the fact that there is little or no
 dependency on a centralized database, therefore essentially removing this
 limiting bottleneck from the scalability equation.
@@ -303,6 +333,7 @@ limiting bottleneck from the scalability equation.
 ** Ease of development
 
 Rating: Low
+
 Analysis: Sophisticated caching and in-memory data grid products make this
 pattern relatively complex to develop, mostly because of the lack of familiarity
 with the tools and products used to create this type of architecture.
