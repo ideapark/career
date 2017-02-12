@@ -7,6 +7,65 @@ Understanding Common Architecture Patterns and When to Use Them
 
 * Layered Architecture
 
+** Overall agility
+
+Rating: Low
+Analysis: Overall agility is the ability to respond quickly to a constantly
+changing environment. While change can be isolated through the layers of
+isolation feature of this pattern, it is still cumbersome and time-consuming to
+make changes in this architecture pattern because of the monolithic nature of
+most implementations as well as the tight coupling of components usually found
+with this pattern.
+
+** Ease of deployment
+
+Rating: Low
+Analysis: Depending on how you implement this pattern, deployment can become an
+issue, particularly for larger applications. One small change to a component can
+require a redeployment of the entire application (or a large portion of the
+application), resulting in deployments that need to be planned, scheduled, and
+executed during off-hours or on weekends. As such, this pattern does not easily
+lend itself toward a continuous delivery pipeline, further reducing the overall
+rating for deployment.
+
+** Testability
+
+Rating: High
+Analysis: Because components belong to specific layers in the architecture,
+other layers can be mocked or stubbed, making this pattern is relatively easy to
+test. A developer can mock a presentation component or screen to isolate testing
+withing a business component, as well as mock the business layer to test certain
+screen functionality.
+
+** Performance
+
+Rating: Low
+Analysis: While it is true some layered architecture can perform well, the
+pattern does not lend itself to high-performance application due to the
+inefficiencies of having to go through multiple layers of the architecture to
+fulfill a business request.
+
+** Scalability
+
+Rating: Low
+Analysis: Because of the trend toward tightly coupled and monolithic
+implementations of this pattern, applications build using this architecture
+pattern are generally difficult to scale. You can scale a layered architecture
+by splitting the layers into separate physical deployments or replicating the
+entire application into multiple nodes, but overall the granularity is too
+broad, making it expensive to scale.
+
+** Ease of development
+
+Rating: High
+Analysis: Ease of development gets a relatively high score, mostly because this
+pattern is so well known and is not overly complex to implement. Because most
+companies develop applications by separating skill sets by layers (presentation,
+business, database), this pattern becomes a natural choice for most
+business-application development. The connection between a company's
+communication and organization structure and the way it develops software is
+outlined is what is called Conway's law.
+
 * Event-Driven Architecture
 
 * Microkernel Architecture
