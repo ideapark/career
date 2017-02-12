@@ -191,4 +191,74 @@ this pattern.
 
 * Microservices Architecture Pattern
 
+Separately deployed units.
+
+** Overall agility
+
+Rating: High
+Analysis: Overall agility is the ability to respond quickly to a constantly
+changing environment. Due to the notion of separately deployed units, change is
+generally isolated to individual service components, which allows for fast and
+easy deployment. Also, applications build using this pattern tend to be very
+loosely coupled, which also helps facilitate change.
+
+** Ease of deployment
+
+Rating: High
+Analysis: Overall this pattern is relatively easy to deploy due to the decoupled
+nature of the event-processor components. The broker topology tends to be easier
+to deploy than the mediator topology, primarily because the event-mediator
+component is somewhat tightly coupled to the event processors: a change in an
+event processor component might also require a change in the event mediator,
+requiring both to be deployed for any given change.
+
+** Testability
+
+Rating: High
+Analysis: Due to the separation and isolation of business functionality into
+independent applications, testing can be scoped, allowing for more targeted
+testing efforts. Regression testing for a particular service component is much
+easier and more feasible than regression testing for an entire monolithic
+application. Also, since the service components in this pattern are loosely
+coupled, there is much less of a chance from a development perspective of making
+a change that breaks another part of the application, easing the testing burden
+of having to test the entire application for one small change.
+
+** Performance
+
+Rating: Low
+Analysis: While you can create applications implemented from this pattern that
+perform very well, overall this pattern does not naturally lend itself to
+high-performance applications due to the distributed nature of the microservices
+architecture pattern.
+
+** Scalability
+
+Rating: High
+Analysis: Because the application is split into separately deployed units, each
+service component can be individually scaled, allowing for fine-tuned scaling of
+the application. For example, the admin area of a stock-trading application may
+not need to scale due to the low user volumes for that functionality, but the
+trade-placement service component may need to scale due to the distributed
+nature of the microservices architecture pattern.
+
+** Scalability
+
+Rating: High
+Analysis: Because the application is split into separately deployed units, each
+service component can be individually scaled, allowing for fine-tuned scaling of
+the application. For example, the admin area of a stock-trading application may
+not need to scale due to the low user volumes for that functionality, but the
+trade-placement service component may need to scale due to the high throughput
+needed by most trading applications for this functionality.
+
+** Ease of development
+
+Rating: High
+Analysis: Because functionality is isolated into separate and distinct service
+components, development becomes easier due to the smaller and isolated scope.
+There is much less chance a developer will make a change in one service
+component that would affect other service components, thereby reducing the
+coordination needed among developers or development teams.
+
 * Space-Based Architecture
