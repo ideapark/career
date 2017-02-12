@@ -68,6 +68,69 @@ outlined is what is called Conway's law.
 
 * Event-Driven Architecture
 
+- Mediator Topology
+
+The mediator topology is useful for events that have multiple steps and require
+some level of orchestration to process the event.
+
+- Broker Topology
+
+The broker topology differs from the mediator topology in that there is no
+central event mediator; rather, the message flow is distributed across the event
+processor components in a chain-like fashion through a lightweight message
+broker.
+
+** Overall agility
+
+Rating: High
+Analysis: Overall agility is the ability to respond quickly to a constantly
+changing environment. Since event-processor components are single-purpose and
+completely decoupled from other event processor components, changes are
+generally isolated to one or few event processors and can be made quickly
+without impacting other components.
+
+** Ease of deployment
+
+Rating: High
+Analysis: Overall this pattern is relatively easy to deploy due to the decoupled
+nature of the event-processor components. The broker topology tends to be easier
+to deploy than the mediator topology, primarily because the event mediator
+component is somewhat tightly coupled to the event processors: a change in an
+event processor component might also require a change in the event mediator,
+requiring both to be deployed for any given change.
+
+** Testability
+
+Rating: Low
+Analysis: While individual unit testing is not overly difficult, it does require
+some sort of specialized testing client or testing tool to generate events.
+Testing is also complicated by the asynchronous nature of this pattern.
+
+** Performance
+
+Rating: High
+Analysis: While it is certainly possible to implement an event-driven
+architecture that does not perform well due to all the messaging infrastructure
+involved, in general, the pattern achieves high performance through its
+asynchronous capabilities; in other words, the ability to perform decoupled,
+parallel asynchronous operations outweighs the cost of queuing and dequeuing
+messages.
+
+** Scalability
+
+Rating: High
+Analysis: Scalability is naturally achieved in this pattern through highly
+independent and decoupled event processors. Each event processor can be scaled
+separately, allowing for fine-grained scalability.
+
+** Ease of development
+
+Rating: Low
+Analysis: Development can be somewhat complicated due to the asynchronous nature
+of the pattern as well as contract creation and the need for more advanced error
+handling conditions within the code for unresponsive event processors and failed
+brokers.
+
 * Microkernel Architecture
 
 * Microservices Architecture Pattern
