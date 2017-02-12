@@ -309,3 +309,14 @@ with the tools and products used to create this type of architecture.
 Furthermore, special care must be taken while developing these types of
 architectures to make sure nothing in the source code impacts performance and
 scalability.
+
+* Patterns Summary
+
+|                 | Layered | Event-driven | Microkernel | Microservices | Space-based |
+|-----------------+---------+--------------+-------------+---------------+-------------|
+| Overall Agility | NO      | YES          | YES         | YES           | YES         |
+| Deployment      | NO      | YES          | YES         | YES           | YES         |
+| Testability     | YES     | NO           | YES         | YES           | NO          |
+| Performance     | NO      | YES          | YES         | NO            | YES         |
+| Scalability     | NO      | YES          | NO          | YES           | YES         |
+| Development     | YES     | NO           | NO          | YES           | NO          |
