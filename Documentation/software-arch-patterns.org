@@ -262,3 +262,50 @@ component that would affect other service components, thereby reducing the
 coordination needed among developers or development teams.
 
 * Space-Based Architecture
+
+** Overall agility
+
+Rating: High
+Analysis: Overall agility is the ability to respond quickly to a constantly
+changing environment. Because processing units (deployed instances of the
+application) can be brought up and down quickly, applications respond well to
+changes related to an increase or decrease in user load (environment changes).
+Architectures created using this pattern generally respond well to coding
+changes due to the small application size and dynamic nature of the pattern.
+
+** Ease of deployment
+
+Rating: High
+Analysis: Although space-based architectures are generally not decoupled and
+distributed, they are dynamic, and sophisticated cloud-based tools allow for
+applications to easily be "pushed" out to servers, simplifying deployment.
+
+** Testability
+
+Rating: Low
+Analysis: Achieving very high user loads in a test environment is both expensive
+and time consuming, making it difficult to test the scalability aspects of the
+application.
+
+** Performance
+
+Rating: High
+Analysis: High performance is achieved through the in-memory data access and
+caching mechanisms build into this pattern.
+
+** Scalability
+
+Rating: High
+Analysis: High scalability come from the fact that there is little or no
+dependency on a centralized database, therefore essentially removing this
+limiting bottleneck from the scalability equation.
+
+** Ease of development
+
+Rating: Low
+Analysis: Sophisticated caching and in-memory data grid products make this
+pattern relatively complex to develop, mostly because of the lack of familiarity
+with the tools and products used to create this type of architecture.
+Furthermore, special care must be taken while developing these types of
+architectures to make sure nothing in the source code impacts performance and
+scalability.
