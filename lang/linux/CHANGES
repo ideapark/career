@@ -165,7 +165,7 @@ for TLPI, available at http://man7.org/tlpi/errata/.
                 Changed several printf() statements to use unsigned types for
                 various fields, since (in the case of the 'statvfs' structure at
                 least) these fields are specified as unsigned in SUSv[34].
-                (The 'statfs' structure isn't covered by SUSv[34], but using 
+                (The 'statfs' structure isn't covered by SUSv[34], but using
                 unsigned types seems reasonable and safe.)
 
 2012-07-22
@@ -463,11 +463,11 @@ for TLPI, available at http://man7.org/tlpi/errata/.
                         # warning "_BSD_SOURCE and _SVID_SOURCE are
                         deprecated, use _DEFAULT_SOURCE"
 
-                warnings that are produced when compiling code that 
+                warnings that are produced when compiling code that
                 defines _SVID_SOURCE or _BSD_SOURCE against glibc headers
                 from version 2.20 onward.
         sysinfo/procfs_user_exe.c
-                Move inclusion of our header files (ugid_functions.h and 
+                Move inclusion of our header files (ugid_functions.h and
                 tlpi_hdr.h) to follow other #include lines (as is done in
                 all other code).
         vmem/madvise_dontneed.c
