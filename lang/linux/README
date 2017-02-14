@@ -72,10 +72,10 @@ of the chapter relating to that file.
 
 Directory       Files for Chapter...
 
-lib             This contains library routines used by other 
-                programs. The tlpi_hdr.h and error_functions.* 
+lib             This contains library routines used by other
+                programs. The tlpi_hdr.h and error_functions.*
                 files are located here.
-                
+
 progconc        3 (System Programming Concepts)
 
 fileio          4 and 5 (File I/O)
@@ -132,11 +132,11 @@ cap             39 (Capabilities)
 loginacct       40 (Login Accounting)
 
 shlibs          41 and 42 (Shared Libraries)
-    
+
 pipes           44 (Pipes and FIFOs)
 
 svipc           45 (System V IPC)
-    
+
 svmsg           46 (System V Message Queues)
 
 svsem           47 (System V Semaphores)
