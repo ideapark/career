@@ -3,12 +3,12 @@
 # This make file relies on the assumption that each C file in this
 # directory belongs in the library
 #
-# This makefile is very simple so that every version of make 
+# This makefile is very simple so that every version of make
 # should be able to handle it
 #
 include ../Makefile.inc
 
-# The library build is "brute force" -- we don't bother with 
+# The library build is "brute force" -- we don't bother with
 # dependency checking.
 
 allgen : ${TLPI_LIB}
@@ -24,4 +24,3 @@ ename.c.inc :
 
 clean :
 	${RM} *.o ename.c.inc ${TLPI_LIB}
-
