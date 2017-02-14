@@ -5,7 +5,7 @@
 #
 
 DIRS = 	lib \
-    	acl altio \
+	acl altio \
 	cap \
 	daemons dirs_links \
 	filebuff fileio filelock files filesys getopt \
@@ -36,11 +36,11 @@ BUILD_DIRS = ${DIRS} ${CDIRS}
 
 # Dummy targets for building and clobbering everything in all subdirectories
 
-all: 	
+all:
 	@ for dir in ${BUILD_DIRS}; do (cd $${dir}; ${MAKE}) ; done
 
-allgen: 
+allgen:
 	@ for dir in ${BUILD_DIRS}; do (cd $${dir}; ${MAKE} allgen) ; done
 
-clean: 
+clean:
 	@ for dir in ${BUILD_DIRS}; do (cd $${dir}; ${MAKE} clean) ; done
