@@ -2,7 +2,7 @@ include ../Makefile.inc
 
 GEN_EXE = t_getopt
 
-LINUX_EXE = 
+LINUX_EXE =
 
 EXE = ${GEN_EXE} ${LINUX_EXE}
 
@@ -10,7 +10,7 @@ all : ${EXE}
 
 allgen : ${GEN_EXE}
 
-clean : 
+clean :
 	${RM} ${EXE} *.o
 
 showall :
