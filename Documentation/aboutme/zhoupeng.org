@@ -52,7 +52,7 @@ Linux, AWS, Serverless
 
 - 一切对象资源化,资源化后就能够分配释放,这是AWS服务基础
 - Serverless无计算服务的理念,能够极大的提升资源利用,快速响应业务变化
-- AWS镪大的DevOps能力
+- AWS强大的DevOps能力
 
 ** RESTful接口测试
 
