@@ -166,4 +166,5 @@ Python语言作为流程胶合代码,在Molint跨平台移植,版本级使用到
 
 - [reporter](https://github.com/lockrecv/more/tree/master/works/reporter)
 - [sysstat](https://github.com/lockrecv/more/tree/master/works/sysstat)
-- [kiss](https://www.gitbook.com/book/lockrecv/kiss/details)
+- [kiss](https://www.github.com/lockrecv/more/tree/master/works/libkiss/)
+- [less](https://www.github.com/lockrecv/more/tree/master/works/less/SUMMARY.md)
