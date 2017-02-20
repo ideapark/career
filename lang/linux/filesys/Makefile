@@ -4,13 +4,13 @@ GEN_EXE = t_statvfs
 
 LINUX_EXE = t_statfs t_mount t_umount
 
-EXE = ${GEN_EXE} ${LINUX_EXE} 
+EXE = ${GEN_EXE} ${LINUX_EXE}
 
 all : ${EXE}
 
 allgen : ${GEN_EXE}
 
-clean : 
+clean :
 	${RM} ${EXE} *.o
 
 showall :
