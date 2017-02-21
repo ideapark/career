@@ -10,7 +10,7 @@
 #include "reporter_options.h"
 #include "reporter_transfer.h"
 
-int main(int argc, char const * argv[])
+int main(int argc, char const *argv[])
 {
 	reporter::get_options(argc, argv);
 
