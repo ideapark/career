@@ -79,7 +79,7 @@ Python, REST
 OSGi架构软件的IT测试方案,提供了一个主控Bundle负责用例Bundle管理和控制,和一个测试
 Bundle,提供测试框架GTest/GMock支持.
 
-*** 进能
+*** 技能
 
 Java OSGi, C, Linux网络程序开发
 
