@@ -5,6 +5,7 @@
 [[file:emacs.png]]
 
 * C/C++ programming
+
 ** coding
   - auto completion
   - indent/format
@@ -14,29 +15,36 @@
   - find reference
   - find tags
   - jump to header/source file
+
 ** compile
   - jump error to source
   - recompile
+
 ** debug
   - gdb
   - source window
   - register window
   - stack window
   - thread window
+
 ** version control
   - checkout
   - commit
   - diff
   - blame
   - log
+
 * Documentation
+
 ** org-mode
   - TODO
 
 *** DONE Prepare a orgmode notes
     CLOSED: [2016-11-25 Fri 00:03]
+
 *** DONE Emacser time
     CLOSED: [2016-12-03 Sat 14:11]
+
 *** DONE Q/A
     CLOSED: [2016-12-03 Sat 14:11]
 
@@ -66,19 +74,25 @@
 
 ** markdown
   - syntax hightlight
+
 * Misc
+
 ** browser
   - builtin eww
   - host's browser
+
 ** ssh
   - remote access
   - /ssh:user@host:password
+
 ** shell
   - local access
+
 ** theme
   - dark
   - light
   - more
+
 ** pdf
   - view
   - export
