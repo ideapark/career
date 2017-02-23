@@ -1,11 +1,14 @@
-/* userns_overview.go
-
-   Display a hierarchical view of the user namespaces on the
-   system along with the member processes for each namespace.
-   This requires features new in Linux 4.9. See the
-   namespaces(7) man page.
-   (http://man7.org/linux/man-pages/man7/namespaces.7.html)
-*/
+/*
+ * LICENSE: GPL
+ *
+ * userns_overview.go
+ *
+ * Display a hierarchical view of the user namespaces on the
+ * system along with the member processes for each namespace.
+ * This requires features new in Linux 4.9. See the
+ * namespaces(7) man page.
+ * (http://man7.org/linux/man-pages/man7/namespaces.7.html)
+ */
 
 package main
 
@@ -101,13 +104,13 @@ func AddNamespace(namespaceFD int, pid int) NamespaceID {
 		parentFD := (int)((uintptr)(unsafe.Pointer(r)))
 
 		if parentFD == -1 {
-			switch (e) {
+			switch e {
 			case syscall.EPERM:
 				// This is the initial NS; remember it
 				initialNS = ns
 			case syscall.ENOTTY:
 				fmt.Println("This kernel doesn't support " +
-						"namespace introspection");
+					"namespace introspection")
 				os.Exit(1)
 			default:
 				// Unexpected error; bail

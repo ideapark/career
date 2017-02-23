@@ -1,6 +1,6 @@
 include ../Makefile.inc
 
-GEN_EXE = orphan 
+GEN_EXE = orphan
 
 LINUX_EXE = \
 	    demo_userns \
@@ -23,7 +23,7 @@ all : ${EXE}
 
 allgen : ${GEN_EXE}
 
-clean : 
+clean :
 	${RM} ${EXE} *.o
 
 showall :
