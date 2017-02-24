@@ -1,5 +1,7 @@
 /*
  * Copyright (c) Zhou Peng <lockrecv@qq.com>
+ *
+ * Breadth first search algorithm implemented by C programming language.
  */
 
 #include "list.h"
