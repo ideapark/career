@@ -283,6 +283,7 @@ static void setup_sysstatdaemon()
 {
 	go_fork();
 
+	/* start a new session, current process became group leader */
 	if (setsid() < 0) {
 		perror("go_daemon: couldn't setsid\n");
 		exit(EXIT_FAILURE);
