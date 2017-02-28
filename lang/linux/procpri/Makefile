@@ -1,6 +1,6 @@
 include ../Makefile.inc
 
-GEN_EXE = sched_set sched_view t_setpriority 
+GEN_EXE = sched_set sched_view t_setpriority
 
 LINUX_EXE = demo_sched_fifo t_sched_setaffinity t_sched_getaffinity
 
@@ -12,7 +12,7 @@ all : ${EXE}
 
 allgen : ${GEN_EXE}
 
-clean : 
+clean :
 	${RM} ${EXE} *.o
 
 showall :
