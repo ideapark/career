@@ -18,3 +18,16 @@ struct elf_hdr {
 	short phdrent;             /* number of entries in section header or 0 */
 	short strsec;              /* section number that contains section name strings */
 };
+
+struct sechdr {
+	int sh_name;    /* name, index into the string table */
+	int sh_type;    /* section type */
+	int sh_flags;   /* flag bits, below */
+	int sh_addr;    /* base memory address, if loadable, or zero */
+	int sh_offset;  /* file position of beginning of section */
+	int sh_size;    /* size in bytes*/
+	int sh_link;    /* section number with related info or zero */
+	int sh_info;    /* more section-specific info */
+	int sh_align;   /* alignment granularity if section is moved */
+	int sh_entsize; /* size of entries if section is an array */
+};
