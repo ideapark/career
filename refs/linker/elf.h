@@ -1,4 +1,4 @@
-struct elf_hdr {
+struct elf_filehdr {
 	char magic[4] = "\177ELF"; /* magic number */
 	char class;                /* address size, 1: 32 bit, 2: 64 bit */
 	char byteorder;            /* 1: little-endian, 2: big-endian */
@@ -19,7 +19,18 @@ struct elf_hdr {
 	short strsec;              /* section number that contains section name strings */
 };
 
-struct sechdr {
+struct elf_proghdr {
+	int type;     /* loadable code or data, dynamic linking info, etc. */
+	int offset;   /* file offset of segment */
+	int virtaddr; /* virtual address to map segment */
+	int physaddr; /* physical address, not used */
+	int filesize; /* size of segment in file */
+	int memsize;  /* size of segment in memory (bigger if contains BSS) */
+	int flags;    /* Read, Write, Execute bits */
+	int align;    /* required alignment, invariably hardware page size */
+};
+
+struct elf_secthdr {
 	int sh_name;    /* name, index into the string table */
 	int sh_type;    /* section type */
 	int sh_flags;   /* flag bits, below */
