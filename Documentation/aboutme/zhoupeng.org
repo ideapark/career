@@ -1,6 +1,6 @@
 #+TITLE: 简历
 #+AUTHOR: 周朋
-#+EMAIL: lockrecv@qq.com
+#+EMAIL: lockrecv@outlook.com
 
 * 基本信息
 
