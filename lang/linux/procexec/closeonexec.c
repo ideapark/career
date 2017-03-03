@@ -1,39 +1,29 @@
-/*************************************************************************\
-*                  Copyright (C) Michael Kerrisk, 2016.                   *
-*                                                                         *
-* This program is free software. You may use, modify, and redistribute it *
-* under the terms of the GNU General Public License as published by the   *
-* Free Software Foundation, either version 3 or (at your option) any      *
-* later version. This program is distributed without any warranty.  See   *
-* the file COPYING.gpl-v3 for details.                                    *
-\*************************************************************************/
-
-/* Listing 27-6 */
-
-/* closeonexec.c
-
-   Demonstrate retrieving and updating of the file descriptor
-   close-on-exec flag.
-*/
+/*
+ * LICENSE: GPL
+ *
+ * closeonexec.c
+ *
+ * Demonstrate retrieving and updating of the file descriptor
+ * close-on-exec flag.
+ */
 #include <fcntl.h>
 #include "tlpi_hdr.h"
 
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
-    int flags;
+	int flags;
 
-    if (argc > 1) {
-        flags = fcntl(STDOUT_FILENO, F_GETFD);              /* Fetch flags */
-        if (flags == -1)
-            errExit("fcntl - F_GETFD");
+	if (argc > 1) {
+		flags = fcntl(STDOUT_FILENO, F_GETFD);              /* Fetch flags */
+		if (flags == -1)
+			errExit("fcntl - F_GETFD");
 
-        flags |= FD_CLOEXEC;                    /* Turn on FD_CLOEXEC */
+		flags |= FD_CLOEXEC;                    /* Turn on FD_CLOEXEC */
 
-        if (fcntl(STDOUT_FILENO, F_SETFD, flags) == -1)     /* Update flags */
-            errExit("fcntl - F_SETFD");
-    }
+		if (fcntl(STDOUT_FILENO, F_SETFD, flags) == -1)     /* Update flags */
+			errExit("fcntl - F_SETFD");
+	}
 
-    execlp("ls", "ls", "-l", argv[0], (char *) NULL);
-    errExit("execlp");
+	execlp("ls", "ls", "-l", argv[0], (char *) NULL);
+	errExit("execlp");
 }
