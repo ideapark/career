@@ -168,17 +168,17 @@ Python语言作为流程胶合代码,在Molint跨平台移植,版本级使用到
 
 * 我的作品
 
-** [reporter]: Linux程序性能剖析
+** reporter: Linux程序性能剖析
 (https://github.com/lockrecv/more/tree/master/works/reporter)
 
-** [sysstat]: Linux内存,线程,中断性能数据采集
+** sysstat: Linux内存,线程,中断性能数据采集
 (https://github.com/lockrecv/more/tree/master/works/sysstat)
 
-** [kiss]: Linux工具集迷你C库
+** kiss: Linux工具集迷你C库
 (https://github.com/lockrecv/more/tree/master/works/libkiss)
 
-** [less]: Unix KISS哲学思想示例
+** less: Unix KISS哲学思想示例
 (https://github.com/lockrecv/more/tree/master/works/less/SUMMARY.md)
 
-** [tank]: 坦克大战游戏简化版
+** tank: 坦克大战游戏简化版
 (https://github.com/lockrecv/more/tree/master/works/tank)
