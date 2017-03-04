@@ -1,0 +1,293 @@
+#+TITLE: Loading a dynamic linked program
+#+AUTHOR: John Levine
+#+EMAIL: lockrecv@outlook.com
+
+* Starting the dynamic linker
+
+When the operating system runs the program, it maps in the file's pages as
+normal, but notes that there's an INTERPRETER section in the executable. The
+specified interpreter is the dynamic linker, =ld.so=, which is itself in ELF
+shared library format. Rather than starting the program, the system maps the
+dynamic linker into a convenient part of the address space as well and starts
+=ld.so=, passing on the stack an auxiliary vector of information needed by the
+linker. The vector includes:
+
+** AT_PHDR
+
+The address of the program header for the program file
+
+** AT_PHENT
+
+The size of each entry in the header
+
+** AT_PHNUM
+
+The number of entries.
+
+This structure describes the segments in the loaded file. If the system hasn't
+mapped the program into memory, there may instead be a =AT_EXECFD= entry that
+contains the file descriptor on which the program file is open.
+
+** AT_ENTRY
+
+Starting address of the program, to which the dynamic linker jumps after it has
+finished initialization.
+
+** AT_BASE
+
+The address at which the dynamic linker was loaded
+
+At this point, bootstrap code at the beginning of =ld.so= finds its own =GOT=,
+the first entry in which points to the DYNAMIC segment in the =ld.so= file. From
+the dynamic segment, the linker can find its own relocation entries, relocate
+pointers in its data segment, and resolve code references to the routines needed
+to load everything else. (The Linux ld.so names all of the essential routines
+with names starting with =_dt_= and special-case code looks for symbols that
+start with the string and resolves them.)
+
+The linker then initializes a chain of symbol tables with pointers to the
+program's symbol table and the linker's own symbol table. Conceptually, the
+program file and all of the libraries loaded into a process share a single
+symbol table. But rather than build a merged symbol table at runtime, the linker
+keeps a linked list of the symbol tables in each file. each file contains a hash
+table to speed symbol lookup, with a set of hash headers and a hash chain for
+each header. The linker can search for a symbol quickly by computing the
+symbol's hash value once, then running through appropriate hash chain in each of
+the symbol tables in the list.
+
+* Finding the libraries
+
+Once the linker's own initialization are done, it finds the names of the
+libraries required by the program. The program's program header has a pointer to
+the "dynamic" segment in the file that contains dynamic linking information.
+That segment contains a pointer, =DT_STRTAB=, to the file's string table, and
+entries =DT_NEEDED= each of which contains the offset in the string table of the
+name of a required library.
+
+For each library, the linker finds the library's ELF shared library file, which
+is in itself a fairly complex process. The library name in a =DT_NEEDED= entry
+is something like =libXt.so.6= (the Xt toolkit, version 6.) The library file
+might in any of serveral library directories, and might not even have the same
+file name. On my system, the actual name of that library is
+=/usr/X11R6/libXt.so.6.0=, with the ".0" at the end being a minor version
+number.
+
+The linker looks in these places to find the library:
+
+- If the dynamic segment contains an entry called =DT_RPATH=, it's a
+  colon-separated list of directories to search for libraries. This entry is
+  added by a command line switch or environment variable to the regular (not
+  dynamoc) linker at the time a program is linked. It's mostly used for
+  subsystems like databases that load a collection of programs and supporting
+  libraries into a single directory.
+
+- If there's an environment symbol =LD_LIBRARY_PATH=, it's treated as a
+  colon-separated list of directories in which the linker looks for the library.
+  This lets a developer build a new version of a library, put it in the
+  =LD_LIBRARY_PATH= and use it with existing linked programs either to test the
+  new library, or equally well to instrument the behavior of the program. (It
+  skips this step if the program is set-uid, for security reasons.)
+
+- The linker looks in the library cache file =/etc/ld.so.conf= which contains a
+  list of library names and paths. If the library name is present, it uses the
+  corresponding path. This is the usual way that most libraries are found. (The
+  file name at the end of the path need not be exactly the same as the library
+  name, see the section on library versions, below.)
+
+- If all else fails, it looks in the default directory =/usr/lib=, and if the
+  library's still not found, displays an error message and exits.
+
+Once it's found the file containing the library, the dynamic opens the file, and
+reads the ELF header to find the program header which in turn points to the
+file's segments including the dynamic segment. The linker allocates space for
+the library's symbol to the chain of symbol tables, and if the library requires
+further libraries not already loaded, adds any new libraries to the list to be
+loaded.
+
+When this process terminates, all of the libraries have been mapped in, and the
+loader has a logical global symbol table consisting of the union of all of the
+symbols tables of the program and the mapped library.
+
+* Shared library initialization
+
+Now the loader revisits each library and handles the library's relocation
+entries, filling in the library's GOT and performing any relocations needed in
+the library's data segment. Load-time relocations on an x86 include:
+
+- =R_386_GLOB_DAT=, used to initialize a GOT entry to the address of a symbol
+  defined in another library.
+
+- =R_386_32=, a non-GOT reference to a symbol defined in another library,
+  generally a pointer in static data.
+
+- =R_386_RELATIVE=, for relocatable data references, typically a pointer to a
+  string or other locally defined static data.
+
+- =R_386_JMP_SLOT=, used to initialize GOT entries for the PLT, described later.
+
+If a library has an =.init= section, the loader calls it to do library-specific
+initializations, such as C++ static constructors, and any =.fini= section is
+noted to be run at exit time. (It doesn't do the init for the main program,
+since that's handled in the program's own startup code.) When this pass is done,
+all of the libraries are fully loaded and ready to execute, and the loader calls
+the programs's entry point to start the program.
+
+* Lazy procedure linkage with the PLT
+
+Programs that use shared libraries generally contain calls to lot of functions.
+In a single run of the program many of the functions are never called, in error
+routines or other parts of the program that aren't used. Futhermore, each shared
+library also contains calls to functions in other libraries, even fewer of which
+will be executed in a given program run since many of them are in routines that
+the program never calls either directly or indirectly.
+
+To speed program startup, dynamiclly linked ELF programs use lazy binding of
+procedure addresses. That is, the address of a procedure isn't bound until the
+first time the procedure is called.
+
+ELF supports lazy binding via the Procedure Linkage Table, or PLT. Each
+dynamiclly bound program and shared library has a PLT, with the PLT containing
+an entry for each non-local routine called from the program or library.
+
+#+BEGIN_SRC asm
+# PLT structure in x86 code
+
+# Special first entry
+PLT0: pushl GOT+4
+      jmp *GOT+8
+
+# Regular entries, non-PIC code:
+PLTn: jmp *GOT+m
+      push #reloc_offset
+      jmp PLT0
+
+# Regular entries, PIC code:
+PLTn: jmp *GOT+m(%ebx)
+      push #reloc_offset
+      jmp PLT0
+#+END_SRC
+
+All calls within the program or library to a particular routine are adjusted
+when the program or library is built to be calls to the routine's entry in the
+PLT. The first time the program or library calls a routine, the PLT entry calls
+the runtime linker to resolve the actual address of the routine. After that, the
+PLT entry jumps directly to the actual address, so after the first call, the
+cost of using the PLT is a single extra indirect jump at a procedure call, and
+nothing at a return.
+
+The first entry in the PLT, which we call PLT0, is special code to call the
+dynamic linker. At load time, the dynamic linker automatically places two values
+in the GOT. At GOT+4 (the second word of the GOT) it puts a code that identifies
+the particular library. At GOT+8, it puts the address of the dynamic linker's
+symbol resolution routine.
+
+The rest of the entries in the PLT, which we call PLTn, each start with an
+indirect jump through a GOT entry. Each PLT entry has a corresponding GOT entry
+which is initially set to point to the push instruction in the PLT entry that
+follows the jmp. (In a PIC file this requires a loadtime relocation, but not an
+expensive symbol lookup.) Following the jump is a push instruction which pushes
+a relocation offset, the offset in the file's relocation table of a special
+relocation entry of type =R_386_JMP_SLOT=. The relocation entry's symbol
+reference points to the symbol in the file's symbol table, and its address
+points to the GOT entry.
+
+This compact but rather baroque arrangement means that the first time the
+program or library calls a PLT entry, the first jump in the PLT entry in effect
+does nothing, since the GOT entry through which it jumps points back into the
+PLT entry. Then the push instruction pushes the offset value which indirectly
+identifies both the symbol to resolve and the GOT entry into which to resolve
+it, and jumps to PLT0. The instruction in PLT0 push another code that identifies
+which program or library it is, and then jumps into stub code in the dynamic
+linker with the two identifying codes at the top of the stack. Note that this
+was a jump, rather than a call, above the two identifying words just pushed is
+the return address back to the routine that called into the PLT.
+
+Now the stub code saves all the registers and calls an internal routine in the
+dynamic linker to do the resolution. the two identifying words suffice to find
+the library's symbol table and the routine's entry in that symbol table. The
+dynamic linker looks up the symbol value using the concatenated runtime symbol
+table, and stores the routine's address into the GOT entry. Then the stub code
+restores the registers, pops the two words that the PLT pushed, and jumps off to
+the routine. The GOT entry having been updated, subsequent calls to that PLT
+entry jump directly to the routine itself without entering the dynamic linker.
+
+* Other peculiarities of dynamic linking
+
+The ELF linker and dynamic linker have a lot of obscure code to handle special
+cases and try and keep the runtime semantics as similar as possible to whose of
+unshared libraries.
+
+** Static initializations
+
+If a program has an external reference to a global variable defined in a shared
+library, the linker has to create in the program a copy of the variable, since
+program data addresses have to be bound at link time. This poses no problem for
+the code in the shared library, since the code can refer to the variable via a
+GOT pointer which the dynamic linker can fix up, but there is a problem if the
+library initializes the variable. To deal with this problem, the linker puts an
+entry in the program's relocation table (which otherwise just contains
+=R_386_JMP_SLOT=, =R_386_GLOB_DAT=, =R_386_32=, and =R_386_RELATIVE= entries) of
+type =R_386_COPY= that points to the place in the program where the copy of the
+variable is defined, and tells the dynamic linker to copy the initial value of
+that word of data from the shared library.
+
+#+BEGIN_SRC c
+/* Global data initialization */
+
+/* Main program */
+extern int token;
+
+/* Routine in shared library */
+int token = 42;
+#+END_SRC
+
+Although this feature is essential for certain kinds of code, it occurs very
+rarely in practice. This is a band-aid, since it only works for single word
+data. The initializers that do occur are always pointers to procedures or other
+data, so the band-aid suffices.
+
+** Library versions
+
+Dynamic libraries are generally named with major and minor versions numbers,
+like libc.so.1.1 but programs should be bound only to major version numbers like
+libc.so.1 since minor versions are supposed to be upward compatible.
+
+To keep program loading reasonably fast, the system manager maintains a cache
+file containing the full pathname most recent version of each library, which is
+updated by a configuration program whenever a new library is installed.
+
+To support this design, each dynamically linked library can have a "true name"
+called the SONAME assigned at library creation time. For example, the library
+called libc.so.1.1 would have a SONAME of libc.so.1. (The SONAME defaults to the
+library's name.) When the linker builds a program that uses shared libraries, it
+lists the SONAMEs of the libraries it used rather than the actual names of the
+libraries. The cache creation program scans all of the directories that contain
+shared libraries, finds all of the shared libraries, extracts the SONAME from
+each one, and where there are multiple libraries with the same SONAME, discards
+all but the highest version number. Then it writes the cache file with SONAMEs
+and full pathnames so at runtime the dynamic linker can quickly find the current
+version of each library.
+
+** Dynamic loading at runtime
+
+Although the ELF dynamic linker is usually called implcitly at program load time
+and from PLT entries, programs can also call it explicitly using dlopen() to
+load a shared library and dlsym() to find the address of a symbol, usually a
+procedure to call. Those two routines are actually simple wrappers that call
+back into the dynamic linker. When the dynamic linker loads a library via
+dlopen(), it does the same relocation and symbol resolution it does on any other
+library, so the dynamically loaded program can without any special arrangements
+call back to routines already loaded and refer to global data in the running
+program.
+
+This permits users to add extra functionality to programs without access to the
+source code of the programs and without even having to stop and restart the
+programs (useful when the program is something like a database or a web server.)
+Mainframe operating systems have provided access to "exit routines" like this
+since at least the early 1960s, albeit without such a convenient interface, and
+it's long been a way to add great flexibility to packaged applications. It also
+provides a way for programs to extend themselves; there's no reason a program
+couldn't write a routine in C or C++, run the compiler and linker to create a
+shared library, then dynamically load and run the new code. (Mainframe sort
+programs have linked and loaded custom inner loop code for each sort job for
+decades.)
