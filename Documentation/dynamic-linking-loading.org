@@ -41,7 +41,7 @@ At this point, bootstrap code at the beginning of =ld.so= finds its own =GOT=,
 the first entry in which points to the DYNAMIC segment in the =ld.so= file. From
 the dynamic segment, the linker can find its own relocation entries, relocate
 pointers in its data segment, and resolve code references to the routines needed
-to load everything else. (The Linux ld.so names all of the essential routines
+to load everything else. (The Linux =ld.so= names all of the essential routines
 with names starting with =_dt_= and special-case code looks for symbols that
 start with the string and resolves them.)
 
@@ -66,10 +66,10 @@ name of a required library.
 
 For each library, the linker finds the library's ELF shared library file, which
 is in itself a fairly complex process. The library name in a =DT_NEEDED= entry
-is something like =libXt.so.6= (the Xt toolkit, version 6.) The library file
-might in any of serveral library directories, and might not even have the same
+is something like =libXt.so.6= (the =Xt= toolkit, version 6.) The library file
+might in any of several library directories, and might not even have the same
 file name. On my system, the actual name of that library is
-=/usr/X11R6/libXt.so.6.0=, with the ".0" at the end being a minor version
+=/usr/X11R6/libXt.so.6.0=, with the =.0= at the end being a minor version
 number.
 
 The linker looks in these places to find the library:
@@ -77,7 +77,7 @@ The linker looks in these places to find the library:
 - If the dynamic segment contains an entry called =DT_RPATH=, it's a
   colon-separated list of directories to search for libraries. This entry is
   added by a command line switch or environment variable to the regular (not
-  dynamoc) linker at the time a program is linked. It's mostly used for
+  dynamic) linker at the time a program is linked. It's mostly used for
   subsystems like databases that load a collection of programs and supporting
   libraries into a single directory.
 
@@ -86,7 +86,7 @@ The linker looks in these places to find the library:
   This lets a developer build a new version of a library, put it in the
   =LD_LIBRARY_PATH= and use it with existing linked programs either to test the
   new library, or equally well to instrument the behavior of the program. (It
-  skips this step if the program is set-uid, for security reasons.)
+  skips this step if the program is =set-uid=, for security reasons.)
 
 - The linker looks in the library cache file =/etc/ld.so.conf= which contains a
   list of library names and paths. If the library name is present, it uses the
@@ -97,12 +97,12 @@ The linker looks in these places to find the library:
 - If all else fails, it looks in the default directory =/usr/lib=, and if the
   library's still not found, displays an error message and exits.
 
-Once it's found the file containing the library, the dynamic opens the file, and
-reads the ELF header to find the program header which in turn points to the
-file's segments including the dynamic segment. The linker allocates space for
-the library's symbol to the chain of symbol tables, and if the library requires
-further libraries not already loaded, adds any new libraries to the list to be
-loaded.
+Once it's found the file containing the library, the dynamic linker opens the
+file, and reads the ELF header to find the program header which in turn points
+to the file's segments including the dynamic segment. The linker allocates space
+for the library's symbol to the chain of symbol tables, and if the library
+requires further libraries not already loaded, adds any new libraries to the
+list to be loaded.
 
 When this process terminates, all of the libraries have been mapped in, and the
 loader has a logical global symbol table consisting of the union of all of the
@@ -130,7 +130,7 @@ initializations, such as C++ static constructors, and any =.fini= section is
 noted to be run at exit time. (It doesn't do the init for the main program,
 since that's handled in the program's own startup code.) When this pass is done,
 all of the libraries are fully loaded and ready to execute, and the loader calls
-the programs's entry point to start the program.
+the program's entry point to start the program.
 
 * Lazy procedure linkage with the PLT
 
@@ -141,13 +141,14 @@ library also contains calls to functions in other libraries, even fewer of which
 will be executed in a given program run since many of them are in routines that
 the program never calls either directly or indirectly.
 
-To speed program startup, dynamiclly linked ELF programs use lazy binding of
+To speed program startup, dynamically linked ELF programs use lazy binding of
 procedure addresses. That is, the address of a procedure isn't bound until the
 first time the procedure is called.
 
-ELF supports lazy binding via the Procedure Linkage Table, or PLT. Each
-dynamiclly bound program and shared library has a PLT, with the PLT containing
-an entry for each non-local routine called from the program or library.
+ELF supports lazy binding via the Procedure Linkage Table, or =PLT=. Each
+dynamically bound program and shared library has a =PLT=, with the =PLT=
+containing an entry for each non-local routine called from the program or
+library.
 
 #+BEGIN_SRC asm
 # PLT structure in x86 code
@@ -169,25 +170,25 @@ PLTn: jmp *GOT+m(%ebx)
 
 All calls within the program or library to a particular routine are adjusted
 when the program or library is built to be calls to the routine's entry in the
-PLT. The first time the program or library calls a routine, the PLT entry calls
-the runtime linker to resolve the actual address of the routine. After that, the
-PLT entry jumps directly to the actual address, so after the first call, the
-cost of using the PLT is a single extra indirect jump at a procedure call, and
-nothing at a return.
+=PLT=. The first time the program or library calls a routine, the =PLT= entry
+calls the runtime linker to resolve the actual address of the routine. After
+that, the =PLT= entry jumps directly to the actual address, so after the first
+call, the cost of using the =PLT= is a single extra indirect jump at a procedure
+call, and nothing at a return.
 
-The first entry in the PLT, which we call PLT0, is special code to call the
+The first entry in the =PLT=, which we call PLT0, is special code to call the
 dynamic linker. At load time, the dynamic linker automatically places two values
 in the GOT. At GOT+4 (the second word of the GOT) it puts a code that identifies
 the particular library. At GOT+8, it puts the address of the dynamic linker's
 symbol resolution routine.
 
-The rest of the entries in the PLT, which we call PLTn, each start with an
-indirect jump through a GOT entry. Each PLT entry has a corresponding GOT entry
-which is initially set to point to the push instruction in the PLT entry that
-follows the jmp. (In a PIC file this requires a loadtime relocation, but not an
-expensive symbol lookup.) Following the jump is a push instruction which pushes
-a relocation offset, the offset in the file's relocation table of a special
-relocation entry of type =R_386_JMP_SLOT=. The relocation entry's symbol
+The rest of the entries in the =PLT=, which we call PLTn, each start with an
+indirect jump through a GOT entry. Each =PLT= entry has a corresponding =GOT=
+entry which is initially set to point to the push instruction in the =PLT= entry
+that follows the jmp. (In a PIC file this requires a loadtime relocation, but
+not an expensive symbol lookup.) Following the jump is a push instruction which
+pushes a relocation offset, the offset in the file's relocation table of a
+special relocation entry of type =R_386_JMP_SLOT=. The relocation entry's symbol
 reference points to the symbol in the file's symbol table, and its address
 points to the GOT entry.
 
@@ -250,7 +251,7 @@ data, so the band-aid suffices.
 
 Dynamic libraries are generally named with major and minor versions numbers,
 like libc.so.1.1 but programs should be bound only to major version numbers like
-libc.so.1 since minor versions are supposed to be upward compatible.
+=libc.so.1= since minor versions are supposed to be upward compatible.
 
 To keep program loading reasonably fast, the system manager maintains a cache
 file containing the full pathname most recent version of each library, which is
