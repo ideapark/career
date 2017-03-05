@@ -1,6 +1,4 @@
-LESS IS MORE
-============
+KISS: Keep it simple, stupid
+============================
 
-Copyright (c) 2013 Zhou Peng <lockrecv@qq.com>
-
-At sixes and sevens
+Copyright (c) 2012 - 2017 Zhou Peng <lockrecv@outlook.com>
