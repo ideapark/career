@@ -24,7 +24,7 @@ void add_history(char *unused) {}
 /* Otherwise include the editline headers */
 #else
 #include <editline/readline.h>
-#include <editline/history.h>
+#include <histedit.h>
 #endif
 
 int main(int argc, char **argv)

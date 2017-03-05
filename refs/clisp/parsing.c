@@ -18,7 +18,7 @@ void add_history(char *unused) {}
 
 #else
 #include <editline/readline.h>
-#include <editline/history.h>
+#include <histedit.h>
 #endif
 
 int main(int argc, char **argv)

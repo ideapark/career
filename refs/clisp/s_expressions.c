@@ -17,7 +17,7 @@ void add_history(char *unused) {}
 
 #else
 #include <editline/readline.h>
-#include <editline/history.h>
+#include <histedit.h>
 #endif
 
 /* Add SYM and SEXPR as possible lval types */
