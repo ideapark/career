@@ -6,7 +6,7 @@
 #
 set -v
 
-# In the following, vis_comm() is accidentally exported by the 
+# In the following, vis_comm() is accidentally exported by the
 # shared library
 
 gcc -g -c -fPIC -Wall vis_comm.c vis_f1.c vis_f2.c
