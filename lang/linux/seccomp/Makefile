@@ -1,6 +1,6 @@
 include ../Makefile.inc
 
-GEN_EXE = 
+GEN_EXE =
 
 LINUX_EXE = libseccomp_demo seccomp_control_open seccomp_deny_open seccomp_perf
 
@@ -10,7 +10,7 @@ all : ${EXE}
 
 allgen : ${GEN_EXE}
 
-clean : 
+clean :
 	${RM} ${EXE} *.o
 
 showall :
