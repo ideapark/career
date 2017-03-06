@@ -68,12 +68,12 @@ int mpc_parse_contents(const char *filename, mpc_parser_t *p, mpc_result_t *r);
  * Function Types
  */
 
-typedef void(*mpc_dtor_t)(mpc_val_t*);
-typedef mpc_val_t*(*mpc_ctor_t)(void);
+typedef void (*mpc_dtor_t)(mpc_val_t *);
+typedef mpc_val_t *(*mpc_ctor_t)(void);
 
-typedef mpc_val_t*(*mpc_apply_t)(mpc_val_t*);
-typedef mpc_val_t*(*mpc_apply_to_t)(mpc_val_t*,void*);
-typedef mpc_val_t*(*mpc_fold_t)(int,mpc_val_t**);
+typedef mpc_val_t *(*mpc_apply_t)(mpc_val_t *);
+typedef mpc_val_t *(*mpc_apply_to_t)(mpc_val_t *, void *);
+typedef mpc_val_t *(*mpc_fold_t)(int, mpc_val_t **);
 
 /*
  * Building a Parser
@@ -95,7 +95,7 @@ mpc_parser_t *mpc_char(char c);
 mpc_parser_t *mpc_range(char s, char e);
 mpc_parser_t *mpc_oneof(const char *s);
 mpc_parser_t *mpc_noneof(const char *s);
-mpc_parser_t *mpc_satisfy(int(*f)(char));
+mpc_parser_t *mpc_satisfy(int (*f)(char));
 mpc_parser_t *mpc_string(const char *s);
 
 /*
@@ -107,7 +107,7 @@ mpc_parser_t *mpc_fail(const char *m);
 mpc_parser_t *mpc_failf(const char *fmt, ...);
 mpc_parser_t *mpc_lift(mpc_ctor_t f);
 mpc_parser_t *mpc_lift_val(mpc_val_t *x);
-mpc_parser_t *mpc_anchor(int(*f)(char,char));
+mpc_parser_t *mpc_anchor(int (*f)(char, char));
 mpc_parser_t *mpc_state(void);
 
 /*
@@ -229,17 +229,17 @@ mpc_val_t *mpcf_unescape_regex(mpc_val_t *x);
 mpc_val_t *mpcf_unescape_string_raw(mpc_val_t *x);
 mpc_val_t *mpcf_unescape_char_raw(mpc_val_t *x);
 
-mpc_val_t *mpcf_null(int n, mpc_val_t** xs);
-mpc_val_t *mpcf_fst(int n, mpc_val_t** xs);
-mpc_val_t *mpcf_snd(int n, mpc_val_t** xs);
-mpc_val_t *mpcf_trd(int n, mpc_val_t** xs);
+mpc_val_t *mpcf_null(int n, mpc_val_t **xs);
+mpc_val_t *mpcf_fst(int n, mpc_val_t **xs);
+mpc_val_t *mpcf_snd(int n, mpc_val_t **xs);
+mpc_val_t *mpcf_trd(int n, mpc_val_t **xs);
 
-mpc_val_t *mpcf_fst_free(int n, mpc_val_t** xs);
-mpc_val_t *mpcf_snd_free(int n, mpc_val_t** xs);
-mpc_val_t *mpcf_trd_free(int n, mpc_val_t** xs);
+mpc_val_t *mpcf_fst_free(int n, mpc_val_t **xs);
+mpc_val_t *mpcf_snd_free(int n, mpc_val_t **xs);
+mpc_val_t *mpcf_trd_free(int n, mpc_val_t **xs);
 
-mpc_val_t *mpcf_strfold(int n, mpc_val_t** xs);
-mpc_val_t *mpcf_maths(int n, mpc_val_t** xs);
+mpc_val_t *mpcf_strfold(int n, mpc_val_t **xs);
+mpc_val_t *mpcf_maths(int n, mpc_val_t **xs);
 
 /*
  * Regular Expression Parsers
@@ -256,7 +256,7 @@ typedef struct mpc_ast_t {
 	char *contents;
 	mpc_state_t state;
 	int children_num;
-	struct mpc_ast_t** children;
+	struct mpc_ast_t **children;
 } mpc_ast_t;
 
 mpc_ast_t *mpc_ast_new(const char *tag, const char *contents);
@@ -316,13 +316,13 @@ mpc_err_t *mpca_lang_contents(int flags, const char *filename, ...);
 void mpc_print(mpc_parser_t *p);
 
 int mpc_test_pass(mpc_parser_t *p, const char *s, const void *d,
-		  int(*tester)(const void*, const void*),
+		  int (*tester)(const void *, const void *),
 		  mpc_dtor_t destructor,
-		  void(*printer)(const void*));
+		  void (*printer)(const void *));
 
 int mpc_test_fail(mpc_parser_t *p, const char *s, const void *d,
-		  int(*tester)(const void*, const void*),
+		  int (*tester)(const void *, const void *),
 		  mpc_dtor_t destructor,
-		  void(*printer)(const void*));
+		  void (*printer)(const void *));
 
 #endif
