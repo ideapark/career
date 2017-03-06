@@ -18,6 +18,11 @@ ifeq ($(findstring MINGW,$(PLATFORM)),MINGW)
 	FILES += prompt_windows
 endif
 
+ifeq ($(findstring CYGWIN,$(PLATFORM)),CYGWIN)
+	LFLAGS += -ledit -lm
+	FILES += prompt_unix
+endif
+
 all: $(FILES)
 
 %: %.c mpc.c
