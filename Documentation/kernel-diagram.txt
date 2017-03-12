@@ -1,3 +1,5 @@
+Kernel Diagram
+==============
 
               user programs
                            \
@@ -35,3 +37,27 @@ Kernel Level
 Hardware Level
 
                     hardware
+
+
+Execution mode and context
+==========================
+
+                                      Process Context
+                                            |
+                                            |
+              +-----------------------------+-----------------------------------+
+	      |                             |                                   |
+	      |     application             |   system calls,                   |
+	      |     (user) mode             |     exceptions                    |
+	      |                             |                                   |
+       user   | (access process space only) | (access process and system space) | kernel
+           ---+-----------------------------+-----------------------------------+---
+       mode   |                             | (access system space only)        | mode
+              |                             |                                   |
+	      |     not allowed             |   interrupts,                     |
+	      |                             |   system tasks                    |
+	      |                             |                                   |
+	      +-----------------------------+-----------------------------------+
+	                                    |
+					    |
+			             system context
