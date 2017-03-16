@@ -1,6 +1,6 @@
 package main
 
-import "fmt"
+import "fmt" // Package implementing formatted I/O.
 
 func main() {
 	fmt.Println("hello, world")
