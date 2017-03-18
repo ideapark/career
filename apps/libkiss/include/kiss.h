@@ -3,8 +3,8 @@
  *        ALL RIGHTS RESERVED
  */
 
-#ifndef KISS_H_
-#define KISS_H_
+#ifndef KISS_H
+#define KISS_H
 
 /*
  * boolean values
@@ -69,4 +69,4 @@ int uniq(char *str);
  */
 int sed(char *str, const char *match, const char *replace);
 
-#endif /* KISS_H_ */
+#endif /* KISS_H */
