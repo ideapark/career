@@ -114,7 +114,7 @@ static int device_release(struct inode *inode, struct file *file)
  * to read from it.
  */
 static ssize_t device_read(struct file *filp, char *buffer,
-		size_t length, loff_t *offset)
+			   size_t length, loff_t *offset)
 {
 	int bytes_read = 0;
 
@@ -141,7 +141,7 @@ static ssize_t device_read(struct file *filp, char *buffer,
  * Called when a process writes to dev file: echo "hi" > /dev/hello
  */
 static ssize_t device_write(struct file *filp, const char *buff,
-		size_t len, loff_t *off)
+			    size_t len, loff_t *off)
 {
 	printk(KERN_ALERT "Sorry, this operation isn't supported.\n");
 

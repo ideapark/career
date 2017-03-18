@@ -16,7 +16,7 @@ static unsigned long procfs_buffer_size = 0;
 static struct proc_dir_entry *our_proc_file;
 
 static ssize_t procfs_read(struct file *filp, char *buffer,
-		size_t length, loff_t *offset)
+			   size_t length, loff_t *offset)
 {
 	static int finished = 0;
 
@@ -43,7 +43,7 @@ static ssize_t procfs_read(struct file *filp, char *buffer,
 }
 
 static ssize_t procfs_write(struct file *file, const char *buffer,
-		size_t len, loff_t *off)
+			    size_t len, loff_t *off)
 {
 	if (len > PROCFS_MAX_SIZE)
 		procfs_buffer_size = PROCFS_MAX_SIZE;
@@ -133,7 +133,7 @@ int init_module(void)
 
 	if (our_proc_file == NULL) {
 		printk(KERN_ALERT "Error: Could not initialize /proc/%s\n",
-				PROC_ENTRY_FILENAME);
+		       PROC_ENTRY_FILENAME);
 		return -ENOMEM;
 	}
 
