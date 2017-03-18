@@ -1,11 +1,11 @@
-/* 
+/*
  * Simple regular expression matching.
  *
  * From:
  *   The Practice of Programming
  *   Brian W. Kernighan, Rob Pike
  *
- */ 
+ */
 
 #include <klee/klee.h>
 
