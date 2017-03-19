@@ -1,3 +1,3 @@
 #!/bin/sh
 
-echo "We Love Linux" | figlet
+echo "GNU/Linux" | figlet
