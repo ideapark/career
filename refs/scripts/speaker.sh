@@ -1,3 +1,3 @@
 #!/bin/sh
 
-echo "We love Linux" | espeak
+echo "The quick brown fox jumped over the lazy dog." | espeak
