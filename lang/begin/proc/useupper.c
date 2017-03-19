@@ -4,20 +4,20 @@
 
 int main(int argc, char *argv[])
 {
-	char *filename;
+        char *filename;
 
-	if (argc != 2) {
-		fprintf(stderr, "usage: useupper file\n");
-		exit(1);
-	}
+        if (argc != 2) {
+                fprintf(stderr, "usage: useupper file\n");
+                exit(1);
+        }
 
-	filename = argv[1];
-	if (!freopen(filename, "r", stdin)) {
-		fprintf(stderr, "could not redirect stdin from file %s\n", filename);
-		exit(2);
-	}
+        filename = argv[1];
+        if (!freopen(filename, "r", stdin)) {
+                fprintf(stderr, "could not redirect stdin from file %s\n", filename);
+                exit(2);
+        }
 
-	execl("./upper", "upper", (char *)0);
-	perror("could not exec ./upper"); /* COULD NOT EXECUTE HERE */
-	return 0;
+        execl("./upper", "upper", (char *)0);
+        perror("could not exec ./upper"); /* COULD NOT EXECUTE HERE */
+        return 0;
 }

@@ -9,10 +9,10 @@
 
 int main(void)
 {
-    char *ptr = (char *)malloc(1024);
-    ptr[0] = 0;
+        char *ptr = (char *)malloc(1024);
+        ptr[0] = 0;
 
-    /* write beyond the block */
-    ptr[1024] = 0;
-    return 0;
+        /* write beyond the block */
+        ptr[1024] = 0;
+        return 0;
 }

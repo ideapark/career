@@ -4,8 +4,8 @@
 
 int main(void)
 {
-	time_t timeval;
-	(void)time(&timeval);
-	printf("The date is: %s", ctime(&timeval)); // equal to asctime(localtime(timeval))
-	return 0;
+        time_t timeval;
+        (void)time(&timeval);
+        printf("The date is: %s", ctime(&timeval)); // equal to asctime(localtime(timeval))
+        return 0;
 }

@@ -6,14 +6,14 @@
 
 int main(void)
 {
-    int res;
+        int res;
 
-    res = mkfifo("/tmp/my_fifo", 0777);
-    if (res == 0) {
-        printf("FIFO created\n");
-        exit(EXIT_SUCCESS);
-    } else {
-        printf("FIFO failure\n");
-        exit(EXIT_FAILURE);
-    }
+        res = mkfifo("/tmp/my_fifo", 0777);
+        if (res == 0) {
+                printf("FIFO created\n");
+                exit(EXIT_SUCCESS);
+        } else {
+                printf("FIFO failure\n");
+                exit(EXIT_FAILURE);
+        }
 }

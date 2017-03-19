@@ -13,6 +13,6 @@
 #define BUFFER_SIZE  20
 
 struct data_to_pass_st {
-    pid_t client_pid;
-    char some_data[BUFFER_SIZE-1];
+        pid_t client_pid;
+        char some_data[BUFFER_SIZE-1];
 };

@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 int main(void) {
-	setupterm("unlisted", fileno(stdout), (int *)0);
-	printf("Done.\n");
-	return 0;
+        setupterm("unlisted", fileno(stdout), (int *)0);
+        printf("Done.\n");
+        return 0;
 }

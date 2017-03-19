@@ -12,29 +12,29 @@
 #define ERR_TEXT_LEN  80
 
 typedef enum {
-    s_create_new_database = 0,
-    s_get_cdc_entry,
-    s_get_cdt_entry,
-    s_add_cdc_entry,
-    s_add_cdt_entry,
-    s_del_cdc_entry,
-    s_del_cdt_entry,
-    s_find_cdc_entry
+        s_create_new_database = 0,
+        s_get_cdc_entry,
+        s_get_cdt_entry,
+        s_add_cdc_entry,
+        s_add_cdt_entry,
+        s_del_cdc_entry,
+        s_del_cdt_entry,
+        s_find_cdc_entry
 } client_request_e;
 
 typedef enum {
-    r_success = 0,
-    r_failure,
-    r_find_no_more
+        r_success = 0,
+        r_failure,
+        r_find_no_more
 } server_response_e;
 
 typedef struct {
-    pid_t client_pid;
-    client_request_e request;
-    server_response_e response;
-    cdc_entry cdc_entry_data;
-    cdt_entry cdt_entry_data;
-    char error_text[ERR_TEXT_LEN+1];
+        pid_t client_pid;
+        client_request_e request;
+        server_response_e response;
+        cdc_entry cdc_entry_data;
+        cdt_entry cdt_entry_data;
+        char error_text[ERR_TEXT_LEN+1];
 } message_db_t;
 
 int server_starting(void);

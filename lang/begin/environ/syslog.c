@@ -4,10 +4,10 @@
 
 int main(void)
 {
-	FILE *f;
+        FILE *f;
 
-	f = fopen("not_here", "r");
-	if (!f)
-		syslog(LOG_ERR|LOG_USER, "oops - %m\n");
-	return 0;
+        f = fopen("not_here", "r");
+        if (!f)
+                syslog(LOG_ERR|LOG_USER, "oops - %m\n");
+        return 0;
 }

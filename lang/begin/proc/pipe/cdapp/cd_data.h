@@ -5,10 +5,10 @@
 #define CAT_ARTIST_LEN  70
 
 typedef struct {
-    char catalog[CAT_CAT_LEN+1];
-    char title[CAT_TITLE_LEN+1];
-    char type[CAT_TYPE_LEN+1];
-    char artist[CAT_ARTIST_LEN+1];
+        char catalog[CAT_CAT_LEN+1];
+        char title[CAT_TITLE_LEN+1];
+        char type[CAT_TYPE_LEN+1];
+        char artist[CAT_ARTIST_LEN+1];
 } cdc_entry;
 
 /* the tracks table, one entry per track */
@@ -16,9 +16,9 @@ typedef struct {
 #define TRACK_TTEXT_LEN  70
 
 typedef struct {
-    char catalog[TRACK_CAT_LEN+1];
-    char track_no;
-    char track_txt[TRACK_TTEXT_LEN+1];
+        char catalog[TRACK_CAT_LEN+1];
+        char track_no;
+        char track_txt[TRACK_TTEXT_LEN+1];
 } cdt_entry;
 
 /* initialization and termination functions */

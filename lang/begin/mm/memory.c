@@ -6,15 +6,15 @@
 
 int main(void)
 {
-	char *some_memory;
-	int megabyte = A_MEGABYTE;
-	int exit_code = EXIT_FAILURE;
+        char *some_memory;
+        int megabyte = A_MEGABYTE;
+        int exit_code = EXIT_FAILURE;
 
-	some_memory = (char *)malloc(megabyte);
-	if (some_memory != NULL) {
-		sprintf(some_memory, "Hello World\n");
-		printf("%s", some_memory);
-		exit_code = EXIT_SUCCESS;
-	}
-	return exit_code;
+        some_memory = (char *)malloc(megabyte);
+        if (some_memory != NULL) {
+                sprintf(some_memory, "Hello World\n");
+                printf("%s", some_memory);
+                exit_code = EXIT_SUCCESS;
+        }
+        return exit_code;
 }

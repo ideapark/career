@@ -1,18 +1,18 @@
 /* check for required command macro */
 #ifndef HOST
-  #error -DHOST="hostname"
+#error -DHOST="hostname"
 #endif
 
 #ifndef SCHEMA
-  #error -DSCHEMA="schema"
+#error -DSCHEMA="schema"
 #endif
 
 #ifndef USER
-  #error -DUSER="user"
+#error -DUSER="user"
 #endif
 
 #ifndef PASSWORD
-  #error -DPASSWORD="password"
+#error -DPASSWORD="password"
 #endif
 
 /* tricks to make -Dmacro string value,

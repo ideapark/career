@@ -5,14 +5,14 @@
 
 int main(void)
 {
-	char *some_memory;
-	int exit_code = EXIT_FAILURE;
+        char *some_memory;
+        int exit_code = EXIT_FAILURE;
 
-	some_memory = (char *)malloc(ONE_K);
-	if (some_memory != NULL) {
-		free(some_memory);
-		printf("Memory allocated and freed again\n");
-		exit_code = EXIT_SUCCESS;
-	}
-	return exit_code;
+        some_memory = (char *)malloc(ONE_K);
+        if (some_memory != NULL) {
+                free(some_memory);
+                printf("Memory allocated and freed again\n");
+                exit_code = EXIT_SUCCESS;
+        }
+        return exit_code;
 }

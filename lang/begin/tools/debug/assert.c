@@ -5,13 +5,13 @@
 
 double my_sqrt(double x)
 {
-    assert(x >= 0.0);
-    return sqrt(x);
+        assert(x >= 0.0);
+        return sqrt(x);
 }
 
 int main(void)
 {
-    printf("sqrt +2 = %g\n", my_sqrt(2.0));
-    printf("sqrt -2 = %g\n", my_sqrt(-2.0));
-    return 0;
+        printf("sqrt +2 = %g\n", my_sqrt(2.0));
+        printf("sqrt -2 = %g\n", my_sqrt(-2.0));
+        return 0;
 }

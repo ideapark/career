@@ -7,7 +7,7 @@ extern void function_three();
 
 int main(void)
 {
-    function_two();
-    function_three();
-    return 0;
+        function_two();
+        function_three();
+        return 0;
 }
