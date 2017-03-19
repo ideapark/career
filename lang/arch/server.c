@@ -40,7 +40,7 @@ int main(void)
 
 	/* Accept a connection request */
 	clientfd = accept(sockfd, (struct sockaddr *)client, &client_size);
-	printf("Connected to %s:%u\n\n", inet_ntoa(client->sin_addr), 
+	printf("Connected to %s:%u\n\n", inet_ntoa(client->sin_addr),
 			ntohs(client->sin_port));
 	printf("Numeric: %u\n", ntohl(client->sin_addr.s_addr));
 

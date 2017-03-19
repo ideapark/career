@@ -75,7 +75,7 @@ int main(int argc, char **argv)
 	/* Install handler for SIGCHLD */
 	struct sigaction sigact;
 	sigact.sa_handler = sigchld_handler;
-	sigaction(SIGCHLD, &sigact, NULL);  
+	sigaction(SIGCHLD, &sigact, NULL);
 
 	/* Attach to the desired process */
 	res = ptrace(PTRACE_ATTACH, pid, 0, 0);

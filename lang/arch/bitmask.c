@@ -4,7 +4,7 @@ int main()
 	int val2 = 18;
 
 	int mask = 1;
-	mask <<= 4; 
+	mask <<= 4;
 
 	if (val1 & mask) {
 		printf("Bit 5 in val1 is set\n");
