@@ -2,8 +2,13 @@ package main
 
 import "fmt"
 
-func trace(s string)   { fmt.Println("entering:", s) }
-func untrace(s string) { fmt.Println("leaving:", s) }
+func trace(s string) {
+	fmt.Println("entering:", s)
+}
+
+func untrace(s string) {
+	fmt.Println("leaving:", s)
+}
 
 func a() {
 	trace("a")
