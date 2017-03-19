@@ -28,35 +28,35 @@ typedef unsigned long vir_bytes;  /* virtual addresses and lengths in bytes */
 
 /* Memory map for local text, stack, data segments. */
 struct mem_map {
-  vir_clicks mem_vir;   /* virtual address */
-  phys_clicks mem_phys; /* physical address */
-  vir_clicks mem_len;   /* length */
+	vir_clicks mem_vir;   /* virtual address */
+	phys_clicks mem_phys; /* physical address */
+	vir_clicks mem_len;   /* length */
 };
 
 /* Memory map for remote memory areas, e.g., for the RAM disk. */
 struct far_mem {
-  int in_use;            /* entry in use, unless zero */
-  phys_clicks mem_phys;  /* physical address */
-  vir_clicks mem_len;    /* length */
+	int in_use;            /* entry in use, unless zero */
+	phys_clicks mem_phys;  /* physical address */
+	vir_clicks mem_len;    /* length */
 };
 
 /* Structure for virtual copying by means of a vector with requests */
 struct vir_addr {
-  int proc_nr;
-  int segment;
-  vir_bytes offset;
+	int proc_nr;
+	int segment;
+	vir_bytes offset;
 };
 
 #define phys_cp_req  vir_cp_req
 struct vir_cp_req {
-  struct vir_addr src;
-  struct vir_addr dst;
-  phys_bytes count;
+	struct vir_addr src;
+	struct vir_addr dst;
+	phys_bytes count;
 };
 
 typedef struct {
-  vir_bytes iov_addr;  /* address of an I/O buffer */
-  vir_bytes iov_size;  /* sizeof of I/O buffer */
+	vir_bytes iov_addr;  /* address of an I/O buffer */
+	vir_bytes iov_size;  /* sizeof of I/O buffer */
 } iovec_t;
 
 /*
@@ -66,40 +66,40 @@ typedef struct {
  * the signal stack.
  */
 struct sigmsg {
-  int sm_signo;             /* signal number beging caught */
-  unsigned long sm_mask;    /* mask to restore when handler returns */
-  vir_bytes sm_sighandler;  /* address of handler */
-  vir_bytes sm_sigreturn;   /* address of _sigreturn in C library */
-  vir_bytes sm_stkptr;      /* user stack pointer */
+	int sm_signo;             /* signal number beging caught */
+	unsigned long sm_mask;    /* mask to restore when handler returns */
+	vir_bytes sm_sighandler;  /* address of handler */
+	vir_bytes sm_sigreturn;   /* address of _sigreturn in C library */
+	vir_bytes sm_stkptr;      /* user stack pointer */
 };
 
 /* This is used to obtain system information through SYS_GETINFO. */
 struct kinfo {
-  phys_bytes code_base;     /* base of kernel code */
-  phys_bytes code_size;
-  phys_bytes data_base;     /* base of kernel data */
-  phys_bytes data_size;
-  vir_bytes proc_addr;      /* virtual address of process table */
-  phys_bytes kmem_base;     /* kernel memory layout (/dev/kmem) */
-  phys_bytes kmem_size;
-  phys_bytes bootdev_base;  /* boot device from boot image (/dev/boot) */
-  phys_bytes bootdev_size;
-  phys_bytes params_base;   /* parameters passed by boot monitor */
-  phys_bytes params_size;
-  int nr_procs;             /* number of user processes */
-  int nr_tasks;             /* number of kernel tasks */
-  char release[6];          /* kernel release number */
-  char version[6];          /* kernel version number */
-  int relocking;            /* relocking check (for debugging) */
+	phys_bytes code_base;     /* base of kernel code */
+	phys_bytes code_size;
+	phys_bytes data_base;     /* base of kernel data */
+	phys_bytes data_size;
+	vir_bytes proc_addr;      /* virtual address of process table */
+	phys_bytes kmem_base;     /* kernel memory layout (/dev/kmem) */
+	phys_bytes kmem_size;
+	phys_bytes bootdev_base;  /* boot device from boot image (/dev/boot) */
+	phys_bytes bootdev_size;
+	phys_bytes params_base;   /* parameters passed by boot monitor */
+	phys_bytes params_size;
+	int nr_procs;             /* number of user processes */
+	int nr_tasks;             /* number of kernel tasks */
+	char release[6];          /* kernel release number */
+	char version[6];          /* kernel version number */
+	int relocking;            /* relocking check (for debugging) */
 };
 
 struct machine {
-  int pc_at;
-  int ps_mca;
-  int processor;
-  int protected;
-  int vdu_ega;
-  int vdu_vga;
+	int pc_at;
+	int ps_mca;
+	int processor;
+	int protected;
+	int vdu_ega;
+	int vdu_vga;
 };
 
 #endif /* _TYPE_H */

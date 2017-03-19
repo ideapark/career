@@ -25,17 +25,17 @@ U16_t cs, ds;              /* kernel code and data segment */
 U16_t mds;                 /* monitor data segment */
 U16_t parmoff, paramsize;  /* boot parameters offset and length */
 {
-    /* Perform system initializations prior to calling main(). Most settings are
-     * determined with help of the environment strings passed by MINIX's loader.
-     */
-    char params[128*sizeof(char *)];  /* boot monitor parameters */
-    register char *value;             /* value in key=value pair */
-    extern int etext, end;
+	/* Perform system initializations prior to calling main(). Most settings are
+	 * determined with help of the environment strings passed by MINIX's loader.
+	 */
+	char params[128*sizeof(char *)];  /* boot monitor parameters */
+	register char *value;             /* value in key=value pair */
+	extern int etext, end;
 
-    /* Decide if mode is protected; 386 or hgiher implies protected mode.
-     * This must be done first, because it is needed for, e.g., seg2phys().
-     * For 286 machines we cannot decide on protected mode, yet. This is
-     * done below.
-     */
+	/* Decide if mode is protected; 386 or hgiher implies protected mode.
+	 * This must be done first, because it is needed for, e.g., seg2phys().
+	 * For 286 machines we cannot decide on protected mode, yet. This is
+	 * done below.
+	 */
 
 }

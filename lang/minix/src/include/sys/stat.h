@@ -12,17 +12,17 @@
 #endif
 
 struct stat {
-  dev_t     st_dev;    /* major/minor device number */
-  ino_t     st_ino;    /* i-node number */
-  mode_t    st_mode;   /* file mode, protection bits, etc. */
-  short int st_nlink;  /* # links; TEMPORARY HACK: should be nlink_t */
-  uid_t     st_uid;    /* uid of the file's owner */
-  short int st_gid;    /* gid; TEPORARY HACK: should be gid_t */
-  dev_t     st_rdev;
-  off_t     st_size;
-  time_t    st_atime;
-  time_t    st_mtime;
-  time_t    st_ctime;
+	dev_t     st_dev;    /* major/minor device number */
+	ino_t     st_ino;    /* i-node number */
+	mode_t    st_mode;   /* file mode, protection bits, etc. */
+	short int st_nlink;  /* # links; TEMPORARY HACK: should be nlink_t */
+	uid_t     st_uid;    /* uid of the file's owner */
+	short int st_gid;    /* gid; TEPORARY HACK: should be gid_t */
+	dev_t     st_rdev;
+	off_t     st_size;
+	time_t    st_atime;
+	time_t    st_mtime;
+	time_t    st_ctime;
 };
 
 /* Traditional mask definitions for st_mode */

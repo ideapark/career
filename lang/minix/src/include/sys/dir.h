@@ -14,8 +14,8 @@
 #endif
 
 struct direct {
-  ino_t d_ino;
-  char d_name[DIRSIZ];
+	ino_t d_ino;
+	char d_name[DIRSIZ];
 };
 
 #endif /* _DIR_H */

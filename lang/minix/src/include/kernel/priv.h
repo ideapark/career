@@ -17,22 +17,22 @@
 #include "type.h"
 
 struct priv {
-  proc_nr_t s_proc_nr;      /* number of associated process */
-  sys_id_t s_id;            /* index of this system structure */
-  short s_flags;            /* PREEMPTIBLE, BILLABLE, etc. */
+	proc_nr_t s_proc_nr;      /* number of associated process */
+	sys_id_t s_id;            /* index of this system structure */
+	short s_flags;            /* PREEMPTIBLE, BILLABLE, etc. */
 
-  short s_trap_mask;        /* allowed system call traps */
-  sys_map_t s_ipc_from;     /* allowed callers to receive from */
-  sys_map_t s_ipc_to;       /* allowed destination processes */
-  long s_call_mask;         /* allowed kernel calls */
+	short s_trap_mask;        /* allowed system call traps */
+	sys_map_t s_ipc_from;     /* allowed callers to receive from */
+	sys_map_t s_ipc_to;       /* allowed destination processes */
+	long s_call_mask;         /* allowed kernel calls */
 
-  sys_map_t s_notify_pending;  /* bit map with pending notifications */
-  irq_id_t s_int_pending;   /* pending hardware interrupts */
-  sigset_t s_sig_pending;   /* pending signals */
+	sys_map_t s_notify_pending;  /* bit map with pending notifications */
+	irq_id_t s_int_pending;   /* pending hardware interrupts */
+	sigset_t s_sig_pending;   /* pending signals */
 
-  timer_t s_alarm_timer;    /* synchronous alarm timer */
-  struct far_mem s_farmem[NR_REMOTE_SEGS];  /* remote memory map */
-  reg_t *s_stack_guard;     /* stack guard word for kernel tasks */
+	timer_t s_alarm_timer;    /* synchronous alarm timer */
+	struct far_mem s_farmem[NR_REMOTE_SEGS];  /* remote memory map */
+	reg_t *s_stack_guard;     /* stack guard word for kernel tasks */
 };
 
 /* Guard word for task stacks. */

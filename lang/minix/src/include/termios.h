@@ -14,13 +14,13 @@ typedef unsigned int speed_t;
 
 /* Primary terminal control structure. POSIX Table 7-1. */
 struct termios {
-  tcflag_t c_iflag;   /* input modes */
-  tcflag_t c_oflag;   /* output modes */
-  tcflag_t c_cflag;   /* control modes */
-  tcflag_t c_lflag;   /* local modes */
-  tcflag_t c_ispeed;  /* input speed */
-  tcflag_t c_ospeed;  /* output speed */
-  cc_t c_cc[NCCS];    /* control characters */
+	tcflag_t c_iflag;   /* input modes */
+	tcflag_t c_oflag;   /* output modes */
+	tcflag_t c_cflag;   /* control modes */
+	tcflag_t c_lflag;   /* local modes */
+	tcflag_t c_ispeed;  /* input speed */
+	tcflag_t c_ospeed;  /* output speed */
+	cc_t c_cc[NCCS];    /* control characters */
 };
 
 /* Values for termios c_iflag bit map. POSIX Table 7-2. */
@@ -197,10 +197,10 @@ _PROTOTYPE(int tcsetattr, (int _filedes, int _opt_actions, const struct termios 
  * information.
  */
 struct winsize {
-  unsigned short ws_row;    /* rows, in characters */
-  unsigned short ws_col;    /* columns, in characters */
-  unsigned short ws_xpixel; /* horizontal size, pixels */
-  unsigned short ws_ypixel; /* vertical size, pixels */
+	unsigned short ws_row;    /* rows, in characters */
+	unsigned short ws_col;    /* columns, in characters */
+	unsigned short ws_xpixel; /* horizontal size, pixels */
+	unsigned short ws_ypixel; /* vertical size, pixels */
 };
 
 #endif /* _MINIX */
