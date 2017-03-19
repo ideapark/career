@@ -38,7 +38,7 @@ enum {
 	LVAL_QEXPR
 };
 
-typedef lval *(*lbuiltin)(lenv*, lval*);
+typedef lval *(*lbuiltin)(lenv *, lval *);
 
 struct lval {
 	int type;

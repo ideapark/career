@@ -33,14 +33,12 @@ int main(int argc, char **argv)
 	puts("Press Ctrl+c to Exit\n");
 
 	while (1) {
-
 		/* Now in either case readline will be correctly defined */
 		char* input = readline("lispy> ");
 		add_history(input);
 
 		printf("No you're a %s\n", input);
 		free(input);
-
 	}
 
 	return 0;

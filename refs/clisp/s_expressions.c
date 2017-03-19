@@ -181,7 +181,7 @@ lval *builtin_op(lval *a, char *op)
 	while (a->count > 0) {
 
 		/* Pop the next element */
-		lval* y = lval_pop(a, 0);
+		lval *y = lval_pop(a, 0);
 
 		/* Perform operation */
 		if (strcmp(op, "+") == 0) { x->num += y->num; }

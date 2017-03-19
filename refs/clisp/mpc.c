@@ -140,7 +140,6 @@ static const char *mpc_err_char_unescape(char c)
 	char_unescape_buffer[2] = '\'';
 
 	switch (c) {
-
 	case '\a': return "bell";
 	case '\b': return "backspace";
 	case '\f': return "formfeed";
@@ -501,7 +500,6 @@ static char mpc_input_getc(mpc_input_t *i)
 	char c = '\0';
 
 	switch (i->type) {
-
 	case MPC_INPUT_STRING: return i->string[i->state.pos];
 	case MPC_INPUT_FILE: c = fgetc(i->file); return c;
 	case MPC_INPUT_PIPE:
