@@ -1,0 +1,9 @@
+| Builtin-1 | Builtin-2 | Description                                                                                                                                                                   |
+|-----------+-----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| close     |           | Used in channel communication                                                                                                                                                 |
+| len       | cap       | len gives the length of a number of types (strings, arrays, slices, maps, channels); cap is the capacity, the maximum storage (only applicable to slices and maps)            |
+| new       | make      | Both =new= and =make= are used for allocating memory: =new= for value types and user-defined types like structs, =make= for built-in reference types (slices, maps, channels) |
+| copy      | append    | used resp. for copying and concatenating slices                                                                                                                               |
+| panic     | recover   | both are used in mechanism for handling errors                                                                                                                                |
+| print     | println   | low level printing functions, use the fmt package in production programs                                                                                                      |
+| complex   | real imag | used for making and manipulating complex numbers                                                                                                                              |
