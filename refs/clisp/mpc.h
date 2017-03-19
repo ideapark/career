@@ -325,4 +325,4 @@ int mpc_test_fail(mpc_parser_t *p, const char *s, const void *d,
 		  mpc_dtor_t destructor,
 		  void (*printer)(const void *));
 
-#endif
+#endif /* mpc_h */
