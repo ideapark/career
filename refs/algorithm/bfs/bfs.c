@@ -9,7 +9,8 @@
 
 #define LEN(arr) (sizeof(arr)/sizeof(arr[0]))
 
-int bfs(struct list_head *pathlist, const struct point *startp, Pass pfn, Target tfn)
+int bfs_path(struct list_head *pathlist, const struct point *startp,
+	     Pass pfn, Target tfn)
 {
 	int nrpath = 0;
 

@@ -135,22 +135,22 @@ int main(int argc, char *argv[])
 	int nr;
 	struct list_head pathlist;
 
-	nr = bfs(&pathlist, &startp, across_predicate, box_predicate);
+	nr = bfs_path(&pathlist, &startp, across_predicate, box_predicate);
 	printf("box path: %d\n", nr);
 	print_path(&pathlist);
 	free_pathlist(&pathlist);
 
-	nr = bfs(&pathlist, &startp, across_predicate, wall_predicate);
+	nr = bfs_path(&pathlist, &startp, across_predicate, wall_predicate);
 	printf("wall path: %d\n", nr);
 	print_path(&pathlist);
 	free_pathlist(&pathlist);
 
-	nr = bfs(&pathlist, &startp, across_predicate, bomb_predicate);
+	nr = bfs_path(&pathlist, &startp, across_predicate, bomb_predicate);
 	printf("bomb path: %d\n", nr);
 	print_path(&pathlist);
 	free_pathlist(&pathlist);
 
-	nr = bfs(&pathlist, &startp, across_predicate, playerb_predicate);
+	nr = bfs_path(&pathlist, &startp, across_predicate, playerb_predicate);
 	printf("player B path: %d\n", nr);
 	print_path(&pathlist);
 	free_pathlist(&pathlist);
