@@ -7,23 +7,23 @@
 
 int main(void)
 {
-  const int SIZE = 4096;
-  const char *name = "OS";
-  const char *message_0 = "Hello";
-  const char *message_1 = "World!";
+	const int SIZE = 4096;
+	const char *name = "OS";
+	const char *message_0 = "Hello";
+	const char *message_1 = "World!";
 
-  int shm_fd;
-  void *ptr;
+	int shm_fd;
+	void *ptr;
 
-  shm_fd = shm_open(name, O_CREAT|O_RDWR, 0666);
-  ftruncate(shm_fd, SIZE);
+	shm_fd = shm_open(name, O_CREAT|O_RDWR, 0666);
+	ftruncate(shm_fd, SIZE);
 
-  ptr = mmap(0, SIZE, PROT_WRITE, MAP_SHARED, shm_fd, 0);
+	ptr = mmap(0, SIZE, PROT_WRITE, MAP_SHARED, shm_fd, 0);
 
-  sprintf(ptr, "%s", message_0);
-  ptr += strlen(message_0);
-  sprintf(ptr, "%s", message_1);
-  ptr += strlen(message_1);
+	sprintf(ptr, "%s", message_0);
+	ptr += strlen(message_0);
+	sprintf(ptr, "%s", message_1);
+	ptr += strlen(message_1);
 
-  return 0;
+	return 0;
 }
