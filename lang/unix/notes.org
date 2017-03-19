@@ -1,14 +1,17 @@
 ** Doug Mcllroy
+
 This is the Unix philosophy: Write programs that do one thing and do it well.
 Write programs to work together. Write programs to handle text streams, because
 that is a universal interface.
 
 ** Rob Pike
+
 Data dominates. If you've chosen the right data structures and organized things
 well, the algorithms will almost always be self-evident. Data structures, not
-algorithms, are central to programing.
+algorithms, are central to programming.
 
 ** Ken Thompson
+
 When in doubt, use brute force.
 
 Using prototyping to learn which features you don't have to implement helps
@@ -16,12 +19,14 @@ optimization for performance; you don't have to optimize what you don't write.
 The most powerful optimization tool in existence may be the delete key.
 
 ** Henry Spencer
+
 The flip side of the Rule of Least Surprise is to avoid making things
 superficially similar but really a little bit different. This is extremely
 treacherous because the seeming familiarity raises false expectations. It's
 often better to make things distinctly than to make them almost the same.
 
 ** Ken Arnold
+
 I think that the terseness of Unix programs is a central feature of the style.
 When your program's output becomes another's input, it should be easy to pick
 out the needed bits. And for people it is a human-factors necessity -- important
@@ -30,4 +35,5 @@ behavior. If all displayed information is important, important information is
 easy to find.
 
 ** Kent Beck
+
 Make it run, then make it right, then make it fast.
