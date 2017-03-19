@@ -18,7 +18,7 @@ func main() {
 	}
 	end := time.Now()
 	delta := end.Sub(start)
-	fmt.Print("longCalculation took this amount of time: %s\n", delta)
+	fmt.Printf("longCalculation took this amount of time: %s\n", delta)
 }
 
 func fibonacci(n int) (res uint64) {
