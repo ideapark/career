@@ -6,7 +6,7 @@ func main() {
 	var slice1 []int = make([]int, 10)
 	// load the array/slice:
 	for i := 0; i < len(slice1); i++ {
-		slice[i] = 5 * i
+		slice1[i] = 5 * i
 	}
 
 	// print the slice
