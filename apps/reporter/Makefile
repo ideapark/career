@@ -15,11 +15,11 @@ CC := clang++
 export ccflags include
 export cc CC
 
-extralib := -lbfd -lsqlite3 -liberty -lpopt -lstdc++ -ldl -lz -lpthread -lintl
+extralib := -lbfd -lsqlite3 -liberty -lpopt -lstdc++ -ldl -lz -lpthread
 
 all: objects
-	$(CC) $(shell find . -type f -name '*.o' | grep -v callgraph.exe) $(extralib) -o target/reporter.exe
-	$(CC) $(shell find . -type f -name '*.o' | grep -v reporter.exe) $(extralib) -o target/callgraph.exe
+	$(CC) $(shell find . -type f -name '*.o' | grep -v callgraph.exe) $(extralib) -o reporter
+	$(CC) $(shell find . -type f -name '*.o' | grep -v reporter.exe) $(extralib) -o callgraph
 
 release: all
 	strip target/reporter.exe
