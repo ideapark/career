@@ -1,0 +1,38 @@
+Struct Memory Layout
+====================
+
+struct type
+-----------
+
+       type Point struct { x, y int }
+
+
+Initialized with new
+--------------------
+
+         new(Point)
+       +-------------+
+       |     *       | *Point
+       +------\------+
+               \
+	        +-----+-----+
+		|  0  |  0  | Point
+	      	+-----+-----+
+
+
+Initialized as a struct literal
+-------------------------------
+
+       p := Point{10, 20}
+         +-----+-----+
+	 |  0  |  0  | Point
+	 +-----+-----+
+
+       pp := &Point{10, 20}
+         +--------+
+  	 |    *   | *Point
+	 +-----\--+
+	        \
+		 +-----+-----+
+		 |  0  |  0  | Point
+		 +-----+-----+
