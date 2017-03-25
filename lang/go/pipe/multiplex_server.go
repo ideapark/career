@@ -32,7 +32,7 @@ func startServer(op binOp) (service chan *Request, quit chan bool) {
 }
 
 func main() {
-	adder := startServer(func(a, b int) int { return a + b })
+	adder, quit := startServer(func(a, b int) int { return a + b })
 	const N = 100
 	var reqs [N]Request
 	for i := 0; i < N; i++ {
