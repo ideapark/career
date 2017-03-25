@@ -5,10 +5,8 @@ import (
 	"time"
 )
 
-func main() {
-	stream := pump()
-	go suck(stream)
-	// the above 2 lines can be shortened to: go suck(pump())
+func main() {	
+	suck(pump())	
 	time.Sleep(1e9)
 }
 
@@ -23,7 +21,9 @@ func pump() chan int {
 }
 
 func suck(ch chan int) {
-	for {
-		fmt.Println(<-ch)
-	}
+	go func() {
+		for v := range ch {
+			fmt.Println(v)
+		}
+	}()
 }
