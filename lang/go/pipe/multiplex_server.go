@@ -24,7 +24,7 @@ func server(op binOp, service chan *Request, quit chan bool) {
 	}
 }
 
-func startServer(op binOp) (chan *Request, quit chan bool) {
+func startServer(op binOp) (service chan *Request, quit chan bool) {
 	service := make(chan *Request)
 	quit := make(chan bool)
 	go server(op, service, quit)
