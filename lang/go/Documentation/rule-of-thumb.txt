@@ -1,0 +1,8 @@
+* use locking (mutexes) when:
+  * caching information in a shared data structure
+  * holding state information, that is context or status of the running application
+
+* use channels when:
+  * communicating asynchronous results
+  * distributing units of work
+  * passing ownership of data
