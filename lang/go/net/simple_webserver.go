@@ -2,8 +2,11 @@ package main
 
 import (
 	"io"
+	"log"
 	"net/http"
 )
+
+type HandleFuc func(http.ResponseWriter, *http.Request)
 
 const form = `
 <html>
@@ -37,9 +40,20 @@ func FormServer(w http.ResponseWriter, request *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/", SimpleServer)
-	http.HandleFunc("/form", FormServer)
+	http.HandleFunc("/", logPanics(SimpleServer))
+	http.HandleFunc("/form", logPanics(FormServer))
 	if err := http.ListenAndServe(":8088", nil); err != nil {
 		panic(err)
+	}
+}
+
+func logPanics(function HandleFuc) HandleFuc {
+	return func(writer http.ResponseWriter, request *http.Request) {
+		defer func() {
+			if x := recover(); x != nil {
+				log.Printf("[%v] caught panic: %v", request.RemoteAddr, x)
+			}
+		}()
+		function(writer, request)
 	}
 }
