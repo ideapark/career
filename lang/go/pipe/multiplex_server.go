@@ -13,18 +13,22 @@ func run(op binOp, req *Request) {
 	req.replyc <- op(req.a, req.b)
 }
 
-func server(op binOp, service chan *Request) {
+func server(op binOp, service chan *Request, quit chan bool) {
 	for {
-		req := <-service // requests arrive here
-		// start goroutine for request:
-		go run(op, req) // don't wait for op
+		select {
+		case req := <-service:
+			go run(op, req)
+		case <-quit:
+			return
+		}
 	}
 }
 
-func startServer(op binOp) chan *Request {
-	reqChan := make(chan *Request)
-	go server(op, reqChan)
-	return reqChan
+func startServer(op binOp) (chan *Request, quit chan bool) {
+	service := make(chan *Request)
+	quit := make(chan bool)
+	go server(op, service, quit)
+	return service, quit
 }
 
 func main() {
@@ -39,12 +43,13 @@ func main() {
 		adder <- req
 	}
 	// checks:
-	for i := N - 1; i >= 0; i-- {
+	for i := N - 1; i >= 0; i-- { // doesn't matter what order
 		if <-reqs[i].replyc != N+2*i {
 			fmt.Println("fail at", i)
 		} else {
 			fmt.Println("Request ", i, "is ok!")
 		}
 	}
+	quit <- true
 	fmt.Println("done")
 }
