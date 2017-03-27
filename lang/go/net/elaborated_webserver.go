@@ -134,12 +134,12 @@ func DateServer(rw http.ResponseWriter, req *http.Request) {
 	}
 	defer p.Release()
 	io.Copy(rw, r)
-	wait, err := p.Wait(0)
+	wait, err := p.Wait()
 	if err != nil {
 		fmt.Fprintf(rw, "wait: %s\n", err)
 		return
 	}
-	if !wait.Exited() || wait.ExitStatus() != 0 {
+	if !wait.Exited() || !wait.Success() {
 		fmt.Fprintf(rw, "date: %v\n", wait)
 		return
 	}
