@@ -75,7 +75,7 @@ func ArgServer(w http.ResponseWriter, req *http.Request) {
 
 func HelloServer(w http.ResponseWriter, req *http.Request) {
 	helloRequests.Add(1)
-	io.WriteString(w, "hello, world\n")
+	io.WriteString(w, "hello, world!\n")
 }
 
 // This makes Counter satisfy the expvar.Var interface, so we can export
@@ -127,7 +127,7 @@ func DateServer(rw http.ResponseWriter, req *http.Request) {
 
 	p, err := os.StartProcess("/bin/date", []string{"date"}, &os.ProcAttr{Files: []*os.File{nil, w, w}})
 	defer r.Close()
-	w.Close
+	w.Close()
 	if err != nil {
 		fmt.Fprintf(rw, "fork/exec: %s\n", err)
 		return
