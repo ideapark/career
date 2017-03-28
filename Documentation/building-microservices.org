@@ -1,0 +1,21 @@
+#+TITLE: Building Microservices
+#+AUTHOR: Sam Newman
+
+* What Are Microservices?
+
+Microservices are small, autonomous services that work together.
+
+* Key Benefits
+
+** Technology Heterogeneity
+** Resilience
+** Scaling
+** Ease of Deployment
+** Organizational Alignment
+** Composability
+** Optimizing for Replaceability
+
+* No Silver Bullet
+
+Microservices are no free lunch or silver bullet, and make for a bad choice as a
+golden hammer. They have all the associated complexities of distributed systems.
