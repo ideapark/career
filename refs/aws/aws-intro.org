@@ -29,7 +29,7 @@ PaaS: Platform as a Service
 4.Add Storage
 5.Add Tags
 6.Configure Security Group
-7.Reivew
+7.Review
 
 ** Lambda
 
