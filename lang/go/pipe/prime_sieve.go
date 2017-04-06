@@ -19,7 +19,7 @@ func filter(in chan int, prime int) chan int {
 	out := make(chan int)
 	go func() {
 		for {
-			if i := <-in; i % prime != 0 {
+			if i := <-in; i%prime != 0 {
 				out <- i
 			}
 		}
