@@ -4,8 +4,10 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"go/ast"
+	"go/format"
 	"go/parser"
 	"go/token"
 )
@@ -45,5 +47,10 @@ func main() {
 	// the new comments list.
 	f.Comments = cmap.Filter(f).Comments()
 
-	fmt.Println(f)
+	// Print the modified AST.
+	var buf bytes.Buffer
+	if err := format.Node(&buf, fset, f); err != nil {
+		panic(err)
+	}
+	fmt.Printf("%s", buf.Bytes())
 }
