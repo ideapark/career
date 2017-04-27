@@ -1,0 +1,54 @@
+#+TITLE: Align & Offset
+#+AUTHOR: Golang
+
+* Struct Memory Layout
+
+#+BEGIN_SRC go
+var x struct {
+    a bool
+    b int16
+    c []int
+}
+#+END_SRC
+
+* 32-bit Platform
+
+| Sizeof           | Alignof          | Offsetof          |
+|------------------+------------------+-------------------|
+| Sizeof(x)   = 16 | Alignof(x)   = 4 |                   |
+| Sizeof(x.a) = 1  | Alignof(x.a) = 1 | Offsetof(x.a) = 0 |
+| Sizeof(x.b) = 2  | Alignof(x.b) = 2 | Offsetof(x.b) = 2 |
+| Sizeof(x.c) = 12 | Alignof(x.c) = 4 | Offsetof(x.c) = 4 |
+
+#+BEGIN_SRC ditaa
++------------+
+| a |  |  b  |
+|------------|
+|   c(data)  |
+|------------|
+|   c(len)   |
+|------------|
+|   c(cap)   |
++------------+
+#+END_SRC
+
+* 64-bit Platform
+
+| Sizeof           | Alignof          | Offsetof          |
+|------------------+------------------+-------------------|
+| Sizeof(x)   = 32 | Alignof(x)   = 8 |                   |
+| Sizeof(x.a) = 1  | Alignof(x.a) = 1 | Offsetof(x.a) = 0 |
+| Sizeof(x.b) = 2  | Alignof(x.b) = 2 | Offsetof(x.b) = 2 |
+| Sizeof(x.c) = 24 | Alignof(x.c) = 8 | Offsetof(x.c) = 8 |
+
+#+BEGIN_SRC ditaa
++------------------------+
+| a |  |  b  |           |
+|------------------------|
+|          c(data)       |
+|------------------------|
+|          c(len)        |
+|------------------------|
+|          c(cap)        |
++------------------------+
+#+END_SRC
