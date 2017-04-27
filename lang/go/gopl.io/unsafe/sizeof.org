@@ -1,0 +1,15 @@
+#+TITLE: unsafe.Sizeof()
+#+AUTHOR: Golang
+
+| Type                       | Size                                        |
+|----------------------------+---------------------------------------------|
+| bool                       | 1 byte                                      |
+| intN,uintN,floatN,complexN | N/8 bytes (for example, float64 is 8 bytes) |
+| int,uint,uintptr           | 1 word                                      |
+| *T                         | 1 word                                      |
+| string                     | 2 words (data,len)                          |
+| []T                        | 3 words (data,len,cap)                      |
+| map                        | 1 word                                      |
+| func                       | 1 word                                      |
+| chan                       | 1 word                                      |
+| interface                  | 2 words (type,value)                        |
