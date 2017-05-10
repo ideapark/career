@@ -5,7 +5,7 @@ import (
 	"strconv"
 )
 
-func mian() {
+func main() {
 	b := []byte("bool:")
 	b = strconv.AppendBool(b, true)
 	fmt.Println(string(b))
