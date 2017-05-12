@@ -41,7 +41,7 @@ var write = func(key, val string) {
 }
 
 func main() {
-	done := make(chan bool)
+	done := make(chan struct{})
 	// Reader
 	go func() {
 		rFreq := time.Tick(1 * time.Second)
@@ -67,6 +67,6 @@ func main() {
 		}
 	}()
 	time.Sleep(20 * time.Second)
-	done <- true
-	done <- true
+	done <- struct{}{}
+	done <- struct{}{}
 }
