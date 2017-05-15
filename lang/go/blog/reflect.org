@@ -1,0 +1,123 @@
+#+TITLE: Laws of reflect
+#+AUTHOR: Rob Pike
+#+LINK: https://golang.org/blog/laws-of-reflection
+
+* Reflection goes from interface value to reflection object
+
+At the basic level, reflection is just a mechanism to examine the type and value
+pair stored inside an interface variable. To get started, there are two types we
+need to know about in =package reflect=: =Type= and =Value=. Those two types
+give access to the contents of an interface variable, and two simple functions,
+called =reflect.TypeOf= and =reflect.ValueOf=, retrieve =reflect.Type= and
+=reflect.Value= pieces out of an interface value. (Also, from the
+=reflect.Value= it's easy to get to the =reflect.Type=, but let's keep the Value
+and Type concepts separate for now.)
+
+Let's start with TypeOf:
+
+#+BEGIN_SRC go
+package main
+
+import (
+    "fmt"
+    "reflect"
+)
+
+func main() {
+    var x float64 = 3.4
+    fmt.Println("type:", reflect.TypeOf(x)
+}
+#+END_SRC
+
+This program prints
+
+#+BEGIN_SRC shell
+type: float64
+#+END_SRC
+
+You might be wondering where the interface is here, since the program looks like
+it's passing the float64 variable x, not an interface value, to reflect.TypeOf.
+But it's there; as godoc reports, the signature of reflect.TypeOf includes an
+empty interface:
+
+#+BEGIN_SRC go
+// TypeOf returns the reflection Type of the value in the interface{}.
+func TypeOf(i interface{}) Type
+#+END_SRC
+
+When we call reflect.TypeOf(x), x is first stored in an empty interface, which
+is then passed as the argument; reflect.TypeOf unpacks that empty interface to
+recover the type information.
+
+The reflect.ValueOf function, of course, recovers the value (from here on we'll
+elide the boilerplate and focus just on the executable code):
+
+#+BEGIN_SRC go
+var x float64 = 3.4
+fmt.Println("value:", reflect.ValueOf(x).String())
+#+END_SRC
+
+prints
+
+#+BEGIN_SRC shell
+value: <float64 Value>
+#+END_SRC
+
+(We call the String method explicitly because by default the fmt package digs
+into a reflect.Value to show the concrete value inside. The String method does
+not.)
+
+Both reflect.Type and reflect.Value have lots of methods to let us examine and
+manipulate them. One important example is that Value has a Type method that
+returns the Type of a reflect.Value. Another is that both Type and Value have a
+Kind method that returns a constant indicating what sort of item is stored:
+Uint, Float64, Slice, and so on. Also methods on Value with names like Int and
+Float let us grab values (as int64 and float64) stored inside:
+
+#+BEGIN_SRC go
+var x float64 = 3.4
+v := reflect.ValueOf(x)
+fmt.Println("type:", v.Type())
+fmt.Println("kind is float64:", v.Kind() == reflect.Float64)
+fmt.Println("value:", v.Float())
+#+END_SRC
+
+prints
+
+#+BEGIN_SRC shell
+type: float64
+kind is float64: true
+value: 3.4
+#+END_SRC
+
+There are also methods like SetInt and SetFloat but to use them we need to
+understand settability, the subject of the third law of reflection, discussed
+below.
+
+The reflection library has a couple of properties worth singling out. First, to
+keep the API simple, the "getter" and "setter" methods of Value operate on the
+largest type that can hold the value: int64 for all the signed integers, for
+instance. That is, the Int method of Value returns an int64 and the SetInt value
+takes an int64; it may be necessary to convert to the actual type involved:
+
+#+BEGIN_SRC go
+var x uint8 = 'x'
+v := reflect.ValueOf(x)
+fmt.Println("type:", v.Type())                            // uint8.
+fmt.Println("kind is uint8: ", v.Kind() == reflect.Uint8) // true.
+x = uint8(v.Uint())                                       // v.Uint returns a uint64.
+#+END_SRC
+
+The second property is that the Kind of a reflection object describes the
+underlying type, not the static type. If a reflection object contains a value of
+a user-defined integer type, as in
+
+#+BEGIN_SRC go
+type MyInt int
+var x MyInt = 7
+v := reflect.ValueOf(x)
+#+END_SRC
+
+the Kind of v is still reflect.Int, even though the static type of x is MyInt,
+not int. In other words, the Kind cannot discriminate an int from a MyInt even
+though the Type can.
