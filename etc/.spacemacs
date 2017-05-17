@@ -322,6 +322,7 @@ you should place your code here."
                 c-basic-offset 8
                 indent-tabs-mode t
                 default-tab-width 8)
+  (global-set-key [f8] 'neotree-toggle)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
