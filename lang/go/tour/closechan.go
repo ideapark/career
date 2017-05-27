@@ -9,13 +9,15 @@ func main() {
 	done := make(chan bool)
 
 	go func() {
-		j, more := <-jobs
-		if more {
-			fmt.Println("received job", j)
-		} else {
-			fmt.Println("received all jobs")
-			done <- true
-			return
+		for {
+			j, more := <-jobs
+			if more {
+				fmt.Println("received job", j)
+			} else {
+				fmt.Println("received all jobs")
+				done <- true
+				return
+			}
 		}
 	}()
 
@@ -23,8 +25,8 @@ func main() {
 		jobs <- j
 		fmt.Println("send job", j)
 	}
-
 	close(jobs)
+
 	fmt.Println("send all jobs")
 
 	<-done
