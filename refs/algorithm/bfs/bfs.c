@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Zhou Peng <lockrecv@qq.com>
+ * Copyright (c) Zhou Peng <lockrecv@outlook.com>
  *
  * Breadth first search algorithm implemented by C programming language.
  */
