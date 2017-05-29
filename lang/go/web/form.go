@@ -9,7 +9,7 @@ import (
 )
 
 func sayhelloName(w http.ResponseWriter, r *http.Request) {
-	r.ParseForm() // NOTE: must called
+	r.ParseForm() // NOTE: must be called before use
 	fmt.Println(r.Form)
 	fmt.Println("path", r.URL.Path)
 	fmt.Println("scheme", r.URL.Scheme)
@@ -27,7 +27,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 		t, _ := template.ParseFiles("login.tmpl")
 		t.Execute(w, nil)
 	} else {
-		r.ParseForm()
+		r.ParseForm() // NOTE: must be called before use
 		fmt.Println("username:", r.Form["username"])
 		fmt.Println("password:", r.Form["password"])
 	}
