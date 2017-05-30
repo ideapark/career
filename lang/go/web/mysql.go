@@ -16,7 +16,7 @@ import (
 )
 
 func main() {
-	db, err := sql.Open("mysql", "root:root@127.0.0.1/account?charset=utf8")
+	db, err := sql.Open("mysql", "username:password@127.0.0.1:3306/account?charset=utf8")
 	checkErr(err)
 
 	// insert
