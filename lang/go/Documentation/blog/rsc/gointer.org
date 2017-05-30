@@ -9,7 +9,7 @@ passing an int where an object with a Read method was expected, or like the Read
 method with the wrong number of arguments. To use interfaces, first define the
 interface type (say, ReadCloser):
 
-#+BEGIN_SRC golang
+#+BEGIN_SRC go
 type ReadCloser interface {
     Read(b []byte) (n int, err os.Error)
     Close()
@@ -20,7 +20,7 @@ and then define your new function as taking a ReadCloser. For example, this
 function calls Read repeatedly to get all the data that was requested and then
 calls Close:
 
-#+BEGIN_SRC golang
+#+BEGIN_SRC go
 func ReadAndClose(r ReadCloser, buf []byte) (n int, err os.Error) {
     for len(buf) > 0 && err == nil {
         var nr int
@@ -42,7 +42,7 @@ Interfaces aren't restricted to static checking, though. You can check
 dynamically whether a particular interface value has an additional method. For
 example:
 
-#+BEGIN_SRC golang
+#+BEGIN_SRC go
 type Stringer interface {
     String() string
 }
@@ -74,7 +74,7 @@ check.)
 As a simple example, let's consider a 64-bit integer type with a String method
 that prints the value in binary an and a trivial Get method:
 
-#+BEGIN_SRC golang
+#+BEGIN_SRC go
 type Binary uint64
 
 func (i Binary) String() string {
@@ -229,7 +229,7 @@ Because Go has the hint of static typing to go along with the dynamic method
 lookups, it can move the lookups back from the call sites to the point when the
 value is stored in the interface. For example, consider this code snippet:
 
-#+BEGIN_SRC golang
+#+BEGIN_SRC go
 1  var any interface{}  // initialized elsewhere
 2  s := any.(Stringer)  // dynamic conversion
 3  for i := 0; i < 100; i++ {
@@ -258,7 +258,7 @@ factor optimizations still available.
 
 Supporting code (x.go):
 
-#+BEGIN_SRC golang
+#+BEGIN_SRC go
 package main
 
 import (

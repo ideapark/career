@@ -14,7 +14,7 @@ There is a handy exception, though. when the value is addressable, the language
 takes care of the common case of invoking a pointer method on a value by
 inserting the address operator automatically.
 
-#+BEGIN_SRC golang
+#+BEGIN_SRC go
 type ByteSlice []byte
 
 func (slice ByteSlice) Append(data []byte) []byte {

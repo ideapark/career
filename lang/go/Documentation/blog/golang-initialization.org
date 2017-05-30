@@ -7,7 +7,7 @@
 ** can only be numbers, characters (runes), strings or booleans
 ** iota enumerator
 
-#+BEGIN_SRC golang
+#+BEGIN_SRC go
 type ByteSize float64
 
 const (
@@ -27,7 +27,7 @@ const (
 
 ** computed at run time
 
-#+BEGIN_SRC golang
+#+BEGIN_SRC go
 var (
     home   = os.Getenv("HOME")
     user   = os.Getenv("USER")
@@ -47,7 +47,7 @@ Besides initializations that cannot be expressed as declarations, a common use
 of init functions is to verify or repair correctness of the program state before
 real execution begins.
 
-#+BEGIN_SRC golang
+#+BEGIN_SRC go
 func init() {
     if user == "" {
         log.Fatal("$USER not set")
