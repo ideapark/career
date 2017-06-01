@@ -1,0 +1,32 @@
+#+TITLE: Why Use GO?
+#+AUTHOR: Cloud Native Go
+
+* Simplicity
+
+There is a compelling beauty in the simplicity of Go. On the surface, it could
+even pass for a simplified variant of ANSI C, but it is powerful enough to
+handle today’s most demanding software requirements.
+
+This simplicity isn’t just on the surface—everything about Go eschews
+unnecessary complexity, ceremony, and cruft. It doesn’t compile to intermediary
+bytecode like Java or .NET, it produces native binaries. As such, this
+simplicity doesn’t come at a price, it actually improves performance.
+
+Once you get over the initial fear of not being able to be productive in a
+language that doesn’t have classes, pure functional programming 4 , or a
+billion other bells and whistles, you may end up like us and love the purity of
+a language that shuns magic and artifice, and gives you raw, pure power to be
+productive and finally enjoy programming again.
+
+* Open Source
+
+Go isn’t just an open source language, it is a language embraced and supported
+by a community of people who thrive on open source and all that it provides.
+
+* Easy Automation and IDE Freedom
+
+As we mentioned earlier in this chapter, if you can control an aspect of your
+build cycle with a script, then you can automate it. Everything that you do with
+Go, from compilation to executing tests or performing static analysis, can be
+done from a simple command line. Another extended benefit to using Go is that it
+enables your freedom to choose whatever text editor you like.
