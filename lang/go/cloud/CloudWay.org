@@ -1,0 +1,29 @@
+#+TITLE: The Way of the Cloud
+#+AUTHOR: Cloud Native Go
+
+* Favor Simplicity
+
+Favor simplicity in everything that you do.
+
+** Is your IDE optional?
+** Can you build and deploy from the command line?
+** Can a new team member quickly figure out what's goning on just by reading the code?
+
+* Test First, Test Everything
+
+** Employ Test-Driven Development. Test everything, everywhere.
+** Fear is the direct result of lack of testing.
+
+* Relase Early, Release Often
+
+** Every checkin is a potential production release, deployed via CD pipeline.
+
+* Automate Everyting
+
+** Everything that can be automated, should be automated.
+** Anything you do more than once per day is a candidate for automation.
+** Any frequently repeated part of your process that cannot be replaced with a button or a script is too complicated, too brittle, or both.
+
+* Build Service Ecosystems
+
+** Everything is a service, including your application
