@@ -1,0 +1,153 @@
+Docker: 过去,现在,未来
+成都
+2 Jan 2017
+
+周朋
+zhoupeng@retail-tek.com
+https://github.com/lockrecv
+微信 lockrecv
+
+* License
+
+Copyright © Zhou Peng <lockrecv@outlook.com>
+
+* 日程
+
+- 计算机发展历程
+- 小结
+- Docker
+  * 基本原理
+  * Build Ship Run
+  * Kubernetes (K8S)
+- 计算机未来是怎样
+
+* 1970~1980 巨型机
+
+关键词: 军队 国家
+.image img/mainframe.jpg
+
+* 1990~2000 工作站 & PC
+
+关键词: 银行 国企 个人
+.image img/workstation.jpg 250 _
+.image img/desktops.png 200 _
+
+* 2000~2017 手持终端 & Cloud
+
+关键词: Cloud, Anyone, Anytime, Anywhere
+.image img/iphone.jpg 250 _
+.image img/google-chromebook.jpg 250 _
+
+* 小结
+
+: Prensenter notes
+你能感知的
+
+- 你能接入的计算能力越来越多
+- 享受的计算越来越便宜
+
+: Prensenter notes
+背后的技术变革
+
+- CPU,内存,硬盘等摩尔定律
+- 虚拟化,容器化,云
+
+* 物理机
+
+  代码
+  数据
+  Runtime(JRE,Python)
+  中间件(glibc)
+  操作系统
+  ----------------------------> 分割线
+  CPU
+  存储
+  网络
+
+应用部署周期: 周/天
+
+* 虚拟机
+
+.image img/vm.png 350 _
+
+- 将一台物理机虚拟成多台,每台虚拟机是一个操作系统的完整拷贝
+- 大小GBs级别,应用部署时间小时/分钟级
+
+* 容器
+
+.image img/container.png 350 _
+
+- 应用程序代码和所有的依赖打包(Docker Image)
+- 多个容器共享Linux内核,彼此之间完全隔离(网络,磁盘,CPU等)
+- 大小MBs级别,应用部署时间毫秒/秒级
+
+* Docker: 基本原理
+
+资源 _隔离_ & _共享_
+
+NET
+.link c/net.c
+FS
+.link c/unionfs.txt
+IPC
+.link c/ipc.c
+PID
+.link c/pid.c
+UTS
+.link c/uts.c
+
+* Docker: Build Ship Run
+
+.image img/build-ship-run.svg 300 _
+
+  $ docker run hello-world
+  Unable to find image 'hello-world:latest' locally
+  latest: Pulling from library/hello-world
+  78445dd45222: Pull complete
+  Digest: sha256:c5515758d4c5e1e838e9cd307f6c6a0d620b5e07e6f927b07d05f6d12a1ac8d7
+  Status: Downloaded newer image for hello-world:latest
+
+  Hello from Docker!
+  This message shows that your installation appears to be working correctly.
+  ... ...
+
+* Docker: Build
+
+.image img/docker-filesystems-multilayer.png
+
+* Docker: Dockerfile
+
+.code elasticsearch/Dockerfile
+.link https://github.com/docker-library/official-images
+
+* Docker: Ship & Run
+
+  $ docker push elasticsearch registry.docker.com/lockrecv/elasticsearch:lastest  (git push)
+  # 本机或另一台Docker机器
+  $ docker pull docker.elastic.co/elasticsearch/elasticsearch                     (git pull)
+  $ docker run elasticsearch
+
+* K8S vs Docker
+
+.image img/boeing-engine.jpg 300 400
+.image img/boeing-flight-deck.jpg 300 700
+
+* Kubernates
+
+- Kubernates集群的操作系统,那么:
+- Pod是新的进程    - 定义部署单元
+- Docker是新的apt - 打包部署单元
+- 容器是新的虚拟机  - 隔离部署单元
+
+* 计算机未来
+
+- AWS云服务
+- Azure云
+- IBM Bluemix
+- Aliyun
+
+未来云就像现在我们家里的_水_和_电_
+
+- 无处不在,而你又没什么感觉
+- 随时随地接入,并且费用低廉
+- ... ...
