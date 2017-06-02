@@ -1,0 +1,8 @@
+applications:
+  - path: .
+    memory: 512MB
+    instances: 1
+    name: your-app-name
+    disk_quota: 1024M
+    command: your-app-binary-name
+    buildpack: https://github.com/cloudfoundry/go-buildpack.git
