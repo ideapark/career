@@ -42,6 +42,7 @@ values."
      yaml
      helm
      html
+     docker
      gtags
      nginx
      python
