@@ -19,7 +19,13 @@ Copyright © Zhou Peng <lockrecv@outlook.com>
 - 进程树
 - 控制进程行为的几种方式
 
-* 模型和实物
+* Difference
+
+           Program             Process
+  ------------------------------------
+  Persist:    Disk              Memory
+     Size:   Fixed         Grow/Shrink
+   Status:  Static     PID/UID/FDs/...
 
 * Program
 
