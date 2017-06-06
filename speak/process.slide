@@ -37,7 +37,8 @@ Copyright © Zhou Peng <lockrecv@outlook.com>
 * Program
 
   $ file $(which go)
-  /usr/local/go/bin/go: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, not stripped
+  /usr/local/go/bin/go: ELF 64-bit LSB executable, x86-64, version 1 (SYSV),
+                        dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, not stripped
 
   $ LC_ALL=C readelf -h $(which go)
   ELF Header:
