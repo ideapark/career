@@ -114,3 +114,20 @@ syscall
 sessionid
 
 * Process cont.
+
+fork()
+
+exec()
+
+* Process cont.
+
+Linux login-run-exit cycle
+
+* Process cont.
+
+session
+group
+pid
+ppid
+uid
+euid
