@@ -127,6 +127,15 @@ UTS
   $ docker pull docker.elastic.co/elasticsearch/elasticsearch                     (git pull)
   $ docker run elasticsearch
 
+* Docker: CI/CD "integration matrix"
+
+硬件环境: Dev,QA,Prod
+软件环境: Web,DB,Daemon
+
+APP能平滑快速的部署发布吗?
+
+.image img/integration-matrix.png _ 1000
+
 * K8S vs Docker
 
 .image img/boeing-engine.jpg 300 400
