@@ -12,6 +12,7 @@ Difference between new() and make()
 In other words, new allocates; make initializes; the following illustrates this
 difference:
 
+#+BEGIN_SRC text
   new([]int)
     +------+
     |  *   | *[]int
@@ -21,13 +22,14 @@ difference:
 	  | nil |  0  |  0  | []int
 	  +-----+-----+-----+
 	   ptr   len   cap
+#+END_SRC
 
 #+BEGIN_SRC go
 var p *[]int = new([]int)  // *p == nil; with len and cap 0
 p := new([]int)
 #+END_SRC
 
-
+#+BEGIN_SRC text
   make([]int, 0)
     +-----+-----+-----+
     |  *  |  0  |  0  | []int
@@ -35,6 +37,7 @@ p := new([]int)
      ptr \ len   cap
           \
 	  ||[0]int
+#+END_SRC
 
 #+BEGIN_SRC go
 p := make([]int, 0)  // slice is initialized, but here points to an empty array
