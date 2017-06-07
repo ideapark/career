@@ -73,9 +73,9 @@ Provides context-sensitive auto completion and uses a client/server
 architecture, where the server is a caching daemon, and the clients are a
 command line utility as well as all popular editors.
 
-* oracle
+* guru (once called oracle)
 
-The Go oracle is a source analysis tool capable of answering a multitude of
+The Go guru is a source analysis tool capable of answering a multitude of
 questions about Go programs, such as:
 
 ** What is the type of this expression? What are its methods?
