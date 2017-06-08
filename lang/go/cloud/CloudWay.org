@@ -14,7 +14,7 @@ Favor simplicity in everything that you do.
 ** Employ Test-Driven Development. Test everything, everywhere.
 ** Fear is the direct result of lack of testing.
 
-* Relase Early, Release Often
+* Release Early, Release Often
 
 ** Every checkin is a potential production release, deployed via CD pipeline.
 
