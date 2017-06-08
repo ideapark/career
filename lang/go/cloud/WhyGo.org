@@ -13,7 +13,7 @@ bytecode like Java or .NET, it produces native binaries. As such, this
 simplicity doesn’t come at a price, it actually improves performance.
 
 Once you get over the initial fear of not being able to be productive in a
-language that doesn’t have classes, pure functional programming 4 , or a
+language that doesn’t have classes, pure functional programming 4, or a
 billion other bells and whistles, you may end up like us and love the purity of
 a language that shuns magic and artifice, and gives you raw, pure power to be
 productive and finally enjoy programming again.
