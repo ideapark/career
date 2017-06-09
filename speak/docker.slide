@@ -129,10 +129,11 @@ UTS
 
 * Docker: CI/CD "integration matrix"
 
-硬件环境: Dev,QA,Prod
-软件环境: Web,DB,Daemon
+  Hardware  What: Dev,QA,Prod
+             How: APP能在差异化的硬件环境下平滑快速的部署发布吗?
 
-APP能平滑快速的部署发布吗?
+  Software  What: Web,DB,Daemon
+             How: 服务和APP之间交互正常吗?
 
 .image img/integration-matrix.png _ 1000
 
