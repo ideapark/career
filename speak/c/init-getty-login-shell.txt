@@ -1,0 +1,23 @@
+            +------+
+      +-----| init |-----+  PID 1   <---内核负责创建
+      |     +------+     |
+      |                  |
+fork()/exec()      fork()/exec()
+      |                  |
+     \|/                \|/
+  +-------+          +-------+
+  | getty | ... .... | getty |  PID 523 ruid: 0 euid: 0
+  +-------+          +-------+
+                         |
+                       exec()
+                         |           +-------+
+                         +---------> | login |  PID 523 ruid: 0 euid: 0
+                                     +-------+
+                                         |
+                                   open()/dup()
+                            setgroups()/setgid()/setuid()
+                                         |
+                                       exec()
+                                         |       +-------+
+                                         +-----> | shell |  PID 523 ruid: 42 euid: 42
+                                                 +-------+

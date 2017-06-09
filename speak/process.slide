@@ -135,7 +135,7 @@ exec()
 
 * Process cont.
 
-Linux login-run-exit cycle
+.code c/init-getty-login-shell.txt
 
 * Process cont.
 
