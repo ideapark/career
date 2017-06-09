@@ -79,7 +79,7 @@ Copyright © Zhou Peng <lockrecv@outlook.com>
 
 - 应用程序代码和所有的依赖打包(Docker Image)
 - 多个容器共享Linux内核,彼此之间完全隔离(网络,磁盘,CPU等)
-- 大小MBs级别,应用部署时间毫秒/秒级
+- 大小MBs级别,应用部署时间秒/毫秒级
 
 * Docker: 基本原理
 
@@ -122,9 +122,9 @@ UTS
 
 * Docker: Ship & Run
 
-  $ docker push elasticsearch registry.docker.com/lockrecv/elasticsearch:lastest  (git push)
+  $ docker push registry.docker.com/lockrecv/elasticsearch:lastest  (git push)
   # 本机或另一台Docker机器
-  $ docker pull docker.elastic.co/elasticsearch/elasticsearch                     (git pull)
+  $ docker pull docker.elastic.co/elasticsearch/elasticsearch       (git pull)
   $ docker run elasticsearch
 
 * Docker: CI/CD "integration matrix"
