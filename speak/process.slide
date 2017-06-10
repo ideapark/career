@@ -40,6 +40,8 @@ Copyright © Zhou Peng <lockrecv@outlook.com>
   /usr/local/go/bin/go: ELF 64-bit LSB executable, x86-64, version 1 (SYSV),
                         dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, not stripped
 
+* Program cont.
+
   $ LC_ALL=C readelf -h $(which go)
   ELF Header:
     Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00
@@ -132,6 +134,8 @@ sessionid
 fork()
 
 exec()
+
+.code c/fork-vs-exec
 
 * Process cont.
 
