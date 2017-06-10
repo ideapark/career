@@ -13,13 +13,13 @@ Copyright © Zhou Peng <lockrecv@outlook.com>
 
 * 日程
 
-- 计算机发展历程
+- 没有容器的时代
 - 小结
 - Docker
   * 基本原理
   * Build Ship Run
   * Kubernetes (K8S)
-- 计算机未来是怎样
+- 容器以后是什么
 
 * 1970~1980 巨型机
 
@@ -149,7 +149,7 @@ UTS
 - Docker是新的apt - 打包部署单元
 - 容器是新的虚拟机  - 隔离部署单元
 
-* 计算机未来
+* 容器的未来
 
 - AWS云服务
 - Azure云
