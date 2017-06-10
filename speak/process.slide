@@ -133,7 +133,11 @@ sessionid
 
 fork()
 
+内核创建一个当前进程的副本,正副本执行同一个Program.
+
 exec()
+
+加载新的Program作为当前进程的执行对象
 
 .code c/fork-vs-exec
 
