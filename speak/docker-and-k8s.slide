@@ -1,4 +1,4 @@
-Container: Docker and Kubernates
+Container: Docker and Kubernetes
 成都
 2 Jan 2017
 
@@ -137,25 +137,25 @@ UTS
 
 .image img/integration-matrix.png _ 1000
 
-* Kubernates vs Docker
+* Kubernetes vs Docker
 
 .image img/boeing-engine.jpg 300 400
 .image img/boeing-flight-deck.jpg 300 700
 
-* Kubernates
+* Kubernetes
 
 主要功能
 
 - 使用Docker对应用程序包装(package)、实例化(instantiate)、运行(run)
 - 以集群的方式运行、管理跨机器的容器
 - 解决Docker跨机器容器之间的通讯问题
-- Kubernates的自我修复机制使得容器集群总是运行在用户期望的状态
+- Kubernetes的自我修复机制使得容器集群总是运行在用户期望的状态
 
-* Kubernates Architecutre
+* Kubernetes Architecutre
 
 .image img/kubernetes-cluster.png
 
-* Kubernates
+* Kubernetes
 
 Pods
 
@@ -163,7 +163,7 @@ Pods
   容器运行相同的应用。Pod包含的容器运行在同一个Minion(Host)上，看作一个统一管理
   单元，共享相同的volumes和network namespace/IP和Port空间。
 
-* Kubernates cont.
+* Kubernetes cont.
 
 Services
 
@@ -172,7 +172,7 @@ Services
   的容器，对外表现为一个单一访问接口，外部不需要了解后端如何运行，这给扩展或维护后
   端带来很大的好处。
 
-* Kubernates cont.
+* Kubernetes cont.
 
 Replication Controllers
 
@@ -184,7 +184,7 @@ Replication Controllers
   pods。对于利用pod 模板创建的pods，Replication Controller根据label selector来关联，
   通过修改pods的label可以删除对应的pods。
 
-* Kubernates cont.
+* Kubernetes cont.
 
 Replication Controller主要有如下用法：
 
@@ -206,7 +206,7 @@ Replication Controller主要有如下用法：
   如果需要在系统中运行multiple release的服务，Replication Controller使用labels来
   区分multiple release tracks。
 
-* Kubernates cont.
+* Kubernetes cont.
 
 Labels
 
@@ -217,9 +217,9 @@ Labels
   Replication Controller也使用labels来管理通过pod 模板创建的一组容器，这样
   Replication Controller可以更加容易，方便地管理多个容器，无论有多少容器。
 
-* Kubernates cont.
+* Kubernetes cont.
 
-- Kubernates集群的操作系统,那么:
+- Kubernetes集群的操作系统,那么:
 - Pod是新的进程 ----- 定义部署单元
 - Docker是新的apt -- 打包部署单元
 - 容器是新的虚拟机 -- 隔离部署单元
