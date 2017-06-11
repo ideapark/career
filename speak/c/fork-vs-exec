@@ -2,7 +2,7 @@
 
 # bash process fork() spawn child process
 # child exec() pstree
-pstree -p $$
+pstree -s -p $$
 
 # bash process exec() pstree
-exec pstree -p $$
+exec pstree -s -p $$
