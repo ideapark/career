@@ -144,6 +144,19 @@ UTS
 
 * Kubernates
 
+主要功能
+
+- 使用Docker对应用程序包装(package)、实例化(instantiate)、运行(run)
+- 以集群的方式运行、管理跨机器的容器
+- 解决Docker跨机器容器之间的通讯问题
+- Kubernates的自我修复机制使得容器集群总是运行在用户期望的状态
+
+* Kubernates Architecutre
+
+.image img/kubernetes-cluster.png
+
+* Kubernates
+
 Pods
 
   Pod是Kubernetes的基本操作单元，把相关的一个或多个容器构成一个Pod，通常Pod里的
