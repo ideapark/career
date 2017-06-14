@@ -37,3 +37,15 @@ application containers. The master schedules the containers to run on the
 cluster's nodes. The nodes communicate with the master using the Kubernetes API,
 which the master exposes. End users can also use the Kubernetes API directly to
 interact with the cluster.
+
+* Scaling
+
+Scaling is accomplished by changing the number of replicas in a Deployment.
+
+Before:
+
+[[file:img/module_05_scaling1.svg]]
+
+After:
+
+[[file:img/module_05_scaling2.svg]]
