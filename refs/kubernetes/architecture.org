@@ -49,3 +49,21 @@ Before:
 After:
 
 [[file:img/module_05_scaling2.svg]]
+
+* Rolling update
+
+** Stage 1:
+
+[[file:img/module_06_rollingupdates1.svg]]
+
+** Stage 2:
+
+[[file:img/module_06_rollingupdates2.svg]]
+
+** Stage 3:
+
+[[file:img/module_06_rollingupdates3.svg]]
+
+** Stage 4:
+
+[[file:img/module_06_rollingupdates4.svg]]
