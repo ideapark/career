@@ -149,7 +149,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+                               :size 12
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -322,10 +322,10 @@ you should place your code here."
   (setq-default c-default-style "linux"
                 c-basic-offset 8
                 indent-tabs-mode t
-                default-tab-width 8
-                display-time-mode t
-                fancy-battery-mode t)
+                default-tab-width 8)
   (global-set-key [f8] 'neotree-toggle)
+  (fancy-battery-mode t)
+  (display-time-mode t)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
