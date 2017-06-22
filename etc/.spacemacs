@@ -322,7 +322,9 @@ you should place your code here."
   (setq-default c-default-style "linux"
                 c-basic-offset 8
                 indent-tabs-mode t
-                default-tab-width 8)
+                default-tab-width 8
+                display-time-mode t
+                fancy-battery-mode t)
   (global-set-key [f8] 'neotree-toggle)
   )
 
