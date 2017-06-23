@@ -25,3 +25,63 @@ Docker Command One Graph
     +------------+             |                     +--------+      |
                                |                                     |
                                +-------------------------------------+
+
+Docker Command Category
+=======================
+
+Docker Environment Information:
+
+- info
+- version
+
+Container Life Cycle Management:
+
+- create
+- exec
+- kill
+- pause
+- restart
+- rm
+- run
+- start
+- stop
+- unpause
+
+Image Repository Command:
+
+- login
+- logout
+- pull
+- push
+- search
+
+Image Management:
+
+- build
+- images
+- import
+- load
+- rmi
+- save
+- tag
+- commit
+
+Container Operation:
+
+- attach
+- export
+- inspect
+- port
+- ps
+- rename
+- stats
+- top
+- wait
+- cp
+- diff
+
+System Log Information:
+
+- events
+- history
+- logs
