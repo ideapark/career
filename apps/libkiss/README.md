@@ -1,7 +1,7 @@
 # LIBKISS
 
 - Author: Zhou Peng
-- Email: lockrecv@qq.com
+- Email: lockrecv@outlook.com
 - License: MIT
 
 # Philosophy
