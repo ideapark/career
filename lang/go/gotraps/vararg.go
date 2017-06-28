@@ -5,6 +5,9 @@ import (
 )
 
 func vprint(a ...int) {
+	for i := range a {
+		a[i] += 10 // we can change the under array of the variable arg slice.
+	}
 	fmt.Printf("%T, %v\n", a, a)
 }
 
