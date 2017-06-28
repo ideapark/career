@@ -1,0 +1,12 @@
+Is Pointer Always Better?
+========================
+
+1. copy pointer will enlarge object pointed lifecycle
+2. compiler sometimes have to alloc memory on heap
+3. GC have to manage these object's lifecycle
+
+Object on Stack
+===============
+
+1. small object can be copied very quickly on stack with a few instructions
+2. read only or copied object suffers less concurrent locks and sync communication
