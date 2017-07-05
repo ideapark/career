@@ -1,11 +1,11 @@
 /*************************************************************************\
-*                  Copyright (C) Michael Kerrisk, 2016.                   *
-*                                                                         *
-* This program is free software. You may use, modify, and redistribute it *
-* under the terms of the GNU General Public License as published by the   *
-* Free Software Foundation, either version 3 or (at your option) any      *
-* later version. This program is distributed without any warranty.  See   *
-* the file COPYING.gpl-v3 for details.                                    *
+ *                  Copyright (C) Michael Kerrisk, 2016.                   *
+ *                                                                         *
+ * This program is free software. You may use, modify, and redistribute it *
+ * under the terms of the GNU General Public License as published by the   *
+ * Free Software Foundation, either version 3 or (at your option) any      *
+ * later version. This program is distributed without any warranty.  See   *
+ * the file COPYING.gpl-v3 for details.                                    *
 \*************************************************************************/
 
 /* Listing 31-2 */
@@ -19,40 +19,38 @@
 #include <pthread.h>
 #include "tlpi_hdr.h"
 
-static void *
-threadFunc(void *arg)
+static void *threadFunc(void *arg)
 {
-    char *str;
+	char *str;
 
-    printf("Other thread about to call strerror()\n");
-    str = strerror(EPERM);
-    printf("Other thread: str (%p) = %s\n", str, str);
+	printf("Other thread about to call strerror()\n");
+	str = strerror(EPERM);
+	printf("Other thread: str (%p) = %s\n", str, str);
 
-    return NULL;
+	return NULL;
 }
 
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
-    pthread_t t;
-    int s;
-    char *str;
+	pthread_t t;
+	int s;
+	char *str;
 
-    str = strerror(EINVAL);
-    printf("Main thread has called strerror()\n");
+	str = strerror(EINVAL);
+	printf("Main thread has called strerror()\n");
 
-    s = pthread_create(&t, NULL, threadFunc, NULL);
-    if (s != 0)
-        errExitEN(s, "pthread_create");
+	s = pthread_create(&t, NULL, threadFunc, NULL);
+	if (s != 0)
+		errExitEN(s, "pthread_create");
 
-    s = pthread_join(t, NULL);
-    if (s != 0)
-        errExitEN(s, "pthread_join");
+	s = pthread_join(t, NULL);
+	if (s != 0)
+		errExitEN(s, "pthread_join");
 
-    /* If strerror() is not thread-safe, then the output of this printf() be
-       the same as that produced by the analogous printf() in threadFunc() */
+	/* If strerror() is not thread-safe, then the output of this printf() be
+	   the same as that produced by the analogous printf() in threadFunc() */
 
-    printf("Main thread:  str (%p) = %s\n", str, str);
+	printf("Main thread:  str (%p) = %s\n", str, str);
 
-    exit(EXIT_SUCCESS);
+	exit(EXIT_SUCCESS);
 }
