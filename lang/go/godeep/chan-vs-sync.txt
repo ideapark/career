@@ -1,0 +1,5 @@
+Golang channel vs standard sync
+===============================
+
+- Channel is better for logical concurrent architecture.
+- Sync is better for local data protection.
