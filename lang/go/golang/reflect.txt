@@ -1,0 +1,6 @@
+Like C, Golang object doesn't keep track of typeinfo, runtime cannt require any
+typeinfo from object itself. Reflection is based on interface variable, which
+store both object's data and type.
+
+func TypeOf(i interface{}) Type
+func ValueOf(i interface{]) Value
