@@ -1,9 +1,0 @@
-{{range .}}
-  {{with .Author}}
-    <p><b>{{html .}}</b></p>
-  {{else}}
-    <p>An anonymous person wrote:</p>
-  {{end}}
-  <pre>{{html .Content}}</pre>
-  <pre>{{html .Date}}</pre>
-{{end}}
