@@ -1,8 +1,0 @@
-Form enctype
-============
-
-| enctype                           | what                                                                            |
-|-----------------------------------+---------------------------------------------------------------------------------|
-| application/x-www-form-urlencoded | Transcode all characters before uploading (default).                            |
-| multipart/form-data               | No transcoding. You must use this value when your form has file upload controls |
-| text/plain                        | Convert spaces to "+", but no transcoding for special characters                |
