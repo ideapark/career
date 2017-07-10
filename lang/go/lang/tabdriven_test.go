@@ -25,3 +25,10 @@ func TestAdd(t *testing.T) {
 		}
 	}
 }
+
+func BenchmarkAdd(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		println("B.N =", b.N)
+		_ = add(1, 2)
+	}
+}
