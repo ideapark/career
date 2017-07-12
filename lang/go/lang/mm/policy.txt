@@ -1,0 +1,5 @@
+1. allocate a big block of memory (1Mb) from operating system.
+2. split block of memory into small pieces linked.
+3. when goroutine need memory, runtime pick from the approperite list.
+4. when memory is no more needed, pay back to the list.
+5. If list has two much free memory, pay some back to the operating system.
