@@ -1,0 +1,42 @@
+          Phase         STW             Work
+-------------------------+-------------------------------------------------------
+                         |
+                     OFF + ------------> Prepare MarkWorker/P, Sleep
+                         |
+                       stop
+                         |
+        [WB:1 BE:1] SCAN +
+                         |
+                       start
+                         |
+                         + ------------> Concurrent scan
+                         |               Gray object enqueue
+                         |               White object reference modification captured by write barrier
+                         |               Malloc alloc white object
+                         |               MarkWorker resume to mark
+                         |
+                    MARK +
+                         |
+                         +-------------> Wait for first round mark complete
+                         |               Handle gray object captured by concurrent scan, exclude white object
+                         |
+                         +-------------> Rescan DATA, BSS
+                         |               New allocated white object
+                         |
+                         +-------------> Wait for second round mark complete
+                         |
+                       stop
+                         |
+                  [BE:0] +
+                         |
+        MARK TERMINATION +
+                         |
+                         +-------------> STW freezon, complete marking.
+              [WB:0] OFF |
+                         +-------------> Concurrent sweep
+                         |
+                       start
+                         |
+                                                                     STW: StopTheWorld
+                                                                     WB: WriteBarrierEnabled
+                                                                     BE: BlackenEnabled
