@@ -1,16 +1,16 @@
 #+TITLE: 简历
 #+AUTHOR: 周朋
-#+EMAIL: lockrecv@outlook.com
+#+EMAIL: p@ctriple.cn
 
 * 基本信息
 
 [[file:avatar.png]]
 
 - 姓名: 周朋
-- 年龄: 26
+- 年龄: 28
 - 婚姻: 已婚
 - 电话: +8615008287847
-- 邮箱: lockrecv@outlook.com
+- 邮箱: p@ctriple.cn
 
 * 英语能力
 
@@ -19,7 +19,7 @@
 
 * 编程技能
 
-- 擅长: Linux, C, Testing, Git, Amazon Web Service
+- 擅长: Golang, Linux, C, Testing, Git, Amazon Web Service
 - 熟练: Shell, Python
 - 了解: Java, JavaScript, HTML/CSS
 
@@ -31,9 +31,12 @@
 
 * 工作经历
 
+- 多点网络(成都)科技有限公司
+- 2017年05月至今 (成都)
+
 - 软件工程师A (15级)
 - 华为成都研究所
-- 2012年07月至今(5 years) | 成都
+- 2012年07月-2017年4月(5 years) | 成都
 
 ** Amazon Web Service分析
 
