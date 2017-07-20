@@ -45,13 +45,13 @@ int main() {
 
     start = std::clock();
     for (long ix = 0; ix < cnt; ix++)
-        slist.push_front("lockrecv@gmail.com");
+        slist.push_front("p@ctriple.cn");
     end = std::clock();
     ldiff = end - start;
 
     start = std::clock();
     for (long ix = 0; ix < cnt; ix++)
-        svec.push_back("lockrecv@gmail.com");
+        svec.push_back("p@ctriple.cn");
     end = std::clock();
     vdiff = end - start;
 

@@ -1,5 +1,5 @@
 # ----------------------------------------------
-# Copyright (C) Zhou Peng <lockrecv@gmail.com>
+# Copyright (C) Zhou Peng <p@ctriple.cn>
 # ----------------------------------------------
 
 objs += locate_images.o

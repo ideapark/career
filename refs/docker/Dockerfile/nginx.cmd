@@ -7,7 +7,7 @@
 FROM ubuntu
 
 # Maintainer: docker_user <docker_user at mail dot com> (@docker_user)
-MAINTAINER Zhou Peng <lockrecv@gmail.com>
+MAINTAINER Zhou Peng <p@ctriple.cn>
 
 # Commands to update the image
 RUN echo "deb http://archive.ubuntu.com/ubuntu/ raring main universe" >> /etc/apt/sources.list
