@@ -33,7 +33,7 @@ func main() {
 	}
 }
 
-// containsAll reports whether x contains the lement of y, in order.
+// containsAll reports whether x contains the element of y, in order.
 func containsAll(x, y []string) bool {
 	for len(y) <= len(x) {
 		if len(y) == 0 {
