@@ -1,0 +1,93 @@
+** Code
+
+#+BEGIN_SRC go
+package main
+
+func pr(i int) {
+	println(i)
+}
+
+func main() {
+	a := []int{1, 2, 3, 4, 5}
+
+	for i := range a {
+		go func() {
+			pr(i)
+		}()
+	}
+}
+#+END_SRC
+
+** Vet
+
+#+BEGIN_SRC shell
+go vet pr.go
+range variable i captured by func literal
+#+END_SRC
+
+#+BEGIN_SRC go
+package main
+
+func pr(i int) {
+	println(i)
+}
+
+func main() {
+	a := []int{1, 2, 3, 4, 5}
+
+	for i := range a {
+		go pr(i)
+	}
+}
+#+END_SRC
+
+** Run
+
+#+BEGIN_SRC shell
+go build -gcflags "-l -m" pr.go
+./pr.go:8: main []int literal does not escape
+
+go tool objdump -s "main.main" pr
+TEXT main.main(SB) /tmp/pr.go
+	pr.go:7		0x44d6a0	64488b0c25f8ffffff	FS MOVQ FS:0xfffffff8, CX
+	pr.go:7		0x44d6a9	483b6110		CMPQ 0x10(CX), SP
+	pr.go:7		0x44d6ad	0f8680000000		JBE 0x44d733
+	pr.go:7		0x44d6b3	4883ec50		SUBQ $0x50, SP
+	pr.go:7		0x44d6b7	48896c2448		MOVQ BP, 0x48(SP)
+	pr.go:7		0x44d6bc	488d6c2448		LEAQ 0x48(SP), BP
+	pr.go:8		0x44d6c1	488b0578250200		MOVQ 0x22578(IP), AX
+	pr.go:8		0x44d6c8	4889442420		MOVQ AX, 0x20(SP)
+	pr.go:8		0x44d6cd	488d7c2428		LEAQ 0x28(SP), DI
+	pr.go:8		0x44d6d2	488d356f250200		LEAQ 0x2256f(IP), SI
+	pr.go:8		0x44d6d9	48896c24f0		MOVQ BP, -0x10(SP)
+	pr.go:8		0x44d6de	488d6c24f0		LEAQ -0x10(SP), BP
+	pr.go:8		0x44d6e3	e83cafffff		CALL 0x448624
+	pr.go:8		0x44d6e8	488b6d00		MOVQ 0(BP), BP
+	pr.go:8		0x44d6ec	31c0			XORL AX, AX
+	pr.go:10	0x44d6ee	4889442418		MOVQ AX, 0x18(SP)
+	pr.go:10	0x44d6f3	4883f805		CMPQ $0x5, AX
+	pr.go:10	0x44d6f7	7d30			JGE 0x44d729
+	pr.go:11	0x44d6f9	4889442410		MOVQ AX, 0x10(SP)
+	pr.go:11	0x44d6fe	c7042408000000		MOVL $0x8, 0(SP)
+	pr.go:11	0x44d705	488d0d14fc0100		LEAQ 0x1fc14(IP), CX
+	pr.go:11	0x44d70c	48894c2408		MOVQ CX, 0x8(SP)
+	pr.go:11	0x44d711	e80addfdff		CALL runtime.newproc(SB)
+	pr.go:10	0x44d716	488b442418		MOVQ 0x18(SP), AX
+	pr.go:10	0x44d71b	48ffc0			INCQ AX
+	pr.go:10	0x44d71e	4889442418		MOVQ AX, 0x18(SP)
+	pr.go:10	0x44d723	4883f805		CMPQ $0x5, AX
+	pr.go:10	0x44d727	7cd0			JL 0x44d6f9
+	pr.go:13	0x44d729	488b6c2448		MOVQ 0x48(SP), BP
+	pr.go:13	0x44d72e	4883c450		ADDQ $0x50, SP
+	pr.go:13	0x44d732	c3			RET
+	pr.go:7		0x44d733	e85885ffff		CALL runtime.morestack_noctxt(SB)
+	pr.go:7		0x44d738	e963ffffff		JMP main.main(SB)
+#+END_SRC
+
+** Notes
+
+Loop var *i* will be reused each loop, so goroutines in this example will drive
+compiler to place *i* in heap and be shared.
+
+In the second code example, goroutine will copy the *i* to its stack before
+started, so this version will do thing that we expected.

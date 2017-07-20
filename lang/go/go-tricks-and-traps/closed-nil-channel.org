@@ -1,0 +1,65 @@
+** Closed vs nil channel
+
+- Send to closed channel, got pannic.
+- Receive from closed channel, got buffered data or zero data.
+- Both send and receive from/to nil channel, got blocked.
+
+** Code
+
+#+BEGIN_SRC go
+package main
+
+import (
+	"sync"
+)
+
+func main() {
+	var wg sync.WaitGroup
+	wg.Add(3)
+
+	a, b := make(chan int), make(chan int)
+
+	go func() {
+		defer wg.Done()
+		for {
+			select {
+			case x, ok := <-a:
+				if !ok {
+					a = nil // nil channel blocked, select will choose other case stmt
+					break
+				}
+				println("a:", x)
+			case x, ok := <-b:
+				if !ok {
+					b = nil // nil channel blocked, select will choose other case stmt
+					break
+				}
+				println("b:", x)
+			}
+
+			if a == nil && b == nil {
+				return
+			}
+		}
+	}()
+
+	go func() {
+		defer wg.Done()
+		defer close(a)
+		for i := 0; i < 3; i++ {
+			a <- i
+		}
+	}()
+
+	go func() {
+		defer wg.Done()
+		defer close(b)
+		for i := 0; i < 3; i++ {
+			b <- i * 10
+
+		}
+	}()
+
+	wg.Wait()
+}
+#+END_SRC

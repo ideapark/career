@@ -1,0 +1,33 @@
+** Go code
+
+#+BEGIN_SRC go
+package main
+
+const PI = 3.1415926
+
+func main() {
+	println(&PI, PI)
+}
+#+END_SRC
+
+** Compile
+
+#+BEGIN_SRC shell
+go build -x test.go
+test.go:6: cannot take the address of PI
+#+END_SRC
+
+** Notes
+
+Compiler would replace const var with the exact literal for optimization. so the
+last code compiled may look like this:
+
+#+BEGIN_SRC go
+package main
+
+func main() {
+	println(&3.1415926, 3.1415926)
+}
+#+END_SRC
+
+Compiler literal can not be addressed.

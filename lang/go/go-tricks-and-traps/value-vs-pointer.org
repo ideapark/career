@@ -1,0 +1,54 @@
+** Code
+
+#+BEGIN_SRC go
+package main
+
+import (
+	"fmt"
+)
+
+type N int
+
+func (n N) value() {
+	n++
+	fmt.Printf("v: %p, %v\n", &n, n)
+}
+
+func (n *N) pointer() {
+	(*n)++
+	fmt.Printf("p: %p, %v\n", n, *n)
+}
+
+func main() {
+	var v N = 25
+	p := &v
+
+	v.value()
+	p.pointer()
+
+	// compiler will convert between T and *T automatically
+	v.pointer()
+	p.value()
+
+	fmt.Printf("a: %p, %v\n", &v, v)
+}
+#+END_SRC
+
+** Run
+
+#+BEGIN_SRC shell
+go run method.go
+v: 0xc42000e260, 26
+p: 0xc42000e238, 26
+p: 0xc42000e238, 27
+v: 0xc42000e298, 28
+a: 0xc42000e238, 27
+#+END_SRC
+
+** Notes
+
+- need to modify object, use *T
+- small object or fixed value, no modify, use T
+- huge object use *T first, for sake of copying cost
+- object include sync.Mutex, use *T, avoid copying Mutex leads to lock failed
+- all other situations, use *T first

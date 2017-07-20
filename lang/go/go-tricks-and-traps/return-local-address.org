@@ -1,0 +1,43 @@
+** Code
+
+#+BEGIN_SRC go
+package main
+
+import (
+	"fmt"
+)
+
+type Location struct {
+	loc float64
+	log float64
+}
+
+func newLocation() *Location {
+	loc := Location{}
+	return &loc
+}
+
+func main() {
+	loc := newLocation()
+	fmt.Printf("%#v\n", loc)
+}
+#+END_SRC
+
+** Compile
+
+#+BEGIN_SRC shell
+go build -x -gcflags "-m -l" test.go
+# command-line-arguments
+./test.go:14: &loc escapes to heap
+./test.go:13: moved to heap: loc
+./test.go:19: loc escapes to heap
+./test.go:19: main ... argument does not escape
+#+END_SRC
+
+** Notes
+
+Golang compiler will analyze code to determine if a variable should be allocated
+on stack or on heap. Go not like C does not strictly differentiate stack and
+heap variable, compiler may place stack variable on heap when var referenced out
+of the function that defined it. yet place heap variable on stack for
+performance improvment if the program's behavior not changed.

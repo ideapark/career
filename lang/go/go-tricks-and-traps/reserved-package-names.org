@@ -1,0 +1,26 @@
+** Notes
+
+There are four reserved names for paths that should NOT be used for packages to
+be built with the go tool:
+
+- "main" denotes the top-level package in a stand-alone executable.
+
+- "all" expands to all package directories found in the GOPATH trees. For
+  example, 'go list all' lists all the packages on the local system.
+
+- "std" is like all but expands to just the packages in the standard Go library.
+
+- "cmd" expands to the Go repository's commands and their internal libraries,
+  import path beginning with "cmd/" only match source code in the Go repository.
+
+** Test
+
+#+BEGIN_SRC shell
+go test std
+ok  	archive/tar	0.048s
+ok  	archive/zip	31.057s
+ok  	bufio	0.103s
+ok  	bytes	2.182s
+ok  	compress/bzip2	0.160s
+...
+#+END_SRC

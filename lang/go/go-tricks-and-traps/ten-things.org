@@ -1,0 +1,308 @@
+** Anonymous structs
+
+*** Grouped globals
+
+#+BEGIN_SRC go
+var config struct {
+	APIKey      string
+	OAuthConfig oauth.Config
+}
+
+config.APIKey = "BADC0C0A"
+#+END_SRC
+
+*** Template data
+
+#+BEGIN_SRC go
+data := struct {
+	Title string
+	Users []*User
+}{
+	title,
+	users,
+}
+err := tmpl.Execute(w, data)
+#+END_SRC
+
+*** Test tables
+
+#+BEGIN_SRC go
+var indexRuneTests = []struct {
+	s    string
+	rune rune
+	out  int
+}{
+	{"a A a", 'A', 2},
+	{"some_text=some_value", '=', 9},
+	{"aa", 'a', 3},
+	{"bb", 'b', 4},
+}
+#+END_SRC
+
+*** Embedded lock
+
+#+BEGIN_SRC go
+var hits struct {
+	sync.Mutex
+	n int
+}
+hits.Lock()
+hits.n++
+hits.Unlock()
+#+END_SRC
+
+** Nested structs
+
+*** Decoding deeply nested JSON data
+
+#+BEGIN_SRC json
+{
+  "data": {
+    "children": [
+      {"data": {
+        "title": "The Go homepage",
+        "url": "http://golang.org/"
+      }},
+      ...
+    ]
+  }
+}
+#+END_SRC
+
+#+BEGIN_SRC go
+type Item struct {
+	Title string
+	URL   string
+}
+
+type Response struct {
+	Data struct {
+		Children []struct{
+			Data Item
+		}
+	}
+}
+#+END_SRC
+
+** Comand-line godoc
+
+#+BEGIN_SRC shell
+% godoc sync Mutex
+PACKAGE
+
+package sync
+    import "sync"
+
+TYPES
+
+type Mutex struct {
+	// contains filtered or unexported fields
+}
+	A Mutex is a mutual exclusion lock. Mutexes can be created as part of
+	other structures; the zero value for a Mutex is an unlocked mutex.
+
+func (m *Mutex) Lock()
+	Lock locks m. If the lock is already in use, the calling goroutine
+	blocks until the mutex is available.
+
+... ...
+#+END_SRC
+
+** godoc -src
+
+#+BEGIN_SRC shell
+% godoc -src sync Mutex
+// A Mutex is a mutual exclusion lock.
+// Mutexes can be created as part of other structures;
+// the zero value for a Mutex is an unlocked mutex.
+type Mutex struct {
+	state int32
+	sema  uint32
+}
+#+END_SRC
+
+** go get supports custom domains
+
+#+BEGIN_SRC shell
+go get camlistore.org/pkg/netutil
+#+END_SRC
+
+See `go help importpath` for the details.
+
+** Mock out the file system
+
+Got a package that works with the file system, but don't want your tests
+to actually use the disk?
+
+#+BEGIN_SRC go
+var fs fileSystem = osFS{}
+
+type fileSystem interface {
+	Open(name string) (file, error)
+	Stat(name string) (os.FileInfo, error)
+}
+
+type file interface {
+	io.Closer
+	io.Reader
+	io.ReaderAt
+	io.Seeker
+	Stat() (os.FileInfo, error)
+}
+
+// osFS implements fileSystem using the local disk.
+type osFS struct{}
+
+func (osFS) Open(name string) (file, error)        { return os.Open(name) }
+func (osFS) Stat(name string) (os.FileInfo, error) { return os.Stat(name) }
+#+END_SRC
+
+** Method expressions
+
+#+BEGIN_SRC go
+type T struct{}
+func (T) Foo(s string) { println(s) }
+
+var fn func(T, string) = T.Foo
+#+END_SRC
+
+Real example from os/exec:
+
+#+BEGIN_SRC go
+func (c *Cmd) stdin() (f *os.File, err error)
+func (c *Cmd) stdout() (f *os.File, err error)
+func (c *Cmd) stderr() (f *os.File, err error)
+
+type F func(*Cmd) (*os.File, error)
+for _, setupFd := range []F{(*Cmd).stdin, (*Cmd).stdout, (*Cmd).stderr} {
+	fd, err := setupFd(c)
+	if err != nil {
+		c.closeDescriptors(c.closeAfterStart)
+		c.closeDescriptors(c.CloseAfterWait)
+		return err
+	}
+	c.childFiles = append(c.childFiles, fd)
+}
+#+END_SRC
+
+** Send and receive on the same channel
+
+#+BEGIN_SRC go
+package main
+
+import "fmt"
+
+var battle = make(chan string)
+
+func warrior(name string, done chan struct{}) {
+	select {
+	case opponent := <-battle:
+		fmt.Printf("%s beat %s\n", name, opponent)
+	case battle <- name:
+		// I lost :-(
+	}
+	done <- struct{}{}
+}
+
+func main() {
+	done := make(chan struct{})
+	langs := []string{"Go", "C", "C++", "Java", "Perl", "Python"}
+	for _, l := range langs {
+		go warrior(l, done)
+	}
+	for _ = range langs {
+		<-done
+	}
+}
+#+END_SRC
+
+** Using close to broadcast
+
+#+BEGIN_SRC go
+func waiter(i int, block, done chan struct{}) {
+	time.Sleep(time.Duration(rand.Intn(3000)) * time.Millisecond)
+	fmt.Println(i, "waiting...")
+	<-block
+	fmt.Println(i, "done!")
+	done <- struct{}{}
+}
+
+func main() {
+	block, done := make(chan struct{}), make(chan struct{})
+	for i := 0; i < 4; i++ {
+		go waiter(i, block, done)
+	}
+	time.Sleep(5 * time.Second)
+	close(block)
+	for i := 0; i < 4; i++ {
+		<-done
+	}
+}
+#+END_SRC
+
+Using close to broadcast
+
+#+BEGIN_SRC go
+func worker(i int, ch chan Work, quit chan struct{}) {
+	var quitting bool
+	for {
+		select {
+		case w := <-ch:
+			if quitting {
+				w.Refuse()
+				fmt.Println("worker", i, "refused", w)
+				break
+			}
+			w.Do()
+			fmt.Println("worker", i, "processed", w)
+		case <-quit:
+			fmt.Println("worker", i, "quitting")
+			quitting = true
+		}
+	}
+}
+
+func main() {
+	ch, quit := make(chan Work), make(chan struct{})
+	go makeWork(ch)
+	for i := 0; i < 4; i+= {
+		go worker(i, ch, quit)
+	}
+	time.Sleep(5 * time.Second)
+	close(quit)
+	time.Sleep(2 * time.Second)
+}
+#+END_SRC
+
+** Nil channel in select
+
+#+BEGIN_SRC go
+func worker(i int, ch chan Work, quit chan struct{}) {
+	for {
+		select {
+		case w := <-ch:
+			if quit == nil {
+				w.Refuse();
+				fmt.Println("worker", i, "refused", w)
+				break
+			}
+			w.Do()
+			fmt.Println("worker", i, "processed", w)
+		case <-quit:
+			fmt.Println("worker", i, "quitting")
+			quit = nil
+		}
+	}
+}
+
+func main() {
+	ch, quit := make(chan Work), make(chan struct{})
+	go makeWork(ch)
+	for i := 0; i < 4; i++ {
+		go worker(i, ch, quit)
+	}
+	time.Sleep(5 * time.Second)
+	close(quit)
+	time.Sleep(2 * time.Second)
+}
+#+END_SRC

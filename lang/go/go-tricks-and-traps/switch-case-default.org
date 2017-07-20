@@ -1,0 +1,53 @@
+** Code
+
+#+BEGIN_SRC go
+package main
+
+func main() {
+	switch x := 5; x {
+	default:
+		x += 10
+		println(x)
+	case 5:
+		x += 50
+		println(x)
+		fallthrough
+	case 6:
+		x += 45
+		println(x)
+	}
+}
+#+END_SRC
+
+#+BEGIN_SRC c
+#include <stdio.h>
+
+int main(void)
+{
+	int x = 5;
+	switch (x) {
+	default:
+		x += 10;
+		printf("%d\n", x);
+	case 5:
+		x += 50;
+		printf("%d\n", x);
+	case 6:
+		x += 45;
+		printf("%d\n", x);
+	}
+
+	return 0;
+}
+#+END_SRC
+
+** Notes
+
+C language switch case matched will fall through to the next case statement by
+default, which leads to many bugs.
+
+Golang has the more natural behavior that you must explicitly use *fallthrough*
+key word to flow to the next case statement.
+
+Both C and Go switch *default* case will be matched last no matter where it is
+placed.
