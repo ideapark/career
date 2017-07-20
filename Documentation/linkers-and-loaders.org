@@ -1,6 +1,6 @@
 #+TITLE: Linkers and Loaders
 #+AUTHOR: Zhou Peng
-#+EMAIL: lockrecv@qq.com
+#+EMAIL: p@ctriple.cn
 
 Linking is the process of combining various pieces of code and data together to
 form a single executable that can be loaded in memory. Linking can be done at

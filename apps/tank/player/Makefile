@@ -1,7 +1,7 @@
 # -----------------------------------------
 #             Player Makefile
 #
-# Copyright (c) Zhou Peng <lockrecv@qq.com>
+# Copyright (c) Zhou Peng <p@ctriple.cn>
 # -----------------------------------------
 
 ply-objs += player.o link.o

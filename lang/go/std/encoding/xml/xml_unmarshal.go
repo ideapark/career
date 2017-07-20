@@ -28,10 +28,10 @@ func main() {
   <FullName>Grace R. Emlin</FullName>
   <Company>LOCEKRECV Inc.</Company>
   <Email where="home">
-    <Addr>lockrecv@qq.com</Addr>
+    <Addr>p@ctriple.cn</Addr>
   </Email>
   <Email where="work">
-    <Addr>lockrecv@outlook.com</Addr>
+    <Addr>p@ctriple.cn</Addr>
   </Email>
   <Group>
     <Value>Friends</Value>

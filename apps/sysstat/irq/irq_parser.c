@@ -1,7 +1,7 @@
 /*
  * sysstat/irq/irq_parser.c - sysstat interrupts parser
  *
- * Copyright (c) Zhou Peng <lockrecv@qq.com>
+ * Copyright (c) Zhou Peng <p@ctriple.cn>
  */
 
 #include <stdio.h>

@@ -1,7 +1,7 @@
 # -----------------------------------------
 #             Server Makefile
 #
-# Copyright (c) Zhou Peng <lockrecv@qq.com>
+# Copyright (c) Zhou Peng <p@ctriple.cn>
 # -----------------------------------------
 
 srv-objs += server.o map.o link.o

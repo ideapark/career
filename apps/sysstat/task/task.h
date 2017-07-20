@@ -1,7 +1,7 @@
 /*
  * sysstat/task/task.h - sysstat task info sample
  *
- * Copyright (c) Zhou Peng <lockrecv@qq.com>
+ * Copyright (c) Zhou Peng <p@ctriple.cn>
  */
 
 #ifndef SYSSTAT_TASK_H

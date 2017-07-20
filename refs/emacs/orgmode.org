@@ -1,6 +1,6 @@
 #+TITLE: Org Mode
 #+AUTHOR: Zhou Peng
-#+EMAIL: lockrecv@qq.com
+#+EMAIL: p@ctriple.cn
 
 * Editing
 

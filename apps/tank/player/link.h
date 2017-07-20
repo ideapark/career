@@ -1,7 +1,7 @@
 /*
  * link.h
  *
- * Copyright (c) Zhou Peng <lockrecv@qq.com>
+ * Copyright (c) Zhou Peng <p@ctriple.cn>
  */
 
 #ifndef LINK_H

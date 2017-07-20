@@ -1,7 +1,7 @@
 # -----------------------------------------
 #             Tank War Makefile
 #
-# Copyright (c) Zhou Peng <lockrecv@qq.com>
+# Copyright (c) Zhou Peng <p@ctriple.cn>
 # -----------------------------------------
 
 export AR = ar
@@ -27,5 +27,5 @@ test: compile
 copyright:
 	@echo "### ----------------------------------------- ###"
 	@echo "###                 Tank War                  ###"
-	@echo "### Copyright (c) Zhou Peng <lockrecv@qq.com> ###"
+	@echo "### Copyright (c) Zhou Peng <p@ctriple.cn> ###"
 	@echo "### ----------------------------------------- ###"

@@ -1,6 +1,6 @@
 #+TITLE: Emacs Introduction
 #+AUTHOR: Zhou Peng
-#+EMAIL: lockrecv@qq.com
+#+EMAIL: p@ctriple.cn
 
 [[file:emacs.png]]
 

@@ -1,6 +1,6 @@
 #+TITLE: Package build
 #+AUTHOR: Golang Authors
-#+EMAIL: lockrecv@outlook.com
+#+EMAIL: p@ctriple.cn
 
 * Go Path
 

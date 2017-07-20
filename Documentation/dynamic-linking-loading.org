@@ -1,6 +1,6 @@
 #+TITLE: Loading a dynamic linked program
 #+AUTHOR: John Levine
-#+EMAIL: lockrecv@outlook.com
+#+EMAIL: p@ctriple.cn
 
 * Starting the dynamic linker
 

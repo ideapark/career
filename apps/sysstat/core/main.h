@@ -1,7 +1,7 @@
 /*
  * sysstat/core/main.h - sysstat type defines
  *
- * Copyright (c) Zhou Peng <lockrecv@qq.com>
+ * Copyright (c) Zhou Peng <p@ctriple.cn>
  */
 
 #ifndef SYSSTAT_MAIN_H

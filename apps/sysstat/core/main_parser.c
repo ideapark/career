@@ -1,7 +1,7 @@
 /*
  * sysstat/core/main_parser.c - sysstat parser main engine
  *
- * Copyright (c) Zhou Peng <lockrecv@qq.com>
+ * Copyright (c) Zhou Peng <p@ctriple.cn>
  */
 
 #include <stdio.h>

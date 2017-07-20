@@ -1,7 +1,7 @@
 /*
  * sysstat/util/sqlite_helper.h - sqlite database helper
  *
- * Copyright (c) Zhou Peng <lockrecv@qq.com>
+ * Copyright (c) Zhou Peng <p@ctriple.cn>
  */
 
 #ifndef SQLITE_HELPER_H

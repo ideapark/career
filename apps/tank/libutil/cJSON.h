@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2009 Dave Gamble
  *
- * Revised by Zhou Peng <lockrecv@qq.com>
+ * Revised by Zhou Peng <p@ctriple.cn>
  *
  * 1. Linux coding style
  * 2. emacs formating

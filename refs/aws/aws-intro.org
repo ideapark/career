@@ -1,6 +1,6 @@
 #+TITLE: Amazon Web Service
 #+AUTHOR: Zhou Peng
-#+EMAIL: lockrecv@outlook.com
+#+EMAIL: p@ctriple.cn
 
 * Cloud Computing
 

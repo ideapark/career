@@ -1,7 +1,7 @@
 #+TITLE: Software Architecture Patterns
 #+AUTHOR: Mark Richards
 #+AUTHOR: Zhou Peng
-#+EMAIL: lockrecv@qq.com
+#+EMAIL: p@ctriple.cn
 
 Understanding Common Architecture Patterns and When to Use Them
 

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #
-# Copyright (c) Zhou Peng <lockrecv@qq.com>
+# Copyright (c) Zhou Peng <p@ctriple.cn>
 #
 
 gcc -shared -fPIC -o libvector.so addvec.c multvec.c

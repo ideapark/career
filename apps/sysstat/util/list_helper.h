@@ -1,7 +1,7 @@
 /*
  * sysstat/util/list_helper.h - double linked list (tailored from Linux)
  *
- * Copyright (c) Zhou Peng <lockrecv@qq.com>
+ * Copyright (c) Zhou Peng <p@ctriple.cn>
  */
 
 #ifndef LIST_HELPER_H

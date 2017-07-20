@@ -1,7 +1,7 @@
 #+TITLE: Emacs Lisp Cheat Sheet
 #+AUTHOR: wikemacs.org/wiki/Emacs_Lisp_Cheat_Sheet
 #+AUTHOR: Zhou Peng
-#+EMAIL: lockrecv@qq.com
+#+EMAIL: p@ctriple.cn
 
 * Contents
 ** Special form

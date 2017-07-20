@@ -7,7 +7,7 @@
 ```
 [global]
     git config --global user.name "Zhou Peng"
-    git config --global user.email "lockrecv@qq.com"
+    git config --global user.email "p@ctriple.cn"
 
     git config --global color.ui auto
     git config --global core.editor vim
@@ -113,7 +113,7 @@
 
      - Typically a hyphen or asterisk is used for the bullet,
        preceded by a single space, with blank lines in between,
-       but conventions vary here 
+       but conventions vary here
 ```
 
 > git tricks

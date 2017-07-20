@@ -1,5 +1,5 @@
 # -------------------------------------------------
-# Copyright (c) Zhou Peng <lockrecv@qq.com>
+# Copyright (c) Zhou Peng <p@ctriple.cn>
 #
 # sysstat   - system performance sample tool
 # sysparser - system performance data parsing tool

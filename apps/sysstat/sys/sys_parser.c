@@ -1,7 +1,7 @@
 /*
  * sysstat/sys/sys.c - sysstat system praser
  *
- * Copyright (c) Zhou Peng <lockrecv@qq.com>
+ * Copyright (c) Zhou Peng <p@ctriple.cn>
  */
 
 #include <stdio.h>

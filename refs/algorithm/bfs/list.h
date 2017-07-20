@@ -2,7 +2,7 @@
  * list.h - double linked list (tailored from Linux)
  *
  * Copyright (c) Linux Kernel
- * Copyright (c) Zhou Peng <lockrecv@qq.com>
+ * Copyright (c) Zhou Peng <p@ctriple.cn>
  */
 
 #ifndef LIST_H

@@ -1,7 +1,7 @@
 /*
  * sysstat/util/endian_helper.h - endian converting helper
  *
- * Copyright (c) Zhou Peng <lockrecv@qq.com>
+ * Copyright (c) Zhou Peng <p@ctriple.cn>
  */
 
 #ifndef ENDIAN_HELPER_H

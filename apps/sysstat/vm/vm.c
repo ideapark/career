@@ -1,7 +1,7 @@
 /*
  * sysstat/proc/proc.c - sysstat process sample
  *
- * Copyright (c) Zhou Peng <lockrecv@qq.com>
+ * Copyright (c) Zhou Peng <p@ctriple.cn>
  */
 
 #include <stdio.h>

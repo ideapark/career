@@ -1,7 +1,7 @@
 /*
  * sysstat/irq/irq.h - sysstat interrupts sample
  *
- * Copyright (c) Zhou Peng <lockrecv@qq.com>
+ * Copyright (c) Zhou Peng <p@ctriple.cn>
  */
 
 #ifndef SYSSTAT_IRQ_H

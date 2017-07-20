@@ -1,6 +1,6 @@
 #+TITLE: Golang Tricks and Traps
 #+AUTHOR: Zhou Peng
-#+EMAIL: lockrecv@outlook.com
+#+EMAIL: p@ctriple.cn
 
 * Item 1: Why cannot take address of const variable.
 

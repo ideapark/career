@@ -2,7 +2,7 @@
 # reporter.exe  - aps performance tool sample data parsing tool
 # callgraph.exe - aps performance tool callgraph tool
 #
-# Copyright (c) Zhou Peng <lockrecv@qq.com>
+# Copyright (c) Zhou Peng <p@ctriple.cn>
 #
 # --------------------------------------------------------------
 
@@ -36,7 +36,7 @@ objects: copyright
 copyright:
 	@echo "@-------------------------------------------------------------------@"
 	@echo "@                                                                   @"
-	@echo "@ Copyright (c) Zhou Peng <lockrecv@qq.com>                         @"
+	@echo "@ Copyright (c) Zhou Peng <p@ctriple.cn>                            @"
 	@echo "@                                                                   @"
 	@echo "@ reporter.exe  - data parsing tool                                 @"
 	@echo "@ callgraph.exe - callgraph tool                                    @"

@@ -1,7 +1,7 @@
 # -----------------------------------------
 #             Library Makefile
 #
-# Copyright (c) Zhou Peng <lockrecv@qq.com>
+# Copyright (c) Zhou Peng <p@ctriple.cn>
 # -----------------------------------------
 
 util-objs += logger.o cJSON.o

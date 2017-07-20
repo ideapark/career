@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Zhou Peng <lockrecv@qq.com>
+ * Copyright (c) Zhou Peng <p@ctriple.cn>
  *
  * Compile this source with or without libpthread, and
  * you will understand what it is saying.
