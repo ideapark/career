@@ -16,7 +16,7 @@ func main() {
 package temperature
 import "fmt"
 type Celsius float64
-func (c Celsius) String() string  { return fmt.Sprintf("%g^C", c) }
+func (c Celsius) String() string  { return fmt.Sprintf("%g℃", c) }
 func (c *Celsius) SetF(f float64) { *c = Celsius(f - 32 / 9 * 5) }
 `
 	fset := token.NewFileSet()
