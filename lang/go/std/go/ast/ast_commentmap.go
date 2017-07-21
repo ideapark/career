@@ -42,6 +42,9 @@ func main() {
 	// and AST nodes.
 	cmap := ast.NewCommentMap(fset, f, f.Comments)
 
+	// Remove the first const declaration from the list of declaration
+	f.Decls = f.Decls[1:]
+
 	// Use the comment map to filter comments that don't belong anymore
 	// (the comments associated with the variable declaration), and create
 	// the new comments list.
