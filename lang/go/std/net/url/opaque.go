@@ -13,9 +13,9 @@ func main() {
 	// Sending a literal '%' in an HTTP request's Path
 	req := &http.Request{
 		Method: "GET",
-		Host:   "example.compress", // takes precedence over URL.Host
+		Host:   "www.ctriple.cn", // takes precedence over URL.Host
 		URL: &url.URL{
-			Host:   "ignored",
+			Host:   "ctriple.cn",
 			Scheme: "https",
 			Opaque: "/%2f/",
 		},
