@@ -9,7 +9,7 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/sendstrailers", func(w http.ResponseWriter, req *http.Request) {
 		// Before any call to WriteHeader or Write, declare
-		// the tralers you will set during the HTTP
+		// the trailers you will set during the HTTP
 		// response. These three headers are actually sent in
 		// the trailer.
 		w.Header().Set("Trailer", "AtEnd1, AtEnd2")
