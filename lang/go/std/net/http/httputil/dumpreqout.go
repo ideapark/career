@@ -10,7 +10,7 @@ import (
 
 func main() {
 	const body = "Go is a general-purpose language with systems programming in mind."
-	req, err := http.NewRequest("PUT", "http://www.example.org", strings.NewReader(body))
+	req, err := http.NewRequest("PUT", "http://www.ctriple.cn", strings.NewReader(body))
 	if err != nil {
 		log.Fatal(err)
 	}

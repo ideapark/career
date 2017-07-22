@@ -26,7 +26,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	req.Host = "www.example.org"
+	req.Host = "www.ctriple.cn"
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		log.Fatal(err)
