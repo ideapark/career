@@ -8,7 +8,7 @@ import (
 
 func main() {
 	// Parse + String preserve the original encoding.
-	u, err := url.Parse("https://example.com/foo%2fbar")
+	u, err := url.Parse("https://www.ctriple.cn/foo%2fbar")
 	if err != nil {
 		log.Fatal(err)
 	}
