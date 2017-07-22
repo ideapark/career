@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	e, err := mail.ParseAddress("Alice <alice@example.com>")
+	e, err := mail.ParseAddress("Docker <d@ctriple.cn>")
 	if err != nil {
 		log.Fatal(err)
 	}
