@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	const list = "Alice <alice@example.com>, Bob <bob@example.com>, Eve <eve@example.com>"
+	const list = "Gitter <git@ctriple.cn>, Linux <l@ctriple.cn>, GitHub <g@ctriple.cn>, Chou <p@ctriple.cn>"
 	emails, err := mail.ParseAddressList(list)
 	if err != nil {
 		log.Fatal(err)
