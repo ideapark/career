@@ -6,10 +6,11 @@ import (
 )
 
 var wg sync.WaitGroup
+
 var urls = []string{
 	"http://www.golang.org/",
 	"http://www.google.com/",
-	"http://www.somestupidname.com/",
+	"http://www.ctriple.cn/",
 }
 
 func main() {
