@@ -58,7 +58,7 @@ slice = append(slice, anotherSlice...)
 As a special case, it is legal to append a string to a byte slice, like this:
 
 #+BEGIN_SRC go
-slice = append([]byte("hello "), "world...)
+slice = append([]byte("hello "), "world"...)
 #+END_SRC
 
 ** func map
