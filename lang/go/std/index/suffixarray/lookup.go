@@ -11,4 +11,8 @@ func main() {
 	for _, off := range offsets {
 		fmt.Println(off)
 	}
+
+	// Unordered output:
+	// 1
+	// 3
 }
