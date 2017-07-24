@@ -7,9 +7,7 @@ import (
 
 type Grams int
 
-func (g Grams) String() string {
-	return fmt.Sprintf("%dg", int(g))
-}
+func (g Grams) String() string { return fmt.Sprintf("%dg", int(g)) }
 
 type Organ struct {
 	Name   string
@@ -22,21 +20,19 @@ func (s Organs) Len() int      { return len(s) }
 func (s Organs) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
 
 // ByName implements sort.Interface by providing Less and using the Len and
-// Swap methods of the embeded Organs value.
+// Swap methods of the embedded Organs value.
 type ByName struct{ Organs }
 
-func (s ByName) Less(i, j int) bool {
-	return s.Organs[i].Name < s.Organs[j].Name
-}
+func (s ByName) Less(i, j int) bool { return s.Organs[i].Name < s.Organs[j].Name }
 
 // ByWeight implements sort.Interface by providing Less and using the Len and
-// Swap methods of the embeded Organs value.
+// Swap methods of the embedded Organs value.
 type ByWeight struct{ Organs }
 
 func (s ByWeight) Less(i, j int) bool { return s.Organs[i].Weight < s.Organs[j].Weight }
 
 func main() {
-	s := []*Organs{
+	s := []*Organ{
 		{"brain", 1340},
 		{"heart", 290},
 		{"liver", 1494},
@@ -52,9 +48,10 @@ func main() {
 	sort.Sort(ByName{s})
 	fmt.Println("Organs by name:")
 	printOrgans(s)
+
 }
 
-func printOrgans(s []*Organs) {
+func printOrgans(s []*Organ) {
 	for _, o := range s {
 		fmt.Printf("%-8s (%v)\n", o.Name, o.Weight)
 	}
