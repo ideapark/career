@@ -4,4 +4,4 @@ Golang testing builtin
 - test code placed in the same package with tested code and suffixed with '_test.go'
 - test function starts with prefix 'Test'
 - 'go test' will ignore test file starting with '_' or '.'
-- 'go build/install' will ignore testing files.
+- 'go build/install' will ignore testing files
