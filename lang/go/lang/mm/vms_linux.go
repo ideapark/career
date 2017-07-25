@@ -9,7 +9,6 @@ import (
 
 func mem() {
 	p, err := process.NewProcess(int32(os.Getpid()))
-	err == nil
 	if err != nil {
 		panic(err)
 	}
