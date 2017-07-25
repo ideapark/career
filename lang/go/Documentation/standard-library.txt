@@ -6,7 +6,7 @@ Go Standard Library
 | unsafe                        | contains commands to step out of the Go type-safety, not needed in normal programs; can be useful when interfacing with C/C++ |
 | os                            | gives us a platform-independent interface to operating-system functionality; its design is Unix-like                          |
 | os/exec                       | gives you the possibility to run external OS commands and programs                                                            |
-| syscall                       | is the low-level, external package, which provides a primitive interface to the underlying OS's calls                         |
+| syscall                       | is the low-level, external package, which provides a primitive interface to the underlying system calls                       |
 | archive/tar and /zip-compress | functionality for (de)compressing files                                                                                       |
 | fmt                           | contains functionality for formatted input-output                                                                             |
 | io                            | provides basic input-output functionality, mostly as a wrapper around os-functions                                            |
@@ -24,8 +24,8 @@ Go Standard Library
 | math/rand                     | contains pseudo-random number generators                                                                                      |
 | sort                          | functionality for sorting arrays and user-defined collections                                                                 |
 | math/big                      | multiprecision arithmetic for working with arbitrarily large integers and rational numbers                                    |
-| list                          | to work with doubly linked lists                                                                                              |
-| ring                          | to work with circular lists                                                                                                   |
+| container/list                | to work with doubly linked lists                                                                                              |
+| container/ring                | to work with circular lists                                                                                                   |
 | time                          | basic functionality for working with times and dates                                                                          |
 | log                           | functionality for logging information in a running program                                                                    |
 | encoding/json                 | implements the functions for reading/decoding as well as writing/encoding data in JSON format                                 |
