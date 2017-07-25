@@ -20,7 +20,9 @@ tell the difference.
 
 Clients should not be forced to depend on methods they do not use.
 
-A great rule of thumb for GO is =accept interfaces, return structs.=
+A great rule of thumb for GO is =accept interfaces, return structs=. Accepting
+interfaces gives your API the greatest flexibility and returning structs allows
+the people reading your code to quickly navigate to the correct function.
                                        -Jack Lindamood
 
 ** Dependency Inversion Principle
