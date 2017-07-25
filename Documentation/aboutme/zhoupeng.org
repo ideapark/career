@@ -19,8 +19,8 @@
 
 * 编程技能
 
-- 擅长: Golang, Linux, C, Testing, Git, Amazon Web Service
-- 熟练: Shell, Python
+- 擅长: Golang, Linux, C, Testing, Git
+- 熟练: Shell, Python, Amazon Web Service
 - 了解: Java, JavaScript, HTML/CSS
 
 * 教育情况
@@ -32,7 +32,7 @@
 * 工作经历
 
 - 多点网络(成都)科技有限公司
-- 2017年05月至今 (成都)
+- 2017年05月至今 | 成都
 
 - 软件工程师A (15级)
 - 华为成都研究所
@@ -172,16 +172,16 @@ Python语言作为流程胶合代码,在Molint跨平台移植,版本级使用到
 * 我的作品
 
 ** reporter: Linux程序性能剖析
-(https://github.com/lockrecv/more/tree/master/apps/reporter)
+(https://github.com/lockrecv/guru/tree/master/works/reporter)
 
 ** sysstat: Linux内存,线程,中断性能数据采集
-(https://github.com/lockrecv/more/tree/master/apps/sysstat)
+(https://github.com/lockrecv/guru/tree/master/works/sysstat)
 
 ** kiss: Linux工具集迷你C库
-(https://github.com/lockrecv/more/tree/master/apps/libkiss)
+(https://github.com/lockrecv/guru/tree/master/works/libkiss)
 
 ** less: Unix KISS哲学思想示例
-(https://github.com/lockrecv/more/tree/master/apps/less/SUMMARY.md)
+(https://github.com/lockrecv/guru/tree/master/works/less/SUMMARY.md)
 
 ** tank: 坦克大战游戏简化版
-(https://github.com/lockrecv/more/tree/master/apps/tank)
+(https://github.com/lockrecv/guru/tree/master/works/tank)
