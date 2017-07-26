@@ -335,7 +335,8 @@ The important takeaways from this chapter are:
 
 * Redis exposes (and is implemented as) five specialized data structures
 
-* Combined, the above make Redis fast and easy to use, but not suitable for every scenario
+* Combined, the above make Redis fast and easy to use, but not suitable for
+  every scenario
 
 # Chapter 2 - The Data Structures
 
