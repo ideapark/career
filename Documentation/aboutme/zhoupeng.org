@@ -20,7 +20,7 @@
 * 编程技能
 
 - 擅长: Golang, Linux, C, Testing, Git
-- 熟练: Shell, Python, Amazon Web Service
+- 熟练: Elasticsearch, Docker, Kubernetes, Amazon Web Service
 - 了解: Java, JavaScript, HTML/CSS
 
 * 教育情况
@@ -37,6 +37,20 @@
 - 软件工程师A (15级)
 - 华为成都研究所
 - 2012年07月-2017年4月(5 years) | 成都
+
+** 大数据分析结果对外提供服务
+
+*** 简介
+
+将部门大数据分析结果例如用户个性化推荐数据提供服务,供APP端调用,为用户提供个性化的购物推荐
+
+*** 技能
+
+Golang, Elasticsearch, Redis, Docker
+
+*** 成果
+
+数据服务QPS最高达到350+稳定可靠,响应在500ms级,日均访问量500万次接口请求.
 
 ** Amazon Web Service分析
 
