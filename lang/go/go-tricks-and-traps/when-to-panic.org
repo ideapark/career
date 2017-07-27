@@ -1,0 +1,18 @@
+* Never?
+
+panic() in a spawned goroutine is the worst, panic is usually ok if:
+
+- Functions begins with MustXYZ()
+- Operations on nil
+
+* Code
+
+#+BEGIN_SRC go
+func MustCompile(str string) *Regexp {
+	regexp, err := Compile(str)
+	if err != nil {
+		panic(err)
+	}
+	return regexp
+}
+#+END_SRC

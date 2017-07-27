@@ -69,3 +69,7 @@
 * Item 17: Channel and sync, which one should I choose.
 
 #+INCLUDE: "chan-vs-sync.org"
+
+* Item 18: When to panic().
+
+#+INCLUDE: "when-to-panic.org"
