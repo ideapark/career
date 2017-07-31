@@ -73,7 +73,8 @@ at runtime; when using gccgo, the program will print
 panic: interface conversion failed: no 'Get' method
 #+END_SRC
 
-This is because, as discussed above, a value of type S rather than *S does not have any methods.
+This is because, as discussed above, a value of type S rather than *S does not
+have any methods.
 
 So, how does this work? I will describe the current gccgo implementation. The
 implementation used in the 6g/8g compiler is generally similar but is different
