@@ -1,0 +1,5 @@
+Cache Should Only Boost Speed, Business Logical Should Not Rely On It.
+
+That's is to say:
+- your app should run happy without cache
+- your app run faster with cache, run slower without cache
