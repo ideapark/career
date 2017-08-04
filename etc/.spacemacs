@@ -50,6 +50,7 @@ values."
      javascript
      vimscript
      graphviz
+     restclient
      typescript
      windows-scripts
      auto-completion
