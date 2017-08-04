@@ -25,4 +25,4 @@
 
 #+ATTR_ORG: :width 1200
 #+ATTR_ORG: :height 550
-[[file:keyword-graph.png]]
+[[file:keywords.png]]
