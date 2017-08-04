@@ -79,6 +79,12 @@ Container Operation:
 - wait
 - cp
 - diff
+- update
+
+Container Resource Mgt:
+
+- volume
+- network
 
 System Log Information:
 
