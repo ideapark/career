@@ -1,3 +1,6 @@
+/*
+ * Need root user
+ */
 #define _GNU_SOURCE
 
 #include <sys/types.h>
