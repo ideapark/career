@@ -1,3 +1,6 @@
+/*
+ * CLONE_NEWNS standards for filesystem mount namespace
+ */
 #define _GNU_SOURCE
 
 #include <sys/types.h>
