@@ -14,7 +14,8 @@ func main() {
 			data[1] += 100
 			data[2] += 100
 		}
-		fmt.Printf("x: %d, data: %d\n", x, data)
+		fmt.Printf("&i: %p, &x: %p\n", &i, &x)
+		fmt.Printf("x: %d, data: %d\n\n", x, data)
 	}
 
 	// range will copy slice
@@ -24,6 +25,7 @@ func main() {
 			data[1] += 100
 			data[2] += 100
 		}
-		fmt.Printf("x: %d, data: %d\n", x, data)
+		fmt.Printf("&i: %p, &x: %p\n", &i, &x)
+		fmt.Printf("x: %d, data: %d\n\n", x, data)
 	}
 }
