@@ -10,5 +10,6 @@ func main() {
 		a struct{}
 	}{}
 
-	fmt.Printf("%p, %d, %d\n", &v, unsafe.Sizeof(v), unsafe.Alignof(v))
+	fmt.Printf("v: %p, %d, %d\n", &v, unsafe.Sizeof(v), unsafe.Alignof(v))
+	fmt.Printf("a: %p, %d, %d\n", &v, unsafe.Sizeof(v.a), unsafe.Alignof(v.a))
 }
