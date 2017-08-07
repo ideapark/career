@@ -16,6 +16,7 @@ func main() {
 
 	// pointer stored in interface cannt be addressed and setted
 	// You must call Elem() to get target object to addr and set
+	// refto: https://blog.golang.org/laws-of-reflection
 	v := reflect.ValueOf(p).Elem()
 
 	name := v.FieldByName("Name")
