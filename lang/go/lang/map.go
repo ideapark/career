@@ -10,7 +10,8 @@ func main() {
 		1: {"Tom", 19},
 	}
 
-	// map's value is not addressable
+	// NOTE: hash algorithm and memory safe
+	//       map's value is not addressable
 	//m1[1].age += 1
 
 	// reset whole value
