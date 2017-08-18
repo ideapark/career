@@ -30,8 +30,8 @@ objects: copyright
 	$(MAKE) -C ./libutil
 	$(MAKE) -C ./libopt++
 	$(MAKE) -C ./libutil++
-	$(MAKE) -C ./reporter.exe
-	$(MAKE) -C ./callgraph.exe
+	$(MAKE) -C ./reporter.dir
+	$(MAKE) -C ./callgraph.dir
 
 copyright:
 	@echo "@-------------------------------------------------------------------@"
