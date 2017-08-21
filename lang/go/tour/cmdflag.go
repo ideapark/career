@@ -13,6 +13,7 @@ func main() {
 	var svar string
 	flag.StringVar(&svar, "svar", "bar", "a string var")
 
+	// NOTE: must be called to parse args.
 	flag.Parse()
 
 	fmt.Println("word:", *wordPtr)
