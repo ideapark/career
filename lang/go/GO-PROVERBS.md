@@ -1,5 +1,6 @@
 #+TITLE: Go Proverbs
 #+AUTHOR: @rob_pike
+#+URL: https://www.youtube.com/watch?v=PAAkCSZUG1c&t=6m25s
 
 ## Simple, Poetic, Pithy
 
