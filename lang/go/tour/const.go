@@ -1,3 +1,9 @@
+// Why constant is not addressable in golang?
+//
+// I guess that const will be substitute literally at compile time
+// for performance improvements. So there is not such variable in
+// run time.
+
 package main
 
 import "fmt"
