@@ -33,6 +33,7 @@ func main() {
 	}
 
 	whatAmI := func(i interface{}) {
+		// NOTE: golang type switch
 		switch t := i.(type) {
 		case bool:
 			fmt.Println("I'm a bool")
