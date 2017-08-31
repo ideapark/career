@@ -32,6 +32,23 @@
   - [[#pointer-types][Pointer types]]
   - [[#function-types][Function types]]
   - [[#interface-types][Interface types]]
+  - [[#map-types][Map types]]
+  - [[#channel-types][Channel types]]
+- [[#properties-of-types-and-values][Properties of types and values]]
+  - [[#type-identity][Type identity]]
+  - [[#assignability][Assignability]]
+- [[#blocks][Blocks]]
+- [[#declarations-and-scope][Declarations and scope]]
+  - [[#label-scopes][Label scopes]]
+  - [[#blank-identifier][Blank identifier]]
+  - [[#predeclared-identifiers][Predeclared identifiers]]
+  - [[#exported-identifiers][Exported identifiers]]
+  - [[#uniqueness-of-identifiers][Uniqueness of identifiers]]
+  - [[#constant-declarations][Constant declarations]]
+  - [[#iota][Iota]]
+  - [[#type-declarations][Type declarations]]
+  - [[#alias-declaration][Alias declaration]]
+  - [[#type-definitions][Type definitions]]
 
 * Introduction
 
@@ -952,5 +969,514 @@ type Bad1 interface {
 }
 type Bad2 interface {
 	Bad1
+}
+#+END_SRC
+
+** Map types
+
+A map is an unordered group of elements of one type, called the element type,
+indexed by a set of unique keys of another type, called the key type. The value
+of an uninitialized map is nil.
+
+#+BEGIN_SRC text
+MapType     = "map" "[" KeyType "]" ElementType .
+KeyType     = Type .
+#+END_SRC
+
+The comparison operators == and != must be fully defined for operands of the key
+type; thus the key type must not be a function, map, or slice. If the key type
+is an interface type, these comparison operators must be defined for the dynamic
+key values; failure will cause a run-time panic.
+
+#+BEGIN_SRC go
+map[string]int
+map[*T]struct{ x, y float64 }
+map[string]interface{}
+#+END_SRC
+
+The number of map elements is called its length. For a map m, it can be
+discovered using the built-in function len and may change during execution.
+Elements may be added during execution using assignments and retrieved with
+index expressions; they may be removed with the delete built-in function.
+
+A new, empty map value is made using the built-in function make, which takes the
+map type and an optional capacity hint as arguments:
+
+#+BEGIN_SRC go
+make(map[string]int)
+make(map[string]int, 100)
+#+END_SRC
+
+The initial capacity does not bound its size: maps grow to accommodate the
+number of items stored in them, with the exception of nil maps. A nil map is
+equivalent to an empty map except that no elements may be added.
+
+** Channel types
+
+A channel provides a mechanism for concurrently executing functions to
+communicate by sending and receiving values of a specified element type. The
+value of an uninitialized channel is nil.
+
+#+BEGIN_SRC text
+ChannelType = ( "chan" | "chan" "<-" | "<-" "chan" ) ElementType .
+#+END_SRC
+
+The optional <- operator specifies the channel direction, send or receive. If no
+direction is given, the channel is bidirectional. A channel may be constrained
+only to send or only to receive by conversion or assignment.
+
+#+BEGIN_SRC go
+chan T          // can be used to send and receive values of type T
+chan<- float64  // can only be used to send float64s
+<-chan int      // can only be used to receive ints
+#+END_SRC
+
+The <- operator associates with the leftmost chan possible:
+
+#+BEGIN_SRC go
+chan<- chan int    // same as chan<- (chan int)
+chan<- <-chan int  // same as chan<- (<-chan int)
+<-chan <-chan int  // same as <-chan (<-chan int)
+chan (<-chan int)
+#+END_SRC
+
+A new, initialized channel value can be made using the built-in function make,
+which takes the channel type and an optional capacity as arguments:
+
+#+BEGIN_SRC go
+make(chan int, 100)
+#+END_SRC
+
+The capacity, in number of elements, sets the size of the buffer in the channel.
+If the capacity is zero or absent, the channel is unbuffered and communication
+succeeds only when both a sender and receiver are ready. Otherwise, the channel
+is buffered and communication succeeds without blocking if the buffer is not
+full (sends) or not empty (receives). A nil channel is never ready for
+communication.
+
+A channel may be closed with the built-in function close. The multi-valued
+assignment form of the receive operator reports whether a received value was
+sent before the channel was closed.
+
+A single channel may be used in send statements, receive operations, and calls
+to the built-in functions cap and len by any number of goroutines without
+further synchronization. Channels act as first-in-first-out queues. For example,
+if one goroutine sends values on a channel and a second goroutine receives them,
+the values are received in the order sent.
+
+* Properties of types and values
+
+** Type identity
+
+Two types are either identical or different.
+
+A defined type is always different from any other type. Otherwise, two types are
+identical if their underlying type literals are structurally equivalent; that
+is, they have the same literal structure and corresponding components have
+identical types. In detail:
+
+    1) Two array types are identical if they have identical element types and
+       the same array length.
+    2) Two slice types are identical if they have identical element types.
+    3) Two struct types are identical if they have the same sequence of fields,
+       and if corresponding fields have the same names, and identical types, and
+       identical tags. Non-exported field names from different packages are
+       always different.
+    4) Two pointer types are identical if they have identical base types.
+    5) Two function types are identical if they have the same number of
+       parameters and result values, corresponding parameter and result types
+       are identical, and either both functions are variadic or neither is.
+       Parameter and result names are not required to match.
+    6) Two interface types are identical if they have the same set of methods
+       with the same names and identical function types. Non-exported method
+       names from different packages are always different. The order of the
+       methods is irrelevant.
+    7) Two map types are identical if they have identical key and value types.
+    8) Two channel types are identical if they have identical value types and
+       the same direction.
+
+Given the declarations
+
+#+BEGIN_SRC go
+type (
+	A0 = []string
+	A1 = A0
+	A2 = struct{ a, b int }
+	A3 = int
+	A4 = func(A3, float64) *A0
+	A5 = func(x int, _ float64) *[]string
+)
+
+type (
+	B0 A0
+	B1 []string
+	B2 struct{ a, b int }
+	B3 struct{ a, c int }
+	B4 func(int, float64) *B0
+	B5 func(x int, y float64) *A1
+)
+
+type	C0 = B0
+#+END_SRC
+
+these types are identical:
+
+#+BEGIN_SRC go
+A0, A1, and []string
+A2 and struct{ a, b int }
+A3 and int
+A4, func(int, float64) *[]string, and A5
+
+B0, B0, and C0
+[]int and []int
+struct{ a, b *T5 } and struct{ a, b *T5 }
+func(x int, y float64) *[]string, func(int, float64) (result *[]string), and A5
+#+END_SRC
+
+B0 and B1 are different because they are new types created by distinct type
+definitions; func(int, float64) *B0 and func(x int, y float64) *[]string are
+different because B0 is different from []string.
+
+** Assignability
+
+A value x is assignable to a variable of type T ("x is assignable to T") in any
+of these cases:
+
+    1) x's type is identical to T.
+    2) x's type V and T have identical underlying types and at least one of V or
+       T is not a defined type.
+    3) T is an interface type and x implements T.
+    4) x is a bidirectional channel value, T is a channel type, x's type V and T
+       have identical element types, and at least one of V or T is not a defined
+       type.
+    5) x is the predeclared identifier nil and T is a pointer, function, slice,
+       map, channel, or interface type.
+    6) x is an untyped constant representable by a value of type T.
+
+* Blocks
+
+A block is a possibly empty sequence of declarations and statements within
+matching brace brackets.
+
+#+BEGIN_SRC text
+Block = "{" StatementList "}" .
+StatementList = { Statement ";" } .
+#+END_SRC
+
+In addition to explicit blocks in the source code, there are implicit blocks:
+
+    1) The universe block encompasses all Go source text.
+    2) Each package has a package block containing all Go source text for that
+       package.
+    3) Each file has a file block containing all Go source text in that file.
+    4) Each "if", "for", and "switch" statement is considered to be in its own
+       implicit block.
+    5) Each clause in a "switch" or "select" statement acts as an implicit
+       block.
+
+Blocks nest and influence scoping.
+
+* Declarations and scope
+
+A declaration binds a non-blank identifier to a constant, type, variable,
+function, label, or package. Every identifier in a program must be declared. No
+identifier may be declared twice in the same block, and no identifier may be
+declared in both the file and package block.
+
+The blank identifier may be used like any other identifier in a declaration, but
+it does not introduce a binding and thus is not declared. In the package block,
+the identifier init may only be used for init function declarations, and like
+the blank identifier it does not introduce a new binding.
+
+#+BEGIN_SRC text
+Declaration   = ConstDecl | TypeDecl | VarDecl .
+TopLevelDecl  = Declaration | FunctionDecl | MethodDecl .
+#+END_SRC
+
+The scope of a declared identifier is the extent of source text in which the
+identifier denotes the specified constant, type, variable, function, label, or
+package.
+
+Go is lexically scoped using blocks:
+
+    1) The scope of a predeclared identifier is the universe block.
+    2) The scope of an identifier denoting a constant, type, variable, or
+       function (but not method) declared at top level (outside any function) is
+       the package block.
+    3) The scope of the package name of an imported package is the file block of
+       the file containing the import declaration.
+    4) The scope of an identifier denoting a method receiver, function
+       parameter, or result variable is the function body.
+    5) The scope of a constant or variable identifier declared inside a function
+       begins at the end of the ConstSpec or VarSpec (ShortVarDecl for short
+       variable declarations) and ends at the end of the innermost containing
+       block.
+    6) The scope of a type identifier declared inside a function begins at the
+       identifier in the TypeSpec and ends at the end of the innermost
+       containing block.
+
+An identifier declared in a block may be redeclared in an inner block. While the
+identifier of the inner declaration is in scope, it denotes the entity declared
+by the inner declaration.
+
+The package clause is not a declaration; the package name does not appear in any
+scope. Its purpose is to identify the files belonging to the same package and to
+specify the default package name for import declarations.
+
+** Label scopes
+
+Labels are declared by labeled statements and are used in the "break",
+"continue", and "goto" statements. It is illegal to define a label that is never
+used. In contrast to other identifiers, labels are not block scoped and do not
+conflict with identifiers that are not labels. The scope of a label is the body
+of the function in which it is declared and excludes the body of any nested
+function.
+
+** Blank identifier
+
+The blank identifier is represented by the underscore character _. It serves as
+an anonymous placeholder instead of a regular (non-blank) identifier and has
+special meaning in declarations, as an operand, and in assignments.
+
+** Predeclared identifiers
+
+The following identifiers are implicitly declared in the universe block:
+
+#+BEGIN_SRC text
+Types:
+	bool byte complex64 complex128 error float32 float64
+	int int8 int16 int32 int64 rune string
+	uint uint8 uint16 uint32 uint64 uintptr
+
+Constants:
+	true false iota
+
+Zero value:
+	nil
+
+Functions:
+	append cap close complex copy delete imag len
+	make new panic print println real recover
+#+END_SRC
+
+** Exported identifiers
+
+An identifier may be exported to permit access to it from another package. An
+identifier is exported if both:
+
+    1) the first character of the identifier's name is a Unicode upper case
+       letter (Unicode class "Lu"); and
+    1) the identifier is declared in the package block or it is a field name or
+       method name.
+
+All other identifiers are not exported.
+
+** Uniqueness of identifiers
+
+Given a set of identifiers, an identifier is called unique if it is different
+from every other in the set. Two identifiers are different if they are spelled
+differently, or if they appear in different packages and are not exported.
+Otherwise, they are the same.
+
+** Constant declarations
+
+A constant declaration binds a list of identifiers (the names of the constants)
+to the values of a list of constant expressions. The number of identifiers must
+be equal to the number of expressions, and the nth identifier on the left is
+bound to the value of the nth expression on the right.
+
+#+BEGIN_SRC text
+ConstDecl      = "const" ( ConstSpec | "(" { ConstSpec ";" } ")" ) .
+ConstSpec      = IdentifierList [ [ Type ] "=" ExpressionList ] .
+
+IdentifierList = identifier { "," identifier } .
+ExpressionList = Expression { "," Expression } .
+#+END_SRC
+
+If the type is present, all constants take the type specified, and the
+expressions must be assignable to that type. If the type is omitted, the
+constants take the individual types of the corresponding expressions. If the
+expression values are untyped constants, the declared constants remain untyped
+and the constant identifiers denote the constant values. For instance, if the
+expression is a floating-point literal, the constant identifier denotes a
+floating-point constant, even if the literal's fractional part is zero.
+
+#+BEGIN_SRC go
+const Pi float64 = 3.14159265358979323846
+const zero = 0.0         // untyped floating-point constant
+const (
+	size int64 = 1024
+	eof        = -1  // untyped integer constant
+)
+const a, b, c = 3, 4, "foo"  // a = 3, b = 4, c = "foo", untyped integer and string constants
+const u, v float32 = 0, 3    // u = 0.0, v = 3.0
+#+END_SRC
+
+Within a parenthesized const declaration list the expression list may be omitted
+from any but the first declaration. Such an empty list is equivalent to the
+textual substitution of the first preceding non-empty expression list and its
+type if any. Omitting the list of expressions is therefore equivalent to
+repeating the previous list. The number of identifiers must be equal to the
+number of expressions in the previous list. Together with the iota constant
+generator this mechanism permits light-weight declaration of sequential values:
+
+#+BEGIN_SRC go
+const (
+	Sunday = iota
+	Monday
+	Tuesday
+	Wednesday
+	Thursday
+	Friday
+	Partyday
+	numberOfDays  // this constant is not exported
+)
+#+END_SRC
+
+** Iota
+
+Within a constant declaration, the predeclared identifier iota represents
+successive untyped integer constants. It is reset to 0 whenever the reserved
+word const appears in the source and increments after each ConstSpec. It can be
+used to construct a set of related constants:
+
+#+BEGIN_SRC go
+const ( // iota is reset to 0
+	c0 = iota  // c0 == 0
+	c1 = iota  // c1 == 1
+	c2 = iota  // c2 == 2
+)
+
+const ( // iota is reset to 0
+	a = 1 << iota  // a == 1
+	b = 1 << iota  // b == 2
+	c = 3          // c == 3  (iota is not used but still incremented)
+	d = 1 << iota  // d == 8
+)
+
+const ( // iota is reset to 0
+	u         = iota * 42  // u == 0     (untyped integer constant)
+	v float64 = iota * 42  // v == 42.0  (float64 constant)
+	w         = iota * 42  // w == 84    (untyped integer constant)
+)
+
+const x = iota  // x == 0  (iota has been reset)
+const y = iota  // y == 0  (iota has been reset)
+#+END_SRC
+
+Within an ExpressionList, the value of each iota is the same because it is only
+incremented after each ConstSpec:
+
+#+BEGIN_SRC go
+const (
+	bit0, mask0 = 1 << iota, 1<<iota - 1  // bit0 == 1, mask0 == 0
+	bit1, mask1                           // bit1 == 2, mask1 == 1
+	_, _                                  // skips iota == 2
+	bit3, mask3                           // bit3 == 8, mask3 == 7
+)
+#+END_SRC
+
+This last example exploits the implicit repetition of the last non-empty
+expression list.
+
+** Type declarations
+
+A type declaration binds an identifier, the type name, to a type. Type
+declarations come in two forms: alias declarations and type definitions.
+
+#+BEGIN_SRC text
+TypeDecl = "type" ( TypeSpec | "(" { TypeSpec ";" } ")" ) .
+TypeSpec = AliasDecl | TypeDef .
+#+END_SRC
+
+** Alias declaration
+
+An alias declaration binds an identifier to the given type.
+
+#+BEGIN_SRC text
+AliasDecl = identifier "=" Type .
+#+END_SRC
+
+Within the scope of the identifier, it serves as an alias for the type.
+
+#+BEGIN_SRC go
+type (
+	nodeList = []*Node  // nodeList and []*Node are identical types
+	Polar    = polar    // Polar and polar denote identical types
+)
+#+END_SRC
+
+** Type definitions
+
+A type definition creates a new, distinct type with the same underlying type and
+operations as the given type, and binds an identifier to it.
+
+#+BEGIN_SRC text
+TypeDef = identifier Type .
+#+END_SRC
+
+The new type is called a defined type. It is different from any other type,
+including the type it is created from.
+
+#+BEGIN_SRC go
+type (
+	Point struct{ x, y float64 }  // Point and struct{ x, y float64 } are different types
+	polar Point                   // polar and Point denote different types
+)
+
+type TreeNode struct {
+	left, right *TreeNode
+	value *Comparable
+}
+
+type Block interface {
+	BlockSize() int
+	Encrypt(src, dst []byte)
+	Decrypt(src, dst []byte)
+}
+#+END_SRC
+
+A defined type may have methods associated with it. It does not inherit any
+methods bound to the given type, but the method set of an interface type or of
+elements of a composite type remains unchanged:
+
+#+BEGIN_SRC go
+// A Mutex is a data type with two methods, Lock and Unlock.
+type Mutex struct         { /* Mutex fields */ }
+func (m *Mutex) Lock()    { /* Lock implementation */ }
+func (m *Mutex) Unlock()  { /* Unlock implementation */ }
+
+// NewMutex has the same composition as Mutex but its method set is empty.
+type NewMutex Mutex
+
+// The method set of the base type of PtrMutex remains unchanged,
+// but the method set of PtrMutex is empty.
+type PtrMutex *Mutex
+
+// The method set of *PrintableMutex contains the methods
+// Lock and Unlock bound to its embedded field Mutex.
+type PrintableMutex struct {
+	Mutex
+}
+
+// MyBlock is an interface type that has the same method set as Block.
+type MyBlock Block
+#+END_SRC
+
+Type definitions may be used to define different boolean, numeric, or string
+types and associate methods with them:
+
+#+BEGIN_SRC go
+type TimeZone int
+
+const (
+	EST TimeZone = -(5 + iota)
+	CST
+	MST
+	PST
+)
+
+func (tz TimeZone) String() string {
+	return fmt.Sprintf("GMT%+dh", tz)
 }
 #+END_SRC
