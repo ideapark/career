@@ -47,8 +47,16 @@
   - [[#constant-declarations][Constant declarations]]
   - [[#iota][Iota]]
   - [[#type-declarations][Type declarations]]
-  - [[#alias-declaration][Alias declaration]]
-  - [[#type-definitions][Type definitions]]
+    - [[#alias-declaration][Alias declaration]]
+    - [[#type-definitions][Type definitions]]
+  - [[#variable-declarations][Variable declarations]]
+  - [[#short-variable-declarations][Short variable declarations]]
+  - [[#function-declarations][Function declarations]]
+  - [[#method-declarations][Method declarations]]
+- [[#expressions][Expressions]]
+  - [[#operands][Operands]]
+  - [[#qualified-identifiers][Qualified identifiers]]
+  - [[#composite-literals][Composite literals]]
 
 * Introduction
 
@@ -1389,7 +1397,7 @@ TypeDecl = "type" ( TypeSpec | "(" { TypeSpec ";" } ")" ) .
 TypeSpec = AliasDecl | TypeDef .
 #+END_SRC
 
-** Alias declaration
+*** Alias declaration
 
 An alias declaration binds an identifier to the given type.
 
@@ -1406,7 +1414,7 @@ type (
 )
 #+END_SRC
 
-** Type definitions
+*** Type definitions
 
 A type definition creates a new, distinct type with the same underlying type and
 operations as the given type, and binds an identifier to it.
@@ -1478,5 +1486,370 @@ const (
 
 func (tz TimeZone) String() string {
 	return fmt.Sprintf("GMT%+dh", tz)
+}
+#+END_SRC
+
+** Variable declarations
+
+A variable declaration creates one or more variables, binds corresponding
+identifiers to them, and gives each a type and an initial value.
+
+#+BEGIN_SRC text
+VarDecl     = "var" ( VarSpec | "(" { VarSpec ";" } ")" ) .
+VarSpec     = IdentifierList ( Type [ "=" ExpressionList ] | "=" ExpressionList ) .
+#+END_SRC
+
+#+BEGIN_SRC go
+var i int
+var U, V, W float64
+var k = 0
+var x, y float32 = -1, -2
+var (
+	i       int
+	u, v, s = 2.0, 3.0, "bar"
+)
+var re, im = complexSqrt(-1)
+var _, found = entries[name]  // map lookup; only interested in "found"
+#+END_SRC
+
+If a list of expressions is given, the variables are initialized with the
+expressions following the rules for assignments. Otherwise, each variable is
+initialized to its zero value.
+
+If a type is present, each variable is given that type. Otherwise, each variable
+is given the type of the corresponding initialization value in the assignment.
+If that value is an untyped constant, it is first converted to its default type;
+if it is an untyped boolean value, it is first converted to type bool. The
+predeclared value nil cannot be used to initialize a variable with no explicit
+type.
+
+#+BEGIN_SRC go
+var d = math.Sin(0.5)  // d is float64
+var i = 42             // i is int
+var t, ok = x.(T)      // t is T, ok is bool
+var n = nil            // illegal
+#+END_SRC
+
+Implementation restriction: A compiler may make it illegal to declare a variable
+inside a function body if the variable is never used.
+
+** Short variable declarations
+
+A short variable declaration uses the syntax:
+
+#+BEGIN_SRC text
+ShortVarDecl = IdentifierList ":=" ExpressionList .
+#+END_SRC
+
+It is shorthand for a regular variable declaration with initializer expressions
+but no types:
+
+#+BEGIN_SRC text
+"var" IdentifierList = ExpressionList .
+#+END_SRC
+
+#+BEGIN_SRC go
+i, j := 0, 10
+f := func() int { return 7 }
+ch := make(chan int)
+r, w := os.Pipe(fd)  // os.Pipe() returns two values
+_, y, _ := coord(p)  // coord() returns three values; only interested in y coordinate
+#+END_SRC
+
+Unlike regular variable declarations, a short variable declaration may redeclare
+variables provided they were originally declared earlier in the same block (or
+the parameter lists if the block is the function body) with the same type, and
+at least one of the non-blank variables is new. As a consequence, redeclaration
+can only appear in a multi-variable short declaration. Redeclaration does not
+introduce a new variable; it just assigns a new value to the original.
+
+#+BEGIN_SRC go
+field1, offset := nextField(str, 0)
+field2, offset := nextField(str, offset)  // redeclares offset
+a, a := 1, 2                              // illegal: double declaration of a or no new variable if a was declared elsewhere
+#+END_SRC
+
+Short variable declarations may appear only inside functions. In some contexts
+such as the initializers for "if", "for", or "switch" statements, they can be
+used to declare local temporary variables.
+
+** Function declarations
+
+A function declaration binds an identifier, the function name, to a function.
+
+#+BEGIN_SRC text
+FunctionDecl = "func" FunctionName ( Function | Signature ) .
+FunctionName = identifier .
+Function     = Signature FunctionBody .
+FunctionBody = Block .
+#+END_SRC
+
+If the function's signature declares result parameters, the function body's
+statement list must end in a terminating statement.
+
+#+BEGIN_SRC go
+func IndexRune(s string, r rune) int {
+	for i, c := range s {
+		if c == r {
+			return i
+		}
+	}
+	// invalid: missing return statement
+}
+#+END_SRC
+
+A function declaration may omit the body. Such a declaration provides the
+signature for a function implemented outside Go, such as an assembly routine.
+
+#+BEGIN_SRC go
+func min(x int, y int) int {
+	if x < y {
+		return x
+	}
+	return y
+}
+
+func flushICache(begin, end uintptr)  // implemented externally
+#+END_SRC
+
+** Method declarations
+
+A method is a function with a receiver. A method declaration binds an
+identifier, the method name, to a method, and associates the method with the
+receiver's base type.
+
+#+BEGIN_SRC text
+MethodDecl = "func" Receiver MethodName ( Function | Signature ) .
+Receiver   = Parameters .
+#+END_SRC
+
+The receiver is specified via an extra parameter section preceding the method
+name. That parameter section must declare a single non-variadic parameter, the
+receiver. Its type must be of the form T or *T (possibly using parentheses)
+where T is a type name. The type denoted by T is called the receiver base type;
+it must not be a pointer or interface type and it must be defined in the same
+package as the method. The method is said to be bound to the base type and the
+method name is visible only within selectors for type T or *T.
+
+A non-blank receiver identifier must be unique in the method signature. If the
+receiver's value is not referenced inside the body of the method, its identifier
+may be omitted in the declaration. The same applies in general to parameters of
+functions and methods.
+
+For a base type, the non-blank names of methods bound to it must be unique. If
+the base type is a struct type, the non-blank method and field names must be
+distinct.
+
+Given type Point, the declarations
+
+#+BEGIN_SRC go
+func (p *Point) Length() float64 {
+	return math.Sqrt(p.x * p.x + p.y * p.y)
+}
+
+func (p *Point) Scale(factor float64) {
+	p.x *= factor
+	p.y *= factor
+}
+#+END_SRC
+
+bind the methods Length and Scale, with receiver type *Point, to the base type
+Point.
+
+The type of a method is the type of a function with the receiver as first
+argument. For instance, the method Scale has type
+
+#+BEGIN_SRC go
+func(p *Point, factor float64)
+#+END_SRC
+
+However, a function declared this way is not a method.
+
+* Expressions
+
+An expression specifies the computation of a value by applying operators and
+functions to operands.
+
+** Operands
+
+Operands denote the elementary values in an expression. An operand may be a
+literal, a (possibly qualified) non-blank identifier denoting a constant,
+variable, or function, a method expression yielding a function, or a
+parenthesized expression.
+
+The blank identifier may appear as an operand only on the left-hand side of an
+assignment.
+
+#+BEGIN_SRC text
+Operand     = Literal | OperandName | MethodExpr | "(" Expression ")" .
+Literal     = BasicLit | CompositeLit | FunctionLit .
+BasicLit    = int_lit | float_lit | imaginary_lit | rune_lit | string_lit .
+OperandName = identifier | QualifiedIdent.
+#+END_SRC
+
+** Qualified identifiers
+
+A qualified identifier is an identifier qualified with a package name prefix.
+Both the package name and the identifier must not be blank.
+
+#+BEGIN_SRC text
+QualifiedIdent = PackageName "." identifier .
+#+END_SRC
+
+A qualified identifier accesses an identifier in a different package, which must
+be imported. The identifier must be exported and declared in the package block
+of that package.
+
+#+BEGIN_SRC go
+math.Sin	// denotes the Sin function in package math
+#+END_SRC
+
+** Composite literals
+
+Composite literals construct values for structs, arrays, slices, and maps and
+create a new value each time they are evaluated. They consist of the type of the
+literal followed by a brace-bound list of elements. Each element may optionally
+be preceded by a corresponding key.
+
+#+BEGIN_SRC text
+CompositeLit  = LiteralType LiteralValue .
+LiteralType   = StructType | ArrayType | "[" "..." "]" ElementType |
+                SliceType | MapType | TypeName .
+LiteralValue  = "{" [ ElementList [ "," ] ] "}" .
+ElementList   = KeyedElement { "," KeyedElement } .
+KeyedElement  = [ Key ":" ] Element .
+Key           = FieldName | Expression | LiteralValue .
+FieldName     = identifier .
+Element       = Expression | LiteralValue .
+#+END_SRC
+
+The LiteralType's underlying type must be a struct, array, slice, or map type
+(the grammar enforces this constraint except when the type is given as a
+TypeName). The types of the elements and keys must be assignable to the
+respective field, element, and key types of the literal type; there is no
+additional conversion. The key is interpreted as a field name for struct
+literals, an index for array and slice literals, and a key for map literals. For
+map literals, all elements must have a key. It is an error to specify multiple
+elements with the same field name or constant key value. For non-constant map
+keys, see the section on evaluation order.
+
+For struct literals the following rules apply:
+
+    1) A key must be a field name declared in the struct type.
+    2) An element list that does not contain any keys must list an element for
+       each struct field in the order in which the fields are declared.
+    3) If any element has a key, every element must have a key.
+    4) An element list that contains keys does not need to have an element for
+       each struct field. Omitted fields get the zero value for that field.
+    5) A literal may omit the element list; such a literal evaluates to the
+       zero value for its type.
+    6) It is an error to specify an element for a non-exported field of a
+        struct belonging to a different package.
+
+Given the declarations
+
+#+BEGIN_SRC go
+type Point3D struct { x, y, z float64 }
+type Line struct { p, q Point3D }
+#+END_SRC
+
+one may write
+
+#+BEGIN_SRC go
+origin := Point3D{}                            // zero value for Point3D
+line := Line{origin, Point3D{y: -4, z: 12.3}}  // zero value for line.q.x
+#+END_SRC
+
+For array and slice literals the following rules apply:
+
+    1) Each element has an associated integer index marking its position in the
+       array.
+    2) An element with a key uses the key as its index. The key must be a
+       non-negative constant representable by a value of type int; and if it is
+       typed it must be of integer type.
+    3) An element without a key uses the previous element's index plus one. If
+       the first element has no key, its index is zero.
+
+Taking the address of a composite literal generates a pointer to a unique
+variable initialized with the literal's value.
+
+#+BEGIN_SRC go
+var pointer *Point3D = &Point3D{y: 1000}
+#+END_SRC
+
+The length of an array literal is the length specified in the literal type. If
+fewer elements than the length are provided in the literal, the missing elements
+are set to the zero value for the array element type. It is an error to provide
+elements with index values outside the index range of the array. The notation
+... specifies an array length equal to the maximum element index plus one.
+
+#+BEGIN_SRC go
+buffer := [10]string{}             // len(buffer) == 10
+intSet := [6]int{1, 2, 3, 5}       // len(intSet) == 6
+days := [...]string{"Sat", "Sun"}  // len(days) == 2
+#+END_SRC
+
+A slice literal describes the entire underlying array literal. Thus the length
+and capacity of a slice literal are the maximum element index plus one. A slice
+literal has the form
+
+#+BEGIN_SRC go
+[]T{x1, x2, … xn}
+#+END_SRC
+
+and is shorthand for a slice operation applied to an array:
+
+#+BEGIN_SRC go
+tmp := [n]T{x1, x2, … xn}
+tmp[0 : n]
+#+END_SRC
+
+Within a composite literal of array, slice, or map type T, elements or map keys
+that are themselves composite literals may elide the respective literal type if
+it is identical to the element or key type of T. Similarly, elements or keys
+that are addresses of composite literals may elide the &T when the element or
+key type is *T.
+
+#+BEGIN_SRC go
+[...]Point{{1.5, -3.5}, {0, 0}}     // same as [...]Point{Point{1.5, -3.5}, Point{0, 0}}
+[][]int{{1, 2, 3}, {4, 5}}          // same as [][]int{[]int{1, 2, 3}, []int{4, 5}}
+[][]Point{{{0, 1}, {1, 2}}}         // same as [][]Point{[]Point{Point{0, 1}, Point{1, 2}}}
+map[string]Point{"orig": {0, 0}}    // same as map[string]Point{"orig": Point{0, 0}}
+map[Point]string{{0, 0}: "orig"}    // same as map[Point]string{Point{0, 0}: "orig"}
+
+type PPoint *Point
+[2]*Point{{1.5, -3.5}, {}}          // same as [2]*Point{&Point{1.5, -3.5}, &Point{}}
+[2]PPoint{{1.5, -3.5}, {}}          // same as [2]PPoint{PPoint(&Point{1.5, -3.5}), PPoint(&Point{})}
+#+END_SRC
+
+A parsing ambiguity arises when a composite literal using the TypeName form of
+the LiteralType appears as an operand between the keyword and the opening brace
+of the block of an "if", "for", or "switch" statement, and the composite literal
+is not enclosed in parentheses, square brackets, or curly braces. In this rare
+case, the opening brace of the literal is erroneously parsed as the one
+introducing the block of statements. To resolve the ambiguity, the composite
+literal must appear within parentheses.
+
+#+BEGIN_SRC go
+if x == (T{a,b,c}[i]) { … }
+if (x == T{a,b,c}[i]) { … }
+#+END_SRC
+
+Examples of valid array, slice, and map literals:
+
+#+BEGIN_SRC go
+// list of prime numbers
+primes := []int{2, 3, 5, 7, 9, 2147483647}
+
+// vowels[ch] is true if ch is a vowel
+vowels := [128]bool{'a': true, 'e': true, 'i': true, 'o': true, 'u': true, 'y': true}
+
+// the array [10]float32{-1, 0, 0, 0, -0.1, -0.1, 0, 0, 0, -1}
+filter := [10]float32{-1, 4: -0.1, -0.1, 9: -1}
+
+// frequencies in Hz for equal-tempered scale (A4 = 440Hz)
+noteFrequency := map[string]float32{
+	"C0": 16.35, "D0": 18.35, "E0": 20.60, "F0": 21.83,
+	"G0": 24.50, "A0": 27.50, "B0": 30.87,
 }
 #+END_SRC
