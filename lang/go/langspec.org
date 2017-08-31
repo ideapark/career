@@ -2,120 +2,36 @@
 #+AUTHOR: p@ctriple.cn
 
 * The Go Programming Language Specification :TOC_4_gh:noexport:
-   - [[#introduction][Introduction]]
-   - [[#notation][Notation]]
-   - [[#source-code-representation][Source code representation]]
-     - [[#characters][Characters]]
-     - [[#letters-and-digits][Letters and digits]]
-   - [[#lexical-elements][Lexical elements]]
-     - [[#comments][Comments]]
-     - [[#tokens][Tokens]]
-     - [[#semicolons][Semicolons]]
-     - [[#identifiers][Identifiers]]
-     - [[#keywords][Keywords]]
-     - [[#operators-and-punctuation][Operators and punctuation]]
-     - [[#integer-literals][Integer literals]]
-     - [[#floating-point-literals][Floating-point literals]]
-     - [[#imaginary-literals][Imaginary literals]]
-     - [[#rune-literals][Rune Literals]]
-     - [[#strings-literals][Strings literals]]
-   - [[#constants][Constants]]
-   - [[#variabls][Variables]]
-   - [[#types][Types]]
-     - [[#method-sets][Method sets]]
-     - [[#boolean-types][Boolean types]]
-     - [[#numeric-types][Numeric types]]
-     - [[#string-types][String types]]
-     - [[#slice-types][Slice types]]
-     - [[#struct-types][Struct types]]
-     - [[#poiinter-types][Pointer types]]
-     - [[#function-types][Function types]]
-     - [[#interface-types][Interface types]]
-     - [[#map-types][Map types]]
-     - [[#channel-types][Channel types]]
-   - [[#properties-of-types-and-values][Properties of types and values]]
-     - [[#type-identify][Type identify]]
-     - [[#assignability][Assignability]]
-   - [[#blocks][Blocks]]
-   - [[#declarations-and-scope][Declarations and scope]]
-     - [[#label-scopes][Label scopes]]
-     - [[#blank-identifier][Blank identifier]]
-     - [[#predeclared-identifiers][Predeclared identifiers]]
-     - [[#exported-identifiers][Exported identifiers]]
-     - [[#uniqueness-of-identifiers][Uniqueness of identifiers]]
-     - [[#constants-declarations][Constant declarations]]
-     - [[#iota][Iota]]
-     - [[#type-declarations][Type declarations]]
-     - [[#variable-declarations][Varable declarations]]
-     - [[#short-variable-declarations][Short variable declarations]]
-     - [[#function-declarations][Function declarations]]
-     - [[#method-declarations][Method declarations]]
-   - [[#expressions][Expressions]]
-     - [[#operands][Operands]]
-     - [[#qualified-identifiers][Qualified identifiers]]
-     - [[#composite-literals][Composite literals]]
-     - [[#function-literals][Function literals]]
-     - [[#primary-expressions][Primary expressions]]
-     - [[#selectors][Selectors]]
-     - [[#method-expressions][Method expressions]]
-     - [[#method-values][Method values]]
-     - [[#index-epxressions][Index expressions]]
-     - [[#slice-expressions][Slice expressions]]
-     - [[#type-assertions][Type assertions]]
-     - [[#calls][Calls]]
-     - [[#passing-arguments-to-parameters][Passing arguments to ... parameters]]
-     - [[#operators][Operators]]
-     - [[#arithmetic-operators][Arithmetic operators]]
-     - [[#comparison-operators][Comparison operators]]
-     - [[#logical-operators][Logical operators]]
-     - [[#address-operators][Address operators]]
-     - [[#receive-operator][Receive operator]]
-     - [[#conversions][Converions]]
-     - [[#constant-expressions][Constant expressions]]
-     - [[#order-of-evaluation][Order of evaluation]]
-   - [[#statements][Statements]]
-     - [[#terminating-statements][Terminating statements]]
-     - [[#empty-statements][Empty statements]]
-     - [[#labeled-statements][Labeled statements]]
-     - [[#expression-statements][Expression statements]]
-     - [[#send-statements][Send statements]]
-     - [[#incdec-statements][IncDec statements]]
-     - [[#assignments][Assignments]]
-     - [[#if-statements][If statements]]
-     - [[#switch-statements][Switch statements]]
-     - [[#for-statements][For statements]]
-     - [[#go-statements][Go statements]]
-     - [[#select-statements][Select statements]]
-     - [[#return-statements][Return statements]]
-     - [[#break-statements][Break statements]]
-     - [[#continue-statements][Continue statements]]
-     - [[#goto-statements][Goto statements]]
-     - [[#fallthrough-statements][Fallthrough statements]]
-     - [[#defer-statements][Defer statements]]
-   - [[#built-in-functions][Built-in functions]]
-     - [[#close][Close]]
-     - [[#length-and-capacity][Length and capacity]]
-     - [[#allocation][Allocation]]
-     - [[#making-slices-maps-and-channels][Making slices, maps and channels]]
-     - [[#appending-to-any-copying-slices][Appending to any copying slices]]
-     - [[#deletion-of-map-elements][Deletion of map elements]]
-     - [[#manipulating-complex-numbers][Manipulating complex numbers]]
-     - [[#handling-panics][Handling panics]]
-     - [[#bootstraping][Bootstraping]]
-   - [[#packages][Packages]]
-     - [[#source-file-organization][Source file organization]]
-     - [[#package-clause][Package clause]]
-     - [[#import-declarations][Import declarations]]
-     - [[#an-example-package][An example package]]
-   - [[#program-initialization-and-execution][Program initialization and execution]]
-     - [[#the-zero-value][The zero value]]
-     - [[#package-initialization][Package initialization]]
-     - [[#program-execution][Program execution]]
-   - [[#errors][Errors]]
-   - [[#run-time-panics][Run-time panics]]
-   - [[#system-considerations][System considerations]]
-     - [[#package-unsafe][Package unsafe]]
-     - [[#size-and-alignment-gurantees][Size and alignment gurantees]]
+- [[#introduction][Introduction]]
+- [[#notation][Notation]]
+- [[#source-code-representation][Source code representation]]
+  - [[#characters][Characters]]
+  - [[#letters-and-digits][Letters and digits]]
+- [[#lexical-elements][Lexical elements]]
+  - [[#comments][Comments]]
+  - [[#tokens][Tokens]]
+  - [[#semicolons][Semicolons]]
+  - [[#identifiers][Identifiers]]
+  - [[#keywords][Keywords]]
+  - [[#operators-and-punctuation][Operators and punctuation]]
+  - [[#integer-literals][Integer literals]]
+  - [[#floating-point-literals][Floating-point literals]]
+  - [[#imaginary-literals][Imaginary literals]]
+  - [[#rune-literals][Rune literals]]
+  - [[#string-literals][String literals]]
+  - [[#constants][Constants]]
+  - [[#variables][Variables]]
+  - [[#types][Types]]
+  - [[#method-sets][Method sets]]
+  - [[#boolean-types][Boolean types]]
+  - [[#numeric-types][Numeric types]]
+  - [[#string-types][String types]]
+  - [[#array-types][Array types]]
+  - [[#slice-types][Slice types]]
+  - [[#struct-types][Struct types]]
+  - [[#pointer-types][Pointer types]]
+  - [[#function-types][Function types]]
+  - [[#interface-types][Interface types]]
 
 * Introduction
 
@@ -135,7 +51,7 @@ tools such as integrated development environments.
 
 The syntax is specified using Extended Backus-Naur Form (EBNF):
 
-#+BEGIN_SRC bnf
+#+BEGIN_SRC text
 Production  = production_name "=" [ Expression ] "." .
 Expression  = Alternative { "|" Alternative } .
 Alternative = Term { Term } .
@@ -148,12 +64,12 @@ Repetition  = "{" Expression "}" .
 Productions are expressions constructed from terms and the following operators,
 in increasing precedence:
 
-#+BEGIN_SRC bnf
+#+BEGIN_SRC text
 |   alternation
 ()  grouping
 []  option (0 or 1 times)
 {}  repetition (0 to n times)
-#+BEGIN_SRC
+#+END_SRC
 
 Lower-case production names are used to identify lexical tokens. Non-terminals
 are in CamelCase. Lexical tokens are enclosed in double quotes "" or back quotes
@@ -164,3 +80,877 @@ alternatives. The horizontal ellipsis … is also used elsewhere in the spec to
 informally denote various enumerations or code snippets that are not further
 specified. The character … (as opposed to the three characters ...) is not a
 token of the Go language.
+
+* Source code representation
+
+Source code is Unicode text encoded in UTF-8. The text is not canonicalized, so
+a single accented code point is distinct from the same character constructed
+from combining an accent and a letter; those are treated as two code points. For
+simplicity, this document will use the unqualified term character to refer to a
+Unicode code point in the source text.
+
+Each code point is distinct; for instance, upper and lower case letters are
+different characters.
+
+Implementation restriction: For compatibility with other tools, a compiler may
+disallow the NUL character (U+0000) in the source text.
+
+Implementation restriction: For compatibility with other tools, a compiler may
+ignore a UTF-8-encoded byte order mark (U+FEFF) if it is the first Unicode code
+point in the source text. A byte order mark may be disallowed anywhere else in
+the source.
+
+** Characters
+
+The following terms are used to denote specific Unicode character classes:
+
+#+BEGIN_SRC text
+newline        = /* the Unicode code point U+000A */ .
+unicode_char   = /* an arbitrary Unicode code point except newline */ .
+unicode_letter = /* a Unicode code point classified as "Letter" */ .
+unicode_digit  = /* a Unicode code point classified as "Number, decimal digit" */ .
+#+END_SRC
+
+In The Unicode Standard 8.0, Section 4.5 "General Category" defines a set of
+character categories. Go treats all characters in any of the Letter categories
+Lu, Ll, Lt, Lm, or Lo as Unicode letters, and those in the Number category Nd as
+Unicode digits.
+
+** Letters and digits
+
+The underscore character _ (U+005F) is considered a letter.
+
+#+BEGIN_SRC text
+letter        = unicode_letter | "_" .
+decimal_digit = "0" … "9" .
+octal_digit   = "0" … "7" .
+hex_digit     = "0" … "9" | "A" … "F" | "a" … "f" .
+#+END_SRC
+
+* Lexical elements
+
+** Comments
+
+Comments serve as program documentation. There are two forms:
+
+1. Line comments start with the character sequence // and stop at the end of the line.
+2. General comments start with the character sequence /* and stop with the first subsequent character sequence */.
+
+A comment cannot start inside a rune or string literal, or inside a comment. A
+general comment containing no newlines acts like a space. Any other comment acts
+like a newline.
+
+** Tokens
+
+Tokens form the vocabulary of the Go language. There are four classes:
+identifiers, keywords, operators and punctuation, and literals. White space,
+formed from spaces (U+0020), horizontal tabs (U+0009), carriage returns
+(U+000D), and newlines (U+000A), is ignored except as it separates tokens that
+would otherwise combine into a single token. Also, a newline or end of file may
+trigger the insertion of a semicolon. While breaking the input into tokens, the
+next token is the longest sequence of characters that form a valid token.
+
+** Semicolons
+
+The formal grammar uses semicolons ";" as terminators in a number of
+productions. Go programs may omit most of these semicolons using the following
+two rules:
+
+1. When the input is broken into tokens, a semicolon is automatically inserted
+   into the token stream immediately after a line's final token if that token is
+
+    1) an identifier
+    2) an integer, floating-point, imaginary, rune, or string literal
+    3) one of the keywords break, continue, fallthrough, or return
+    4) one of the operators and punctuation ++, --, ), ], or }
+
+2. To allow complex statements to occupy a single line, a semicolon may be
+   omitted before a closing ")" or "}".
+
+To reflect idiomatic use, code examples in this document elide semicolons using
+these rules.
+
+** Identifiers
+
+Identifiers name program entities such as variables and types. An identifier is
+a sequence of one or more letters and digits. The first character in an
+identifier must be a letter.
+
+#+BEGIN_SRC text
+identifier = letter { letter | unicode_digit } .
+#+END_SRC
+
+#+BEGIN_SRC text
+a
+_x9
+ThisVariableIsExported
+αβ
+#+END_SRC
+
+Some identifiers are predeclared.
+
+** Keywords
+
+The following keywords are reserved and may not be used as identifiers.
+
+#+BEGIN_SRC text
+break        default      func         interface    select
+case         defer        go           map          struct
+chan         else         goto         package      switch
+const        fallthrough  if           range        type
+continue     for          import       return       var
+#+END_SRC
+
+** Operators and punctuation
+
+The following character sequences represent operators (including assignment
+operators) and punctuation:
+
+#+BEGIN_SRC go
++    &     +=    &=     &&    ==    !=    (    )
+-    |     -=    |=     ||    <     <=    [    ]
+`*   ^     *=    ^=     <-    >     >=    {    }
+/    <<    /=    <<=    ++    =     :=    ,    ;
+%    >>    %=    >>=    --    !     ...   .    :
+     &^          &^=
+#+END_SRC
+
+** Integer literals
+
+An integer literal is a sequence of digits representing an integer constant. An
+optional prefix sets a non-decimal base: 0 for octal, 0x or 0X for hexadecimal.
+In hexadecimal literals, letters a-f and A-F represent values 10 through 15.
+
+#+BEGIN_SRC text
+int_lit     = decimal_lit | octal_lit | hex_lit .
+decimal_lit = ( "1" … "9" ) { decimal_digit } .
+octal_lit   = "0" { octal_digit } .
+hex_lit     = "0" ( "x" | "X" ) hex_digit { hex_digit } .
+#+END_SRC
+
+#+BEGIN_SRC text
+42
+0600
+0xBadFace
+170141183460469231731687303715884105727
+#+END_SRC
+
+** Floating-point literals
+
+A floating-point literal is a decimal representation of a floating-point
+constant. It has an integer part, a decimal point, a fractional part, and an
+exponent part. The integer and fractional part comprise decimal digits; the
+exponent part is an e or E followed by an optionally signed decimal exponent.
+One of the integer part or the fractional part may be elided; one of the decimal
+point or the exponent may be elided.
+
+#+BEGIN_SRC text
+float_lit = decimals "." [ decimals ] [ exponent ] |
+            decimals exponent |
+            "." decimals [ exponent ] .
+decimals  = decimal_digit { decimal_digit } .
+exponent  = ( "e" | "E" ) [ "+" | "-" ] decimals .
+#+END_SRC
+
+#+BEGIN_SRC text
+0.
+72.40
+072.40  // == 72.40
+2.71828
+1.e+0
+6.67428e-11
+1E6
+.25
+.12345E+5
+#+END_SRC
+
+** Imaginary literals
+
+An imaginary literal is a decimal representation of the imaginary part of a
+complex constant. It consists of a floating-point literal or decimal integer
+followed by the lower-case letter i.
+
+#+BEGIN_SRC text
+imaginary_lit = (decimals | float_lit) "i" .
+#+END_SRC
+
+#+BEGIN_SRC text
+0i
+011i  // == 11i
+0.i
+2.71828i
+1.e+0i
+6.67428e-11i
+1E6i
+.25i
+.12345E+5i
+#+END_SRC
+
+** Rune literals
+
+A rune literal represents a rune constant, an integer value identifying a
+Unicode code point. A rune literal is expressed as one or more characters
+enclosed in single quotes, as in 'x' or '\n'. Within the quotes, any character
+may appear except newline and unescaped single quote. A single quoted character
+represents the Unicode value of the character itself, while multi-character
+sequences beginning with a backslash encode values in various formats.
+
+The simplest form represents the single character within the quotes; since Go
+source text is Unicode characters encoded in UTF-8, multiple UTF-8-encoded bytes
+may represent a single integer value. For instance, the literal 'a' holds a
+single byte representing a literal a, Unicode U+0061, value 0x61, while 'ä'
+holds two bytes (0xc3 0xa4) representing a literal a-dieresis, U+00E4, value
+0xe4.
+
+Several backslash escapes allow arbitrary values to be encoded as ASCII text.
+There are four ways to represent the integer value as a numeric constant: \x
+followed by exactly two hexadecimal digits; \u followed by exactly four
+hexadecimal digits; \U followed by exactly eight hexadecimal digits, and a plain
+backslash \ followed by exactly three octal digits. In each case the value of
+the literal is the value represented by the digits in the corresponding base.
+
+Although these representations all result in an integer, they have different
+valid ranges. Octal escapes must represent a value between 0 and 255 inclusive.
+Hexadecimal escapes satisfy this condition by construction. The escapes \u and
+\U represent Unicode code points so within them some values are illegal, in
+particular those above 0x10FFFF and surrogate halves.
+
+After a backslash, certain single-character escapes represent special values:
+
+#+BEGIN_SRC text
+\a   U+0007 alert or bell
+\b   U+0008 backspace
+\f   U+000C form feed
+\n   U+000A line feed or newline
+\r   U+000D carriage return
+\t   U+0009 horizontal tab
+\v   U+000b vertical tab
+\\   U+005c backslash
+\'   U+0027 single quote  (valid escape only within rune literals)
+\"   U+0022 double quote  (valid escape only within string literals)
+#+END_SRC
+
+All other sequences starting with a backslash are illegal inside rune literals.
+
+#+BEGIN_SRC text
+rune_lit         = "'" ( unicode_value | byte_value ) "'" .
+unicode_value    = unicode_char | little_u_value | big_u_value | escaped_char .
+byte_value       = octal_byte_value | hex_byte_value .
+octal_byte_value = `\` octal_digit octal_digit octal_digit .
+hex_byte_value   = `\` "x" hex_digit hex_digit .
+little_u_value   = `\` "u" hex_digit hex_digit hex_digit hex_digit .
+big_u_value      = `\` "U" hex_digit hex_digit hex_digit hex_digit
+                           hex_digit hex_digit hex_digit hex_digit .
+escaped_char     = `\` ( "a" | "b" | "f" | "n" | "r" | "t" | "v" | `\` | "'" | `"` ) .
+#+END_SRC
+
+#+BEGIN_SRC text
+'a'
+'ä'
+'本'
+'\t'
+'\000'
+'\007'
+'\377'
+'\x07'
+'\xff'
+'\u12e4'
+'\U00101234'
+'\''         // rune literal containing single quote character
+'aa'         // illegal: too many characters
+'\xa'        // illegal: too few hexadecimal digits
+'\0'         // illegal: too few octal digits
+'\uDFFF'     // illegal: surrogate half
+'\U00110000' // illegal: invalid Unicode code point
+#+END_SRC
+
+** String literals
+
+A string literal represents a string constant obtained from concatenating a
+sequence of characters. There are two forms: raw string literals and interpreted
+string literals.
+
+Raw string literals are character sequences between back quotes, as in `foo`.
+Within the quotes, any character may appear except back quote. The value of a
+raw string literal is the string composed of the uninterpreted (implicitly
+UTF-8-encoded) characters between the quotes; in particular, backslashes have no
+special meaning and the string may contain newlines. Carriage return characters
+('\r') inside raw string literals are discarded from the raw string value.
+
+Interpreted string literals are character sequences between double quotes, as in
+"bar". Within the quotes, any character may appear except newline and unescaped
+double quote. The text between the quotes forms the value of the literal, with
+backslash escapes interpreted as they are in rune literals (except that \' is
+illegal and \" is legal), with the same restrictions. The three-digit octal
+(\nnn) and two-digit hexadecimal (\xnn) escapes represent individual bytes of
+the resulting string; all other escapes represent the (possibly multi-byte)
+UTF-8 encoding of individual characters. Thus inside a string literal \377 and
+\xFF represent a single byte of value 0xFF=255, while ÿ, \u00FF, \U000000FF and
+\xc3\xbf represent the two bytes 0xc3 0xbf of the UTF-8 encoding of character
+U+00FF.
+
+#+BEGIN_SRC text
+string_lit             = raw_string_lit | interpreted_string_lit .
+raw_string_lit         = "`" { unicode_char | newline } "`" .
+interpreted_string_lit = `"` { unicode_value | byte_value } `"` .
+#+END_SRC
+
+#+BEGIN_SRC text
+`abc`                // same as "abc"
+`\n
+\n`                  // same as "\\n\n\\n"
+"\n"
+"\""                 // same as `"`
+"Hello, world!\n"
+"日本語"
+"\u65e5本\U00008a9e"
+"\xff\u00FF"
+"\uD800"             // illegal: surrogate half
+"\U00110000"         // illegal: invalid Unicode code point
+#+END_SRC
+
+These examples all represent the same string:
+
+#+BEGIN_SRC text
+"日本語"                                 // UTF-8 input text
+`日本語`                                 // UTF-8 input text as a raw literal
+"\u65e5\u672c\u8a9e"                    // the explicit Unicode code points
+"\U000065e5\U0000672c\U00008a9e"        // the explicit Unicode code points
+"\xe6\x97\xa5\xe6\x9c\xac\xe8\xaa\x9e"  // the explicit UTF-8 bytes
+#+END_SRC
+
+If the source code represents a character as two code points, such as a
+combining form involving an accent and a letter, the result will be an error if
+placed in a rune literal (it is not a single code point), and will appear as two
+code points if placed in a string literal.
+
+** Constants
+
+There are boolean constants, rune constants, integer constants, floating-point
+constants, complex constants, and string constants. Rune, integer,
+floating-point, and complex constants are collectively called numeric constants.
+
+A constant value is represented by a rune, integer, floating-point, imaginary,
+or string literal, an identifier denoting a constant, a constant expression, a
+conversion with a result that is a constant, or the result value of some
+built-in functions such as unsafe.Sizeof applied to any value, cap or len
+applied to some expressions, real and imag applied to a complex constant and
+complex applied to numeric constants. The boolean truth values are represented
+by the predeclared constants true and false. The predeclared identifier iota
+denotes an integer constant.
+
+In general, complex constants are a form of constant expression and are
+discussed in that section.
+
+Numeric constants represent exact values of arbitrary precision and do not
+overflow. Consequently, there are no constants denoting the IEEE-754 negative
+zero, infinity, and not-a-number values.
+
+Constants may be typed or untyped. Literal constants, true, false, iota, and
+certain constant expressions containing only untyped constant operands are
+untyped.
+
+A constant may be given a type explicitly by a constant declaration or
+conversion, or implicitly when used in a variable declaration or an assignment
+or as an operand in an expression. It is an error if the constant value cannot
+be represented as a value of the respective type. For instance, 3.0 can be given
+any integer or any floating-point type, while 2147483648.0 (equal to 1<<31) can
+be given the types float32, float64, or uint32 but not int32 or string.
+
+An untyped constant has a default type which is the type to which the constant
+is implicitly converted in contexts where a typed value is required, for
+instance, in a short variable declaration such as i := 0 where there is no
+explicit type. The default type of an untyped constant is bool, rune, int,
+float64, complex128 or string respectively, depending on whether it is a
+boolean, rune, integer, floating-point, complex, or string constant.
+
+Implementation restriction: Although numeric constants have arbitrary precision
+in the language, a compiler may implement them using an internal representation
+with limited precision. That said, every implementation must:
+
+    1) Represent integer constants with at least 256 bits.
+    2) Represent floating-point constants, including the parts of a complex
+       constant, with a mantissa of at least 256 bits and a signed binary
+       exponent of at least 16 bits.
+    3) Give an error if unable to represent an integer constant precisely.
+    4) Give an error if unable to represent a floating-point or complex constant
+       due to overflow.
+    5) Round to the nearest representable constant if unable to represent a
+       floating-point or complex constant due to limits on precision.
+
+These requirements apply both to literal constants and to the result of
+evaluating constant expressions.
+
+** Variables
+
+A variable is a storage location for holding a value. The set of permissible
+values is determined by the variable's type.
+
+A variable declaration or, for function parameters and results, the signature of
+a function declaration or function literal reserves storage for a named
+variable. Calling the built-in function new or taking the address of a composite
+literal allocates storage for a variable at run time. Such an anonymous variable
+is referred to via a (possibly implicit) pointer indirection.
+
+Structured variables of array, slice, and struct types have elements and fields
+that may be addressed individually. Each such element acts like a variable.
+
+The static type (or just type) of a variable is the type given in its
+declaration, the type provided in the new call or composite literal, or the type
+of an element of a structured variable. Variables of interface type also have a
+distinct dynamic type, which is the concrete type of the value assigned to the
+variable at run time (unless the value is the predeclared identifier nil, which
+has no type). The dynamic type may vary during execution but values stored in
+interface variables are always assignable to the static type of the variable.
+
+#+BEGIN_SRC text
+var x interface{}  // x is nil and has static type interface{}
+var v *T           // v has value nil, static type *T
+x = 42             // x has value 42 and dynamic type int
+x = v              // x has value (*T)(nil) and dynamic type *T
+#+END_SRC
+
+A variable's value is retrieved by referring to the variable in an expression;
+it is the most recent value assigned to the variable. If a variable has not yet
+been assigned a value, its value is the zero value for its type.
+
+** Types
+
+A type determines a set of values together with operations and methods specific
+to those values. A type may be denoted by a type name, if it has one, or
+specified using a type literal, which composes a type from existing types.
+
+#+BEGIN_SRC text
+Type      = TypeName | TypeLit | "(" Type ")" .
+TypeName  = identifier | QualifiedIdent .
+TypeLit   = ArrayType | StructType | PointerType | FunctionType | InterfaceType |
+	    SliceType | MapType | ChannelType .
+#+END_SRC
+
+Named instances of the boolean, numeric, and string types are predeclared. Other
+named types are introduced with type declarations. Composite types—array,
+struct, pointer, function, interface, slice, map, and channel types—may be
+constructed using type literals.
+
+Each type T has an underlying type: If T is one of the predeclared boolean,
+numeric, or string types, or a type literal, the corresponding underlying type
+is T itself. Otherwise, T's underlying type is the underlying type of the type
+to which T refers in its type declaration.
+
+#+BEGIN_SRC go
+type (
+	A1 = string
+	A2 = A1
+)
+
+type (
+	B1 string
+	B2 B1
+	B3 []B1
+	B4 B3
+)
+#+END_SRC
+
+The underlying type of string, A1, A2, B1, and B2 is string. The underlying type
+of []B1, B3, and B4 is []B1.
+
+** Method sets
+
+A type may have a method set associated with it. The method set of an interface
+type is its interface. The method set of any other type T consists of all
+methods declared with receiver type T. The method set of the corresponding
+pointer type *T is the set of all methods declared with receiver *T or T (that
+is, it also contains the method set of T). Further rules apply to structs
+containing embedded fields, as described in the section on struct types. Any
+other type has an empty method set. In a method set, each method must have a
+unique non-blank method name.
+
+The method set of a type determines the interfaces that the type implements and
+the methods that can be called using a receiver of that type.
+
+** Boolean types
+
+A boolean type represents the set of Boolean truth values denoted by the
+predeclared constants true and false. The predeclared boolean type is bool.
+
+** Numeric types
+
+A numeric type represents sets of integer or floating-point values. The
+predeclared architecture-independent numeric types are:
+
+#+BEGIN_SRC text
+uint8       the set of all unsigned  8-bit integers (0 to 255)
+uint16      the set of all unsigned 16-bit integers (0 to 65535)
+uint32      the set of all unsigned 32-bit integers (0 to 4294967295)
+uint64      the set of all unsigned 64-bit integers (0 to 18446744073709551615)
+
+int8        the set of all signed  8-bit integers (-128 to 127)
+int16       the set of all signed 16-bit integers (-32768 to 32767)
+int32       the set of all signed 32-bit integers (-2147483648 to 2147483647)
+int64       the set of all signed 64-bit integers (-9223372036854775808 to 9223372036854775807)
+
+float32     the set of all IEEE-754 32-bit floating-point numbers
+float64     the set of all IEEE-754 64-bit floating-point numbers
+
+complex64   the set of all complex numbers with float32 real and imaginary parts
+complex128  the set of all complex numbers with float64 real and imaginary parts
+
+byte        alias for uint8
+rune        alias for int32
+#+END_SRC
+
+The value of an n-bit integer is n bits wide and represented using two's
+complement arithmetic.
+
+There is also a set of predeclared numeric types with implementation-specific
+sizes:
+
+#+BEGIN_SRC text
+uint     either 32 or 64 bits
+int      same size as uint
+uintptr  an unsigned integer large enough to store the uninterpreted bits of a pointer value
+#+END_SRC
+
+To avoid portability issues all numeric types are distinct except byte, which is
+an alias for uint8, and rune, which is an alias for int32. Conversions are
+required when different numeric types are mixed in an expression or assignment.
+For instance, int32 and int are not the same type even though they may have the
+same size on a particular architecture.
+
+** String types
+
+A string type represents the set of string values. A string value is a (possibly
+empty) sequence of bytes. Strings are immutable: once created, it is impossible
+to change the contents of a string. The predeclared string type is string.
+
+The length of a string s (its size in bytes) can be discovered using the
+built-in function len. The length is a compile-time constant if the string is a
+constant. A string's bytes can be accessed by integer indices 0 through
+len(s)-1. It is illegal to take the address of such an element; if s[i] is the
+i'th byte of a string, &s[i] is invalid.
+
+** Array types
+
+An array is a numbered sequence of elements of a single type, called the element
+type. The number of elements is called the length and is never negative.
+
+#+BEGIN_SRC text
+ArrayType   = "[" ArrayLength "]" ElementType .
+ArrayLength = Expression .
+ElementType = Type .
+#+END_SRC
+
+The length is part of the array's type; it must evaluate to a non-negative
+constant representable by a value of type int. The length of array a can be
+discovered using the built-in function len. The elements can be addressed by
+integer indices 0 through len(a)-1. Array types are always one-dimensional but
+may be composed to form multi-dimensional types.
+
+#+BEGIN_SRC text
+[32]byte
+[2*N] struct { x, y int32 }
+[1000]*float64
+[3][5]int
+[2][2][2]float64  // same as [2]([2]([2]float64))
+#+END_SRC
+
+** Slice types
+
+A slice is a descriptor for a contiguous segment of an underlying array and
+provides access to a numbered sequence of elements from that array. A slice type
+denotes the set of all slices of arrays of its element type. The value of an
+uninitialized slice is nil.
+
+#+BEGIN_SRC text
+SliceType = "[" "]" ElementType .
+#+END_SRC
+
+Like arrays, slices are indexable and have a length. The length of a slice s can
+be discovered by the built-in function len; unlike with arrays it may change
+during execution. The elements can be addressed by integer indices 0 through
+len(s)-1. The slice index of a given element may be less than the index of the
+same element in the underlying array.
+
+A slice, once initialized, is always associated with an underlying array that
+holds its elements. A slice therefore shares storage with its array and with
+other slices of the same array; by contrast, distinct arrays always represent
+distinct storage.
+
+The array underlying a slice may extend past the end of the slice. The capacity
+is a measure of that extent: it is the sum of the length of the slice and the
+length of the array beyond the slice; a slice of length up to that capacity can
+be created by slicing a new one from the original slice. The capacity of a slice
+a can be discovered using the built-in function cap(a).
+
+A new, initialized slice value for a given element type T is made using the
+built-in function make, which takes a slice type and parameters specifying the
+length and optionally the capacity. A slice created with make always allocates a
+new, hidden array to which the returned slice value refers. That is, executing
+
+#+BEGIN_SRC go
+make([]T, length, capacity)
+#+END_SRC
+
+produces the same slice as allocating an array and slicing it, so these two
+expressions are equivalent:
+
+#+BEGIN_SRC go
+make([]int, 50, 100)
+new([100]int)[0:50]
+#+END_SRC
+
+Like arrays, slices are always one-dimensional but may be composed to construct
+higher-dimensional objects. With arrays of arrays, the inner arrays are, by
+construction, always the same length; however with slices of slices (or arrays
+of slices), the inner lengths may vary dynamically. Moreover, the inner slices
+must be initialized individually.
+
+** Struct types
+
+A struct is a sequence of named elements, called fields, each of which has a
+name and a type. Field names may be specified explicitly (IdentifierList) or
+implicitly (EmbeddedField). Within a struct, non-blank field names must be
+unique.
+
+#+BEGIN_SRC text
+StructType    = "struct" "{" { FieldDecl ";" } "}" .
+FieldDecl     = (IdentifierList Type | EmbeddedField) [ Tag ] .
+EmbeddedField = [ "*" ] TypeName .
+Tag           = string_lit .
+#+END_SRC
+
+#+BEGIN_SRC go
+// An empty struct.
+struct {}
+
+// A struct with 6 fields.
+struct {
+	x, y int
+	u float32
+	_ float32  // padding
+	A *[]int
+	F func()
+}
+#+END_SRC
+
+A field declared with a type but no explicit field name is called an embedded
+field. An embedded field must be specified as a type name T or as a pointer to a
+non-interface type name *T, and T itself may not be a pointer type. The
+unqualified type name acts as the field name.
+
+#+BEGIN_SRC go
+// A struct with four embedded fields of types T1, *T2, P.T3 and *P.T4
+struct {
+	T1        // field name is T1
+	*T2       // field name is T2
+	P.T3      // field name is T3
+	*P.T4     // field name is T4
+	x, y int  // field names are x and y
+}
+#+END_SRC
+
+The following declaration is illegal because field names must be unique in a
+struct type:
+
+#+BEGIN_SRC go
+struct {
+	T     // conflicts with embedded field *T and *P.T
+	*T    // conflicts with embedded field T and *P.T
+	*P.T  // conflicts with embedded field T and *T
+}
+#+END_SRC
+
+A field or method f of an embedded field in a struct x is called promoted if x.f
+is a legal selector that denotes that field or method f.
+
+Promoted fields act like ordinary fields of a struct except that they cannot be
+used as field names in composite literals of the struct.
+
+Given a struct type S and a type named T, promoted methods are included in the
+method set of the struct as follows:
+
+    1) If S contains an embedded field T, the method sets of S and *S both
+       include promoted methods with receiver T. The method set of *S also
+       includes promoted methods with receiver *T.
+    2) If S contains an embedded field *T, the method sets of S and *S both
+       include promoted methods with receiver T or *T.
+
+A field declaration may be followed by an optional string literal tag, which
+becomes an attribute for all the fields in the corresponding field declaration.
+An empty tag string is equivalent to an absent tag. The tags are made visible
+through a reflection interface and take part in type identity for structs but
+are otherwise ignored.
+
+#+BEGIN_SRC go
+struct {
+	x, y float64 ""  // an empty tag string is like an absent tag
+	name string  "any string is permitted as a tag"
+	_    [4]byte "ceci n'est pas un champ de structure"
+}
+
+// A struct corresponding to a TimeStamp protocol buffer.
+// The tag strings define the protocol buffer field numbers;
+// they follow the convention outlined by the reflect package.
+struct {
+	microsec  uint64 `protobuf:"1"`
+	serverIP6 uint64 `protobuf:"2"`
+}
+#+END_SRC
+
+** Pointer types
+
+A pointer type denotes the set of all pointers to variables of a given type,
+called the base type of the pointer. The value of an uninitialized pointer is
+nil.
+
+#+BEGIN_SRC text
+PointerType = "*" BaseType .
+BaseType    = Type .
+#+END_SRC
+
+#+BEGIN_SRC go
+*Point
+*[4]int
+#+END_SRC
+
+** Function types
+
+A function type denotes the set of all functions with the same parameter and
+result types. The value of an uninitialized variable of function type is nil.
+
+#+BEGIN_SRC text
+FunctionType   = "func" Signature .
+Signature      = Parameters [ Result ] .
+Result         = Parameters | Type .
+Parameters     = "(" [ ParameterList [ "," ] ] ")" .
+ParameterList  = ParameterDecl { "," ParameterDecl } .
+ParameterDecl  = [ IdentifierList ] [ "..." ] Type .
+#+END_SRC
+
+Within a list of parameters or results, the names (IdentifierList) must either
+all be present or all be absent. If present, each name stands for one item
+(parameter or result) of the specified type and all non-blank names in the
+signature must be unique. If absent, each type stands for one item of that type.
+Parameter and result lists are always parenthesized except that if there is
+exactly one unnamed result it may be written as an unparenthesized type.
+
+The final incoming parameter in a function signature may have a type prefixed
+with .... A function with such a parameter is called variadic and may be invoked
+with zero or more arguments for that parameter.
+
+#+BEGIN_SRC go
+func()
+func(x int) int
+func(a, _ int, z float32) bool
+func(a, b int, z float32) (bool)
+func(prefix string, values ...int)
+func(a, b int, z float64, opt ...interface{}) (success bool)
+func(int, int, float64) (float64, *[]int)
+func(n int) func(p *T)
+#+END_SRC
+
+** Interface types
+
+An interface type specifies a method set called its interface. A variable of
+interface type can store a value of any type with a method set that is any
+superset of the interface. Such a type is said to implement the interface. The
+value of an uninitialized variable of interface type is nil.
+
+#+BEGIN_SRC text
+InterfaceType      = "interface" "{" { MethodSpec ";" } "}" .
+MethodSpec         = MethodName Signature | InterfaceTypeName .
+MethodName         = identifier .
+InterfaceTypeName  = TypeName .
+#+END_SRC
+
+As with all method sets, in an interface type, each method must have a unique
+non-blank name.
+
+#+BEGIN_SRC go
+// A simple File interface
+interface {
+	Read(b Buffer) bool
+	Write(b Buffer) bool
+	Close()
+}
+#+END_SRC
+
+More than one type may implement an interface. For instance, if two types S1 and
+S2 have the method set
+
+#+BEGIN_SRC go
+func (p T) Read(b Buffer) bool { return … }
+func (p T) Write(b Buffer) bool { return … }
+func (p T) Close() { … }
+#+END_SRC
+
+(where T stands for either S1 or S2) then the File interface is implemented by
+both S1 and S2, regardless of what other methods S1 and S2 may have or share.
+
+A type implements any interface comprising any subset of its methods and may
+therefore implement several distinct interfaces. For instance, all types
+implement the empty interface:
+
+#+BEGIN_SRC go
+interface{}
+#+END_SRC
+
+Similarly, consider this interface specification, which appears within a type
+declaration to define an interface called Locker:
+
+#+BEGIN_SRC go
+type Locker interface {
+	Lock()
+	Unlock()
+}
+#+END_SRC
+
+If S1 and S2 also implement
+
+#+BEGIN_SRC go
+func (p T) Lock() { … }
+func (p T) Unlock() { … }
+#+END_SRC
+
+they implement the Locker interface as well as the File interface.
+
+An interface T may use a (possibly qualified) interface type name E in place of
+a method specification. This is called embedding interface E in T; it adds all
+(exported and non-exported) methods of E to the interface T.
+
+#+BEGIN_SRC go
+type ReadWriter interface {
+	Read(b Buffer) bool
+	Write(b Buffer) bool
+}
+
+type File interface {
+	ReadWriter  // same as adding the methods of ReadWriter
+	Locker      // same as adding the methods of Locker
+	Close()
+}
+
+type LockedFile interface {
+	Locker
+	File        // illegal: Lock, Unlock not unique
+	Lock()      // illegal: Lock not unique
+}
+#+END_SRC
+
+An interface type T may not embed itself or any interface type that embeds T,
+recursively.
+
+#+BEGIN_SRC go
+// illegal: Bad cannot embed itself
+type Bad interface {
+	Bad
+}
+
+// illegal: Bad1 cannot embed itself using Bad2
+type Bad1 interface {
+	Bad2
+}
+type Bad2 interface {
+	Bad1
+}
+#+END_SRC
