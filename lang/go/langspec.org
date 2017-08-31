@@ -116,3 +116,51 @@
    - [[#system-considerations][System considerations]]
      - [[#package-unsafe][Package unsafe]]
      - [[#size-and-alignment-gurantees][Size and alignment gurantees]]
+
+* Introduction
+
+This is a reference manual for the Go programming language. For more information
+and other documents, see [[url:https://golang.org][golang.org]].
+
+Go is a general-purpose language designed with systems programming in mind. It
+is strongly typed and garbage-collected and has explicit support for concurrent
+programming. Programs are constructed from packages, whose properties allow
+efficient management of dependencies. The existing implementations use a
+traditional compile/link model to generate executable binaries.
+
+The grammar is compact and regular, allowing for easy analysis by automatic
+tools such as integrated development environments.
+
+* Notation
+
+The syntax is specified using Extended Backus-Naur Form (EBNF):
+
+#+BEGIN_SRC bnf
+Production  = production_name "=" [ Expression ] "." .
+Expression  = Alternative { "|" Alternative } .
+Alternative = Term { Term } .
+Term        = production_name | token [ "…" token ] | Group | Option | Repetition .
+Group       = "(" Expression ")" .
+Option      = "[" Expression "]" .
+Repetition  = "{" Expression "}" .
+#+END_SRC
+
+Productions are expressions constructed from terms and the following operators,
+in increasing precedence:
+
+#+BEGIN_SRC bnf
+|   alternation
+()  grouping
+[]  option (0 or 1 times)
+{}  repetition (0 to n times)
+#+BEGIN_SRC
+
+Lower-case production names are used to identify lexical tokens. Non-terminals
+are in CamelCase. Lexical tokens are enclosed in double quotes "" or back quotes
+``.
+
+The form a … b represents the set of characters from a through b as
+alternatives. The horizontal ellipsis … is also used elsewhere in the spec to
+informally denote various enumerations or code snippets that are not further
+specified. The character … (as opposed to the three characters ...) is not a
+token of the Go language.
