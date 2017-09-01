@@ -57,6 +57,18 @@
   - [[#operands][Operands]]
   - [[#qualified-identifiers][Qualified identifiers]]
   - [[#composite-literals][Composite literals]]
+  - [[#function-literals][Function literals]]
+  - [[#primary-expressions][Primary expressions]]
+  - [[#selectors][Selectors]]
+  - [[#method-expressions][Method expressions]]
+  - [[#method-values][Method values]]
+  - [[#index-expressions][Index expressions]]
+  - [[#slice-expressions][Slice expressions]]
+    - [[#simple-slice-expressions][Simple slice expressions]]
+    - [[#full-slice-expressions][Full slice expressions]]
+  - [[#type-assertions][Type assertions]]
+  - [[#calls][Calls]]
+  - [[#passing-arguments-to--parameters][Passing arguments to ... parameters]]
 
 * Introduction
 
@@ -1853,3 +1865,633 @@ noteFrequency := map[string]float32{
 	"G0": 24.50, "A0": 27.50, "B0": 30.87,
 }
 #+END_SRC
+
+** Function literals
+
+A function literal represents an anonymous function.
+
+#+BEGIN_SRC text
+FunctionLit = "func" Function .
+#+END_SRC
+
+#+BEGIN_SRC go
+func(a, b int, z float64) bool { return a*b < int(z) }
+#+END_SRC
+
+A function literal can be assigned to a variable or invoked directly.
+
+#+BEGIN_SRC go
+f := func(x, y int) int { return x + y }
+func(ch chan int) { ch <- ACK }(replyChan)
+#+END_SRC
+
+Function literals are closures: they may refer to variables defined in a
+surrounding function. Those variables are then shared between the surrounding
+function and the function literal, and they survive as long as they are
+accessible.
+
+** Primary expressions
+
+Primary expressions are the operands for unary and binary expressions.
+
+#+BEGIN_SRC text
+PrimaryExpr =
+	Operand |
+	Conversion |
+	PrimaryExpr Selector |
+	PrimaryExpr Index |
+	PrimaryExpr Slice |
+	PrimaryExpr TypeAssertion |
+	PrimaryExpr Arguments .
+
+Selector       = "." identifier .
+Index          = "[" Expression "]" .
+Slice          = "[" [ Expression ] ":" [ Expression ] "]" |
+                 "[" [ Expression ] ":" Expression ":" Expression "]" .
+TypeAssertion  = "." "(" Type ")" .
+Arguments      = "(" [ ( ExpressionList | Type [ "," ExpressionList ] ) [ "..." ] [ "," ] ] ")" .
+#+END_SRC
+
+#+BEGIN_SRC go
+x
+2
+(s + ".txt")
+f(3.1415, true)
+Point{1, 2}
+m["foo"]
+s[i : j + 1]
+obj.color
+f.p[i].x()
+#+END_SRC
+
+** Selectors
+
+For a primary expression x that is not a package name, the selector expression
+
+#+BEGIN_SRC go
+x.f
+#+END_SRC
+
+denotes the field or method f of the value x (or sometimes *x; see below). The
+identifier f is called the (field or method) selector; it must not be the blank
+identifier. The type of the selector expression is the type of f. If x is a
+package name, see the section on qualified identifiers.
+
+A selector f may denote a field or method f of a type T, or it may refer to a
+field or method f of a nested embedded field of T. The number of embedded fields
+traversed to reach f is called its depth in T. The depth of a field or method f
+declared in T is zero. The depth of a field or method f declared in an embedded
+field A in T is the depth of f in A plus one.
+
+The following rules apply to selectors:
+
+    1) For a value x of type T or *T where T is not a pointer or interface type,
+       x.f denotes the field or method at the shallowest depth in T where there
+       is such an f. If there is not exactly one f with shallowest depth, the
+       selector expression is illegal.
+    2) For a value x of type I where I is an interface type, x.f denotes the
+       actual method with name f of the dynamic value of x. If there is no
+       method with name f in the method set of I, the selector expression is
+       illegal.
+    3) As an exception, if the type of x is a named pointer type and (*x).f is a
+       valid selector expression denoting a field (but not a method), x.f is
+       shorthand for (*x).f.
+    4) In all other cases, x.f is illegal.
+    5) If x is of pointer type and has the value nil and x.f denotes a struct
+       field, assigning to or evaluating x.f causes a run-time panic.
+    6) If x is of interface type and has the value nil, calling or evaluating
+       the method x.f causes a run-time panic.
+
+For example, given the declarations:
+
+#+BEGIN_SRC go
+type T0 struct {
+	x int
+}
+
+func (*T0) M0()
+
+type T1 struct {
+	y int
+}
+
+func (T1) M1()
+
+type T2 struct {
+	z int
+	T1
+	*T0
+}
+
+func (*T2) M2()
+
+type Q *T2
+
+var t T2     // with t.T0 != nil
+var p *T2    // with p != nil and (*p).T0 != nil
+var q Q = p
+#+END_SRC
+
+one may write:
+
+#+BEGIN_SRC go
+t.z          // t.z
+t.y          // t.T1.y
+t.x          // (*t.T0).x
+
+p.z          // (*p).z
+p.y          // (*p).T1.y
+p.x          // (*(*p).T0).x
+
+q.x          // (*(*q).T0).x        (*q).x is a valid field selector
+
+p.M0()       // ((*p).T0).M0()      M0 expects *T0 receiver
+p.M1()       // ((*p).T1).M1()      M1 expects T1 receiver
+p.M2()       // p.M2()              M2 expects *T2 receiver
+t.M2()       // (&t).M2()           M2 expects *T2 receiver, see section on Calls
+#+END_SRC
+
+but the following is invalid:
+
+#+BEGIN_SRC go
+q.M0()       // (*q).M0 is valid but not a field selector
+#+END_SRC
+
+** Method expressions
+
+If M is in the method set of type T, T.M is a function that is callable as a
+regular function with the same arguments as M prefixed by an additional argument
+that is the receiver of the method.
+
+#+BEGIN_SRC text
+MethodExpr    = ReceiverType "." MethodName .
+ReceiverType  = TypeName | "(" "*" TypeName ")" | "(" ReceiverType ")" .
+#+END_SRC
+
+Consider a struct type T with two methods, Mv, whose receiver is of type T, and
+Mp, whose receiver is of type *T.
+
+#+BEGIN_SRC go
+type T struct {
+	a int
+}
+func (tv  T) Mv(a int) int         { return 0 }  // value receiver
+func (tp *T) Mp(f float32) float32 { return 1 }  // pointer receiver
+
+var t T
+#+END_SRC
+
+The expression
+
+#+BEGIN_SRC go
+T.Mv
+#+END_SRC
+
+yields a function equivalent to Mv but with an explicit receiver as its first
+argument; it has signature
+
+#+BEGIN_SRC go
+func(tv T, a int) int
+#+END_SRC
+
+That function may be called normally with an explicit receiver, so these five
+invocations are equivalent:
+
+#+BEGIN_SRC go
+t.Mv(7)
+T.Mv(t, 7)
+(T).Mv(t, 7)
+f1 := T.Mv; f1(t, 7)
+f2 := (T).Mv; f2(t, 7)
+#+END_SRC
+
+Similarly, the expression
+
+#+BEGIN_SRC go
+(*T).Mp
+#+END_SRC
+
+yields a function value representing Mp with signature
+
+#+BEGIN_SRC go
+func(tp *T, f float32) float32
+#+END_SRC
+
+For a method with a value receiver, one can derive a function with an explicit
+pointer receiver, so
+
+#+BEGIN_SRC go
+(*T).Mv
+#+END_SRC
+
+yields a function value representing Mv with signature
+
+#+BEGIN_SRC go
+func(tv *T, a int) int
+#+END_SRC
+
+Such a function indirects through the receiver to create a value to pass as the
+receiver to the underlying method; the method does not overwrite the value whose
+address is passed in the function call.
+
+The final case, a value-receiver function for a pointer-receiver method, is
+illegal because pointer-receiver methods are not in the method set of the value
+type.
+
+Function values derived from methods are called with function call syntax; the
+receiver is provided as the first argument to the call. That is, given f :=
+T.Mv, f is invoked as f(t, 7) not t.f(7). To construct a function that binds the
+receiver, use a function literal or method value.
+
+It is legal to derive a function value from a method of an interface type. The
+resulting function takes an explicit receiver of that interface type.
+
+** Method values
+
+If the expression x has static type T and M is in the method set of type T, x.M
+is called a method value. The method value x.M is a function value that is
+callable with the same arguments as a method call of x.M. The expression x is
+evaluated and saved during the evaluation of the method value; the saved copy is
+then used as the receiver in any calls, which may be executed later.
+
+The type T may be an interface or non-interface type.
+
+As in the discussion of method expressions above, consider a struct type T with
+two methods, Mv, whose receiver is of type T, and Mp, whose receiver is of type
+*T.
+
+#+BEGIN_SRC go
+type T struct {
+	a int
+}
+func (tv  T) Mv(a int) int         { return 0 }  // value receiver
+func (tp *T) Mp(f float32) float32 { return 1 }  // pointer receiver
+
+var t T
+var pt *T
+func makeT() T
+#+END_SRC
+
+The expression
+
+#+BEGIN_SRC go
+t.Mv
+#+END_SRC
+
+yields a function value of type
+
+#+BEGIN_SRC go
+func(int) int
+#+END_SRC
+
+These two invocations are equivalent:
+
+#+BEGIN_SRC go
+t.Mv(7)
+f := t.Mv; f(7)
+#+END_SRC
+
+Similarly, the expression
+
+#+BEGIN_SRC go
+pt.Mp
+#+END_SRC
+
+yields a function value of type
+
+#+BEGIN_SRC go
+func(float32) float32
+#+END_SRC
+
+As with selectors, a reference to a non-interface method with a value receiver
+using a pointer will automatically dereference that pointer: pt.Mv is equivalent
+to (*pt).Mv.
+
+As with method calls, a reference to a non-interface method with a pointer
+receiver using an addressable value will automatically take the address of that
+value: t.Mp is equivalent to (&t).Mp.
+
+#+BEGIN_SRC go
+f := t.Mv; f(7)   // like t.Mv(7)
+f := pt.Mp; f(7)  // like pt.Mp(7)
+f := pt.Mv; f(7)  // like (*pt).Mv(7)
+f := t.Mp; f(7)   // like (&t).Mp(7)
+f := makeT().Mp   // invalid: result of makeT() is not addressable
+#+END_SRC
+
+Although the examples above use non-interface types, it is also legal to create
+a method value from a value of interface type.
+
+#+BEGIN_SRC go
+var i interface { M(int) } = myVal
+f := i.M; f(7)  // like i.M(7)
+#+END_SRC
+
+** Index expressions
+
+A primary expression of the form
+
+#+BEGIN_SRC go
+a[x]
+#+END_SRC
+
+denotes the element of the array, pointer to array, slice, string or map a
+indexed by x. The value x is called the index or map key, respectively. The
+following rules apply:
+
+If a is not a map:
+
+    1) the index x must be of integer type or untyped; it is in range if 0 <= x
+       < len(a), otherwise it is out of range
+    2) a constant index must be non-negative and representable by a value of
+       type int
+
+For a of array type A:
+
+    1) a constant index must be in range
+    2) if x is out of range at run time, a run-time panic occurs
+    3) a[x] is the array element at index x and the type of a[x] is the element
+       type of A
+
+For a of pointer to array type:
+
+    1) a[x] is shorthand for (*a)[x]
+
+For a of slice type S:
+
+    1) if x is out of range at run time, a run-time panic occurs
+    2) a[x] is the slice element at index x and the type of a[x] is the element
+       type of S
+
+For a of string type:
+
+    1) a constant index must be in range if the string a is also constant
+    2) if x is out of range at run time, a run-time panic occurs
+    3) a[x] is the non-constant byte value at index x and the type of a[x] is
+       byte
+    4) a[x] may not be assigned to
+
+For a of map type M:
+
+    1) x's type must be assignable to the key type of M
+    2) if the map contains an entry with key x, a[x] is the map value with key x
+       and the type of a[x] is the value type of M
+    3) if the map is nil or does not contain such an entry, a[x] is the zero
+       value for the value type of M
+
+Otherwise a[x] is illegal.
+
+An index expression on a map a of type map[K]V used in an assignment or
+initialization of the special form
+
+#+BEGIN_SRC go
+v, ok = a[x]
+v, ok := a[x]
+var v, ok = a[x]
+var v, ok T = a[x]
+#+END_SRC
+
+yields an additional untyped boolean value. The value of ok is true if the key x
+is present in the map, and false otherwise.
+
+Assigning to an element of a nil map causes a run-time panic.
+
+** Slice expressions
+
+Slice expressions construct a substring or slice from a string, array, pointer
+to array, or slice. There are two variants: a simple form that specifies a low
+and high bound, and a full form that also specifies a bound on the capacity.
+
+*** Simple slice expressions
+
+For a string, array, pointer to array, or slice a, the primary expression
+
+#+BEGIN_SRC go
+a[low : high]
+#+END_SRC
+
+constructs a substring or slice. The indices low and high select which elements
+of operand a appear in the result. The result has indices starting at 0 and
+length equal to high - low. After slicing the array a
+
+#+BEGIN_SRC go
+a := [5]int{1, 2, 3, 4, 5}
+s := a[1:4]
+#+END_SRC
+
+the slice s has type []int, length 3, capacity 4, and elements
+
+#+BEGIN_SRC go
+s[0] == 2
+s[1] == 3
+s[2] == 4
+#+END_SRC
+
+For convenience, any of the indices may be omitted. A missing low index defaults
+to zero; a missing high index defaults to the length of the sliced operand:
+
+#+BEGIN_SRC go
+a[2:]  // same as a[2 : len(a)]
+a[:3]  // same as a[0 : 3]
+a[:]   // same as a[0 : len(a)]
+#+END_SRC
+
+If a is a pointer to an array, a[low : high] is shorthand for (*a)[low : high].
+
+For arrays or strings, the indices are in range if 0 <= low <= high <= len(a),
+otherwise they are out of range. For slices, the upper index bound is the slice
+capacity cap(a) rather than the length. A constant index must be non-negative
+and representable by a value of type int; for arrays or constant strings,
+constant indices must also be in range. If both indices are constant, they must
+satisfy low <= high. If the indices are out of range at run time, a run-time
+panic occurs.
+
+Except for untyped strings, if the sliced operand is a string or slice, the
+result of the slice operation is a non-constant value of the same type as the
+operand. For untyped string operands the result is a non-constant value of type
+string. If the sliced operand is an array, it must be addressable and the result
+of the slice operation is a slice with the same element type as the array.
+
+If the sliced operand of a valid slice expression is a nil slice, the result is
+a nil slice. Otherwise, the result shares its underlying array with the operand.
+
+*** Full slice expressions
+
+For an array, pointer to array, or slice a (but not a string), the primary
+expression
+
+#+BEGIN_SRC go
+a[low : high : max]
+#+END_SRC
+
+constructs a slice of the same type, and with the same length and elements as
+the simple slice expression a[low : high]. Additionally, it controls the
+resulting slice's capacity by setting it to max - low. Only the first index may
+be omitted; it defaults to 0. After slicing the array a
+
+#+BEGIN_SRC go
+a := [5]int{1, 2, 3, 4, 5}
+t := a[1:3:5]
+#+END_SRC
+
+the slice t has type []int, length 2, capacity 4, and elements
+
+#+BEGIN_SRC go
+t[0] == 2
+t[1] == 3
+#+END_SRC
+
+As for simple slice expressions, if a is a pointer to an array, a[low : high :
+max] is shorthand for (*a)[low : high : max]. If the sliced operand is an array,
+it must be addressable.
+
+The indices are in range if 0 <= low <= high <= max <= cap(a), otherwise they
+are out of range. A constant index must be non-negative and representable by a
+value of type int; for arrays, constant indices must also be in range. If
+multiple indices are constant, the constants that are present must be in range
+relative to each other. If the indices are out of range at run time, a run-time
+panic occurs.
+
+** Type assertions
+
+For an expression x of interface type and a type T, the primary expression
+
+#+BEGIN_SRC go
+x.(T)
+#+END_SRC
+
+asserts that x is not nil and that the value stored in x is of type T. The
+notation x.(T) is called a type assertion.
+
+More precisely, if T is not an interface type, x.(T) asserts that the dynamic
+type of x is identical to the type T. In this case, T must implement the
+(interface) type of x; otherwise the type assertion is invalid since it is not
+possible for x to store a value of type T. If T is an interface type, x.(T)
+asserts that the dynamic type of x implements the interface T.
+
+If the type assertion holds, the value of the expression is the value stored in
+x and its type is T. If the type assertion is false, a run-time panic occurs. In
+other words, even though the dynamic type of x is known only at run time, the
+type of x.(T) is known to be T in a correct program.
+
+#+BEGIN_SRC go
+var x interface{} = 7          // x has dynamic type int and value 7
+i := x.(int)                   // i has type int and value 7
+
+type I interface { m() }
+
+func f(y I) {
+	s := y.(string)        // illegal: string does not implement I (missing method m)
+	r := y.(io.Reader)     // r has type io.Reader and the dynamic type of y must implement both I and io.Reader
+	…
+}
+#+END_SRC
+
+A type assertion used in an assignment or initialization of the special form
+
+#+BEGIN_SRC go
+v, ok = x.(T)
+v, ok := x.(T)
+var v, ok = x.(T)
+var v, ok T1 = x.(T)
+#+END_SRC
+
+yields an additional untyped boolean value. The value of ok is true if the
+assertion holds. Otherwise it is false and the value of v is the zero value for
+type T. No run-time panic occurs in this case.
+
+** Calls
+
+Given an expression f of function type F,
+
+#+BEGIN_SRC go
+f(a1, a2, … an)
+#+END_SRC
+
+calls f with arguments a1, a2, … an. Except for one special case, arguments
+must be single-valued expressions assignable to the parameter types of F and are
+evaluated before the function is called. The type of the expression is the
+result type of F. A method invocation is similar but the method itself is
+specified as a selector upon a value of the receiver type for the method.
+
+#+BEGIN_SRC go
+math.Atan2(x, y)  // function call
+var pt *Point
+pt.Scale(3.5)     // method call with receiver pt
+#+END_SRC
+
+In a function call, the function value and arguments are evaluated in the usual
+order. After they are evaluated, the parameters of the call are passed by value
+to the function and the called function begins execution. The return parameters
+of the function are passed by value back to the calling function when the
+function returns.
+
+Calling a nil function value causes a run-time panic.
+
+As a special case, if the return values of a function or method g are equal in
+number and individually assignable to the parameters of another function or
+method f, then the call f(g(parameters_of_g)) will invoke f after binding the
+return values of g to the parameters of f in order. The call of f must contain
+no parameters other than the call of g, and g must have at least one return
+value. If f has a final ... parameter, it is assigned the return values of g
+that remain after assignment of regular parameters.
+
+#+BEGIN_SRC go
+func Split(s string, pos int) (string, string) {
+	return s[0:pos], s[pos:]
+}
+
+func Join(s, t string) string {
+	return s + t
+}
+
+if Join(Split(value, len(value)/2)) != value {
+	log.Panic("test fails")
+}
+#+END_SRC
+
+A method call x.m() is valid if the method set of (the type of) x contains m and
+the argument list can be assigned to the parameter list of m. If x is
+addressable and &x's method set contains m, x.m() is shorthand for (&x).m():
+
+#+BEGIN_SRC go
+var p Point
+p.Scale(3.5)
+#+END_SRC
+
+There is no distinct method type and there are no method literals.
+
+** Passing arguments to ... parameters
+
+If f is variadic with a final parameter p of type ...T, then within f the type
+of p is equivalent to type []T. If f is invoked with no actual arguments for p,
+the value passed to p is nil. Otherwise, the value passed is a new slice of type
+[]T with a new underlying array whose successive elements are the actual
+arguments, which all must be assignable to T. The length and capacity of the
+slice is therefore the number of arguments bound to p and may differ for each
+call site.
+
+Given the function and calls
+
+#+BEGIN_SRC go
+func Greeting(prefix string, who ...string)
+Greeting("nobody")
+Greeting("hello:", "Joe", "Anna", "Eileen")
+#+END_SRC
+
+within Greeting, who will have the value nil in the first call, and
+[]string{"Joe", "Anna", "Eileen"} in the second.
+
+If the final argument is assignable to a slice type []T, it may be passed
+unchanged as the value for a ...T parameter if the argument is followed by ....
+In this case no new slice is created.
+
+Given the slice s and call
+
+#+BEGIN_SRC go
+s := []string{"James", "Jasmine"}
+Greeting("goodbye:", s...)
+#+END_SRC
+
+within Greeting, who will have the same value as s with the same underlying
+array.
