@@ -69,6 +69,22 @@
   - [[#type-assertions][Type assertions]]
   - [[#calls][Calls]]
   - [[#passing-arguments-to--parameters][Passing arguments to ... parameters]]
+  - [[#operators][Operators]]
+    - [[#operator-precedence][Operator precedence]]
+  - [[#arithmetic-operators][Arithmetic operators]]
+    - [[#integer-operators][Integer operators]]
+    - [[#integer-overflow][Integer overflow]]
+    - [[#floating-point-operators][Floating-point operators]]
+    - [[#string-concatenation][String concatenation]]
+  - [[#comparison-operators][Comparison operators]]
+  - [[#logical-operators][Logical operators]]
+  - [[#address-operators][Address operators]]
+  - [[#receive-operator][Receive operator]]
+  - [[#conversions][Conversions]]
+    - [[#conversions-between-numeric-types][Conversions between numeric types]]
+    - [[#conversions-to-and-from-a-string-type][Conversions to and from a string type]]
+  - [[#constant-expressions][Constant expressions]]
+  - [[#order-of-evaluation][Order of evaluation]]
 
 * Introduction
 
@@ -2495,3 +2511,656 @@ Greeting("goodbye:", s...)
 
 within Greeting, who will have the same value as s with the same underlying
 array.
+
+** Operators
+
+Operators combine operands into expressions.
+
+#+BEGIN_SRC text
+Expression = UnaryExpr | Expression binary_op Expression .
+UnaryExpr  = PrimaryExpr | unary_op UnaryExpr .
+
+binary_op  = "||" | "&&" | rel_op | add_op | mul_op .
+rel_op     = "==" | "!=" | "<" | "<=" | ">" | ">=" .
+add_op     = "+" | "-" | "|" | "^" .
+mul_op     = "*" | "/" | "%" | "<<" | ">>" | "&" | "&^" .
+
+unary_op   = "+" | "-" | "!" | "^" | "*" | "&" | "<-" .
+#+END_SRC
+
+Comparisons are discussed elsewhere. For other binary operators, the operand
+types must be identical unless the operation involves shifts or untyped
+constants. For operations involving constants only, see the section on constant
+expressions.
+
+Except for shift operations, if one operand is an untyped constant and the other
+operand is not, the constant is converted to the type of the other operand.
+
+The right operand in a shift expression must have unsigned integer type or be an
+untyped constant representable by a value of type uint. If the left operand of a
+non-constant shift expression is an untyped constant, it is first converted to
+the type it would assume if the shift expression were replaced by its left
+operand alone.
+
+#+BEGIN_SRC go
+var s uint = 33
+var i = 1<<s           // 1 has type int
+var j int32 = 1<<s     // 1 has type int32; j == 0
+var k = uint64(1<<s)   // 1 has type uint64; k == 1<<33
+var m int = 1.0<<s     // 1.0 has type int; m == 0 if ints are 32bits in size
+var n = 1.0<<s == j    // 1.0 has type int32; n == true
+var o = 1<<s == 2<<s   // 1 and 2 have type int; o == true if ints are 32bits in size
+var p = 1<<s == 1<<33  // illegal if ints are 32bits in size: 1 has type int, but 1<<33 overflows int
+var u = 1.0<<s         // illegal: 1.0 has type float64, cannot shift
+var u1 = 1.0<<s != 0   // illegal: 1.0 has type float64, cannot shift
+var u2 = 1<<s != 1.0   // illegal: 1 has type float64, cannot shift
+var v float32 = 1<<s   // illegal: 1 has type float32, cannot shift
+var w int64 = 1.0<<33  // 1.0<<33 is a constant shift expression
+#+END_SRC
+
+*** Operator precedence
+
+Unary operators have the highest precedence. As the ++ and -- operators form
+statements, not expressions, they fall outside the operator hierarchy. As a
+consequence, statement *p++ is the same as (*p)++.
+
+There are five precedence levels for binary operators. Multiplication operators
+bind strongest, followed by addition operators, comparison operators, &&
+(logical AND), and finally || (logical OR):
+
+#+BEGIN_SRC text
+Precedence    Operator
+    5             *  /  %  <<  >>  &  &^
+    4             +  -  |  ^
+    3             ==  !=  <  <=  >  >=
+    2             &&
+    1             ||
+#+END_SRC
+
+Binary operators of the same precedence associate from left to right. For
+instance, x / y * z is the same as (x / y) * z.
+
+#+BEGIN_SRC go
++x
+23 + 3*x[i]
+x <= f()
+^a >> b
+f() || g()
+x == y+1 && <-chanPtr > 0
+#+END_SRC
+
+** Arithmetic operators
+
+Arithmetic operators apply to numeric values and yield a result of the same type
+as the first operand. The four standard arithmetic operators (+, -, *, /) apply
+to integer, floating-point, and complex types; + also applies to strings. The
+bitwise logical and shift operators apply to integers only.
+
+#+BEGIN_SRC text
+ +    sum                    integers, floats, complex values, strings
+ -    difference             integers, floats, complex values
+ *    product                integers, floats, complex values
+ /    quotient               integers, floats, complex values
+ %    remainder              integers
+
+ &    bitwise AND            integers
+ |    bitwise OR             integers
+ ^    bitwise XOR            integers
+ &^   bit clear (AND NOT)    integers
+
+ <<   left shift             integer << unsigned integer
+ >>   right shift            integer >> unsigned integer
+#+END_SRC
+
+*** Integer operators
+
+For two integer values x and y, the integer quotient q = x / y and remainder r =
+x % y satisfy the following relationships:
+
+#+BEGIN_SRC text
+x = q*y + r  and  |r| < |y|
+#+END_SRC
+
+with x / y truncated towards zero ("truncated division").
+
+#+BEGIN_SRC text
+ x     y     x / y     x % y
+ 5     3       1         2
+-5     3      -1        -2
+ 5    -3      -1         2
+-5    -3       1        -2
+#+END_SRC
+
+As an exception to this rule, if the dividend x is the most negative value for
+the int type of x, the quotient q = x / -1 is equal to x (and r = 0).
+
+#+BEGIN_SRC text
+			 x, q
+int8                     -128
+int16                  -32768
+int32             -2147483648
+int64    -9223372036854775808
+#+END_SRC
+
+If the divisor is a constant, it must not be zero. If the divisor is zero at run
+time, a run-time panic occurs. If the dividend is non-negative and the divisor
+is a constant power of 2, the division may be replaced by a right shift, and
+computing the remainder may be replaced by a bitwise AND operation:
+
+#+BEGIN_SRC text
+ x     x / 4     x % 4     x >> 2     x & 3
+ 11      2         3         2          3
+-11     -2        -3        -3          1
+#+END_SRC
+
+The shift operators shift the left operand by the shift count specified by the
+right operand. They implement arithmetic shifts if the left operand is a signed
+integer and logical shifts if it is an unsigned integer. There is no upper limit
+on the shift count. Shifts behave as if the left operand is shifted n times by 1
+for a shift count of n. As a result, x << 1 is the same as x*2 and x >> 1 is the
+same as x/2 but truncated towards negative infinity.
+
+For integer operands, the unary operators +, -, and ^ are defined as follows:
+
+#+BEGIN_SRC text
++x                          is 0 + x
+-x    negation              is 0 - x
+^x    bitwise complement    is m ^ x  with m = "all bits set to 1" for unsigned x
+                                      and  m = -1 for signed x
+#+END_SRC
+
+*** Integer overflow
+
+For unsigned integer values, the operations +, -, *, and << are computed modulo
+2n, where n is the bit width of the unsigned integer's type. Loosely speaking,
+these unsigned integer operations discard high bits upon overflow, and programs
+may rely on ``wrap around''.
+
+For signed integers, the operations +, -, *, and << may legally overflow and the
+resulting value exists and is deterministically defined by the signed integer
+representation, the operation, and its operands. No exception is raised as a
+result of overflow. A compiler may not optimize code under the assumption that
+overflow does not occur. For instance, it may not assume that x < x + 1 is
+always true.
+
+*** Floating-point operators
+
+For floating-point and complex numbers, +x is the same as x, while -x is the
+negation of x. The result of a floating-point or complex division by zero is not
+specified beyond the IEEE-754 standard; whether a run-time panic occurs is
+implementation-specific.
+
+An implementation may combine multiple floating-point operations into a single
+fused operation, possibly across statements, and produce a result that differs
+from the value obtained by executing and rounding the instructions individually.
+A floating-point type conversion explicitly rounds to the precision of the
+target type, preventing fusion that would discard that rounding.
+
+For instance, some architectures provide a "fused multiply and add" (FMA)
+instruction that computes x*y + z without rounding the intermediate result x*y.
+These examples show when a Go implementation can use that instruction:
+
+#+BEGIN_SRC go
+// FMA allowed for computing r, because x*y is not explicitly rounded:
+r  = x*y + z
+r  = z;   r += x*y
+t  = x*y; r = t + z
+*p = x*y; r = *p + z
+r  = x*y + float64(z)
+
+// FMA disallowed for computing r, because it would omit rounding of x*y:
+r  = float64(x*y) + z
+r  = z; r += float64(x*y)
+t  = float64(x*y); r = t + z
+#+END_SRC
+
+*** String concatenation
+
+Strings can be concatenated using the + operator or the += assignment operator:
+
+#+BEGIN_SRC go
+s := "hi" + string(c)
+s += " and good bye"
+#+END_SRC
+
+String addition creates a new string by concatenating the operands.
+
+** Comparison operators
+
+Comparison operators compare two operands and yield an untyped boolean value.
+
+#+BEGIN_SRC text
+==    equal
+!=    not equal
+<     less
+<=    less or equal
+>     greater
+>=    greater or equal
+#+END_SRC
+
+In any comparison, the first operand must be assignable to the type of the
+second operand, or vice versa.
+
+The equality operators == and != apply to operands that are comparable. The
+ordering operators <, <=, >, and >= apply to operands that are ordered. These
+terms and the result of the comparisons are defined as follows:
+
+    1) Boolean values are comparable. Two boolean values are equal if they are
+       either both true or both false.
+    2) Integer values are comparable and ordered, in the usual way.
+    3) Floating-point values are comparable and ordered, as defined by the
+       IEEE-754 standard.
+    4) Complex values are comparable. Two complex values u and v are equal if
+       both real(u) == real(v) and imag(u) == imag(v).
+    5) String values are comparable and ordered, lexically byte-wise.
+    6) Pointer values are comparable. Two pointer values are equal if they point
+       to the same variable or if both have value nil. Pointers to distinct
+       zero-size variables may or may not be equal.
+    7) Channel values are comparable. Two channel values are equal if they were
+       created by the same call to make or if both have value nil.
+    8) Interface values are comparable. Two interface values are equal if they
+       have identical dynamic types and equal dynamic values or if both have
+       value nil.
+    9) A value x of non-interface type X and a value t of interface type T are
+       comparable when values of type X are comparable and X implements T. They
+       are equal if t's dynamic type is identical to X and t's dynamic value is
+       equal to x.
+   10) Struct values are comparable if all their fields are comparable. Two
+       struct values are equal if their corresponding non-blank fields are
+       equal.
+   11) Array values are comparable if values of the array element type are
+       comparable. Two array values are equal if their corresponding elements
+       are equal.
+   12) A comparison of two interface values with identical dynamic types causes
+       a run-time panic if values of that type are not comparable. This behavior
+       applies not only to direct interface value comparisons but also when
+       comparing arrays of interface values or structs with interface-valued
+       fields.
+
+Slice, map, and function values are not comparable. However, as a special case,
+a slice, map, or function value may be compared to the predeclared identifier
+nil. Comparison of pointer, channel, and interface values to nil is also allowed
+and follows from the general rules above.
+
+#+BEGIN_SRC go
+const c = 3 < 4            // c is the untyped boolean constant true
+
+type MyBool bool
+var x, y int
+var (
+	// The result of a comparison is an untyped boolean.
+	// The usual assignment rules apply.
+	b3        = x == y // b3 has type bool
+	b4 bool   = x == y // b4 has type bool
+	b5 MyBool = x == y // b5 has type MyBool
+)
+#+END_SRC
+
+** Logical operators
+
+Logical operators apply to boolean values and yield a result of the same type as
+the operands. The right operand is evaluated conditionally.
+
+#+BEGIN_SRC text
+&&    conditional AND    p && q  is  "if p then q else false"
+||    conditional OR     p || q  is  "if p then true else q"
+!     NOT                !p      is  "not p"
+#+END_SRC
+
+** Address operators
+
+For an operand x of type T, the address operation &x generates a pointer of type
+*T to x. The operand must be addressable, that is, either a variable, pointer
+indirection, or slice indexing operation; or a field selector of an addressable
+struct operand; or an array indexing operation of an addressable array. As an
+exception to the addressability requirement, x may also be a (possibly
+parenthesized) composite literal. If the evaluation of x would cause a run-time
+panic, then the evaluation of &x does too.
+
+For an operand x of pointer type *T, the pointer indirection *x denotes the
+variable of type T pointed to by x. If x is nil, an attempt to evaluate *x will
+cause a run-time panic.
+
+#+BEGIN_SRC go
+&x
+&a[f(2)]
+&Point{2, 3}
+*p
+*pf(x)
+
+var x *int = nil
+*x   // causes a run-time panic
+&*x  // causes a run-time panic
+#+END_SRC
+
+** Receive operator
+
+For an operand ch of channel type, the value of the receive operation <-ch is
+the value received from the channel ch. The channel direction must permit
+receive operations, and the type of the receive operation is the element type of
+the channel. The expression blocks until a value is available. Receiving from a
+nil channel blocks forever. A receive operation on a closed channel can always
+proceed immediately, yielding the element type's zero value after any previously
+sent values have been received.
+
+#+BEGIN_SRC go
+v1 := <-ch
+v2 = <-ch
+f(<-ch)
+<-strobe  // wait until clock pulse and discard received value
+#+END_SRC
+
+A receive expression used in an assignment or initialization of the special form
+
+#+BEGIN_SRC go
+x, ok = <-ch
+x, ok := <-ch
+var x, ok = <-ch
+var x, ok T = <-ch
+#+END_SRC
+
+yields an additional untyped boolean result reporting whether the communication
+succeeded. The value of ok is true if the value received was delivered by a
+successful send operation to the channel, or false if it is a zero value
+generated because the channel is closed and empty.
+
+** Conversions
+
+Conversions are expressions of the form T(x) where T is a type and x is an
+expression that can be converted to type T.
+
+#+BEGIN_SRC text
+Conversion = Type "(" Expression [ "," ] ")" .
+#+END_SRC
+
+If the type starts with the operator * or <-, or if the type starts with the
+keyword func and has no result list, it must be parenthesized when necessary to
+avoid ambiguity:
+
+#+BEGIN_SRC go
+*Point(p)        // same as *(Point(p))
+(*Point)(p)      // p is converted to *Point
+<-chan int(c)    // same as <-(chan int(c))
+(<-chan int)(c)  // c is converted to <-chan int
+func()(x)        // function signature func() x
+(func())(x)      // x is converted to func()
+(func() int)(x)  // x is converted to func() int
+func() int(x)    // x is converted to func() int (unambiguous)
+#+END_SRC
+
+A constant value x can be converted to type T in any of these cases:
+
+    1) x is representable by a value of type T.
+    2) x is a floating-point constant, T is a floating-point type, and x is
+       representable by a value of type T after rounding using IEEE 754
+       round-to-even rules, but with an IEEE -0.0 further rounded to an unsigned
+       0.0. The constant T(x) is the rounded value.
+    3) x is an integer constant and T is a string type. The same rule as for
+       non-constant x applies in this case.
+
+Converting a constant yields a typed constant as result.
+
+#+BEGIN_SRC go
+uint(iota)               // iota value of type uint
+float32(2.718281828)     // 2.718281828 of type float32
+complex128(1)            // 1.0 + 0.0i of type complex128
+float32(0.49999999)      // 0.5 of type float32
+float64(-1e-1000)        // 0.0 of type float64
+string('x')              // "x" of type string
+string(0x266c)           // "♬" of type string
+MyString("foo" + "bar")  // "foobar" of type MyString
+string([]byte{'a'})      // not a constant: []byte{'a'} is not a constant
+(*int)(nil)              // not a constant: nil is not a constant, *int is not a boolean, numeric, or string type
+int(1.2)                 // illegal: 1.2 cannot be represented as an int
+string(65.0)             // illegal: 65.0 is not an integer constant
+#+END_SRC
+
+A non-constant value x can be converted to type T in any of these cases:
+
+    1) x is assignable to T.
+    2) ignoring struct tags (see below), x's type and T have identical
+       underlying types.
+    3) ignoring struct tags (see below), x's type and T are pointer types that
+       are not defined types, and their pointer base types have identical
+       underlying types.
+    4) x's type and T are both integer or floating point types.
+    5) x's type and T are both complex types.
+    6) x is an integer or a slice of bytes or runes and T is a string type.
+    7) x is a string and T is a slice of bytes or runes.
+
+Struct tags are ignored when comparing struct types for identity for the purpose
+of conversion:
+
+#+BEGIN_SRC go
+type Person struct {
+	Name    string
+	Address *struct {
+		Street string
+		City   string
+	}
+}
+
+var data *struct {
+	Name    string `json:"name"`
+	Address *struct {
+		Street string `json:"street"`
+		City   string `json:"city"`
+	} `json:"address"`
+}
+
+var person = (*Person)(data)  // ignoring tags, the underlying types are identical
+#+END_SRC
+
+Specific rules apply to (non-constant) conversions between numeric types or to
+and from a string type. These conversions may change the representation of x and
+incur a run-time cost. All other conversions only change the type but not the
+representation of x.
+
+There is no linguistic mechanism to convert between pointers and integers. The
+package unsafe implements this functionality under restricted circumstances.
+
+*** Conversions between numeric types
+
+For the conversion of non-constant numeric values, the following rules apply:
+
+When converting between integer types, if the value is a signed integer, it is sign extended to implicit infinite precision; otherwise it is zero extended. It is then truncated to fit in the result type's size. For example, if v := uint16(0x10F0), then uint32(int8(v)) == 0xFFFFFFF0. The conversion always yields a valid value; there is no indication of overflow.
+When converting a floating-point number to an integer, the fraction is discarded (truncation towards zero).
+When converting an integer or floating-point number to a floating-point type, or a complex number to another complex type, the result value is rounded to the precision specified by the destination type. For instance, the value of a variable x of type float32 may be stored using additional precision beyond that of an IEEE-754 32-bit number, but float32(x) represents the result of rounding x's value to 32-bit precision. Similarly, x + 0.1 may use more than 32 bits of precision, but float32(x + 0.1) does not.
+In all non-constant conversions involving floating-point or complex values, if the result type cannot represent the value the conversion succeeds but the result value is implementation-dependent.
+
+*** Conversions to and from a string type
+
+Converting a signed or unsigned integer value to a string type yields a string
+containing the UTF-8 representation of the integer. Values outside the range of
+valid Unicode code points are converted to "\uFFFD".
+
+#+BEGIN_SRC go
+string('a')       // "a"
+string(-1)        // "\ufffd" == "\xef\xbf\xbd"
+string(0xf8)      // "\u00f8" == "ø" == "\xc3\xb8"
+type MyString string
+MyString(0x65e5)  // "\u65e5" == "日" == "\xe6\x97\xa5"
+#+END_SRC
+
+Converting a slice of bytes to a string type yields a string whose successive
+bytes are the elements of the slice.
+
+#+BEGIN_SRC go
+string([]byte{'h', 'e', 'l', 'l', '\xc3', '\xb8'})   // "hellø"
+string([]byte{})                                     // ""
+string([]byte(nil))                                  // ""
+
+type MyBytes []byte
+string(MyBytes{'h', 'e', 'l', 'l', '\xc3', '\xb8'})  // "hellø"
+#+END_SRC
+
+Converting a slice of runes to a string type yields a string that is the
+concatenation of the individual rune values converted to strings.
+
+#+BEGIN_SRC go
+string([]rune{0x767d, 0x9d6c, 0x7fd4})   // "\u767d\u9d6c\u7fd4" == "白鵬翔"
+string([]rune{})                         // ""
+string([]rune(nil))                      // ""
+
+type MyRunes []rune
+string(MyRunes{0x767d, 0x9d6c, 0x7fd4})  // "\u767d\u9d6c\u7fd4" == "白鵬翔"
+#+END_SRC
+
+Converting a value of a string type to a slice of bytes type yields a slice
+whose successive elements are the bytes of the string.
+
+#+BEGIN_SRC go
+[]byte("hellø")   // []byte{'h', 'e', 'l', 'l', '\xc3', '\xb8'}
+[]byte("")        // []byte{}
+
+MyBytes("hellø")  // []byte{'h', 'e', 'l', 'l', '\xc3', '\xb8'}
+#+END_SRC
+
+Converting a value of a string type to a slice of runes type yields a slice
+containing the individual Unicode code points of the string.
+
+#+BEGIN_SRC go
+[]rune(MyString("白鵬翔"))  // []rune{0x767d, 0x9d6c, 0x7fd4}
+[]rune("")                 // []rune{}
+
+MyRunes("白鵬翔")           // []rune{0x767d, 0x9d6c, 0x7fd4}
+#+END_SRC
+
+** Constant expressions
+
+Constant expressions may contain only constant operands and are evaluated at
+compile time.
+
+Untyped boolean, numeric, and string constants may be used as operands wherever
+it is legal to use an operand of boolean, numeric, or string type, respectively.
+Except for shift operations, if the operands of a binary operation are different
+kinds of untyped constants, the operation and, for non-boolean operations, the
+result use the kind that appears later in this list: integer, rune,
+floating-point, complex. For example, an untyped integer constant divided by an
+untyped complex constant yields an untyped complex constant.
+
+A constant comparison always yields an untyped boolean constant. If the left
+operand of a constant shift expression is an untyped constant, the result is an
+integer constant; otherwise it is a constant of the same type as the left
+operand, which must be of integer type. Applying all other operators to untyped
+constants results in an untyped constant of the same kind (that is, a boolean,
+integer, floating-point, complex, or string constant).
+
+#+BEGIN_SRC go
+const a = 2 + 3.0          // a == 5.0   (untyped floating-point constant)
+const b = 15 / 4           // b == 3     (untyped integer constant)
+const c = 15 / 4.0         // c == 3.75  (untyped floating-point constant)
+const Θ float64 = 3/2      // Θ == 1.0   (type float64, 3/2 is integer division)
+const Π float64 = 3/2.     // Π == 1.5   (type float64, 3/2. is float division)
+const d = 1 << 3.0         // d == 8     (untyped integer constant)
+const e = 1.0 << 3         // e == 8     (untyped integer constant)
+const f = int32(1) << 33   // illegal    (constant 8589934592 overflows int32)
+const g = float64(2) >> 1  // illegal    (float64(2) is a typed floating-point constant)
+const h = "foo" > "bar"    // h == true  (untyped boolean constant)
+const j = true             // j == true  (untyped boolean constant)
+const k = 'w' + 1          // k == 'x'   (untyped rune constant)
+const l = "hi"             // l == "hi"  (untyped string constant)
+const m = string(k)        // m == "x"   (type string)
+const Σ = 1 - 0.707i       //            (untyped complex constant)
+const Δ = Σ + 2.0e-4       //            (untyped complex constant)
+const Φ = iota*1i - 1/1i   //            (untyped complex constant)
+#+END_SRC
+
+Applying the built-in function complex to untyped integer, rune, or
+floating-point constants yields an untyped complex constant.
+
+#+BEGIN_SRC go
+const ic = complex(0, c)   // ic == 3.75i  (untyped complex constant)
+const iΘ = complex(0, Θ)   // iΘ == 1i     (type complex128)
+#+END_SRC
+
+Constant expressions are always evaluated exactly; intermediate values and the
+constants themselves may require precision significantly larger than supported
+by any predeclared type in the language. The following are legal declarations:
+
+#+BEGIN_SRC go
+const Huge = 1 << 100         // Huge == 1267650600228229401496703205376  (untyped integer constant)
+const Four int8 = Huge >> 98  // Four == 4                                (type int8)
+#+END_SRC
+
+The divisor of a constant division or remainder operation must not be zero:
+
+#+BEGIN_SRC go
+3.14 / 0.0   // illegal: division by zero
+#+END_SRC
+
+The values of typed constants must always be accurately representable as values
+of the constant type. The following constant expressions are illegal:
+
+#+BEGIN_SRC go
+uint(-1)     // -1 cannot be represented as a uint
+int(3.14)    // 3.14 cannot be represented as an int
+int64(Huge)  // 1267650600228229401496703205376 cannot be represented as an int64
+Four * 300   // operand 300 cannot be represented as an int8 (type of Four)
+Four * 100   // product 400 cannot be represented as an int8 (type of Four)
+#+END_SRC
+
+The mask used by the unary bitwise complement operator ^ matches the rule for
+non-constants: the mask is all 1s for unsigned constants and -1 for signed and
+untyped constants.
+
+#+BEGIN_SRC go
+^1         // untyped integer constant, equal to -2
+uint8(^1)  // illegal: same as uint8(-2), -2 cannot be represented as a uint8
+^uint8(1)  // typed uint8 constant, same as 0xFF ^ uint8(1) = uint8(0xFE)
+int8(^1)   // same as int8(-2)
+^int8(1)   // same as -1 ^ int8(1) = -2
+#+END_SRC
+
+Implementation restriction: A compiler may use rounding while computing untyped
+floating-point or complex constant expressions; see the implementation
+restriction in the section on constants. This rounding may cause a
+floating-point constant expression to be invalid in an integer context, even if
+it would be integral when calculated using infinite precision, and vice versa.
+
+** Order of evaluation
+
+At package level, initialization dependencies determine the evaluation order of
+individual initialization expressions in variable declarations. Otherwise, when
+evaluating the operands of an expression, assignment, or return statement, all
+function calls, method calls, and communication operations are evaluated in
+lexical left-to-right order.
+
+For example, in the (function-local) assignment
+
+#+BEGIN_SRC go
+y[f()], ok = g(h(), i()+x[j()], <-c), k()
+#+END_SRC
+
+the function calls and communication happen in the order f(), h(), i(), j(),
+<-c, g(), and k(). However, the order of those events compared to the evaluation
+and indexing of x and the evaluation of y is not specified.
+
+#+BEGIN_SRC go
+a := 1
+f := func() int { a++; return a }
+x := []int{a, f()}            // x may be [1, 2] or [2, 2]: evaluation order between a and f() is not specified
+m := map[int]int{a: 1, a: 2}  // m may be {2: 1} or {2: 2}: evaluation order between the two map assignments is not specified
+n := map[int]int{a: f()}      // n may be {2: 3} or {3: 3}: evaluation order between the key and the value is not specified
+#+END_SRC
+
+At package level, initialization dependencies override the left-to-right rule
+for individual initialization expressions, but not for operands within each
+expression:
+
+#+BEGIN_SRC go
+var a, b, c = f() + v(), g(), sqr(u()) + v()
+
+func f() int        { return c }
+func g() int        { return a }
+func sqr(x int) int { return x*x }
+
+// functions u and v are independent of all other variables and functions
+#END_SRC
+
+The function calls happen in the order u(), sqr(), v(), f(), v(), and g().
+
+Floating-point operations within a single expression are evaluated according to
+the associativity of the operators. Explicit parentheses affect the evaluation
+by overriding the default associativity. In the expression x + (y + z) the
+addition y + z is performed before adding x.
