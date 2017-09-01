@@ -19,9 +19,9 @@
   - [[#imaginary-literals][Imaginary literals]]
   - [[#rune-literals][Rune literals]]
   - [[#string-literals][String literals]]
-  - [[#constants][Constants]]
-  - [[#variables][Variables]]
-  - [[#types][Types]]
+- [[#constants][Constants]]
+- [[#variables][Variables]]
+- [[#types][Types]]
   - [[#method-sets][Method sets]]
   - [[#boolean-types][Boolean types]]
   - [[#numeric-types][Numeric types]]
@@ -524,7 +524,7 @@ combining form involving an accent and a letter, the result will be an error if
 placed in a rune literal (it is not a single code point), and will appear as two
 code points if placed in a string literal.
 
-** Constants
+* Constants
 
 There are boolean constants, rune constants, integer constants, floating-point
 constants, complex constants, and string constants. Rune, integer,
@@ -581,7 +581,7 @@ with limited precision. That said, every implementation must:
 These requirements apply both to literal constants and to the result of
 evaluating constant expressions.
 
-** Variables
+* Variables
 
 A variable is a storage location for holding a value. The set of permissible
 values is determined by the variable's type.
@@ -614,7 +614,7 @@ A variable's value is retrieved by referring to the variable in an expression;
 it is the most recent value assigned to the variable. If a variable has not yet
 been assigned a value, its value is the zero value for its type.
 
-** Types
+* Types
 
 A type determines a set of values together with operations and methods specific
 to those values. A type may be denoted by a type name, if it has one, or
