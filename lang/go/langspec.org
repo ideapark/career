@@ -3010,10 +3010,26 @@ package unsafe implements this functionality under restricted circumstances.
 
 For the conversion of non-constant numeric values, the following rules apply:
 
-When converting between integer types, if the value is a signed integer, it is sign extended to implicit infinite precision; otherwise it is zero extended. It is then truncated to fit in the result type's size. For example, if v := uint16(0x10F0), then uint32(int8(v)) == 0xFFFFFFF0. The conversion always yields a valid value; there is no indication of overflow.
-When converting a floating-point number to an integer, the fraction is discarded (truncation towards zero).
-When converting an integer or floating-point number to a floating-point type, or a complex number to another complex type, the result value is rounded to the precision specified by the destination type. For instance, the value of a variable x of type float32 may be stored using additional precision beyond that of an IEEE-754 32-bit number, but float32(x) represents the result of rounding x's value to 32-bit precision. Similarly, x + 0.1 may use more than 32 bits of precision, but float32(x + 0.1) does not.
-In all non-constant conversions involving floating-point or complex values, if the result type cannot represent the value the conversion succeeds but the result value is implementation-dependent.
+    1) When converting between integer types, if the value is a signed integer,
+       it is sign extended to implicit infinite precision; otherwise it is zero
+       extended. It is then truncated to fit in the result type's size. For
+       example, if v := uint16(0x10F0), then uint32(int8(v)) == 0xFFFFFFF0. The
+       conversion always yields a valid value; there is no indication of
+       overflow.
+    2) When converting a floating-point number to an integer, the fraction is
+       discarded (truncation towards zero).
+    4) When converting an integer or floating-point number to a floating-point
+       type, or a complex number to another complex type, the result value is
+       rounded to the precision specified by the destination type. For instance,
+       the value of a variable x of type float32 may be stored using additional
+       precision beyond that of an IEEE-754 32-bit number, but float32(x)
+       represents the result of rounding x's value to 32-bit precision.
+       Similarly, x + 0.1 may use more than 32 bits of precision, but
+       float32(x + 0.1) does not.
+
+In all non-constant conversions involving floating-point or complex values, if
+the result type cannot represent the value the conversion succeeds but the
+result value is implementation-dependent.
 
 *** Conversions to and from a string type
 
