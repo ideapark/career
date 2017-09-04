@@ -1,0 +1,18 @@
+Function-Based vs Block-Based Resource Management
+=================================================
+
+Block-Based:
+
+  Traditional C-family language management resource based on block
+  scoped. Like C++, you can use {} to define a block, compiler will
+  automatically alloc object declared in this block and free object
+  before block end.
+
+  If you have object corss mutiple blocks, this object must be managed
+  by programmer explicitly.
+
+Function-Based:
+
+  Golang's defer is function blocked resource managment primitives,
+  that means the language ensures that object managemented by it is
+  ensured no matter how the function returned (normally, panic, break).
