@@ -1,7 +1,100 @@
 #+TITLE: A Quick Guide to Go's Assembler
 #+AUTHOR: https://golang.org/doc/asm
 
-* Symbols
+* A Quick Guide to Go's Assembler :TOC_4_gh:noexport:
+- [[#a-quick-guide-to-gos-assembler][A Quick Guide to Go's Assembler]]
+  - [[#constants][Constants]]
+  - [[#symbols][Symbols]]
+  - [[#directives][Directives]]
+  - [[#runtime-coordination][Runtime Coordination]]
+- [[#architecture-specific-details][Architecture-specific details]]
+  - [[#32-bit-intel-386][32-bit Intel 386]]
+  - [[#64-bit-intel-386-aka-amd64][64-bit Intel 386 (a.k.a. amd64)]]
+  - [[#arm][ARM]]
+  - [[#arm64][ARM64]]
+  - [[#64-bit-powerpc-aka-ppc64][64-bit PowerPC, a.k.a. ppc64]]
+  - [[#ibm-zarchitecture-aka-s390x][IBM z/Architecture, a.k.a. s390x]]
+  - [[#mips-mips64][MIPS, MIPS64]]
+  - [[#unsupported-opcodes][Unsupported opcodes]]
+
+* A Quick Guide to Go's Assembler
+
+This document is a quick outline of the unusual form of assembly language used
+by the gc Go compiler. The document is not comprehensive.
+
+The assembler is based on the input style of the Plan 9 assemblers, which is
+documented in detail elsewhere. If you plan to write assembly language, you
+should read that document although much of it is Plan 9-specific. The current
+document provides a summary of the syntax and the differences with what is
+explained in that document, and describes the peculiarities that apply when
+writing assembly code to interact with Go.
+
+The most important thing to know about Go's assembler is that it is not a direct
+representation of the underlying machine. Some of the details map precisely to
+the machine, but some do not. This is because the compiler suite (see this
+description) needs no assembler pass in the usual pipeline. Instead, the
+compiler operates on a kind of semi-abstract instruction set, and instruction
+selection occurs partly after code generation. The assembler works on the
+semi-abstract form, so when you see an instruction like MOV what the tool chain
+actually generates for that operation might not be a move instruction at all,
+perhaps a clear or load. Or it might correspond exactly to the machine
+instruction with that name. In general, machine-specific operations tend to
+appear as themselves, while more general concepts like memory move and
+subroutine call and return are more abstract. The details vary with
+architecture, and we apologize for the imprecision; the situation is not
+well-defined.
+
+The assembler program is a way to parse a description of that semi-abstract
+instruction set and turn it into instructions to be input to the linker. If you
+want to see what the instructions look like in assembly for a given
+architecture, say amd64, there are many examples in the sources of the standard
+library, in packages such as runtime and math/big. You can also examine what the
+compiler emits as assembly code (the actual output may differ from what you see
+here):
+
+#+BEGIN_SRC shell
+$ cat x.go
+package main
+
+func main() {
+	println(3)
+}
+$ GOOS=linux GOARCH=amd64 go tool compile -S x.go        # or: go build -gcflags -S x.go
+
+--- prog list "main" ---
+0000 (x.go:3) TEXT    main+0(SB),$8-0
+0001 (x.go:3) FUNCDATA $0,gcargs·0+0(SB)
+0002 (x.go:3) FUNCDATA $1,gclocals·0+0(SB)
+0003 (x.go:4) MOVQ    $3,(SP)
+0004 (x.go:4) PCDATA  $0,$8
+0005 (x.go:4) CALL    ,runtime.printint+0(SB)
+0006 (x.go:4) PCDATA  $0,$-1
+0007 (x.go:4) PCDATA  $0,$0
+0008 (x.go:4) CALL    ,runtime.printnl+0(SB)
+0009 (x.go:4) PCDATA  $0,$-1
+0010 (x.go:5) RET     ,
+...
+#+END_SRC
+
+The FUNCDATA and PCDATA directives contain information for use by the garbage
+collector; they are introduced by the compiler.
+
+** Constants
+
+Although the assembler takes its guidance from the Plan 9 assemblers, it is a
+distinct program, so there are some differences. One is in constant evaluation.
+Constant expressions in the assembler are parsed using Go's operator precedence,
+not the C-like precedence of the original. Thus 3&1<<2 is 4, not 0—it parses as
+(3&1)<<2 not 3&(1<<2). Also, constants are always evaluated as 64-bit unsigned
+integers. Thus -2 is not the integer value minus two, but the unsigned 64-bit
+integer with the same bit pattern. The distinction rarely matters but to avoid
+ambiguity, division or right shift where the right operand's high bit is set is
+rejected.
+
+** Symbols
+
+Some symbols, such as R1 or LR, are predefined and refer to registers. The exact
+set depends on the architecture.
 
 There are four predeclared symbols that refer to pseudo-registers. These are not
 real registers, but rather virtual registers maintained by the tool chain, such
@@ -95,7 +188,7 @@ referred to as ·Int. This convention avoids the need to hard-code a package's
 import path in its own source code, making it easier to move the code from one
 location to another.
 
-* Directives
+** Directives
 
 The assembler uses various directives to bind text and data to symbol names. For
 example, here is a simple complete function definition. The TEXT directive
@@ -165,34 +258,34 @@ or-ed together, or can be set symbolically for easier absorption by a human.
 Their values, defined in the standard #include file textflag.h, are:
 
 - NOPROF = 1
-(For TEXT items.) Don't profile the marked function. This flag is deprecated.
+  (For TEXT items.) Don't profile the marked function. This flag is deprecated.
 
 - DUPOK = 2
-It is legal to have multiple instances of this symbol in a single binary. The
-linker will choose one of the duplicates to use.
+  It is legal to have multiple instances of this symbol in a single binary. The
+  linker will choose one of the duplicates to use.
 
 - NOSPLIT = 4
-(For TEXT items.) Don't insert the preamble to check if the stack must be split.
-The frame for the routine, plus anything it calls, must fit in the spare space
-at the top of the stack segment. Used to protect routines such as the stack
-splitting code itself.
+  (For TEXT items.) Don't insert the preamble to check if the stack must be split.
+  The frame for the routine, plus anything it calls, must fit in the spare space
+  at the top of the stack segment. Used to protect routines such as the stack
+  splitting code itself.
 
 - RODATA = 8
-(For DATA and GLOBL items.) Put this data in a read-only section.
+  (For DATA and GLOBL items.) Put this data in a read-only section.
 
 - NOPTR = 16
-(For DATA and GLOBL items.) This data contains no pointers and therefore does
-not need to be scanned by the garbage collector.
+  (For DATA and GLOBL items.) This data contains no pointers and therefore does
+  not need to be scanned by the garbage collector.
 
 - WRAPPER = 32
-(For TEXT items.) This is a wrapper function and should not count as disabling
-recover.
+  (For TEXT items.) This is a wrapper function and should not count as disabling
+  recover.
 
 - NEEDCTXT = 64
-(For TEXT items.) This function is a closure so it uses its incoming context
-register.
+  (For TEXT items.) This function is a closure so it uses its incoming context
+  register.
 
-* Runtime Coordination
+** Runtime Coordination
 
 For garbage collection to run correctly, the runtime must know the location of
 pointers in all global data and in most stack frames. The Go compiler emits this
@@ -247,3 +340,232 @@ pointers to stack data must not be kept in local variables.
 Assembly functions should always be given Go prototypes, both to provide pointer
 information for the arguments and results and to let go vet check that the
 offsets being used to access them are correct.
+
+* Architecture-specific details
+
+It is impractical to list all the instructions and other details for each
+machine. To see what instructions are defined for a given machine, say ARM, look
+in the source for the obj support library for that architecture, located in the
+directory src/cmd/internal/obj/arm. In that directory is a file a.out.go; it
+contains a long list of constants starting with A, like this:
+
+#+BEGIN_SRC go
+const (
+	AAND = obj.ABaseARM + obj.A_ARCHSPECIFIC + iota
+	AEOR
+	ASUB
+	ARSB
+	AADD
+	...
+#+END_SRC
+
+This is the list of instructions and their spellings as known to the assembler
+and linker for that architecture. Each instruction begins with an initial
+capital A in this list, so AAND represents the bitwise and instruction, AND
+(without the leading A), and is written in assembly source as AND. The
+enumeration is mostly in alphabetical order. (The architecture-independent AXXX,
+defined in the cmd/internal/obj package, represents an invalid instruction). The
+sequence of the A names has nothing to do with the actual encoding of the
+machine instructions. The cmd/internal/obj package takes care of that detail.
+
+The instructions for both the 386 and AMD64 architectures are listed in
+cmd/internal/obj/x86/a.out.go.
+
+The architectures share syntax for common addressing modes such as (R1)
+(register indirect), 4(R1) (register indirect with offset), and $foo(SB)
+(absolute address). The assembler also supports some (not necessarily all)
+addressing modes specific to each architecture. The sections below list these.
+
+One detail evident in the examples from the previous sections is that data in
+the instructions flows from left to right: MOVQ $0, CX clears CX. This rule
+applies even on architectures where the conventional notation uses the opposite
+direction.
+
+Here follow some descriptions of key Go-specific details for the supported
+architectures.
+
+** 32-bit Intel 386
+
+The runtime pointer to the g structure is maintained through the value of an
+otherwise unused (as far as Go is concerned) register in the MMU. A OS-dependent
+macro get_tls is defined for the assembler if the source includes a special
+header, go_asm.h:
+
+#+BEGIN_SRC asm
+#include "go_asm.h"
+#+END_SRC
+
+Within the runtime, the get_tls macro loads its argument register with a pointer
+to the g pointer, and the g struct contains the m pointer. The sequence to load
+g and m using CX looks like this:
+
+#+BEGIN_SRC asm
+get_tls(CX)
+MOVL	g(CX), AX     // Move g into AX.
+MOVL	g_m(AX), BX   // Move g.m into BX.
+#+END_SRC
+
+Addressing modes:
+
+    1) (DI)(BX*2): The location at address DI plus BX*2.
+    2) 64(DI)(BX*2): The location at address DI plus BX*2 plus 64. These modes
+       accept only 1, 2, 4, and 8 as scale factors.
+
+When using the compiler and assembler's -dynlink or -shared modes, any load or
+store of a fixed memory location such as a global variable must be assumed to
+overwrite CX. Therefore, to be safe for use with these modes, assembly sources
+should typically avoid CX except between memory references.
+
+** 64-bit Intel 386 (a.k.a. amd64)
+
+The two architectures behave largely the same at the assembler level. Assembly
+code to access the m and g pointers on the 64-bit version is the same as on the
+32-bit 386, except it uses MOVQ rather than MOVL:
+
+#+BEGIN_SRC asm
+get_tls(CX)
+MOVQ	g(CX), AX     // Move g into AX.
+MOVQ	g_m(AX), BX   // Move g.m into BX.
+#+END_SRC
+
+** ARM
+
+The registers R10 and R11 are reserved by the compiler and linker.
+
+R10 points to the g (goroutine) structure. Within assembler source code, this
+pointer must be referred to as g; the name R10 is not recognized.
+
+To make it easier for people and compilers to write assembly, the ARM linker
+allows general addressing forms and pseudo-operations like DIV or MOD that may
+not be expressible using a single hardware instruction. It implements these
+forms as multiple instructions, often using the R11 register to hold temporary
+values. Hand-written assembly can use R11, but doing so requires being sure that
+the linker is not also using it to implement any of the other instructions in
+the function.
+
+When defining a TEXT, specifying frame size $-4 tells the linker that this is a
+leaf function that does not need to save LR on entry.
+
+The name SP always refers to the virtual stack pointer described earlier. For
+the hardware register, use R13.
+
+Condition code syntax is to append a period and the one- or two-letter code to
+the instruction, as in MOVW.EQ. Multiple codes may be appended: MOVM.IA.W. The
+order of the code modifiers is irrelevant.
+
+Addressing modes:
+
+1) R0->16
+   R0>>16
+   R0<<16
+   R0@>16: For <<, left shift R0 by 16 bits. The other codes are -> (arithmetic
+   right shift), >> (logical right shift), and @> (rotate right).
+2) R0->R1
+   R0>>R1
+   R0<<R1
+   R0@>R1: For <<, left shift R0 by the count in R1. The other codes are ->
+   (arithmetic right shift), >> (logical right shift), and @> (rotate right).
+3) [R0,g,R12-R15]: For multi-register instructions, the set comprising R0, g,
+   and R12 through R15 inclusive.
+4) (R5, R6): Destination register pair.
+
+** ARM64
+
+The ARM64 port is in an experimental state.
+
+Instruction modifiers are appended to the instruction following a period. The
+only modifiers are P (postincrement) and W (preincrement): MOVW.P, MOVW.W
+
+Addressing modes:
+
+    (R5, R6): Register pair for LDP/STP.
+
+** 64-bit PowerPC, a.k.a. ppc64
+
+The 64-bit PowerPC port is in an experimental state.
+
+Addressing modes:
+
+    1) (R5)(R6*1): The location at R5 plus R6. It is a scaled mode as on the
+       x86, but the only scale allowed is 1.
+    2) (R5+R6): Alias for (R5)(R6*1)
+
+** IBM z/Architecture, a.k.a. s390x
+
+The registers R10 and R11 are reserved. The assembler uses them to hold
+temporary values when assembling some instructions.
+
+R13 points to the g (goroutine) structure. This register must be referred to as
+g; the name R13 is not recognized.
+
+R15 points to the stack frame and should typically only be accessed using the
+virtual registers SP and FP.
+
+Load- and store-multiple instructions operate on a range of registers. The range
+of registers is specified by a start register and an end register. For example,
+LMG (R9), R5, R7 would load R5, R6 and R7 with the 64-bit values at 0(R9), 8(R9)
+and 16(R9) respectively.
+
+Storage-and-storage instructions such as MVC and XC are written with the length
+as the first argument. For example, XC $8, (R9), (R9) would clear eight bytes at
+the address specified in R9.
+
+If a vector instruction takes a length or an index as an argument then it will
+be the first argument. For example, VLEIF $1, $16, V2 will load the value
+sixteen into index one of V2. Care should be taken when using vector
+instructions to ensure that they are available at runtime. To use vector
+instructions a machine must have both the vector facility (bit 129 in the
+facility list) and kernel support. Without kernel support a vector instruction
+will have no effect (it will be equivalent to a NOP instruction).
+
+Addressing modes:
+
+    (R5)(R6*1): The location at R5 plus R6. It is a scaled mode as on the x86,
+    but the only scale allowed is 1.
+
+** MIPS, MIPS64
+
+General purpose registers are named R0 through R31, floating point registers are
+F0 through F31.
+
+R30 is reserved to point to g. R23 is used as a temporary register.
+
+In a TEXT directive, the frame size $-4 for MIPS or $-8 for MIPS64 instructs the
+linker not to save LR.
+
+SP refers to the virtual stack pointer. For the hardware register, use R29.
+
+Addressing modes:
+
+    1) 16(R1): The location at R1 plus 16.
+    2) (R1): Alias for 0(R1).
+
+** Unsupported opcodes
+
+The assemblers are designed to support the compiler so not all hardware
+instructions are defined for all architectures: if the compiler doesn't generate
+it, it might not be there. If you need to use a missing instruction, there are
+two ways to proceed. One is to update the assembler to support that instruction,
+which is straightforward but only worthwhile if it's likely the instruction will
+be used again. Instead, for simple one-off cases, it's possible to use the BYTE
+and WORD directives to lay down explicit data into the instruction stream within
+a TEXT. Here's how the 386 runtime defines the 64-bit atomic load function.
+
+#+BEGIN_SRC asm
+// uint64 atomicload64(uint64 volatile* addr);
+// so actually
+// void atomicload64(uint64 *res, uint64 volatile *addr);
+TEXT runtime·atomicload64(SB), NOSPLIT, $0-12
+	MOVL	ptr+0(FP), AX
+	TESTL	$7, AX
+	JZ	2(PC)
+	MOVL	0, AX // crash with nil ptr deref
+	LEAL	ret_lo+4(FP), BX
+	// MOVQ (%EAX), %MM0
+	BYTE $0x0f; BYTE $0x6f; BYTE $0x00
+	// MOVQ %MM0, 0(%EBX)
+	BYTE $0x0f; BYTE $0x7f; BYTE $0x03
+	// EMMS
+	BYTE $0x0F; BYTE $0x77
+	RET
+#+END_SRC
