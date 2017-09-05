@@ -16,6 +16,8 @@
   - [[#ibm-zarchitecture-aka-s390x][IBM z/Architecture, a.k.a. s390x]]
   - [[#mips-mips64][MIPS, MIPS64]]
   - [[#unsupported-opcodes][Unsupported opcodes]]
+- [[#appendix][Appendix]]
+  - [[#plan9][Plan9]]
 
 * A Quick Guide to Go's Assembler
 
@@ -568,4 +570,49 @@ TEXT runtime·atomicload64(SB), NOSPLIT, $0-12
 	// EMMS
 	BYTE $0x0F; BYTE $0x77
 	RET
+#+END_SRC
+
+* Appendix
+
+** Plan9
+
+#+BEGIN_SRC text
+data register                         R0
+address register                      A0
+floating-point register               F0
+special names                         CAAR, CACR, etc.
+constant                              $con
+floating point constant               $fcon
+external symbol                       name+o(SB)
+local symbol                          name<>+o(SB)
+automatic symbol                      name+o(SP)
+argument                              name+o(FP)
+address of external                   $name+o(SB)
+address of local                      $name+o(SB)
+indirect post-increment               (A0)+
+indirect pre-decrement                -(A0)
+indirect with offset                  o(A0)
+indexed with offset                   o()(R0.s)
+indexed with offset                   0(A0)(R0.s)
+external indexed                      name+o(SB)(R0.s)
+local indexed                         name<>+o(SB)(R0.s)
+automatic indexed                     name+o(SP)(R0.s)
+parameter indexed                     name+o(FP)(R0.s)
+offset indirect post-indexed          d(o())(R0.s)
+offset indirect post-indexed          d(o(A0))(R0.s)
+external indirect post-indexed        d(name+o(SB))(R0.s)
+local indirect post-indexed           d(name<>+o(SB))(R0.s)
+automatic indirect post-indexed       d(name+o(SP))(R0.s)
+parameter indirect post-indexed       d(name+o(FP))(R0.s)
+offset indirect pre-indexed           d(o()(R0.s))
+offset indirect pre-indexed           d(o(A0))
+offset indirect pre-indexed           d(o(A0)(R0.s))
+external indirect pre-indexed         d(name+o(SB))
+external indirect pre-indexed         d(name+o(SB)(R0.s))
+local indirect pre-indexed            d(name<>+o(SB))
+local indirect pre-indexed            d(name<>+o(SB)(R0.s))
+automatic indirect pre-indexed        d(name+o(SP))
+automatic indirect pre-indexed        d(name+o(SP)(R0.s))
+parameter indirect pre-indexed        d(name+o(FP))
+parameter indirect pre-indexed        d(name+o(FP)(R0.s))
 #+END_SRC
