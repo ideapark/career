@@ -62,7 +62,9 @@ values."
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
-     spell-checking
+     (spell-checking :variables
+		     ispell-program-name "aspell"
+		     ispell-dictionary "american")
      syntax-checking
      version-control
      )
