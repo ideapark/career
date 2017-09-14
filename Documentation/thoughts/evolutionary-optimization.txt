@@ -1,0 +1,8 @@
+Programming is made up of 2 activities: making decisions (95%) and typing (5%).
+
+Make decisions -- Design
+Type           -- Build
+
+1. Make It Work
+2. Make It Right
+3. Make It Fast
