@@ -1,3 +1,10 @@
+// Channel's Axioms
+//
+// 1. A send to a nil channel blocks forever
+// 2. A receive from a nil channel blocks forever
+// 3. A send to a closed channel panic
+// 4. A receive from a closed channel returns the zero value immediately
+
 package main
 
 import "fmt"
