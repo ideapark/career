@@ -18,3 +18,30 @@
 | SCSI command time-out                      | 30 s      | 3 millennia   |
 | Hardware (HW) virtualization system reboot | 40 s      | 4 millennia   |
 | Physical system reboot                     | 5 m       | 32 millennia  |
+
+* Golang specific
+
+| Event                                       | Latency     |
+|---------------------------------------------+-------------|
+| L1 cache reference                          | 1ns         |
+| Branch mispredict                           | 5ns         |
+| L2 cache reference                          | 7ns         |
+| Mutex lock/unlock                           | 25ns        |
+| Linear seek in 100 long slice @F1           | 80ns        |
+| Main memory reference                       | 100ns       |
+| Go sync.Mutex lock/unlock @F1               | 100ns       |
+| Go channel send/receive @F1                 | 300ns       |
+| Go native map retrieval @F1                 | 350ns       |
+| Go native map insertion @F1                 | 1000ns      |
+| Call method reflectively @F1                | 1000ns      |
+| Compress 1Kb /w cheap compression algorithm | 3000ns      |
+| Send 2Kb over 1Gbps network                 | 20000ns     |
+| Read 1Mb sequentially from memory           | 250000ns    |
+| Roundtrip within datacenter                 | 500000ns    |
+| Memcache access @F1                         | 3000000ns   |
+| Datastore put @F1                           | 6000000ns   |
+| Datastore get @F1                           | 6000000ns   |
+| Datastore query @F1                         | 6500000ns   |
+| Disk seek                                   | 10000000ns  |
+| Read 1Mb sequentially from disk             | 20000000ns  |
+| Roundtrip over the atlantic                 | 150000000ns |
