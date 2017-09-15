@@ -1,3 +1,13 @@
+// StructTag
+//
+//                 space separation
+//                      |
+//                      ^
+// `json:"foo,omitempty" xml:"bar"`
+//               ^
+//               |
+//           option (not part of the spec)
+
 package main
 
 import (
