@@ -1,4 +1,4 @@
-* The way Go code to service
+* The Way Go Code to Service
 
 TODO: use picture to visualize horizontal and vertical composition
 
