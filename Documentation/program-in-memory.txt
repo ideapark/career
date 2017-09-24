@@ -97,7 +97,7 @@ Acutal Segments
  |Read/Write (anonymous)| \
  +----------------------+  \+---------------------+
  |         Data         |\  | (memory filled with |userName
- |      Read/Write      | \ |        zeros)       |cntActiveUsers  <---
+ |      Read/Write      | \ |        zeros)       |cntActiveUsers  <--+
  +----------------------+  \+---------------------+                   |
  |         Text         |\  |      0x080484f0     |gonzo              |
  |      Read/Execute    | \ +---------------------+                   |
@@ -107,4 +107,4 @@ Acutal Segments
                          \  +---------------------+                   |
                           \ | jmp here, jmp there |                   |
                            \| mov this, mov that  |0x08048000         |
-                            +---------------------+                <---
+                            +---------------------+                <--+
