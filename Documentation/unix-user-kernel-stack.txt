@@ -1,6 +1,6 @@
 
      User Stack                          Kernel Stack
----------------------                ----------------------
++-------------------+                +--------------------+
 | Local    not      |  Direction of  |                    |
 | Vars    shown     |  stack grouth  |         /|\        |
 |-------------------|                |          |         |
@@ -33,5 +33,5 @@
 |              argc |                | params to kernel   |
 | params to main    |                |    func1           |
 |              argv |Frame 1  Frame 1|                    |
-|-------------------|                |--------------------|
++-------------------+                +--------------------+
                      main()   func1()
