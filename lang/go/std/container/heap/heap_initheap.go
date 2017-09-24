@@ -6,7 +6,7 @@ import (
 	"fmt"
 )
 
-// An InitHeap is a min-heap of ints.
+// An IntHeap is a min-heap of ints.
 type IntHeap []int
 
 func (h IntHeap) Len() int           { return len(h) }
