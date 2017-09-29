@@ -1,0 +1,6 @@
+  data type          1st value             2nd value
+--------------------+---------------------+-------------+------------
+  string             index                 s[index]      unicode, rune
+  array/slice        index                 v[index]
+  map                key                   value
+  channel            element
