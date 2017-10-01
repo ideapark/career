@@ -1,7 +1,7 @@
 /*
  * Copyright (c) Zhou Peng <p@ctriple.cn>
  *
- * Breadth first search algorithm implemented by C programming language.
+ * Breadth first search algorithm implemented by pure C language.
  */
 
 #include "list.h"
@@ -9,8 +9,7 @@
 
 #define LEN(arr) (sizeof(arr)/sizeof(arr[0]))
 
-int bfs_path(struct list_head *pathlist, const struct point *startp,
-	     Pass pfn, Target tfn)
+int bfs_path(struct list_head *pathlist, const struct point *startp, Pass pfn, Target tfn)
 {
 	int nrpath = 0;
 
@@ -35,8 +34,7 @@ int bfs_path(struct list_head *pathlist, const struct point *startp,
 			R(&front_node->p)
 		};
 
-		unsigned i;
-		for (i = 0; i < LEN(adjs); i++) {
+		for (unsigned i = 0; i < LEN(adjs); i++) {
 
 			/* backstrace path */
 			if (tfn && tfn(&adjs[i])) {
