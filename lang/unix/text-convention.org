@@ -1,4 +1,6 @@
-* Unix Textual File Format Conventions
+#+TITLE: Unix Textual File Format Conventions
+#+AUTHOR: @unix
+#+EMAIL: p@ctriple.cn
 
 ** One record per newline-terminated line, if possible.
 

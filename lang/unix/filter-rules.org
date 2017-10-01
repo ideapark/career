@@ -1,3 +1,7 @@
+#+TITLE: Filter Rules
+#+AUTHOR: @unix
+#+EMAIL: p@ctriple.cn
+
 * When designing filters, it is well to bear in mind some rules
 
 ** Be generous in what you accept, rigorous in what you emit

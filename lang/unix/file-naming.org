@@ -1,3 +1,7 @@
+#+TITLE: File Naming
+#+AUTHOR: @unix
+#+EMAIL: p@ctriple.cn
+
 README   The roadmap file, to be read first.
 INSTALL  Configuration, build, and installation instructions.
 AUTHORS  List of project contributors (GNU convention).

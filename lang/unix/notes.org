@@ -1,3 +1,7 @@
+#+TITLE: Notes
+#+AUTHOR: @unix
+#+EMAIL: p@ctriple.cn
+
 ** Doug Mcllroy
 
 This is the Unix philosophy: Write programs that do one thing and do it well.

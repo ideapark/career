@@ -1,4 +1,6 @@
-* Basic of the Unix Philosophy
+#+TITLE: Basic of the Unix Philosophy
+#+AUTHOR: @unix
+#+EMAIL: p@ctriple.cn
 
 ** Rule of Modularity
 

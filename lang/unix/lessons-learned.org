@@ -1,3 +1,7 @@
+#+TITLE: Lessons Learned
+#+AUTHOR: @unix
+#+EMAIL: p@ctriple.cn
+
 * The Lessons of Unix History
 
 - The largest-scale pattern in the history of Unix is this: when and where Unix
