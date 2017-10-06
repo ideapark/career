@@ -1,9 +1,9 @@
 /*
  * name:
  *         average: calc average of float array
- * param: 
+ * param:
  *         float array, array length
- * return: 
+ * return:
  *         double, average value
  */
 double average(const float *array, int length)
