@@ -1,6 +1,0 @@
-# interrupting priority
-
-[0] top-half interrupt handlers
-[1] bottom-half interrupt handlers
-[2] kernel-system service routines (preemptible)
-[3] user-mode programs (preemptible)
