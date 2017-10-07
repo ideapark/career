@@ -1,4 +1,5 @@
 #+AUTHOR: Robert Love
+#+EMAIL: p@ctriple.cn
 
 * What is the advantage of using zero-length arrays in C?
 
