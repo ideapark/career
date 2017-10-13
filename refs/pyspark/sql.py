@@ -7,7 +7,7 @@ spark = SparkSession.builder \
                     .getOrCreate()
 
 # Creating DataFrames
-df = spark.read.json('/home/esc/employees.json')
+df = spark.read.json('testdata/employees.json')
 df.show()
 
 # Print the schema in a tree format
