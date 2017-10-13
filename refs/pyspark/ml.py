@@ -19,8 +19,8 @@ spark = SparkSession.builder \
 sc = spark.sparkContext
 
 # http://www.dcc.fc.up.pt/~ltorgo/Regression/cal_housing.tgz
-rdd = sc.textFile('/home/esc/CaliforniaHousing/cal_housing.data')
-header = sc.textFile('/home/esc/CaliforniaHousing/cal_housing.domain')
+rdd = sc.textFile('testdata/cal_housing.data')
+header = sc.textFile('testdata/cal_housing.domain')
 
 #### Data Exploration
 print header.collect()
