@@ -1,4 +1,4 @@
-There are four reserved names for paths that should NOT be used for packages to
+There are five reserved names for paths that should NOT be used for packages to
 be built with the go tool:
 
 - "main" denotes the top-level package in a stand-alone executable.
@@ -10,3 +10,5 @@ be built with the go tool:
 
 - "cmd" expands to the Go repository's commands and their internal libraries,
   import path beginning with "cmd/" only match source code in the Go repository.
+
+- "documentation" doc info
