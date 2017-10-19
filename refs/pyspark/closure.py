@@ -9,7 +9,7 @@ from random import Random
 from pyspark.sql import SparkSession
 
 numEdges = 200
-numVectices = 100
+numVectices = 50
 rand = Random(42)
 
 
