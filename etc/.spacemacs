@@ -154,7 +154,7 @@ values."
                                :size 12
                                :weight normal
                                :width normal
-                               :powerline-scale 1.1)
+                               :powerline-scale 1.0)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The key used for Emacs commands (M-x) (after pressing on the leader key).
@@ -328,6 +328,7 @@ you should place your code here."
   (global-set-key [f8] 'neotree-toggle)
   (fancy-battery-mode t)
   (display-time-mode t)
+  (setq powerline-default-separator 'arrow)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
