@@ -6,23 +6,23 @@
 TableTennisPlayer::TableTennisPlayer(const std::string &fn,
                                      const std::string &ln,
                                      bool ht)
-    : firstname(fn), lastname(ln), hasTable(ht)
+	: firstname(fn), lastname(ln), hasTable(ht)
 {
 }
 
 void TableTennisPlayer::Name() const
 {
-    std::cout << lastname << ", " << firstname;
+	std::cout << lastname << ", " << firstname;
 }
 
 RatedPlayer::RatedPlayer(unsigned int r, const std::string &fn,
                          const std::string &ln, bool ht)
-    : TableTennisPlayer(fn, ln, ht)
+	: TableTennisPlayer(fn, ln, ht)
 {
-    rating = r;
+	rating = r;
 }
 
 RatedPlayer::RatedPlayer(unsigned int r, const TableTennisPlayer &tp)
-    : TableTennisPlayer(tp), rating(r)
+	: TableTennisPlayer(tp), rating(r)
 {
 }
