@@ -16,6 +16,6 @@ int main(int argc, char *argv[]) {
 	std::string word;
 	while (infile >> word)
 		outfile << word << ' ';
-	
+
 	return 0;
 }

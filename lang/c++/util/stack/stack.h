@@ -6,32 +6,32 @@
 
 class iStack {
 public:
-    iStack(int capacity) : _stack(capacity), _top(0) {}
-    
-    bool pop(int &value);
-    bool push(int value);
+iStack(int capacity) : _stack(capacity), _top(0) {}
 
-    bool full();
-    bool empty();
+	bool pop(int &value);
+	bool push(int value);
 
-    void display();
-    int size();
+	bool full();
+	bool empty();
+
+	void display();
+	int size();
 
 private:
-    int _top;
-    std::vector<int> _stack;
+	int _top;
+	std::vector<int> _stack;
 };
 
 inline int iStack::size() {
-    return _top;
+	return _top;
 }
 
 inline bool iStack::empty() {
-    return _top ? false : true;
+	return _top ? false : true;
 }
 
-inline bool iStack::full() { 
-    return _top < _stack.size()-1 ? false : true;
+inline bool iStack::full() {
+	return _top < _stack.size()-1 ? false : true;
 }
 
 #endif // UTIL_STACK_INCLUDE_

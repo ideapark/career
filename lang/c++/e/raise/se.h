@@ -5,10 +5,10 @@ class PopOnEmpty { /* ... */ };
 
 class PushOnFull {
 public:
-    PushOnFull(int i) : _value(i) {}
-    int value() { return _value; }
+PushOnFull(int i) : _value(i) {}
+	int value() { return _value; }
 private:
-    int _value;
+	int _value;
 };
 
 #endif // STACK_EXCEPTION_H

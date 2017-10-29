@@ -6,7 +6,7 @@ using namespace std;
 
 int main(void)
 {
-    copy(istream_iterator<int>(cin), istream_iterator<int>(), 
-        ostream_iterator<int>(cout));
-    return 0;
+	copy(istream_iterator<int>(cin), istream_iterator<int>(),
+	     ostream_iterator<int>(cout));
+	return 0;
 }

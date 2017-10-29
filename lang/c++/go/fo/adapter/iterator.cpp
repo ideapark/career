@@ -13,15 +13,15 @@
  */
 
 int main() {
-    std::istream_iterator<int> input(std::cin);
-    std::istream_iterator<int> end_of_stream;
-    std::vector<int> vec;
-    
-    std::copy(input, end_of_stream, std::inserter(vec, vec.begin()));
-    std::sort(vec.begin(), vec.end(), std::greater<int>());
+	std::istream_iterator<int> input(std::cin);
+	std::istream_iterator<int> end_of_stream;
+	std::vector<int> vec;
 
-    std::ostream_iterator<int> output(std::cout, " ");
-    std::unique_copy(vec.begin(), vec.end(), output);
+	std::copy(input, end_of_stream, std::inserter(vec, vec.begin()));
+	std::sort(vec.begin(), vec.end(), std::greater<int>());
 
-    return 0;
+	std::ostream_iterator<int> output(std::cout, " ");
+	std::unique_copy(vec.begin(), vec.end(), output);
+
+	return 0;
 }

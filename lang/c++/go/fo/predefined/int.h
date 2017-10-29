@@ -7,26 +7,26 @@
 
 class Int {
 public:
-    Int(int ival = 0) : _val(ival) {}
+Int(int ival = 0) : _val(ival) {}
 
-    operator int() { return _val; }
-    int operator-() { return -_val; }
-    int operator%(int ival) { return _val % ival; } 
-    bool operator<(int ival) { return _val < ival; }
-    bool operator!() { return _val == 0; }
+	operator int() { return _val; }
+	int operator-() { return -_val; }
+	int operator%(int ival) { return _val % ival; }
+	bool operator<(int ival) { return _val < ival; }
+	bool operator!() { return _val == 0; }
 
 private:
-    int _val;
+	int _val;
 };
 
 template <class FuncObject, class Type>
-Type UnaryFunc(FuncObject fob, const Type &val) {
-    return fob(val);
+	Type UnaryFunc(FuncObject fob, const Type &val) {
+	return fob(val);
 }
 
 template <class FuncObject, class Type>
-Type BinaryFunc(FuncObject fob, const Type &val1, const Type &val2) {
-    return fob(val1, val2);
+	Type BinaryFunc(FuncObject fob, const Type &val1, const Type &val2) {
+	return fob(val1, val2);
 }
 
 std::vector<std::string> svec;

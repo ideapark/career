@@ -3,7 +3,7 @@
 
 class OrQuery : public BinaryQuery {
 public:
-    OrQuery(Query *lop, Query *rop) 
+OrQuery(Query *lop, Query *rop)
         : BinaryQuery(lop, rop) { }
-    virtual void eval();
+	virtual void eval();
 };
