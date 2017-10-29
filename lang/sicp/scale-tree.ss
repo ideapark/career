@@ -16,5 +16,5 @@
   (map (lambda (sub-tree)
 	 (if (pair? sub-tree)
 	     (scale-tree2 sub-tree factor)
-	   (* sub-tree factor)))
+	     (* sub-tree factor)))
        tree))

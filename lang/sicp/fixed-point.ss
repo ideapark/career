@@ -7,7 +7,7 @@
     (let ((next (f guess)))
       (if (close-enough? guess next)
 	  next
-	(try next))))
+	  (try next))))
   (try fist-guess))
 
 ;; cos

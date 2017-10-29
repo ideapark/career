@@ -34,13 +34,13 @@
 (define (list-of-values exps env)
   (if (no-operands? exps)
       '()
-    (cons (eval (first-operand exps) env)
-	  (list-of-values (rest-operands exps) env))))
+      (cons (eval (first-operand exps) env)
+	    (list-of-values (rest-operands exps) env))))
 
 (define (eval-if exp env)
   (if (true? (eval (if-predicate exp) env))
       (eval (if-consequent exp) env)
-    (eval (if-alternative exp) env)))
+      (eval (if-alternative exp) env)))
 
 (define (eval-sequence exps env)
   (cond ((last-exp? exps) (eval (first-exp exps) env))
@@ -74,7 +74,7 @@
 (define (tagged-list? exp tag)
   (if (pair? exp)
       (eq? (car exp) tag)
-    false))
+      false))
 
 (define (assignment? exp)
   (tagged-list? exp 'set!))
@@ -89,13 +89,13 @@
 (define (definition-variable exp)
   (if (symbol? (car exp))
       (cadr exp)
-    (caadr exp)))
+      (caadr exp)))
 
 (define (definition-value exp)
   (if (symbol? (cadr exp))
       (caddr exp)
-    (make-lambda (cdadr exp) ; formal parameters
-		 (cddr exp)))) ; body
+      (make-lambda (cdadr exp) ; formal parameters
+		   (cddr exp)))) ; body
 
 ;; lambda
 (define (lambda? exp) (tagged-list? exp 'lambda))
@@ -117,7 +117,7 @@
 (define (if-alternative exp)
   (if (not (null? (cdddr exp)))
       (cadddr exp)
-    'false))
+      'false))
 
 (define (make-if predicate consequent alternative)
   (list 'if predicate consequent alternative))
@@ -171,16 +171,16 @@
 (define (expand-clauses clauses)
   (if (null? clauses)
       'false
-    (let ((first (car clauses))
-	  (rest (cdr clauses)))
-      (if (cond-else-clause? first)
-	  (if (null? rest)
-	      (sequence->exp (cond-actions first))
-	    (error "ELSE clause isn't last -- COND->IF"
-		   clauses))
-	(make-if (cond-predicate first)
-		 (sequence->exp (cond-actions first))
-		 (expand-clauses rest))))))
+      (let ((first (car clauses))
+	    (rest (cdr clauses)))
+	(if (cond-else-clause? first)
+	    (if (null? rest)
+		(sequence->exp (cond-actions first))
+		(error "ELSE clause isn't last -- COND->IF"
+		       clauses))
+	    (make-if (cond-predicate first)
+		     (sequence->exp (cond-actions first))
+		     (expand-clauses rest))))))
 
 ;; procedure
 (define (make-procedure parameters body env)
@@ -217,9 +217,9 @@
 (define (extend-environment vars vals base-env)
   (if (= (length vars) (length vals))
       (cons (make-frame vars vals) base-env)
-    (if (< (length vars) (length vals))
-	(error "Too many arguments supplied" vars vals)
-      (error "Too few arguments supplied" vars vals))))
+      (if (< (length vars) (length vals))
+	  (error "Too many arguments supplied" vars vals)
+	  (error "Too few arguments supplied" vars vals))))
 
 (define (lookup-variable-value var env)
   (define (env-loop env)
@@ -231,9 +231,9 @@
 	    (else (scan (cdr vars) (cdr vals)))))
     (if (eq? env the-empty-environment)
 	(error "Unbound variable" var)
-      (let ((frame (first-frame env)))
-	(scan (frame-variables frame)
-	      (frame-values frame)))))
+	(let ((frame (first-frame env)))
+	  (scan (frame-variables frame)
+		(frame-values frame)))))
   (env-loop env))
 
 (define (set-variable-value! var val env)
@@ -246,9 +246,9 @@
 	    (else (scan (cdr vars) (cdr vals)))))
     (if (eq? env the-empty-environment)
 	(error "Unbound variable -- SET!" var)
-      (let ((frame (first-frame env)))
-	(scan (frame-variables frame)
-	      (frame-values frame)))))
+	(let ((frame (first-frame env)))
+	  (scan (frame-variables frame)
+		(frame-values frame)))))
   (env-loop env))
 
 (define (define-variable! var val env)
@@ -321,7 +321,7 @@
 		     (procedure-parameters object)
 		     (procedure-body object)
 		     '<procedure-env>))
-    (display object)))
+      (display object)))
 
 (define the-global-environment (setup-environment))
 
@@ -331,8 +331,8 @@
 (define (append x y)
   (if (null? x)
       y
-    (cons (car x)
-	  (append (cdr x) y))))
+      (cons (car x)
+	    (append (cdr x) y))))
 
 ;;; M-Eval value:
 ok
