@@ -8,3 +8,6 @@
 
 (define (square x)
   (* x x))
+
+;; ---------- TESTS ----------
+(fast-expt 15 10)
