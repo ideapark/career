@@ -5,3 +5,6 @@
 	(iter (* counter product)
 	      (+ counter 1))))
   (iter 1 1))
+
+;; ---------- TESTS ----------
+(factorial 10)
