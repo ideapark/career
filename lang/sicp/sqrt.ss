@@ -11,3 +11,13 @@
 
 (define (improve guess x)
   (average guess (/ x guess)))
+
+(define (average x y)
+  (/ (+ x y) 2))
+
+;; ------------- TESTS -------------
+(sqrt 1)
+(sqrt 2)
+(sqrt 3)
+(sqrt 4)
+(sqrt 5)
