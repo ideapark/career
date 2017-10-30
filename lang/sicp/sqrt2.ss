@@ -8,3 +8,9 @@
         guess
 	(sqrt-iter (improve guess x) x)))
   (sqrt-iter 1.0 x))
+
+;; ------------ TESTS ---------------
+(sqrt 1)
+(sqrt 2)
+(sqrt 3)
+(sqrt 4)
