@@ -1,3 +1,4 @@
+;; Linear iterative process
 (define (factorial n)
   (define (iter product counter)
     (if (> counter n)

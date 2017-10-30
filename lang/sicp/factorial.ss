@@ -1,3 +1,4 @@
+;; Linear recursive process
 (define (factorial n)
   (if (= n 1)
       1
