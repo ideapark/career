@@ -1,3 +1,4 @@
+;; High order procedure
 (define (sum term a next b)
   (if (> a b)
       0
@@ -11,4 +12,5 @@
     (+ x 4))
   (sum pi-term a pi-next b))
 
+;; ---------- TESTS ----------
 (* 8 (pi-sum 1 1000))
