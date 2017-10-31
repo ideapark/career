@@ -27,3 +27,8 @@
 ;; PI
 ;; sin x = 0  x in [2, 4]
 (half-interval-method sin 2.0 4.0)
+
+;; x^3 - 2x - 3 = 0
+(half-interval-method (lambda (x) (- (* x x x) (* 2 x) 3))
+		      1.0
+		      2.0)
