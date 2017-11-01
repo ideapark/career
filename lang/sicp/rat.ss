@@ -34,7 +34,7 @@
     (cons (/ n g) (/ d g))))
 
 (define (numer x) (car x))
-(deifne (denom x) (cdr x))
+(define (denom x) (cdr x))
 
 (define (print-rat x)
   (newline)
