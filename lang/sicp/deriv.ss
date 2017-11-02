@@ -1,3 +1,15 @@
+;; dx
+;; -- = 1,
+;; dx
+;;
+;; d(u+v)   du   dv
+;; ------ = -- + --
+;;   dx     dx   dx
+;;
+;; d(uv)    dv    du
+;; ----- = u-- + v--
+;;  dx      dx    dx
+
 (define (deriv exp var)
   (cond ((number? exp) 0)
 	((variable? exp)
@@ -44,7 +56,12 @@
 
 (define (multiplier p) (cadr p))
 
-(define (multiplicand p) (caddar p))
+(define (multiplicand p) (caddr p))
 
 (define (=number? exp num)
   (and (number? exp) (= exp num)))
+
+;; ---------- TESTS ----------
+(deriv '(+ x 3) 'x)
+(deriv '(* x y) 'x)
+(deriv '(* (* x y) (+ x 3)) 'x)
