@@ -1,3 +1,14 @@
+;; Huffman Encoding Tree
+;;
+;; Initial leaves {(A 8) (B 3) (C 1) (D 1) (E 1) (F 1) (G 1) (H 1)}
+;;          Merge {(A 8) (B 3) ({C D} 2) (E 1) (F 1) (G 1) (H 1)}
+;;          Merge {(A 8) (B 3) ({C D} 2) ({E F} 2) (G 1) (H 1)}
+;;          Merge {(A 8) (B 3) ({C D} 2) ({E F} 2) ({G H} 2)}
+;;          Merge {(A 8) (B 3) ({C D} 2) ({E F G H} 4)}
+;;          Merge {(A 8) ({B C D} 5) ({E F G H} 4)}
+;;          Merge {(A 8) ({B C D E F G H} 9)}
+;;    Final Merge {({A B C D E F G H} 17)}
+
 (define (make-leaf symbol weight)
   (list 'leaf symbol weight))
 
@@ -44,8 +55,6 @@
   (cond ((= bit 0) (left-branch branch))
 	((= bit 1) (right-branch branch))
 	(else (error "bad bit -- CHOOSE-BRANCH" bit))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define (adjoin-set x set)
   (cond ((null? set) (list x))
