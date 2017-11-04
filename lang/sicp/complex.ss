@@ -1,3 +1,7 @@
+;; Multiple Representations for Abstract Data
+;;
+;; representations for complex numbers
+
 (define (add-complex z1 z2)
   (make-from-real-imag (+ (real-part z1) (real-part z2))
 		       (+ (imag-part z1) (imag-part z2))))
@@ -51,3 +55,25 @@
 
 (define (make-from-mag-ang r a)
   (cons r a))
+
+;;
+;; Tagged data
+;;
+(define (attach-tag type-tag contents)
+  (cons type-tag contents))
+
+(define (type-tag datum)
+  (if (pair? datum)
+      (car datum)
+      (error "Bad tagged datum: TYPE_TAG" datum)))
+
+(define (contents datum)
+  (if (pair? datum)
+      (cdr datum)
+      (error "Bad tagged datum: CONTENTS" datum)))
+
+(define (rectangular? z)
+  (eq? (type-tag z) 'rectangular))
+
+(define (polar? z)
+  (eq? (type-tag z) 'polar))
