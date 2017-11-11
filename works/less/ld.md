@@ -5,7 +5,7 @@
 > gcc -v -o a.out hello.o
 
 ```
-[lockrecv@thinkpad kiss]$ gcc -v -o a.out hello.o
+[esc@thinkpad kiss]$ gcc -v -o a.out hello.o
 Using built-in specs.
 COLLECT_GCC=gcc
 COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/lto-wrapper
@@ -21,6 +21,6 @@ COLLECT_GCC_OPTIONS='-v' '-o' 'a.out' '-mtune=generic' '-march=x86-64'
 ```
 
 ```
-[lockrecv@thinkpad kiss]$ ./a.out
+[esc@thinkpad kiss]$ ./a.out
 Hello, world!
 ```

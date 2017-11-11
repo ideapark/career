@@ -5,7 +5,7 @@
 > find /usr/include -type f -iname '*.h' | head -20 | xargs wc -l
 
 ```
-[lockrecv@thinkpad lockrecv]$ find /usr/include -type f -iname '*.h' | head -20 | xargs wc -l
+[esc@thinkpad esc]$ find /usr/include -type f -iname '*.h' | head -20 | xargs wc -l
     74 /usr/include/jconfig.h
    496 /usr/include/dbstl_utility.h
    645 /usr/include/pygobject-3.0/pygobject.h

@@ -18,7 +18,7 @@ int main()
 > cpp hello.c > hello.i
 
 ```
-[lockrecv@thinkpad kiss]$ cpp hello.c > hello.i
+[esc@thinkpad kiss]$ cpp hello.c > hello.i
 # 1 "hello.c"
 # 1 "<built-in>"
 # 1 "<command-line>"

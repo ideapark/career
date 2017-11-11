@@ -5,7 +5,7 @@
 > make
 
 ```
-[lockrecv@thinkpad lockrecv]$ pstree
+[esc@thinkpad esc]$ pstree
 systemd-+-dbus-daemon
         |-dhcpcd
         |-docker-+-docker-containe---8*[{docker-containe}]

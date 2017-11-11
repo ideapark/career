@@ -5,14 +5,14 @@
 > python -m SimpleHTTPServer 8080
 
 ```
-[lockrecv@thinkpad lockrecv]$ python -m SimpleHTTPServer 8080
+[esc@thinkpad esc]$ python -m SimpleHTTPServer 8080
 Serving HTTP on 0.0.0.0 port 8080 ...
 ```
 
 ![pyserver-chrome](pyserver-chrome.png)
 
 ```
-[lockrecv@thinkpad lockrecv]$ wget http://192.168.1.103:8080/mm/msync.c
+[esc@thinkpad esc]$ wget http://192.168.1.103:8080/mm/msync.c
 --2016-06-20 20:17:22--  http://192.168.1.103:8080/mm/msync.c
 Connecting to 192.168.1.103:8080... connected.
 HTTP request sent, awaiting response... 200 OK
@@ -25,7 +25,7 @@ msync.c  100%[==================================>] 2.42K --.-KB/s  in 0s
 ```
 
 ```
-[lockrecv@thinkpad linux]$ python -m SimpleHTTPServer 8080
+[esc@thinkpad linux]$ python -m SimpleHTTPServer 8080
 Serving HTTP on 0.0.0.0 port 8080 ...
 192.168.1.103 - - [20/Jun/2016 20:16:53] "GET /mm/msync.c HTTP/1.1" 200 -
 192.168.1.103 - - [20/Jun/2016 20:17:01] "GET /mm/msync.c HTTP/1.1" 200 -

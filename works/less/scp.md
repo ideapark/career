@@ -2,10 +2,10 @@
 
 ### Transport local files to any host
 
-> scp -r /home/lockrecv/.vim lockrecv@lockrecv.koding.io:/home/lockrecv
+> scp -r /home/esc/.vim esc@esc.koding.io:/home/esc
 
 ```
-[lockrecv@thinkpad lockrecv]$ scp -r /home/lockrecv/.vim lockrecv@lockrecv.koding.io:/home/lockrecv
+[esc@thinkpad esc]$ scp -r /home/esc/.vim esc@esc.koding.io:/home/esc
 basic.vim                          100% 1407     1.4KB/s   00:00
 baycomb.vim                        100% 9761     9.5KB/s   00:00
 bayQua.vim                         100% 4817     4.7KB/s   00:00

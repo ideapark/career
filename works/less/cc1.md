@@ -5,7 +5,7 @@
 > gcc -S hello.i
 
 ```
-[lockrecv@thinkpad kiss]$ gcc -S hello.i
+[esc@thinkpad kiss]$ gcc -S hello.i
 	.file	"hello.c"
 	.section	.rodata
 .LC0:
