@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 - 2015, Zhou Peng
+ * Copyright (c) 2014 - 2015, Zhou Peng <p@ctriple.cn>
  *        ALL RIGHTS RESERVED
  */
 
