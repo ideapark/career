@@ -1,2 +1,2 @@
-Golang Essense and Compiler
-===========================
+Go Programming Language
+=======================
