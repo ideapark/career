@@ -7,3 +7,19 @@
 +---------+---------------------------+----------------------------------+
 | EXAMPLE | a++/if/for                | a+1                              |
 +---------+---------------------------+----------------------------------+
+
+#+BEGIN_SRC go
+package main
+
+func main() {
+	a := 1
+	++a                // Syntax Error: unexpected ++ (no prefix ++)
+
+	if (a++) > 1 {     // Syntax Error: postfix ++ is statement, not expression
+	}
+
+	p := &a
+	*p++               // Equal to (*p)++, pointer operation not supported
+	println(a)
+}
+#+END_SRC
