@@ -1,3 +1,5 @@
+;; Inductive Sets of Data
+
 ;; The Smaller-Subproblem Principle
 ;;
 ;; If we can reduce a problem to a smaller subproblem, we can call the procedure
