@@ -1,4 +1,5 @@
 typedef struct Nameval Nameval;
+
 struct Nameval {
 	char*    name;
 	int      value;

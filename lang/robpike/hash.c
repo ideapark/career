@@ -1,6 +1,7 @@
 #define NHASH   517  /* primer number is prefered */
 
 typedef struct Nameval Nameval;
+
 struct Nameval {
         char    *name;
         int     value;
