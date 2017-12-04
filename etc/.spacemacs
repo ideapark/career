@@ -328,7 +328,7 @@ you should place your code here."
   (global-set-key [f8] 'neotree-toggle)
   (fancy-battery-mode t)
   (display-time-mode t)
-  (setq powerline-default-separator 'arrow)
+  (setq powerline-default-separator 'nil)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
