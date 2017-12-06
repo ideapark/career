@@ -74,14 +74,14 @@ The interesting new broken abstractions for defer are in how the deferred
 functions get called. If a function contains a defer statement, instead of
 ending with the usual epilogue
 
-#+BEGIN_SRC shell
+#+BEGIN_SRC asm
 ADDL $48, SP // or whatever the frame size is
 RET
 #+END_SRC
 
 the function ends with
 
-#+BEGIN_SRC shell
+#+BEGIN_SRC asm
 CALL runtime.deferreturn(SB)
 ADDL $48, SP
 RET
