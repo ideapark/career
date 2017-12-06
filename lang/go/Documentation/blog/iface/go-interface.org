@@ -55,7 +55,7 @@ conversion is checked at runtime. If the conversion is invalid—if the type of
 the value stored in the existing interface value does not satisfy the interface
 to which it is being converted—the program will fail with a runtime error.
 
-For example, since every type satisfies the empty interface interface {}:
+For example, since every type satisfies the empty interface interface{}:
 
 #+BEGIN_SRC go
 func g(i interface{}) int { return i.(I).Get() }
