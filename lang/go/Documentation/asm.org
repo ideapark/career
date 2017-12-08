@@ -259,6 +259,7 @@ is a bit mask of flags, which can be written as numeric expressions, added or
 or-ed together, or can be set symbolically for easier absorption by a human.
 Their values, defined in the standard #include file textflag.h, are:
 
+#+BEGIN_SRC text
 - NOPROF = 1
   (For TEXT items.) Don't profile the marked function. This flag is deprecated.
 
@@ -286,6 +287,7 @@ Their values, defined in the standard #include file textflag.h, are:
 - NEEDCTXT = 64
   (For TEXT items.) This function is a closure so it uses its incoming context
   register.
+#+END_SRC
 
 ** Runtime Coordination
 
