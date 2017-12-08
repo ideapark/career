@@ -1,5 +1,6 @@
 #+TITLE: Laws of reflect
 #+AUTHOR: Rob Pike
+#+EMAIL: r@golang.org
 #+LINK: https://golang.org/blog/laws-of-reflection
 
 * Reflection goes from interface value to reflection object
