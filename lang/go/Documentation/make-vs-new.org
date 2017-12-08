@@ -1,5 +1,8 @@
-Difference between new() and make()
-===================================
+#+TITLE: new() vs make()
+#+AUTHOR: Zhou Peng
+#+EMAIL: p@ctriple.cn
+
+* Difference between new() and make()
 
 - new(T) allocates zeroed storage for a new item of type T and returns its
   address, a value of type *T: it =returns a pointer= to a newly allocated
