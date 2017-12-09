@@ -38,7 +38,6 @@ f1 = sp.poly1d(fp1)
 print(error(f1, x, y))
 fx = sp.linspace(0, x[-1], 1000)
 plt.plot(fx, f1(fx), linewidth=4)
-plt.legend(["d=%i" % f1.order], loc="upper left")
 
 # SECOND-ORDER fit
 fp2 = sp.polyfit(x, y, 2)
@@ -47,7 +46,28 @@ print(fp2)
 f2 = sp.poly1d(fp2)
 print(error(f2, x, y))
 plt.plot(fx, f2(fx), linewidth=4)
-plt.legend(["d=%i" % f2.order], loc="upper left")
+
+# treat data another way
+inflection = int(3.5*7*24)
+xa = x[:inflection]
+ya = y[:inflection]
+xb = x[inflection:]
+yb = y[inflection:]
+
+fa = sp.poly1d(sp.polyfit(xa, ya, 1))
+fb = sp.poly1d(sp.polyfit(xb, yb, 1))
+
+fa_error = error(fa, xa, ya)
+fb_error = error(fb, xb, yb)
+print("Error inflection=%f" % (fa_error+fb_error))
+
+fax = fx[:inflection]
+fbx = fx[inflection:]
+plt.plot(fax, fa(fax), linewidth=4)
+plt.plot(fbx, fb(fbx), linewidth=4)
+
+# underfitting
+# overfitting
 
 plt.grid()
 plt.show()
