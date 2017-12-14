@@ -6,6 +6,30 @@
 
 ** Introduction
 
+#+BEGIN_SRC go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println("Hello, 世界")
+}
+#+END_SRC
+
+Following conclusions can be acquired from the example:
+- Source code is full UTF-8 encoded
+- Golang is static typed, that means you need to compile then run
+- Unlike many other static language, go code does not need semicolon to terminate a statement
+- Package is the smallest public module
+- Public/Private is controlled by Uppercase or Lowercase, like =Println= is public
+
+Let's build and run the example:
+
+#+BEGIN_SRC bash
+go run hello.go
+Hello, 世界
+#+END_SRC
+
 ** Language Elements
 
 ** Array and Slice
