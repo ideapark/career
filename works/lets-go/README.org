@@ -2,7 +2,7 @@
 #+AUTHOR: Zhou Peng
 #+EMAIL: p@ctriple.cn
 
-* Outside
+* Part 1: Outside
 
 ** Introduction
 
@@ -24,10 +24,18 @@
 
 ** Tool Chains
 
-* Inside
+* Part 2: Inside
 
 ** Memory Alloc & Free
 
 ** Garbage Collection
 
 ** Goroutine Schedule
+
+** Slice
+
+** String
+
+** Channel
+
+** Map
