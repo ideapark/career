@@ -32,6 +32,63 @@ Hello, 世界
 
 ** Language Elements
 
+*** Golang has only 25 keywords
+
+| 1        | 2           | 3      | 4         | 5      |
+|----------+-------------+--------+-----------+--------|
+| break    | default     | func   | interface | select |
+| case     | defer       | go     | map       | struct |
+| chan     | else        | goto   | package   | switch |
+| const    | fallthrough | if     | range     | type   |
+| continue | for         | import | return    | var    |
+
+*** And 36 builtin functions or types
+
+| 1      | 2       | 3       | 4       | 5      | 6       | 7         | 8          | 9       |
+|--------+---------+---------+---------+--------+---------+-----------+------------+---------|
+| append | bool    | byte    | cap     | close  | complex | complex64 | complex128 | uint16  |
+| copy   | false   | float32 | float64 | imag   | int     | int8      | int16      | uint32  |
+| int32  | int64   | iota    | len     | make   | new     | nil       | panic      | uint64  |
+| print  | println | real    | recover | string | true    | uint      | uint8      | uintptr |
+
+*** Difference between keywords and builtins
+
+In one word, =builtins= are just predefined functions or types, which can be
+redefined by users for other purpose, but =keywords= can only be used as the
+=language spec= explained.
+
+*** Keywords grouped by their mainly used cases
+
+|        |                 |                       |                 |               |
+|--------+-----------------+-----------------------+-----------------+---------------|
+| Golang | Basic Structure | Variable and Constant | =var=           |               |
+|        |                 |                       | =const=         |               |
+|        |                 | Pakcage Management    | =package=       |               |
+|        |                 |                       | =import=        |               |
+|        |                 |                       |                 |               |
+|        | Basic Elements  | Function              | =func=          |               |
+|        |                 |                       | =return=        |               |
+|        |                 | User-Defined Type     | =interface=     |               |
+|        |                 |                       | =struct=        |               |
+|        |                 | Reference Type        | =map=           |               |
+|        |                 |                       | =range=         |               |
+|        |                 |                       |                 |               |
+|        | Control Flow    | Concurrency           | =go=            |               |
+|        |                 |                       | =select=        |               |
+|        |                 |                       | =chan=          |               |
+|        |                 | Single-Task Control   | Single Branch   | =if=          |
+|        |                 |                       |                 | =else=        |
+|        |                 |                       | Multiple Branch | =switch=      |
+|        |                 |                       |                 | =case=        |
+|        |                 |                       |                 | =default=     |
+|        |                 |                       |                 | =fallthrough= |
+|        |                 |                       | Loop            | =for=         |
+|        |                 |                       |                 | =break=       |
+|        |                 |                       |                 | =continue=    |
+|        |                 |                       | Jump            | =goto=        |
+|        |                 |                       |                 |               |
+|        | Defered Flow    | =defer=               |                 |               |
+
 ** Array and Slice
 
 ** Map
