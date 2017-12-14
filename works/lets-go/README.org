@@ -34,7 +34,7 @@ Hello, 世界
 
 *** Golang has only 25 keywords
 
-| 1        | 2           | 3      | 4         | 5      |
+|          |             |        |           |        |
 |----------+-------------+--------+-----------+--------|
 | break    | default     | func   | interface | select |
 | case     | defer       | go     | map       | struct |
@@ -44,7 +44,7 @@ Hello, 世界
 
 *** And 36 builtin functions or types
 
-| 1      | 2       | 3       | 4       | 5      | 6       | 7         | 8          | 9       |
+|        |         |         |         |        |         |           |            |         |
 |--------+---------+---------+---------+--------+---------+-----------+------------+---------|
 | append | bool    | byte    | cap     | close  | complex | complex64 | complex128 | uint16  |
 | copy   | false   | float32 | float64 | imag   | int     | int8      | int16      | uint32  |
