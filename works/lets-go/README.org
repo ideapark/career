@@ -1,0 +1,33 @@
+#+TITLE: Let's Go: Golang inside and outside
+#+AUTHOR: Zhou Peng
+#+EMAIL: p@ctriple.cn
+
+* Outside
+
+** Introduction
+
+** Language Elements
+
+** Array and Slice
+
+** Map
+
+** Function
+
+** Struct and Method
+
+** Interface
+
+** Reflect
+
+** Channel and Concurrency
+
+** Tool Chains
+
+* Inside
+
+** Memory Alloc & Free
+
+** Garbage Collection
+
+** Goroutine Schedule
