@@ -12,7 +12,7 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println("Hello, 世界")
+        fmt.Println("Hello, 世界")
 }
 #+END_SRC
 
@@ -109,9 +109,9 @@ Initialized with new
        |     *       | *Point
        +------\------+
                \
-	        +-----+-----+
-		|  0  |  0  | Point
-	      	+-----+-----+
+                +-----+-----+
+                |  0  |  0  | Point
+                +-----+-----+
 
 
 Initialized as a struct literal
@@ -119,17 +119,17 @@ Initialized as a struct literal
 
        p := Point{10, 20}
          +-----+-----+
-	 |  0  |  0  | Point
-	 +-----+-----+
+         |  0  |  0  | Point
+         +-----+-----+
 
        pp := &Point{10, 20}
          +--------+
-  	 |    *   | *Point
-	 +-----\--+
-	        \
-		 +-----+-----+
-		 |  0  |  0  | Point
-		 +-----+-----+
+         |    *   | *Point
+         +-----\--+
+                \
+                 +-----+-----+
+                 |  0  |  0  | Point
+                 +-----+-----+
 
 
 Memory layout of a struct of structs
