@@ -16,7 +16,7 @@ func main() {
 }
 #+END_SRC
 
-Following conclusions can be acquired from the example:
+Following conclusions can be made:
 - Source code is full UTF-8 encoded
 - Golang is static typed, that means you need to compile then run
 - Unlike many other static language, go code does not need semicolon to terminate a statement
@@ -53,9 +53,9 @@ Hello, 世界
 
 *** Difference between keywords and builtins
 
-In one word, =builtins= are just predefined functions or types, which can be
-redefined by users for other purpose, but =keywords= can only be used as the
-=language spec= explained.
+In one word, =builtins= are just predefined functions or types by the go
+compiler, which can be redefined by users for other purpose, but =keywords= can
+only be used as the =language spec= explained.
 
 *** Keywords grouped by their mainly used cases
 
@@ -91,7 +91,82 @@ redefined by users for other purpose, but =keywords= can only be used as the
 
 ** Array and Slice
 
+#+BEGIN_SRC text
+Struct Memory Layout
+====================
+
+struct type
+-----------
+
+       type Point struct { x, y int }
+
+
+Initialized with new
+--------------------
+
+         new(Point)
+       +-------------+
+       |     *       | *Point
+       +------\------+
+               \
+	        +-----+-----+
+		|  0  |  0  | Point
+	      	+-----+-----+
+
+
+Initialized as a struct literal
+-------------------------------
+
+       p := Point{10, 20}
+         +-----+-----+
+	 |  0  |  0  | Point
+	 +-----+-----+
+
+       pp := &Point{10, 20}
+         +--------+
+  	 |    *   | *Point
+	 +-----\--+
+	        \
+		 +-----+-----+
+		 |  0  |  0  | Point
+		 +-----+-----+
+
+
+Memory layout of a struct of structs
+====================================
+
+    type Rect1 struct { Min, Max Point }
+    type Rect2 struct { Min, Max *Point }
+
+        r1 := Rect1{Point{10, 20}, Point{50,60}}
+            +----+----+----+----+
+            | 10 | 20 | 50 | 60 | Rect1
+            +----+----+----+----+
+
+        r2 := Rect2{&Point{10, 20}, &Point{50, 60}}
+            +--------+--------+
+            |   *    |    *   | Rect2
+            +----\---+-------\+
+                  \           \
+                   +----+----+ +----+----+
+                   | 10 | 20 | | 50 | 60 | Point
+                   +----+----+ +----+----+
+#+END_SRC
+
+Golang =array= details:
+- Array's memory is allocated as a whole, which makes array access much more efficient
+- Array's length is part of array type, which means =[5]int= does equal to =[2]int=
+
+Golang =slice= details:
+- Slice is just a descriptor of an array, consists of 3 parts: =ptr= to
+  underling memory block, =len= length of current slice, =cap= the underline
+  memory block capabilities.
+- So copy slice is just copy 3 small integers, but copy array is copy the whole
+  memory block, which makes slice much more useful in many situations.
+
 ** Map
+
+** Make vs New
 
 ** Function
 
