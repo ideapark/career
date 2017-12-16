@@ -166,6 +166,28 @@ Golang =slice= details:
 
 ** Map
 
+#+BEGIN_SRC go
+package main
+
+func main() {
+	bytes := make(map[string]int)
+	bytes["KB"] = 1 << 10
+	bytes["MB"] = 1 << 20
+	bytes["GB"] = 1 << 30
+	bytes["TB"] = 1 << 40
+	bytes["PB"] = 1 << 50
+	bytes["ZB"] = 1 << 60
+
+	for unit, byte := range bytes {
+		println(unit, byte)
+	}
+}
+#+END_SRC
+
+Map's notes:
+- Map is reference type, you need make() to create one
+- Traversal sequence is not guaranteed the same as they were put
+
 ** Make vs New
 
 ** Function
