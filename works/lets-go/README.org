@@ -323,6 +323,40 @@ language like Python and also be in safety like an static language like Java.
 
 ** Reflect
 
+#+BEGIN_SRC go
+package main
+
+import "fmt"
+
+func main() {
+	udf := struct {
+		i int
+		f float32
+		s string
+	}{
+		i: 10,
+		f: 10.0,
+		s: "Hello, World!",
+	}
+	fmt.Println(10)              // int
+	fmt.Println(10.0)            // float
+	fmt.Println("Hello, World!") // string
+	fmt.Println(udf)             // user defined
+}
+#+END_SRC
+
+Golang standard library "fmt" has a magic function 'Println()', which can print
+out any variables of any types. We know that Golang neither support function
+override like Java/C++, nor does it support default arguments. So how could this
+happen? Golang's answer is empty =interface{}=, which is equal to Object in many
+other OOP languages. As to =Println()=, it has only one variadic argument
+=...interface{}=. Like C, Golang object doesn't keep track of typeinfo, runtime
+cannt require any typeinfo from object itself. Reflection is based on interface
+var, which store both object's data and type.
+
+func TypeOf(i interface{}) Type
+func ValueOf(i interface{}) Value
+
 ** Channel and Concurrency
 
 ** Tool Chains
