@@ -190,7 +190,50 @@ Map's notes:
 
 ** Make vs New
 
+#+BEGIN_SRC go
+package main
+
+func main() {
+  a := new([5]int)
+  s := make([]int, 5)
+  a[0] = 1
+  s[0] = 1
+  println(a[0])
+  println(s[0])
+}
+#+END_SRC
+
+Golang has three builtin reference types, aka Slice/Map/Chan. You can treat
+reference just like a pointer or descriptor, if you new these three reference
+types, you only allocate memory for the pointer or descriptor (think about
+linux's file descriptor); but many other are not allocated, like slice's
+underling array, map's hash buckets, chan's buffer for messages. So, golang have
+to use a special syntax to completely initialize these reference types.
+
 ** Function
+
+#+BEGIN_SRC go
+package main
+
+func main() {
+  s := new(int)
+  *s = 1024
+  println(*s)
+}
+#+END_SRC
+
+#+BEGIN_SRC shell
+go build -gcflags="-l -m" t.go
+# command-line-arguments
+./t.go:4 main new(int) does not escape
+#+END_SRC
+
+Golang belongs to C language family, function is the basic block to describe the
+process of algorithms, and encapsulate to reuse code. Golang's function
+distinguished from C in multiple return values, named return value, and not
+strictly difference between stack and heap variables; Golang compiler will take
+escape analysis when code get compiled, so programmer new a variable does not
+mean to it will be placed on the heap finally.
 
 ** Struct and Method
 
