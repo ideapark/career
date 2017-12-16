@@ -1,4 +1,4 @@
-#+TITLE: Let's Go: Golang inside and outside
+#+TITLE: Let's Go: Golang inside and outside outlined
 #+AUTHOR: Zhou Peng
 #+EMAIL: p@ctriple.cn
 
