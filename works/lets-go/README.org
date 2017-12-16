@@ -237,6 +237,38 @@ mean to it will be placed on the heap finally.
 
 ** Struct and Method
 
+#+BEGIN_SRC go
+package main
+
+type Gopher struct {
+	OS     string
+	Editor string
+	Lang   string
+}
+
+func (g *Gopher) WhoAmI() {
+	println("    Operating System:", g.OS)
+	println("       Coding Editor:", g.Editor)
+	println("Programming Language:", g.Lang)
+}
+
+func main() {
+	g := Gopher{
+		OS:     "Linux",
+		Editor: "Emacs",
+		Lang:   "Golang",
+	}
+	g.WhoAmI()
+}
+#+END_SRC
+
+Golang has struct type to composite small units to represent large and
+complicated objects. method is just function with the first argument being
+specified with the specific type's object. The two concepts together is equal to
+OOP like Java/C++, but more rely on composition than inheritance. Which one is
+better can not be made easy, but Golang's approach is more simple and less
+trouble obviously.
+
 ** Interface
 
 ** Reflect
