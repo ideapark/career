@@ -271,6 +271,56 @@ trouble obviously.
 
 ** Interface
 
+#+BEGIN_SRC go
+package main
+
+type Gopher interface {
+	OS() string
+	Editor() string
+	Lang() string
+}
+
+type ChinaGopher struct {
+	os     string
+	editor string
+	lang   string
+}
+
+func (cg *ChinaGopher) OS() string {
+	return cg.os
+}
+
+func (cg *ChinaGopher) Editor() string {
+	return cg.editor
+}
+
+func (cg *ChinaGopher) Lang() string {
+	return cg.lang
+}
+
+func main() {
+	cg := &ChinaGopher{
+		os:     "Linux",
+		editor: "Vim",
+		lang:   "Go",
+	}
+	var g Gopher = cg
+	println(g.OS())
+	println(g.Editor())
+	println(g.Lang())
+}
+#+END_SRC
+
+Golang interface is collection of methods, we say one type has implemented one
+interface when this type's methods set is a super set of interface's method set.
+Besides, interface is implemented automatically, that means type does not need
+to declare in advance, and no special language syntax need to quantify this
+relationship between type and interface (such as Java's 'extends' keyword). If
+you assign a type variable which does not have all the methods required by the
+interface to the interface variable, go compiler will complain, and emit an
+compile time error. In conclusion, Golang's interface is used like an dynamic
+language like Python and also be in safety like an static language like Java.
+
 ** Reflect
 
 ** Channel and Concurrency
