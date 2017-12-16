@@ -286,25 +286,25 @@ type ChinaGopher struct {
 	lang   string
 }
 
-func (cg *ChinaGopher) OS() string {
-	return cg.os
+func (cgo *ChinaGopher) OS() string {
+	return cgo.os
 }
 
-func (cg *ChinaGopher) Editor() string {
-	return cg.editor
+func (cgo *ChinaGopher) Editor() string {
+	return cgo.editor
 }
 
-func (cg *ChinaGopher) Lang() string {
-	return cg.lang
+func (cgo *ChinaGopher) Lang() string {
+	return cgo.lang
 }
 
 func main() {
-	cg := &ChinaGopher{
+	cgo := &ChinaGopher{
 		os:     "Linux",
 		editor: "Vim",
 		lang:   "Go",
 	}
-	var g Gopher = cg
+	var g Gopher = cgo
 	println(g.OS())
 	println(g.Editor())
 	println(g.Lang())
