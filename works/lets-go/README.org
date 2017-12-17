@@ -418,6 +418,27 @@ value, and even make methods of a function.
 
 ** Tool Chains
 
+- gofmt
+
+The end of coding style wars
+
+- go test
+
+Functionality, code coverage and performance test built into the language
+
+- godef & gocode & guru
+
+Auto-complement, function jumping, definition reference etc
+
+- go get
+
+Fetch project dependencies from the internet
+
+Golang is a language that built with tools in mind. Tools are easy to be
+created, and many other wonderful tools is already ready. Golang has helped soft
+engineering capabilities much, that's a good news to big company with hundreds
+of developers who working together.
+
 * Part 2: Inside
 
 ** Memory Alloc & Free
