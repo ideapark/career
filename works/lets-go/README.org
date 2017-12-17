@@ -2,6 +2,28 @@
 #+AUTHOR: Zhou Peng
 #+EMAIL: p@ctriple.cn
 
+* Let's Go: Golang inside and outside outlined                            :TOC_4_gh:noexport:
+- [[#part-1-outside][Part 1: Outside]]
+  - [[#introduction][Introduction]]
+  - [[#language-elements][Language Elements]]
+  - [[#array-and-slice][Array and Slice]]
+  - [[#map][Map]]
+  - [[#make-vs-new][Make vs New]]
+  - [[#function][Function]]
+  - [[#struct-and-method][Struct and Method]]
+  - [[#interface][Interface]]
+  - [[#reflect][Reflect]]
+  - [[#channel-and-concurrency][Channel and Concurrency]]
+  - [[#tool-chains][Tool Chains]]
+- [[#part-2-inside][Part 2: Inside]]
+  - [[#memory-alloc--free][Memory Alloc & Free]]
+  - [[#garbage-collection][Garbage Collection]]
+  - [[#goroutine-schedule][Goroutine Schedule]]
+  - [[#slice][Slice]]
+  - [[#string][String]]
+  - [[#channel][Channel]]
+  - [[#map-1][Map]]
+
 * Part 1: Outside
 
 ** Introduction
@@ -32,7 +54,7 @@ Hello, 世界
 
 ** Language Elements
 
-*** Golang has only 25 keywords
+- Golang has only 25 keywords
 
 |          |             |        |           |        |
 |----------+-------------+--------+-----------+--------|
@@ -42,7 +64,7 @@ Hello, 世界
 | const    | fallthrough | if     | range     | type   |
 | continue | for         | import | return    | var    |
 
-*** And 36 builtin functions or types
+- And 36 builtin functions or types
 
 |        |         |         |         |        |         |           |            |         |
 |--------+---------+---------+---------+--------+---------+-----------+------------+---------|
@@ -51,13 +73,13 @@ Hello, 世界
 | int32  | int64   | iota    | len     | make   | new     | nil       | panic      | uint64  |
 | print  | println | real    | recover | string | true    | uint      | uint8      | uintptr |
 
-*** Difference between keywords and builtins
+- Difference between keywords and builtins
 
 In one word, =builtins= are just predefined functions or types by the go
 compiler, which can be redefined by users for other purpose, but =keywords= can
 only be used as the =language spec= explained.
 
-*** Keywords grouped by their mainly used cases
+- Keywords grouped by their mainly used cases
 
 |        |                 |                       |                 |               |
 |--------+-----------------+-----------------------+-----------------+---------------|
