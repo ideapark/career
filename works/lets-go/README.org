@@ -19,10 +19,10 @@
   - [[#memory-alloc--free][Memory Alloc & Free]]
   - [[#garbage-collection][Garbage Collection]]
   - [[#goroutine-schedule][Goroutine Schedule]]
-  - [[#slice][Slice]]
-  - [[#string][String]]
-  - [[#channel][Channel]]
-  - [[#map-1][Map]]
+  - [[#slice-internals][Slice internals]]
+  - [[#string-internals][String internals]]
+  - [[#channel-internals][Channel internals]]
+  - [[#map-internals][Map internals]]
 
 * Part 1: Outside
 
@@ -469,10 +469,10 @@ of developers who working together.
 
 ** Goroutine Schedule
 
-** Slice
+** Slice internals
 
-** String
+** String internals
 
-** Channel
+** Channel internals
 
-** Map
+** Map internals
