@@ -181,7 +181,7 @@ Golang =array= details:
 
 Golang =slice= details:
 - Slice is just a descriptor of an array, consists of 3 parts: =ptr= to
-  underling memory block, =len= length of current slice, =cap= the underline
+  underlying memory block, =len= length of current slice, =cap= the underline
   memory block capabilities.
 - So copy slice is just copy 3 small integers, but copy array is copy the whole
   memory block, which makes slice much more useful in many situations.
@@ -229,7 +229,7 @@ Golang has three builtin reference types, aka Slice/Map/Chan. You can treat
 reference just like a pointer or descriptor, if you new these three reference
 types, you only allocate memory for the pointer or descriptor (think about
 linux's file descriptor); but many other are not allocated, like slice's
-underling array, map's hash buckets, chan's buffer for messages. So, golang have
+underlying array, map's hash buckets, chan's buffer for messages. So, golang have
 to use a special syntax to completely initialize these reference types.
 
 ** Function
