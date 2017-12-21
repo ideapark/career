@@ -463,6 +463,8 @@ of developers who working together.
 
 * Part 2: Inside
 
+NOTE: All is based on GOOS=linux GOARCH=amd64
+
 ** Memory Alloc & Free
 
 ** Garbage Collection
