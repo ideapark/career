@@ -51,7 +51,6 @@
 # sets of data are uncorrelated, has same dimension as rho.
 
 from scipy import stats
-import numpy as np
 
 print stats.spearmanr([1, 2, 3, 4, 5], [5, 6, 7, 8, 7])
 
