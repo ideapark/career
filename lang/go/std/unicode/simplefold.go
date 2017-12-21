@@ -12,5 +12,4 @@ func main() {
 	fmt.Printf("%#U\n", unicode.SimpleFold('k'))      // '\u212A' (Kelvin symbol, K)
 	fmt.Printf("%#U\n", unicode.SimpleFold('\u212A')) // 'K'
 	fmt.Printf("%#U\n", unicode.SimpleFold('1'))      // '1'
-
 }
