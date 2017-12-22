@@ -14,3 +14,12 @@ Memory Hierarchy
                                                         Main Memory                 ||
                                                                                     ++
                                                                                    Disk
+
+
+What We Learned
+===============
+
+- Byte Read: access byte costs much than access word
+- Byte Write: write one byte costs much than write word
+- Temporal Locality: access recently accessed word would be cache hit
+- Spatial Locality: access nearby word would be cache hit
