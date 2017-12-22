@@ -1,0 +1,8 @@
+Mark-Sweep Garbage Collection Cost Analysis
+===========================================
+
+H: heap size
+R: reachable word
+
+       GC Cost: c1*R + c2*H (c1, c2 are constants)
+Amortized Cost: (c1*R + c2*H) / (H - R)
