@@ -1,0 +1,39 @@
+Regular Expression
+==================
+
+Symbol
+------
+
+For each symbol a in the alphabet of the language, the regular expression a
+denotes the language containing just the string a.
+
+Alternation
+-----------
+
+Given two regular expressions M and N, the alternation operator written as a
+vertical bar | makes a new regular expression M | N. A string is in the language
+of M | N if it is in the language of M or in the language of N. Thus, the
+language of a | b contains the two strings a and b.
+
+Concatenation
+-------------
+
+Given two regular expressions M and N, the concatenation operator · makes a new
+regular expression M · N. A string is in the language of M · N if it is the
+concatenation of any two strings α and β such that α is in the language of M
+and β is in the language of N. Thus, the regular expression (a | b) · a defines
+the language containing the two strings aa and ba.
+
+Epsilon
+-------
+
+The regular expression ε represents a language whose only string is the empty
+string. Thus, (a · b) | ε represents the language { "" , "ab" }.
+
+Repetition
+----------
+
+Given a regular expression M, its Kleene closure is M∗ . A string is in M∗ if
+it is the concatenation of zero or more strings, all of which are in M. Thus,
+((a | b) · a) ∗ represents the infinite set { "" , "aa" , "ba" , "aaaa" , "baaa"
+, "aaba" , "baba" , "aaaaaa" , . . . }.
