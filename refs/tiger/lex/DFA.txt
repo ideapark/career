@@ -1,0 +1,16 @@
+FINITE AUTOMATA
+---------------
+
+A finite automation has a finite set of states; edges lead from one state to
+another, and each edge is labeled with a symbol. One state is the start state,
+and certain of the states are distinguished as final states.
+
+In a deterministic finite automaton (DFA), no two edges leaving from the same
+state are labeled with the same symbol. A DFA accepts or rejects a string as
+follows. Starting in the start state, for each character in the input string the
+automaton follows exactly one edge to get to the next state. The edge must be
+labeled with the input character. After making n transitions for an n-character
+string, if the automaton is in a final state, then it accepts the string. If it
+is not in a final state, or if at some point there was no appropriately labeled
+edge to follow, it rejects. The language recognized by an automaton is the set
+of strings that it accepts.
