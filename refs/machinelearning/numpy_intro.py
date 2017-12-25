@@ -34,10 +34,10 @@ print a**2
 print a[np.array([2, 3, 4])]
 
 # bool condition apply to each element
-print a>4
-print a[a>4]
+print a > 4
+print a[a > 4]
 # correct abnormal data
-a[a>4] = 4
+a[a > 4] = 4
 print a
 # special func to do above work
 a1 = a.clip(0, 3)
@@ -55,5 +55,5 @@ a = np.array([1, 2, 3])
 print a.dtype
 s = np.array(['1', 'stringy'], dtype='|S8')
 print s.dtype
-o =  np.array([1, 'stringy', set([1, 2, 3])])
+o = np.array([1, 'stringy', set([1, 2, 3])])
 print o.dtype
