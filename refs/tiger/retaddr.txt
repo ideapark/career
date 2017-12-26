@@ -1,0 +1,14 @@
+RETURN ADDRESSES
+================
+
+When function g calls function f , eventually f must return. It needs to know
+where to go back to. If the call instruction within g is at address a, then
+(usually) the right place to return to is a + 1, the next instruction in g. This
+is called the return address. On 1970s machines, the return address was pushed
+on the stack by the call instruction. Modern science has shown that it is faster
+and more flexible to pass the return address in a register, avoiding memory
+traffic and also avoiding the need to build any particular stack discipline into
+the hardware. On modern machines, the call instruction merely puts the return
+address (the address of the instruction after the call) in a designated
+register. A non-leaf procedure will then have to write it to the stack (unless
+interprocedural register allocation is used), but a leaf procedure will not.
