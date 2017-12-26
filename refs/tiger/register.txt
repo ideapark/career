@@ -1,0 +1,32 @@
+REGISTERS
+=========
+
+A modern machine has a large set of registers (typically 32 of them). To make
+compiled programs run fast, it’s useful to keep local variables, intermediate
+results of expressions, and other values in registers instead of in the stack
+frame. Registers can be directly accessed by arithmetic instructions; on most
+machines, accessing memory requires separate load and store instructions. Even
+on machines whose arithmetic instructions can access memory, it is faster to
+access registers. A machine (usually) has only one set of registers, but many
+different procedures and functions need to use registers. Suppose a function f
+is using register r to hold a local variable and calls procedure g, which also
+uses r for its own calculations. Then r must be saved (stored into a stack
+frame) before g uses it and restored (fetched back from the frame) after g is
+finished using it. But is it f ’s responsibility to save and restore the
+register, or g’s? We say that r is a =caller-save= register if the caller (in
+this case, f ) must save and restore the register, and r is =callee-save= if it
+is the responsibility of the callee (in this case, g). On most machine
+architectures, the notion of caller-save or callee-save register is not
+something built into the hardware, but is a convention described in the
+machine’s reference manual. On the MIPS computer, for example, registers 16–23
+are preserved across procedure calls (callee-save), and all other registers are
+not preserved across procedure calls (caller-save). Sometimes the saves and
+restores are unnecessary. If f knows that the value of some variable x will not
+be needed after the call, it may put x in a caller-save register and not save it
+when calling g. Conversely, if f has a local variable i that is needed before
+and after several function calls, it may put i in some callee-save register r i
+and, save r i just once (upon entry to f ) and fetch it back just once (before
+returning from f ). Thus, the wise selection of a caller-save or callee-save
+register for each local variable and temporary can reduce the number of stores
+and fetches a program executes. We will rely on our register allocator to choose
+the appropriate kind of register for each local variable and temporary value.
