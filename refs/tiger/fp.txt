@@ -1,0 +1,19 @@
+Functional Programming
+======================
+
+The mathematical notion of function is that if f (x) = a “this time,” then
+f(x) = a “next time”; there is no other value equal to f(x). This allows the
+use of equational reasoning familiar from algebra: that if a = f(x) then g(f(x),
+f(x)) is equivalent to g(a, a). Pure functional programming languages encourage
+a kind of programming in which equational reasoning works, as it does in
+mathematics.
+
+Imperative programming languages have similar syntax: a ← f(x). But if we
+follow this by b ← f(x) there is no guarantee that a = b; the function f can
+have side effects on global variables that make it return a different value each
+time. Furthermore, a program might assign into variable x between calls to f(x),
+so f(x) really means a different thing each time.
+
+Higher-order functions. Functional programming languages also allow functions to
+be passed as arguments to other functions, or returned as results. Functions
+that take functional arguments are called higher-order functions.
