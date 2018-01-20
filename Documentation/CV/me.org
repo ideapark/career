@@ -148,16 +148,16 @@ Linux, C++, Python, 编译器
 * 我的作品
 
 ** reporter: Linux程序性能剖析
-https://github.com/tabesc/esc/tree/master/works/reporter
+https://github.com/tabesc/p/tree/master/works/reporter
 
 ** sysstat: Linux内存,线程,中断性能数据采集
-https://github.com/tabesc/esc/tree/master/works/sysstat
+https://github.com/tabesc/p/tree/master/works/sysstat
 
 ** kiss: Linux工具集迷你C库
-https://github.com/tabesc/esc/tree/master/works/libkiss
+https://github.com/tabesc/p/tree/master/works/libkiss
 
 ** less: Unix KISS哲学思想示例
-https://github.com/tabesc/esc/tree/master/works/less/SUMMARY.md
+https://github.com/tabesc/p/tree/master/works/less/SUMMARY.md
 
 ** tank: 坦克大战游戏简化版
-https://github.com/tabesc/esc/tree/master/works/tank
+https://github.com/tabesc/p/tree/master/works/tankwar
