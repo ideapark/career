@@ -1,5 +1,5 @@
-UTXO
-====
+UTXO: unspent transactions outputs
+==================================
 
              tx0
    +---------------------+
