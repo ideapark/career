@@ -1,9 +1,0 @@
-* A default constructor if you define no constructors
-
-* A default destructor if you don't define one
-
-* A copy constructor if you don't define one
-
-* An assignment operator if you don't define one
-
-* An address operator if you don't define one

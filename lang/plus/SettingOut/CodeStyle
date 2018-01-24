@@ -1,8 +1,0 @@
-* One statement per line
-
-* An opening brace and a closing brace for a function, each of 
-  which is on its own line
-
-* Statements in a function indented from the braces
-
-* No whitespace around the parentheses associated with a function name

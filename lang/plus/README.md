@@ -1,4 +1,0 @@
-cpplus
-======
-
-C++ Primer Plus
