@@ -40,7 +40,7 @@ int open_listenfd(int port)
 		return -1;
 
 	if (setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR,
-		       (const void *)&optval, sizeof(int)) < 0)
+                 (const void *)&optval, sizeof(int)) < 0)
 		return -1;
 
 	bzero((char *)&serveraddr, sizeof(serveraddr));
@@ -50,7 +50,7 @@ int open_listenfd(int port)
 
 	if (bind(listenfd, (struct sockaddr *)&serveraddr, sizeof(serveraddr)) < 0)
 		return -1;
-	
+
 	if (listen(listenfd, LISTENQ) < 0)
 		return -1;
 

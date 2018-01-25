@@ -93,7 +93,7 @@ static void place(void *bp, size_t asize)
 }
 
 int mm_init(void)
-{	
+{
 	if ((heap_listp = mem_sbrk(4*WSIZE)) == (void *)-1)
 		return -1;
 

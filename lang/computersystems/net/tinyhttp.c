@@ -19,7 +19,7 @@ void serve_static(int fd, char *filename, int filesize);
 void get_filetype(char *filename, char *filetype);
 void serve_dynamic(int fd, char *filename, char *cgiargs);
 void clienterror(int fd, char *cause, char *errnum,
-		 char *shortmsg, char *longmsg);
+                 char *shortmsg, char *longmsg);
 
 int main(int argc, char *argv[])
 {
@@ -57,7 +57,7 @@ void doit(int fd)
 	sscanf(buf, "%s %s %s", method, uri, version);
 	if (strcasecmp(method, "GET")) {
 		clienterror(fd, method, "501", "Not Implemented",
-			    "Tiny does not implement this method");
+                "Tiny does not implement this method");
 		return;
 	}
 
@@ -66,21 +66,21 @@ void doit(int fd)
 	is_static = parse_uri(uri, filename, cgiargs);
 	if (stat(filename, &sbuf) < 0) {
 		clienterror(fd, filename, "404", "Not found",
-			    "Tiny couldn't find this file");
+                "Tiny couldn't find this file");
 		return;
 	}
 
 	if (is_static) {
 		if (!(S_ISREG(sbuf.st_mode)) || !(S_IRUSR & sbuf.st_mode)) {
 			clienterror(fd, filename, "403", "Forbidden",
-				    "Tiny couldn't read the file");
+                  "Tiny couldn't read the file");
 			return;
 		}
 		serve_static(fd, filename, sbuf.st_size);
 	} else {
 		if (!(S_ISREG(sbuf.st_mode)) || !(S_IXUSR & sbuf.st_mode)) {
 			clienterror(fd, filename, "403", "Forbidden",
-				    "Tiny couldn't run the CGI program");
+                  "Tiny couldn't run the CGI program");
 			return;
 		}
 		serve_dynamic(fd, filename, cgiargs);
@@ -88,7 +88,7 @@ void doit(int fd)
 }
 
 void clienterror(int fd, char *cause, char *errnum,
-		 char *shortmsg, char *longmsg)
+                 char *shortmsg, char *longmsg)
 {
 	char buf[MAXLINE], body[MAXBUF];
 
@@ -142,7 +142,6 @@ int parse_uri(char *uri, char *filename, char *cgiargs)
 		return 0;
 	}
 }
-
 
 void serve_static(int fd, char *filename, int filesize)
 {
