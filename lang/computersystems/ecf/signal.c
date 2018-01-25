@@ -17,7 +17,7 @@ void handler(int sig)
 		fprintf(stderr, "waitpid error: %s\n", strerror(errno));
 		exit(0);
 	}
-	sleep(2);	
+	sleep(2);
 }
 
 int main(void)
