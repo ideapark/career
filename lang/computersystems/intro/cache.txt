@@ -1,0 +1,20 @@
+ Storage Hierarchy
+==================
+
+  Small/Expensive/Quick
+   /|
+   /|  L0: register                               #
+    |                                            ###
+    |  L1: L1-cache                             #####
+    |                                          #######
+    |  L2: L2-cache                           #########
+    |                                        ###########
+    |  l3: L3-cache                         #############
+    |                                      ################
+    |  L4: DRAM                           ##################
+    |                                    ####################
+    |  L5: Local Disk                   ######################
+    |                                  ########################
+   \|  L6: Distributed File System    ##########################
+   \|
+  Large/Cheap/Slow
