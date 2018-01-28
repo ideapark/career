@@ -12,3 +12,10 @@
 	default = simple
 [apply]
 	whitespace = warn
+[alias]
+	change = codereview change
+	gofmt = codereview gofmt
+	mail = codereview mail
+	pending = codereview pending
+	submit = codereview submit
+	sync = codereview sync
