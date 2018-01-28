@@ -3,6 +3,10 @@ IEEE Float
 
  V = (-1)^s * M * 2^E
 
+ s: sign (1:negative 0:negative)
+ M: significand
+ E: exponent
+
  float
  -----
 
