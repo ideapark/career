@@ -37,8 +37,8 @@ points where it has to briefly stop all the threads in order to safely move to
 the next stage of collection. It does this by marking all the running goroutines
 for pre-emption. As they reach a safe point, the G’s and the M’s will go to
 sleep. When the garbage collector is the only remaining running G, it will move
-to the next stage, and then wake up GOMAXPROC M’s, which will each find
-runnable G’s, and keep going.
+to the next stage, and then wake up GOMAXPROC M’s, which will each find runnable
+G’s, and keep going.
 
 The runtime.Gosched function causes the M to put its current G on the list of
 runnable goroutines and pick a new G off that list to start running.
