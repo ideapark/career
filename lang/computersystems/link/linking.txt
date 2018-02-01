@@ -4,7 +4,7 @@ Linking
 What
 ----
 
-Collect data and text to produce a single executable.
+Collect multiple data and text to produce a single executable.
 
 When
 ----
