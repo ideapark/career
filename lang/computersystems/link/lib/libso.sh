@@ -5,7 +5,7 @@
 #
 
 #
-# HOWTO
+# HOWTO: dynamic link
 #
 #       main.c    vector.h
 #          |         |
