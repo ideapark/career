@@ -1,9 +1,41 @@
 Multiple Definition Resolve Rules
 =================================
 
-Rule 1: Two strong global symbol not allowed.
-Rule 2: Choose strong one between strong and weak symbols.
-Rule 3: Choose any one among multiple weak symbols.
+Rule1: Two strong global symbol not allowed.
+
+ERROR: multiple strong function
+1 /* foo1.c */   1 /* bar1. c*/
+2 int main() {   2 int main() {
+3   return 0;    3   return 0;
+4 }              4 }
+
+ERROR: multiple strong global variable
+1 /* foo2.c */   1 /* bar2.c */
+2 int x = 15231; 2 int x = 15231;
+3                3
+4 int main() {   4 void f() {
+5   return 0     5 }
+6 }
+
+Rule2: Choose strong one between strong and weak symbols.
+
+OK: choose foo2.c
+1 /* foo3.c */   1 /* bar3.c */
+2 int x = 15231; 2 int x;
+3                3
+4 int main() {   4 void f() {
+5   return 0     5 }
+6 }
+
+Rule3: Choose any one among multiple weak symbols.
+
+BUG: may choose double or int
+1 /* foo4.c */   1 /* bar4.c */
+2 double x;      2 int x;
+3                3
+4 int main() {   4 void f() {
+5   return 0     5 }
+6 }
 
 gcc -fno-common: print warning when came across multiple
                  definition global variables
