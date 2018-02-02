@@ -18,7 +18,7 @@ for (i = 0; i < NLET; i++) { /* generate histogram */
 		continue;
 	for (j = HEIGHT-let[i]/fac; j < HEIGHT; j++)
 		draw(j+1+LABELROW, (i+1)*WIDTH, '*');
-}
+ }
 draw(MAXROW-1, MINCOL+1, ' '); /* label x axis */
 
 for (i = 'A'; i <= 'Z'; i++)
