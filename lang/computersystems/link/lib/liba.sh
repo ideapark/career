@@ -4,7 +4,7 @@
 # Copyright (c) Zhou Peng <p@ctriple.cn>
 #
 
-# HOWTO
+# HOWTO: static link
 #
 # source               main.c   vector.h
 #                        |         |
