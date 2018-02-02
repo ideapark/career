@@ -1,4 +1,5 @@
 ECF: Exceptional Control Flow
+=============================
 
 +-----------+-----------------------+----------------+------------------------------+
 | Type      | Cause                 | [S]ync/[A]snyc | Return                       |
@@ -8,3 +9,60 @@ ECF: Exceptional Control Flow
 | fault     | Recoverable Fault     | S              | Possible Current Instruction |
 | abort     | Non-Recoverable Fault | S              | No Return                    |
 +-----------+-----------------------+----------------+------------------------------+
+
+Interrupt
+=========
+
+          |
+          |
+          |    Control transfered to interrupt hander
+    Icurr +------------------------+
+                                   |
+                                   | Interrupt handler run
+                                   |
+    Inext +------------------------+
+          |    Control transfered to next instruction
+          |
+         \|
+
+Trap
+====
+
+          |
+          |
+          |    Control transfered to interrupt hander
+  syscall +------------------------+
+                                   |
+                                   | Interrupt handler run
+                                   |
+    Inext +------------------------+
+          |    Control transfered to next instruction
+          |
+         \|
+
+Fault
+=====
+
+          |
+          |
+          |    Control transfered to hander
+    Icurr +------------------------+
+          |\                       | Handler run
+          | +----------------------+...............> ABORT
+          |                      Return to Icurr or abort
+          |
+          |
+          |
+         \|
+
+Exit
+====
+
+          |
+          |
+          |    Control transfered to hander
+    Icurr +------------------------+
+                                   |
+                                   | Terminate program
+                                   +-------------------------> ABORT
+                                     Return to exit() routine
