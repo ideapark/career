@@ -22,3 +22,12 @@ VP1| cached   |--------------------+     +-------+
    +----------+
 VPn| uncached |
    +----------+n-1
+
+Why
+===
+
+locality(局部性)
+
+ACTIVE_PAGE|WORKING_SET|RESIDENT_SET
+
+thrashing(颠簸)
