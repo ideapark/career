@@ -31,7 +31,7 @@ int main(void)
 	}
 	record = (struct pwrecord) { UINT_MAX, UINT_MAX, "", "", "", "", "" };
 	results = fscanf(fp, "%32[^:]:%32[^:]:%u:%u", recptr->user, recptr->pw,
-			&recptr->uid, &recptr->gid);
+                   &recptr->uid, &recptr->gid);
 
 	if (results < 4) {
 		fprintf(stderr, "Unable to parse line.\n");
@@ -50,7 +50,7 @@ int main(void)
 		fscanf(fp, "%*[^\n]\n"); /* read and discard reamaining text */
 	}
 	printf("The user account %s with UID %u belongs to %s.\n",
-			recptr->user, recptr->uid, recptr->realname);
+         recptr->user, recptr->uid, recptr->realname);
 
 	return 0;
 }

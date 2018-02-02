@@ -10,12 +10,12 @@ int main(void)
 	int output_len = 0;
 
 	output_len = snprintf(buffer, 80, "For the input value %lf, %lf,"
-			" and %lf, the result was %lf.\n", x, y, z, a);
+                        " and %lf, the result was %lf.\n", x, y, z, a);
 	puts(buffer);
 
 	if (output_len >= 80)
 		fprintf(stderr, "Output string truncated! Lost %d characters.\n",
-				output_len-79);
+            output_len-79);
 
 	return 0;
 }

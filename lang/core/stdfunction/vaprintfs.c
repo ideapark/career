@@ -3,7 +3,7 @@
 #include <stdarg.h>
 
 void write_log(const char *function_name, unsigned int line_num,
-		const char *format, ...)
+               const char *format, ...)
 {
 	FILE *fp_log;
 	if ((fp_log = fopen("./vaprintfs.log", "a+")) == NULL) {
@@ -16,7 +16,7 @@ void write_log(const char *function_name, unsigned int line_num,
 	va_start(argptr, format);
 
 	fprintf(fp_log, "%.8s %s (line %u): ", ctime(&timestamp)+11,
-			function_name, line_num);
+          function_name, line_num);
 	vfprintf(fp_log, format, argptr);
 
 	va_end(argptr);

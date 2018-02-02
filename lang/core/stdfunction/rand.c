@@ -6,7 +6,7 @@
 int main(void)
 {
 	printf("Think of a number between one and twenty.\n"
-		"Press Enter when you're ready.");
+         "Press Enter when you're ready.");
 	getchar();
 	srand((unsigned)time(NULL));
 

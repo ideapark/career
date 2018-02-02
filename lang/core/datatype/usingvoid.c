@@ -4,10 +4,10 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h> // void srand(unsigned int seed);
-		// int rand(void);
-		// void *malloc(size_t size);
-		// void free(void *ptr);
-		// void exit(int status);
+// int rand(void);
+// void *malloc(size_t size);
+// void free(void *ptr);
+// void exit(int status);
 
 enum { ARR_LEN = 100 };
 

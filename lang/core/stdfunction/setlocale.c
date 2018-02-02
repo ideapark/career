@@ -23,7 +23,7 @@ int main(void)
 	newlocale = setlocale(LC_CTYPE, locale);
 	if (newlocale == NULL)
 		printf("Sorry, couldn't change the locale to %s.\n"
-				"The current locale is %s.", locale, setlocale(LC_CTYPE, NULL));
+           "The current locale is %s.", locale, setlocale(LC_CTYPE, NULL));
 	else
 		printf("The new locale is %s. ", newlocale);
 

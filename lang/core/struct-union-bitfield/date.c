@@ -19,11 +19,11 @@ void printSong(const Song_t *pSong)
 	int m = pSong->duration / 60;
 	int s = pSong->duration % 60;
 	printf("-------------------------------------------\n"
-		"Title:         %s\n"
-		"Artist:        %s\n"
-		"Composer:      %s\n"
-		"Playing time:  %d:%02d\n"
-		"Date:          %s\n",
-		pSong->title, pSong->artist, pSong->composer, m, s,
-		dateAsString(pSong->published));
+         "Title:         %s\n"
+         "Artist:        %s\n"
+         "Composer:      %s\n"
+         "Playing time:  %d:%02d\n"
+         "Date:          %s\n",
+         pSong->title, pSong->artist, pSong->composer, m, s,
+         dateAsString(pSong->published));
 }

@@ -24,24 +24,24 @@ int main(void)
 
 	printf("The return value, %ld, represents %s", (long)seconds, ctime(&seconds));
 	printf("The structure has been adjusted as follows:\n"
-			"tm_sec   == %d\n"
-			"tm_min   == %d\n"
-			"tm_hour  == %d\n"
-			"tm_mday  == %d\n"
-			"tm_mon   == %d\n"
-			"tm_year  == %d\n"
-			"tm_wday  == %d\n"
-			"tm_yday  == %d\n"
-			"tm_isdst == %d\n",
-			sometime.tm_sec,
-			sometime.tm_min,
-			sometime.tm_hour,
-			sometime.tm_mday,
-			sometime.tm_mon,
-			sometime.tm_year,
-			sometime.tm_wday,
-			sometime.tm_yday,
-			sometime.tm_isdst);
+         "tm_sec   == %d\n"
+         "tm_min   == %d\n"
+         "tm_hour  == %d\n"
+         "tm_mday  == %d\n"
+         "tm_mon   == %d\n"
+         "tm_year  == %d\n"
+         "tm_wday  == %d\n"
+         "tm_yday  == %d\n"
+         "tm_isdst == %d\n",
+         sometime.tm_sec,
+         sometime.tm_min,
+         sometime.tm_hour,
+         sometime.tm_mday,
+         sometime.tm_mon,
+         sometime.tm_year,
+         sometime.tm_wday,
+         sometime.tm_yday,
+         sometime.tm_isdst);
 	printf("The structure now represents %s", asctime(&sometime));
 
 	return 0;

@@ -7,19 +7,19 @@
 #define false  0
 
 typedef struct Node {
-        struct Node *left;  // point to left node
-        struct Node *right; // point to right node
-        size_t size;        // memory needed
-        char data[];        // data
+  struct Node *left;  // point to left node
+  struct Node *right; // point to right node
+  size_t size;        // memory needed
+  char data[];        // data
 } Node_t;
 
 typedef const void *GetKeyFunc_t(const void *dData);
 typedef int CmpFunc_t(const void *pKey1, const void *pKey2);
 
 typedef struct {
-        struct Node  *pRoot;  // point to root of BST
-        CmpFunc_t    *cmp;    // compare two keys
-        GetKeyFunc_t *getKey; // convert data to key
+  struct Node  *pRoot;  // point to root of BST
+  CmpFunc_t    *cmp;    // compare two keys
+  GetKeyFunc_t *getKey; // convert data to key
 } BST_t;
 
 BST_t *newBST(CmpFunc_t *cmp, GetKeyFunc_t *getKey);

@@ -13,12 +13,12 @@ char *msgTable[5] = { "Sum", "Difference", "Product", "Quotient", "Power" };
 
 int main()
 {
-        int i;
-        double x = 0, y = 0;
-        printf("Enter two operands for some arithmetic:\n");
-        if (scanf("%lf %lf", &x, &y) != 2)
-                printf("Invalid input.\n");
-        for (i = 0; i < 5; ++i)
-                printf("%10s: %6.2f\n", msgTable[i], funcTable[i](x, y));
-        return 0;
+  int i;
+  double x = 0, y = 0;
+  printf("Enter two operands for some arithmetic:\n");
+  if (scanf("%lf %lf", &x, &y) != 2)
+    printf("Invalid input.\n");
+  for (i = 0; i < 5; ++i)
+    printf("%10s: %6.2f\n", msgTable[i], funcTable[i](x, y));
+  return 0;
 }

@@ -41,18 +41,18 @@ int main(void)
 	int result;
 
 	result = read_person(
-			pe->lastname,
-			pe->firstname,
-			pe->dob_month,
-			pe->dob_day,
-			pe->dob_year);
+                       pe->lastname,
+                       pe->firstname,
+                       pe->dob_month,
+                       pe->dob_day,
+                       pe->dob_year);
 #ifdef DEBUG
 	fprintf(stderr, "Fields read: %s, %s; born %d-%d-%d\n",
-			pe->lastname,
-			pe->firstname,
-			pe->dob_month,
-			pe->dob_day,
-			pe->dob_year);
+          pe->lastname,
+          pe->firstname,
+          pe->dob_month,
+          pe->dob_day,
+          pe->dob_year);
 #endif // def DEBUG
 	return result > 0;
 }

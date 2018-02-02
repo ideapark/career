@@ -36,7 +36,7 @@ void sigint_handler(int sig)
 
 	signal(SIGINT, SIG_IGN); /* ignore the second Ctrl+C */
 	puts("\nThis is the function sigint_handler()."
-			"\nDo you want to exit the program now? [y/n]");
+       "\nDo you want to exit the program now? [y/n]");
 
 	while ((c = tolower(getchar())) != 'y' && c != 'n')
 		;

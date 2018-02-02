@@ -22,7 +22,7 @@ int main(void)
 	else
 		greaterlessequal = "the same as";
 	printf("The word \"%s\" is %s the word \"%s\".\n",
-		word1, greaterlessequal, word2);
+         word1, greaterlessequal, word2);
 
 	return 0;
 }
