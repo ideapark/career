@@ -6,7 +6,7 @@ What can VM do?
 - easy link
 - easy load
 - easy share
-- easy memory allocation
+- easy allocation
 
          Virtual Address Space                     Physical Address Space
 
