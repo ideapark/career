@@ -7,8 +7,8 @@
 typedef int data_t;
 
 typedef struct {
-    long int len;
-    data_t *data;
+  long int len;
+  data_t *data;
 } vec_rec, *vec_ptr;
 
 vec_ptr new_vec(long int len);
