@@ -20,7 +20,7 @@ ERROR: multiple strong global variable
 Rule2: Choose strong one between strong and weak symbols.
 
 OK: choose foo2.c
-1 /* foo3.c */   1 /* bar3.c */
+1 /* foo2.c */   1 /* bar3.c */
 2 int x = 15231; 2 int x;
 3                3
 4 int main() {   4 void f() {
