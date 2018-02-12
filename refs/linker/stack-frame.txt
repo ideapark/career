@@ -1,17 +1,17 @@
 Stack Frame (Activate Record)
 =============================
 
-           +--------------------+ <----------
+           +--------------------+ <------+
            |                    |        |
            |     Func  Args     |        |
            |                    |        |
            +--------------------+        |
            |   Return address   |        |
  ebp ----->+--------------------+        |
-           |   Old ebp          |        |
+ FramePtr  |   Old ebp          |        |
            +--------------------+        |
            |                    |
-           |   Saved registers  |    Activate Record
+           |   Saved registers  |    Activate Record (Stack Frame)
            |                    |
            +--------------------+        |
            |                    |        |
@@ -21,4 +21,5 @@ Stack Frame (Activate Record)
            |                    |        |
            |   Other datas      |        |
            |                    |        |
- esp ----->+--------------------+ <----------
+ esp ----->+--------------------+ <------+
+ StackPtr
