@@ -1,26 +1,23 @@
 Root inode numbers
 ==================
 
-The inode number for the root directory of a filesystem is always 2.
-Why is that? The answer has to do with both technology and history.
+The inode number for the root directory of a filesystem is always 2. Why is
+that? The answer has to do with both technology and history.
 
-A directory entry with an inode number of zero indicates an unused,
-or empty, slot. So inode 0 cannot be used for a real file or directory.
+A directory entry with an inode number of zero indicates an unused, or empty,
+slot. So inode 0 cannot be used for a real file or directory.
 
-OK, so what about inode 1? Well, particularly in the 1970s and 1980s,
-disks were not as well made as they are now. When you bought a disk,
-it came with a list of bad blocks -- known locations on the disk that
-were not usable. Each operating system had to have to keep track of
-those blocks and avoid using them.
+OK, so what about inode 1? Well, particularly in the 1970s and 1980s, disks were
+not as well made as they are now. When you bought a disk, it came with a list of
+bad blocks -- known locations on the disk that were not usable. Each operating
+system had to have to keep track of those blocks and avoid using them.
 
-Under Unix, you did this by creating a special-purpose file, whose data
-blocks were the ones known to be bad. This file was attached on inode
-1, leaving inode 2 as the first inode usable for regular files or
-directories.
+Under Unix, you did this by creating a special-purpose file, whose data blocks
+were the ones known to be bad. This file was attached on inode 1, leaving inode
+2 as the first inode usable for regular files or directories.
 
-Modern disk drives have considerable built-in electronics and handle
-bad blocks on their own. Thus, technically, it would be feasible to
-use inode 1 for a file. However, since so much Unix software assumes
-that inode 2 is the inode for filesystem root directories. Linux follows
-this convention as well. (However, Linux sometimes uses inode 1 for
-nonnative filesystems, such as vfat or /proc.)
+Modern disk drives have considerable built-in electronics and handle bad blocks
+on their own. Thus, technically, it would be feasible to use inode 1 for a file.
+However, since so much Unix software assumes that inode 2 is the inode for
+filesystem root directories. Linux follows this convention as well. (However,
+Linux sometimes uses inode 1 for nonnative filesystems, such as vfat or /proc.)
