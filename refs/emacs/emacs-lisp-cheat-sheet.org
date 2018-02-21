@@ -3,7 +3,7 @@
 #+AUTHOR: Zhou Peng
 #+EMAIL: p@ctriple.cn
 
-* Contents :TOC_4:noexport:
+* Contents                                                                :TOC_4:noexport:
 - [[#special-form][Special form]]
 - [[#standard-library][Standard Library]]
   - [[#number][Number]]
@@ -32,6 +32,7 @@
   - [[#m-bufferel-functions-for-operating-over-the-contents-of-emacs-buffers][m-buffer.el, functions for operating over the contents of Emacs buffers]]
 
 * Special form
+
 special form has its own rule for which arguments are evaluated
 
 				  Special form
@@ -50,8 +51,11 @@ special form has its own rule for which arguments are evaluated
 | Other                  | interactive track-mouse with-output-to-temp-buffer       |
 
 * Standard Library
+
 Including function, variable, command, option, macro, Special Form
+
 ** Number
+
 Emacs supports two numeric data types: integers and floating point numbers
 
 		      Number related function and Variable
@@ -69,6 +73,7 @@ Emacs supports two numeric data types: integers and floating point numbers
 | Random Numbers         | random                                         |
 
 ** String and Character
+
 A string in Emacs Lisp is an array that contains an ordered sequence of characters
 
 	       String and Character related function and Variable
@@ -85,6 +90,7 @@ A string in Emacs Lisp is an array that contains an ordered sequence of characte
 Tip: you can also use a modern string manipulation library with 's.el'
 
 ** List
+
 Lists are built up from cons cells
 
 		       List related function and Variable
@@ -101,6 +107,7 @@ Lists are built up from cons cells
 Tip: You can benefit from a modern list manipulation api with dash.el
 
 ** Vector
+
 		      Vector related function and Variable
 | Category         | Functions Variable                 |
 |------------------+------------------------------------|
@@ -108,6 +115,7 @@ Tip: You can benefit from a modern list manipulation api with dash.el
 | Bool-vectors     | make-bool-vector bool-vector-p     |
 
 ** Sequence
+
 sequence type is the union of two other Lisp types: lists and arrays. While
 array has four types, all one-dimensional: strings, vectors, bool-vectors,
 char-tables.
@@ -120,6 +128,7 @@ char-tables.
 | Char-Tables        | make-char-table char-table-p char-table-subtype char-table-parent set-char-table-parent char-table-extra-slot set-char-table-extra-slot char-table-range set-char-table-range map-char-table |
 
 ** Hash Tables
+
 		   Hash Tables related function and Variable
 | Category      | Functions Variable                                                                                                                                   |
 |---------------+------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -129,6 +138,7 @@ char-tables.
 | Other Hash    | hash-table-p copy-hash-table hash-table-count hash-table-test hash-table-weakness hash-table-rehash-size hash-table-rehash-threshold hash-table-size |
 
 ** Symbols
+
 		     Symbols related function and Variable
 | Category               | Functions Variable                                                                         |
 |------------------------+--------------------------------------------------------------------------------------------|
@@ -137,6 +147,7 @@ char-tables.
 | Property Lists         | symbol-plist setplist get put plist-get plist-put lax-plist-get lax-plist-put plist-member |
 
 ** Minibuffer
+
 A minibuffer is a special buffer that Emacs commands use to read arguments more
 complicated than the single numeric prefix argument.
 
@@ -163,6 +174,7 @@ complicated than the single numeric prefix argument.
 | Minibuffer Miscellany  | minibufferp minibuffer-setup-hook minibuffer-exit-hook minibuffer-help-form minibuffer-scroll-window minibuffer-selected-window max-mini-window-height                                                                                                                                                                                                                                                                         |
 
 ** Keymaps
+
 		     Keymaps related function and Variable
 | Category                       | Functions Variable                                                                                                                                                                                                                                                                      |
 |--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -186,6 +198,7 @@ complicated than the single numeric prefix argument.
 | Modifying Menus                | define-key-after                                                                                                                                                                                                                                                                        |
 
 ** File
+
 See: f.el, a modern library for working with files and directories.
 
 		       File related function and Variable
@@ -205,6 +218,7 @@ See: f.el, a modern library for working with files and directories.
 | Format Conversion       | format-alist buffer-file-format format-write-file format-find-file format-insert-file buffer-auto-file-format write-region-annotate-functions write-region-post-annotation-function after-insert-file-functions                                                                                                                                                                                                                                                              |
 
 ** Buffer
+
 buffer is a lisp object containing text to be edited
 
 		      Buffer related function and Variable
@@ -280,6 +294,7 @@ buffer is a lisp object containing text to be edited
 | Display Feature Testing  | display-popup-menus-p display-graphic-p display-mouse-p display-color-p display-grayscale-p display-supports-face-attributes-p display-selections-p display-images-p display-screens display-pixel-height display-pixel-width display-mm-height display-mm-width display-mm-dimensions-alist display-backing-store display-save-under display-planes display-visual-class display-color-cells x-server-version x-server-vendor |
 
 ** Positions
+
 A position is the index of a character in the text of a buffer.
 
 		    Positions related function and Variable
@@ -291,6 +306,7 @@ A position is the index of a character in the text of a buffer.
 | Narrowing  | narrow-to-region narrow-to-page widen save-restriction                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
 ** Marker
+
 A marker is a Lisp object used to specify a position in a buffer relative to the
 surrounding text.
 
@@ -306,6 +322,7 @@ surrounding text.
 | The Region               | region-beginning region-end use-region-p                                                                                                                                                                                |
 
 ** Text
+
 Text is manipulated through Buffer object with point and marker.
 
 		       Text related function and Variable
