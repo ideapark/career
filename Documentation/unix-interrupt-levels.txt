@@ -1,14 +1,14 @@
 
- -----------------------
- |    Machine Errors   |       /|\
- -----------------------        |
- |         Clock       |        |
- -----------------------  Higher Priority
- |         Disk        |        |
- -----------------------        |
- |    Network Devices  |        |
- -----------------------   Lower Priority
- |       Terminals     |        |
- -----------------------        |
- | Software Interrupts |       \|/
- -----------------------
+ +---------------------+
+ |    Machine Errors   |  ↑
+ +---------------------+  |
+ |         Clock       |  |
+ +---------------------+  | Higher Priority
+ |         Disk        |  |
+ +---------------------+  |
+ |    Network Devices  |  |
+ +---------------------+  | Lower Priority
+ |       Terminals     |  |
+ +---------------------+  |
+ | Software Interrupts |  |
+ +---------------------+
