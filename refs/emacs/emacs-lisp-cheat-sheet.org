@@ -3,33 +3,33 @@
 #+AUTHOR: Zhou Peng
 #+EMAIL: p@ctriple.cn
 
-* Contents
-** Special form
-** Standard Library
-- Number
-- String and Character
-- List
-- Vector
-- Sequence
-- Hash Tables
-- Symbols
-- Minibuffer
-- Keymaps
-- File
-- Buffer
-- Windows
-- Frames
-- Positions
-- Marker
-- Text
-- Searching and Matching
-- Processes
-- System Interface
-- Display
-** Third party libraries
-- s.el, a string manipulation library
-- dash.el, a modern list library
-- m-buffer.el, functions for operating over the contents of Emacs buffers
+* Contents :TOC_4:noexport:
+- [[#special-form][Special form]]
+- [[#standard-library][Standard Library]]
+  - [[#number][Number]]
+  - [[#string-and-character][String and Character]]
+  - [[#list][List]]
+  - [[#vector][Vector]]
+  - [[#sequence][Sequence]]
+  - [[#hash-tables][Hash Tables]]
+  - [[#symbols][Symbols]]
+  - [[#minibuffer][Minibuffer]]
+  - [[#keymaps][Keymaps]]
+  - [[#file][File]]
+  - [[#buffer][Buffer]]
+  - [[#windows][Windows]]
+  - [[#frames][Frames]]
+  - [[#positions][Positions]]
+  - [[#marker][Marker]]
+  - [[#text][Text]]
+  - [[#searching-and-matching][Searching and Matching]]
+  - [[#processes][Processes]]
+  - [[#system-interface][System Interface]]
+  - [[#display][Display]]
+- [[#third-party-libraries][Third party libraries]]
+  - [[#sel-a-string-manipulation-library][s.el, a string manipulation library]]
+  - [[#dashel-a-modern-list-library][dash.el, a modern list library]]
+  - [[#m-bufferel-functions-for-operating-over-the-contents-of-emacs-buffers][m-buffer.el, functions for operating over the contents of Emacs buffers]]
 
 * Special form
 special form has its own rule for which arguments are evaluated
