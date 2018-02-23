@@ -1,5 +1,4 @@
-Redis
-=====
+# Redis Object
 
                                                         +-- string
                                                         |
