@@ -1,17 +1,19 @@
+User vs Kernel Stack
+====================
 
      User Stack                          Kernel Stack
 +-------------------+                +--------------------+
 | Local    not      |  Direction of  |                    |
-| Vars    shown     |  stack grouth  |         /|\        |
+| Vars    shown     |  stack growth  |          ↑         |
 |-------------------|                |          |         |
-|  Addr of Frame 2  |      /|\       |          |         |
+|  Addr of Frame 2  |       ↑        |          |         |
 |-------------------|       |        |          |         |
 |  Ret addr after   |       |        |          |         |
 |    write call     |       |        |          |         |
 |-------------------|       |        |          |         |
 | parms        new  |       |        |          |         |
 |  to        buffer |                |          |         |
-| write      count  |Frame 3         |         \|/        |
+| write      count  |Frame 3         |          ↓         |
 |-------------------|call write()    |                    |
 | Local             |         Frame 3|--------------------|
 | Vars       count  |                | Local Vars         |
