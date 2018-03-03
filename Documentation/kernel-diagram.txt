@@ -46,18 +46,18 @@ Execution mode and context
                                             |
                                             |
               +-----------------------------+-----------------------------------+
-	      |                             |                                   |
-	      |     application             |   system calls,                   |
-	      |     (user) mode             |     exceptions                    |
-	      |                             |                                   |
+              |                             |                                   |
+              |     application             |   system calls,                   |
+              |     (user) mode             |     exceptions                    |
+              |                             |                                   |
        user   | (access process space only) | (access process and system space) | kernel
            ---+-----------------------------+-----------------------------------+---
        mode   |                             | (access system space only)        | mode
               |                             |                                   |
-	      |     not allowed             |   interrupts,                     |
-	      |                             |   system tasks                    |
-	      |                             |                                   |
-	      +-----------------------------+-----------------------------------+
-	                                    |
-					    |
-			             system context
+              |     not allowed             |   interrupts,                     |
+              |                             |   system tasks                    |
+              |                             |                                   |
+              +-----------------------------+-----------------------------------+
+                                            |
+                                            |
+                                      system context
