@@ -1,33 +1,33 @@
 # Kernel/User Space
 
-  Linux User/Kernel                   Windows, default                    Windows booted
-    Memory Split                        Memory Split                     with /3GB switch
- +-----------------+0xffffffff      +-----------------+0xffffffff       +-----------------+0xffffffff
- |   Kernel Space  |                |                 |                 |   Kernel Space  |
- |       (1GB)     |                |   Kernel Space  |                 |      (1GB)      |
- +-----------------+0xc0000000      |       (2GB)     |                 +-----------------+0xc0000000
- |                 |                |                 |                 | User Mode Space |
- |                 |                +-----------------+0x80000000       |      (3GB)      |
- | User Mode Space |                |                 |                 | Only applies to |
- |      (3GB)      |                | User Mode Space |                 | EXEs flagged as |
- |                 |                |       (2GB)     |                 |  large-address  |
- |                 |                |                 |                 |     aware.      |
- +-----------------+0               +-----------------+0                +-----------------+
+     Linux User/Kernel                   Windows, default                    Windows booted
+       Memory Split                        Memory Split                     with /3GB switch
+    +-----------------+0xffffffff      +-----------------+0xffffffff       +-----------------+0xffffffff
+    |   Kernel Space  |                |                 |                 |   Kernel Space  |
+    |       (1GB)     |                |   Kernel Space  |                 |      (1GB)      |
+    +-----------------+0xc0000000      |       (2GB)     |                 +-----------------+0xc0000000
+    |                 |                |                 |                 | User Mode Space |
+    |                 |                +-----------------+0x80000000       |      (3GB)      |
+    | User Mode Space |                |                 |                 | Only applies to |
+    |      (3GB)      |                | User Mode Space |                 | EXEs flagged as |
+    |                 |                |       (2GB)     |                 |  large-address  |
+    |                 |                |                 |                 |     aware.      |
+    +-----------------+0               +-----------------+0                +-----------------+
 
 
 # Process Switches
 
- +-----------------+0xffffffff       +-----------------+0xffffffff       +-----------------+0xffffffff
- |   Kernel Space  |                 |   Kernel Space  |                 |   Kernel Space  |
- |       (1GB)     |                 |       (1GB)     |                 |       (1GB)     |
- +-----------------+0xc0000000       +-----------------+0xc0000000       +-----------------+0xc0000000
- |*****************|                 |*****************|                 |*****************|
- |                 |                 |                 |                 |                 |
- | User Mode Space |     Process     | User Mode Space |     Process     | User Mode Space |
- |****(Firefox)****|     Switch      |     (/bin/ls)   |     Switch      |*****(Firefox)***|
- |*****************|  ------------>  |                 |  ------------>  |*****************|
- |*****************|                 |*****************|                 |*****************|
- +-----------------+0                +-----------------+0                +-----------------+0
+    +-----------------+0xffffffff       +-----------------+0xffffffff       +-----------------+0xffffffff
+    |   Kernel Space  |                 |   Kernel Space  |                 |   Kernel Space  |
+    |       (1GB)     |                 |       (1GB)     |                 |       (1GB)     |
+    +-----------------+0xc0000000       +-----------------+0xc0000000       +-----------------+0xc0000000
+    |*****************|                 |*****************|                 |*****************|
+    |                 |                 |                 |                 |                 |
+    | User Mode Space |     Process     | User Mode Space |     Process     | User Mode Space |
+    |****(Firefox)****|     Switch      |     (/bin/ls)   |     Switch      |*****(Firefox)***|
+    |*****************|  ------------>  |                 |  ------------>  |*****************|
+    |*****************|                 |*****************|                 |*****************|
+    +-----------------+0                +-----------------+0                +-----------------+0
 
 
 # Segment Layout
@@ -87,20 +87,20 @@
 
 # Actual Segments
 
-          Memory
- +----------------------+                        Symbol name or address
- |         BSS          |\                             in memory
- |Read/Write (anonymous)| \
- +----------------------+  \+---------------------+
- |         Data         |\  | (memory filled with |userName
- |      Read/Write      | \ |        zeros)       |cntActiveUsers  <--+
- +----------------------+  \+---------------------+                   |
- |         Text         |\  |      0x080484f0     |gonzo              |
- |      Read/Execute    | \ +---------------------+                   |
- +----------------------+  \|         10          |cntWorkBees        |
-                        |   +---------------------+               Binary image on disk
-                        \   |"God's own prototype"|0x080484f0        (/bin/gonzo)
-                         \  +---------------------+                   |
-                          \ | jmp here, jmp there |                   |
-                           \| mov this, mov that  |0x08048000         |
-                            +---------------------+                <--+
+             Memory
+    +----------------------+                        Symbol name or address
+    |         BSS          |\                             in memory
+    |Read/Write (anonymous)| \
+    +----------------------+  \+---------------------+
+    |         Data         |\  | (memory filled with |userName
+    |      Read/Write      | \ |        zeros)       |cntActiveUsers  <--+
+    +----------------------+  \+---------------------+                   |
+    |         Text         |\  |      0x080484f0     |gonzo              |
+    |      Read/Execute    | \ +---------------------+                   |
+    +----------------------+  \|         10          |cntWorkBees        |
+                           |   +---------------------+               Binary image on disk
+                           \   |"God's own prototype"|0x080484f0        (/bin/gonzo)
+                            \  +---------------------+                   |
+                             \ | jmp here, jmp there |                   |
+                              \| mov this, mov that  |0x08048000         |
+                               +---------------------+                <--+
