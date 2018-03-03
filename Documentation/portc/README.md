@@ -1,4 +1,1 @@
-nowppc
-======
-
-notes on writing portable programs in c
+# Notes On Writing Portable Programs In C
