@@ -23,13 +23,13 @@ rdd = sc.textFile('testdata/cal_housing.data')
 header = sc.textFile('testdata/cal_housing.domain')
 
 #### Data Exploration
-print header.collect()
+print(header.collect())
 
 rdd = rdd.map(lambda line: line.split(","))
 
-print rdd.take(2)
-print rdd.first()
-print rdd.top(2)
+print(rdd.take(2))
+print(rdd.first())
+print(rdd.top(2))
 
 # map the rdd (Represents Data) to a df (DataFrames)
 df = rdd.map(lambda line: Row(longitude=line[0],
@@ -63,7 +63,7 @@ df.describe().show()
 #### Preprocessing The Targe Values
 df = df.withColumn("mediaHouseValue", col("mediaHouseValue")/100000)
 
-print df.take(2)
+print(df.take(2))
 
 #### Feature Engineering
 roomsPerHousehold = df.select(col("totalRooms")/col("households"))
@@ -74,7 +74,7 @@ df = df.withColumn("roomsPerHousehold", col("totalRooms")/col("households")) \
        .withColumn("populationPerHousehold", col("population")/col("households")) \
        .withColumn("bedroomPerRoom", col("totalBedRooms")/col("totalRooms"))
 
-print df.first()
+print(df.first())
 
 df = df.select("mediaHouseValue",
                "totalBedRooms",
@@ -92,7 +92,7 @@ df = spark.createDataFrame(input_data, ["label", "features"])
 standardScaler = StandardScaler(inputCol="features", outputCol="features_scaled")
 scaler = standardScaler.fit(df)
 scaled_df = scaler.transform(df)
-print scaled_df.take(2)
+print(scaled_df.take(2))
 
 #### Building A Machine Learning Model With Spark ML
 train_data, test_data = scaled_df.randomSplit([.8,.2], seed=1234)
@@ -102,13 +102,13 @@ predicted = linearModel.transform(test_data)
 predictions = predicted.select("prediction").rdd.map(lambda x: x[0])
 labels = predicted.select("label").rdd.map(lambda x: x[0])
 predictionAndLabel = predictions.zip(labels).collect()
-print predictionAndLabel[:5]
+print(predictionAndLabel[:5])
 
 #### Evaluating the Model
-print linearModel.coefficients
-print linearModel.intercept
-print linearModel.summary.rootMeanSquaredError
-print linearModel.summary.r2
+print(linearModel.coefficients)
+print(linearModel.intercept)
+print(linearModel.summary.rootMeanSquaredError)
+print(linearModel.summary.r2)
 
 # Stop spark session
 spark.stop()
