@@ -1,5 +1,4 @@
-Kernel/User Space
-=================
+# Kernel/User Space
 
   Linux User/Kernel                   Windows, default                    Windows booted
     Memory Split                        Memory Split                     with /3GB switch
@@ -16,8 +15,7 @@ Kernel/User Space
  +-----------------+0               +-----------------+0                +-----------------+
 
 
-Process Switches
-================
+# Process Switches
 
  +-----------------+0xffffffff       +-----------------+0xffffffff       +-----------------+0xffffffff
  |   Kernel Space  |                 |   Kernel Space  |                 |   Kernel Space  |
@@ -32,8 +30,7 @@ Process Switches
  +-----------------+0                +-----------------+0                +-----------------+0
 
 
-Segment Layout
-==============
+# Segment Layout
 
       --->+-----------------------------------------------------------+
       |   |                       Kernel space                        |
@@ -88,8 +85,7 @@ Segment Layout
       --->+-----------------------------------------------------------+0
 
 
-Acutal Segments
-===============
+# Actual Segments
 
           Memory
  +----------------------+                        Symbol name or address
