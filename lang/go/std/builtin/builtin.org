@@ -154,7 +154,7 @@ if v is nil, len(v) is zero.
 ** func make
 
 #+BEGIN_SRC go
-func make(Type, size IntegerType) Type
+func make(Type, size ...IntegerType) Type
 #+END_SRC
 
 The make built-in function allocates and initializes an object of type slice,
@@ -304,7 +304,7 @@ byte is an alias for uint8 and is equivalent to uint8 in all ways. It is used,
 by convention, to distinguish byte values from 8-bit unsigned integer values.
 
 #+BEGIN_SRC go
-type byte byte
+type byte byte // Really: type byte = uint8 (see golang.org/issue/21601)
 #+END_SRC
 
 ** type complex128
@@ -401,7 +401,7 @@ rune is an alias for int32 and is equivalent to int32 in all ways. It is used,
 by convention, to distinguish character values from integer values.
 
 #+BEGIN_SRC go
-type rune rune
+type rune rune // Really: type rune = int32 (see golang.org/issue/21601)
 #+END_SRC
 
 ** type string
