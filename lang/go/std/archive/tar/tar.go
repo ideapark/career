@@ -10,13 +10,9 @@ import (
 )
 
 func main() {
-	// Create a buffer to write our archive to.
-	buf := new(bytes.Buffer)
-
-	// Create a new tar archive.
-	tw := tar.NewWriter(buf)
-
-	// Add some files to the archive.
+	// Create and add some files to the archive.
+	var buf bytes.Buffer
+	tw := tar.NewWriter(&buf)
 	var files = []struct {
 		Name, Body string
 	}{
@@ -37,21 +33,16 @@ func main() {
 			log.Fatalln(err)
 		}
 	}
-	// Make sure to check the error on Close.
 	if err := tw.Close(); err != nil {
 		log.Fatalln(err)
 	}
 
-	// Open the tar archive for read reading.
-	r := bytes.NewReader(buf.Bytes())
-	tr := tar.NewReader(r)
-
-	// Iterate through the files in the archive.
+	// Open and iterate through the files in the archive.
+	tr := tar.NewReader(&buf)
 	for {
 		hdr, err := tr.Next()
 		if err == io.EOF {
-			// end of tar archive
-			break
+			break // end of tar archive
 		}
 		if err != nil {
 			log.Fatalln(err)
