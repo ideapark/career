@@ -16,10 +16,10 @@ A bundle contains code, resources, and metadata
  | +------|-+
  | | +------|-+
  | | |        |                             |\         +^^^^^^^^+
- | | |  .xml  |                 ------------| \        |        |
+ | | |  .xml  |                 +-----------+ \        |        |
  | | |  .jpg  |                 |              \       +^^^^^^^^+
  | | |  etc.  |                 |              /       /        \
- +-| |        |                 ------------| /       |          |
+ +-| |        |                 +-----------+ /       |          |
    +-|        |                             |/        |          |
      +--------+                                       |   Bundle |
  Resource files                                       |          |
@@ -34,4 +34,3 @@ A bundle contains code, resources, and metadata
                                 |             |
                                 +-------------+
                                    Metadata
-
