@@ -5,8 +5,8 @@
 * Difference between new() and make()
 
 - new(T) allocates zeroed storage for a new item of type T and returns its
-  address, a value of type *T: it =returns a pointer= to a newly allocated
-  zero value of type T, ready for use; it applies to value types like arrays and
+  address, a value of type *T: it =returns a pointer= to a newly allocated zero
+  value of type T, ready for use; it applies to value types like arrays and
   structs; it is equivalent to &T{}
 
 - make(T) =returns an initialized value= of type T; it applies only to the 3
