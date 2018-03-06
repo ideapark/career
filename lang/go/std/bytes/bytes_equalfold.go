@@ -1,3 +1,5 @@
+// EqualFold reports whether s and t, interpreted as UTF-8 strings, are equal
+// under Unicode case-folding.
 package main
 
 import (
