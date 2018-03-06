@@ -1,3 +1,6 @@
+// IndexFunc interprets s as a sequence of UTF-8-encoded code points. It returns
+// the byte index in s of the first Unicode code point satisfying f(c), or -1 if
+// none do.
 package main
 
 import (
