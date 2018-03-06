@@ -20,9 +20,10 @@ func main() {
 				return i + 1, data[:i], nil
 			}
 		}
-		// There is one final token to be delivered, which may be the empty string.
-		// Returning bufio.ErrFinalToken here tells Scan there are no more tokens
-		// after this but does not trigger an error to be returned from Scan itself.
+		// There is one final token to be delivered, which may be the
+		// empty string. Returning bufio.ErrFinalToken here tells Scan
+		// there are no more tokens after this but does not trigger an
+		// error to be returned from Scan itself.
 		return 0, data, bufio.ErrFinalToken
 	}
 	scanner.Split(onComma)
