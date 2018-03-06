@@ -1,3 +1,5 @@
+// Join concatenates the elements of s to create a new byte slice. The separator
+// sep is placed between elements in the resulting slice.
 package main
 
 import (
