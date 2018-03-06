@@ -1,6 +1,6 @@
-// Compare returns an integer comparing two byte slices lexicographically.
-// The result will be 0 if a == b, -1 if a < b, and +1 if a > b. A nil
-// argument is equivalent to an empty slice.
+// Compare returns an integer comparing two byte slices lexicographically. The
+// result will be 0 if a == b, -1 if a < b, and +1 if a > b. A nil argument is
+// equivalent to an empty slice.
 package main
 
 import (
