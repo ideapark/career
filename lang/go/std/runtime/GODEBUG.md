@@ -1,17 +1,14 @@
-GODEBUG
-=======
+# GODEBUG
 
 The GODEBUG variable controls debugging variables within the runtime. It is a
 comma-separated list of name=val pairs setting these named variables:
 
-allocfreetrace
---------------
+## allocfreetrace
 
 setting allocfreetrace=1 causes every allocation to be profiled and a stack
 trace printed on each object's allocation and free.
 
-cgocheck
---------
+## cgocheck
 
 setting cgocheck=0 disable all checks for packages using cgo to incorrectly pass
 Go pointers to non-Go code. Setting cgocheck=1 (the default) enables relatively
@@ -19,61 +16,52 @@ cheap checks that may miss some errors. Setting cgocheck=2 enables expensive
 checks that should not miss any errors, but will cause your program to run
 slower.
 
-efence
-------
+## efence
 
 setting efence=1 causes the allocator to run in a mode where each object is
 allocated on a unique page and addresses are never recycled.
 
-gccheckmark
------------
+## gccheckmark
 
 setting gccheckmark=1 enables verification of the garbage collector's concurrent
 mark phase by performing a second mark pass while the world is stopped. If the
 second pass finds a reachable object that was not found by concurrent mark, the
 garbage collector will panic.
 
-gcpacertrace
-------------
+## gcpacertrace
 
 setting gcpacertrace=1 causes the garbage collector to print information about
 the internal state of the concurrent pacer.
 
-gcshrinkstackoff
-----------------
+## gcshrinkstackoff
 
 setting gcshrinkstackoff=1 disables moving goroutines onto smaller stacks. In
 this mode, a goroutine's stack can only grow.
 
-gcstackbarrieroff
------------------
+## gcstackbarrieroff
 
 setting gcstackbarrieroff=1 disables the use of stack barriers that allow the
 garbage collector to avoid repeating a stack scan during the mark termination
 phase.
 
-gcstackbarrierall
------------------
+## gcstackbarrierall
 
 setting gcstackbarrierall=1 installs stack barriers in every stack frame, rather
 than in exponentially-spaced frames.
 
-gcrescanstacks
---------------
+## gcrescanstacks
 
 setting gcrescanstacks=1 enables stack re-scanning during the STW mark
 termination phase. This is helpful for debugging if objects are being
 prematurely garbage collected.
 
-gcstoptheworld
---------------
+## gcstoptheworld
 
 setting gcstoptheword=1 disables concurrent garbage collection, making every
 garbage collection a stop-the-world event. Setting gcstoptheword=2 also disables
 concurrent sweeping after the garbage collection finishes.
 
-gctrace
--------
+## gctrace
 
 setting gctrace=1 causes the garbage collector to emit a single line to the
 standard error at each collection, summarizing the amount of memory collected
@@ -109,15 +97,13 @@ where the fields are as follows:
     released: #  MB released to the system
     consumed: #  MB allocated from the system
 
-memprofilerate
---------------
+## memprofilerate
 
 setting memprofilerate=X will update the value of runtime.MemProfileRate. When
 set to 0 memory profiling is disabled. Refer to the description of
 MemProfileRate for the default value.
 
-invalidptr
-----------
+## invalidptr
 
 defaults to invalidptr=1, causing the garbage collector and stack copier to
 crash the program if an invalid pointer value (for example, 1) is found in a
@@ -125,27 +111,23 @@ pointer-typed location. Setting invalidptr=0 disables this check. This should
 only be used as a temporary workaround to diagnose buggy code. The real fix is
 to not store integers in pointer-typed locations.
 
-sbrk
-----
+## sbrk
 
 setting sbrk=1 replaces the memory allocator and garbage collector with a
 trivial allocator that obtains memory from the operating system and never
 reclaims any memory.
 
-scavenge
---------
+## scavenge
 
 scavenge=1 enables debugging mode of heap scavenger.
 
-scheddetail
------------
+## scheddetail
 
 setting schedtrace=X and scheddetail=1 causes the scheduler to emit detailed
 multiline info every X milliseconds, describing state of the scheduler,
 processors, threads and goroutines.
 
-schedtrace
-----------
+## schedtrace
 
 setting schedtrace=X causes the scheduler to emit a single line to standard
 error every X milliseconds, summaring the scheduler state.
