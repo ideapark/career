@@ -1,3 +1,6 @@
+// Split slices s into all subslices separated by sep and returns a slice of the
+// subslices between those separators. If sep is empty, Split splits after each
+// UTF-8 sequence. It is equivalent to SplitN with a count of -1.
 package main
 
 import (
