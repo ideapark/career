@@ -1,4 +1,1 @@
-ccore
-=====
-
-c language core technology
+# C Language Core Technology
