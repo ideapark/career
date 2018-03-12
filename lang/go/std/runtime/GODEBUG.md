@@ -68,6 +68,7 @@ standard error at each collection, summarizing the amount of memory collected
 and the length of the pause. Setting gctrace=2 emits the same summary but also
 repeats each collection. The format of this line is subject to change.
 Currently, it is:
+```
     gc # @#s #%: #+#+# ms clock, #+#/#/#+# ms cpu, #->#-># MB, # MB goal, # P
 where the fields are as follows:
     gc #         the GC number, incremented at each GC
@@ -77,6 +78,7 @@ where the fields are as follows:
     #->#-># MB   heap size at GC start, at GC end, and live heap
     # MB goal    goal heap size
     # P          number of processors used
+```
 The phases are stop-the-world (STW) sweep termination, concurrent mark and scan,
 and STW mark termination. The CPU times for mark/scan are broken down in to
 assist time (GC performed in line with allocation), background GC time, and idle
@@ -87,6 +89,7 @@ Setting gctrace to any value > 0 also causes the garbage collector to emit a
 summary when memory is released back to the system. This process of returning
 memory to the system is called scavenging. The format of this summary is subject
 to change. Currently it is:
+```
     scvg#: # MB released printed only if non-zero
     scvg#: inuse: # idle: # sys: # released: # consumed: # (MB)
 where the fields are as follows:
@@ -96,6 +99,7 @@ where the fields are as follows:
     sys: #       MB mapped from the system
     released: #  MB released to the system
     consumed: #  MB allocated from the system
+```
 
 ## memprofilerate
 
