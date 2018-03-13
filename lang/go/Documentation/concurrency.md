@@ -6,3 +6,6 @@ pieces. In Go, concurrency has three elements:
 - goroutines (execution)
 - channels (communication)
 - select (coordination)
+
+Concurrency is a way to design a program by decomposing it into independently
+executing pieces. The result can be clean, efficient, and very adaptable.
