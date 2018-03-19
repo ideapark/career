@@ -1,6 +1,0 @@
-#+TITLE: Golang GC Algorithm Phases
-#+AUTHOR: https://talks.golang.org/2015/go-gc.pdf
-
-* GC Algorithm Phases
-
-[[file:gc.png]]
