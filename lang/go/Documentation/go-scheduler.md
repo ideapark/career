@@ -1,6 +1,7 @@
-#+TITLE: How does the golang scheduler works
-#+AUTHOR: Ian Lance Taylor
-#+URL: https://www.quora.com/How-does-the-golang-scheduler-work/answer/Ian-Lance-Taylor
+# How does the golang scheduler works
+
+AUTHOR: Ian Lance Taylor
+URL: [Quora](https://www.quora.com/How-does-the-golang-scheduler-work/answer/Ian-Lance-Taylor)
 
 I will give an overview of the scheduler used as of Go version 1.7.
 
