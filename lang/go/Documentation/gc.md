@@ -27,4 +27,4 @@
 |                          |   |                                                                   |
 +--------------------------------------------------------------------------------------------------+
 ```
-WB: write barrier STW: stop the world
+WB: write barrier; STW: stop the world
