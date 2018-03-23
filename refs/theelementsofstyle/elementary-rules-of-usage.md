@@ -309,7 +309,34 @@ separate the title of a work from its subtitle or a Bible chapter from a verse.
 
     Nehemiah 11:7
 
-## 8.
+## 8. Use a dash to set off an abrupt break or interruption and to announce a long appositive or summary
+
+A dash is a mark of separation stronger than a comma, less formal than colon,
+and more relaxed than parentheses.
+
+    His first thought on getting out of bed -- if he had any thought at all -- was
+    to get back in again.
+
+    The rear axle began to make a noise -- a grinding, chattering, teeth-gritting
+    rasp.
+
+    The increasing reluctance of the sun to rise, the extra nip in the breeze, the
+    patter of shed leaves dropping -- all the evidences of fall drifting into winter
+    were clearer each day.
+
+Use a dash only when a more common mark of punctuation seems inadequate.
+
+    Her father's suspicions well-founded -- it was not Edward she cared for -- it
+    was San Francisco.
+
+    Her father's suspicions proved well-founded. It was not Edward she cared for,
+    it was San Francisco.
+
+    Violence -- the kind you see on television -- is not honestly violent -- there
+    lies its harm.
+
+    Violence, the kind you see on television, is not honestly violent. There lies
+    its harm.
 
 ## 9.
 
