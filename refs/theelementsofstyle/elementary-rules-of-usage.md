@@ -1,6 +1,6 @@
 # Elementary Rules of Usage
 
-## Form the possessive singular of nouns by adding 's.
+## 1. Form the possessive singular of nouns by adding 's.
 
 Follow this rule whatever the final consonant. Thus write,
 
@@ -27,7 +27,7 @@ contraction, meaning "It is." The second is a possessive.
 
     It's a wise dog that scratches its own fleas.
 
-## In a series of three or more terms with a single conjunction, use a comma after each term except the last
+## 2. In a series of three or more terms with a single conjunction, use a comma after each term except the last
 
 Thus write,
 
@@ -40,7 +40,7 @@ firms the last comma is usually omitted. Follow the usage of the individual firm
 
     Little, Brown and Company Donaldson, Lufkin & Jenrette
 
-## Enclose parenthetic expressions between commas
+## 3. Enclose parenthetic expressions between commas
 
     The best way to see a country, unless you are pressed for time, is to travel
     on foot.
@@ -161,3 +161,79 @@ clause, use a comma to set off these elements.
 
     Partly by hard fighting, partly by diplomatic skill, they enlarged their
     dominions to the east and rose to royal rank with the possession of Sicily.
+
+## 4. Place a comma before a conjunction introducing an independent clause
+
+The early records of the city have disappeared, and the story of its first years
+can no longer be reconstructed.
+
+The situation is perilous, but there is still one chance of escape.
+
+Two-part sentences of which the second member is introduced by as (in the sense
+of "because"), for, or, nor, or while (in the sense of "and at the same time")
+likewise require a comma before the conjunction.
+
+If a dependent clause, or an introductory phrase requiring to be set off by
+comma, precedes the second independent clause, no comma is needed after the
+conjunction.
+
+The situation is perilous, but if we are prepared to act promptly, there is
+still one chance of escape.
+
+When the subject is the same for both clauses and is expressed only once, a
+comma is useful if the connective is but. When the connective is and, the comma
+should be omitted if the relation between the two statements is close or
+immediate.
+
+    I have heard the aguments, but am still unconvinced.
+
+    He has had several years' expreience and is thoroughly competent.
+
+## 5. Do not join independent clauses with a comma
+
+If two or more clauses grammatically complete and not joined by a conjunction
+are to form a single compound sentence, the proper mark of punctuation is a
+semicolon.
+
+    Mary Shelley's works are entertaining; they are full of engaging ideas.
+
+    It is nearly half past five; we cannot reach town before dark.
+
+It is, of course, equally correct to write each of these as two sentences,
+replacing the semicolon with periods.
+
+    Mary Shelley's works are entertaining. they are full of engaging ideas.
+
+    It is nearly half past five. we cannot reach town before dark.
+
+If a conjunction is inserted, the proper mark is a comma. (Rule 4)
+
+    Mary Shelley's works are entertaining, for they are full of engaging ideas.
+
+    It is nearly half past five, and we cannot reach town before dark.
+
+A comparison of the three forms given above will show clearly the advantage of
+the first. It is, at least in the examples given, better than the second form
+because it suggests the close relationship between the two statements in a way
+that the second does not attempt, and better than the third because it is
+briefer and therefore more forcible. Indeed, this simple method of indicating
+relationship between statements is one of the most useful devices of compsition.
+The relationship, as above, is commonly one of cause and consequence.
+
+Note that if the second clause is preceded by an adverb, such as accordingly,
+besides, then, therefore, or thus, and not by a conjunction, the semicolon is
+still required.
+
+    I had never been in the place before; besides, it was dark as a tomb.
+
+An exception to the semicolon rule is worth nothing here. A comma is preferable
+when the clauses are very short and alike in form, or when tone of the sentence
+is easy and conversational.
+
+    Man proposes, God disposes.
+
+    The gates swung apart, the bridge fell, the portcullis was drawn up.
+
+    I hardly knew him, he was so changed.
+
+    Here today, gone tomorrow.
