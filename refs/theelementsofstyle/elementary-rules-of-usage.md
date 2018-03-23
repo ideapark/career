@@ -238,7 +238,7 @@ is easy and conversational.
 
     Here today, gone tomorrow.
 
-## Do not break sentences in two
+## 6. Do not break sentences in two
 
 In other words, do not use periods for commas.
 
@@ -265,7 +265,7 @@ Rules 3, 4, 5, and 6 cover the most important principles that govern
 punctuation. They should be thoroughly mastered that their application becomes
 second nature.
 
-## Use a colon after an independent clause to introduce a list of particulars, an appositive, an amplification, or an illustrative quotation
+## 7. Use a colon after an independent clause to introduce a list of particulars, an appositive, an amplification, or an illustrative quotation
 
 A colon tells the reader that what follows is closely related to the preceding
 clause. The colon has more effect than the comma, less power to separate than
@@ -308,3 +308,29 @@ separate the title of a work from its subtitle or a Bible chapter from a verse.
     Practical Calligraphy: An Introduction to Italic Script
 
     Nehemiah 11:7
+
+## 8.
+
+## 9.
+
+## 10.
+
+## 11.
+
+## 12.
+
+## 13.
+
+## 14.
+
+## 15.
+
+## 16.
+
+## 17.
+
+## 18.
+
+## 19.
+
+## 20.
