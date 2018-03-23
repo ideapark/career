@@ -338,7 +338,87 @@ Use a dash only when a more common mark of punctuation seems inadequate.
     Violence, the kind you see on television, is not honestly violent. There lies
     its harm.
 
-## 9.
+## 9. The number of the subject determines the number of the verb
+
+Words that intervene between subject and verb do not affect the number of the
+verb.
+
+    The bittersweet flavor of youth -- its trails, its joys, its adventures,
+    its challenges -- are not soon forgotten.
+
+    The bittersweet flavor of youth -- its trails, its joys, its adventures,
+    its challenges -- is not soon forgotten.
+
+A common blunder is the use of a singular verb form in a relative clause
+following "one of..." or a similar expression when the relative is the subject.
+
+    One of the ablest scientists who has attacked this problem.
+
+    One of the ablest scientists who have attacked this problem.
+
+    One of those people who is never ready on time.
+
+    One of those people who are never ready on time.
+
+Use a singular verb form after each, either, everyone, everybody, neither,
+nobody, someone.
+
+    Everybody thinks he has a unique sense of humor.
+
+    Although both clocks strike cheerfully, neither keeps good time.
+
+With none, use the singular verb when the word means "no one" or "not one."
+
+    None of us are perfect.
+
+    None of us is perfect.
+
+A plural verb is commonly used when none suggests more than one thing or person.
+
+    None are so fallible as those who are sure they're right.
+
+A compound subject formed of two or more nouns joined by and almost always
+requires a plural verb.
+
+    The walrus and the carpenter were walking close at hand.
+
+But certain compounds, often cliches, are so inseparable they are considered a
+unit and so take a singular verb, as do compound subjects qualified by each or
+every.
+
+    The long and the short of it is ...
+
+    Bread and butter was all she served.
+
+    Give and take is essential to a happy household.
+
+    Every window, picture, and mirror was smashed.
+
+A singular subject remains singular even if other nouns are connected to it by
+with, as well as, in addition to, except, together with, and no less than.
+
+    His speech as well as his manner is objectionable.
+
+A linking verb agrees with the number of its subject.
+
+    What is wanted is a few more pairs of hands.
+
+    The trouble with truth is its many varieties.
+
+Some nouns that appear to be plural are usually construed as singular and given
+a singular verb.
+
+    Politics is an art, not a science.
+
+    The Republican Headquarters is on his side of the tracks.
+
+But
+
+    The general's quarters are across the river.
+
+In these cases the writer must simply learn the idioms. The contents of a book
+is singular. The contents of a jar may be either singular or plural, depending
+on what's in the jar -- jam or marbles.
 
 ## 10.
 
