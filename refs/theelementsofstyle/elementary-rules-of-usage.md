@@ -264,3 +264,47 @@ happens to speak in a clipped for fragmentary way.
 Rules 3, 4, 5, and 6 cover the most important principles that govern
 punctuation. They should be thoroughly mastered that their application becomes
 second nature.
+
+## Use a colon after an independent clause to introduce a list of particulars, an appositive, an amplification, or an illustrative quotation
+
+A colon tells the reader that what follows is closely related to the preceding
+clause. The colon has more effect than the comma, less power to separate than
+the semicolon, and more formality than the dash. It usually follows an
+independent clause and should not separate a verb from its complement or a
+preposition from its object. The examples in the lefthand column, below, are
+wrong; they should be rewritten as in the righthand column.
+
+    Your dedicated whittler requires: a knife, a piece of wood, and a back porch.
+
+    Your dedicated whittler requires three props: a knife, a piece of wood, and a
+    back porch.
+
+    Understanding is that penetrating quality of knowledge that grows from:
+    theory, practice, conviction, assertion, error, and humiliation.
+
+    Understanding is that penetrating quality of knowledge that grows from
+    theory, practice, conviction, assertion, error, and humiliation.
+
+Join two independent clauses with a colon if the second interprets or amplifies
+the first.
+
+    But even so, there was a directness and dispatch about animal burial: there
+    was no stopover in the undertaker's foul parlor, no wreath or spray.
+
+A colon may introduce a quotation that supports or contributes to the preceding
+clause.
+
+    The squalor of the streets reminded her of a line from Oscar Wilde: "We are
+    all in the gutter, but some of us are looking at the stars."
+
+The colon also has certain functions of form: to follow the salutation of a
+formal letter, to separate hour from minute in a notation of time, and to
+separate the title of a work from its subtitle or a Bible chapter from a verse.
+
+    Dear Mr. Montague:
+
+    departs at 10:48 P.M.
+
+    Practical Calligraphy: An Introduction to Italic Script
+
+    Nehemiah 11:7
