@@ -237,3 +237,30 @@ is easy and conversational.
     I hardly knew him, he was so changed.
 
     Here today, gone tomorrow.
+
+## Do not break sentences in two
+
+In other words, do not use periods for commas.
+
+    I met them on a Cunard liner many years ago. Coming home from Liverpool
+    to New York
+
+    She was an interesting talker. A woman who had traveled all over the world
+    and lived in half a dozen countries.
+
+In both these examples, the first period should be replaced by a comma and the
+following word begun with a small letter.
+
+It is permissible to make an emphatic word or expression serve the purpose of a
+sentence and to punctuate it accordingly:
+
+    Again and again he called out. No reply.
+
+The writer must, however, be certain that the emphasis is warranted, lest a
+clipped sentence seem merely a blunder in syntax or in punctuation. Generally
+speaking, the place for broken sentences is in dialogue, when a character
+happens to speak in a clipped for fragmentary way.
+
+Rules 3, 4, 5, and 6 cover the most important principles that govern
+punctuation. They should be thoroughly mastered that their application becomes
+second nature.
