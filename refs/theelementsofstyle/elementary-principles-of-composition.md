@@ -95,7 +95,60 @@ succession can be distracting. Paragraph breaks used only for show read like the
 writing of commerce or of display advertising. Moderation and a sense of order
 should be the main considerations in paragraphing.
 
-## 14.
+## 14. Use the active voice
+
+The active voice is usually more direct and vigorous than the passive:
+
+    I shall always remember my first visit to Boston.
+
+This is much better than
+
+    My first visit to Boston will always be remembered by me.
+
+The latter sentence is less direct, less bold, and less concise. If the writer
+tries to make it more concise by omitting "by me,"
+
+    My first visit to Boston will always be remembered,
+
+it becomes indefinite: is it the writer or some undisclosed person or the world
+at large that will always remember this visit?
+
+This rule does not, of course, mean that the writer should entirely discard the
+passive voice, which is frequently convenient and sometimes necessary.
+
+    The dramatists of the Restoration are little esteemed today.
+
+    Modern readers have little esteem for the dramatists of the Restoration.
+
+The first would be the preferred form in a paragraph on the dramatists of the
+Restoration, the second in a paragraph on the tastes of modern readers. The need
+to make a particular word the subject of the sentence will often, as in these
+examples, determine which voice is to be used.
+
+The habitual use of the active voice, however, makes for forcible writing. This
+is true not only in narrative concerned principally with action but in writing
+of any kind. Many a tame sentence of description or exposition can be made
+lively and emphatic by substituting a transitive in the active voice for some
+such perfunctory expression as there is or could be heard.
+
+    There were a great number of dead leaves lying on the ground.
+
+    Dead leaves covered the ground.
+
+    At dawn the crowing of a rooster could be heard.
+
+    The cock's crow came with dawn.
+
+    The reason he left college was that his health became impaired.
+
+    Failing health compelled him to leave college.
+
+    It was not long before she was very sorry that she had said what she had.
+
+    She soon repented her words.
+
+Note, in the examples above, that when a sentence is made stronger, it usually
+becomes shorter. Thus, brevity is a by-product of vigor.
 
 ## 15.
 
