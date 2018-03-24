@@ -416,6 +416,87 @@ two clauses joined by a semicolon, periodic sentences of two clauses, or
 sentences (loose or periodic) of three clauses — whichever best represent the
 real relations of the thought.
 
-## 19.
+## 19. Express coordinate ideas in similar form
+
+This principle, that of parallel construction, requires that expressions similar
+in content and function be outwardly similar. The likeness of form enables the
+reader to recognize more readily the likeness of content and function. The
+familiar Beatitudes exemplify the virtue of parallel construction.
+
+    Blessed are the poor in spirit: for theirs is the kingdom of heaven.
+
+    Blessed are they that mourn: for they shall be comforted.
+
+    Blessed are the meek: for they shall inherit the earth.
+
+    Blessed are they which do hunger and thirst after righteousness: for
+    they shall be filled.
+
+The unskilled writer often violates this principle, mistakenly believing in the
+value of constantly varying the form of expression. When repeating a statement
+to emphasize it, the writer may need to vary its form. Otherwise, the writer
+should follow the principle of parallel construction.
+
+    Formerly, science was taught by the textbook method, while now the
+    laboratory method is employed.
+
+    Formerly, science was taught by the textbook method; now it is taught
+    by the laboratory method.
+
+The lefthand version gives the impression that the writer is undecided or timid,
+apparently unable or afraid to choose one form of expression and hold to it. The
+righthand version shows that the writer has at least made a choice and abided by
+it.
+
+By this principle, an article or a preposition applying to all the members of a
+series must either be used only before the first term or else be repeated before
+each term.
+
+    the French, the Italians, Spanish, and Portuguese
+
+    the French, the Italians, the Spanish, and the Portuguese
+
+    in spring, summer, or in winter
+
+    in spring, summer, or winter (in spring, in summer, or in winter)
+
+Some words require a particular preposition in certain idiomatic uses. When such
+words are joined in a compound construction, all the appropriate prepositions
+must be included, unless they are the same.
+
+    His speech was marked by disagreement and scorn for his opponent's position.
+
+    His speech was marked by disagreement with and scorn for his opponent's
+    position.
+
+Correlative expressions (both, and; not, but; not only, but also; either, or;
+first, second, third; and the like) should be followed by the same grammatical
+construction. Many violations of this rule can be corrected by rearranging the
+sentence.
+
+    It was both a long ceremony and very tedious.
+
+    The ceremony was both long and tedious.
+
+    A time not for words but action.
+
+    A time not for words but for action.
+
+    Either you must grant his request or incur his ill will.
+
+    You must either grant his request or incur his ill will.
+
+    My objections are, first, the injustice of the measure; second, that it is
+    unconstitutional.
+
+    My objections are, first, that the measure is unjust; second, that it is
+    unconstitutional.
+
+It may be asked, what if you need to express a rather large number of similar
+ideas — say, twenty? Must you write twenty consecutive sentences of the same
+pattern? On closer examination, you will probably find that the difficulty is
+imaginary — that these twenty ideas can be classified in groups, and that you
+need apply the principle only within each group. Otherwise, it is best to avoid
+the difficulty by putting statements in the form of a table.
 
 ## 20.
