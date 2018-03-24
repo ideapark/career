@@ -512,7 +512,40 @@ In the first sentence, the queried objection is to me, as opposed to other
 members of the group, asking a question. In the second example, the issue is
 whether a question may be asked at all.
 
-## 11.
+## 11. A participial phrase at the beginning of a sentence must refer to the grammatical subject
+
+    Walking slowly down the road, he saw a woman accompanied by two children.
+
+The word walking refers to the subject of the sentence, not the woman. To make
+it refer to the woman, the writer must recast the sentence.
+
+    He saw a woman, accompanied by two children, walking slowly down the road.
+
+Participial phrases preceded by a conjunction or by a preposition, nouns in
+apposition, adjectives, and adjective phrases come under the same rule if they
+begin the sentence.
+
+    On arriving in Chicago, his friends met him at the station.
+
+    On arriving in Chicago, he was met at the by his friends.
+
+    A soldier of proved valor, they entrusted him with the defense of the city.
+
+    A soldier of proved valor, has was entrusted with the defense of the city.
+
+    Young and inexperienced, the task seemed easy to me.
+
+    Young and inexperienced, I thought the task easy.
+
+    Without a friend to counsel him, the temptation proved irresistible.
+
+    Without a friend to counsel him, he found the temptation irresistible.
+
+Sentences violating Rule 11 are often ludicrous:
+
+    Being in a dilapidated condition, I was able to buy the house very cheap.
+
+    Wondering irresolutely what to do next, the clock struck twelve.
 
 ## 12.
 
