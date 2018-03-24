@@ -150,7 +150,74 @@ such perfunctory expression as there is or could be heard.
 Note, in the examples above, that when a sentence is made stronger, it usually
 becomes shorter. Thus, brevity is a by-product of vigor.
 
-## 15.
+## 15. Put statements in positive form
+
+Make definite assertions. Avoid tame, colorless, hesitating, noncommittal
+language. Use the word not as a means of denial or in antithesis, never as a
+means of evasion.
+
+    He was not very often on time.
+
+    He usually came late.
+
+    She did not think that studying Latin was a sensible way to use one's time.
+
+    She thought the study of Latin a waste of time.
+
+    The Taming of the Shrew is rather weak in spots. Shakespeare does not
+    portray Katharine as a very admirable character, nor does Bianca remain
+    long in memory as an important character in Shakespeare's works.
+
+    The women in The Taming of the Shrew are unattractive. Katharine is
+    disagreeable, Bianca insignificant.
+
+The last example, before correction, is indefinite as well as negative. The
+corrected version, consequently, is simply a guess at the writer's intention.
+
+All three examples show the weakness inherent in the word not. Consciously or
+unconsciously, the reader is dissatisfied with being told only what is not; the
+reader wishes to be told what is. Hence, as a rule, it is better to express even
+a negative in positive form.
+
+    not honest                              dishonest
+    not important                           trifling
+    did not remember                        forgot
+    did not pay any attention to            ignored
+    did not have much confidence in         distrusted
+
+Placing negative and positive in opposition makes for a stronger structure.
+
+    Not charity, but simple justice.
+
+    Not that I loved Caesar less, but that I loved Rome more.
+
+    Ask not what your country can do for you — ask what you can do for your
+    country.
+
+Negative words other than not are usually strong.
+
+    Her loveliness I never knew / Until she smiled on me.
+
+Statements qualified with unnecessary auxiliaries or conditionals sound
+irresolute.
+
+    If you would let us know the time of your arrival, we would be happy to
+    arrange your transportation from the airport.
+
+    If you will let us know the time of your arrival, we shall be happy to
+    arrange your transportation from the airport.
+
+    Applicants can make a good impression by being neat and punctual.
+
+    Applicants will make a good impression if they are neat and punctual.
+
+    Plath may be ranked among those modem poets who died young.
+
+    Plath was one of those modern poets who died young.
+
+If your every sentence admits a doubt, your writing will lack authority. Save
+the auxiliaries would, should, could, may, might, and can for situations
+involving real uncertainty.
 
 ## 16.
 
