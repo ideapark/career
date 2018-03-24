@@ -363,7 +363,58 @@ prediction of the witches by murdering Duncan and becoming king of Scotland in
 his place. (26 words)
 ```
 
-## 18.
+## 18. Avoid a succession of loose sentences
+
+This rule refers especially to loose sentences of a particular type: those
+consisting of two clauses, the second introduced by a conjunction or relative. A
+writer may err by making sentences too compact and periodic. An occasional loose
+sentence prevents the style from becoming too formal and gives the reader a
+certain relief. Consequently, loose sentences are common in easy, unstudied
+writing. The danger is that there may be too many of them.
+
+An unskilled writer will sometimes construct a whole paragraph of sentences of
+this kind, using as connectives and, but, and, less frequently, who, which,
+when, where, and while, these last in nonrestrictive senses. (See Rule 3.)
+
+```
+The third concert of the subscription series was given last evening, and a large
+audience was in attendance. Mr. Edward Appleton was the soloist, and the Boston
+Symphony Orchestra furnished the instrumental music. The former showed himself
+to be an artist of the first rank, while the latter proved itself fully
+deserving of its high reputation. The interest aroused by the series has been
+very gratifying to the Committee, and it is planned to give a similar series
+annually hereafter. The fourth concert will be given on Tuesday, May 10, when an
+equally attractive program will be presented.
+```
+
+Apart from its triteness and emptiness, the paragraph above is bad because of
+the structure of its sentences, with their mechanical symmetry and singsong.
+Compare these sentences from the chapter "What I Believe" in E. M. Forster's Two
+Cheers for Democracy:
+
+```
+I believe in aristocracy, though — if that is the right word, and if a democrat
+may use it. Not an aristocracy of power, based upon rank and influence, but an
+aristocracy of the sensitive, the considerate and the plucky. Its members are to
+be found in all nations and classes, and all through the ages, and there is a
+secret understanding between them when they meet. They represent the true human
+tradition, the one permanent victory of our queer race over cruelty and chaos.
+Thousands of them perish in obscurity, a few are great names. They are sensitive
+for others as well as for themselves, they are considerate without being fussy,
+their pluck is not swankiness but the power to endure, and they can take a
+joke.*
+```
+
+(* Excerpt from "What I Believe" in Two Cheers for Democracy, copyright 1939 and
+renewed 1967 by E. M. Forster, reprinted by permission of Harcourt, Inc. Also,
+by permission of The Provost and Scholars of King's College, Cambridge, and The
+Society of Authors as the literary representatives of the E. M. Forster Estate.)
+
+A writer who has written a series of loose sentences should recast enough of
+them to remove the monotony, replacing them with simple sentences, sentences of
+two clauses joined by a semicolon, periodic sentences of two clauses, or
+sentences (loose or periodic) of three clauses — whichever best represent the
+real relations of the thought.
 
 ## 19.
 
