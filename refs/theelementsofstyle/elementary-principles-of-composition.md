@@ -617,3 +617,44 @@ relation is suggested.
 
 Note, in the last lefthand example, how swiftly meaning departs when words are
 wrongly juxtaposed.
+
+## 21. In summaries, keep to one tense
+
+In summarizing the action of a drama, use the present tense. In summarizing a
+poem, story, or novel, also use the present, though you may use the past if it
+seems more natural to do so. If the summary is in the present tense, antecedent
+action should be expressed by the perfect; if in the past, by the past perfect.
+
+```
+Chance prevents Friar John from delivering Friar Lawrence's letter to Romeo.
+Meanwhile, owing to her father's arbitrary change of the day set for her
+wedding, Juliet has been compelled to drink the potion on Tuesday night, with
+the result that Balthasar informs Romeo of her supposed death before Friar
+Lawrence learns of the nondelivery of the letter.
+```
+
+But whichever tense is used in the summary, a past tense in indirect discourse
+or in indirect question remains unchanged.
+
+    The Friar confesses that it was he who married them.
+
+Apart from the exceptions noted, the writer should use the same tense
+throughout. Shifting from one tense to another gives the appearance of
+uncertainty and irresolution. In presenting the statements or the thought of
+someone else, as in summarizing an essay or reporting a speech, do not overwork
+such expressions as "he said," "she stated," "the speaker added," "the speaker
+then went on to say," "the author also thinks." Indicate clearly at the outset,
+once for all, that what follows is summary, and then waste no words in repeating
+the notification.
+
+In notebooks, in newspapers, in handbooks of literature, summaries of one kind
+or another may be indispensable, and for children in primary schools retelling a
+story in their own words is a useful exercise. But in the criticism or
+interpretation of literature, be careful to avoid dropping into summary. It may
+be necessary to devote one or two sentences to indicating the subject, or the
+opening situation, of the work being discussed, or to cite numerous details to
+illustrate its qualities. But you should aim at writing an orderly discussion
+supported by evidence, not a summary with occasional comment. Similarly, if the
+scope of the discussion includes a number of works, as a rule it is better not
+to take them up singly in chronological order but to aim from the beginning at
+establishing general conclusions.
