@@ -303,7 +303,65 @@ James Version).
     men of understanding, nor yet favor to men of skill; but time and chance
     happeneth to them all.
 
-## 17.
+## 17. Omit needless words
+
+Vigorous writing is concise. A sentence should contain no unnecessary words, a
+paragraph no unnecessary sentences, for the same reason that a drawing should
+have no unnecessary lines and a machine no unnecessary parts. This requires not
+that the writer make all sentences short, or avoid all detail and treat subjects
+only in outline, but that every word tell.
+
+Many expressions in common use violate this principle.
+
+    the question as to whether            whether (the question whether)
+    there is no doubt but that            no doubt (doubtless)
+    used for fuel purposes                used for fuel
+    he is a man who                       he
+    in a hasty manner                     hastily
+    this is a subject that                this subject
+    Her story is a strange one.           Her story is strange.
+    the reason why is that                because
+
+The fact that is an especially debilitating expression. It should be revised out
+of every sentence in which it occurs.
+
+    owing to the fact that                     since (because)
+    in spite of the fact that                  though (although)
+    call your attention to the fact that       remind you (notify you)
+    I was unaware of the fact that             I was unaware that (did not know)
+    the fact that he had not succeeded         his failure
+    the fact that I had arrived                my arrival
+
+See also the words case, character, nature in Chapter IV. Who is, which was, and
+the like are often superfluous.
+
+    His cousin, who is a member of the same firm
+
+    His cousin, a member of the same firm
+
+    Trafalgar, which was Nelson's last battle
+
+    Trafalgar, Nelson's last battle
+
+As the active voice is more concise than the passive, and a positive statement
+more concise than a negative one, many of the examples given under Rules 14 and
+15 illustrate this rule as well.
+
+A common way to fall into wordiness is to present a single complex idea, step by
+step, in a series of sentences that might to advantage be combined into one.
+
+```
+Macbeth was very ambitious. This led him to wish to become king of Scotland. The
+witches told him that this wish of his would come true. The king of Scotland at
+this time was Duncan. Encouraged by his wife, Macbeth murdered Duncan. He was
+thus enabled to succeed Duncan as king. (51 words)
+```
+
+```
+Encouraged by his wife, Macbeth achieved his ambition and realized the
+prediction of the witches by murdering Duncan and becoming king of Scotland in
+his place. (26 words)
+```
 
 ## 18.
 
