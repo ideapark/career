@@ -546,21 +546,3 @@ Sentences violating Rule 11 are often ludicrous:
     Being in a dilapidated condition, I was able to buy the house very cheap.
 
     Wondering irresolutely what to do next, the clock struck twelve.
-
-## 12.
-
-## 13.
-
-## 14.
-
-## 15.
-
-## 16.
-
-## 17.
-
-## 18.
-
-## 19.
-
-## 20.
