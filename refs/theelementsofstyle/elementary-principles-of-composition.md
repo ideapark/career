@@ -499,4 +499,121 @@ imaginary — that these twenty ideas can be classified in groups, and that you
 need apply the principle only within each group. Otherwise, it is best to avoid
 the difficulty by putting statements in the form of a table.
 
-## 20.
+## 20. Keep related words together
+
+The position of the words in a sentence is the principal means of showing their
+relationship. Confusion and ambiguity result when words are badly placed. The
+writer must, therefore, bring together the words and groups of words that are
+related in thought and keep apart those that are not so related.
+
+    He noticed a large stain in the rug that was right in the center.
+
+    He noticed a large stain right in the center of the rug.
+
+    You can call your mother in London and tell her all about George's taking
+    you out to dinner for just two dollars.
+
+    For just two dollars you can call your mother in London and tell her all
+    about George's taking you out to dinner.
+
+    New York's first commercial human-sperm bank opened Friday with semen samples
+    from eighteen men frozen in a stainless steel tank.
+
+    New York's first commercial human- sperm bank opened Friday when semen
+    samples were taken from eighteen men. The samples were then frozen and
+    stored in a stainless steel tank.
+
+In the lefthand version of the first example, the reader has no way of knowing
+whether the stain was in the center of the rug or the rug was in the center of
+the room. In the lefthand version of the second example, the reader may well
+wonder which cost two dollars — the phone call or the dinner. In the lefthand
+version of the third example, the reader's heart goes out to those eighteen poor
+fellows frozen in a steel tank.
+
+The subject of a sentence and the principal verb should not, as a rule, be
+separated by a phrase or clause that can be transferred to the beginning.
+
+    Toni Morrison, in Beloved, writes about characters who have escaped from
+    slavery but are haunted by its heritage.
+
+    In Beloved, Toni Morrison writes about characters who have escaped from
+    slavery but are haunted by its heritage.
+
+    A dog, if you fail to discipline him, becomes a household pest.
+
+    Unless disciplined, a dog becomes a household pest.
+
+Interposing a phrase or a clause, as in the lefthand examples above, interrupts
+the flow of the main clause. This interruption, however, is not usually
+bothersome when the flow is checked only by a relative clause or by an
+expression in apposition. Sometimes, in periodic sentences, the interruption is
+a deliberate device for creating suspense. (See examples under Rule 22.)
+
+The relative pronoun should come, in most instances, immediately after its
+antecedent.
+
+    There was a stir in the audience that suggested disapproval.
+
+    A stir that suggested disapproval swept the audience.
+
+    He wrote three articles about his adventures in Spain, which were published
+    in Harper's Magazine.
+
+    He published three articles in Harper's Magazine about his adventures in
+    Spain.
+
+    This is a portrait of Benjamin Harrison, who became President in 1889. He
+    was the grandson of William Henry Harrison.
+
+    This is a portrait of Benjamin Harrison, grandson of William Henry
+    Harrison, who became President in 1889.
+
+If the antecedent consists of a group of words, the relative comes at the end of
+the group, unless this would cause ambiguity.
+
+    The Superintendent of the Chicago Division, who
+
+No ambiguity results from the above. But
+
+    A proposal to amend the Sherman Act, which has been variously judged
+
+leaves the reader wondering whether it is the proposal or the Act that has been
+variously judged. The relative clause must be moved forward, to read, "A
+proposal, which has been variously judged, to amend the Sherman Act...."
+Similarly
+
+    The grandson of William Henry Harrison, who
+
+    William Henry Harrison's grandson, Benjamin Harrison, who
+
+A noun in apposition may come between antecedent and relative, because in such a
+combination no real ambiguity can arise.
+
+    The Duke of York, his brother, who was regarded with hostility by the Whigs
+
+Modifiers should come, if possible, next to the words they modify. If several
+expressions modify the same word, they should be arranged so that no wrong
+relation is suggested.
+
+    All the members were not present.
+
+    Not all the members were present.
+
+    She only found two mistakes.
+
+    She found only two mistakes.
+
+    The director said he hoped all members would give generously to the Fund at
+    a meeting of the committee yesterday.
+
+    At a meeting of the committee yesterday, the director said he hoped all
+    members would give generously to the Fund.
+
+    Major R. E. Joyce will give a lecture on Tuesday evening in Bailey Hall, to
+    which the public is invited on "My Experiences in Mesopotamia" at 8:00 P.M.
+
+    On Tuesday evening at eight, Major R. E. Joyce will give a lecture in Bailey
+    Hall on "My Experiences in Mesopotamia." The public is invited.
+
+Note, in the last lefthand example, how swiftly meaning departs when words are
+wrongly juxtaposed.
