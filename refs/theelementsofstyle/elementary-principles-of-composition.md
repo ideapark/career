@@ -219,7 +219,89 @@ If your every sentence admits a doubt, your writing will lack authority. Save
 the auxiliaries would, should, could, may, might, and can for situations
 involving real uncertainty.
 
-## 16.
+## 16. Use definite, specific, concrete language
+
+Prefer the specific to the general, the definite to the vague, the concrete to
+the abstract.
+
+    A period of unfavorable weather set in.
+
+    It rained every day for a week.
+
+    He showed satisfaction as he took possession of his well-earned reward.
+
+    He grinned as he pocketed the coin.
+
+If those who have studied the art of writing are in accord on any one point, it
+is this: the surest way to arouse and hold the readers attention is by being
+specific, definite, and concrete. The greatest writers — Homer, Dante,
+Shakespeare — are effective largely because they deal in particulars and report
+the details that matter. Their words call up pictures.
+
+Jean Stafford, to cite a more modern author, demonstrates in her short story "In
+the Zoo" how prose is made vivid by the use of words that evoke images and
+sensations:
+
+```
+... Daisy and I in time found asylum in a small menagerie down by the railroad
+tracks. It belonged to a gentle alcoholic ne'er-do-well, who did nothing all
+day long but drink bathtub gin in rickeys and play solitaire and smile to
+himself and talk to his animals. He had a little, stunted red vixen and a
+deodorized skunk, a parrot from Tahiti that spoke Parisian French, a woebegone
+coyote, and two capuchin monkeys, so serious and humanized, so small and sad and
+sweet, and so religious-looking with their tonsured heads that it was impossible
+not to think their gibberish was really an ordered language with a grammar that
+someday some philologist would understand.
+
+Gran knew about our visits to Mr. Murphy and she did not object, for it gave her
+keen pleasure to excoriate him when we came home. His vice was not a matter of
+guesswork; it was an established fact that he was half-seas over from dawn till
+midnight. "With the black Irish," said Gran, "the taste for drink is taken in
+with the mother's milk and is never mastered. Oh, I know all about those
+promises to join the temperance movement and not to touch another drop. The way
+to Hell is paved with good intentions."*
+```
+
+(* Excerpt from "In the Zoo" from Bad Characters by Jean Stafford. Copyright ©
+1964 by Jean Stafford. Copyright renewed © 1992 by Nora Cosgrove. Reprinted by
+permission of Farrar, Straus & Giroux, Inc. Also copyright © 1969 by Jean
+Stafford; reprinted by permission of Curtis Brown, Ltd.)
+
+If the experiences of Walter Mitty, of Molly Bloom, of Rabbit Angstrom have
+seemed for the moment real to countless readers, if in reading Faulkner we have
+almost the sense of inhabiting Yoknapatawpha County during the decline of the
+South, it is because the details used are definite, the terms concrete. It is
+not that every detail is given — that would be impossible, as well as to no
+purpose — but that all the significant details are given, and with such accuracy
+and vigor that readers, in imagination, can project themselves into the scene.
+
+In exposition and in argument, the writer must likewise never lose hold of the
+concrete; and even when dealing with general principles, the writer must furnish
+particular instances of their application.
+
+In his Philosophy of Style, Herbert Spencer gives two sentences to illustrate
+how the vague and general can be turned into the vivid and particular:
+
+    In proportion as the manners, customs, and amusements of a nation are cruel
+    and barbarous, the regulations of its penal code will be severe.
+
+    In proportion as men delight in battles, bullfights, and combats of
+    gladiators, will they punish by hanging, burning, and the rack.
+
+To show what happens when strong writing is deprived of its vigor, George Orwell
+once took a passage from the Bible and drained it of its blood. On the left,
+below, is Orwell's translation; on the right, the verse from Ecclesiastes (King
+James Version).
+
+    Objective consideration of contemporary phenomena compels the conclusion
+    that success or failure in competitive activities exhibits no tendency to
+    be commensurate with innate capacity, but that a considerable element of
+    the unpredictable must inevitably be taken into account.
+
+    I returned, and saw under the sun, that the race is not to the swift, nor
+    the battle to the strong, neither yet bread to the wise, nor yet riches to
+    men of understanding, nor yet favor to men of skill; but time and chance
+    happeneth to them all.
 
 ## 17.
 
