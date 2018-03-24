@@ -420,7 +420,97 @@ In these cases the writer must simply learn the idioms. The contents of a book
 is singular. The contents of a jar may be either singular or plural, depending
 on what's in the jar -- jam or marbles.
 
-## 10.
+## 10. Use the proper case of pronoun
+
+The personal pronouns, as well as the pronoun who, change form as they function
+as subject or object.
+
+    Will Jane or he be hired, do you think?
+
+    The culprit, it turned out, was he.
+
+    We heavy eaters would rather walk than ride.
+
+    Who knocks?
+
+    Give this work to whoever looks idle.
+
+In the last example, whoever is the subject of looks idle; the object of the
+preposition to is the entire clause whoever looks idle. When who introduces a
+subordinate clause, its case depends on its function in that clause.
+
+    Virgil Soames is the candidate whom we think will win.
+
+    Virgil Soames is the candidate who we think will win. [We think he will win.]
+
+    Virgil Soames is the candidate who we hope to elect.
+
+    Virgil Soames is the candidate whom we hope to elect. [We hope to elect him.]
+
+A pronoun in a comparison is nominative if it is the subject of a stated or
+understood verb.
+
+    Sandy writes better than I. (Than I write.)
+
+In general, avoid "understood" verbs by supplying them.
+
+    I think Horace admires Jessica more than I.
+
+    I think Horace admires Jessica more than I do.
+
+    Polly loves cake more than me.
+
+    Polly loves cake more than she loves me.
+
+The objective case is correct in the following examples.
+
+    The ranger offered Shirley and him some advice on campsites.
+
+    The came to meet the Baldwins and us.
+
+    Let's talk it over between us, then, you and me.
+
+    Whom should I ask?
+
+A group of us taxpayers protested.
+
+Us in the last example is in apposition to taxpayers, the object of the
+preposition of. The wording, although grammatically defensible, is rarely apt.
+"A group of us protested as taxpayers" is better, if not exactly equivalent.
+
+Use the simple personal pronoun as a subject.
+
+    Blake and myself stayed home.
+
+    Blake and I stayed home.
+
+    Howard and yourself brought the lunch, I thought.
+
+    Howard and you brought the lunch, I thought.
+
+The possessive case of pronouns is used to show ownership. It has two forms: the
+adjectival modifier, your hat, and the noun form, a hat of yours.
+
+    The dog has buried one of your gloves and one of mine in the flower bed.
+
+Gerunds usually require the possessive case.
+
+    Mother objected to your driving on the icy roads.
+
+A present participle as a verbal, on the other hand, takes the objective case.
+
+    The heard him singing in the shower.
+
+The difference between a verbal participle and a gerund is not always obvious,
+but note what is really said in each of the following.
+
+    Do you mind me asking a question?
+
+    Do you mind my asking a question?
+
+In the first sentence, the queried objection is to me, as opposed to other
+members of the group, asking a question. In the second example, the issue is
+whether a question may be asked at all.
 
 ## 11.
 
