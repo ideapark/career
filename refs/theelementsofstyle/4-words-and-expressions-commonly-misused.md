@@ -129,3 +129,77 @@ corrected by rearrangement.
     Our country had vast resources but seemed almost wholly unprepared for war. But within a year it had created an army of four million.
 
     Our country seemed almost wholly unprepared for war, but it had vast resources. Within a year it had created an army of four million.
+
+## *Can.*
+Means "am (is, are) able." Not to be used as a substitute for may.
+
+## *Care less.*
+The dismissive "I couldn't care less" is often used with the shortened "not"
+mistakenly (and mysteriously) omitted: "I could care less." The error destroys
+the meaning of the sentence and is careless indeed.
+
+## *Case.*
+Often unnecessary.
+
+    In many cases, the rooms lacked air conditioning.
+
+    Many of the rooms lacked air conditioning.
+
+    It has rarely been the case that any mistake has been made.
+
+    Few mistakes have been made.
+
+## *Certainly.*
+Used indiscriminately by some speakers, much as others use very, in an attempt
+to intensify any and every statement. A mannerism of this kind, bad in speech,
+is even worse in writing.
+
+## *Character.*
+Often simply redundant, used from a mere habit of wordiness.
+
+    acts of a hostile character
+
+    hostile acts
+
+## *Claim (verb).*
+With object-noun, means "lay claim to." May be used with a dependent clause if
+this sense is clearly intended: "She claimed that she was the sole heir." (But
+even here claimed to be would be better.) Not to be used as a substitute for
+declare, maintain, or charge.
+
+    He claimed he knew how.
+
+    He declared he knew how.
+
+## *Clever.*
+Note that the word means one thing when applied to people, another when applied
+to horses. A clever horse is a good-natured one, not an ingenious one.
+
+## *Compare.*
+To compare to is to point out or imply resemblances between objects regarded as
+essentially of a different order; to compare with is mainly to point out
+differences between objects regarded as essentially of the same order. Thus,
+life has been compared to a pilgrimage, to a drama, to a battle; Congress may be
+compared with the British Parliament. Paris has been compared to ancient Athens;
+it may be compared with modern London.
+
+## *Comprise.*
+Literally, "embrace": A zoo comprise mammals, reptiles, and birds (because it
+"embraces", or "includes," them). But animals do not comprise ("embrace") a zoo
+-- they constitute a zoo.
+
+## *Consider.*
+Not followed by as when it means "believe to be."
+
+    I consider him as competent.
+
+    I consider him competent.
+
+When considered means "examined" or "discussed," it is followed by as:
+
+    The lecturer  considered Eisenhower first as soldier and second as administrator.
+
+## *Contact.*
+As a transitive verb, the word is vague and self-important. Do not contact
+people; get in touch with them, look them up, phone them, find them, or meet
+them.
