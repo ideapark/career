@@ -203,3 +203,55 @@ When considered means "examined" or "discussed," it is followed by as:
 As a transitive verb, the word is vague and self-important. Do not contact
 people; get in touch with them, look them up, phone them, find them, or meet
 them.
+
+## *Cope.*
+An intransitive verb used with with. In formal writing, one doesn't "cope," one
+"copes with" something or somebody.
+
+    I knew they'd cope. (jocular)
+
+    I knew they would cope with the situation.
+
+## *Currently.*
+In the sense of now with a verb in the represent tense, currently is usually
+redundant; emphasis is better achieved through a more precise reference to time.
+
+    We are currently reviewing your application.
+
+    We are at this moment reviewing your application.
+
+## *Data.*
+Like strata, phenomena, and media, data is a plural and is best used with a
+plural verb. The word, however, is slowly gaining acceptance as a singular.
+
+    The data is misleading.
+
+    These data are misleading.
+
+## *Different than.*
+Here logic supports established usage: one thing differs from another, hence,
+different from, Or, other than, unlike.
+
+## *Disinterested.*
+Means "impartial." Do not confuse it with uninterested, which means "not
+interested in."
+
+    Let a disinterested person judge our dispute. (an impartial person)
+
+    This mean is obviously uninterested in our dispute. (couldn't care less)
+
+## *Divided into.*
+Not to be misused for composed of. The line is sometimes difficult to draw;
+doubtless plays are divided into acts, but poems are composed of stanzas. An
+apple, halved, is divided into sections, but an apple is composed of seeds,
+flesh, and skin.
+
+## *Due to.*
+Loosely used for through, because of, or owing to, in adverbial phrases.
+
+    He lost the first game due to carelessness.
+
+    He lost the first game because of carelessness.
+
+In correct use, synonymous with attributable to: "The accident was due to bad
+weather"; "losses due to preventable fires."
