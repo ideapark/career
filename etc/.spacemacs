@@ -37,7 +37,8 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      go
-     python
+     (python :variables
+             flycheck-flake8-maximum-line-length 160)
      helm
      auto-completion
      better-defaults
