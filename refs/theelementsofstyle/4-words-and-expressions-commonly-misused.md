@@ -255,3 +255,120 @@ Loosely used for through, because of, or owing to, in adverbial phrases.
 
 In correct use, synonymous with attributable to: "The accident was due to bad
 weather"; "losses due to preventable fires."
+
+## *Each and every one.*
+Pitchman's jargon. Avoid, except in dialogue.
+
+    It should be a lesson to each and every one of us.
+
+    It should be a lesson to every one of us (to us all).
+
+## *Effect.*
+As a noun, means "result"; as a verb, means "to bring about," "to accomplish"
+(not to be confused with effect, which means "to influence").
+
+As a noun, often loosely used in perfunctory writing about fashions, music,
+painting, and other arts: "a Southwestern effect"; "effects in pale green";
+"very delicate effects"; "subtle effects"; "a charming effect was produced." The
+writer who has a definite meaning to express will not take refuge in such
+vagueness.
+
+## *Enormity.*
+Use only in the sense of "monstrous wickedness." Misleading, if not wrong, when
+used to express bigness.
+
+## *Enthuse.*
+An annoying web growing out of the noun enthusiasm. Not recommended.
+
+    She was enthused about her new car.
+
+    She was enthusiastic about her new car.
+
+    She enthused about her new car.
+
+    She talked enthusiastically (expressed enthusiasm) about her new car.
+
+## *Etc.*
+Literally, "and other things."; sometimes loosely used to mean "and other
+persons." The phrase is equivalent to and the rest, and so forth, and hence is
+not to be used if one of these would be insufficient -- that is, if the reader
+would be left in doubt as to any important particulars. Least open to objection
+when it represents the last terms of a list already given almost in full, or
+immaterial words at the end of a quotation.
+
+At the end of a list introduced by such as, for example, or any similar
+expression, etc. is incorrect. In formal writing, etc. is a misfit. An item
+important enough to call for etc. is probably important enough to be named.
+
+## *Fact.*
+Use this word only of matters capable of direct verification, not of matters of
+judgment. That a particular event happened on a given date and that lead melts
+at a certain temperature are facts. But such conclusions as that climate of
+California is delightful, however defensible they may be, are not properly
+called facts.
+
+## *Facility.*
+Why must jails, hospitals, and schools suddenly become "facilities"?
+
+    Parents complained bitterly about the fire hazard in the wooden facility.
+
+    Parents complained bitterly about the fire hazard in the wooden schoolhouse.
+
+    He has been appointed warden of the new facility.
+
+    He has been appointed warden of the new prison.
+
+## *Factor.*
+A hackneyed word; the expressions of which it is a part can usually be replaced
+by something more direct and idiomatic.
+
+    Her superior training was the great factor in her winning the match.
+
+    She won the match by being better tarined.
+
+    Air power is becoming an increasingly important factor in deciding battles.
+
+    Air power is playing a larger and larger part in deciding battles.
+
+## *Farther, Further.*
+The two words are commonly interchanged, but there is a distinction worth
+observing: farther serves best as a distance word, further as a time or quantity
+word. You chase a ball farther than the other fellow; you pursue a subject
+further.
+
+## *Feature.*
+Another hackneyed word; like factor; it usually adds nothing to the sentence in
+which it occurs.
+
+    A feature of the entertainment especially worthy of mention was the singing of Allison Jones.
+
+    (Better use the same number of words to tell what Allison Jones sang and how she sang it.)
+
+As a verb, in the sense of "offer as a special attraction," it is to be avoided.
+
+## *Finalize.*
+A pompous, ambiguous verb. (See Chapter V, Reminder 21.)
+
+## *Fix.*
+Colloquial in America for arrange, prepare, mend. The usage is well established,
+But bear in mind that this verb is from figere: "to make firm," "to place
+definitely." These are the preferred meanings of the word.
+
+## *Flammable.*
+An oddity, chiefly useful in saving lives. The common word meaning "combustible"
+is inflammable. But some people are thrown off by the in- and think inflammable
+means "not combustible." For this reason, trucks carrying gasoline or explosives
+are now marked FLAMMABLE. Unless you are operating a truck and hence are
+concerned with the safety of children and illiterates, use inflammable.
+
+## *Folk.*
+A collective noun, equivalent to people. Use the singular only. Folks, in the
+sense of "parents," "family," "those present," is colloquial and too folksy for
+formal writing.
+
+    Her folks arrived by the afternoon train.
+
+    Her father and mother arrived by the afternoon train.
+
+## *Fortuitous.*
+Limited to what happens by chance. Not to be used for fortunate or lucky.
