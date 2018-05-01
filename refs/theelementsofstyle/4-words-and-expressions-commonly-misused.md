@@ -372,3 +372,241 @@ formal writing.
 
 ## *Fortuitous.*
 Limited to what happens by chance. Not to be used for fortunate or lucky.
+
+## *Get.*
+The colloquial have got for have should not be used in writing. The preferable
+form of the participle is got.
+
+    He has not got any sense.
+    He has no sense.
+    They returned without having gotten any.
+    They returned without having got any.
+
+## *Gratuitous.*
+Means "unearned," or "unwarranted."
+
+    This insult seemed gratuitous. (undeserved)
+
+## *He is a man who.*
+A common type of redundant expression; see Rule 17.
+
+    He is a man who is very ambitious.
+    He is very ambitious.
+    Vermont is a state that attracts visitors because of its winter sports.
+    Vermont attracts visitors because of its winter sports.
+
+## *Hopefully.*
+This once-useful adverb meaning "with hope" has been distorted and is now widely
+used to mean "I hope" or "it is to be hoped." Such use is not merely wrong, it
+is silly. To say, "Hopefully I'll leave on the noon plane" is to talk nonsense.
+Do you mean you'll leave on the noon plane in a hopeful frame of mind? Or do you
+mean you hope you'll leave on the noon plane? Whichever you mean, you haven't
+said it clearly. Although the word in its new, free-floating capacity may be
+pleasurable and even useful to many, it offends the ear of many others, who do
+not like to see words dulled or eroded, particularly when the erosion leads to
+ambiguity, softness, or nonsense.
+
+## *However.*
+Avoid starting a sentence with however when the meaning is "nevertheless." The
+word usually serves better when not in first position.
+
+    The roads were almost impassable. However, we at last succeeded in reaching camp.
+    The roads were almost impassable. At last, however, we succeeded in reaching camp.
+
+When however comes first, it means "in whatever way" or "to whatever extent."
+
+    However you advise him, he will probably do as he thinks best.
+    However discouraging the prospect, they never lost hert.
+
+## *Illusion.*
+See allusion.
+
+## *Imply. Infer.*
+Not interchangeable. Something implied is something suggested or indicated,
+though not expressed. Something inferred is something deduced from evidence at
+hand.
+
+    Framing implies early rising.
+    Since she was a farmer, we inferred that she got up early.
+
+## *Importantly.*
+Avoid by rephrasing.
+
+    More importantly, he paid for the damages.
+    What's more, he paid for the damages.
+    With the breeze freshening, he altered course to pass inside the island. More importantly, as things turned out, he tucked in a reef.
+    With the breeze freshening, he altered course to pass inside the island. More important, as things turned out, he tucked in a reef.
+
+## *In regard to.*
+Often wrongly written in regards to. But as regards is correct, and means the
+same thing.
+
+## *In the last analysis.*
+A bankrupt expression.
+
+## *Inside of. Inside.*
+The of following inside is correct in the adverbial meaning "in less than." In
+other meanings, of is unnecessary.
+
+    Inside of five minutes I'll be inside the bank.
+
+## *Insightful.*
+The word is a suspicious overstatement for "perceptive." If it is to be used at
+all, it should be used for instances of remarkably penetrating vision. Usually,
+it crops up merely to inflate the commonplace.
+
+    That was an insightful remark you made.
+    That was a perceptive remark you made.
+
+## *In terms of.*
+A piece of padding usually best omitted.
+
+    The job was unattractive in terms of salary.
+    The salary made the job unattractive.
+
+## *Interesting.*
+An unconvincing word; avoid it as a means of introduction. Instead of announcing
+that what you are about to tell is interesting, make it so.
+
+    An interesting story is told of
+    (Tell the story without preamble.)
+    In connection with the forthcoming visit of Mr. B. to America, it is interesting to recall that he
+    Mr. B., who will soon visit America
+
+Also to be avoided in introduction is the word of funny. Nothing becomes funny
+by being labeled so.
+
+## *Irregardless.*
+Should be regardless. The error results from failure to see the negative in
+-less and from a desire to get it in as a prefix, suggested by such words as
+irregular, irresponsible, and, perhaps especially, irrespective.
+
+  *-ize.* Do not coin verbs by adding this tempting suffix. Many good and useful
+  verbs do end in -ize: summarize, fraternize, harmonize, fertilize. But there
+  is a growing list of abominations: containerize, prioritize, finalize, to name
+  three. Be suspicious of -ize; let your ear and your eye guide you. Never tack
+  -ize onto a noun to create a verb. Usually you will discover that a useful
+  verb already exists. Why say "utilize" when there is the simple, unpretentious
+  word use?
+
+## *Kind of.*
+Except in familiar style, not to be used as a substitute for rather or something
+like. Restrict it to its literal sense: "Amber is a kind of fossil resin"; "I
+dislike that kind of publicity." The same holds true for sort of.
+
+## *Lay.*
+A transitive verb. Except is slang("Let it lay"), do not misuse it for the
+intransitive verb lie. The hen, or the play, lays an egg; the llama lies down.
+The playwright went home and lay down.
+
+    lie, lay, lain, lying
+    lay, laid, laid, laying
+
+## *Leave.*
+Not to be misused for let.
+
+    Leave it stand the way it is.
+    Let it stand the way it is.
+    Leave go of that rope!
+    Let go of that rope!
+
+## *Less.*
+Should not be misused for fewer.
+
+    They had less workers than in the previous campaign.
+    They had fewer workers than in the previous campaign.
+
+Less refers to quantity, fewer to number. "His troubles are less than mine"
+means "His troubles are not so great as mine." "His troubles are fewer than
+mine" means "His troubles are not so numerous as mine."
+
+## *Like.*
+Not to be used for the conjunction as. Like governs nouns and pronouns; before
+phrases and clauses the equivalent word is as.
+
+    We spent the evening like in the old days.
+    We spent the evening as in the old days.
+    Chloe smells good, like a baby should.
+    Chloe smells good, as a baby should.
+
+The use of like for as has its defenders; they argue that any usage that
+achieves currency becomes valid automatically. This, they say, is the way the
+language is formed. It is and it isn't. An expression sometimes merely enjoys a
+vogue, much as an article of apparel does. Like has long been widely misused by
+the illiterate; lately it has been taken up by the knowing and the
+well-informed, who find it catchy, or liberating, and who use it as though they
+were slumming. If every word or device that achieved currency were immediately
+authenticated, simply on the ground of popularity, the language would be as
+chaotic as a ball game with no foul lines. For the student, perhaps the most
+useful thing to know about like is that most carefully edited publications
+regard its use before phrases and clauses as simple error.
+
+## *Line. Along these lines.*
+Line in the sense of "course of procedure, conduct, thought" is allowable but
+has been so overworked, particularly in the phrase along these lines, that a
+writer who aims at freshness or originality had better discard it entirely.
+
+    Mr. B. also spoke along the same lines.
+    Mr. B. also spoke to the same effect.
+    She is studying along the line of French literature.
+    She is studying Frensh literature.
+
+## *Literal. Literally.*
+Often incorrectly used in support of exaggeration or violent metaphor.
+
+    a literal flood of abuse literally dead with fatigue
+    a flood of abuse almost dead with fatigue
+
+## *A noun. As a verb, prefer lend.*
+
+    Lend me your ears.
+    the loan of your ears
+
+## *Meaningful.*
+A bankrupt adjective. Choose another, or rephrase.
+
+    His was a meaningful contribution.
+    His contribution counted heavily.
+    We are instituting many meaningful changes in the curriculum.
+    We are improving the curriculum in many ways.
+
+## *Memento.*
+Often incorrectly written memento.
+
+## *Most.*
+Not to be used for almost in formal composition.
+
+    most everybody
+    almost everybody
+    most all the time
+    almost all the time
+
+## *Nature.*
+Often simply redundant, used like character.
+
+    acts of a hostile nature
+    hostile acts
+
+Nature should be avoided in such vague expressions as "a lover of nature,"
+"poems about nature." Unless more specific statements follow, the reader cannot
+tell whether the poems have to do with natural scenery, rural life, the sunset,
+the untracked wilderness, or the habits of squirrels.
+
+## *Nauseous. Nauseated.*
+The first means "sickening to contemplate"; the second means "sick at the
+stomach." Do not, therefore, say, "I feel nauseous," unless you are sure you
+have that effect on others.
+
+## *Nice.*
+A shaggy, all-purpose word, to be used sparingly in formal composition. "I had a
+nice time." "It was nice weather." "She was so nice to her mother." The meanings
+are indistinct. Nice is most useful in the sense of "precise" of "delicate": "a
+nice distinction."
+
+## *Nor.*
+Often used wrongly for or after negative expressions.
+
+    He cannot eat nor sleep.
+    He cannot ear or sleep.
+    He can neither ear nor sleep.
+    He cannot ear nor can he sleep.
