@@ -6,3 +6,4 @@ My private Linux environment configurations.
 - vim
 - gdb
 - emacs
+- fcitx (chinese input method)
