@@ -7,4 +7,4 @@ My private Linux environment configurations.
 - gdb
 - emacs
 - fcitx (chinese input method)
-- caps2ctrl.bash (set capslock to ctrl)
+- caps2ctrl.bash (set virtual console (tty) capslock to ctrl)
