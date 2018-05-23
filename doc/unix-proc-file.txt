@@ -4,13 +4,13 @@ Linux/Unix Process Address Space
     Program Stack    ||  High Address
           |          ||
           |          ||  STACK SEGMENT
-         \|/         ||
+          ↓          ||
                      ||  Stack grows downward
 
      Possible "hole"
     in address space
 
-         /|\         ||  Heap grows upward
+          ↑          ||  Heap grows upward
           |          ||
           |          ||
          Heap        ||
