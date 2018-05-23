@@ -1,11 +1,12 @@
 (1)
+
           +----------+                    +-------------+
           | pipeline | ----- pipe() ----> | fd 3 | fd 4 |
           +----------+                    +-------------+
-             /    \                            /|\
+             /    \                             ↑
          fork()  fork()                         |
            /        \                           |
-         \/          \/                         | Pipe is shared
+          ↓          ↓                          | Pipe is shared
     +----------+  +----------+                  | among parent
     | pipeline |  | pipeline |                  | and both children
     +----------+  +----------+                  |
@@ -13,15 +14,16 @@
          +--------------+-----------------------+
   Left-hand child  Right-hand child
 
+
 (2)
                                            |
           +----------+                     | +-------------+
           | pipeline | ----- close() ----> | | fd 3 | fd 4 |
           +----------+                     | +-------------+
-           /        \                      |       /|\
+           /        \                      |        ↑
        wait()      wait()                           |
-         /            ----------\                   |
-       \/                        \/                 | Parent closes pipe,
+         /            ----------+                   |
+        ↓                       ↓                   | Parent closes pipe,
  +----------+       |       +----------+            | waits for children
  | pipeline | --> 1 | 0 --> | pipeline |            |
  +----------+       |       +----------+            | Children move pipe
@@ -38,8 +40,8 @@ Left-hand child           Right-hand child
            /        \
         wait()     wait()            Child call exec(),
           /            \             programs run
-         /              \-------------
-       \/                             \/
+         /              \-------------+
+        ↓                             ↓
 +---------------+               +------------------+
 | echo hi there | --> 1 | 0 --> | sed s/hi/hello/g | hello there
 +---------------+               +------------------+
