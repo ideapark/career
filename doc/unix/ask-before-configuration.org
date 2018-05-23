@@ -8,7 +8,7 @@
   user?
 - Could the program's normal behavior be changed in an innocuous way that would
   make the option unnecessary?
-- I this option merely cosmetic? Should I be thinking less about how to make the
+- Is this option merely cosmetic? Should I be thinking less about how to make the
   user interface configurable and more about how to make it right?
 - Should the behavior enable by this option be a separate program instead?
 
