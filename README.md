@@ -1,2 +1,3 @@
-# DORA
-Thinking In Programming
+# www.ctriple.cn
+
+The way to programming.
