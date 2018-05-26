@@ -8,16 +8,16 @@
 int cut(char *str, const char *cut)
 {
 	int ncut;
-	struct range range;
+	struct range r;
 
 	ncut = 0;
-	while (grep(str, cut, &range)) {
+	while (grep(str, cut, &r)) {
 		ncut++;
 		do {
-			str[range.begin] = str[range.end];
-			range.begin++;
-			range.end++;
-		} while (str[range.begin] != '\0');
+			str[r.begin] = str[r.end];
+			r.begin++;
+			r.end++;
+		} while (str[r.begin] != '\0');
 	}
 
 	return ncut;
