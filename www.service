@@ -1,0 +1,12 @@
+[Unit]
+Description=www.ctriple.cn powered by python3.0+
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/ctriple/www.ctriple.cn
+ExecStart=python -m http.server 8080
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
