@@ -610,3 +610,122 @@ Often used wrongly for or after negative expressions.
     He cannot ear or sleep.
     He can neither ear nor sleep.
     He cannot ear nor can he sleep.
+
+## *Noun used as verb.*
+Many nouns have lately been pressed into service as verbs. Not all are bad, but
+all are suspect.
+
+    Be prepared for kisses when you gift your girlfriend with this merry scent.
+    Be prepared for kisses when you give your girlfriend this merry scent.
+
+    The candidate hosted a dinner for fifty of her workers.
+    The candidate gave a dinner for fifty of her workers.
+
+    The meeting was chaired by Mr. Oglethorp.
+    Mr. Oglethorp was chair of the meeting.
+
+    She headquarters in Newark.
+    She has headquarters in Newark.
+
+    The theater troupe debuted last fall.
+    The theatre troupe made its debut last fall.
+
+## *Offputting. Ongoing.*
+Newfound adjectives, to be avoided because they are inexact and clumsy. Ongoing
+is a mix of "continuing" and "active" and is usually superfluous.
+
+    He devoted all his spare time to the ongoing program for aid to the elderly.
+    He devoted all his sapre time to the program for aid to the elderly.
+
+Offputting might mean "objectionable," "disconcerting," "distasteful." Select
+instead a word whose meaning is clear. As a simple test, transform the
+participles to verbs. It is possible to upset something. But to offput? To ongo?
+
+## *One.*
+In the sense of "a person," not to be followed by his or her.
+
+    One must watch his step.
+    One must watch one's step. (You must watch your step.)
+
+## *One of the most.*
+Avoid this feeble formula. "One of the most exciting developments of modern
+science is..."; "Switzerland is one of the most beautiful countries of Europe."
+There is nothing wrong with the grammar; the formula is simply threadbare.
+
+## *-oriented.*
+A clumsy, pretentious device, much in vogue. Find a better way of indicating
+orientation or alignment or direction.
+
+    It was a manufacturing-oriented company.
+    It was a company chiefly concerned with manufacturing.
+
+    Many of the skits are situation-oriented.
+    Many of the skits rely on situation.
+
+## *Partially.*
+Not always interchangeable with partly. Best used in the sense of "to a certain
+degree," when speaking of a condition or state: "I'm partially resigned to it."
+Partly carries the idea of a part as distinct from the whole -- usually a
+physical object.
+
+    The log was partially submerged.
+    The log was partly sub-merged.
+
+    She was partially in and partially out.
+    She was parly in and partly out.
+    She was part in, part out.
+
+## *Participle for verbal noun.*
+
+    There was little prospect of the Senate accepting.
+    There was little prospect of the Senate's accepting even this compromise.
+
+In the lefthand column, accepting is a present participle; in the righthand
+column, it is a verbal noun (gerund). The construction shown in the lefthand
+column is occasionally found, and has its defenders. Yet is is easy to see that
+the second sentence has to do not with a prospect of the Senate but with a
+prospect of accepting.
+
+Any sentence in which the use of the possessive is awkward or impossible should
+of course be recast.
+
+    In the event of a reconsideration of the whole mater's becomming necessary.
+    If it should become necessary to reconsider the whole matter.
+
+    There was great dissatisfaction with the decision of the arbitrators being favorable to the company.
+    There was great dissatisfaction with the arbitrators' decision in favor of the compay.
+
+## *People.*
+A word with many meanings. (The American Heritage Dictionary, Third Edition,
+gives nine.) The people is a political support or opposition; from the public
+comes artistic appreciation or commercial patronage.
+
+The word people is best not used with words of number, in place of persons. If
+of "six people" five went away, how many people would be left? Answer: one
+people.
+
+## *Personalize.*
+A pretentious word, often carrying bad advice. Do not personalize your prose;
+simply make it good and keep it clean. See Chaper V, Reminder 1.
+
+    a highly personalized affair
+    a highly personal affair
+
+    Personalize your stationery.
+    Design a letterhead.
+
+## *Personally.*
+Often unnecessary.
+
+    Personally, I thought it was a good book.
+    I thought it a good book.
+
+## *Possess.*
+Often used because to the writer it sounds more impressive than have or own.
+Such usage is not incorrect but is to guarded against.
+
+    She possessed great courage.
+    She had great courage (was very brave).
+
+    He was the fortunate possessor of.
+    He was lucky enough to own.
