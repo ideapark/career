@@ -1,3 +1,3 @@
-# www.ctriple.cn
+# http://www.ctriple.cn
 
 The way to programming.
