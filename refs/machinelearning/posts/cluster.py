@@ -33,7 +33,7 @@ print(vectorizer)
 
 content = ["How to format my hard disk", " Hard disk format problems "]
 X = vectorizer.fit_transform(content)
-print vectorizer.get_feature_names()
+print(vectorizer.get_feature_names())
 print(X.toarray().transpose())
 
 DIR = '.'
@@ -52,11 +52,11 @@ print(X_train.getrow(4).toarray())
 import nltk.stem
 
 s = nltk.stem.SnowballStemmer('english')
-print s.stem("graphics")
-print s.stem("imaging")
-print s.stem("image")
-print s.stem("imagination")
-print s.stem("imagine")
+print(s.stem("graphics"))
+print(s.stem("imaging"))
+print(s.stem("image"))
+print(s.stem("imagination"))
+print(s.stem("imagine"))
 
 # NLTK stemmed CountVectorizer
 english_stemmer = nltk.stem.SnowballStemmer('english')
@@ -99,4 +99,4 @@ class StemmedTfidfVectorizer(TfidfVectorizer):
         return lambda doc: (english_stemmer.stem(w) for w in analyzer(doc))
 vectorizer = StemmedTfidfVectorizer(min_df=1,
                                     stop_words='english')
-print vectorizer
+print(vectorizer)

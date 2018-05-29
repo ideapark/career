@@ -23,8 +23,8 @@ for doc in mm:
 import numpy as np
 
 lens = np.array([len(t) for t in topics])
-print np.mean(lens)
-print np.mean(lens <= 10)
+print(np.mean(lens))
+print(np.mean(lens <= 10))
 
 
 counts = np.zeros(100)

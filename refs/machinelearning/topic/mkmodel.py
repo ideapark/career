@@ -6,7 +6,7 @@ model = models.ldamodel.LdaModel(corpus,
                                  id2word=corpus.id2word,
                                  alpha=0.5)
 topics = [model[c] for c in corpus]
-print topics[0]
+print(topics[0])
 
 import numpy as np
 
@@ -29,4 +29,4 @@ for ti in range(len(topics)):
 def closest_to(doc_id):
     return pairwise[doc_id].argmin()
 
-print closest_to(1)
+print(closest_to(1))

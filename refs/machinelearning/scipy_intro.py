@@ -1,9 +1,9 @@
 import scipy, numpy
 
-print scipy.version.full_version
+print(scipy.version.full_version)
 
 # numpy is available by scipy
-print scipy.dot is numpy.dot
+print(scipy.dot is numpy.dot)
 
 # SciPy packages
 #

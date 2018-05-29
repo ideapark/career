@@ -10,7 +10,7 @@ x = data[:,0]
 y = data[:,1]
 
 # y contains invalid value
-print sp.sum(sp.isnan(y))
+print(sp.sum(sp.isnan(y)))
 
 # clean nan
 x = x[~sp.isnan(y)]
