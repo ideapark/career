@@ -46,7 +46,7 @@ static void unlock_cond(void *arg)
 
 /*
  * Worker thread routine.
- * 
+ *
  * Worker threads start with this routine, which begins with a condition wait
  * designed to synchronize workers and the parent. Each worker thread then
  * takes a turn taking a number of which it will determine whether or not it
