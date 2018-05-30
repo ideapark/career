@@ -53,29 +53,30 @@
 # sets of data are uncorrelated, has same dimension as rho.
 
 from scipy import stats
+import numpy as np
 
-print stats.spearmanr([1, 2, 3, 4, 5], [5, 6, 7, 8, 7])
+print(stats.spearmanr([1, 2, 3, 4, 5], [5, 6, 7, 8, 7]))
 
 np.random.seed(1234321)
 
 x2n = np.random.randn(100, 2)
 y2n = np.random.randn(100, 2)
 
-print stats.spearmanr(x2n)
-print stats.spearmanr(x2n[:,0], x2n[:,1])
+print(stats.spearmanr(x2n))
+print(stats.spearmanr(x2n[:, 0], x2n[:, 1]))
 
 rho, pval = stats.spearmanr(x2n, y2n)
 
-print rho
-print pval
+print(rho)
+print(pval)
 
 rho, pval = stats.spearmanr(x2n.T, y2n.T, axis=1)
 
-print rho
-print pval
+print(rho)
+print(pval)
 
-print stats.spearmanr(x2n, y2n, axis=None)
-print stats.spearmanr(x2n.ravel(), y2n.ravel())
+print(stats.spearmanr(x2n, y2n, axis=None))
+print(stats.spearmanr(x2n.ravel(), y2n.ravel()))
 
 xint = np.random.randint(10, size=(100, 2))
-print stats.spearmanr(xint)
+print(stats.spearmanr(xint))

@@ -31,6 +31,7 @@
 # 2-tailed p-value
 
 from scipy import stats
+import numpy as np
 
 a = np.array([0, 0, 0, 1, 1, 1, 1])
 b = np.arange(7)
