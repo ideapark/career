@@ -6,5 +6,5 @@ objs += popt_options.o
 
 all: $(objs)
 
-popt_options.o: popt_options.cpp
+popt_options.o: popt_options.cc
 	$(CC) $(ccflags) $(include) -c $< -o $@

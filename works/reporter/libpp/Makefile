@@ -6,5 +6,5 @@ objs += locate_images.o
 
 all: $(objs)
 
-locate_images.o: locate_images.cpp
+locate_images.o: locate_images.cc
 	$(CC) $(ccflags) $(include) -c $< -o $@

@@ -16,35 +16,35 @@ objs += string_manip.o
 
 all: $(objs)
 
-bfd_support.o: bfd_support.cpp
+bfd_support.o: bfd_support.cc
 	$(CC) $(ccflags) $(include) -c $< -o $@
 
-child_reader.o: child_reader.cpp
+child_reader.o: child_reader.cc
 	$(CC) $(ccflags) $(include) -c $< -o $@
 
-cverb.o: cverb.cpp
+cverb.o: cverb.cc
 	$(CC) $(ccflags) $(include) -c $< -o $@
 
-file_manip.o: file_manip.cpp
+file_manip.o: file_manip.cc
 	$(CC) $(ccflags) $(include) -c $< -o $@
 
-glob_filter.o: glob_filter.cpp
+glob_filter.o: glob_filter.cc
 	$(CC) $(ccflags) $(include) -c $< -o $@
 
-op_bfd.o: op_bfd.cpp
+op_bfd.o: op_bfd.cc
 	$(CC) $(ccflags) $(include) -c $< -o $@
 
-op_exception.o: op_exception.cpp
+op_exception.o: op_exception.cc
 	$(CC) $(ccflags) $(include) -c $< -o $@
 
-path_filter.o: path_filter.cpp
+path_filter.o: path_filter.cc
 	$(CC) $(ccflags) $(include) -c $< -o $@
 
-stream_util.o: stream_util.cpp
+stream_util.o: stream_util.cc
 	$(CC) $(ccflags) $(include) -c $< -o $@
 
-string_filter.o: string_filter.cpp
+string_filter.o: string_filter.cc
 	$(CC) $(ccflags) $(include) -c $< -o $@
 
-string_manip.o: string_manip.cpp
+string_manip.o: string_manip.cc
 	$(CC) $(ccflags) $(include) -c $< -o $@
