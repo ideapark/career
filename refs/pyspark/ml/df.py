@@ -5,7 +5,6 @@ https://github.com/apache/spark/blob/master/examples/src/main/python/ml/datafram
 from __future__ import print_function
 
 import os
-import sys
 import tempfile
 import shutil
 
@@ -25,9 +24,9 @@ labelSummary = df.describe("label")
 labelSummary.show()
 
 # convert features column to an RDD of vectors
-features = MLUtils.convertVectorColumnsFromML(df, "features")\
-                  .select("features")\
-                  .rdd\
+features = MLUtils.convertVectorColumnsFromML(df, "features") \
+                  .select("features") \
+                  .rdd \
                   .map(lambda r: r.features)
 summary = Statistics.colStats(features)
 print("Selected features solumn with average values:\n" + str(summary.mean()))

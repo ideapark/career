@@ -10,8 +10,8 @@ from pyspark.sql.types import IntegerType
 from pyspark.sql import SparkSession
 
 
-spark = SparkSession.builder\
-                    .appName("Pyspark Machine Learning: Tokenizer")\
+spark = SparkSession.builder \
+                    .appName("Pyspark Machine Learning: Tokenizer") \
                     .getOrCreate()
 
 sentenceDataFrame = spark.createDataFrame([
@@ -27,13 +27,13 @@ regexTokenizer = RegexTokenizer(inputCol="sentence",
 
 countTokens = udf(lambda words: len(words), IntegerType())
 tokenized = tokenizer.transform(sentenceDataFrame)
-tokenized.select("sentence", "words")\
-         .withColumn("tokens", countTokens(col("words")))\
+tokenized.select("sentence", "words") \
+         .withColumn("tokens", countTokens(col("words"))) \
          .show(truncate=False)
 
 regexTokenized = regexTokenizer.transform(sentenceDataFrame)
-regexTokenized.select("sentence", "words")\
-              .withColumn("tokens", countTokens(col("words")))\
+regexTokenized.select("sentence", "words") \
+              .withColumn("tokens", countTokens(col("words"))) \
               .show(truncate=False)
 
 spark.stop()
