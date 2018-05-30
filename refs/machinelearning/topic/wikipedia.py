@@ -1,4 +1,6 @@
-import logging, gensim
+import logging
+import gensim
+import numpy as np
 
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %s(message)s',
                     level=logging.INFO)
@@ -18,9 +20,6 @@ model = gensim.models.ldamodel.LdaModel.load('wiki_lda.pkl')
 topics = []
 for doc in mm:
     topics.append(model[doc])
-
-
-import numpy as np
 
 lens = np.array([len(t) for t in topics])
 print(np.mean(lens))
