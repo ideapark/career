@@ -66,7 +66,7 @@ test = spark.createDataFrame([
 # 'probability' column since we renamed the lr.probabilityCol parameter previously.
 prediction = model2.transform(test)
 result = prediction.select("features", "label", "myProbability", "prediction") \
-    .collect()
+                   .collect()
 
 for row in result:
     print("features=%s, label=%s -> prob=%s, prediction=%s" %

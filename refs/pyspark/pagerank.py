@@ -10,19 +10,22 @@ from operator import add
 
 from pyspark.sql import SparkSession
 
+
 def computeContribs(urls, rank):
     """Calculates URL contributions to the rank of other URLs."""
     num_urls = len(urls)
     for url in urls:
         yield(url, rank/num_urls)
 
+
 def parseHeighbors(urls):
     """Parses a urls pair string into urls pair."""
     parts = re.split(r'\s+', urls)
     return parts[0], parts[1]
 
-print("WARN: This is a naive implementation of PageRank and is given as an example!\n"+
-        "Please refer to PageRank implementation provided by graphx", file=sys.stderr)
+
+print("WARN: This is a naive implementation of PageRank and is given as an example!\n" +
+      "Please refer to PageRank implementation provided by graphx", file=sys.stderr)
 
 # Initialize the spark context.
 spark = SparkSession.builder.appName("PythonPageRank").getOrCreate()
@@ -32,7 +35,7 @@ spark = SparkSession.builder.appName("PythonPageRank").getOrCreate()
 #     URL     neighbor URL
 #     URL     neighbor URL
 #     ...
-lines = spark.read.text('testdata/pagerank.data').rdd.map(lambda r:r[0])
+lines = spark.read.text('testdata/pagerank.data').rdd.map(lambda r: r[0])
 
 # Loads all URLs from input file and initialize their neighbors.
 links = lines.map(lambda urls: parseHeighbors(urls)).distinct().groupByKey().cache()
@@ -49,7 +52,7 @@ for iteration in range(50):
     # Re-calculates URL ranks based on neighbor contributions.
     ranks = contribs.reduceByKey(add).mapValues(lambda rank: rank*0.85+0.15)
 
-for (link,rank) in ranks.collect():
+for (link, rank) in ranks.collect():
     print("%s has rank: %s." % (link, rank))
 
 spark.stop()
