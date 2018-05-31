@@ -23,7 +23,9 @@ def generateGraph():
     return edges
 
 
-spark = SparkSession.builder.appName("PythonTransitiveClosure").getOrCreate()
+spark = SparkSession.builder \
+                    .appName("PythonTransitiveClosure") \
+                    .getOrCreate()
 
 partitions = 2
 
@@ -39,6 +41,7 @@ edges = tc.map(lambda x_y: (x_y[1], x_y[0]))
 
 oldCount = 0
 nextCount = tc.count()
+
 while True:
     oldCount = nextCount
     # Perform the join, obtaining an RDD of (y,(z,x)) pairs,
