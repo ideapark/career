@@ -18,7 +18,7 @@ def computeContribs(urls, rank):
         yield(url, rank/num_urls)
 
 
-def parseHeighbors(urls):
+def parseNeighbors(urls):
     """Parses a urls pair string into urls pair."""
     parts = re.split(r'\s+', urls)
     return parts[0], parts[1]
@@ -38,7 +38,7 @@ spark = SparkSession.builder.appName("PythonPageRank").getOrCreate()
 lines = spark.read.text('testdata/pagerank.data').rdd.map(lambda r: r[0])
 
 # Loads all URLs from input file and initialize their neighbors.
-links = lines.map(lambda urls: parseHeighbors(urls)).distinct().groupByKey().cache()
+links = lines.map(lambda urls: parseNeighbors(urls)).distinct().groupByKey().cache()
 
 # Loads all URLs from other URL(s) link to from input file and initialize ranks of them to one.
 ranks = links.map(lambda url_neighbors: (url_neighbors[0], 1.0))
