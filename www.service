@@ -1,11 +1,11 @@
 [Unit]
-Description=www.ctriple.cn powered by python3.0+
+Description=www.ctriple.cn powered by golang
 After=network.target
 
 [Service]
 Type=simple
 WorkingDirectory=/home/ctriple/www.ctriple.cn
-ExecStart=/usr/bin/python -m http.server 9090
+ExecStart=/usr/local/go/bin/go run /home/ctriple/www.ctriple.cn/lib/server.go
 Restart=on-failure
 
 [Install]
