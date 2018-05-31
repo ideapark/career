@@ -51,7 +51,7 @@
                                        '(member ,g ',k))
                                       (t '(eql ,g ',k)))
                                (progn ,@(cdr cl)))))
-                clauses)))))
+                clauses)))
 
 (defun -cddr (x) (cdr (cdr x)))
 
