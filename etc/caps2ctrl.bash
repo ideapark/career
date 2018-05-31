@@ -1,4 +1,4 @@
-#!/us/bin/env bash
+#!/usr/bin/env bash
 
 # NOTE: root permission required to run this script
 
