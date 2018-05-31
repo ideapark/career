@@ -1,4 +1,5 @@
-import scipy, numpy
+import scipy
+import numpy
 
 print(scipy.version.full_version)
 
