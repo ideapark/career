@@ -15,7 +15,7 @@ register r to hold a local variable and calls procedure g, which also uses r for
 its own calculations. Then r must be saved (stored into a stack frame) before g
 uses it and restored (fetched back from the frame) after g is finished using it.
 
-But is it f ’s responsibility to save and restore the register, or g’s? We say
+But is it f’s responsibility to save and restore the register, or g’s? We say
 that r is a =caller-save= register if the caller (in this case, f) must save and
 restore the register, and r is =callee-save= if it is the responsibility of the
 callee (in this case, g).

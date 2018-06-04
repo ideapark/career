@@ -1,7 +1,7 @@
 FINITE AUTOMATA
 ---------------
 
-A finite automation has a finite set of states; edges lead from one state to
+A finite automaton has a finite set of states; edges lead from one state to
 another, and each edge is labeled with a symbol. One state is the start state,
 and certain of the states are distinguished as final states.
 
