@@ -1,5 +1,4 @@
-nginx
-=====
+# nginx
 
 nginx (pronounced "engine x") is a free open source web server written by
 Igor Sysoev, a Russian software engineer. Since its public launch in 2004,
@@ -10,8 +9,7 @@ integrate efficiently with a variety of applications, have helped to make
 nginx a good choice for modern website architectures. Currently nginx is
 the second most popular open source web server on the Internet.
 
-14.1. Why Is High Concurrency Important?
-----------------------------------------
+## 14.1. Why Is High Concurrency Important?
 
 These days the Internet is so widespread and ubiquitous it's hard to imagine
 it wasn't exactly there, as we know it, a decade ago. It has greatly evolved,
@@ -70,8 +68,7 @@ web server software that client connections are accepted and processed. Thus, th
 web server should be able to scale nonlinearly with the growing number of
 simultaneous connections and requests per second.
 
-Isn't Apache Suitable?
-----------------------
+## Isn't Apache Suitable?
 
 Apache, the web server software that still largely dominates the Internet today,
 has its roots in the beginning of the 1990s. Originally, its architecture matched
@@ -126,8 +123,7 @@ servers scale better with the new version, though, as it could potentially allev
 bottlenecks on the backend side which still often remain unsolved in typical
 nginx-plus-Apache web configurations.
 
-Are There More Advantages to Using nginx?
------------------------------------------
+## Are There More Advantages to Using nginx?
 
 Handling high concurrency with high performance and efficiency has always been the
 key benefit of deploying nginx. However, there are now even more interesting benefits.
@@ -174,8 +170,7 @@ nginx version for Windows include a much lower number of concurrent connections,
 decreased performance, no caching and no bandwidth policing. Future versions of nginx
 for Windows will match the mainstream functionality more closely.
 
-14.2. Overview of nginx Architecture
-------------------------------------
+## 14.2. Overview of nginx Architecture
 
 Traditional process- or thread-based models of handling concurrent connections
 involve handling each connection with a separate process or thread, and blocking
@@ -202,8 +197,7 @@ run-loop in a limited number of single-threaded processes called workers. Within
 each worker nginx can handle many thousands of concurrent connections and requests
 per second.
 
-Code Structure
---------------
+## Code Structure
 
 The nginx worker code includes the core and the functional modules. The core of
 nginx is responsible for maintaining a tight run-loop and executing appropriate
@@ -239,8 +233,7 @@ A high-level overview of nginx architecture is presented in Figure 14.1.
 
 Figure 14.1: Diagram of nginx's architecture
 
-Workers Model
--------------
+## Workers Model
 
 As previously mentioned, nginx doesn't spawn a process or thread for every
 connection. Instead, worker processes accept new requests from a shared
@@ -311,8 +304,7 @@ lead to a situation where the worker is hung, affecting many thousands of
 connections at once. More work is planned to make embedded scripting with
 nginx simpler, more reliable and suitable for a broader range of applications.
 
-nginx Process Roles
--------------------
+## nginx Process Roles
 
 nginx runs several processes in memory; there is a single master process and
 several worker processes. There are also a couple of special purpose processes,
@@ -348,8 +340,7 @@ The cache manager is mostly responsible for cache expiration and invalidation.
 It stays in memory during normal nginx operation and it is restarted by the
 master process in the case of failure.
 
-Brief Overview of nginx Caching
--------------------------------
+## Brief Overview of nginx Caching
 
 Caching in nginx is implemented in the form of hierarchical data storage on a
 filesystem. Cache keys are configurable, and different request-specific
@@ -375,8 +366,7 @@ There are third-party extensions for nginx which make it possible to control
 cached content remotely, and more work is planned to integrate this
 functionality in the main distribution.
 
-14.3. nginx Configuration
--------------------------
+## 14.3. nginx Configuration
 
 nginx's configuration system was inspired by Igor Sysoev's experiences with
 Apache. His main insight was that a scalable configuration system is essential
@@ -446,8 +436,7 @@ Overall, the try_files directive works well and can be extremely efficient
 and useful. It is recommended that the reader thoroughly check the try_files
 directive and adopt its use whenever applicable.
 
-14.4. nginx Internals
----------------------
+## 14.4. nginx Internals
 
 As was mentioned before, the nginx codebase consists of a core and a number
 of modules. The core of nginx is responsible for providing the foundation
@@ -727,8 +716,7 @@ additional modules for load balancing, full WebDAV support, advanced cache
 control and other interesting third-party work that the authors of this
 chapter encourage and will support in the future.
 
-14.5. Lessons Learned
----------------------
+## 14.5. Lessons Learned
 
 When Igor Sysoev started to write nginx, most of the software enabling the
 Internet already existed, and the architecture of such software typically
