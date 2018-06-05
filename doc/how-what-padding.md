@@ -1,16 +1,18 @@
-# array
+# How and What Padding
+
+## array
 
 padding is satisfied if builtin types are padded.
 
-# union
+## union
 
 padding is satisfied when the biggest data type is padded.
 
-# struct
+## struct
 
 padding is satisfied if each field is padded.
 
-# struct padding
+## struct padding
 
     struct animal_struct {
         char dog;           /* 1 bytes */
@@ -19,7 +21,7 @@ padding is satisfied if each field is padded.
         char fox;           /* 1 bytes */
     };
 
-# compiler padding
+## compiler padding
 
     struct animal_struct {
         char dog;           /* 1 bytes */
@@ -30,7 +32,7 @@ padding is satisfied if each field is padded.
         u8 __pad1;          /* 1 bytes */
     };
 
-# rearranged struct
+## rearranged struct
 
     struct animal_struct {
         unsigned long cat;  /* 4 bytes */
@@ -39,6 +41,6 @@ padding is satisfied if each field is padded.
         char fox;           /* 1 bytes */
     }
 
-# gcc
+## gcc
 
 gcc -Wpadded: warnning compiler struct padding
