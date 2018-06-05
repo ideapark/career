@@ -2,8 +2,8 @@
 Server is a very simple static file server written in golang
 
 Usage:
-    -p="9090" port to listen
-    -d="."    the directory of static file to host
+    -port="9090" port to listen
+    -dir="."     the directory of static file to host
 */
 package main
 
