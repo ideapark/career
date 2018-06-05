@@ -1,3 +1,6 @@
+Unix Driver Entry
+=================
+
                              File System
 --------------------------------------------------------------------
  open  close  read  write  ioctl       open    close  read write
@@ -37,4 +40,4 @@
                    \                            /
                     \                          /
                      \                        /
-                      ----Device Interrupt----
+                      +---Device Interrupt---+
