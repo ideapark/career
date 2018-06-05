@@ -34,7 +34,7 @@
                  +-----|-----+
 
 
-# Memory layout of a struct of structs
+## Memory layout of a struct of structs
 
     type Rect1 struct { Min, Max Point }
     type Rect2 struct { Min, Max *Point }
