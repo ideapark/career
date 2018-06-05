@@ -17,7 +17,7 @@ filesystems as they are mounted; umount remove information that file when
 filesystem is unmounted.
 
 
-/proc/mounts
-============
+/proc/self/mounts
+=================
 
-/etc/mtab symbolic links to /proc/mounts
+/etc/mtab -> ../proc/self/mounts
