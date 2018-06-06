@@ -1,19 +1,15 @@
-Infix - Postfix
-===============
+# Infix - Postfix
 
-Infix Expression:
------------------
+## Infix Expression:
 
 Any expression in the standard form like "2*3-4/5" is an Infix(Inorder)
 expression.
 
-Postfix Expression:
--------------------
+## Postfix Expression:
 
 The Postfix(Postorder) form of the above expression is "23*45/-".
 
-Infix to Postfix Conversion:
-----------------------------
+## Infix to Postfix Conversion:
 
 In normal algebra we use the infix notation like a+b*c. The corresponding
 postfix notation is abc*+. The algorithm for the conversion is as follows :
@@ -36,8 +32,7 @@ postfix notation is abc*+. The algorithm for the conversion is as follows :
   not empty.
 - Return the Postfix string.
 
-Example:
---------
+## Example:
 
 Let us see how the above algorithm will be imlemented using an example.
 
