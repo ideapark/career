@@ -155,7 +155,6 @@ typedef int (*Target)(const struct point *p);
  * @Pfn assert point can be passed through
  * @Tfn assert point is the target point
  */
-int bfs_path(struct list_head *pathlist, const struct point *start,
-	     Pass Pfn, Target Tfn);
+int bfs_path(struct list_head *pathlist, const struct point *start, Pass Pfn, Target Tfn);
 
 #endif /* BFS_H */
