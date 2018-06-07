@@ -199,8 +199,32 @@ type itab struct {
     fun   [1]uintptr // variable sized. func[0]==0 means _type does not implement inter.
 }
 
-type eface struct {
+type _type struct {
+    size       uintptr
+    ptrdata    uintptr // size of memory prefix holding all pointers
+    hash       uint32
+    tflag      tflag
+    align      uint8
+    fieldalign uint8
+    kind       uint8
+    alg        *typeAlg
+    // gcdata stores the GC type data for the garbage collector.
+    // If the kindGCProg bit is set in kind, gcdata is a GC program.
+    // Otherwise it is a ptrmask bitmap. See mbitmap.go for details.
+    gcdata     *byte
+    str        nameOff
+    ptrToThis  typeOff
+}
 
+type interfacetype struct {
+    type    _type
+    pkgpath name
+    mhdr    []imethod
+}
+
+type imethod struct {
+    name  nameOff
+    itype typeOff
 }
 ```
 
