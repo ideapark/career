@@ -53,7 +53,7 @@ GOOS=linux GOARCH=amd64 go tool compile -S t.go
     0x0030 00048 (t.go:10)  MOVQ        16(SP), BP
     0x0035 00053 (t.go:10)  ADDQ        $24, SP
     0x0039 00057 (t.go:10)  RET
-    0x003a 00058 (t.go:10)  NOP
+    0x003a 00058 (t.go:10)  NOP                                                                      # some platform cannot jump to call, which may lead to very dark places
     0x003a 00058 (t.go:8)   PCDATA      $0, $-1                                                      # GC infos, introduced by compiler
     0x003a 00058 (t.go:8)   CALL        runtime.morestack_noctxt(SB)                                 # stack-split epilogue
     0x003f 00063 (t.go:8)   JMP         0
