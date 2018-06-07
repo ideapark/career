@@ -49,7 +49,7 @@ GOOS=linux GOARCH=amd64 go tool compile -S t.go
     0x001d 00029 (t.go:9)   MOVQ        $137438953482, AX                                            # $137438953482: b:32+a:10 (int64); $echo 'obase=2;137438953482' | bc
     0x0027 00039 (t.go:9)   MOVQ        AX, (SP)
     0x002b 00043 (t.go:9)   PCDATA      $0, $0                                                       # GC infos, introduced by compiler
-    0x002b 00043 (t.go:9)   CALL        "".add(SB)
+    0x002b 00043 (t.go:9)   CALL        "".add(SB)                                                   # also push the return address on top of the stack
     0x0030 00048 (t.go:10)  MOVQ        16(SP), BP
     0x0035 00053 (t.go:10)  ADDQ        $24, SP
     0x0039 00057 (t.go:10)  RET
