@@ -46,7 +46,7 @@ GOOS=linux GOARCH=amd64 go tool compile -S t.go
     0x0018 00024 (t.go:8)   LEAQ        16(SP), BP                                                   # get main stack frame's BP
     0x001d 00029 (t.go:8)   FUNCDATA    $0, gclocals·33cdeccccebe80329f1fdbee7f5874cb(SB)            # GC infos, introduced by compiler
     0x001d 00029 (t.go:8)   FUNCDATA    $1, gclocals·33cdeccccebe80329f1fdbee7f5874cb(SB)
-    0x001d 00029 (t.go:9)   MOVQ        $137438953482, AX                                            # $137438953482: 32+10 (int64); $echo 'obase=2;137438953482' | bc
+    0x001d 00029 (t.go:9)   MOVQ        $137438953482, AX                                            # $137438953482: b:32+a:10 (int64); $echo 'obase=2;137438953482' | bc
     0x0027 00039 (t.go:9)   MOVQ        AX, (SP)
     0x002b 00043 (t.go:9)   PCDATA      $0, $0                                                       # GC infos, introduced by compiler
     0x002b 00043 (t.go:9)   CALL        "".add(SB)
