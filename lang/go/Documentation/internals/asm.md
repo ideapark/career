@@ -67,7 +67,7 @@ GOOS=linux GOARCH=amd64 go tool compile -S t.go
     rel 59+4 t=8 runtime.morestack_noctxt+0
 ```
 
-## stack diagram
+## stack diagram (main.add has finished executing)
 
 ```text
          +--------------------+ <-- 32(SP)
