@@ -31,11 +31,12 @@ namespace options {
 	int slice_end        = -1;
 
 	float threshold              = 0.001;
-	std::string threshold_string = "0.001"; /* It seems like that libpopt
-						 * can NOT parse float command
-						 * arguments, so I have to use
-						 * string, and convert it myself
-						 */
+  /* FIXME: It seems like that libpopt
+   * can NOT parse float command
+   * arguments, so I have to use
+   * string, and convert it myself
+   */
+	std::string threshold_string = "0.001";
 } /* namespace options */
 
 namespace {
