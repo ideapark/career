@@ -226,6 +226,11 @@ type imethod struct {
     name  nameOff
     itype typeOff
 }
+
+type eface struct {
+    _type *_type
+    data  unsafe.Pointer
+}
 ```
 
 1. heap allocation as the compiler takes the conservative route and forces the
