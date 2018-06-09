@@ -1,6 +1,6 @@
 # Go Assembler
 
-## demo
+## Example
 
 ```go
 package main
@@ -15,13 +15,13 @@ func main() {
 }
 ```
 
-## assembly
+## Assembly
 
 ```bash
 GOOS=linux GOARCH=amd64 go tool compile -S t.go
 ```
 
-## annotated add & main (trimmed)
+## Annotated add & main (trimmed)
 
 ```asm
 "".add STEXT nosplit size=20 args=0x10 locals=0x0
@@ -67,7 +67,7 @@ GOOS=linux GOARCH=amd64 go tool compile -S t.go
     rel 59+4 t=8 runtime.morestack_noctxt+0
 ```
 
-## stack diagram (main.add has finished executing)
+## Stack diagram (main.add has finished executing)
 
 ```text
          +--------------------+ <-- 32(SP)
