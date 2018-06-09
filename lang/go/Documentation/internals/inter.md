@@ -1,5 +1,22 @@
 # Interface
 
+## Golang call types
+
+```text
+| Known at compile time                       | Known at run time                      |
+|---------------------------------------------|----------------------------------------|
+| direct call of top-level func               |                                        |
+| direct call of method with value receiver   |                                        |
+| direct call of method with pointer receiver |                                        |
+| indirect call of method on interface        | containing value with value method     |
+| indirect call of method on interface        | containing pointer with value method   |
+| indirect call of method on interface        | containing pointer with pointer method |
+| indirect call of func value                 | set to top-level func                  |
+| indirect call of func value                 | set to value method                    |
+| indirect call of func value                 | set to pointer method                  |
+| indirect call of func value                 | set to func literal                    |
+```
+
 ## Example
 
 ```go
