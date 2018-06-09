@@ -41,7 +41,7 @@ GOOS=linux GOARCH=amd64 go tool compile -S t.go
     0x0000 00000 (t.go:8)   MOVQ        (TLS), CX                                                    # stack-split prologue
     0x0009 00009 (t.go:8)   CMPQ        SP, 16(CX)
     0x000d 00013 (t.go:8)   JLS         58
-    0x000f 00015 (t.go:8)   SUBQ        $24, SP                                                      # make stack frame for main
+    0x000f 00015 (t.go:8)   SUBQ        $24, SP                                                      # make stack frame for main (24 = 8:uintptr + 4:aligned bool + 4:int32 + 4:int32 + 4:int32)
     0x0013 00019 (t.go:8)   MOVQ        BP, 16(SP)                                                   # save caller's BP
     0x0018 00024 (t.go:8)   LEAQ        16(SP), BP                                                   # get main stack frame's BP
     0x001d 00029 (t.go:8)   FUNCDATA    $0, gclocals·33cdeccccebe80329f1fdbee7f5874cb(SB)            # GC infos, introduced by compiler
