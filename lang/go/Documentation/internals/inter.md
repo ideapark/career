@@ -1,6 +1,6 @@
 # Interface
 
-## example code
+## Example
 
 ```go
 package main
@@ -183,7 +183,7 @@ GOOS=linux GOARCH=amd64 go tool compile -S t.go
 	rel 100+4 t=8 runtime.morestack_noctxt+0
 ```
 
-## how interface built
+## How interface built
 
 ```go
 type iface struct {
@@ -237,10 +237,10 @@ type eface struct {
    receiver to escape. this holds true even for scalar types!
 
 
-## dynamic dispatch
+## Dynamic dispatch
 
-## special cases
+## Special cases
 
-## interface composition
+## Interface composition
 
-## type assertions & switches
+## Type assertions & switches
