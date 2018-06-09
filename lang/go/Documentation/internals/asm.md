@@ -89,3 +89,59 @@ GOOS=linux GOARCH=amd64 go tool compile -S t.go
       ↓  |   main.main + 0x30 |
          +--------------------+ <--  0(SP) (TOP OF STACK)
 ```
+
+## Stack-split
+
+New goroutine is given an initial tiny 2kB stack by the runtime (said stack is
+actually allocated on the heap behind the scenes). As a goroutine runs along
+doing its job, it might end up outgrowing its contrived, initial stack-space
+(i.e. stack-overflow). To prevent this from happening, the runtime makes sure
+that when a goroutine is running out of stack, a new, bigger stack with two
+times the size of the old one gets allocated, and that the content of the
+original stack gets copied over to the new one. This process is known as a
+stack-split and effectively makes goroutine stacks dynamically-sized.
+
+For stack-splitting to work, the compiler inserts a few instructions at the
+beginning and end of every function that could potentially overflow its stack.
+To avoid unnecessary overhead, functions that cannot possibly outgrow their
+stack are marked as NOSPLIT as a hint for the compiler not to insert these
+checks.
+
+```asm
+"".main STEXT size=65 args=0x0 locals=0x18
+    0x0000 00000 (t.go:8)   TEXT        "".main(SB), $24-0
+    0x0000 00000 (t.go:8)   MOVQ        (TLS), CX                                                    # stack-split prologue
+    0x0009 00009 (t.go:8)   CMPQ        SP, 16(CX)                                                   # compare SP and g.stackguard0
+    0x000d 00013 (t.go:8)   JLS         58                                                           # jump to epilogue if SP < g.stackguard0
+    ;; ...ommited main body...
+    0x003a 00058 (t.go:10)  NOP                                                                      # some platform cannot jump to call, which may lead to very dark places
+    0x003a 00058 (t.go:8)   PCDATA      $0, $-1                                                      # GC infos, introduced by compiler
+    0x003a 00058 (t.go:8)   CALL        runtime.morestack_noctxt(SB)                                 # stack-split epilogue
+    0x003f 00063 (t.go:8)   JMP         0                                                            # jump back to start again
+```
+
+As you can see, the stack-split preamble is divided into a prologue and an
+epilogue:
+
+- The prologue checks whether the goroutine is running out of space and, if it's
+  the case, jumps to the epilogue.
+
+- The epilogue, on the other hand, triggers the stack-growth machinery and then
+  jumps back to the prologue.
+
+```go
+type g struct {
+	// Stack parameters.
+	// stack describes the actual stack memory: [stack.lo, stack.hi).
+	// stackguard0 is the stack pointer compared in the Go stack growth prologue.
+	// It is stack.lo+StackGuard normally, but can be StackPreempt to trigger a preemption.
+	// stackguard1 is the stack pointer compared in the C stack growth prologue.
+	// It is stack.lo+StackGuard on g0 and gsignal stacks.
+	// It is ~0 on other goroutine stacks, to trigger a call to morestackc (and crash).
+	stack       stack   // offset known to runtime/cgo
+	stackguard0 uintptr // offset known to liblink
+	stackguard1 uintptr // offset known to liblink
+
+    // ...omitted dozens of fields...
+}
+```
