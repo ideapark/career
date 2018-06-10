@@ -200,6 +200,11 @@ GOOS=linux GOARCH=amd64 go tool compile -S t.go
 	rel 100+4 t=8 runtime.morestack_noctxt+0
 ```
 
+Implicit dereferencing (Call value method with pointer)
+
+- the receiver is on the stack: copy value over to the callee's stack
+- the receiver is on the heap: use a wrapper function broker
+
 ## How interface built
 
 ```go
