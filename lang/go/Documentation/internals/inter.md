@@ -209,8 +209,8 @@ Implicit dereferencing (Call value method with pointer)
 
 ```go
 type iface struct {
-    tab  *itab
-    data unsafe.Pointer
+    tab  *itab          // describe both the type of interface as well as the type of the data it points to
+    data unsafe.Pointer // raw pointer to the value held by the interface
 }
 
 type itab struct {
