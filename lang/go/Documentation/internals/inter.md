@@ -249,6 +249,20 @@ type imethod struct {
     itype typeOff
 }
 
+func convT2I32(tab *itab, val uint32) (i iface) {
+	t := tab._type
+	var x unsafe.Pointer
+	if val == 0 {
+		x = unsafe.Pointer(&zeroVal[0])
+	} else {
+		x = mallocgc(4, t, false)
+		*(*uint32)(x) = val
+	}
+	i.tab = tab
+	i.data = x
+	return
+}
+
 type eface struct {
     _type *_type
     data  unsafe.Pointer
