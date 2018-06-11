@@ -331,6 +331,41 @@ func main() {
 	0x0071 00113 (t.go:16)	JMP	0
 ```
 
+## Measurement
+
+### cpu cache
+
+```bash
+$ LC_ALL=C lscpu | sed -nr '/Model name/ s/.*:\s*(.* @ .*)/\1/p'
+Intel(R) Core(TM) i5-5200U CPU @ 2.20GHz
+
+$ LC_ALL=C lscpu | grep cache
+L1d cache:           32K
+L1i cache:           32K
+L2 cache:            256K
+L3 cache:            3072K
+```
+
+### perf statistic cpu IPC (instruction per cycle) and branch predication
+
+```bash
+$ sudo perf stat --cpu=1 taskset 2 go test strings
+ok  	strings	0.374s
+
+ Performance counter stats for 'CPU(s) 1':
+
+       2383.219835      cpu-clock (msec)          #    1.000 CPUs utilized
+             3,580      context-switches          #    0.002 M/sec
+                 1      cpu-migrations            #    0.000 K/sec
+            81,287      page-faults               #    0.034 M/sec
+     6,334,739,153      cycles                    #    2.658 GHz
+    12,101,423,420      instructions              #    1.91  insn per cycle
+     2,450,948,828      branches                  # 1028.419 M/sec
+        41,058,516      branch-misses             #    1.68% of all branches
+
+       2.383249218 seconds time elapsed
+```
+
 ## Special cases
 
 ## Interface composition
