@@ -521,3 +521,38 @@ zerobase = 0x546fa8
 Syntastic sugar exposed by the compiler.
 
 ## Type assertions & switches
+
+```go
+var j uint32
+var Eface interface{}
+
+func assertion() {
+    i := uint64(42)
+    Eface = i
+    j = Eface.(uint64)
+}
+```
+
+Disassembly ``j = Eface.(uint64)``
+
+```asm
+0x0065 00101 MOVQ	"".Eface(SB), AX        ;; AX = Eface._type
+0x006c 00108 MOVQ	"".Eface+8(SB), CX      ;; CX = Eface.data
+0x0073 00115 LEAQ	type.uint32(SB), DX     ;; DX = type.uint32
+0x007a 00122 CMPQ	AX, DX                  ;; Eface._type == type.uint32 ?
+0x007d 00125 JNE	162                     ;; no? panic our way outta here
+0x007f 00127 MOVL	(CX), AX                ;; AX = *Eface.data
+0x0081 00129 MOVL	AX, "".j(SB)            ;; j = AX = *Eface.data
+;; exit
+0x0087 00135 MOVQ	40(SP), BP
+0x008c 00140 ADDQ	$48, SP
+0x0090 00144 RET
+;; panic: interface conversion: <iface> is <have>, not <want>
+0x00a2 00162 MOVQ	AX, (SP)                    ;; have: Eface._type
+0x00a6 00166 MOVQ	DX, 8(SP)                   ;; want: type.uint32
+0x00ab 00171 LEAQ	type.interface{}(SB), AX    ;; AX = type.interface{}(eface)
+0x00b2 00178 MOVQ	AX, 16(SP)                  ;; iface: AX
+0x00b7 00183 CALL	runtime.panicdottypeE(SB)	;; func panicdottypeE(have, want, iface *_type)
+0x00bc 00188 UNDEF
+0x00be 00190 NOP
+```
