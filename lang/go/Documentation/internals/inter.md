@@ -378,6 +378,31 @@ type eface struct { // 16 bytes on linux/amd64
 - With the virtual table gone, the type of the empty interface itself, not to be
   confused with the type of the data it holds, is always the same
 
+### interface holding a scalar type
+
+```go
+func BenchmarkEfaceScalar(b *testing.B) {
+    var Uint uint32
+    b.Run("uint32", func(b *testing.B) {
+        for i := 0; i < b.N; i++ {
+            Uint = uint32(i)
+        }
+    })
+    var Eface interface{}
+    b.Run("eface32", func(b *testing.B) {
+        for i := 0; i < b.N; i++ {
+            Eface = uint32(i)
+        }
+    })
+}
+```
+
+```bash
+$ go test -bench=. -benchmem scalar_eface_test.go
+BenchmarkEfaceScalar/uint32-4         	2000000000	         0.41 ns/op	       0 B/op	       0 allocs/op
+BenchmarkEfaceScalar/eface32-4        	100000000	        18.4 ns/op	       4 B/op	       1 allocs/op
+```
+
 ## Interface composition
 
 ## Type assertions & switches
