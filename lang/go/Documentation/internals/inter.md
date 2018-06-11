@@ -518,4 +518,6 @@ zerobase = 0x546fa8
 
 ## Interface composition
 
+Syntastic sugar exposed by the compiler.
+
 ## Type assertions & switches
