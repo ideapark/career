@@ -455,6 +455,67 @@ Using the right offset into this array, the compiler can effectively avoid an
 extra heap allocation and still reference any value representable as a single
 byte.
 
+### zero-values
+
+when in need of a pointer to a zero-value, unnecessary allocations are avoided
+by taking the address of a special, always-zero variable exposed by the runtime.
+
+```go
+//go:linkname zeroVal runtime.zeroVal
+var zeroVal uintptr
+
+type eface struct{ _type, data unsafe.Pointer }
+
+func main() {
+    x := 42
+    var i interface{} = x - x // outsmart the compiler (avoid static inference)
+
+    fmt.Printf("zeroVal = %p\n", &zeroVal)
+    fmt.Printf("      i = %p\n", ((*eface)(unsafe.Pointer(&i))).data)
+}
+```
+
+```bash
+$ go run zeroval.go
+zeroVal = 0x5458e0
+      i = 0x5458e0
+```
+
+### zero-sized variable
+
+In a similar vein as zero-values, a very common trick in Go programs is to rely
+on the fact that instanciating an object of size 0 (such as struct{}{}) doesn't
+result in an allocation.
+
+Golang specification explains:
+
+```text
+A struct or array type has size zero if it contains no fields (or elements,
+respectively) that have a size greater than zero. Two distinct zero-size
+variables may have the same address in memory.
+```
+
+```go
+//go:linkname zerobase runtime.zerobase
+var zerobase uintptr
+
+func main() {
+    var s struct{}
+    var a [42]struct{}
+
+    fmt.Printf("zerobase = %p\n", &zerobase)
+    fmt.Printf("       s = %p\n", &s)
+    fmt.Printf("       a = %p\n", &a)
+}
+```
+
+```bash
+$ go run zerobase.go
+zerobase = 0x546fa8
+       s = 0x546fa8
+       a = 0x546fa8
+```
+
 ## Interface composition
 
 ## Type assertions & switches
