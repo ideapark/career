@@ -262,11 +262,6 @@ func convT2I32(tab *itab, val uint32) (i iface) {
 	i.data = x
 	return
 }
-
-type eface struct {
-    _type *_type
-    data  unsafe.Pointer
-}
 ```
 
 1. heap allocation as the compiler takes the conservative route and forces the
@@ -366,7 +361,22 @@ ok  	strings	0.374s
        2.383249218 seconds time elapsed
 ```
 
-## Special cases
+## Special cases & compiler tricks
+
+### emtpy interface
+
+```go
+type eface struct { // 16 bytes on linux/amd64
+    _type *_type         // holds the type information of the value pointed by data
+    data  unsafe.Pointer
+}
+```
+
+- Since the empty interface has no methods, everything related to dynamic
+  dispatch can safely be dropped from the datastructure.
+
+- With the virtual table gone, the type of the empty interface itself, not to be
+  confused with the type of the data it holds, is always the same
 
 ## Interface composition
 
