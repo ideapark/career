@@ -1,92 +1,196 @@
-#+TITLE: Basic of the Unix Philosophy
-#+AUTHOR: @unix
-#+EMAIL: p@ctriple.cn
+                     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                      BASIC OF THE UNIX PHILOSOPHY
 
-** Rule of Modularity
+                                 @unix
+                     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Write simple parts connected by clean interfaces
 
-** Rule of Clarity
+Table of Contents
+─────────────────
 
-Clarity is better than cleverness
+.. 0.1 Rule of Modularity
+.. 0.2 Rule of Clarity
+.. 0.3 Rule of Composition
+.. 0.4 Rule of Separation
+.. 0.5 Rule of Simplicity
+.. 0.6 Rule of Parsimony
+.. 0.7 Rule of Transparency
+.. 0.8 Rule of Robustness
+.. 0.9 Rule of Representation
+.. 0.10 Rule of Least Surprise
+.. 0.11 Rule of Silence
+.. 0.12 Rule of Repair
+.. 0.13 Rule of Economy
+.. 0.14 Rule of Generation
+.. 0.15 Rule of Optimization
+.. 0.16 Rule of Diversity
+.. 0.17 Rule of Extensibility
+1 KISS
+.. 1.1 Keep It Simple, Stupid!
+2 Applying the Unix Philosophy
+.. 2.1 Everything that can be a source- and destination-independent filter should be one
+.. 2.2 Data streams should if at all possible be textual (so they can be viewed and filtered with standard tools)
+.. 2.3 Database layouts and application protocols should if at all possible be textual (human-readable and human-editable)
+.. 2.4 Complex front ends (user interfaces) should be cleanly separated from complex back ends
+.. 2.5 Whenever possible, prototype in an interpreted language before coding C
+.. 2.6 Mixing languages is better than writing everthing in one, if and only if using only that one is likely to overcomplicate the program
+.. 2.7 Be generous in what you accept, rigorous in what you emit
+.. 2.8 When filtering, never throw away information you don't need to
+.. 2.9 Small is beautiful. Write programs that do as little as is consistent with getting the job done
 
-** Rule of Composition
 
-Design programs to be connected with other programs
 
-** Rule of Separation
 
-Separate policy from mechanism; separate interfaces from engines
 
-** Rule of Simplicity
+0.1 Rule of Modularity
+──────────────────────
 
-Design for simplicity; add complexity only where you must
+  Write simple parts connected by clean interfaces
 
-** Rule of Parsimony
 
-Write a big program only when it is clear by demonstration that nothing else
-will do
+0.2 Rule of Clarity
+───────────────────
 
-** Rule of Transparency
+  Clarity is better than cleverness
 
-Design for visibility to make inspection and debuging easier
 
-** Rule of Robustness
+0.3 Rule of Composition
+───────────────────────
 
-Robustness is the child of transparency and simplicity
-Software is transparent when you can look at it and immediately see what
-is going on. It is simple when what is going on is uncomplicated enough
-for a human brain to reason about all the potential cases without strain.
+  Design programs to be connected with other programs
 
-** Rule of Representation
 
-Fold knowledge into data, so program logic can be stupid and robust
+0.4 Rule of Separation
+──────────────────────
 
-** Rule of Least Surprise
+  Separate policy from mechanism; separate interfaces from engines
 
-In interface design, always do the least surprising thing
 
-** Rule of Silence
+0.5 Rule of Simplicity
+──────────────────────
 
-When a program has nothing surprising to say, it should say nothing
+  Design for simplicity; add complexity only where you must
 
-** Rule of Repair
 
-Repair what you can -- but when you must fail, fail noisily and as soon as
-possible
+0.6 Rule of Parsimony
+─────────────────────
 
-** Rule of Economy
+  Write a big program only when it is clear by demonstration that
+  nothing else will do
 
-Programmer time is expensive; conserve it in preference to machine time
 
-** Rule of Generation
+0.7 Rule of Transparency
+────────────────────────
 
-Avoid hand hacking; write programs to write programs when you can
+  Design for visibility to make inspection and debuging easier
 
-** Rule of Optimization
 
-Prototype before polishing. Get it working before you optimize it
+0.8 Rule of Robustness
+──────────────────────
 
-** Rule of Diversity
+  Robustness is the child of transparency and simplicity Software is
+  transparent when you can look at it and immediately see what is going
+  on. It is simple when what is going on is uncomplicated enough for a
+  human brain to reason about all the potential cases without strain.
 
-Distrust all claims for one true way
 
-** Rule of Extensibility
+0.9 Rule of Representation
+──────────────────────────
 
-Design for the future, because it will be here sooner than you think
+  Fold knowledge into data, so program logic can be stupid and robust
 
-* KISS
 
-** Keep It Simple, Stupid!
+0.10 Rule of Least Surprise
+───────────────────────────
 
-* Applying the Unix Philosophy
+  In interface design, always do the least surprising thing
 
-** Everything that can be a source- and destination-independent filter should be one
-** Data streams should if at all possible be textual (so they can be viewed and filtered with standard tools)
-** Database layouts and application protocols should if at all possible be textual (human-readable and human-editable)
-** Complex front ends (user interfaces) should be cleanly separated from complex back ends
-** Whenever possible, prototype in an interpreted language before coding C
-** Mixing languages is better than writing everthing in one, if and only if using only that one is likely to overcomplicate the program
-** Be generous in what you accept, rigorous in what you emit
-** When filtering, never throw away information you don't need to
-** Small is beautiful. Write programs that do as little as is consistent with getting the job done
+
+0.11 Rule of Silence
+────────────────────
+
+  When a program has nothing surprising to say, it should say nothing
+
+
+0.12 Rule of Repair
+───────────────────
+
+  Repair what you can – but when you must fail, fail noisily and as soon
+  as possible
+
+
+0.13 Rule of Economy
+────────────────────
+
+  Programmer time is expensive; conserve it in preference to machine
+  time
+
+
+0.14 Rule of Generation
+───────────────────────
+
+  Avoid hand hacking; write programs to write programs when you can
+
+
+0.15 Rule of Optimization
+─────────────────────────
+
+  Prototype before polishing. Get it working before you optimize it
+
+
+0.16 Rule of Diversity
+──────────────────────
+
+  Distrust all claims for one true way
+
+
+0.17 Rule of Extensibility
+──────────────────────────
+
+  Design for the future, because it will be here sooner than you think
+
+
+1 KISS
+══════
+
+1.1 Keep It Simple, Stupid!
+───────────────────────────
+
+
+2 Applying the Unix Philosophy
+══════════════════════════════
+
+2.1 Everything that can be a source- and destination-independent filter should be one
+─────────────────────────────────────────────────────────────────────────────────────
+
+
+2.2 Data streams should if at all possible be textual (so they can be viewed and filtered with standard tools)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+2.3 Database layouts and application protocols should if at all possible be textual (human-readable and human-editable)
+───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+2.4 Complex front ends (user interfaces) should be cleanly separated from complex back ends
+───────────────────────────────────────────────────────────────────────────────────────────
+
+
+2.5 Whenever possible, prototype in an interpreted language before coding C
+───────────────────────────────────────────────────────────────────────────
+
+
+2.6 Mixing languages is better than writing everthing in one, if and only if using only that one is likely to overcomplicate the program
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+2.7 Be generous in what you accept, rigorous in what you emit
+─────────────────────────────────────────────────────────────
+
+
+2.8 When filtering, never throw away information you don't need to
+──────────────────────────────────────────────────────────────────
+
+
+2.9 Small is beautiful. Write programs that do as little as is consistent with getting the job done
+───────────────────────────────────────────────────────────────────────────────────────────────────

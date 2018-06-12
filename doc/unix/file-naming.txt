@@ -1,13 +1,19 @@
-#+TITLE: File Naming
-#+AUTHOR: @unix
-#+EMAIL: p@ctriple.cn
+                             ━━━━━━━━━━━━━
+                              FILE NAMING
 
-README   The roadmap file, to be read first.
-INSTALL  Configuration, build, and installation instructions.
-AUTHORS  List of project contributors (GNU convention).
-NEWS     Recent project news.
-HISTORY  Project history.
-CHANGES  Log of significant changes between revisions.
-COPYING  Project license terms (GNU convention).
-LICENSE  Project license terms.
-FAQ      Palin-text Frequently-Asked-Questions document for the project.
+                                 @unix
+                             ━━━━━━━━━━━━━
+
+
+Table of Contents
+─────────────────
+
+
+
+
+README The roadmap file, to be read first. INSTALL Configuration, build,
+and installation instructions. AUTHORS List of project contributors (GNU
+convention). NEWS Recent project news. HISTORY Project history. CHANGES
+Log of significant changes between revisions. COPYING Project license
+terms (GNU convention). LICENSE Project license terms. FAQ Palin-text
+Frequently-Asked-Questions document for the project.

@@ -1,22 +1,41 @@
-#+TITLE: Ask Before Configuration
-#+AUTHOR: @unix
-#+EMAIL: p@ctriple.cn
+                       ━━━━━━━━━━━━━━━━━━━━━━━━━━
+                        ASK BEFORE CONFIGURATION
 
-* Questions to consider whenever you find yourself thinking about adding a configuration option
+                                 @unix
+                       ━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-- Can I leave this feature out? Why am I fattening the manual and burdening the
-  user?
-- Could the program's normal behavior be changed in an innocuous way that would
-  make the option unnecessary?
-- Is this option merely cosmetic? Should I be thinking less about how to make the
-  user interface configurable and more about how to make it right?
-- Should the behavior enable by this option be a separate program instead?
 
-* Where configuration live
+Table of Contents
+─────────────────
 
-- Run-control files under /etc (or at fixed location elsewhere in system-land)
-- System-set environment variables
-- Run-control files (or 'dotfiles') in the user's home directory
-- User-set environment variables
-- Switches and arguments passed to the program on the command line that invoked
-  it
+1 Questions to consider whenever you find yourself thinking about adding a configuration option
+2 Where configuration live
+
+
+
+
+
+1 Questions to consider whenever you find yourself thinking about adding a configuration option
+═══════════════════════════════════════════════════════════════════════════════════════════════
+
+  • Can I leave this feature out? Why am I fattening the manual and
+    burdening the user?
+  • Could the program's normal behavior be changed in an innocuous way
+    that would make the option unnecessary?
+  • Is this option merely cosmetic? Should I be thinking less about how
+    to make the user interface configurable and more about how to make
+    it right?
+  • Should the behavior enable by this option be a separate program
+    instead?
+
+
+2 Where configuration live
+══════════════════════════
+
+  • Run-control files under /etc (or at fixed location elsewhere in
+    system-land)
+  • System-set environment variables
+  • Run-control files (or 'dotfiles') in the user's home directory
+  • User-set environment variables
+  • Switches and arguments passed to the program on the command line
+    that invoked it

@@ -1,43 +1,74 @@
-#+TITLE: Notes
-#+AUTHOR: @unix
-#+EMAIL: p@ctriple.cn
+                                ━━━━━━━
+                                 NOTES
 
-** Doug Mcllroy
+                                 @unix
+                                ━━━━━━━
 
-This is the Unix philosophy: Write programs that do one thing and do it well.
-Write programs to work together. Write programs to handle text streams, because
-that is a universal interface.
 
-** Rob Pike
+Table of Contents
+─────────────────
 
-Data dominates. If you've chosen the right data structures and organized things
-well, the algorithms will almost always be self-evident. Data structures, not
-algorithms, are central to programming.
+1 Doug Mcllroy
+2 Rob Pike
+3 Ken Thompson
+4 Henry Spencer
+5 Ken Arnold
+6 Kent Beck
 
-** Ken Thompson
 
-When in doubt, use brute force.
 
-Using prototyping to learn which features you don't have to implement helps
-optimization for performance; you don't have to optimize what you don't write.
-The most powerful optimization tool in existence may be the delete key.
 
-** Henry Spencer
 
-The flip side of the Rule of Least Surprise is to avoid making things
-superficially similar but really a little bit different. This is extremely
-treacherous because the seeming familiarity raises false expectations. It's
-often better to make things distinctly than to make them almost the same.
+1 Doug Mcllroy
+══════════════
 
-** Ken Arnold
+  This is the Unix philosophy: Write programs that do one thing and do
+  it well. Write programs to work together. Write programs to handle
+  text streams, because that is a universal interface.
 
-I think that the terseness of Unix programs is a central feature of the style.
-When your program's output becomes another's input, it should be easy to pick
-out the needed bits. And for people it is a human-factors necessity -- important
-information should not be mixed in with verbosity about internal program
-behavior. If all displayed information is important, important information is
-easy to find.
 
-** Kent Beck
+2 Rob Pike
+══════════
 
-Make it run, then make it right, then make it fast.
+  Data dominates. If you've chosen the right data structures and
+  organized things well, the algorithms will almost always be
+  self-evident. Data structures, not algorithms, are central to
+  programming.
+
+
+3 Ken Thompson
+══════════════
+
+  When in doubt, use brute force.
+
+  Using prototyping to learn which features you don't have to implement
+  helps optimization for performance; you don't have to optimize what
+  you don't write. The most powerful optimization tool in existence may
+  be the delete key.
+
+
+4 Henry Spencer
+═══════════════
+
+  The flip side of the Rule of Least Surprise is to avoid making things
+  superficially similar but really a little bit different. This is
+  extremely treacherous because the seeming familiarity raises false
+  expectations. It's often better to make things distinctly than to make
+  them almost the same.
+
+
+5 Ken Arnold
+════════════
+
+  I think that the terseness of Unix programs is a central feature of
+  the style. When your program's output becomes another's input, it
+  should be easy to pick out the needed bits. And for people it is a
+  human-factors necessity – important information should not be mixed in
+  with verbosity about internal program behavior. If all displayed
+  information is important, important information is easy to find.
+
+
+6 Kent Beck
+═══════════
+
+  Make it run, then make it right, then make it fast.
