@@ -1,0 +1,61 @@
+                           ━━━━━━━━━━━━━━━━━
+                                 SOLID
+
+                            Robert C Martin
+                           ━━━━━━━━━━━━━━━━━
+
+
+Table of Contents
+─────────────────
+
+1 SOLID
+.. 1.1 Single Responsibility Principle
+.. 1.2 Open / Closed Principle
+.. 1.3 Liskov Substitution Principle
+.. 1.4 Interface Segregation Principle
+.. 1.5 Dependency Inversion Principle
+
+
+
+
+
+1 SOLID
+═══════
+
+1.1 Single Responsibility Principle
+───────────────────────────────────
+
+  A Class should have one, and only one, reason to change.
+
+
+1.2 Open / Closed Principle
+───────────────────────────
+
+  Software entities should be open for extension, but closed for
+  modification.
+
+
+1.3 Liskov Substitution Principle
+─────────────────────────────────
+
+  Two types are substitutable if they exhibit such that the caller is
+  unable to tell the difference.
+
+
+1.4 Interface Segregation Principle
+───────────────────────────────────
+
+  Clients should not be forced to depend on methods they do not use.
+
+  A great rule of thumb for GO is `accept interfaces, return structs'.
+  Accepting interfaces gives your API the greatest flexibility and
+  returning structs allows the people reading your code to quickly
+  navigate to the correct function. -Jack Lindamood
+
+
+1.5 Dependency Inversion Principle
+──────────────────────────────────
+
+  High-level modules should not depend on low-level modules. Both should
+  depend on abstractions. Abstractions should not depend on details.
+  Details should depend on abstractions.
