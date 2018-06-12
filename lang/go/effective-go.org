@@ -365,7 +365,7 @@ The rule is this. If the last token before a newline is an identifier (which
 includes words like int and float64), a basic literal such as a number or string
 constant, or one of the tokens
 
-#+BEGIN_SRC go
+#+BEGIN_SRC text
 break continue fallthrough return ++ -- ) }
 #+END_SRC
 
