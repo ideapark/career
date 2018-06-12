@@ -582,7 +582,7 @@ for pos, char := range "日本\x80語" { // \x80 is an illegal UTF-8 encoding
 
 prints
 
-#+BEGIN_SRC go
+#+BEGIN_SRC text
 character U+65E5 '日' starts at byte position 0
 character U+672C '本' starts at byte position 3
 character U+FFFD '�' starts at byte position 6
@@ -899,7 +899,7 @@ func main() {
 
 prints
 
-#+BEGIN_SRC shell
+#+BEGIN_SRC text
 entering: b
 in b
 entering: a
@@ -1031,7 +1031,7 @@ length, and the capacity, and until those items are initialized, the slice is
 nil. For slices, maps, and channels, make initializes the internal data
 structure and prepares the value for use. For instance,
 
-#+BEGIN_SRC
+#+BEGIN_SRC go
 make([]int, 10, 100)
 #+END_SRC
 
