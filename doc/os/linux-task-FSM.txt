@@ -5,7 +5,7 @@
 
         SIGCONT                                 |                             resource ready
        wake_up()                                ↓                         wake_up_interruptible()
-   +------------------------------------\                                        wake_up()
+   +------------------------------------↘                                        wake_up()
    |                 +------------------>  TASK_RUNNING <---------------------------+
    |                 | resource ready                                               |
    |                 |   wake_up()           ↑      |                               |
