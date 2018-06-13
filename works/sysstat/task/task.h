@@ -11,7 +11,7 @@
 #include <inttypes.h>
 #include "util/list_helper.h"
 
-#define TASKPATH_MAX     512
+#define TASKPATH_MAX     1024
 
 #pragma pack(push)
 #pragma pack(1)

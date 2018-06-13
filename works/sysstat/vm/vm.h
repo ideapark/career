@@ -11,7 +11,7 @@
 #include <inttypes.h>
 #include "util/list_helper.h"
 
-#define PROC_PATHMAX    64
+#define PROC_PATHMAX    512
 #define PROC_NAMELEN    64
 #define PROC_NR         128
 
