@@ -151,7 +151,7 @@ int bfd_symbol::get_vma_bfd_key(const vma_entry &vma,
 	std::string elf_path = vma.vm_file;
 
 	/*
-	 * WARNING: Linux path char ':' will be replaced by '_' on windows.
+	 * NOTE: Linux path char ':' will be replaced by '_' on windows.
 	 */
 	for (unsigned int i = 0; i < elf_path.size(); i++)
 		if (elf_path[i] == ':')
