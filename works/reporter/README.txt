@@ -15,6 +15,6 @@ callgraph.exe
 =============
 
 This program is designed to generate call stack graph.
-to compile it, should have to install
+to compile it, you should have to install
 
     cygwin gcc/gdb libsqlite libpopt libstdc++
