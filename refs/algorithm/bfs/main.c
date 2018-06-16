@@ -2,8 +2,10 @@
  * Copyright (c) Zhou Peng <p@ctriple.cn>
  */
 
+#include <errno.h>
 #include <assert.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "list.h"
 #include "bfs.h"
@@ -27,6 +29,11 @@ int GRAPH_X;
 static void load_graph(const char *graph)
 {
 	FILE *f = fopen(graph, "r");
+
+  if (f == NULL) {
+    fprintf(stderr, "load_graph: %s: %s\n", graph, strerror(errno));
+    exit(1);
+  }
 
 	fscanf(f, "%d", &GRAPH_Y);
 	fscanf(f, "%d", &GRAPH_X);
