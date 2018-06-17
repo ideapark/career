@@ -12,22 +12,22 @@
 
 using namespace std;
 
-#define IS_ADD(ch)       ((ch) == "+")
-#define IS_MINUS(ch)     ((ch) == "-")
-#define IS_MULTIPLY(ch)  ((ch) == "*")
-#define IS_DIVIDE(ch)    ((ch) == "/")
-#define IS_OPERATOR(ch)  (IS_ADD(ch) || IS_MINUS(ch) || IS_MULTIPLY(ch) || IS_DIVIDE(ch))
+#define ADD(ch)       ((ch) == "+")
+#define MINUS(ch)     ((ch) == "-")
+#define MULTIPLY(ch)  ((ch) == "*")
+#define DIVIDE(ch)    ((ch) == "/")
+#define OPERATOR(ch)  (ADD(ch) || MINUS(ch) || MULTIPLY(ch) || DIVIDE(ch))
 
-#define PRECEDENCE_LEVEL1(op)        (IS_ADD(op) || IS_MINUS(op))
-#define PRECEDENCE_LEVEL2(op)        (IS_MULTIPLY(op) || IS_DIVIDE(op))
+#define PRECEDENCE_LEVEL1(op)        (ADD(op) || MINUS(op))
+#define PRECEDENCE_LEVEL2(op)        (MULTIPLY(op) || DIVIDE(op))
 #define PRECEDENCE_HIGHER(op1, op2)  (PRECEDENCE_LEVEL2(op1) && PRECEDENCE_LEVEL1(op2))
 
 string infixToPostfix(const string expression)
 {
 	ostringstream infixExpressoinWriter;
 
-	for (int i = 0; i < expression.length(); i++) {
-		if (IS_OPERATOR(expression.substr(i, 1)))
+	for (long unsigned int i = 0; i < expression.length(); i++) {
+		if (OPERATOR(expression.substr(i, 1)))
 			infixExpressoinWriter << " " << expression.substr(i, 1) << " ";
 		else
 			infixExpressoinWriter << expression.substr(i, 1);
@@ -39,7 +39,7 @@ string infixToPostfix(const string expression)
 	ostringstream postfixExpressionWriter;
 
 	while (infixExpressionReader >> token) {
-		if (IS_OPERATOR(token)) {
+		if (OPERATOR(token)) {
 			while (!operatorStack.empty()) {
 				const string &topOperator = operatorStack.top();
 				if (PRECEDENCE_HIGHER(token, topOperator)) {
@@ -72,16 +72,16 @@ static string doCalculation(const string leftOperand,
 	unsigned int right = atoi(rightOperand.c_str());
 	unsigned int result = 0;
 
-	if (IS_ADD(operatorString))
+	if (ADD(operatorString))
 		result = left + right;
 
-	if (IS_MINUS(operatorString))
+	if (MINUS(operatorString))
 		result = left - right;
 
-	if (IS_MULTIPLY(operatorString))
+	if (MULTIPLY(operatorString))
 		result = left * right;
 
-	if (IS_DIVIDE(operatorString))
+	if (DIVIDE(operatorString))
 		result = left / right;
 
 	ostringstream stringWriter;
@@ -98,7 +98,7 @@ string calcPostfixExpression(const string postfixExpression)
 	istringstream postfixExpressionReader(postfixExpression);
 
 	while (postfixExpressionReader >> token) {
-		if (IS_OPERATOR(token)) {
+		if (OPERATOR(token)) {
 			const string rightOperand = calculationStack.top();
 			calculationStack.pop();
 			const string leftOperand = calculationStack.top();
