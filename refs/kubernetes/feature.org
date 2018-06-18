@@ -4,7 +4,7 @@
 * Automatic binpacking
 
 Automatically places containers based on their resource requirements and other
-contraints, while not sacrificing availability. Mix critical and best-effort
+constraints, while not sacrificing availability. Mix critical and best-effort
 workloads in order to drive up utilization and save even more sources.
 
 * Horizontal scaling
