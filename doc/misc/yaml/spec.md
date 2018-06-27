@@ -162,3 +162,26 @@ It should be mentioned that there are ongoing efforts to define standard
 XML/YAML mappings. This generally requires that a subset of each language be
 used. For more information on using both XML and YAML, please visit
 http://yaml.org/xml.
+
+### Terminology
+
+This specification uses key words based on RFC2119 to indicate requirement
+level. In particular, the following words are used to describe the actions of a
+YAML processor:
+
+May     The word may, or the adjective optional, mean that conforming YAML
+        processors are permitted to, but need not behave as described.
+
+Should  The word should, or the adjective recommended, mean that there could be
+        reasons for a YAML processor to deviate from the behavior described, but
+        that such deviation could hurt interoperability and should therefore be
+        advertised with appropriate notice
+
+Must    The word must, or the term required or shall, mean that the behavior
+        described is an absolute requirement of the specification.
+
+The rest of this document is arranged as follows. Chapter 2 provides a short
+preview of the main YAML features. Chapter 3 describes the YAML information
+model, and the processes for converting from and to this model and the YAML text
+format. The bulk of the document, chapters 4 through 9, formally define this
+text format. Finally, chapter 10 recommends basic YAML schemas.
