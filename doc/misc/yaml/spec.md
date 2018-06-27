@@ -654,3 +654,82 @@ may translate directly between native data structures and a character stream
 take place so that the native data structures are constructed only from
 information available in the representation. In particular, mapping key order,
 comments, and tag handles should not be referenced during composition.
+
+#### Dump
+
+Dumping native data structures to a character stream is done using the following
+three stages:
+
+- Representing Native Data Structures
+
+YAML represents any native data structure using three node kinds: sequence - an
+ordered series of entries; mapping - an unordered association of unique keys to
+values; and scalar - any datum with opaque structure presentable as a series of
+Unicode characters. Combined, these primitives generate directed graph
+structures. These primitives were chosen because they are both powerful and
+familiar: the sequence corresponds to a Perl array and a Python list, the
+mapping corresponds to a Perl hash table and a Python dictionary. The scalar
+represents strings, integers, dates, and other atomic data types.
+
+Each YAML node requires, in addition to its kind and content, a tag specifying
+its data type. Type specifiers are either global URIs, or are local in scope to
+a single application. For example, an integer is represented in YAML with a
+scalar plus the global tag “tag:yaml.org,2002:int”. Similarly, an invoice
+object, particular to a given organization, could be represented as a mapping
+together with the local tag “!invoice”. This simple model can represent any
+data structure independent of programming language.
+
+- Serializing the Representation Graph
+
+For sequential access mediums, such as an event callback API, a YAML
+representation must be serialized to an ordered tree. Since in a YAML
+representation, mapping keys are unordered and nodes may be referenced more than
+once (have more than one incoming “arrow”), the serialization process is
+required to impose an ordering on the mapping keys and to replace the second and
+subsequent references to a given node with place holders called aliases. YAML
+does not specify how these serialization details are chosen. It is up to the
+YAML processor to come up with human-friendly key order and anchor names,
+possibly with the help of the application. The result of this process, a YAML
+serialization tree, can then be traversed to produce a series of event calls for
+one-pass processing of YAML data.
+
+- Presenting the Serialization Tree
+
+The final output process is presenting the YAML serializations as a character
+stream in a human-friendly manner. To maximize human readability, YAML offers a
+rich set of stylistic options which go far beyond the minimal functional needs
+of simple data storage. Therefore the YAML processor is required to introduce
+various presentation details when creating the stream, such as the choice of
+node styles, how to format scalar content, the amount of indentation, which tag
+handles to use, the node tags to leave unspecified, the set of directives to
+provide and possibly even what comments to add. While some of this can be done
+with the help of the application, in general this process should be guided by
+the preferences of the user.
+
+#### Load
+
+Loading native data structures from a character stream is done using the
+following three stages:
+
+- Parsing the Presentation Stream
+
+Parsing is the inverse process of presentation, it takes a stream of characters
+and produces a series of events. Parsing discards all the details introduced in
+the presentation process, reporting only the serialization events. Parsing can
+fail due to ill-formed input.
+
+- Composing the Representation Graph
+
+Composing takes a series of serialization events and produces a representation
+graph. Composing discards all the details introduced in the serialization
+process, producing only the representation graph. Composing can fail due to any
+of several reasons, detailed below.
+
+- Constructing Native Data Structures
+
+The final input process is constructing native data structures from the YAML
+representation. Construction must be based only on the information available in
+the representation, and not on additional serialization or presentation details
+such as comments, directives, mapping key order, node styles, scalar content
+format, indentation levels etc. Construction can fail due to the unavailability
+of the required native data types.
