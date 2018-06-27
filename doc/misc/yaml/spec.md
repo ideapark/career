@@ -637,3 +637,20 @@ achieve portability between programming environments. Serialization concerns
 itself with turning a YAML representation into a serial form, that is, a form
 with sequential access constraints. Presentation deals with the formatting of a
 YAML serialization as a series of characters in a human-friendly manner.
+
+### Processes
+
+Translating between native data structures and a character stream is done in
+several logically distinct stages, each with a well defined input and output
+data model, as shown in the following diagram:
+
+- Figure 3.1. Processing Overview
+
+[Processing Overview](file://overview2.png)
+
+A YAML processor need not expose the serialization or representation stages. It
+may translate directly between native data structures and a character stream
+(dump and load in the diagram above). However, such a direct translation should
+take place so that the native data structures are constructed only from
+information available in the representation. In particular, mapping key order,
+comments, and tag handles should not be referenced during composition.
