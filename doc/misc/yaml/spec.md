@@ -10,7 +10,7 @@ auditing. Together with the Unicode standard for characters, this specification
 provides all the information necessary to understand YAML Version 1.2 and to
 create programs that process YAML information.
 
-## Chapter1. Introduction
+## Chapter 1. Introduction
 
 "YAML Ain't Markup Language" (abbrieviated YAML) is a data serialization
 language disigned to be human-friendly and work well with modern programming
@@ -186,7 +186,7 @@ model, and the processes for converting from and to this model and the YAML text
 format. The bulk of the document, chapters 4 through 9, formally define this
 text format. Finally, chapter 10 recommends basic YAML schemas.
 
-## Chapter2. Preview
+## Chapter 2. Preview
 
 This section provides a quick glimpse into the expressive power of YAML. It is
 not expected that the first-time reader grok all of the examples. Rather, these
@@ -617,3 +617,23 @@ Stack:
     code: |-
       foo = bar
 ```
+
+## Chapter 3. Processing YAML Information
+
+YAML is both a text format and a method for presenting any native data structure
+in this format. Therefore, this specification defines two concepts: a class of
+data objects called YAML representations, and a syntax for presenting YAML
+representations as a series of characters, called a YAML stream. A YAML
+processor is a tool for converting information between these complementary
+views. It is assumed that a YAML processor does its work on behalf of another
+module, called an application. This chapter describes the information structures
+a YAML processor must provide to or obtain from the application.
+
+YAML information is used in two ways: for machine processing, and for human
+consumption. The challenge of reconciling these two perspectives is best done in
+three distinct translation stages: representation, serialization, and
+presentation. Representation addresses how YAML views native data structures to
+achieve portability between programming environments. Serialization concerns
+itself with turning a YAML representation into a serial form, that is, a form
+with sequential access constraints. Presentation deals with the formatting of a
+YAML serialization as a series of characters in a human-friendly manner.
