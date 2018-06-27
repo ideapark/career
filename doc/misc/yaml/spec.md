@@ -185,3 +185,81 @@ preview of the main YAML features. Chapter 3 describes the YAML information
 model, and the processes for converting from and to this model and the YAML text
 format. The bulk of the document, chapters 4 through 9, formally define this
 text format. Finally, chapter 10 recommends basic YAML schemas.
+
+## Chapter2. Preview
+
+This section provides a quick glimpse into the expressive power of YAML. It is
+not expected that the first-time reader grok all of the examples. Rather, these
+selections are used as motivation for the remainder of the specification.
+
+### Collections
+
+YAML’s block collections use indentation for scope and begin each entry on its
+own line. Block sequences indicate each entry with a dash and space ( “- ”).
+Mappings use a colon and space (“: ”) to mark each key: value pair. Comments
+begin with an octothorpe (also called a “hash”, “sharp”, “pound”, or
+“number sign” - “#”).
+
+- Example 2.1. Sequence of Scalars (ball players)
+
+```yaml
+- Mark McGwire
+- Sammy Sosa
+- Ken Griffey
+```
+
+- Example 2.2. Mapping Scalars to Scalars (player statistics)
+
+```yaml
+hr:  65    # Home runs
+avg: 0.278 # Batting average
+rbi: 147   # Runs Batted In
+```
+
+- Example 2.3. Mapping Scalars to Sequences (ball clubs in each league)
+
+```yaml
+american:
+ - Boston Red Sox
+ - Detroit Tigers
+ - New York Yankees
+national:
+ - New York Mets
+ - Chicago Cubs
+ - Atlanta Braves
+```
+
+- Example 2.4. Sequence of Mappings (players’ statistics)
+
+```yaml
+-
+ name: Mark McGwire
+ hr: 65
+ avg: 0.278
+-
+ name: Sammy Sosa
+ hr: 63
+ avg: 0.288
+```
+
+YAML also has flow styles, using explicit indicators rather than indentation to
+denote scope. The flow sequence is written as a comma separated list within
+square brackets. In a similar manner, the flow mapping uses curly braces.
+
+- Example 2.5. Sequence of Sequences
+
+```yaml
+- [name        , hr, avg  ]
+- [Mark McGwire, 65, 0.278]
+- [Sammy Sosa  , 63, 0.288]
+```
+
+- Example 2.6. Mapping of Mappings
+
+```yaml
+Mark McGwire: {hr: 65, avg: 0.278}
+Sammy Sosa: {
+    hr: 63,
+    avg: 0.288
+ }
+```
