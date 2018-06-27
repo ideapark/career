@@ -646,7 +646,7 @@ data model, as shown in the following diagram:
 
 - Figure 3.1. Processing Overview
 
-[Processing Overview](file://overview2.png)
+![Processing Overview](file://overview2.png)
 
 A YAML processor need not expose the serialization or representation stages. It
 may translate directly between native data structures and a character stream
@@ -733,3 +733,352 @@ the representation, and not on additional serialization or presentation details
 such as comments, directives, mapping key order, node styles, scalar content
 format, indentation levels etc. Construction can fail due to the unavailability
 of the required native data types.
+
+### Information Models
+
+This section specifies the formal details of the results of the above processes.
+To maximize data portability between programming languages and implementations,
+users of YAML should be mindful of the distinction between serialization or
+presentation properties and those which are part of the YAML representation.
+Thus, while imposing a order on mapping keys is necessary for flattening YAML
+representations to a sequential access medium, this serialization detail must
+not be used to convey application level information. In a similar manner, while
+indentation technique and a choice of a node style are needed for the human
+readability, these presentation details are neither part of the YAML
+serialization nor the YAML representation. By carefully separating properties
+needed for serialization and presentation, YAML representations of application
+information will be consistent and portable between various programming
+environments.
+
+The following diagram summarizes the three information models. Full arrows
+denote composition, hollow arrows denote inheritance, “1” and “*” denote
+“one” and “many” relationships. A single “+” denotes serialization
+details, a double “++” denotes presentation details.
+
+- Figure 3.2. Information Models
+
+![Information Models](model2.png)
+
+#### Representation Graph
+
+YAML’s representation of native data structure is a rooted, connected, directed
+graph of tagged nodes. By “directed graph” we mean a set of nodes and directed
+edges (“arrows”), where each edge connects one node to another (see a formal
+definition). All the nodes must be reachable from the root node via such edges.
+Note that the YAML graph may include cycles, and a node may have more than one
+incoming edge.
+
+Nodes that are defined in terms of other nodes are collections; nodes that are
+independent of any other nodes are scalars. YAML supports two kinds of
+collection nodes: sequences and mappings. Mapping nodes are somewhat tricky
+because their keys are unordered and must be unique.
+
+- Figure 3.3. Representation Model
+
+![Representation Model](represent2.png)
+
+##### Nodes
+
+A YAML node represents a single native data structure. Such nodes have content
+of one of three kinds: scalar, sequence, or mapping. In addition, each node has
+a tag which serves to restrict the set of possible values the content can have.
+
+- Scalar
+
+The content of a scalar node is an opaque datum that can be presented as a
+series of zero or more Unicode characters.
+
+- Sequence
+
+The content of a sequence node is an ordered series of zero or more nodes. In
+particular, a sequence may contain the same node more than once. It could even
+contain itself (directly or indirectly).
+
+- Mapping
+
+The content of a mapping node is an unordered set of key: value node pairs, with
+the restriction that each of the keys is unique. YAML places no further
+restrictions on the nodes. In particular, keys may be arbitrary nodes, the same
+node may be used as the value of several key: value pairs, and a mapping could
+even contain itself as a key or a value (directly or indirectly).
+
+When appropriate, it is convenient to consider sequences and mappings together,
+as collections. In this view, sequences are treated as mappings with integer
+keys starting at zero. Having a unified collections view for sequences and
+mappings is helpful both for theoretical analysis and for creating practical
+YAML tools and APIs. This strategy is also used by the Javascript programming
+language.
+
+##### Tags
+
+YAML represents type information of native data structures with a simple
+identifier, called a tag. Global tags are URIs and hence globally unique across
+all applications. The “tag:” URI scheme is recommended for all global YAML
+tags. In contrast, local tags are specific to a single application. Local tags
+start with “!”, are not URIs and are not expected to be globally unique. YAML
+provides a “TAG” directive to make tag notation less verbose; it also offers
+easy migration from local to global tags. To ensure this, local tags are
+restricted to the URI character set and use URI character escaping.
+
+YAML does not mandate any special relationship between different tags that begin
+with the same substring. Tags ending with URI fragments (containing “#”) are
+no exception; tags that share the same base URI but differ in their fragment
+part are considered to be different, independent tags. By convention, fragments
+are used to identify different “variants” of a tag, while “/” is used to
+define nested tag “namespace” hierarchies. However, this is merely a
+convention, and each tag may employ its own rules. For example, Perl tags may
+use “::” to express namespace hierarchies, Java tags may use “.”, etc.
+
+YAML tags are used to associate meta information with each node. In particular,
+each tag must specify the expected node kind (scalar, sequence, or mapping).
+Scalar tags must also provide a mechanism for converting formatted content to a
+canonical form for supporting equality testing. Furthermore, a tag may provide
+additional information such as the set of allowed content values for validation,
+a mechanism for tag resolution, or any other data that is applicable to all of
+the tag’s nodes.
+
+##### Node Comparison
+
+Since YAML mappings require key uniqueness, representations must include a
+mechanism for testing the equality of nodes. This is non-trivial since YAML
+allows various ways to format scalar content. For example, the integer eleven
+can be written as “0o13” (octal) or “0xB” (hexadecimal). If both notations
+are used as keys in the same mapping, only a YAML processor which recognizes
+integer formats would correctly flag the duplicate key as an error.
+
+- Canonical Form
+
+YAML supports the need for scalar equality by requiring that every scalar tag
+must specify a mechanism for producing the canonical form of any formatted
+content. This form is a Unicode character string which also presents the same
+content, and can be used for equality testing. While this requirement is
+stronger than a well defined equality operator, it has other uses, such as the
+production of digital signatures.
+
+- Equality
+
+Two nodes must have the same tag and content to be equal. Since each tag applies
+to exactly one kind, this implies that the two nodes must have the same kind to
+be equal. Two scalars are equal only when their tags and canonical forms are
+equal character-by-character. Equality of collections is defined recursively.
+Two sequences are equal only when they have the same tag and length, and each
+node in one sequence is equal to the corresponding node in the other sequence.
+Two mappings are equal only when they have the same tag and an equal set of
+keys, and each key in this set is associated with equal values in both mappings.
+
+Different URI schemes may define different rules for testing the equality of
+URIs. Since a YAML processor cannot be reasonably expected to be aware of them
+all, it must resort to a simple character-by-character comparison of tags to
+ensure consistency. This also happens to be the comparison method defined by the
+“tag:” URI scheme. Tags in a YAML stream must therefore be presented in a
+canonical way so that such comparison would yield the correct results.
+
+- Identity
+
+Two nodes are identical only when they represent the same native data structure.
+Typically, this corresponds to a single memory address. Identity should not be
+confused with equality; two equal nodes need not have the same identity. A YAML
+processor may treat equal scalars as if they were identical. In contrast, the
+separate identity of two distinct but equal collections must be preserved.
+
+#### Serialization Tree
+
+To express a YAML representation using a serial API, it is necessary to impose
+an order on mapping keys and employ alias nodes to indicate a subsequent
+occurrence of a previously encountered node. The result of this process is a
+serialization tree, where each node has an ordered set of children. This tree
+can be traversed for a serial event-based API. Construction of native data
+structures from the serial interface should not use key order or anchor names
+for the preservation of application data.
+
+- Figure 3.4. Serialization Model
+
+![Serialization Model](serialize2.png)
+
+##### Keys Order
+
+In the representation model, mapping keys do not have an order. To serialize a
+mapping, it is necessary to impose an ordering on its keys. This order is a
+serialization detail and should not be used when composing the representation
+graph (and hence for the preservation of application data). In every case where
+node order is significant, a sequence must be used. For example, an ordered
+mapping can be represented as a sequence of mappings, where each mapping is a
+single key: value pair. YAML provides convenient compact notation for this case.
+
+##### Anchors and Aliases
+
+In the representation graph, a node may appear in more than one collection. When
+serializing such data, the first occurrence of the node is identified by an
+anchor. Each subsequent occurrence is serialized as an alias node which refers
+back to this anchor. Otherwise, anchor names are a serialization detail and are
+discarded once composing is completed. When composing a representation graph
+from serialized events, an alias node refers to the most recent node in the
+serialization having the specified anchor. Therefore, anchors need not be unique
+within a serialization. In addition, an anchor need not have an alias node
+referring to it. It is therefore possible to provide an anchor for all nodes in
+serialization.
+
+#### Presentation Stream
+
+A YAML presentation is a stream of Unicode characters making use of of styles,
+scalar content formats, comments, directives and other presentation details to
+present a YAML serialization in a human readable way. Although a YAML processor
+may provide these details when parsing, they should not be reflected in the
+resulting serialization. YAML allows several serialization trees to be contained
+in the same YAML character stream, as a series of documents separated by
+markers. Documents appearing in the same stream are independent; that is, a node
+must not appear in more than one serialization tree or representation graph.
+
+- Figure 3.5. Presentation Model
+
+![Presentation Model](present2.png)
+
+##### Node Styles
+
+Each node is presented in some style, depending on its kind. The node style is a
+presentation detail and is not reflected in the serialization tree or
+representation graph. There are two groups of styles. Block styles use
+indentation to denote structure; In contrast, flow styles styles rely on
+explicit indicators.
+
+YAML provides a rich set of scalar styles. Block scalar styles include the
+literal style and the folded style. Flow scalar styles include the plain style
+and two quoted styles, the single-quoted style and the double-quoted style.
+These styles offer a range of trade-offs between expressive power and
+readability.
+
+Normally, block sequences and mappings begin on the next line. In some cases,
+YAML also allows nested block collections to start in-line for a more compact
+notation. In addition, YAML provides a compact notation for flow mappings with a
+single key: value pair, nested inside a flow sequence. These allow for a natural
+“ordered mapping” notation.
+
+- Figure 3.6. Kind/Style Combinations
+
+![Kind/Style Combinations](styles2.png)
+
+##### Scalar Formats
+
+YAML allows scalars to be presented in several formats. For example, the integer
+“11” might also be written as “0xB”. Tags must specify a mechanism for
+converting the formatted content to a canonical form for use in equality
+testing. Like node style, the format is a presentation detail and is not
+reflected in the serialization tree and representation graph.
+
+##### Comments
+
+Comments are a presentation detail and must not have any effect on the
+serialization tree or representation graph. In particular, comments are not
+associated with a particular node. The usual purpose of a comment is to
+communicate between the human maintainers of a file. A typical example is
+comments in a configuration file. Comments must not appear inside scalars, but
+may be interleaved with such scalars inside collections.
+
+##### Directives
+
+Each document may be associated with a set of directives. A directive has a name
+and an optional sequence of parameters. Directives are instructions to the YAML
+processor, and like all other presentation details are not reflected in the YAML
+serialization tree or representation graph. This version of YAML defines a two
+directives, “YAML” and “TAG”. All other directives are reserved for future
+versions of YAML.
+
+### Loading Failure Points
+
+The process of loading native data structures from a YAML stream has several
+potential failure points. The character stream may be ill-formed, aliases may be
+unidentified, unspecified tags may be unresolvable, tags may be unrecognized,
+the content may be invalid, and a native type may be unavailable. Each of these
+failures results with an incomplete loading.
+
+A partial representation need not resolve the tag of each node, and the
+canonical form of formatted scalar content need not be available. This weaker
+representation is useful for cases of incomplete knowledge of the types used in
+the document. In contrast, a complete representation specifies the tag of each
+node, and provides the canonical form of formatted scalar content, allowing for
+equality testing. A complete representation is required in order to construct
+native data structures.
+
+- Figure 3.7. Loading Failure Points
+
+![Loading Failure Points](validity2.png)
+
+#### Well-Formed Streams and Identified Aliases
+
+A well-formed character stream must match the BNF productions specified in the
+following chapters. Successful loading also requires that each alias shall refer
+to a previous node identified by the anchor. A YAML processor should reject
+ill-formed streams and unidentified aliases. A YAML processor may recover from
+syntax errors, possibly by ignoring certain parts of the input, but it must
+provide a mechanism for reporting such errors.
+
+#### Resolved Tags
+
+Typically, most tags are not explicitly specified in the character stream.
+During parsing, nodes lacking an explicit tag are given a non-specific tag:
+“!” for non-plain scalars, and “?” for all other nodes. Composing a complete
+representation requires each such non-specific tag to be resolved to a specific
+tag, be it a global tag or a local tag.
+
+Resolving the tag of a node must only depend on the following three parameters:
+(1) the non-specific tag of the node, (2) the path leading from the root to the
+node, and (3) the content (and hence the kind) of the node. When a node has more
+than one occurrence (using aliases), tag resolution must depend only on the path
+to the first (anchored) occurrence of the node.
+
+Note that resolution must not consider presentation details such as comments,
+indentation and node style. Also, resolution must not consider the content of
+any other node, except for the content of the key nodes directly along the path
+leading from the root to the resolved node. Finally, resolution must not
+consider the content of a sibling node in a collection, or the content of the
+value node associated with a key node being resolved.
+
+These rules ensure that tag resolution can be performed as soon as a node is
+first encountered in the stream, typically before its content is parsed. Also,
+tag resolution only requires referring to a relatively small number of
+previously parsed nodes. Thus, in most cases, tag resolution in one-pass
+processors is both possible and practical.
+
+YAML processors should resolve nodes having the “!” non-specific tag as
+“tag:yaml.org,2002:seq”, “tag:yaml.org,2002:map” or
+“tag:yaml.org,2002:str” depending on their kind. This tag resolution
+convention allows the author of a YAML character stream to effectively
+“disable” the tag resolution process. By explicitly specifying a “!”
+non-specific tag property, the node would then be resolved to a “vanilla”
+sequence, mapping, or string, according to its kind.
+
+Application specific tag resolution rules should be restricted to resolving the
+“?” non-specific tag, most commonly to resolving plain scalars. These may be
+matched against a set of regular expressions to provide automatic resolution of
+integers, floats, timestamps, and similar types. An application may also match
+the content of mapping nodes against sets of expected keys to automatically
+resolve points, complex numbers, and similar types. Resolved sequence node types
+such as the “ordered mapping” are also possible.
+
+That said, tag resolution is specific to the application. YAML processors should
+therefore provide a mechanism allowing the application to override and expand
+these default tag resolution rules.
+
+If a document contains unresolved tags, the YAML processor is unable to compose
+a complete representation graph. In such a case, the YAML processor may compose
+a partial representation, based on each node’s kind and allowing for
+non-specific tags.
+
+#### Recognized and Valid Tags
+
+To be valid, a node must have a tag which is recognized by the YAML processor
+and its content must satisfy the constraints imposed by this tag. If a document
+contains a scalar node with an unrecognized tag or invalid content, only a
+partial representation may be composed. In contrast, a YAML processor can always
+compose a complete representation for an unrecognized or an invalid collection,
+since collection equality does not depend upon knowledge of the collection’s
+data type. However, such a complete representation cannot be used to construct a
+native data structure.
+
+#### Available Tags
+
+In a given processing environment, there need not be an available native type
+corresponding to a given tag. If a node’s tag is unavailable, a YAML processor
+will not be able to construct a native data structure for it. In this case, a
+complete representation may still be composed, and an application may wish to
+use this representation directly.
