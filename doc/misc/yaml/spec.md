@@ -145,3 +145,20 @@ like YAML. Such a format might also serve as YAML’s "canonical format".
 Defining such a “YSON” format (YSON is a Serialized Object Notation) can be
 done either by enhancing the JSON specification or by restricting the YAML
 specification. Such a definition is beyond the scope of this specification.
+
+### Relation to XML
+
+Newcomers to YAML often search for its correlation to the eXtensible Markup
+Language (XML). Although the two languages may actually compete in several
+application domains, there is no direct correlation between them.
+
+YAML is primarily a data serialization language. XML was designed to be
+backwards compatible with the Standard Generalized Markup Language (SGML), which
+was designed to support structured documentation. XML therefore had many design
+constraints placed on it that YAML does not share. XML is a pioneer in many
+domains, YAML is the result of lessons learned from XML and other technologies.
+
+It should be mentioned that there are ongoing efforts to define standard
+XML/YAML mappings. This generally requires that a subset of each language be
+used. For more information on using both XML and YAML, please visit
+http://yaml.org/xml.
