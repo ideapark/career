@@ -111,3 +111,37 @@ YAML was designed to support incremental interfaces that include both input
 (“getNextEvent()”) and output (“sendNextEvent()”) one-pass interfaces.
 Together, these enable YAML to support the processing of large documents (e.g.
 transaction logs) or continuous streams (e.g. feeds from a production machine).
+
+### Relation to JSON
+
+Both JSON and YAML aim to be human readable data interchange formats. However,
+JSON and YAML have different priorities. JSON’s foremost design goal is
+simplicity and universality. Thus, JSON is trivial to generate and parse, at the
+cost of reduced human readability. It also uses a lowest common denominator
+information model, ensuring any JSON data can be easily processed by every
+modern programming environment.
+
+In contrast, YAML’s foremost design goals are human readability and support for
+serializing arbitrary native data structures. Thus, YAML allows for extremely
+readable files, but is more complex to generate and parse. In addition, YAML
+ventures beyond the lowest common denominator data types, requiring more complex
+processing when crossing between different programming environments.
+
+YAML can therefore be viewed as a natural superset of JSON, offering improved
+human readability and a more complete information model. This is also the case
+in practice; every JSON file is also a valid YAML file. This makes it easy to
+migrate from JSON to YAML if/when the additional features are required.
+
+JSON's RFC4627 requires that mappings keys merely “SHOULD” be unique, while
+YAML insists they “MUST” be. Technically, YAML therefore complies with the
+JSON spec, choosing to treat duplicates as an error. In practice, since JSON is
+silent on the semantics of such duplicates, the only portable JSON files are
+those with unique keys, which are therefore valid YAML files.
+
+It may be useful to define a intermediate format between YAML and JSON. Such a
+format would be trivial to parse (but not very human readable), like JSON. At
+the same time, it would allow for serializing arbitrary native data structures,
+like YAML. Such a format might also serve as YAML’s "canonical format".
+Defining such a “YSON” format (YSON is a Serialized Object Notation) can be
+done either by enhancing the JSON specification or by restricting the YAML
+specification. Such a definition is beyond the scope of this specification.
