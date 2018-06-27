@@ -1,8 +1,6 @@
-#+TITLE: YAML Ain't Markup Language (YAML) Version 1.2
-#+AUTHOR: http://yaml.org/spec/1.2/spec.html
-#+EMAIL: p@ctriple.cn
+# YAML Ain't Markup Language (YAML) Version 1.2
 
-* Abstract
+## Abstract
 
 YAML (rhymes with "camel") is a human-friendly, cross language, Unicode based
 data serialization language designed around the common native data types of
