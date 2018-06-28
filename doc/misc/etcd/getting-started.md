@@ -1,6 +1,6 @@
 # Getting started with etcd
 
-![Origin Link](https://coreos.com/etcd/docs/latest/getting-started-with-etcd.html)
+[Origin Link](https://coreos.com/etcd/docs/latest/getting-started-with-etcd.html)
 
 etcd is an open-source distributed key value store that provides shared
 configuration and service discovery for Container Linux clusters. etcd runs on
