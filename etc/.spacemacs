@@ -40,6 +40,7 @@ values."
      (python :variables
              flycheck-flake8-maximum-line-length 160)
      helm
+     yaml
      auto-completion
      better-defaults
      emacs-lisp
