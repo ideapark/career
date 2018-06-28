@@ -89,9 +89,10 @@ static int on_legend(cJSON *body)
 static int on_roundstep(cJSON *body)
 {
 	logger_info("%s\n", "player: round step.");
-	/* get server status */
 
-	/* calc my action strategy */
+	/* TODO: get server status */
+
+	/* TODO: calc my action strategy */
 
 	/* echo server my actions */
 	cJSON *root = cJSON_CreateObject();
