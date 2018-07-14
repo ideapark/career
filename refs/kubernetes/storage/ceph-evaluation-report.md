@@ -8,11 +8,11 @@
 
 CentOS VM: 2-cpu 4G-mem 8G-disk
 
-192.168.3.31 ceph-client
-192.168.3.32 ceph-admin
-192.168.3.33 ceph-storage1
-192.168.3.34 ceph-storage2
-192.168.3.35 ceph-storage3
+192.168.3.31 client
+192.168.3.32 admin
+192.168.3.33 storage1
+192.168.3.34 storage2
+192.168.3.35 storage3
 
 ### Benchmark Baseline
 
