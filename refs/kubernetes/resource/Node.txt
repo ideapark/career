@@ -2,7 +2,7 @@
 
 - Address: hostname, internet IP, intranet IP.
 - Condition: OutOfDisk, Ready, MemoryPressure, DiskPressure
-- Capacity: CPU, Memory, Pod NO.
+- Capacity: CPU, Memory, Pod Counts.
 - Info: Kernel Version, Container Version, OS Type
 
  Physical Machine or VM
@@ -14,7 +14,7 @@
 | +------------+        +------------+          +------------+      |
 | |  ##        |        | ##   @@    |          | ## @@ $$   |      |
 | |  ##        |        | ##   @@    |          | ## @@ $$   |      |
-| +------------+        +------------+          +------------+      |
+| +------------+        +------------+          +-----+------+      |
 |                                                     |             |
 |  10.10.10.4                                         |             |
 | +---------------+                                  Pod            |
