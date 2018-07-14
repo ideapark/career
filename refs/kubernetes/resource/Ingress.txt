@@ -10,7 +10,7 @@ termination, HTTP routing.
 
 
    Internet
-      |
+       |
    [Ingress]
   ---|---|---
   [Services]
@@ -18,14 +18,14 @@ termination, HTTP routing.
 
 ## Multi-Service Ingress.
 
-foo.bar.com -> 178.91.123.132 -> /foo  s1:80
-                                 /bar  s2:80
+foo.bar.com -> 178.91.123.132 -> /foo  svc1:80
+                                 /bar  svc2:80
 
 ## Virtual Host Ingress
 
-foo.bar.com --+                +--> foo.bar.com  s1:80
+foo.bar.com --+                +--> foo.bar.com  svc1:80
               | 178.91.123.132 |
-bar.foo.com --+                +--> bar.foo.com  s2:80
+bar.foo.com --+                +--> bar.foo.com  svc2:80
 
 ## TLS Ingress
 
