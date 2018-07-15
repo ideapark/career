@@ -4,15 +4,18 @@
 
 ## Ceph 性能测试
 
-### Cluster
+### Test Cluster (CentOS Ceph Cluster)
 
-CentOS VM: 2-cpu 4G-mem 8G-disk
+http://docs.ceph.org.cn/start/quick-start-preflight/
 
-192.168.3.31 client
-192.168.3.32 admin
-192.168.3.33 storage1
-192.168.3.34 storage2
-192.168.3.35 storage3
+ admin-node: 192.168.3.30 +-----------> node1: 192.168.3.31
+               ceph-deploy|             mon.node1
+                          |
+                          +-----------> node2: 192.168.3.32
+                          |             osd.0
+                          |
+                          +-----------> node3: 192.168.3.33
+                                        osd.1
 
 ### Benchmark Baseline
 
