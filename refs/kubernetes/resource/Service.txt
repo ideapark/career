@@ -1,0 +1,58 @@
+# Service
+
+Load balancing:
+
+- Service
+- Ingress Controller
+- Service Load Balancer
+- Custom Load Balancer
+
+# Service Type
+
+- ClusterIP
+- NodePort
+- LoadBalancer
+- ExternalName
+
+                                             @
+                                             |
+                                             | https:443
+                                 +--------------------------+
+                                 |      Frontend Service    |
+                                 | app=webapp role=frontend |
+                                 +--------------------------+
+                                             |
+                                             |
+           +---------------------------------+----------------------------+
+           |                                 |                            |
+  +--------------------------+ +--------------------------+ +--------------------------+
+  |      Frontend v1 Pod     | |      Frontend v1 Pod     | |     Frontend v2 Pod      |
+  | app=webapp role=frontend | | app=webapp role=frontend | | app=webapp role=frontend |
+  | version=1.0.0            | | version=1.0.0            | | version=2.0.0            |
+  +--------------------------+ +--------------------------+ +--------------------------+
+
+
+# kube-proxy
+
+                                                   +--------+
+                                                   | Client |
+      +------+                                     +--------+
+      | User |                                          |
+      +------+                              +--------+-----+---------+
+          | create service                  |        | VIP |         |
+          |                                 |        +-----+         |
+  +----------------+                        |         Service        |
+  | kube-apiserver |                        | label selecter: app=wb |
+  +----------------+                        +------------------------+
+    watch |                                              |
+     +------------+            update            +---------------+
+     | kube-proxy |----------------------------->| iptables/ipvs |
+     +------------+                              +---------------+
+                                                  /      |      \
+                                                 /       |       \
+                                                /        |        \
+                                               /         |         \
+                                        +-------+    +-------+  +-------+
+                                        |  Pod  |    |  Pod  |  |  Pod  |
+                                        |app=web|    |app=web|  |app=web|
+                                        +-------+    +-------+  +-------+
