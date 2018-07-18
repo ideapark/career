@@ -1,0 +1,24 @@
+# Volume
+
+- emptyDir (life to Pod)
+- hostPath
+- gcePersistentDisk
+- awsElasticBlockStore
+- nfs
+- iscsi
+- flocker
+- glusterfs
+- rbd
+- cephfs
+- gitRepo (life to Pod)
+- secret (life to Pod)
+- persistentVolumeClaim
+- downwardAPI
+- azureDisk
+- vsphereVolume
+- Quobyte
+- PortworxVolume
+- ScalieIO
+- FlexVolume
+- StorageOS
+- local
