@@ -21,12 +21,12 @@ CMD=/tmp/ceph.cmd
 #
 # Run our first monitor
 (cat <<'EOF'
-docker run -d --net=host \
-       -v /etc/ceph:/etc/ceph \
-       -v /var/lib/ceph/:/var/lib/ceph/ \
-       -e MON_IP=192.168.99.101 \
-       -e CEPH_PUBLIC_NETWORK=192.168.99.0/24 \
-       ceph/daemon mon
+sudo docker run -d --net=host \
+            -v /etc/ceph:/etc/ceph \
+            -v /var/lib/ceph/:/var/lib/ceph/ \
+            -e MON_IP=192.168.99.101 \
+            -e CEPH_PUBLIC_NETWORK=192.168.99.0/24 \
+            ceph/daemon mon
 EOF
 ) > $CMD
 ssh -t node0 'bash -s' < $CMD
@@ -52,12 +52,12 @@ ssh -t node0 'bash -s' < $CMD
 #
 # Run second monitor
 (cat <<'EOF'
-docker run -d --net=host \
-       -v /etc/ceph:/etc/ceph \
-       -v /var/lib/ceph/:/var/lib/ceph/ \
-       -e MON_IP=192.168.99.102 \
-       -e CEPH_PUBLIC_NETWORK=192.168.99.0/24 \
-       ceph/daemon mon
+sudo docker run -d --net=host \
+            -v /etc/ceph:/etc/ceph \
+            -v /var/lib/ceph/:/var/lib/ceph/ \
+            -e MON_IP=192.168.99.102 \
+            -e CEPH_PUBLIC_NETWORK=192.168.99.0/24 \
+            ceph/daemon mon
 EOF
 ) > $CMD
 ssh -t node1 'bash -s' < $CMD
@@ -68,12 +68,12 @@ read -p 'confirm mon initialized ok, continue? '
 #
 # Run third monitor
 (cat <<'EOF'
-docker run -d --net=host \
-       -v /etc/ceph:/etc/ceph \
-       -v /var/lib/ceph/:/var/lib/ceph/ \
-       -e MON_IP=192.168.99.103 \
-       -e CEPH_PUBLIC_NETWORK=192.168.99.0/24 \
-       ceph/daemon mon
+sudo docker run -d --net=host \
+            -v /etc/ceph:/etc/ceph \
+            -v /var/lib/ceph/:/var/lib/ceph/ \
+            -e MON_IP=192.168.99.103 \
+            -e CEPH_PUBLIC_NETWORK=192.168.99.0/24 \
+            ceph/daemon mon
 EOF
 ) > $CMD
 ssh -t node2 'bash -s' < $CMD
@@ -84,10 +84,10 @@ read -p 'confirm mon initialized ok, continue? '
 #
 # Run a ceph manager
 (cat <<'EOF'
-docker run -d --net=host \
-       -v /etc/ceph:/etc/ceph \
-       -v /var/lib/ceph/:/var/lib/ceph/ \
-       ceph/daemon mgr
+sudo docker run -d --net=host \
+            -v /etc/ceph:/etc/ceph \
+            -v /var/lib/ceph/:/var/lib/ceph/ \
+            ceph/daemon mgr
 EOF
 ) > $CMD
 ssh -t node0 'bash -s' < $CMD
@@ -99,24 +99,24 @@ read -p 'confirm mgr initialized ok, continue? '
 # Run 2 osds (Object Storage Daemon) on each node
 (cat <<'EOF'
 # ===> osd on /dev/sdb
-docker run -d --net=host \
-       --pid=host \
-       --privileged=true \
-       -v /dev/:/dev/ \
-       -v /etc/ceph:/etc/ceph \
-       -v /var/lib/ceph/:/var/lib/ceph/ \
-       -e OSD_DEVICE=/dev/sdb \
-       ceph/daemon osd
+sudo docker run -d --net=host \
+            --pid=host \
+            --privileged=true \
+            -v /dev/:/dev/ \
+            -v /etc/ceph:/etc/ceph \
+            -v /var/lib/ceph/:/var/lib/ceph/ \
+            -e OSD_DEVICE=/dev/sdb \
+            ceph/daemon osd
 
 # ===> osd on /dev/sdc
-docker run -d --net=host \
-       --pid=host \
-       --privileged=true \
-       -v /dev/:/dev/ \
-       -v /etc/ceph:/etc/ceph \
-       -v /var/lib/ceph/:/var/lib/ceph/ \
-       -e OSD_DEVICE=/dev/sdc \
-       ceph/daemon osd
+sudo docker run -d --net=host \
+            --pid=host \
+            --privileged=true \
+            -v /dev/:/dev/ \
+            -v /etc/ceph:/etc/ceph \
+            -v /var/lib/ceph/:/var/lib/ceph/ \
+            -e OSD_DEVICE=/dev/sdc \
+            ceph/daemon osd
 EOF
 ) > $CMD
 for node in node0 node1 node2 node3
@@ -130,11 +130,11 @@ read -p 'confirm osds initialized ok, continue? '
 #
 # Run 2 mds (Metadata Server)
 (cat <<'EOF'
-docker run -d --net=host \
-       -v /etc/ceph:/etc/ceph \
-       -v /var/lib/ceph/:/var/lib/ceph/ \
-       -e CEPHFS_CREATE=1 \
-       ceph/daemon mds
+sudo docker run -d --net=host \
+            -v /etc/ceph:/etc/ceph \
+            -v /var/lib/ceph/:/var/lib/ceph/ \
+            -e CEPHFS_CREATE=1 \
+            ceph/daemon mds
 EOF
 ) > $CMD
 for node in node2 node3
@@ -149,10 +149,10 @@ read -p 'confirm mds initialized ok, continue? '
 # Run a rgw (Rados Gateway)
 # NOTE: expose container port 8080 to host 80 port
 (cat <<'EOF'
-docker run -d -p 80:8080 \
-       -v /etc/ceph:/etc/ceph \
-       -v /var/lib/ceph/:/var/lib/ceph/ \
-       ceph/daemon rgw
+sudo docker run -d -p 80:8080 \
+            -v /etc/ceph:/etc/ceph \
+            -v /var/lib/ceph/:/var/lib/ceph/ \
+            ceph/daemon rgw
 EOF
 ) > $CMD
 ssh -t node1 'bash -s' < $CMD
@@ -171,22 +171,22 @@ fi
 
 (cat <<'EOF'
 # destroy partition table: '/dev/sdb'
-docker run --rm -d --privileged=true \
-       -v /dev/:/dev/ \
-       -e OSD_DEVICE=/dev/sdb \
-       ceph/daemon zap_device
+sudo docker run --rm -d --privileged=true \
+            -v /dev/:/dev/ \
+            -e OSD_DEVICE=/dev/sdb \
+            ceph/daemon zap_device
 
 # destroy partition table: '/dev/sdc'
-docker run --rm -d --privileged=true \
-       -v /dev/:/dev/ \
-       -e OSD_DEVICE=/dev/sdc \
-       ceph/daemon zap_device
+sudo docker run --rm -d --privileged=true \
+            -v /dev/:/dev/ \
+            -e OSD_DEVICE=/dev/sdc \
+            ceph/daemon zap_device
 
-docker stop $(docker ps -aq)
-docker rm   $(docker ps -aq)
+sudo docker stop $(docker ps -aq)
+sudo docker rm   $(docker ps -aq)
 
-rm -rf /etc/ceph/
-rm -rf /var/lib/ceph/
+sudo rm -rf /etc/ceph/
+sudo rm -rf /var/lib/ceph/
 EOF
 ) > $CMD
 for node in node0 node1 node2 node3
