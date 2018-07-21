@@ -121,7 +121,12 @@ docker run -d -p 80:8080 \
 # DEBUG:
 #   stop and remove ceph containers
 #   delete /etc/ceph,/var/lib/ceph
-docker stop $(docker ps -aq)
-docker rm   $(docker ps -aq)
-rm -rf /etc/ceph
-rm -rf /var/lib/ceph
+for node in node0 node1 node2 node3
+do
+    ssh -t ${node} <<EOF
+        docker stop $(docker ps -aq)
+        docker rm   $(docker ps -aq)
+        rm -rf /etc/ceph
+        rm -rf /var/lib/ceph
+EOF
+done
