@@ -23,7 +23,7 @@ CMD=/tmp/ceph.cmd
 (cat <<'EOF'
 docker run -d --net=host \
        -v /etc/ceph:/etc/ceph \
-       -v /var/lib/ceph:/var/lib/ceph \
+       -v /var/lib/ceph/:/var/lib/ceph/ \
        -e MON_IP=192.168.99.101 \
        -e CEPH_PUBLIC_NETWORK=192.168.99.0/24 \
        ceph/daemon mon
@@ -41,8 +41,8 @@ read -p 'confirm mon initialized ok, continue? '
 (cat <<'EOF'
 for node in node1 node2 node3
 do
-    scp -r /etc/ceph     ${node}:/etc
-    scp -r /var/lib/ceph ${node}:/var/lib
+    scp -r /etc/ceph/     ${node}:/etc/
+    scp -r /var/lib/ceph/ ${node}:/var/lib/
 done
 EOF
 ) > $CMD
@@ -54,7 +54,7 @@ ssh -t node0 'bash -s' < $CMD
 (cat <<'EOF'
 docker run -d --net=host \
        -v /etc/ceph:/etc/ceph \
-       -v /var/lib/ceph:/var/lib/ceph \
+       -v /var/lib/ceph/:/var/lib/ceph/ \
        -e MON_IP=192.168.99.102 \
        -e CEPH_PUBLIC_NETWORK=192.168.99.0/24 \
        ceph/daemon mon
@@ -70,7 +70,7 @@ read -p 'confirm mon initialized ok, continue? '
 (cat <<'EOF'
 docker run -d --net=host \
        -v /etc/ceph:/etc/ceph \
-       -v /var/lib/ceph:/var/lib/ceph \
+       -v /var/lib/ceph/:/var/lib/ceph/ \
        -e MON_IP=192.168.99.103 \
        -e CEPH_PUBLIC_NETWORK=192.168.99.0/24 \
        ceph/daemon mon
@@ -86,7 +86,7 @@ read -p 'confirm mon initialized ok, continue? '
 (cat <<'EOF'
 docker run -d --net=host \
        -v /etc/ceph:/etc/ceph \
-       -v /var/lib/ceph:/var/lib/ceph \
+       -v /var/lib/ceph/:/var/lib/ceph/ \
        ceph/daemon mgr
 EOF
 ) > $CMD
@@ -110,7 +110,7 @@ docker run -d --net=host \
        --privileged=true \
        -v /dev:/dev \
        -v /etc/ceph:/etc/ceph \
-       -v /var/lib/ceph:/var/lib/ceph \
+       -v /var/lib/ceph/:/var/lib/ceph/ \
        -e OSD_DEVICE=/dev/sdb \
        ceph/daemon osd
 
@@ -126,7 +126,7 @@ docker run -d --net=host \
        --privileged=true \
        -v /dev:/dev \
        -v /etc/ceph:/etc/ceph \
-       -v /var/lib/ceph:/var/lib/ceph \
+       -v /var/lib/ceph/:/var/lib/ceph/ \
        -e OSD_DEVICE=/dev/sdc \
        ceph/daemon osd
 EOF
@@ -144,7 +144,7 @@ read -p 'confirm osds initialized ok, continue? '
 (cat <<'EOF'
 docker run -d --net=host \
        -v /etc/ceph:/etc/ceph \
-       -v /var/lib/ceph:/var/lib/ceph \
+       -v /var/lib/ceph/:/var/lib/ceph/ \
        -e CEPHFS_CREATE=1 \
        ceph/daemon mds
 EOF
@@ -163,7 +163,7 @@ read -p 'confirm mds initialized ok, continue? '
 (cat <<'EOF'
 docker run -d -p 80:8080 \
        -v /etc/ceph:/etc/ceph \
-       -v /var/lib/ceph:/var/lib/ceph \
+       -v /var/lib/ceph/:/var/lib/ceph/ \
        ceph/daemon rgw
 EOF
 ) > $CMD
@@ -184,8 +184,8 @@ fi
 (cat <<'EOF'
 docker stop $(docker ps -aq)
 docker rm   $(docker ps -aq)
-rm -rf /etc/ceph
-rm -rf /var/lib/ceph
+rm -rf /etc/ceph/
+rm -rf /var/lib/ceph/
 EOF
 ) > $CMD
 for node in node0 node1 node2 node3
