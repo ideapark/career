@@ -23,13 +23,13 @@ function reset_cluster() {
 
     (cat <<'EOF'
 # destroy partition table: '/dev/sdb'
-docker run --rm -d --privileged=true \
+docker run --rm --privileged=true \
        -v /dev/:/dev/ \
        -e OSD_DEVICE=/dev/sdb \
        ceph/daemon zap_device
 
 # destroy partition table: '/dev/sdc'
-docker run --rm -d --privileged=true \
+docker run --rm --privileged=true \
        -v /dev/:/dev/ \
        -e OSD_DEVICE=/dev/sdc \
        ceph/daemon zap_device
