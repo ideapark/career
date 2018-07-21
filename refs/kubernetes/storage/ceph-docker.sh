@@ -69,7 +69,7 @@ docker run -d --net=host \
 # Run 2 osds (Object Storage Daemon) on each node
 
 # destroy partition table if needed
-docker run -d --privileged=true \
+docker run --rm -d --privileged=true \
        -v /dev:/dev \
        -e OSD_DEVICE=/dev/sdb \
        ceph/daemon zap_device
@@ -85,7 +85,7 @@ docker run -d --net=host \
        ceph/daemon osd
 
 # destroy partition table if needed
-docker run -d --privileged=true \
+docker run --rm -d --privileged=true \
        -v /dev:/dev \
        -e OSD_DEVICE=/dev/sdc \
        ceph/daemon zap_device
