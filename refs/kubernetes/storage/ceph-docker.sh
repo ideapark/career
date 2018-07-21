@@ -18,12 +18,12 @@
 # node0:
 #
 # Run our first monitor
-sudo docker run -d --net=host \
-     -v /etc/ceph:/etc/ceph \
-     -v /var/lib/ceph:/var/lib/ceph \
-     -e MON_IP=192.168.99.101 \
-     -e CEPH_PUBLIC_NETWORK=192.168.99.0/24 \
-     ceph/daemon mon
+docker run -d --net=host \
+       -v /etc/ceph:/etc/ceph \
+       -v /var/lib/ceph:/var/lib/ceph \
+       -e MON_IP=192.168.99.101 \
+       -e CEPH_PUBLIC_NETWORK=192.168.99.0/24 \
+       ceph/daemon mon
 
 # node0
 #
@@ -32,84 +32,84 @@ sudo docker run -d --net=host \
 # NOTE: root permission required
 for node in node1 node2 node3
 do
-    sudo scp -r /etc/ceph     root@${node}:/etc
-    sudo scp -r /var/lib/ceph root@${node}:/var/lib
+    scp -r /etc/ceph     ${node}:/etc
+    scp -r /var/lib/ceph ${node}:/var/lib
 done
 
 # node1
 #
 # Run second monitor
-sudo docker run -d --net=host \
-     -v /etc/ceph:/etc/ceph \
-     -v /var/lib/ceph:/var/lib/ceph \
-     -e MON_IP=192.168.99.102 \
-     -e CEPH_PUBLIC_NETWORK=192.168.99.0/24 \
-     ceph/daemon mon
+docker run -d --net=host \
+       -v /etc/ceph:/etc/ceph \
+       -v /var/lib/ceph:/var/lib/ceph \
+       -e MON_IP=192.168.99.102 \
+       -e CEPH_PUBLIC_NETWORK=192.168.99.0/24 \
+       ceph/daemon mon
 
 # node2
 #
 # Run third monitor
-sudo docker run -d --net=host \
-     -v /etc/ceph:/etc/ceph \
-     -v /var/lib/ceph:/var/lib/ceph \
-     -e MON_IP=192.168.99.103 \
-     -e CEPH_PUBLIC_NETWORK=192.168.99.0/24 \
-     ceph/daemon mon
+docker run -d --net=host \
+       -v /etc/ceph:/etc/ceph \
+       -v /var/lib/ceph:/var/lib/ceph \
+       -e MON_IP=192.168.99.103 \
+       -e CEPH_PUBLIC_NETWORK=192.168.99.0/24 \
+       ceph/daemon mon
 
 # node0
 #
 # Run a ceph manager
-sudo docker run -d --net=host \
-     -v /etc/ceph:/etc/ceph \
-     -v /var/lib/ceph:/var/lib/ceph \
-     ceph/daemon mgr
+docker run -d --net=host \
+       -v /etc/ceph:/etc/ceph \
+       -v /var/lib/ceph:/var/lib/ceph \
+       ceph/daemon mgr
 
 # node0,node1,node2,node3
 #
 # Run 2 osds on each node
 
 # ===> osd on /dev/sdb
-sudo docker run -d --net=host \
-     --privileged=true \
-     -v /dev:/dev \
-     -v /etc/ceph:/etc/ceph \
-     -v /var/lib/ceph:/var/lib/ceph \
-     -e OSD_FORCE_ZAP=1 \
-     -e OSD_DEVICE=/dev/sdb \
-     ceph/daemon osd_ceph_disk
+docker run -d --net=host \
+       --privileged=true \
+       -v /dev:/dev \
+       -v /etc/ceph:/etc/ceph \
+       -v /var/lib/ceph:/var/lib/ceph \
+       -e OSD_FORCE_ZAP=1 \
+       -e OSD_DEVICE=/dev/sdb \
+       ceph/daemon osd_ceph_disk
 
 # ===> osd on /dev/sdc
-sudo docker run -d --net=host \
-     --privileged=true \
-     -v /dev:/dev \
-     -v /etc/ceph:/etc/ceph \
-     -v /var/lib/ceph:/var/lib/ceph \
-     -e OSD_FORCE_ZAP=1 \
-     -e OSD_DEVICE=/dev/sdc \
-     ceph/daemon osd_ceph_disk
+docker run -d --net=host \
+       --privileged=true \
+       -v /dev:/dev \
+       -v /etc/ceph:/etc/ceph \
+       -v /var/lib/ceph:/var/lib/ceph \
+       -e OSD_FORCE_ZAP=1 \
+       -e OSD_DEVICE=/dev/sdc \
+       ceph/daemon osd_ceph_disk
 
 # node2,node3
 #
 # Run 2 mds
-sudo docker run -d --net=host \
-     -v /etc/ceph:/etc/ceph \
-     -v /var/lib/ceph:/var/lib/ceph \
-     -e CEPHFS_CREATE=1 \
-     ceph/daemon mds
+docker run -d --net=host \
+       -v /etc/ceph:/etc/ceph \
+       -v /var/lib/ceph:/var/lib/ceph \
+       -e CEPHFS_CREATE=1 \
+       ceph/daemon mds
 
 # node1
 #
 # Run a rgw (Rados Gateway)
 # NOTE: expose container port 8080 to host 80 port
-sudo docker run -d -p 80:8080 \
-     -v /etc/ceph:/etc/ceph \
-     -v /var/lib/ceph:/var/lib/ceph \
-     ceph/daemon rgw
+docker run -d -p 80:8080 \
+       -v /etc/ceph:/etc/ceph \
+       -v /var/lib/ceph:/var/lib/ceph \
+       ceph/daemon rgw
 
 # DEBUG:
 #   stop and remove ceph containers
 #   delete /etc/ceph,/var/lib/ceph
-sudo docker stop $(docker ps -aq)
-sudo docker rm   $(docker ps -aq)
-sudo rm -rf /etc/ceph
-sudo rm -rf /var/lib/ceph
+docker stop $(docker ps -aq)
+docker rm   $(docker ps -aq)
+rm -rf /etc/ceph
+rm -rf /var/lib/ceph
