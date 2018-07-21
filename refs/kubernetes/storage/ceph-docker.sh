@@ -98,12 +98,6 @@ read -p 'confirm mgr initialized ok, continue? '
 #
 # Run 2 osds (Object Storage Daemon) on each node
 (cat <<'EOF'
-# destroy partition table if needed
-docker run --rm -d --privileged=true \
-       -v /dev/:/dev/ \
-       -e OSD_DEVICE=/dev/sdb \
-       ceph/daemon zap_device
-
 # ===> osd on /dev/sdb
 docker run -d --net=host \
        --pid=host \
@@ -113,12 +107,6 @@ docker run -d --net=host \
        -v /var/lib/ceph/:/var/lib/ceph/ \
        -e OSD_DEVICE=/dev/sdb \
        ceph/daemon osd
-
-# destroy partition table if needed
-docker run --rm -d --privileged=true \
-       -v /dev/:/dev/ \
-       -e OSD_DEVICE=/dev/sdc \
-       ceph/daemon zap_device
 
 # ===> osd on /dev/sdc
 docker run -d --net=host \
@@ -182,8 +170,21 @@ then
 fi
 
 (cat <<'EOF'
+# destroy partition table: '/dev/sdb'
+docker run --rm -d --privileged=true \
+       -v /dev/:/dev/ \
+       -e OSD_DEVICE=/dev/sdb \
+       ceph/daemon zap_device
+
+# destroy partition table: '/dev/sdc'
+docker run --rm -d --privileged=true \
+       -v /dev/:/dev/ \
+       -e OSD_DEVICE=/dev/sdc \
+       ceph/daemon zap_device
+
 docker stop $(docker ps -aq)
 docker rm   $(docker ps -aq)
+
 rm -rf /etc/ceph/
 rm -rf /var/lib/ceph/
 EOF
