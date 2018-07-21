@@ -15,10 +15,12 @@
 # | node3      | 192.168.99.104       | /dev/{sda,sdb,sdc} |     osd*2,mds  |
 # +------------+----------------------+--------------------+----------------+
 
+CMD=cmd.sh
+
 # node0
 #
 # Run our first monitor
-read cmd <<EOF
+(cat <<'EOF'
 docker run -d --net=host \
        -v /etc/ceph:/etc/ceph \
        -v /var/lib/ceph:/var/lib/ceph \
@@ -26,26 +28,28 @@ docker run -d --net=host \
        -e CEPH_PUBLIC_NETWORK=192.168.99.0/24 \
        ceph/daemon mon
 EOF
-ssh -t node0 $cmd
+) > $CMD
+ssh -t node0 'bash -s' < $CMD
 
 # node0
 #
 # Distribute /etc/ceph,/var/lib/ceph to node1,node2,node3
 #
 # NOTE: root permission required
-read cmd <<EOF
+(cat <<'EOF'
 for node in node1 node2 node3
 do
     scp -r /etc/ceph     ${node}:/etc
     scp -r /var/lib/ceph ${node}:/var/lib
 done
 EOF
-ssh -t node0 $cmd
+) > $CMD
+ssh -t node0 'bash -s' < $CMD
 
 # node1
 #
 # Run second monitor
-read cmd <<EOF
+(cat <<'EOF'
 docker run -d --net=host \
        -v /etc/ceph:/etc/ceph \
        -v /var/lib/ceph:/var/lib/ceph \
@@ -53,12 +57,13 @@ docker run -d --net=host \
        -e CEPH_PUBLIC_NETWORK=192.168.99.0/24 \
        ceph/daemon mon
 EOF
-ssh -t node1 $cmd
+) > $CMD
+ssh -t node1 'bash -s' < $CMD
 
 # node2
 #
 # Run third monitor
-read cmd <<EOF
+(cat <<'EOF'
 docker run -d --net=host \
        -v /etc/ceph:/etc/ceph \
        -v /var/lib/ceph:/var/lib/ceph \
@@ -66,23 +71,25 @@ docker run -d --net=host \
        -e CEPH_PUBLIC_NETWORK=192.168.99.0/24 \
        ceph/daemon mon
 EOF
-ssh -t node2 $cmd
+) > $CMD
+ssh -t node2 'bash -s' < $CMD
 
 # node0
 #
 # Run a ceph manager
-read cmd <<EOF
+(cat <<'EOF'
 docker run -d --net=host \
        -v /etc/ceph:/etc/ceph \
        -v /var/lib/ceph:/var/lib/ceph \
        ceph/daemon mgr
 EOF
-ssh -t node0 $cmd
+) > $CMD
+ssh -t node0 'bash -s' < $CMD
 
 # node0,node1,node2,node3
 #
 # Run 2 osds (Object Storage Daemon) on each node
-read cmd <<EOF
+(cat <<'EOF'
 # destroy partition table if needed
 docker run --rm -d --privileged=true \
        -v /dev:/dev \
@@ -115,50 +122,54 @@ docker run -d --net=host \
        -e OSD_DEVICE=/dev/sdc \
        ceph/daemon osd
 EOF
+) > $CMD
 for node in node0 node1 node2 node3
 do
-    ssh -t ${node} ${cmd}
+    ssh -t ${node} 'bash -s' < $CMD
 done
 
 # node2,node3
 #
 # Run 2 mds (Metadata Server)
-read cmd <<EOF
+(cat <<'EOF'
 docker run -d --net=host \
        -v /etc/ceph:/etc/ceph \
        -v /var/lib/ceph:/var/lib/ceph \
        -e CEPHFS_CREATE=1 \
        ceph/daemon mds
 EOF
+) > $CMD
 for node in node2 node3
 do
-    ssh -t ${node} ${cmd}
+    ssh -t ${node} 'bash -s' < $CMD
 done
 
 # node1
 #
 # Run a rgw (Rados Gateway)
 # NOTE: expose container port 8080 to host 80 port
-read cmd <<EOF
+(cat <<'EOF'
 docker run -d -p 80:8080 \
        -v /etc/ceph:/etc/ceph \
        -v /var/lib/ceph:/var/lib/ceph \
        ceph/daemon rgw
 EOF
-ssh -t node1 $cmd
+) > $CMD
+ssh -t node1 'bash -s' < $CMD
 
 exit 0
 
 # DEBUG:
 #   stop and remove ceph containers
 #   delete /etc/ceph,/var/lib/ceph
-read cmd <<EOF
-docker stop \$(docker ps -aq)
-docker rm   \$(docker ps -aq)
+(cat <<'EOF'
+docker stop $(docker ps -aq)
+docker rm   $(docker ps -aq)
 rm -rf /etc/ceph
 rm -rf /var/lib/ceph
 EOF
+) > $CMD
 for node in node0 node1 node2 node3
 do
-    ssh -t ${node} ${cmd}
+    ssh -t ${node} 'bash -s' < $CMD
 done
