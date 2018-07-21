@@ -133,7 +133,8 @@ read -p 'confirm mgr initialized ok, continue? '
 # Run 2 osds (Object Storage Daemon) on each node
 (cat <<'EOF'
 # ===> osd on /dev/sdb
-docker run -d --net=host \
+docker run -d --restart \
+       --net=host \
        --pid=host \
        --privileged=true \
        -v /dev/:/dev/ \
@@ -143,7 +144,8 @@ docker run -d --net=host \
        ceph/daemon osd
 
 # ===> osd on /dev/sdc
-docker run -d --net=host \
+docker run -d --restart \
+       --net=host \
        --pid=host \
        --privileged=true \
        -v /dev/:/dev/ \
