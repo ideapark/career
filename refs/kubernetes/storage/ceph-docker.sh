@@ -15,7 +15,7 @@
 # | node3      | 192.168.99.104       | /dev/{sda,sdb,sdc} |     osd*2,mds  |
 # +------------+----------------------+--------------------+----------------+
 
-CMD=cmd.sh
+CMD=/tmp/ceph.cmd
 
 # node0
 #
@@ -30,6 +30,9 @@ docker run -d --net=host \
 EOF
 ) > $CMD
 ssh -t node0 'bash -s' < $CMD
+
+# wait monitor to initialize ok
+sleep 10s
 
 # node0
 #
@@ -60,6 +63,9 @@ EOF
 ) > $CMD
 ssh -t node1 'bash -s' < $CMD
 
+# wait monitor to initialize ok
+sleep 10s
+
 # node2
 #
 # Run third monitor
@@ -74,6 +80,9 @@ EOF
 ) > $CMD
 ssh -t node2 'bash -s' < $CMD
 
+# wait monitor to initialize ok
+sleep 10s
+
 # node0
 #
 # Run a ceph manager
@@ -85,6 +94,9 @@ docker run -d --net=host \
 EOF
 ) > $CMD
 ssh -t node0 'bash -s' < $CMD
+
+# wait mgr to initialize ok
+sleep 10s
 
 # node0,node1,node2,node3
 #
@@ -128,6 +140,9 @@ do
     ssh -t ${node} 'bash -s' < $CMD
 done
 
+# wait osds to initialize ok
+sleep 20s
+
 # node2,node3
 #
 # Run 2 mds (Metadata Server)
@@ -144,6 +159,9 @@ do
     ssh -t ${node} 'bash -s' < $CMD
 done
 
+# wait mds to initialize ok
+sleep 10s
+
 # node1
 #
 # Run a rgw (Rados Gateway)
@@ -156,6 +174,9 @@ docker run -d -p 80:8080 \
 EOF
 ) > $CMD
 ssh -t node1 'bash -s' < $CMD
+
+# wait rgw to initialize ok
+sleep 10s
 
 exit 0
 
