@@ -162,7 +162,7 @@ read -p 'confirm rgw initialized ok, continue? '
 # DEBUG:
 #   stop and remove ceph containers
 #   delete /etc/ceph,/var/lib/ceph
-read -p 'reset cluster (YES)? ' RESET
+read -p '===>> RESET CLUSTER (YES)? ' RESET
 
 if [ "YES" != "$RESET" ]
 then
