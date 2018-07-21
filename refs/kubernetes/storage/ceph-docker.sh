@@ -28,10 +28,12 @@ sudo docker run -d --net=host \
 # node0
 #
 # Distribute /etc/ceph,/var/lib/ceph to node1,node2,node3
+#
+# NOTE: root permission required
 for node in node1 node2 node3
 do
-    scp -r /etc/ceph     ${node}:/etc
-    scp -r /var/lib/ceph ${node}:/var/lib
+    scp -r /etc/ceph     root@${node}:/etc
+    scp -r /var/lib/ceph root@${node}:/var/lib
 done
 
 # node1
