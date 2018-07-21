@@ -15,6 +15,36 @@
 # | node3      | 192.168.99.104       | /dev/{sda,sdb,sdc} |     osd*2,mds  |
 # +------------+----------------------+--------------------+----------------+
 
+# trap ctrl-c and call reset_cluster()
+trap reset_cluster INT
+
+function reset_cluster() {
+    (cat <<'EOF'
+# destroy partition table: '/dev/sdb'
+docker run --rm -d --privileged=true \
+       -v /dev/:/dev/ \
+       -e OSD_DEVICE=/dev/sdb \
+       ceph/daemon zap_device
+
+# destroy partition table: '/dev/sdc'
+docker run --rm -d --privileged=true \
+       -v /dev/:/dev/ \
+       -e OSD_DEVICE=/dev/sdc \
+       ceph/daemon zap_device
+
+docker stop $(docker ps -aq)
+docker rm   $(docker ps -aq)
+
+rm -rf /etc/ceph/
+rm -rf /var/lib/ceph/
+EOF
+    ) > $CMD
+    for node in node0 node1 node2 node3
+    do
+        ssh -t ${node} 'bash -s' < $CMD
+    done
+}
+
 CMD=/tmp/ceph.cmd
 
 # node0
@@ -169,29 +199,6 @@ then
     exit 0
 fi
 
-(cat <<'EOF'
-# destroy partition table: '/dev/sdb'
-docker run --rm -d --privileged=true \
-       -v /dev/:/dev/ \
-       -e OSD_DEVICE=/dev/sdb \
-       ceph/daemon zap_device
-
-# destroy partition table: '/dev/sdc'
-docker run --rm -d --privileged=true \
-       -v /dev/:/dev/ \
-       -e OSD_DEVICE=/dev/sdc \
-       ceph/daemon zap_device
-
-docker stop $(docker ps -aq)
-docker rm   $(docker ps -aq)
-
-rm -rf /etc/ceph/
-rm -rf /var/lib/ceph/
-EOF
-) > $CMD
-for node in node0 node1 node2 node3
-do
-    ssh -t ${node} 'bash -s' < $CMD
-done
+reset_cluster
 
 exit 1
