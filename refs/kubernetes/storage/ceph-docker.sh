@@ -66,7 +66,7 @@ docker run -d --net=host \
 
 # node0,node1,node2,node3
 #
-# Run 2 osds on each node
+# Run 2 osds (Object Storage Daemon) on each node
 
 # destroy partition table if you want
 docker run -d --privileged=true \
@@ -102,7 +102,7 @@ docker run -d --net=host \
 
 # node2,node3
 #
-# Run 2 mds
+# Run 2 mds (Metadata Server)
 docker run -d --net=host \
        -v /etc/ceph:/etc/ceph \
        -v /var/lib/ceph:/var/lib/ceph \
