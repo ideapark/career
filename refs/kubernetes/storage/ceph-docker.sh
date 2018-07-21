@@ -15,7 +15,7 @@
 # | node3      | 192.168.99.104  | /dev/{sda,sdb,sdc} |     osd*2,mds  |
 # +------------+-----------------+--------------------+----------------+
 
-# node0:
+# node0
 #
 # Run our first monitor
 docker run -d --net=host \
@@ -68,7 +68,7 @@ docker run -d --net=host \
 #
 # Run 2 osds (Object Storage Daemon) on each node
 
-# destroy partition table if you want
+# destroy partition table if needed
 docker run -d --privileged=true \
        -v /dev:/dev \
        -e OSD_DEVICE=/dev/sdb \
@@ -84,7 +84,7 @@ docker run -d --net=host \
        -e OSD_DEVICE=/dev/sdb \
        ceph/daemon osd
 
-# destroy partition table if you want
+# destroy partition table if needed
 docker run -d --privileged=true \
        -v /dev:/dev \
        -e OSD_DEVICE=/dev/sdc \
