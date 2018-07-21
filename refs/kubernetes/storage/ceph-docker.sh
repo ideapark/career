@@ -43,6 +43,8 @@ EOF
     do
         ssh -t ${node} 'bash -s' < $CMD
     done
+
+    exit 1
 }
 
 CMD=/tmp/ceph.cmd
@@ -194,11 +196,9 @@ read -p 'confirm rgw initialized ok, continue? '
 #   delete /etc/ceph,/var/lib/ceph
 read -p '===>> RESET CLUSTER (YES)? ' RESET
 
-if [ "YES" != "$RESET" ]
+if [ "YES" == "$RESET" ]
 then
-    exit 0
+    reset_cluster
 fi
 
-reset_cluster
-
-exit 1
+exit 0
