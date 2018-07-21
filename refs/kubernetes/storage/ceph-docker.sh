@@ -69,24 +69,36 @@ docker run -d --net=host \
 # Run 2 osds on each node
 
 # ===> osd on /dev/sdb
+docker run -d --privileged=true \
+       -v /dev:/dev \
+       -e OSD_DEVICE=/dev/sdb \
+       ceph/daemon zap_device
+
 docker run -d --net=host \
+       --pid=host \
        --privileged=true \
        -v /dev:/dev \
        -v /etc/ceph:/etc/ceph \
        -v /var/lib/ceph:/var/lib/ceph \
-       -e OSD_FORCE_ZAP=1 \
        -e OSD_DEVICE=/dev/sdb \
-       ceph/daemon osd_ceph_disk
+       -e OSD_TYPE=disk \
+       ceph/daemon osd
 
 # ===> osd on /dev/sdc
+docker run -d --privileged=true \
+       -v /dev:/dev \
+       -e OSD_DEVICE=/dev/sdc \
+       ceph/daemon zap_device
+
 docker run -d --net=host \
+       --pid=host \
        --privileged=true \
        -v /dev:/dev \
        -v /etc/ceph:/etc/ceph \
        -v /var/lib/ceph:/var/lib/ceph \
-       -e OSD_FORCE_ZAP=1 \
        -e OSD_DEVICE=/dev/sdc \
-       ceph/daemon osd_ceph_disk
+       -e OSD_TYPE=disk \
+       ceph/daemon osd
 
 # node2,node3
 #
