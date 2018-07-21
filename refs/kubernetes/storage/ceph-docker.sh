@@ -105,3 +105,11 @@ sudo docker run -d -p 80:8080 \
      -v /etc/ceph:/etc/ceph \
      -v /var/lib/ceph:/var/lib/ceph \
      ceph/daemon rgw
+
+# DEBUG:
+#   stop and remove ceph containers
+#   delete /etc/ceph,/var/lib/ceph
+sudo docker stop $(docker ps -aq)
+sudo docker rm   $(docker ps -aq)
+sudo rm -rf /etc/ceph
+sudo rm -rf /var/lib/ceph
