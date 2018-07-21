@@ -68,12 +68,13 @@ docker run -d --net=host \
 #
 # Run 2 osds on each node
 
-# ===> osd on /dev/sdb
+# destroy partition table if you want
 docker run -d --privileged=true \
        -v /dev:/dev \
        -e OSD_DEVICE=/dev/sdb \
        ceph/daemon zap_device
 
+# ===> osd on /dev/sdb
 docker run -d --net=host \
        --pid=host \
        --privileged=true \
@@ -81,15 +82,15 @@ docker run -d --net=host \
        -v /etc/ceph:/etc/ceph \
        -v /var/lib/ceph:/var/lib/ceph \
        -e OSD_DEVICE=/dev/sdb \
-       -e OSD_TYPE=disk \
        ceph/daemon osd
 
-# ===> osd on /dev/sdc
+# destroy partition table if you want
 docker run -d --privileged=true \
        -v /dev:/dev \
        -e OSD_DEVICE=/dev/sdc \
        ceph/daemon zap_device
 
+# ===> osd on /dev/sdc
 docker run -d --net=host \
        --pid=host \
        --privileged=true \
@@ -97,7 +98,6 @@ docker run -d --net=host \
        -v /etc/ceph:/etc/ceph \
        -v /var/lib/ceph:/var/lib/ceph \
        -e OSD_DEVICE=/dev/sdc \
-       -e OSD_TYPE=disk \
        ceph/daemon osd
 
 # node2,node3
