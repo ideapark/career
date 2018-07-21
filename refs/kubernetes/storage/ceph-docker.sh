@@ -97,8 +97,9 @@ read -p 'confirm mgr initialized ok, continue? '
 # node0,node1,node2,node3
 #
 # Run 2 osds (Object Storage Daemon) on each node
-(cat <<'EOF'
+
 # ===> osd on /dev/sdb
+(cat <<'EOF'
 docker run -d --net=host \
        --pid=host \
        --privileged=true \
@@ -107,8 +108,17 @@ docker run -d --net=host \
        -v /var/lib/ceph/:/var/lib/ceph/ \
        -e OSD_DEVICE=/dev/sdb \
        ceph/daemon osd
+EOF
+) > $CMD
+for node in node0 node1 node2 node3
+do
+    ssh -t ${node} 'bash -s' < $CMD
+done
+
+read -p 'confirm osd on [/dev/sdb] initialized ok, continue? '
 
 # ===> osd on /dev/sdc
+(cat <<'EOF'
 docker run -d --net=host \
        --pid=host \
        --privileged=true \
@@ -124,7 +134,7 @@ do
     ssh -t ${node} 'bash -s' < $CMD
 done
 
-read -p 'confirm osds initialized ok, continue? '
+read -p 'confirm osd on [/dev/sdc] initialized ok, continue? '
 
 # node2,node3
 #
