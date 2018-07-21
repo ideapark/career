@@ -106,7 +106,6 @@ docker run --rm -d --privileged=true \
 
 # ===> osd on /dev/sdb
 docker run -d --net=host \
-       --pid=host \
        --privileged=true \
        -v /dev/:/dev/ \
        -v /etc/ceph:/etc/ceph \
@@ -122,7 +121,6 @@ docker run --rm -d --privileged=true \
 
 # ===> osd on /dev/sdc
 docker run -d --net=host \
-       --pid=host \
        --privileged=true \
        -v /dev/:/dev/ \
        -v /etc/ceph:/etc/ceph \
