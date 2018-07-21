@@ -19,6 +19,8 @@
 trap reset_cluster INT
 
 function reset_cluster() {
+    echo '===>> RESETTING CEPH CLUSTER...'
+
     (cat <<'EOF'
 # destroy partition table: '/dev/sdb'
 docker run --rm -d --privileged=true \
