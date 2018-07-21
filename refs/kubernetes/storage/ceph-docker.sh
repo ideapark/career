@@ -171,11 +171,16 @@ ssh -t node1 'bash -s' < $CMD
 
 read -p 'confirm rgw initialized ok, continue? '
 
-exit 0
-
 # DEBUG:
 #   stop and remove ceph containers
 #   delete /etc/ceph,/var/lib/ceph
+read -p 'reset cluster (YES)? ' RESET
+
+if [ "YES" != "$RESET" ]
+then
+    exit 0
+fi
+
 (cat <<'EOF'
 docker stop $(docker ps -aq)
 docker rm   $(docker ps -aq)
@@ -187,3 +192,5 @@ for node in node0 node1 node2 node3
 do
     ssh -t ${node} 'bash -s' < $CMD
 done
+
+exit 1
