@@ -31,8 +31,7 @@ EOF
 ) > $CMD
 ssh -t node0 'bash -s' < $CMD
 
-# wait monitor to initialize ok
-sleep 10s
+read -p 'confirm mon initialized ok, continue? '
 
 # node0
 #
@@ -63,8 +62,7 @@ EOF
 ) > $CMD
 ssh -t node1 'bash -s' < $CMD
 
-# wait monitor to initialize ok
-sleep 10s
+read -p 'confirm mon initialized ok, continue? '
 
 # node2
 #
@@ -80,8 +78,7 @@ EOF
 ) > $CMD
 ssh -t node2 'bash -s' < $CMD
 
-# wait monitor to initialize ok
-sleep 10s
+read -p 'confirm mon initialized ok, continue? '
 
 # node0
 #
@@ -95,8 +92,7 @@ EOF
 ) > $CMD
 ssh -t node0 'bash -s' < $CMD
 
-# wait mgr to initialize ok
-sleep 10s
+read -p 'confirm mgr initialized ok, continue? '
 
 # node0,node1,node2,node3
 #
@@ -140,8 +136,7 @@ do
     ssh -t ${node} 'bash -s' < $CMD
 done
 
-# wait osds to initialize ok
-sleep 20s
+read -p 'confirm osds initialized ok, continue? '
 
 # node2,node3
 #
@@ -159,8 +154,7 @@ do
     ssh -t ${node} 'bash -s' < $CMD
 done
 
-# wait mds to initialize ok
-sleep 10s
+read -p 'confirm mds initialized ok, continue? '
 
 # node1
 #
@@ -175,8 +169,7 @@ EOF
 ) > $CMD
 ssh -t node1 'bash -s' < $CMD
 
-# wait rgw to initialize ok
-sleep 10s
+read -p 'confirm rgw initialized ok, continue? '
 
 exit 0
 
