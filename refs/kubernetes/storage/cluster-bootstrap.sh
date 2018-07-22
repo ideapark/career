@@ -131,7 +131,7 @@ read -p 'confirm mon initialized ok, continue? '
 
 # node0
 #
-# Run a ceph manager
+# Run a ceph manager (required since ceph:luminous)
 (cat <<'EOF'
 docker run -d --net=host \
        -v /etc/ceph:/etc/ceph \
