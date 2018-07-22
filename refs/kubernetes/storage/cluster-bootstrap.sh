@@ -142,6 +142,7 @@ docker run -d --net=host \
        -v /etc/ceph:/etc/ceph \
        -v /var/lib/ceph/:/var/lib/ceph/ \
        -e OSD_DEVICE=/dev/sdb \
+       -e OSD_TYPE=disk \
        ceph/daemon osd
 
 # ===> osd on /dev/sdc
@@ -152,6 +153,7 @@ docker run -d --net=host \
        -v /etc/ceph:/etc/ceph \
        -v /var/lib/ceph/:/var/lib/ceph/ \
        -e OSD_DEVICE=/dev/sdc \
+       -e OSD_TYPE=disk \
        ceph/daemon osd
 EOF
 ) > $CMDSSH
