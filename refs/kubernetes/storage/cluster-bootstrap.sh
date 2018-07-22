@@ -51,7 +51,7 @@ EOF
     exit 1
 }
 
-CMD=/tmp/ceph.cmd
+CMDSSH=/tmp/ceph.cmd
 
 # node0
 #
@@ -64,8 +64,8 @@ docker run -d --net=host \
        -e CEPH_PUBLIC_NETWORK=192.168.99.0/24 \
        ceph/daemon mon
 EOF
-) > $CMD
-ssh -t node0 'bash -s' < $CMD
+) > $CMDSSH
+ssh -t node0 'bash -s' < $CMDSSH
 
 read -p 'confirm mon initialized ok, continue? '
 
@@ -81,8 +81,8 @@ do
     scp -r /var/lib/ceph/ ${node}:/var/lib/
 done
 EOF
-) > $CMD
-ssh -t node0 'bash -s' < $CMD
+) > $CMDSSH
+ssh -t node0 'bash -s' < $CMDSSH
 
 # node1
 #
@@ -95,8 +95,8 @@ docker run -d --net=host \
        -e CEPH_PUBLIC_NETWORK=192.168.99.0/24 \
        ceph/daemon mon
 EOF
-) > $CMD
-ssh -t node1 'bash -s' < $CMD
+) > $CMDSSH
+ssh -t node1 'bash -s' < $CMDSSH
 
 read -p 'confirm mon initialized ok, continue? '
 
@@ -111,8 +111,8 @@ docker run -d --net=host \
        -e CEPH_PUBLIC_NETWORK=192.168.99.0/24 \
        ceph/daemon mon
 EOF
-) > $CMD
-ssh -t node2 'bash -s' < $CMD
+) > $CMDSSH
+ssh -t node2 'bash -s' < $CMDSSH
 
 read -p 'confirm mon initialized ok, continue? '
 
@@ -125,8 +125,8 @@ docker run -d --net=host \
        -v /var/lib/ceph/:/var/lib/ceph/ \
        ceph/daemon mgr
 EOF
-) > $CMD
-ssh -t node0 'bash -s' < $CMD
+) > $CMDSSH
+ssh -t node0 'bash -s' < $CMDSSH
 
 read -p 'confirm mgr initialized ok, continue? '
 
@@ -154,10 +154,10 @@ docker run -d --net=host \
        -e OSD_DEVICE=/dev/sdc \
        ceph/daemon osd
 EOF
-) > $CMD
+) > $CMDSSH
 for node in node0 node1 node2 node3
 do
-    ssh -t ${node} 'bash -s' < $CMD
+    ssh -t ${node} 'bash -s' < $CMDSSH
 done
 
 read -p 'confirm osds initialized ok, continue? '
@@ -172,10 +172,10 @@ docker run -d --net=host \
        -e CEPHFS_CREATE=1 \
        ceph/daemon mds
 EOF
-) > $CMD
+) > $CMDSSH
 for node in node2 node3
 do
-    ssh -t ${node} 'bash -s' < $CMD
+    ssh -t ${node} 'bash -s' < $CMDSSH
 done
 
 read -p 'confirm mds initialized ok, continue? '
@@ -190,8 +190,8 @@ docker run -d -p 80:8080 \
        -v /var/lib/ceph/:/var/lib/ceph/ \
        ceph/daemon rgw
 EOF
-) > $CMD
-ssh -t node1 'bash -s' < $CMD
+) > $CMDSSH
+ssh -t node1 'bash -s' < $CMDSSH
 
 read -p 'confirm rgw initialized ok, continue? '
 
