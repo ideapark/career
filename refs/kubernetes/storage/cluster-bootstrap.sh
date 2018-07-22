@@ -208,9 +208,8 @@ ssh -t node1 'bash -s' < $CMDSSH
 
 read -p 'confirm rgw initialized ok, continue? '
 
-# DEBUG:
-#   stop and remove ceph containers
-#   delete /etc/ceph,/var/lib/ceph
+# If anything goes wrong, you can reset the whole cluster to the right
+# beginning.
 read -p '===>> RESET CLUSTER (YES)? ' RESET
 
 if [ "YES" == "$RESET" ]
