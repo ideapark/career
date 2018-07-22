@@ -1,7 +1,8 @@
 #!/usr/bin/bash
 
-# This script instructs how to bootstrap ceph cluster using docker container and
-# test ceph's services.
+# AUTHOR: Zhou Peng <p@ctriple.cn>
+
+# This script bootstraps a Ceph cluster using docker container
 
 # Cluster Info
 #
@@ -17,6 +18,7 @@
 
 # trap ctrl-c and call reset_cluster()
 trap reset_cluster INT
+
 
 function reset_cluster() {
     echo '===>> RESETTING CEPH CLUSTER...'
