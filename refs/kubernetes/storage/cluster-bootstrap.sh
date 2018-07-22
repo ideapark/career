@@ -34,6 +34,8 @@ trap reset_cluster INT
 function reset_cluster() {
     echo '===>> RESETTING CEPH CLUSTER...'
 
+    CMDRESET=/tmp/reset.cmd
+
     (cat <<'EOF'
 # destroy partition table: '/dev/sdb'
 docker run --rm --privileged=true \
@@ -53,10 +55,10 @@ docker rm   $(docker ps -aq)
 rm -rf /etc/ceph/*
 rm -rf /var/lib/ceph/*
 EOF
-    ) > $CMDSSH
+    ) > $CMDRESET
     for node in node0 node1 node2 node3
     do
-        ssh -t ${node} 'bash -s' < $CMDSSH
+        ssh -t ${node} 'bash -s' < $CMDRESET
     done
 
     exit 1
