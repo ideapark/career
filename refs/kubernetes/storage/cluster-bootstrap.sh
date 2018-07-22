@@ -3,7 +3,16 @@
 # AUTHOR: Zhou Peng <p@ctriple.cn>
 
 # This script bootstraps a Ceph cluster using docker container
-
+#
+# Make sure you can ssh to every host (node0,node1,node2,node3) without password
+# from the client node.
+#
+#             [ssh]
+#           /------- node0
+#    client -------- node1
+#           \------- node2
+#            \------ node3
+#
 # Cluster Info
 #
 # +------------+----------------------+--------------------+----------------+
@@ -15,6 +24,8 @@
 # | node2      | 192.168.99.103       | /dev/{sda,sdb,sdc} | mon,osd*2,mds  |
 # | node3      | 192.168.99.104       | /dev/{sda,sdb,sdc} |     osd*2,mds  |
 # +------------+----------------------+--------------------+----------------+
+#
+# Edit /etc/hosts to append every node hostname to ip lookup entry
 
 # trap ctrl-c and call reset_cluster()
 trap reset_cluster INT
