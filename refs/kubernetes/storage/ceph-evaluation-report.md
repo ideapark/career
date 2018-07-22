@@ -32,13 +32,13 @@
 
 ### Test Cluster (CentOS Ceph Cluster)
 
-| Host Name | IP (192.168.0.0/24) | Ceph Service |
-|-----------|---------------------|--------------|
-| client    |       192.168.3.100 | N/A          |
-| node0     |       192.168.3.101 | osd,mon,mgr  |
-| node1     |       192.168.3.102 | osd,mon,rgw  |
-| node2     |       192.168.3.103 | osd,mon,rgw  |
-| node3     |       192.168.3.104 | osd,mds      |
+| Host Name | IP (192.168.0.0/24) | Disk           | Ceph Service |
+|-----------|---------------------|----------------|--------------|
+| client    |       192.168.3.100 | /dev/{sda,sdb} | N/A          |
+| node0     |       192.168.3.101 | /dev/{sda,sdb} | osd,mon,mgr  |
+| node1     |       192.168.3.102 | /dev/{sda,sdb} | osd,mon,rgw  |
+| node2     |       192.168.3.103 | /dev/{sda,sdb} | osd,mon,rgw  |
+| node3     |       192.168.3.104 | /dev/{sda,sdb} | osd,mds      |
 
 ### Benchmark Baseline
 
