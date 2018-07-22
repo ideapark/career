@@ -25,7 +25,7 @@
 # | node3      | 192.168.99.104       | /dev/{sda,sdb,sdc} |     osd*2,mds  |
 # +------------+----------------------+--------------------+----------------+
 #
-# Edit /etc/hosts to append every node hostname to ip lookup entry
+# Edit /etc/hosts on every node to add {hostname->ip} lookup entry
 
 # trap ctrl-c and call reset_cluster()
 trap reset_cluster INT
