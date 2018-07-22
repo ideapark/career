@@ -39,8 +39,8 @@ docker run --rm --privileged=true \
 docker stop $(docker ps -aq)
 docker rm   $(docker ps -aq)
 
-rm -rf /etc/ceph/
-rm -rf /var/lib/ceph/
+rm -rf /etc/ceph/*
+rm -rf /var/lib/ceph/*
 EOF
     ) > $CMDSSH
     for node in node0 node1 node2 node3
