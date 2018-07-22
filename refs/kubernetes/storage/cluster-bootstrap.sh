@@ -39,13 +39,13 @@ function reset_cluster() {
 docker run --rm --privileged=true \
        -v /dev/:/dev/ \
        -e OSD_DEVICE=/dev/sdb \
-       ceph/daemon zap_device
+       ceph/daemon:v3.0.5-stable-3.0-luminous-centos-7-x86_64 zap_device
 
 # destroy partition table: '/dev/sdc'
 docker run --rm --privileged=true \
        -v /dev/:/dev/ \
        -e OSD_DEVICE=/dev/sdc \
-       ceph/daemon zap_device
+       ceph/daemon:v3.0.5-stable-3.0-luminous-centos-7-x86_64 zap_device
 
 docker stop $(docker ps -aq)
 docker rm   $(docker ps -aq)
@@ -73,7 +73,7 @@ docker run -d --net=host \
        -v /var/lib/ceph/:/var/lib/ceph/ \
        -e MON_IP=192.168.99.101 \
        -e CEPH_PUBLIC_NETWORK=192.168.99.0/24 \
-       ceph/daemon mon
+       ceph/daemon:v3.0.5-stable-3.0-luminous-centos-7-x86_64 mon
 EOF
 ) > $CMDSSH
 ssh -t node0 'bash -s' < $CMDSSH
@@ -104,7 +104,7 @@ docker run -d --net=host \
        -v /var/lib/ceph/:/var/lib/ceph/ \
        -e MON_IP=192.168.99.102 \
        -e CEPH_PUBLIC_NETWORK=192.168.99.0/24 \
-       ceph/daemon mon
+       ceph/daemon:v3.0.5-stable-3.0-luminous-centos-7-x86_64 mon
 EOF
 ) > $CMDSSH
 ssh -t node1 'bash -s' < $CMDSSH
@@ -120,7 +120,7 @@ docker run -d --net=host \
        -v /var/lib/ceph/:/var/lib/ceph/ \
        -e MON_IP=192.168.99.103 \
        -e CEPH_PUBLIC_NETWORK=192.168.99.0/24 \
-       ceph/daemon mon
+       ceph/daemon:v3.0.5-stable-3.0-luminous-centos-7-x86_64 mon
 EOF
 ) > $CMDSSH
 ssh -t node2 'bash -s' < $CMDSSH
@@ -134,7 +134,7 @@ read -p 'confirm mon initialized ok, continue? '
 docker run -d --net=host \
        -v /etc/ceph:/etc/ceph \
        -v /var/lib/ceph/:/var/lib/ceph/ \
-       ceph/daemon mgr
+       ceph/daemon:v3.0.5-stable-3.0-luminous-centos-7-x86_64 mgr
 EOF
 ) > $CMDSSH
 ssh -t node0 'bash -s' < $CMDSSH
@@ -154,7 +154,7 @@ docker run -d --net=host \
        -v /var/lib/ceph/:/var/lib/ceph/ \
        -e OSD_DEVICE=/dev/sdb \
        -e OSD_TYPE=disk \
-       ceph/daemon osd
+       ceph/daemon:v3.0.5-stable-3.0-luminous-centos-7-x86_64 osd
 
 # ===> osd on /dev/sdc
 docker run -d --net=host \
@@ -165,7 +165,7 @@ docker run -d --net=host \
        -v /var/lib/ceph/:/var/lib/ceph/ \
        -e OSD_DEVICE=/dev/sdc \
        -e OSD_TYPE=disk \
-       ceph/daemon osd
+       ceph/daemon:v3.0.5-stable-3.0-luminous-centos-7-x86_64 osd
 EOF
 ) > $CMDSSH
 for node in node0 node1 node2 node3
@@ -183,7 +183,7 @@ docker run -d --net=host \
        -v /etc/ceph:/etc/ceph \
        -v /var/lib/ceph/:/var/lib/ceph/ \
        -e CEPHFS_CREATE=1 \
-       ceph/daemon mds
+       ceph/daemon:v3.0.5-stable-3.0-luminous-centos-7-x86_64 mds
 EOF
 ) > $CMDSSH
 for node in node2 node3
@@ -201,7 +201,7 @@ read -p 'confirm mds initialized ok, continue? '
 docker run -d -p 80:8080 \
        -v /etc/ceph:/etc/ceph \
        -v /var/lib/ceph/:/var/lib/ceph/ \
-       ceph/daemon rgw
+       ceph/daemon:v3.0.5-stable-3.0-luminous-centos-7-x86_64 rgw
 EOF
 ) > $CMDSSH
 ssh -t node1 'bash -s' < $CMDSSH
