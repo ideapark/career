@@ -24,3 +24,12 @@
            |                                    |
            |<-----------------------------------|
            |               Ack                  |
+
+
+# CAP theorem of distributed systems
+
+- Consistency
+- Availability
+- Partition tolerance
+
+Ceph MONs pick C/P over A
