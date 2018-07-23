@@ -37,6 +37,9 @@ function reset_cluster() {
     CMDRESET=/tmp/reset.cmd
 
     (cat <<'EOF'
+docker stop $(docker ps -aq)
+docker rm   $(docker ps -aq)
+
 # destroy partition table: '/dev/sdb'
 docker run --rm --privileged=true \
        -v /dev/:/dev/ \
@@ -48,9 +51,6 @@ docker run --rm --privileged=true \
        -v /dev/:/dev/ \
        -e OSD_DEVICE=/dev/sdc \
        ceph/daemon:v3.0.5-stable-3.0-luminous-centos-7-x86_64 zap_device
-
-docker stop $(docker ps -aq)
-docker rm   $(docker ps -aq)
 
 rm -rf /etc/ceph/*
 rm -rf /var/lib/ceph/*
