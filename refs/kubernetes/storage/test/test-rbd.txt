@@ -35,8 +35,8 @@ rbd info foo
 
 # NOTE: if map failed, try to disable some features. this was caused by kernel
 # version mismatch ceph version (too old kernel)
-ceph osd crush tunable hammer rbd feature
-rbd disable foo fast-diff object-map exclusive-lock deep-flatten
+ceph osd crush tunable hammer
+rbd feature disable foo fast-diff object-map exclusive-lock deep-flatten
 
 rbd map foo
 rbd showmapped
