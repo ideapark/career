@@ -1,0 +1,11 @@
+# RADOS does not implement striping.
+
+dd if=/dev/zero of=my-object bs=10m count=1
+
+rados -p data put my-object myobject
+rados -p data stat myobject
+
+# Benchmark
+#           SECOND        MODE                      [OBJSIZE]              [THREADS]
+#                         write,seq,read            default:4mb            default:16
+rados bench   10          write              -b      10kb              -t      5
