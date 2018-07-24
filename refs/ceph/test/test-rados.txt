@@ -8,4 +8,4 @@ rados -p data stat myobject
 # Benchmark
 #           SECOND        MODE                      [OBJSIZE]              [THREADS]
 #                         write,seq,read            default:4mb            default:16
-rados bench   10          write              -b      10kb              -t      5
+rados bench   10          write                      -b 10kb                 -t 5
