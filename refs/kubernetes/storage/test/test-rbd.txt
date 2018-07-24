@@ -1,0 +1,53 @@
+# RBD images strips their data into multiple RADOS objects
+# Image data is thus distributed across the cluster
+# Image distribution enhances scalability
+# To the clint, the image looks like a single block device
+#
+#                       +-------+
+#                       |HOST/VM|
+#                       +-------+
+#                           |
+#                           |
+#                      +---------+
+#                      |RBD Image|
+#                      +---------+
+#                       /   |    \
+#                      /    |     \
+#                  +---+  +---+   +---+
+#                  |OSD|  |OSD|   |OSD|
+#                  +---+  +---+   +---+
+#
+# RBD Requirements:
+#     - Linux kernel version 2.6.37 or later
+#     - Compiled in as a kernel module
+#     - Load rbd kernel module
+#         root$ modinfo rbd
+#         root$ modprobe rbd
+
+# ===>> Setup
+
+# creating an RBD image
+rbd create foo --size 1024
+rbd ls
+rbd info foo
+
+# mapping a RBD image on a client
+
+# NOTE: if map failed, try to disable some features. this was caused by kernel
+# version mismatch ceph version (too old kernel)
+ceph osd crush tunable hammer rbd feature
+rbd disable foo fast-diff object-map exclusive-lock deep-flatten
+
+rbd map foo
+rbd showmapped
+
+# mount RBD
+mkfs.ext4 /dev/rbd0
+mount /dev/rbd0 /mnt
+
+# ===>> Teardown
+umount /mnt
+
+# unmapping a RBD image
+rbd unmap /dev/rbd0
+rbd rm foo
