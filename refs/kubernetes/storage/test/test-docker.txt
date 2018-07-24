@@ -1,0 +1,12 @@
+# Run docker ceph/daemon container to access ceph cluster manually, mostly used
+# for debug purpose.
+
+docker run -ti --rm \
+       --pid=host \
+       --net=host \
+       --privileged=true \
+       --entrypoint=/bin/bash \
+       -v /dev:/dev \
+       -v /etc/ceph:/etc/ceph \
+       -v /var/lib/ceph:/var/lib/ceph \
+       ceph/daemon
