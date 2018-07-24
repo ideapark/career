@@ -1,0 +1,26 @@
+# Rados Gateway
+
+radosgw-admin user create --uid=testuser --display-name="Test Rados Gateway User"
+
+# AccessKey & SecretKey
+#
+# -jsonpath=keys[].access_key
+# -jsonpath=keys[].secret_key
+
+# setting capabilities
+radosgw-admin caps add --uid=testuser --caps="users=*"
+radosgw-admin caps add --uid=testuser --caps="buckets=*"
+radosgw-admin caps add --uid=testuser --caps="metadata=*"
+radosgw-admin caps add --uid=testuser --caps="zone=*"
+
+# set AccessKey & SecretKey
+s3cmd --configure
+
+s3cmd ls
+s3cmd mb s3://my-test-bucket
+
+s3cmd put somefile.txt s3://my-test-bucket/somefile.txt
+s3cmd put --recursive dir1 dir2 s3://my-test-bucket/stuffs
+
+s3cmd get s3://my-test-bucket/somefile.txt somefile.txt
+s3cmd get --recursive s3://my-test-buckets/stuffs
