@@ -51,3 +51,8 @@ umount /mnt
 # unmapping a RBD image
 rbd unmap /dev/rbd0
 rbd rm foo
+
+# WARNING:
+#
+# Do not map the same rbd image from different host/vm, or your filesystem will
+# corrupt
