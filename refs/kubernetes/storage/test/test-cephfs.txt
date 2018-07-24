@@ -1,0 +1,17 @@
+# CephFS client
+#
+#  - CephFS: in-kernel
+#  - FUSE (preferred on pre-2.6.32 kernels)
+#
+# Load ceph filesystem module
+#
+#    root$ modinfo ceph
+#    root$ modprobe ceph
+
+# mount ceph filesystem
+mkdir /mnt/mycephfs
+mount -t ceph node0:/ /mnt/mycephfs
+
+# filesystem in user space (FUSE)
+mkdir ~/mycephfs
+ceph-fuse ~/mycephfs
