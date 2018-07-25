@@ -6,7 +6,7 @@ public class HelloWorld {
                 }
             };
         myThread.start();
-        Thread.yield();
+        Thread.yield(); // notify scheduler i want to be scheduled out
         System.out.println("Hello from main thread");
         myThread.join();
     }
