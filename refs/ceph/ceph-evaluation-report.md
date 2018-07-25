@@ -2,38 +2,40 @@
 
 ## Ceph 架构原理
 
-```text
-  +--------------------------------------+
-  |              HOST/VM                 |
-  +--------------------------------------+
-     +-------------------------------+
-     |           librbd              |
-     +-------------------------------+
-         +----------------------+
-         |       librados       |
-         +----------------------+
-                   |socket
-                   |
-+---+---+---+---+---+---+---+---+---+---+
-|osd|osd|osd|osd|ods|ods|ods|mds|ods|ods|
-+---+---+---+---+---+---+---+---+---+---+
-+---+---+---+---+---+---+---+---+---+---+
-|osd|osd|mon|osd|ods|ods|ods|rgw|ods|ods|
-+---+---+---+---+---+---+---+---+---+---+
-+---+---+---+---+---+---+---+---+---+---+
-|osd|mds|osd|osd|ods|mon|ods|ods|ods|ods|
-+---+---+---+---+---+---+---+---+---+---+
-+---+---+---+---+---+---+---+---+---+---+
-|osd|rgw|osd|osd|ods|ods|ods|ods|mon|ods|
-+---+---+---+---+---+---+---+---+---+---+
-```
+### 架构
+
+![Ceph Architecture](img/ceph-architecture.png)
+
+### 存储节点
+
+![Ceph OSD](img/ceph-osd-internals.png)
+
+### Rados 接口
+
+![Rados](img/ceph-rados.png)
+
+### 块存储
+
+#### 虚拟机
+![Ceph Block Device for VM](img/ceph-rbd-vm.png)
+
+#### 主机
+![Ceph Block Device for Host](img/ceph-rbd-host.png)
+
+### 对象存储
+
+![Ceph Object Storage](img/ceph-rgw.png)
+
+### 文件系统
+
+![Ceph Filesystem](img/ceph-fs.png)
 
 ## CEPH 性能测试
 
 ### Test Cluster (CentOS Ceph Cluster)
 
 | Host Name | IP (192.168.0.0/24) | Disk           | Ceph Service |
-|-----------|---------------------|----------------|--------------|
+| --------- | ------------------- | -------------  | ------------ |
 | client    |       192.168.3.100 | /dev/{sda,sdb} | N/A          |
 | node0     |       192.168.3.101 | /dev/{sda,sdb} | osd,mon,mgr  |
 | node1     |       192.168.3.102 | /dev/{sda,sdb} | osd,mon,rgw  |
