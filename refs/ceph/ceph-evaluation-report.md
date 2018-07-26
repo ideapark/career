@@ -61,12 +61,49 @@ sudo echo 3 | sudo tee /proc/sys/vm/drop_caches && sudo sync
 
 #### rados
 
+```bash
+rados bench -p <poolname> 10 write --no-cleanup
+rados bench -p <poolname> 10 seq
+rados bench -p <poolname> 10 rand
+```
+
 #### rbd
+
+```bash
+rbd bench --io-type write <imagename> --pool=<poolname>
+rbd bench --io-type read  <imagename> --pool=<poolname>
+```
 
 #### rgw
 
+```bash
+radosgw-admin user create --uid=benchmark --display-name="benchmark"
+radosgw-admin subuser create --uid=benchmark --subuser=benchmark:swift --access=full
+radosgw-admin key create --subuser=benchmark:swift --key-type=swift --secret=guessme
+radosgw-admin user modify --uid=benchmark --max-buckets=0
+```
+
+- swift.conf
+
+```text
+[bench]
+auth = http://ip:port/auth/v1.0
+user = benchmark:swift
+key = guessme
+auth_version = 1.0
+```
+
+```bash
+swift-bench -c 64 -s 4096 -n 1000 -g 100 swift.conf
+```
+
 #### cephfs
 
-## 业界应用情况
+```bash
+# kernel module support
+modinfo  ceph
+modprobe ceph
 
-## 结论
+mkdir ~/mycephfs
+mount -t ceph monitor-ip:/ ~/mycephfs
+```
