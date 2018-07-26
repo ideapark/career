@@ -59,6 +59,14 @@ iperf -c 192.168.1.1   # host2
 
 sudo echo 3 | sudo tee /proc/sys/vm/drop_caches && sudo sync
 
+#### rados
+
+#### rbd
+
+#### rgw
+
+#### cephfs
+
 ## 业界应用情况
 
 ## 结论
