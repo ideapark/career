@@ -30,9 +30,9 @@
 
 ![Ceph Filesystem](img/ceph-fs.png)
 
-## CEPH 性能测试
+## Ceph 性能测试
 
-### Test Cluster (CentOS Ceph Cluster)
+### Test Cluster (CentOS 7)
 
 | Host Name | IP (192.168.0.0/24) | Disk           | Ceph Service |
 | --------- | ------------------- | -------------  | ------------ |
