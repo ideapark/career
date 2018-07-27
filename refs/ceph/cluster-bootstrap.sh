@@ -58,7 +58,7 @@ EOF
     ) > $CMDRESET
     for node in node0 node1 node2 node3
     do
-        ssh -t ${node} 'bash -s' < $CMDRESET
+        ssh -T ${node} 'bash -s' < $CMDRESET
     done
 
     exit 1
@@ -78,7 +78,7 @@ docker run -d --net=host \
        ceph/daemon:v3.0.5-stable-3.0-luminous-centos-7-x86_64 mon
 EOF
 ) > $CMDSSH
-ssh -t node0 'bash -s' < $CMDSSH
+ssh -T node0 'bash -s' < $CMDSSH
 
 read -p 'confirm mon initialized ok, continue? '
 
@@ -95,7 +95,7 @@ do
 done
 EOF
 ) > $CMDSSH
-ssh -t node0 'bash -s' < $CMDSSH
+ssh -T node0 'bash -s' < $CMDSSH
 
 # node1
 #
@@ -109,7 +109,7 @@ docker run -d --net=host \
        ceph/daemon:v3.0.5-stable-3.0-luminous-centos-7-x86_64 mon
 EOF
 ) > $CMDSSH
-ssh -t node1 'bash -s' < $CMDSSH
+ssh -T node1 'bash -s' < $CMDSSH
 
 read -p 'confirm mon initialized ok, continue? '
 
@@ -125,7 +125,7 @@ docker run -d --net=host \
        ceph/daemon:v3.0.5-stable-3.0-luminous-centos-7-x86_64 mon
 EOF
 ) > $CMDSSH
-ssh -t node2 'bash -s' < $CMDSSH
+ssh -T node2 'bash -s' < $CMDSSH
 
 read -p 'confirm mon initialized ok, continue? '
 
@@ -139,7 +139,7 @@ docker run -d --net=host \
        ceph/daemon:v3.0.5-stable-3.0-luminous-centos-7-x86_64 mgr
 EOF
 ) > $CMDSSH
-ssh -t node0 'bash -s' < $CMDSSH
+ssh -T node0 'bash -s' < $CMDSSH
 
 read -p 'confirm mgr initialized ok, continue? '
 
@@ -172,7 +172,7 @@ EOF
 ) > $CMDSSH
 for node in node0 node1 node2 node3
 do
-    ssh -t ${node} 'bash -s' < $CMDSSH
+    ssh -T ${node} 'bash -s' < $CMDSSH
 done
 
 read -p 'confirm osds initialized ok, continue? '
@@ -190,7 +190,7 @@ EOF
 ) > $CMDSSH
 for node in node2 node3
 do
-    ssh -t ${node} 'bash -s' < $CMDSSH
+    ssh -T ${node} 'bash -s' < $CMDSSH
 done
 
 read -p 'confirm mds initialized ok, continue? '
@@ -206,7 +206,7 @@ docker run -d -p 80:8080 \
        ceph/daemon:v3.0.5-stable-3.0-luminous-centos-7-x86_64 rgw
 EOF
 ) > $CMDSSH
-ssh -t node1 'bash -s' < $CMDSSH
+ssh -T node1 'bash -s' < $CMDSSH
 
 read -p 'confirm rgw initialized ok, continue? '
 
