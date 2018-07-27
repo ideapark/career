@@ -1,8 +1,6 @@
-Microservices: Pros and Cons
-============================
+# Microservices: Pros and Cons
 
-Pros
-----
+## Pros
 
 1. Microservices allows for Independent development and deployment
    of the various services. This allows for teams to work and deploy
@@ -62,8 +60,7 @@ Pros
    to fix and deploy the isolated service instead of being forced to
    deploy the entire application.
 
-Cons
-----
+## Cons
 
 1. A microservices architecture necessitates a distributed system which
    can be complex and hard to manage. Having the right resources and
