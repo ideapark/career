@@ -73,7 +73,7 @@
 | Alibaba | Hangzhou | 20000 | IT       |
 
 ** markdown
-  - syntax hightlight
+  - syntax highlight
 
 * Misc
 
