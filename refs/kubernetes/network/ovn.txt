@@ -1,0 +1,11 @@
+# OVN: Open Virtual Networking
+
+- underlay
+
+Containers run on virtual machine, OVS run on host machine, OVN connect
+container network with virtual machine network.
+
+- overlay
+
+OVN connect containers on all nodes by logical overlay network, OVS run on
+either host machine or virtual machine.
