@@ -2,6 +2,17 @@
 #+AUTHOR: https://12factor.net/zh_cn/
 #+EMAIL: p@ctriple.cn
 
++------------+--------------+-----------+--------------------------+--------------------------+---------------+----------------+---------------------------+----------------------+-------------------+--------------+------------------+
+| 1.Codebase | 2.Dependency | 3.Config  | 4.Backing services       | 5.Build,release,run      | 6.Processes   | 7.Port binding | 8.Concurrency             | 9.Disposability      | 10.Dev/Prod parti | 11.Logs      | 12.Admin process |
++------------+--------------+-----------+--------------------------+--------------------------+---------------+----------------+---------------------------+----------------------+-------------------+--------------+------------------+
+| GitHub     | Maven        | Env       |        Production        |        docker            | Stateless     | Self-contained |    Scale                  | Graceful termination | code->build->test | Event stream | One-off process  |
+| GitLab     | Gradle       | ConfigMap |         deploy           |                          |               |                |  |        HPA             |                      | plan           |  |              |                  |
+| SVN        |              |           |       /   |   |  \       | code - build \           | Share-nothing | Port-bound     |  |      worker.3          |                      | monitor   release | Stdout       | kubectl exec     |
+|            |              |           |      /    |   |   \      |               -> release |               | Web process    |  |web.2 worker.2          |                      |    |           |  |              |                  |
+|            |              |           |   MySQL Email S3 Twitter |        config/           |               |                |  |web.1 worker.1 clock.1  |                      |   operate<-deploy |              |                  |
+|            |              |           |                          |                          |               |                |  +----------------------> |                      |                   |              |                  |
++------------+--------------+-----------+--------------------------+--------------------------+---------------+----------------+---------------------------+----------------------+-------------------+--------------+------------------+
+
 * 简介
 
 如今，软件通常会作为一种服务来交付，它们被称为网络应用程序，或软件即服务（SaaS）。
