@@ -26,7 +26,7 @@
            |               Ack                  |
 
 
-# CAP theorem of distributed systems
+# CAP theory of distributed systems
 
 - Consistency
 - Availability
