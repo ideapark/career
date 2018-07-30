@@ -1,0 +1,10 @@
+# Resource Object
+
++-----------------+--------------------------------------------------------------------------------------------------------------------+
+| Type            | Name                                                                                                               |
++-----------------+--------------------------------------------------------------------------------------------------------------------+
+| Resource Object | Pod, ReplicaSet, ReplicationController, Deployment, StatefulSet, DaemonSet, Job, CronJob, HorizontalPodAutoScaling |
+| Config Object   | Node, Namespace, Service, Secret, ConfigMap, Ingress, Label, ThirdPartyResource, ServiceAcount                     |
+| Storage Object  | Volume, PersistentVolume, PersistentVolumeClaim                                                                    |
+| Policy Object   | SecurityContext, ResourceQuota, LimitRange                                                                         |
++-----------------+--------------------------------------------------------------------------------------------------------------------+
