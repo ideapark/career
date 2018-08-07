@@ -1,3 +1,3 @@
 # http://www.ctriple.cn
 
-The way to programming.
+Zhou Peng <p@ctriple.cn>
