@@ -284,13 +284,13 @@ int main(void)
     char *re;
     char *s;
   } test[] = {
-              {"abcdefg",	"abcdefg"   },
-              {"(a|b)*a",	"ababababab"},
-              {"(a|b)*a",	"aaaaaaaaba"},
-              {"(a|b)*a",	"aaaaaabac" },
-              {"a(b|c)*d",	"abccbcccd" },
-              {"a(b|c)*d",	"abccbcccde"},
-              {NULL,		NULL        }
+              {"abcdefg",  "abcdefg"   },
+              {"(a|b)*a",  "ababababab"},
+              {"(a|b)*a",  "aaaaaaaaba"},
+              {"(a|b)*a",  "aaaaaabac" },
+              {"a(b|c)*d", "abccbcccd" },
+              {"a(b|c)*d", "abccbcccde"},
+              {NULL,       NULL        }
   };
 
   for (i = 0; test[i].re; i++) {
