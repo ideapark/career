@@ -1,7 +1,6 @@
-#+TITLE: Kubernetes Cluster
-#+AUTHOR: https://kubernetes.io
+# Kubernetes Cluster
 
-* Kubernetes coordinates a highly available cluster of computers that are connected to work as a single unit
+## Kubernetes coordinates a highly available cluster of computers that are connected to work as a single unit
 
 The abstractions in Kubernetes allow you to deploy containerized applications to
 a cluster without tying them specifically to individual machines. To make use of
@@ -11,7 +10,7 @@ Containerized applications are more flexible and available than in past
 deployment models, where applications were installed directly onto specific
 machines as packages deeply integrated into the host.
 
-* Kubernetes automates the distribution and scheduling of application containers across a cluster in a more efficient way
+## Kubernetes automates the distribution and scheduling of application containers across a cluster in a more efficient way
 
 A Kubernetes cluster consists of two types of resources:
 
@@ -20,7 +19,7 @@ A Kubernetes cluster consists of two types of resources:
 
 Cluster Diagram
 
-[[file:img/module_01_cluster.svg]]
+![Cluster Diagram](img/module_01_cluster.svg)
 
 The Master is responsible for managing the cluster. The master coordinates all
 activities in your cluster, such as scheduling applications, maintaining
@@ -38,32 +37,32 @@ cluster's nodes. The nodes communicate with the master using the Kubernetes API,
 which the master exposes. End users can also use the Kubernetes API directly to
 interact with the cluster.
 
-* Scaling
+## Scaling
 
 Scaling is accomplished by changing the number of replicas in a Deployment.
 
 Before:
 
-[[file:img/module_05_scaling1.svg]]
+![Scaling Before](img/module_05_scaling1.svg)
 
 After:
 
-[[file:img/module_05_scaling2.svg]]
+![Scaling After](img/module_05_scaling2.svg)
 
-* Rolling update
+## Rolling update
 
-** Stage 1:
+### Stage 1:
 
-[[file:img/module_06_rollingupdates1.svg]]
+![Rolling Update Stage 1](img/module_06_rollingupdates1.svg)
 
-** Stage 2:
+### Stage 2:
 
-[[file:img/module_06_rollingupdates2.svg]]
+![Rolling Update Stage 2](img/module_06_rollingupdates2.svg)
 
-** Stage 3:
+### Stage 3:
 
-[[file:img/module_06_rollingupdates3.svg]]
+![Rolling Update Stage 3](img/module_06_rollingupdates3.svg)
 
-** Stage 4:
+### Stage 4:
 
-[[file:img/module_06_rollingupdates4.svg]]
+![Rolling Update Stage 4](img/module_06_rollingupdates4.svg)
