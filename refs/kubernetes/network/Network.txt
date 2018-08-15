@@ -1,0 +1,27 @@
+# Kubernetes Network
+
+## Infrastructure Network
+
+The network your physical (or virtual) machines are connected to. Normally your
+production network, or a part of it.
+
+## Service Network
+
+The (completely) virtual (rather fictional) network, which is used to assign IP
+addresses to Kubernetes Services, which you will be creating. (A Service is a
+frontend to RC or a Deployment). It must be noted that IP from this network are
+never assigned to any of the interfaces of any the nodes/VMs, etc. These
+(Service IPs) are used behind the scenes by kube-proxy to create (weird)
+iptables rules on the worker nodes.
+
+## Pod Network
+
+This is the network, which is used by the pods. However it is not a simple
+network either, depending on what kubernetes network solution you are employing.
+If you are using flannel, then this would be a large software defined overlay
+network, and each worker node will get a subnet of this network and configured
+for it's docker0 interface (in very simple words, there is a little more to it).
+If you are employing CIDR network, using CNI, then it would be a large network
+called cluster-cidr, with small subnets corresponding to your worker nodes to
+these small subnets. This is proved to be a challenge on AWS VPC router, but
+this is piece of cake on a simple/generic router in your network.
