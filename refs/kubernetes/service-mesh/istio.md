@@ -40,3 +40,16 @@ services and let you see how that performance is affecting your other processes.
 The policy enforcement component of Istio can be extended and customized to
 integrate with existing solutions for ACLs, logging, monitoring, quotas,
 auditing, and more.
+
+## Architecture
+
+- data plane
+
+Composed of a set of intelligent proxies (Envoy) deployed as sidecars. These
+proxies mediate and control all network communication between microservices
+along with Mixer, a general-purpose policy and telemetry hub.
+
+- control plane
+
+Manages and configures the proxies to route traffic. Additionally, the control
+plane configures Mixers to enforce policies and collect telemetry.
