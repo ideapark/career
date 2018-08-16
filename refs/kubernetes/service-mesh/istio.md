@@ -53,3 +53,30 @@ along with Mixer, a general-purpose policy and telemetry hub.
 
 Manages and configures the proxies to route traffic. Additionally, the control
 plane configures Mixers to enforce policies and collect telemetry.
+
+```text
++----------------+                     +----------------+
+| +------------+ |                     | +------------+ |
+| |  Service A | |                     | |  Service B | |
+| +------------+ | HTTP/1.1, HTTP/2,   | +------------+ |
+|       |        | gRPC or TCP --      |        |       |
+|       |        | with or without     |        |       |
+| +------------+ | mTLS                | +------------+ |
+| |   Proxy    |-|---------------------|>|    Proxy   | |
+| +------------+ |                     | +------------+ |
++----------------+                     +----------------+
+                 \                     /
+                  \                   /
+                   \  Policy checks  /
+        |    /      \   telemetry   /       \    |
+ Config |   /        \             /         \   | TLS certs to
+ data to|  /          \           /           \  | proxies
+ proxies| /            +---------+             \ |
+        |/                                      \|
+ +---------+    +------------------------+   +-----------+
+ |  Pilot  |    |         Mixer          |   |  Citadel  |
+ +---------+    +------------------------+   +-----------+
+     |                                              |
+     |               Control Plane API              |
+     +----------------------------------------------+
+```
