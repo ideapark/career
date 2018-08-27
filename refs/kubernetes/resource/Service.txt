@@ -37,6 +37,13 @@ Visually
    v|
  endpoint
 
+(1) Client sends packet to node2:nodePort
+(2) node2 replaces the source IP address (SNAT) in the packet with its own IP address
+(3) node2 replaces the destination IP on the packet with the pod IP
+(4) packet is routed to node 1, and then to the endpoint
+(5) the pod's reply is routed back to node2
+(6) the pod's reply is sent back to the client
+
 - LoadBalancer
 
 For a LoadBalancer service, Kubernetes provisions an external load balancer. The
