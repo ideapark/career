@@ -67,6 +67,19 @@ Visually (externalTrafficPolicy:Local)
 For a LoadBalancer service, Kubernetes provisions an external load balancer. The
 type of service depends on how the specific Kubernetes cluster is configured.
 
+Visually
+========
+
+                     client
+                       |
+                     lb VIP
+                     /^
+                    v/
+ health check ---> node 1    node 2 <--- health check
+         200  <---  ^|              --->  500
+                    |v
+                 endpoint
+
 - ExternalIP
 
 An ExternalIP service uses an IP address from the predefined pool of external IP
