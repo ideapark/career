@@ -23,6 +23,20 @@ For a NodePort servie, Kubernetes allocates a port from a configured range
 each node, to the service. It is possible to define a specific port number, but
 you should take care to avoid potential port conflicts.
 
+Visually
+========
+
+        client
+           \^
+            \\
+             \\
+              v\
+  node 1 <--- node 2
+   |^    SNAT
+   ||    --->
+   v|
+ endpoint
+
 - LoadBalancer
 
 For a LoadBalancer service, Kubernetes provisions an external load balancer. The
