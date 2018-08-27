@@ -44,6 +44,24 @@ Visually
 (5) the pod's reply is routed back to node2
 (6) the pod's reply is sent back to the client
 
+Visually (externalTrafficPolicy:Local)
+======================================
+
+            client
+            ^/   \
+           //     \
+          /v       X
+       node 1     node 2
+         ^|
+         ||
+         |v
+      endpoint
+
+(1) client sends packet to node2:nodePort, which doesn't have any endpoints
+(2) packet is dropped
+(3) client sends packet to node1:nodePort, which does have endpoints
+(4) node1 routes packet to endpoint with the correct source IP
+
 - LoadBalancer
 
 For a LoadBalancer service, Kubernetes provisions an external load balancer. The
