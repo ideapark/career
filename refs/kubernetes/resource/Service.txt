@@ -10,9 +10,39 @@ Load balancing:
 # Service Type
 
 - ClusterIP
+
+A ClusterIP service makes it accessible from any of the Kubernetes cluster's
+nodes. The use of virtual IP address for this purpose makes it possible to have
+several pods expose the same port on the same node - All of these pods will be
+accessible via a unique IP address.
+
 - NodePort
+
+For a NodePort servie, Kubernetes allocates a port from a configured range
+(default is 30000-32767), and each node forwards that port, which is the same on
+each node, to the service. It is possible to define a specific port number, but
+you should take care to avoid potential port conflicts.
+
 - LoadBalancer
+
+For a LoadBalancer service, Kubernetes provisions an external load balancer. The
+type of service depends on how the specific Kubernetes cluster is configured.
+
+- ExternalIP
+
+An ExternalIP service uses an IP address from the predefined pool of external IP
+address to the cluster's nodes. These external IP are not managed by Kubernetes;
+they are responsibility of the cluster administrator.
+
 - ExternalName
+
+ExternalName is a special case of service that does not have selectors. It does
+not define any ports or endpoints. Instead, it returns the name of an external
+service that resides outside the cluster. Such a service works in the same way
+as others, with the only difference being that the redirection happens at the
+DNS level without proxying or forwarding. Later, you may decide to replace an
+external service with an internal one. In this case, you will need to replace a
+service definition in your application.
 
                                              @
                                              |
