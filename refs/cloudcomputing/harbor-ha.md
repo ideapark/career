@@ -1,11 +1,5 @@
 # Harbor High Availability
 
-## HA
-
-- Compute HA (DONE)
-- Storage HA (DONE)
-- Network HA (TODO)
-
 ## Theory
 
 ### Stateless service
@@ -66,3 +60,9 @@ MySQL Galera Cluster.
             | Galera Cluster | http://galeracluster.com
             +----------------+
 ```
+
+## HA Completed
+
+- Compute HA (DONE)
+- Storage HA (DONE)
+- Network HA (TODO)
