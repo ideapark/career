@@ -6,6 +6,35 @@
 - Storage HA (DONE)
 - Network HA (TODO)
 
+## Theory
+
+### Stateless service
+
+| SERVICE     |
+| ----------- |
+| Adminserver |
+| UI          |
+| Registry    |
+| Logs        |
+| Jobservice  |
+| Clair       |
+| Proxy       |
+
+- Redundant
+- Load Balance
+
+### Stateful service
+
+| SERVICE                      |
+| ---------------------------- |
+| Harbor database (MariaDB)    |
+| Clair database (PostgresSQL) |
+| Notary database (MariaDB)    |
+| Redis                        |
+
+Depend on the high availability implementation for each application, such as
+MySQL Galera Cluster.
+
 ## Solution
 
 ```text
