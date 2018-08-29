@@ -19,11 +19,11 @@ This document outlines the v2 Docker registry authentication scheme:
                  \\     \\                    //
                   \\     \\                  //
                    \\   5 \\              3 //
-                    \\     \\              //
+                    \v     \v              /v
                    +----------------------------+
                    |         Docker Daemon      |
                    +----------------------------+
-                                |
+                                ^
                                 |
                   +-------------------------------+
                   |         Docker Client         |

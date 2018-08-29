@@ -34,13 +34,13 @@ MySQL Galera Cluster.
 ```text
                       LB
                        |
-                       | replica:3
+                       v replica:3
                    +-------+
                    | Nginx | Nginx Service
                    +-------+
                     /     \
                    /       \
-     replica:3    /         \      replica:3
+     replica:3    v         v      replica:3
    +--------------+         +-----------------+
    | Admin server |         | Docker Registry |
    |--------------|         |-----------------|
@@ -53,7 +53,7 @@ MySQL Galera Cluster.
          \                      /
           \                    /
            \                  /
-            \    replica:3   /
+            v    replica:3   v
             +----------------+
             |     MySQL      |
             |----------------|
