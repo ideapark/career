@@ -13,12 +13,12 @@ This document outlines the v2 Docker registry authentication scheme:
            | Registry |                      | Authorization Service |
            +----------+                      +-----------------------+
              ^\     ^\                            ^/
-              \\     \\                          //
-               \\     \\                        //
-                \\     \\                      //
+              \\     \\ 6                        // 4
+               \\ 2   \\                        //
+              1 \\     \\                      //
                  \\     \\                    //
                   \\     \\                  //
-                   \\     \\                //
+                   \\   5 \\              3 //
                     \\     \\              //
                    +----------------------------+
                    |         Docker Daemon      |
