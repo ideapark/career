@@ -5,6 +5,7 @@ successfully.
 
 ## Job Controller
 
+```text
                        +-----------+
                        | Scheduler |
                        +-----------+    +----+
@@ -23,3 +24,4 @@ successfully.
                        |    Job   |        |Pod|
                        |Controller|        +---+
                        +----------+
+```

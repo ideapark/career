@@ -26,6 +26,7 @@ you should take care to avoid potential port conflicts.
 Visually
 ========
 
+```text
         client
            \^
             \\
@@ -36,6 +37,7 @@ Visually
    ||    --->
    v|
  endpoint
+```
 
 (1) Client sends packet to node2:nodePort
 (2) node2 replaces the source IP address (SNAT) in the packet with its own IP address
@@ -47,6 +49,7 @@ Visually
 Visually (externalTrafficPolicy:Local)
 ======================================
 
+```text
             client
             ^/   \
            //     \
@@ -56,6 +59,7 @@ Visually (externalTrafficPolicy:Local)
          ||
          |v
       endpoint
+```
 
 (1) client sends packet to node2:nodePort, which doesn't have any endpoints
 (2) packet is dropped
@@ -70,6 +74,7 @@ type of service depends on how the specific Kubernetes cluster is configured.
 Visually
 ========
 
+```text
                      client
                        |
                      lb VIP
@@ -79,6 +84,7 @@ Visually
          200  <---  ^|              --->  500
                     |v
                  endpoint
+```
 
 - ExternalIP
 
@@ -96,6 +102,7 @@ DNS level without proxying or forwarding. Later, you may decide to replace an
 external service with an internal one. In this case, you will need to replace a
 service definition in your application.
 
+```text
                                              @
                                              |
                                              | https:443
@@ -112,10 +119,12 @@ service definition in your application.
   | app=webapp role=frontend | | app=webapp role=frontend | | app=webapp role=frontend |
   | version=1.0.0            | | version=1.0.0            | | version=2.0.0            |
   +--------------------------+ +--------------------------+ +--------------------------+
+```
 
 
 # kube-proxy
 
+```text
                                                    +--------+
                                                    | Client |
       +------+                                     +--------+
@@ -138,3 +147,4 @@ service definition in your application.
                                         |  Pod  |    |  Pod  |  |  Pod  |
                                         |app=web|    |app=web|  |app=web|
                                         +-------+    +-------+  +-------+
+```

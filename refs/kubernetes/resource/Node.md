@@ -5,6 +5,7 @@
 - Capacity: CPU, Memory, Pod Counts.
 - Info: Kernel Version, Container Version, OS Type
 
+```text
  Physical Machine or VM
 +-----------------------------------+-------------------------------+
 |            kubelet                |          docker/rkt           |
@@ -26,3 +27,4 @@
 |     containerized app                                             |
 |                                                                   |
 +-------------------------------------------------------------------+
+```
