@@ -1,10 +1,12 @@
-#+TITLE: Stack Traces In Go
-#+AUTHOR: William Kennedy
-#+EMAIL: bill@ardanlabs.com
+---
+title: Stack Traces In Go
+author: William Kennedy
+email: bill@ardanlabs.com
+---
 
-* Goroutine must panic
+# Goroutine must panic
 
-#+BEGIN_SRC go
+```go
   package main
 
   type T int
@@ -19,11 +21,11 @@
     println(t)
     panic("Want stack trace")
   }
-#+END_SRC
+```
 
-* Stack trace
+# Stack trace
 
-#+BEGIN_SRC text
+```bash
   0xc420039f30
   panic: Want stack trace
 
@@ -33,9 +35,9 @@
   main.main()
     /tmp/t.go:8 +0xa7
   exit status 2
-#+END_SRC
+```
 
-* Explains
+# Explains
 
 - Method is just special function with first argument specified
 - Slice and String arguments are be splited by their internal representation

@@ -2,11 +2,13 @@
 
 ## struct type
 
+```text
        type Point struct { x, y int }
-
+```
 
 ## Initialized with new
 
+```text
          new(Point)
        +-------------+
        |     *       | *Point
@@ -15,10 +17,11 @@
                +-----+-----+
                |  0  |  0  | Point
                +-----+-----+
-
+```
 
 ## Initialized as a struct literal
 
+```text
        p := Point{10, 20}
          +-----+-----+
          |  0  |  0  | Point
@@ -32,10 +35,11 @@
                  +-----+-----+
                  |  0  |  0  | Point
                  +-----+-----+
-
+```
 
 ## Memory layout of a struct of structs
 
+```text
     type Rect1 struct { Min, Max Point }
     type Rect2 struct { Min, Max *Point }
 
@@ -52,3 +56,4 @@
                    +----+----+ +----+----+
                    | 10 | 20 | | 50 | 60 | Point
                    +----+----+ +----+----+
+```

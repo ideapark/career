@@ -1,6 +1,8 @@
-#+TITLE: new() vs make()
-#+AUTHOR: Zhou Peng
-#+EMAIL: p@ctriple.cn
+---
+title: new() vs make()
+author: Zhou Peng
+email: p@ctriple.cn
+---
 
 * Difference between new() and make()
 
@@ -15,7 +17,7 @@
 In other words, new allocates; make initializes; the following illustrates this
 difference:
 
-#+BEGIN_SRC text
+```text
   new([]int)
     +------+
     |  *   | *[]int
@@ -25,9 +27,9 @@ difference:
 	  | nil |  0  |  0  | []int
 	  +-----+-----+-----+
 	   ptr   len   cap
-#+END_SRC
+```
 
-#+BEGIN_SRC go
+```go
 var p *[]int = new([]int)  // *p == nil; with len and cap 0
 p := new([]int)
 #+END_SRC
@@ -40,8 +42,8 @@ p := new([]int)
      ptr \ len   cap
           \
 	  ||[0]int
-#+END_SRC
+```
 
-#+BEGIN_SRC go
+```go
 p := make([]int, 0)  // slice is initialized, but here points to an empty array
-#+END_SRC
+```

@@ -1,6 +1,10 @@
-# Golang GC Algorithm Phases [Rick Hudson](https://talks.golang.org/2015/go-gc.pdf)
+---
+title: Golang GC Algorithm Phases
+author: Rick Hudson
+url: https://talks.golang.org/2015/go-gc.pdf
+---
 
-```
+```text
 +--------------------------------------------------------------------------------------------------+
 |                          |   |                                                                   |
 |       Off                |   | GC disabled                                                       |

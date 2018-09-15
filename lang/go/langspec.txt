@@ -1,7 +1,5 @@
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-               THE GO PROGRAMMING LANGUAGE SPECIFICATION
-
-                              p@ctriple.cn
+THE GO PROGRAMMING LANGUAGE SPECIFICATION
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
