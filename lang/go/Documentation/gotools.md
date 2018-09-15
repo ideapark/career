@@ -1,11 +1,13 @@
-#+TITLE: Golang Tools
-#+AUTHOR: Dominik Honnef
+---
+title: Golang Tools
+author: Dominik Honnef
+---
 
-* gofmt
+# gofmt
 
 Formats your code according to the only acceptable way of formatting it.
 
-* go vet
+# go vet
 
 Analysing Go code and finding common mistakes:
 
@@ -22,58 +24,58 @@ Analysing Go code and finding common mistakes:
 ** Misuse of unsafe.Pointer
 ** Mistakes invoking boolean operators
 
-* go lint
+# go lint
 
 Checks your code for style violations.
 
-* errcheck
+# errcheck
 
 Running errcheck on a package will report all function calls that have unchecked
 errors.
 
-* go tool cover
+# go tool cover
 
 Code coverage reports provide a quick and easy way of finding untested code.
 
-* benchcmp
+# benchcmp
 
-* prettybench
+# prettybench
 
-* benchviz
+# benchviz
 
 Generates graphical output, it depends on benchcmp and uses bar charts to show
 positive and negative changes.
 
-* go generate
+# go generate
 
 Replace various uses of makefiles and shell scripts in Go packages.
 
-* stringer
+# stringer
 
-* impl
+# impl
 
 Given an interface, will create method stubs for implementing that interface.
 
-* goimports
+# goimports
 
 It removes unused imports and adds missing imports, as long as doing so is not
 ambiguous. If multiple packages with the same name, such as text/template and
 html/template can be used to make the code compile, then goimports errs on the
 side of safety and imports neither.
 
-* goreturns
+# goreturns
 
 Fills in incomplete return statements with zero values.
 
-* godef
+# godef
 
-* gocode
+# gocode
 
 Provides context-sensitive auto completion and uses a client/server
 architecture, where the server is a caching daemon, and the clients are a
 command line utility as well as all popular editors.
 
-* guru (once called oracle)
+# guru (once called oracle)
 
 The Go guru is a source analysis tool capable of answering a multitude of
 questions about Go programs, such as:
@@ -92,8 +94,8 @@ questions about Go programs, such as:
 ** Which statements could update this filed/local/global/map/array/etc?
 ** Which functions might be called indirectly from this one?
 
-* gorename
+# gorename
 
-* godepgraph
+# godepgraph
 
 A tool for generating dependency graphs (in Graphviz format) for Go packages.

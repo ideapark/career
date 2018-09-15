@@ -1,7 +1,9 @@
-#+TITLE: Golang Command Documentation
-#+AUTHOR: Golang Authors
+---
+title: Golang Command Documentation
+author: Golang Authors
+---
 
-* Command
+# Command
 
 | Name  | Synopsis                                                                                                                                |
 |-------+-----------------------------------------------------------------------------------------------------------------------------------------|

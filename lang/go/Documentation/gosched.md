@@ -1,6 +1,9 @@
-# Golang Scheduling
+---
+title: Golang Scheduling
+author: Dmitry Vyukov
+---
 
-```
+```text
 ┌─┐         ┌─┐         ┌─┐         ┌─┐                  ┌─┐
 │ │         │ │         │ │         │ │                  │ │
 ├─┤         ├─┤         ├─┤         ├─┤                  ├─┤ Global
