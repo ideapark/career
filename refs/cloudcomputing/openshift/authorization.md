@@ -10,9 +10,13 @@ the action.
 
 Authorization is managed using:
 
+```text
++----------+--------------------------------------------------------------------------------------------------------------+
 | Rules    | Sets of permitted verbs on a set of objects. For example, whether something can create pods.                 |
 | Roles    | Collections of rules. Users and groups can be associated with, or bound to, multiple roles at the same time. |
 | Bindings | Associations between users and/or groups with a role.                                                        |
++----------+--------------------------------------------------------------------------------------------------------------+
+```
 
 The relationships between cluster roles, local roles, cluster role bindings,
 local role bindings, users, groups and service accounts are illustrated below.
