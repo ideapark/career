@@ -3,11 +3,13 @@
 ## Configuration Events
 
 | Name             | Description                         |
+|------------------|-------------------------------------|
 | FailedValidation | Failed pod configuration validation |
 
 ## Container Events
 
 | Name                | Description                                                          |
+|---------------------|----------------------------------------------------------------------|
 | BackOff             | Back-off restarting failed the container                             |
 | Created             | Container created                                                    |
 | Failed              | Pull/Create/Start failed.                                            |
@@ -19,11 +21,13 @@
 ## Health Events
 
 | Name      | Description            |
+|-----------|------------------------|
 | Unhealthy | Container is unhealthy |
 
 ## Image Events
 
 | Name              | Description                                                                             |
+|-------------------|-----------------------------------------------------------------------------------------|
 | BackOff           | Back off Ctr Start, image pull.                                                         |
 | ErrImageNeverPull | The image's NeverPull Policy is violated.                                               |
 | Failed            | Failed to pull the image.                                                               |
@@ -34,12 +38,14 @@
 ## Image Manager Events
 
 | Name                | Description             |
+|---------------------|-------------------------|
 | FreeDiskSpaceFailed | Free disk space failed. |
 | InvalidDiskCapacity | Invalid disk capacity.  |
 
 ## Node Events
 
 | Name                             | Description                                     |
+|----------------------------------|-------------------------------------------------|
 | FailedMount                      | Volume mount failed.                            |
 | HostNetworkNotSupported          | Host network not supported.                     |
 | HostPortConflict                 | Host/port conflict.                             |
@@ -75,16 +81,19 @@
 ## Pod Worker Events
 
 | Name       | Description      |
+|------------|------------------|
 | FailedSync | Pod sync failed. |
 
 ## System Events
 
 | Name      | Description                                               |
+|-----------|-----------------------------------------------------------|
 | SystemOOM | There is an OOM (out of memory) situation on the cluster. |
 
 ## Pod Events
 
 | Name                     | Description                          |
+|--------------------------|--------------------------------------|
 | FailedKillPod            | Failed to stop a pod.                |
 | FailedCreatePodContainer | Failed to create a pod container.    |
 | Failed                   | Failed to make pod data directories. |
@@ -97,6 +106,7 @@
 ## Horizontal Pod AutoScaler Events
 
 | Name                         | Description                                                               |
+|------------------------------|---------------------------------------------------------------------------|
 | SelectorRequired             | Selector is required.                                                     |
 | InvalidSelector              | Could not convert selector into a corresponding internal selector object. |
 | FailedGetObjectMetric        | HPA was unable to compute the replica count.                              |
@@ -113,17 +123,20 @@
 ## Network Events (openshift-sdn)
 
 | Name          | Description                                                            |
+|---------------|------------------------------------------------------------------------|
 | Starting      | Starting OpenShift-SDN.                                                |
 | NetworkFailed | The pod's network interface has been lost and the pod will be stopped. |
 
 ## Network Events (kube-proxy)
 
 | Name     | Description                                        |
+|----------|----------------------------------------------------|
 | NeedPods | The service-port <servicenName>:<port> needs pods. |
 
 ## Volume Events
 
 | Name                      | Description                                                                               |
+|---------------------------|-------------------------------------------------------------------------------------------|
 | FailedBinding             | There are no persistent volumes available and no storage class is set.                    |
 | VolumeMismatch            | Volume size or class is different from what is requested in claim.                        |
 | VolumeFailedRecycle       | Error creating recycler pod.                                                              |
@@ -140,6 +153,7 @@
 ## Lifecycle hooks
 
 | Name                  | Description                   |
+|-----------------------|-------------------------------|
 | FailedPostStartHook   | Handler failed for pod start. |
 | FaieldPreStopHook     | Handler failed for pre-stop.  |
 | UnfinishedPreStopHook | Pre-stop hook unfinished.     |
@@ -147,6 +161,7 @@
 ## Deployments
 
 | Name                         | Description                                     |
+|------------------------------|-------------------------------------------------|
 | DeploymentCancellationFailed | Failed to cancel deployment.                    |
 | DeploymentCancelled          | Cancelled deployment                            |
 | DeploymentCreated            | Created new replication controller.             |
@@ -155,6 +170,7 @@
 ## Scheduler Events
 
 | Name             | Description                                                                                        |
+|------------------|----------------------------------------------------------------------------------------------------|
 | FailedScheduling | Failed to schedule pod: <pod-namespace>/<pod-name>. This event is raised for multiple reasons, for |
 |                  | example: AssumePodVolumes failed, Binding rejected etc.                                            |
 | Preempted        | By <preemptor-namespace>/<preemptor-name> on node <node-name>.                                     |
@@ -163,6 +179,7 @@
 ## DaemonSet Events
 
 | Name            | Description                                                                  |
+|-----------------|------------------------------------------------------------------------------|
 | SelectingAll    | This daemon set is selecting all pods. A non-empty selector is required.     |
 | FailedPlacement | Failed to place pod on <node-name>.                                          |
 | FailedDaemonPod | Found failed daemon pod <pod-name> on node <node-name>, will try to kill it. |
@@ -170,6 +187,7 @@
 ## LoadBalancer Service Events
 
 | Name                       | Description                                                                                   |
+|----------------------------|-----------------------------------------------------------------------------------------------|
 | CreatingLoadBalancerFailed | Error creating load balancer.                                                                 |
 | DeletingLoadBalancer       | Deleting load balancer.                                                                       |
 | EnsuringLoadBalancer       | Ensuring load balancer.                                                                       |
