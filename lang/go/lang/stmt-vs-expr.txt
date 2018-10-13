@@ -8,7 +8,7 @@
 | EXAMPLE | a++/if/for                | a+1                              |
 +---------+---------------------------+----------------------------------+
 
-#+BEGIN_SRC go
+```go
 package main
 
 func main() {
@@ -22,4 +22,4 @@ func main() {
 	*p++               // Equal to (*p)++, pointer operation not supported
 	println(a)
 }
-#+END_SRC
+```

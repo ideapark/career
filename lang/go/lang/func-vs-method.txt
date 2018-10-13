@@ -1,6 +1,0 @@
-Func vs Method
-==============
-
-1. method is associated with an object.
-2. func receive parameters and execute algorithm, then return result.
-3. method is stateful, but func is stateless.
