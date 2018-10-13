@@ -1,7 +1,7 @@
 Golang Memory Allocation Global Policy
 ======================================
 
-1. allocate a big block of memory (1Mb) from operating system.
+1. allocate a big block of memory (1 MiB) from operating system.
 2. split block of memory into small pieces linked.
 3. when goroutine need memory, runtime pick from the approperite list.
 4. when memory is no more needed, pay back to the list.
