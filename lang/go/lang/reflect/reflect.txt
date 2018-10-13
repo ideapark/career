@@ -1,4 +1,4 @@
-Like C, Golang object doesn't keep track of typeinfo, runtime cannt require any
+Like C, Golang object doesn't keep track of typeinfo, runtime cannot require any
 typeinfo from object itself. Reflection is based on interface var, which store
 both object's data and type.
 
