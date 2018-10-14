@@ -13,5 +13,5 @@ int getchar(void)
 		n = read(0, buf, sizeof buf);
 		bufp = buf;
 	}
-	return (--n >= 0) ? (unsigned char) *bufp++ : EOF;
+	return (--n >= 0) ? (unsigned char)*bufp++ : EOF;
 }

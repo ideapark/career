@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAXOP   100  /* maximum operator & operand length */
-#define NUMBER  '0'  /* mark found */
+#define MAXOP   100		/* maximum operator & operand length */
+#define NUMBER  '0'		/* mark found */
 
-int getop(char []);
+int getop(char[]);
 void push(double);
 double pop(void);
 
@@ -47,10 +47,10 @@ main()
 	return 0;
 }
 
-#define MAXVAL  100   /* maximum stack size */
+#define MAXVAL  100		/* maximum stack size */
 
-int sp = 0;           /* next empty stack pos */
-double val[MAXVAL];   /* value stack */
+int sp = 0;			/* next empty stack pos */
+double val[MAXVAL];		/* value stack */
 
 void push(double f)
 {
@@ -79,18 +79,15 @@ int getop(char s[])
 {
 	int i, c;
 
-	while ((s[0] = c = getch()) == ' ' || c == '\t')
-		;
+	while ((s[0] = c = getch()) == ' ' || c == '\t') ;
 	s[1] = '\0';
 	if (!isdigit(c) && c != '.')
-		return c;   /* not a number */
+		return c;	/* not a number */
 	i = 0;
-	if (isdigit(c)) /* integer part */
-		while (isdigit(s[++i] = c = getch()))
-			;
-	if (c == '.')   /* fraction part */
-		while (isdigit(s[++i] = c = getch()))
-			;
+	if (isdigit(c))		/* integer part */
+		while (isdigit(s[++i] = c = getch())) ;
+	if (c == '.')		/* fraction part */
+		while (isdigit(s[++i] = c = getch())) ;
 	s[i] = '\0';
 	if (c != EOF)
 		ungetch(c);
@@ -99,8 +96,8 @@ int getop(char s[])
 
 #define BUFSIZE  100
 
-char buf[BUFSIZE];  /* buffer for ungetch() */
-int bufp = 0;       /* next buffer free pos */
+char buf[BUFSIZE];		/* buffer for ungetch() */
+int bufp = 0;			/* next buffer free pos */
 
 int getch(void)
 {

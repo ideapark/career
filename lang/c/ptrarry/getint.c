@@ -8,18 +8,17 @@ int getint(int *pn)
 {
 	int c, sign;
 
-	while (isspace(c = getch()))
-		;
+	while (isspace(c = getch())) ;
 
 	if (!isdigit(c) && c != EOF && c != '+' && c != '-') {
-		ungetch(c); /* input not number */
+		ungetch(c);	/* input not number */
 		return 0;
 	}
 	sign = (c == '-') ? -1 : 1;
 	if (c == '+' || c == '-')
 		c = getch();
 	for (*pn = 0; isdigit(c); c = getch())
-		*pn = 10 * *pn + (c-'0');
+		*pn = 10 * *pn + (c - '0');
 	*pn *= sign;
 	if (c != EOF)
 		ungetch(c);

@@ -3,12 +3,12 @@
 
 void minprintf(char *fmt, ...)
 {
-	va_list ap; /* point to each nameless argument */
+	va_list ap;		/* point to each nameless argument */
 	char *p, *sval;
 	int ival;
 	double dval;
 
-	va_start(ap, fmt); /* ap points to first nameless argument */
+	va_start(ap, fmt);	/* ap points to first nameless argument */
 	for (p = fmt; *p; p++) {
 		if (*p != '%') {
 			putchar(*p);
@@ -32,5 +32,5 @@ void minprintf(char *fmt, ...)
 			break;
 		}
 	}
-	va_end(ap); /* clean */
+	va_end(ap);		/* clean */
 }

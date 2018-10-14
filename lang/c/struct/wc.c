@@ -63,15 +63,14 @@ int getword(char *word, int lim)
 	int c;
 	char *w = word;
 
-	while (isspace(c = getc(stdin)))
-		;
+	while (isspace(c = getc(stdin))) ;
 	if (c != EOF)
 		*w++ = c;
 	if (!isalpha(c)) {
 		*w = '\0';
 		return c;
 	}
-	for ( ; --lim > 0; w++) {
+	for (; --lim > 0; w++) {
 		if (!isalnum(*w = getc(stdin))) {
 			ungetc(*w, stdin);
 			break;

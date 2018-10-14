@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "calc.h"
 
-#define MAXOP   100  /* maximum operator & operand length */
+#define MAXOP   100		/* maximum operator & operand length */
 
 main()
 {

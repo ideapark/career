@@ -13,8 +13,8 @@ FILE *fopen(char *name, char *mode)
 		return NULL;
 	for (fp = _iob; fp < _iob + OPEN_MAX; fp++)
 		if ((fp->flag & (_READ | _WRITE)) == 0)
-			break; /* find empty slot */
-	if (fp >= _iob + OPEN_MAX) /* not found */
+			break;	/* find empty slot */
+	if (fp >= _iob + OPEN_MAX)	/* not found */
 		return NULL;
 
 	if (*mode == 'w')

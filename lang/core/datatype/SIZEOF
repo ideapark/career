@@ -1,3 +1,0 @@
-C Standard:
-
-    sizeof(short) <= sizeof(int) <= sizeof(long) <= sizeof(long long)

@@ -34,7 +34,7 @@ void fsize(char *name)
 
 #define MAX_PATH 1024
 
-void dirwalk(char *dir, void (*fcn)(char *))
+void dirwalk(char *dir, void (*fcn) (char *))
 {
 	char name[MAX_PATH];
 	DIR *dfd;
@@ -45,13 +45,15 @@ void dirwalk(char *dir, void (*fcn)(char *))
 		return;
 	}
 	while ((dp = readdir(dfd)) != NULL) {
-		if (strcmp(dp->d_name, ".") == 0 || strcmp(dp->d_name, "..") == 0)
+		if (strcmp(dp->d_name, ".") == 0
+		    || strcmp(dp->d_name, "..") == 0)
 			continue;
-		if (strlen(dir)+strlen(dp->d_name)+2 > sizeof(name))
-			fprintf(stderr, "dirwalk: name %s/%s too long\n", dir, dp->d_name);
+		if (strlen(dir) + strlen(dp->d_name) + 2 > sizeof(name))
+			fprintf(stderr, "dirwalk: name %s/%s too long\n", dir,
+				dp->d_name);
 		else {
 			sprintf(name, "%s/%s", dir, dp->d_name);
-			(*fcn)(name);
+			(*fcn) (name);
 		}
 	}
 	closedir(dfd);

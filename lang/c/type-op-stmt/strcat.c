@@ -5,6 +5,5 @@ void strcat(char s[], char t[])
 	i = j = 0;
 	while (s[i] != '\0')
 		i++;
-	while ((s[i++] = t[j++]) != '\0')
-		;
+	while ((s[i++] = t[j++]) != '\0') ;
 }

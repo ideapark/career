@@ -9,27 +9,27 @@ struct key {
 	char *word;
 	int count;
 } keytab[] = {
-	{"auto",     0},
-	{"break",    0},
-	{"case",     0},
-	{"char",     0},
-	{"const",    0},
-	{"continue", 0},
-	{"default",  0},
-	{"do",       0},
-	{"double",   0},
-	{"else",     0},
-	{"extern",   0},
-	{"float",    0},
-	{"goto",     0},
-	{"if",       0},
-	{"int",      0},
-	{"struct",   0},
-	{"unsigned", 0},
-	{"void",     0},
-	{"volatile", 0},
-	{"while",    0},
-};
+	{
+	"auto", 0}, {
+	"break", 0}, {
+	"case", 0}, {
+	"char", 0}, {
+	"const", 0}, {
+	"continue", 0}, {
+	"default", 0}, {
+	"do", 0}, {
+	"double", 0}, {
+	"else", 0}, {
+	"extern", 0}, {
+	"float", 0}, {
+	"goto", 0}, {
+	"if", 0}, {
+	"int", 0}, {
+	"struct", 0}, {
+	"unsigned", 0}, {
+	"void", 0}, {
+	"volatile", 0}, {
+"while", 0},};
 
 int getword(char *, int);
 int binsearch(char *, struct key *, int);
@@ -62,7 +62,7 @@ int binsearch(char *word, struct key tab[], int n)
 	low = 0;
 	high = n - 1;
 	while (low <= high) {
-		mid = (low+high) / 2;
+		mid = (low + high) / 2;
 		if ((cond = strcmp(word, tab[mid].word)) < 0)
 			high = mid - 1;
 		else if (cond > 0)
@@ -78,15 +78,14 @@ int getword(char *word, int lim)
 	int c;
 	char *w = word;
 
-	while (isspace(c = getc(stdin)))
-		;
+	while (isspace(c = getc(stdin))) ;
 	if (c != EOF)
 		*w++ = c;
 	if (!isalpha(c)) {
 		*w = '\0';
 		return c;
 	}
-	for ( ; --lim > 0; w++) {
+	for (; --lim > 0; w++) {
 		if (!isalnum(*w = getc(stdin))) {
 			ungetc(*w, stdin);
 			break;

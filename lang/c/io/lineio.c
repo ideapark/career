@@ -1,4 +1,4 @@
-char *fgets(char *s, int n, FILE *iop)
+char *fgets(char *s, int n, FILE * iop)
 {
 	register int c;
 	register char *cs;
@@ -11,7 +11,7 @@ char *fgets(char *s, int n, FILE *iop)
 	return (c == EOF && cs == s) ? NULL : s;
 }
 
-int fputs(char *s, FILE *iop)
+int fputs(char *s, FILE * iop)
 {
 	int c, cnt;
 

@@ -1,10 +1,10 @@
 #include <stdio.h>
 
-#define MAXLINE  1000  /* maximum line length */
+#define MAXLINE  1000		/* maximum line length */
 
-int max;               /* current maximum length */
-char line[MAXLINE];    /* store current line */
-char longest[MAXLINE]; /* store longest line */
+int max;			/* current maximum length */
+char line[MAXLINE];		/* store current line */
+char longest[MAXLINE];		/* store longest line */
 
 int _getline(void);
 void copy(void);
@@ -32,7 +32,7 @@ int _getline(void)
 	int c, i;
 	extern char line[];
 
-	for (i = 0; i < MAXLINE-1 && (c = getchar()) != EOF && c != '\n'; ++i)
+	for (i = 0; i < MAXLINE - 1 && (c = getchar()) != EOF && c != '\n'; ++i)
 		line[i] = c;
 	if (c == '\n') {
 		line[i] = c;

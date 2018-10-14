@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MAXLINES 5000  /* maximum sort lines */
+#define MAXLINES 5000		/* maximum sort lines */
 
-char *lineptr[MAXLINES]; /* point to each lines */
+char *lineptr[MAXLINES];	/* point to each lines */
 
 int readlines(char *lineptr[], int nlines);
 void writelines(char *lineptr[], int nlines);
@@ -15,7 +15,7 @@ main()
 	int nlines;
 
 	if ((nlines = readlines(lineptr, MAXLINES)) >= 0) {
-		qsort(lineptr, 0, nlines-1);
+		qsort(lineptr, 0, nlines - 1);
 		writelines(lineptr, nlines);
 		return 0;
 	} else {
@@ -32,15 +32,15 @@ void qsort(char *v[], int left, int right)
 	if (left >= right)
 		return;
 
-	swap(v, left, (left+right)/2);
+	swap(v, left, (left + right) / 2);
 	last = left;
-	for (i = left+1; i <= right; i++) {
+	for (i = left + 1; i <= right; i++) {
 		if (strcmp(v[i], v[left]) < 0)
 			swap(v, ++last, i);
 	}
 	swap(v, left, last);
-	qsort(v, left, last-1);
-	qsort(v, last+1, right);
+	qsort(v, left, last - 1);
+	qsort(v, last + 1, right);
 }
 
 void swap(char *v[], int i, int j)

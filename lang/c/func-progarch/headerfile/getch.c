@@ -3,8 +3,8 @@
 
 #define BUFSIZE  100
 
-static char buf[BUFSIZE];  /* buffer for ungetch() */
-static int bufp = 0;       /* next buffer free pos */
+static char buf[BUFSIZE];	/* buffer for ungetch() */
+static int bufp = 0;		/* next buffer free pos */
 
 int getch(void)
 {

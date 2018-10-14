@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include "calc.h"
 
-#define MAXVAL  100   /* maximum stack size */
+#define MAXVAL  100		/* maximum stack size */
 
-static int sp = 0;         /* next empty stack pos */
-static double val[MAXVAL]; /* value stack */
+static int sp = 0;		/* next empty stack pos */
+static double val[MAXVAL];	/* value stack */
 
 void push(double f)
 {

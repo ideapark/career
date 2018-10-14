@@ -21,7 +21,7 @@ main(int argc, char *argv[])
 	return 0;
 }
 
-void filecopy(FILE *ifp, FILE *ofp)
+void filecopy(FILE * ifp, FILE * ofp)
 {
 	int c;
 

@@ -12,7 +12,8 @@ int main(int argc, char *argv[])
 	else {
 		while (--argc > 0) {
 			if ((fp = fopen(*++argv, "r")) == NULL) {
-				fprintf(stderr, "%s: can't open %s\n", prog, *argv);
+				fprintf(stderr, "%s: can't open %s\n", prog,
+					*argv);
 				exit(1);
 			} else {
 				filecopy(fp, stdout);
@@ -27,7 +28,7 @@ int main(int argc, char *argv[])
 	exit(0);
 }
 
-void filecopy(FILE *ifp, FILE *ofp)
+void filecopy(FILE * ifp, FILE * ofp)
 {
 	int c;
 
