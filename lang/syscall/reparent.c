@@ -12,11 +12,11 @@ int main(int argc, char *argv[])
 	pid_t old_ppid, new_ppid;
 	pid_t child, parent;
 
-	parent = getpid(); /* before fork() */
+	parent = getpid();	/* before fork() */
 
 	if ((child = fork()) < 0) {
 		fprintf(stderr, "%s: fork of child failed: %s\n",
-				argv[0], strerror(errno));
+			argv[0], strerror(errno));
 		exit(1);
 	} else if (child == 0) {
 		old_ppid = getppid();
@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 		new_ppid = getppid();
 	} else {
 		sleep(1);
-		exit(0); /* parent exits after fork() */
+		exit(0);	/* parent exits after fork() */
 	}
 
 	/* only the child executes this */

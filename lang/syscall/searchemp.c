@@ -35,7 +35,7 @@ int emp_id_compare(const void *e1p, const void *e2p)
 void print_employee(const struct employee *emp)
 {
 	printf("%s %s\t%ld\t%s", emp->lastname, emp->firstname,
-			emp->emp_id, ctime(&emp->start_date));
+	       emp->emp_id, ctime(&emp->start_date));
 }
 
 int main(int argc, char *argv[])
@@ -56,17 +56,17 @@ int main(int argc, char *argv[])
 
 	if ((fp = fopen(argv[1], "r")) == NULL) {
 		fprintf(stderr, "%s: %s: could not open: %s\n", argv[0],
-				argv[1], strerror(errno));
+			argv[1], strerror(errno));
 		exit(1);
 	}
 
 	for (npres = 0; npres < NPRES && fgets(buf, BUFSIZ, fp) != NULL;
-			npres++) {
+	     npres++) {
 		sscanf(buf, "%s %s %ld %ld",
-				presidents[npres].lastname,
-				presidents[npres].firstname,
-				&presidents[npres].emp_id,
-				&presidents[npres].start_date);
+		       presidents[npres].lastname,
+		       presidents[npres].firstname,
+		       &presidents[npres].emp_id,
+		       &presidents[npres].start_date);
 	}
 	fclose(fp);
 
@@ -86,7 +86,8 @@ int main(int argc, char *argv[])
 		sscanf(buf, "%d\n", &id);
 		key.emp_id = id;
 		the_pres = (struct employee *)bsearch(&key, presidents, npres,
-				sizeof(struct employee), emp_id_compare);
+						      sizeof(struct employee),
+						      emp_id_compare);
 
 		if (the_pres != NULL) {
 			printf("Found: ");

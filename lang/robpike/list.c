@@ -1,17 +1,17 @@
 typedef struct Nameval Nameval;
 
 struct Nameval {
-	char*    name;
-	int      value;
-	Nameval* next; /* in list */
+	char *name;
+	int value;
+	Nameval *next;		/* in list */
 };
 
 /* newitem: create new item from name and value */
-Nameval* newitem(char* name, int value)
+Nameval *newitem(char *name, int value)
 {
-	Nameval* newp;
+	Nameval *newp;
 
-	newp = (Nameval*)emalloc(sizeof(Nameval));
+	newp = (Nameval *) emalloc(sizeof(Nameval));
 	newp->name = name;
 	newp->value = value;
 	newp->next = NULL;
@@ -19,7 +19,7 @@ Nameval* newitem(char* name, int value)
 }
 
 /* addfront: add newp to front of listp */
-Nameval* addfront(Nameval* listp, Nameval* newp)
+Nameval *addfront(Nameval * listp, Nameval * newp)
 {
 	newp->next = listp;
 	return newp;
@@ -28,51 +28,50 @@ Nameval* addfront(Nameval* listp, Nameval* newp)
 nvlist = addfront(nvlist, newitem("smiley", 0x263A));
 
 /* addend: add newp to end of listp */
-Nameval* addend(Nameval* listp, Nameval* newp)
+Nameval *addend(Nameval * listp, Nameval * newp)
 {
-	Nameval* p;
+	Nameval *p;
 	if (listp == NULL)
 		return newp;
-	for (p = listp; p->next != NULL; p = p->next)
-		;
+	for (p = listp; p->next != NULL; p = p->next) ;
 	p->next = newp;
 	return listp;
 }
 
 /* lookup: sequential search for name in listp */
-Nameval* lookup(Nameval* listp, char* name)
+Nameval *lookup(Nameval * listp, char *name)
 {
-	for ( ; listp != NULL; listp = listp->next) {
+	for (; listp != NULL; listp = listp->next) {
 		if (strcmp(name, listp->name) == 0)
 			return listp;
 	}
-	return NULL; /* no match */
+	return NULL;		/* no match */
 }
 
 /* apply: execute fn for each element of listp */
-void apply(Nameval* listp, void (*fn)(Nameval*, void*), void* arg)
+void apply(Nameval * listp, void (*fn) (Nameval *, void *), void *arg)
 {
-	for ( ; listp != NULL; listp = listp->next)
-		(*fn)(listp, arg); /* call the function */
+	for (; listp != NULL; listp = listp->next)
+		(*fn) (listp, arg);	/* call the function */
 }
 
 /* printnv: print name and value using format in arg */
-void printnv(Nameval* p, void* arg)
+void printnv(Nameval * p, void *arg)
 {
-	char* fmt;
-	fmt = (char*)arg;
+	char *fmt;
+	fmt = (char *)arg;
 	printf(fmt, p->name, p->value);
 }
 
 apply(nvlist, printnv, "%s: %x\n");
 
 /* inccounter: increment counter *arg */
-void inccounter(Nameval* p, void* arg)
+void inccounter(Nameval * p, void *arg)
 {
-	int* ip;
+	int *ip;
 
 	/* p is unused */
-	ip = (int*)arg;
+	ip = (int *)arg;
 	(*ip)++;
 }
 
@@ -82,11 +81,11 @@ apply(nvlist, inccounter, &n);
 printf("%d elements in nvlist\n", n);
 
 /* freeall: free all elements of listp */
-void freeall(Nameval* listp)
+void freeall(Nameval * listp)
 {
-	Nameval* next;
+	Nameval *next;
 
-	for ( ; listp != NULL; listp = next) {
+	for (; listp != NULL; listp = next) {
 		next = listp->next;
 		/* assumes name is freed elsewhere */
 		free(listp);
@@ -94,9 +93,9 @@ void freeall(Nameval* listp)
 }
 
 /* delitem: delete first 'name' from listp */
-Nameval* delitem(Nameval* listp, char* name)
+Nameval *delitem(Nameval * listp, char *name)
 {
-	Nameval* p, *prev;
+	Nameval *p, *prev;
 
 	prev = NULL;
 	for (p = listp; p != NULL; p = p->next) {
@@ -111,5 +110,5 @@ Nameval* delitem(Nameval* listp, char* name)
 		prev = p;
 	}
 	eprintf("delitem: %s not in list", name);
-	return NULL; /* can't get here */
+	return NULL;		/* can't get here */
 }

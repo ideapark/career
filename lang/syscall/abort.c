@@ -10,17 +10,17 @@
  */
 void recurse(void)
 {
-        static int i;
+	static int i;
 
-        if (++i == 3)
-                abort();
-        else
-                recurse();
+	if (++i == 3)
+		abort();
+	else
+		recurse();
 }
 
 int main(int argc, char *argv[])
 {
-        recurse();
+	recurse();
 
-        return 0;
+	return 0;
 }

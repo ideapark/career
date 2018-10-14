@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 	myname = argv[0];
 
 	if (argc == 1)
-		errs = process("."); /* default to current directory */
+		errs = process(".");	/* default to current directory */
 	else
 		for (i = 1; i < argc; i++)
 			errs += process(argv[1]);
@@ -43,7 +43,7 @@ int process(const char *dir)
 	nents = scandir(dir, &entries, nodots, alphasort);
 	if (nents < 0) {
 		fprintf(stderr, "%s: scandir failed: %s\n", myname,
-				strerror(errno));
+			strerror(errno));
 		return 1;
 	}
 

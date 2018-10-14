@@ -4,11 +4,10 @@
 
 #include "util.h"
 
-static char* name = NULL; /* program name for messages */
-
+static char *name = NULL;	/* program name for messages */
 
 /* eprintf: print error message and exit */
-void eprintf(char* fmt, ...)
+void eprintf(char *fmt, ...)
 {
 	va_list args;
 
@@ -20,17 +19,17 @@ void eprintf(char* fmt, ...)
 	vfprintf(stderr, fmt, args);
 	va_end(args);
 
-	if (fmt[0] != '\0' && fmt[strlen(fmt)-1] == ':')
+	if (fmt[0] != '\0' && fmt[strlen(fmt) - 1] == ':')
 		fprintf(stderr, " %s", strerror(errno));
 	fprintf(stderr, "\n");
-	exit(2); /* conventional value for failed execution */
+	exit(2);		/* conventional value for failed execution */
 }
 
 /* estrdup: duplicate a string, report if error */
-char* estrdup(char* s)
+char *estrdup(char *s)
 {
-	char* t;
-	t = (char*)malloc(strlen(s)+1);
+	char *t;
+	t = (char *)malloc(strlen(s) + 1);
 	if (t == NULL)
 		eprintf("estrdup(\"%.20s\") failed:", s);
 	strcpy(t, s);
@@ -38,9 +37,9 @@ char* estrdup(char* s)
 }
 
 /* emalloc: malloc and report if error */
-void* emalloc(size_t n)
+void *emalloc(size_t n)
 {
-	void* p;
+	void *p;
 	p = malloc(n);
 	if (p == NULL)
 		eprintf("malloc of %u bytes failed:", n);
@@ -48,13 +47,13 @@ void* emalloc(size_t n)
 }
 
 /* setprogname: set stored name of program */
-void setprogname(char* str)
+void setprogname(char *str)
 {
 	name = estrdup(str);
 }
 
 /* progname: return stored name of program */
-char* progname(void)
+char *progname(void)
 {
 	return name;
 }
@@ -68,27 +67,26 @@ void usage(void)
 }
 
 /* strings: extract printable strings from stream */
-void strings(char* name, FILE* fin)
+void strings(char *name, FILE * fin)
 {
 	int c, i;
 	char buf[BUFSIZ];
 
-	do { /* once for each string */
-		for (i = 0; (c = getc(fin)) != EOF; ) {
+	do {			/* once for each string */
+		for (i = 0; (c = getc(fin)) != EOF;) {
 			if (!isprint(c))
 				break;
 			buf[i++] = c;
 			if (i >= BUFSIZ)
 				break;
 		}
-		if (i >= MINLEN) /* print if long enough */
+		if (i >= MINLEN)	/* print if long enough */
 			printf("%s:%.s\n", name, i, buf);
 	} while (c != EOF);
 }
 
-
 /* util main test: util test example */
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
 	int i;
 
@@ -103,10 +101,10 @@ int main(int argc, char* argv[])
 }
 
 /* strings main: find printable strings in files */
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
 	int i;
-	FILE* fin;
+	FILE *fin;
 
 	setprogname("strings");
 	if (argc == 1)

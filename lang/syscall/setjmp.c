@@ -18,12 +18,12 @@ int main(void)
 	int i = 5;
 	volatile int j = 6;
 
-	if (setjmp(env) == 0) { /* first time */
+	if (setjmp(env) == 0) {	/* first time */
 		i++;
 		j++;
 		printf("first time: i = %d, j = %d\n", i, j);
 		comeback();
-	} else { /* second time */
+	} else {		/* second time */
 		printf("second time: i = %d, j = %d\n", i, j);
 	}
 

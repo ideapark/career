@@ -1,14 +1,14 @@
 typedef struct Nameval Nameval;
 
 struct Nameval {
-	char*    name;
-	int      value;
-	Nameval* left;  /* lesser */
-	Nameval* right; /* greater */
+	char *name;
+	int value;
+	Nameval *left;		/* lesser */
+	Nameval *right;		/* greater */
 };
 
 /* insert: insert newp in treep, return treep */
-Nameval* insert(Nameval* treep, Nameval* newp)
+Nameval *insert(Nameval * treep, Nameval * newp)
 {
 	int cmp;
 	if (treep == NULL)
@@ -24,7 +24,7 @@ Nameval* insert(Nameval* treep, Nameval* newp)
 }
 
 /* lookup: look up name in tree treep */
-Nameval* lookup(Nameval* treep, char* name)
+Nameval *lookup(Nameval * treep, char *name)
 {
 	int cmp;
 	if (treep == NULL)
@@ -39,7 +39,7 @@ Nameval* lookup(Nameval* treep, char* name)
 }
 
 /* nrlookup: non-recursively look up name in tree treep */
-Nameval* nrlookup(Nameval* treep, char* name)
+Nameval *nrlookup(Nameval * treep, char *name)
 {
 	int cmp;
 	while (treep != NULL) {
@@ -55,21 +55,21 @@ Nameval* nrlookup(Nameval* treep, char* name)
 }
 
 /* applyinorder: inorder application of fn to treep */
-void applyinorder(Nameval* treep, void (*fn)(Nameval*, void*), void* arg)
+void applyinorder(Nameval * treep, void (*fn) (Nameval *, void *), void *arg)
 {
 	if (treep == NULL)
 		return;
 	applyinorder(treep->left, fn, arg);
-	(*fn)(treep, arg);
+	(*fn) (treep, arg);
 	applyinorder(treep->right, fn, arg);
 }
 
 /* applypostorder: postorder application of fn to treep */
-void applypostorder(Nameval* treep, void (*fn)(Nameval*, void*), void* arg)
+void applypostorder(Nameval * treep, void (*fn) (Nameval *, void *), void *arg)
 {
 	if (treep == NULL)
 		return;
 	applypostorder(treep->left, fn, arg);
 	applypostorder(treep->right, fn, arg);
-	(*fn)(treep, arg);
+	(*fn) (treep, arg);
 }

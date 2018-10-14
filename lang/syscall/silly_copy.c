@@ -1,7 +1,5 @@
 SYSCALL_DEFINE3(silly_copy,
-		unsigned long *, src,
-		unsigned long *, dst,
-		unsigned long, len)
+		unsigned long *, src, unsigned long *, dst, unsigned long, len)
 {
 	unsigned long buf;
 

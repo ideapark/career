@@ -6,35 +6,35 @@
 
 void print_group(const struct group *gr)
 {
-        int i;
+	int i;
 
-        printf("%s:%s:%ld:", gr->gr_name, gr->gr_passwd, (long)gr->gr_gid);
+	printf("%s:%s:%ld:", gr->gr_name, gr->gr_passwd, (long)gr->gr_gid);
 
-        for (i = 0; gr->gr_mem[i] != NULL; i++) {
-                printf("%s", gr->gr_mem[i]);
-                if (gr->gr_mem[i+1] != NULL)
-                        putchar(',');
-        }
+	for (i = 0; gr->gr_mem[i] != NULL; i++) {
+		printf("%s", gr->gr_mem[i]);
+		if (gr->gr_mem[i + 1] != NULL)
+			putchar(',');
+	}
 
-        putchar('\n');
+	putchar('\n');
 }
 
 int main(int argc, char *argv[])
 {
-        struct group *gr;
-        int i;
+	struct group *gr;
+	int i;
 
-        if (argc != 2) {
-                fprintf(stderr, "usage: %s user\n", argv[0]);
-                exit(1);
-        }
+	if (argc != 2) {
+		fprintf(stderr, "usage: %s user\n", argv[0]);
+		exit(1);
+	}
 
-        while ((gr = getgrent()) != NULL)
-                for (i = 0; gr->gr_mem[i] != NULL; i++)
-                        if (strcmp(gr->gr_mem[i], argv[1]) == 0)
-                                print_group(gr);
+	while ((gr = getgrent()) != NULL)
+		for (i = 0; gr->gr_mem[i] != NULL; i++)
+			if (strcmp(gr->gr_mem[i], argv[1]) == 0)
+				print_group(gr);
 
-        endgrent();
+	endgrent();
 
-        exit(0);
+	exit(0);
 }

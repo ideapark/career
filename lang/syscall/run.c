@@ -15,9 +15,8 @@ int main(int argc, char *argv[])
 
 	path = argv[1];
 
-	execv(path, argv + 2); /* skip argv[0] and argv[1] */
-	fprintf(stderr, "%s: execv() failed: %s\n", argv[0],
-			strerror(errno));
+	execv(path, argv + 2);	/* skip argv[0] and argv[1] */
+	fprintf(stderr, "%s: execv() failed: %s\n", argv[0], strerror(errno));
 
 	exit(0);
 }

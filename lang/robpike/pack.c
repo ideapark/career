@@ -1,11 +1,11 @@
 #include <stdarg.h>
 
 /* pack: pack binary items into buf, return length */
-int pack(uchar* buf, char* fmt, ...)
+int pack(uchar * buf, char *fmt, ...)
 {
 	va_list args;
-	char* p;
-	uchar* bp;
+	char *p;
+	uchar *bp;
 	ushort s;
 	ulong l;
 
@@ -13,21 +13,21 @@ int pack(uchar* buf, char* fmt, ...)
 	va_start(args, fmt);
 	for (p = fmt; *p != '\0'; p++) {
 		switch (*p) {
-		case 'c': /* char */
+		case 'c':	/* char */
 			*bp++ = va_arg(args, int);
 			break;
-		case 's': /* short */
+		case 's':	/* short */
 			s = va_arg(args, int);
 			*bp++ = s;
 			break;
-		case 'l': /* long */
+		case 'l':	/* long */
 			l = va_arg(args, ulong);
 			*bp++ = l >> 24;
 			*bp++ = l >> 16;
 			*bp++ = l >> 8;
 			*bp++ = l;
 			break;
-		default: /* illegal type character */
+		default:	/* illegal type character */
 			va_end(args);
 			return -1;
 		}
@@ -37,16 +37,16 @@ int pack(uchar* buf, char* fmt, ...)
 }
 
 /* pack_type1: pack format 1 packet */
-int pack_type1(uchar* buf, ushort count, uchar val, ulong data)
+int pack_type1(uchar * buf, ushort count, uchar val, ulong data)
 {
 	return pack(buf, "cscl", 0x01, count, val, data);
 }
 
 /* unpack: unpack packed items from buf, return length */
-int unpack(uchar* buf, char* fmt, ...)
+int unpack(uchar * buf, char *fmt, ...)
 {
 	va_list args;
-	char* p;
+	char *p;
 	uchar *bp, *pc;
 	ushort *ps;
 	ulong *pl;
@@ -55,23 +55,23 @@ int unpack(uchar* buf, char* fmt, ...)
 	va_start(args, fmt);
 	for (p = fmt; *p != '\0'; p++) {
 		switch (*p) {
-		case 'c': /* char */
-			pc = va_arg(args, uchar*);
+		case 'c':	/* char */
+			pc = va_arg(args, uchar *);
 			*pc = *bp++;
 			break;
-		case 's': /* short */
-			ps = va_arg(args, ushort*);
+		case 's':	/* short */
+			ps = va_arg(args, ushort *);
 			*ps = *bp++ << 8;
 			*ps |= *bp++;
 			break;
-		case 'l': /* long */
-			pl = va_arg(args, ulong*);
+		case 'l':	/* long */
+			pl = va_arg(args, ulong *);
 			*pl = *bp++ << 24;
 			*pl |= *bp++ << 16;
 			*pl |= *bp++ << 8;
 			*pl |= *bp++;
 			break;
-		default: /* illegal type character */
+		default:	/* illegal type character */
 			va_end(args);
 			return -1;
 		}
@@ -81,7 +81,7 @@ int unpack(uchar* buf, char* fmt, ...)
 }
 
 /* unpack_type2: unpack and process type 2 packet */
-int unpack_type2(int n, uchar* buf)
+int unpack_type2(int n, uchar * buf)
 {
 	uchar c;
 	ushort count;
@@ -103,7 +103,7 @@ void receive(int network)
 		type = buf[0];
 		if (type >= NELEMS(unpackfn))
 			eprintf("bad packet type 0x%x", type);
-		if ((*unpackfn[type])(n, buf) < 0)
+		if ((*unpackfn[type]) (n, buf) < 0)
 			eprintf("protocol error, type %x length %d", type, n);
 	}
 }

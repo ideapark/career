@@ -28,10 +28,11 @@ const char *format_num(int num)
 		num /= 10;
 	} while (num > 0);
 
-	return &buf[i+1];
+	return &buf[i + 1];
 }
 
-void manage(siginfo_t *si) {
+void manage(siginfo_t * si)
+{
 	char buf[100];
 
 	switch (si->si_code) {
@@ -40,7 +41,7 @@ void manage(siginfo_t *si) {
 		kill(si->si_pid, SIGCONT);
 		break;
 
-	case CLD_CONTINUED: /* not sent on Linux */
+	case CLD_CONTINUED:	/* not sent on Linux */
 		write(1, "\tchild continued\n", 17);
 		break;
 
@@ -49,7 +50,7 @@ void manage(siginfo_t *si) {
 		strcat(buf, format_num(si->si_status));
 		strcat(buf, "\n");
 		write(1, buf, strlen(buf));
-		exit(0); /* we're done */
+		exit(0);	/* we're done */
 		break;
 
 	case CLD_DUMPED:
@@ -67,7 +68,7 @@ void manage(siginfo_t *si) {
 }
 
 /* catch SIGCHLD, reap just one child */
-void childhandler(int sig, siginfo_t *si, void *context)
+void childhandler(int sig, siginfo_t * si, void *context)
 {
 	int status, ret;
 	char buf[100];
@@ -82,19 +83,19 @@ retry:
 		strcat(buf, format_num(si->si_pid));
 		strcat(buf, "\n");
 		write(1, buf, strlen(buf));
-		manage(si); /* deal with what happened to it */
+		manage(si);	/* deal with what happened to it */
 	} else if (ret > 0) {
 		strcpy(buf, "\treaped unexpected pid ");
 		strcat(buf, format_num(ret));
 		strcat(buf, "\n");
 		write(1, buf, strlen(buf));
-		goto retry; /* why not? */
+		goto retry;	/* why not? */
 	} else if (ret == 0) {
 		strcpy(buf, "\tpid");
 		strcat(buf, format_num(si->si_pid));
 		strcat(buf, " changed status\n");
 		write(1, buf, strlen(buf));
-		manage(si); /* deal with what happened to it */
+		manage(si);	/* deal with what happened to it */
 	} else if (ret == -1 && errno == EINTR) {
 		write(1, "\tretrying\n", 10);
 		goto retry;
@@ -110,10 +111,10 @@ retry:
 
 void child(void)
 {
-	raise(SIGCONT); /* should be ignored */
-	raise(SIGSTOP); /* go to sleep, parent wakes us back up */
+	raise(SIGCONT);		/* should be ignored */
+	raise(SIGSTOP);		/* go to sleep, parent wakes us back up */
 	printf("\t---> child restarted <---\n");
-	exit(42);       /* normal exit, let parent get value */
+	exit(42);		/* normal exit, let parent get value */
 }
 
 /* set up child-related information and signals, create child */
@@ -127,13 +128,13 @@ int main(int argc, char *argv[])
 
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = childhandler;
-	sigfillset(&sa.sa_mask); /* block everything when handler runs */
+	sigfillset(&sa.sa_mask);	/* block everything when handler runs */
 	sigaction(SIGCHLD, &sa, NULL);
 
 	sigemptyset(&childset);
 	sigaddset(&childset, SIGCHLD);
 
-	sigprocmask(SIG_SETMASK, &childset, NULL); /* block it in main code */
+	sigprocmask(SIG_SETMASK, &childset, NULL);	/* block it in main code */
 
 	if ((kid = fork()) == 0)
 		child();

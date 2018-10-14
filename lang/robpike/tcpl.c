@@ -6,7 +6,7 @@
 if ((ch = getchar()) == EOF)
 	not_eof = FALSE;
 
-int smaller(char* s, char* t)
+int smaller(char *s, char *t)
 {
 	if (strcmp(s, t) < 1)
 		return 1;
@@ -14,7 +14,7 @@ int smaller(char* s, char* t)
 		return 0;
 }
 
-if ((falloc(SMRHSHSCRTCH, S_IFEXT|0644, MAXODDHSH)) < 0)
+if ((falloc(SMRHSHSCRTCH, S_IFEXT | 0644, MAXODDHSH)) < 0)
 	NULL;
 
 #define isupper(c) ((c) >= 'A' && (c) <= 'Z')

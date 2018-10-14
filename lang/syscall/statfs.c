@@ -14,10 +14,10 @@
 #define EXT2_SUPER_MAGIC      0xEF53
 #define HPFS_SUPER_MAGIC      0xF995E849
 #define ISOFS_SUPER_MAGIC     0x9660
-#define MINIX_SUPER_MAGIC     0x137F /* orig, minix */
-#define MINIX_SUPER_MAGIC2    0x138F /* 30-char minix */
-#define MINIX2_SUPER_MAGIC    0x2468 /* minix V2 */
-#define MINIX2_SUPER_MAGIC2   0x2468 /* minix V2, 30 char names */
+#define MINIX_SUPER_MAGIC     0x137F	/* orig, minix */
+#define MINIX_SUPER_MAGIC2    0x138F	/* 30-char minix */
+#define MINIX2_SUPER_MAGIC    0x2468	/* minix V2 */
+#define MINIX2_SUPER_MAGIC2   0x2468	/* minix V2, 30 char names */
 #define MSDOS_SUPER_MAGIC     0x4d44
 #define NCP_SUPER_MAGIC       0x564c
 #define NFS_SUPER_MAGIC       0x6969
@@ -40,7 +40,7 @@ char *myname;
 int main(int argc, char *argv[])
 {
 	int c;
-	char *file = "/etc/mtab"; /* default file to read */
+	char *file = "/etc/mtab";	/* default file to read */
 
 	myname = argv[0];
 	while ((c = getopt(argc, argv, "f:")) != -1) {
@@ -63,10 +63,10 @@ void process(const char *filename)
 	FILE *fp;
 	struct mntent *fs;
 
-	fp = setmntent(filename, "r"); /* read only */
+	fp = setmntent(filename, "r");	/* read only */
 	if (fp == NULL) {
 		fprintf(stderr, "%s: %s: could not open: %s\n",
-				myname, filename, strerror(errno));
+			myname, filename, strerror(errno));
 		exit(1);
 	}
 
@@ -82,28 +82,28 @@ const char *type2str(long type)
 		long type;
 		const char *name;
 	} table[] = {
-		{AFFS_SUPER_MAGIC, "AFFS"},
-		{COH_SUPER_MAGIC, "COH"},
-		{EXT2_OLD_SUPER_MAGIC, "OLD EXT2"},
-		{EXT2_SUPER_MAGIC, "EXT2"},
-		{HPFS_SUPER_MAGIC, "HPFS"},
-		{ISOFS_SUPER_MAGIC, "ISOFS"},
-		{MINIX2_SUPER_MAGIC, "MINIX V2"},
-		{MINIX2_SUPER_MAGIC2, "MINIX V2 30 char"},
-		{MINIX_SUPER_MAGIC, "MINIX"},
-		{MINIX_SUPER_MAGIC, "MINIX 30 char"},
-		{MSDOS_SUPER_MAGIC, "MSDOS"},
-		{NCP_SUPER_MAGIC, "NCP"},
-		{NFS_SUPER_MAGIC, "NFS"},
-		{PROC_SUPER_MAGIC, "PROC"},
-		{SMB_SUPER_MAGIC, "SMB"},
-		{SYSV2_SUPER_MAGIC, "SYSV2"},
-		{SYSV4_SUPER_MAGIC, "SYSV4"},
-		{UFS_MAGIC, "UFS"},
-		{XENIX_SUPER_MAGIC, "XENIX"},
-		{_XIAFS_SUPER_MAGIC, "XIAFS"},
-		{0, NULL},
-	};
+		{
+		AFFS_SUPER_MAGIC, "AFFS"}, {
+		COH_SUPER_MAGIC, "COH"}, {
+		EXT2_OLD_SUPER_MAGIC, "OLD EXT2"}, {
+		EXT2_SUPER_MAGIC, "EXT2"}, {
+		HPFS_SUPER_MAGIC, "HPFS"}, {
+		ISOFS_SUPER_MAGIC, "ISOFS"}, {
+		MINIX2_SUPER_MAGIC, "MINIX V2"}, {
+		MINIX2_SUPER_MAGIC2, "MINIX V2 30 char"}, {
+		MINIX_SUPER_MAGIC, "MINIX"}, {
+		MINIX_SUPER_MAGIC, "MINIX 30 char"}, {
+		MSDOS_SUPER_MAGIC, "MSDOS"}, {
+		NCP_SUPER_MAGIC, "NCP"}, {
+		NFS_SUPER_MAGIC, "NFS"}, {
+		PROC_SUPER_MAGIC, "PROC"}, {
+		SMB_SUPER_MAGIC, "SMB"}, {
+		SYSV2_SUPER_MAGIC, "SYSV2"}, {
+		SYSV4_SUPER_MAGIC, "SYSV4"}, {
+		UFS_MAGIC, "UFS"}, {
+		XENIX_SUPER_MAGIC, "XENIX"}, {
+		_XIAFS_SUPER_MAGIC, "XIAFS"}, {
+	0, NULL},};
 	static char unknown[100];
 	int i;
 
@@ -119,12 +119,12 @@ void do_statfs(const struct mntent *fs)
 {
 	struct statfs vfs;
 
-	if (fs->mnt_fsname[0] != '/') /* skip nonreal filesystem */
+	if (fs->mnt_fsname[0] != '/')	/* skip nonreal filesystem */
 		return;
 
 	if (statfs(fs->mnt_dir, &vfs) != 0) {
 		fprintf(stderr, "%s: %s: statfs failed: %s\n",
-				myname, fs->mnt_dir, strerror(errno));
+			myname, fs->mnt_dir, strerror(errno));
 		errors++;
 		return;
 	}

@@ -8,7 +8,7 @@ int main(void)
 {
 	double f;
 
-	errno = 0; /* clear error state */
+	errno = 0;		/* clear error state */
 	f = log(-1.23);
 	printf("%f %d %s\n", f, errno, strerror(errno));
 	return 0;

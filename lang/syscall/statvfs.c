@@ -16,7 +16,7 @@ char *myname;
 int main(int argc, char *argv[])
 {
 	int c;
-	char *file = "/etc/mtab"; /* default file to read */
+	char *file = "/etc/mtab";	/* default file to read */
 
 	myname = argv[0];
 	while ((c = getopt(argc, argv, "f:")) != -1) {
@@ -39,10 +39,10 @@ void process(const char *filename)
 	FILE *fp;
 	struct mntent *fs;
 
-	fp = setmntent(filename, "r"); /* read only */
+	fp = setmntent(filename, "r");	/* read only */
 	if (fp == NULL) {
 		fprintf(stderr, "%s: %s: could not open: %s\n",
-				myname, filename, strerror(errno));
+			myname, filename, strerror(errno));
 		exit(1);
 	}
 
@@ -64,7 +64,7 @@ void do_statvfs(const struct mntent *fs)
 
 	if (statvfs(fs->mnt_dir, &vfs) != 0) {
 		fprintf(stderr, "%s: %s: statvfs failed: %s\n",
-				myname, fs->mnt_dir, strerror(errno));
+			myname, fs->mnt_dir, strerror(errno));
 		errors++;
 		return;
 	}

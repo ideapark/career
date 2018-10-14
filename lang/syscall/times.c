@@ -16,7 +16,7 @@ int main(void)
 	time(&now);
 	curtime = localtime(&now);
 	(void)strftime(buf, sizeof(buf),
-			"It is now %A, %B %d, %Y, %I:%M %p", curtime);
+		       "It is now %A, %B %d, %Y, %I:%M %p", curtime);
 
 	printf("%s\n", buf);
 	printf("ctime() says: %s", ctime(&now));

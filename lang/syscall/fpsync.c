@@ -3,10 +3,10 @@
 #include <unistd.h>
 #include <stdio.h>
 
-int fpsync(FILE *fp)
+int fpsync(FILE * fp)
 {
-        if (fp == NULL || fflush(fp) == EOF || fsync(fileno(fp)) < 0)
-                return -1;
+	if (fp == NULL || fflush(fp) == EOF || fsync(fileno(fp)) < 0)
+		return -1;
 
-        return 0;
+	return 0;
 }

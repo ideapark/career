@@ -2,7 +2,7 @@
 #include <ctype.h>
 #include <limits.h>
 
-unsigned long count[UCHAR_MAX+1];
+unsigned long count[UCHAR_MAX + 1];
 
 /* freq main: display byte frequency counts */
 int main(void)

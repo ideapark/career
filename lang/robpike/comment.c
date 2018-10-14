@@ -9,7 +9,7 @@
  * Coefficients extended to 12 bits for
  * IEEE 1180-1990 compliance
  */
-static void idct(int b[8*8])
+static void idct(int b[8 * 8])
 {
 	// ...
 }

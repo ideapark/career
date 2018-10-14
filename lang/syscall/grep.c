@@ -11,15 +11,15 @@
 #include <unistd.h>
 #include <sys/types.h>
 
-char *myname;        /* for error messages */
-int ignore_case = 0; /* -i option: ignore case */
-int extended = 0;    /* -E option: use extended RE's */
-int errors = 0;      /* number of errors */
+char *myname;			/* for error messages */
+int ignore_case = 0;		/* -i option: ignore case */
+int extended = 0;		/* -E option: use extended RE's */
+int errors = 0;			/* number of errors */
 
-regex_t pattern;     /* pattern to match */
+regex_t pattern;		/* pattern to match */
 
 void compile_pattern(const char *pat);
-void process(const char *name, FILE *fp);
+void process(const char *name, FILE * fp);
 void usage(void);
 
 /*
@@ -47,17 +47,17 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	if (optind == argc) /* sanity check */
+	if (optind == argc)	/* sanity check */
 		usage();
 
-	compile_pattern(argv[optind]); /* compile the pattern */
+	compile_pattern(argv[optind]);	/* compile the pattern */
 
-	if (errors) /* compile failed */
+	if (errors)		/* compile failed */
 		return 1;
 	else
 		optind++;
 
-	if (optind == argc) { /* no files, default to stdin */
+	if (optind == argc) {	/* no files, default to stdin */
 		process("standard input", stdin);
 	} else {
 		/* loop over files */
@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
 				fclose(fp);
 			} else {
 				fprintf(stderr, "%s: %s: could not open: %s\n",
-						argv[0], argv[1], strerror(errno));
+					argv[0], argv[1], strerror(errno));
 				errors++;
 			}
 		}
@@ -84,9 +84,9 @@ int main(int argc, char *argv[])
  */
 void compile_pattern(const char *pat)
 {
-	int flags = REG_NOSUB; /* don't need where-matched info */
+	int flags = REG_NOSUB;	/* don't need where-matched info */
 	int ret;
-#define MSGBUFSIZE 512 /* arbitrary */
+#define MSGBUFSIZE 512		/* arbitrary */
 	char error[MSGBUFSIZE];
 
 	if (ignore_case)
@@ -106,7 +106,7 @@ void compile_pattern(const char *pat)
 /*
  * read lines of text and match against the pattern.
  */
-void process(const char *name, FILE *fp)
+void process(const char *name, FILE * fp)
 {
 	char *buf = NULL;
 	size_t size = 0;
@@ -117,14 +117,16 @@ void process(const char *name, FILE *fp)
 		ret = regexec(&pattern, buf, 0, NULL, 0);
 		if (ret != 0) {
 			if (ret != REG_NOMATCH) {
-				(void)regerror(ret, &pattern, error, sizeof(error));
-				fprintf(stderr, "%s: file %s: %s\n", myname, name, error);
+				(void)regerror(ret, &pattern, error,
+					       sizeof(error));
+				fprintf(stderr, "%s: file %s: %s\n", myname,
+					name, error);
 				free(buf);
 				errors++;
 				return;
 			}
 		} else {
-			printf("%s: %s", name, buf); /* print matching lines */
+			printf("%s: %s", name, buf);	/* print matching lines */
 		}
 	}
 

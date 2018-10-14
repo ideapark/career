@@ -60,12 +60,12 @@ int main(void)
 
 	/* very simple code to read date */
 	for (npres = 0; npres < NPRES && fgets(buf, BUFSIZ, stdin) != NULL;
-			npres++) {
+	     npres++) {
 		sscanf(buf, "%s %s %ld %ld\n",
-				presidents[npres].lastname,
-				presidents[npres].firstname,
-				&presidents[npres].emp_id,
-				&presidents[npres].start_date);
+		       presidents[npres].lastname,
+		       presidents[npres].firstname,
+		       &presidents[npres].emp_id,
+		       &presidents[npres].start_date);
 	}
 
 	/* sort by name */
@@ -75,23 +75,22 @@ int main(void)
 
 	for (i = 0; i < npres; i++) {
 		printf("\t%s %s\t%ld\t%s",
-				presidents[i].lastname,
-				presidents[i].firstname,
-				presidents[i].emp_id,
-				ctime(&presidents[i].start_date));
+		       presidents[i].lastname,
+		       presidents[i].firstname,
+		       presidents[i].emp_id, ctime(&presidents[i].start_date));
 	}
 
 	/* sort by seniority */
-	qsort(presidents, npres, sizeof(struct employee), emp_seniority_compare);
+	qsort(presidents, npres, sizeof(struct employee),
+	      emp_seniority_compare);
 
 	printf("Sorted by seniority:\n");
 
 	for (i = 0; i < npres; i++) {
 		printf("\t%s %s\t%ld\t%s",
-				presidents[i].lastname,
-				presidents[i].firstname,
-				presidents[i].emp_id,
-				ctime(&presidents[i].start_date));
+		       presidents[i].lastname,
+		       presidents[i].firstname,
+		       presidents[i].emp_id, ctime(&presidents[i].start_date));
 	}
 
 	return 0;
