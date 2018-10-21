@@ -27,3 +27,19 @@ Finally, if container A connects to an external host, the traffic looks like:
 ```text
 eth0 (in A's netns) --> vethA --> br0 --> tun0 --> (NAT) --> eth0 (physical device) --> internet
 ```
+
+## Access Diagram
+
+```
+Machine outside      External Net      Node with external     Cluster Net
+  the cluster    ------------------->        access       -------------------> Cluster Node
+                                     \                   /                      \
+                                      \                 /                        \
+                             Public IP \               / Node IP          Node IP \
+                             Access     \             /  Address          Address  \
+                                         \           /                              \
+                                          \         /                                \  Pod IP
+                                           \       /      Pod IP                      \ Address
+                                         "Router" pod     Address                    Cluster Pod
+                                         (in the node)   (local to the cluster)     (in the node)
+```
