@@ -1,4 +1,4 @@
-# PKI: Private Key Infrastructure
+# PKI: Public Key Infrastructure
 
 Kubernetes requires PKI for the following operations:
 
