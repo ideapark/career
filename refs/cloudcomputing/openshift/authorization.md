@@ -47,3 +47,11 @@ local role bindings, users, groups and service accounts are illustrated below.
                                        | Rule  Rule           Rule  Rule        Rule  Rule          Rule  Rule     |
                                        +---------------------------------------------------------------------------+
 ```
+
+OKD evaluates authorizations using the following steps:
+
+  1. The identify and the project-scoped action is used to find all bindings that apply to the user or their groups.
+  2. Bindings are used to locate all the roles that apply.
+  3. Roles are used to find all the rules that apply.
+  4. The action is checked against each rule to find a match.
+  5. If no matching rule is found, the action is then denied by default.
