@@ -9,4 +9,5 @@ connection both the parties should have the same key.
 
 In this, the encryption key is published to anyone who want to encrypt the
 message. Though, the decryption key which is used to make the message readable
-is only to the person for whom the message is sent.
+is only to the person for whom the message is sent. This will need third party
+CA (Certificate Authority) Certs to provide identification (Such as HTTPS).
