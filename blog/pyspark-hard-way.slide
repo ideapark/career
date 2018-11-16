@@ -217,13 +217,13 @@ each block of rows, many functions can be applied.
   +------------+------+--------+--------+---------+
   |    language|  born|    user|   trend|  learned|
   +------------+------+--------+--------+---------+
-  | lisp       | 1960 | 300000 | stable | ****    | <-- Window 1
-  | asm        | 1960 | 100000 | down   | **      | <--
+  | lisp       | 1960 | 300000 | stable | ****    | <---Window 1
+  | asm        | 1960 | 100000 | down   | **      | <--<
   | c          | 1970 | 400000 | stable | ****    | <-- Window 2
-  | java       | 1995 | 500000 | down   | **      | <--
+  | java       | 1995 | 500000 | down   | **      | <--<
   | javascript | 1995 | 700000 | up     | **      |     Window 3
-  | python     | 1995 | 350000 | up     | ***     | <--
-  | go         | 2007 | 200000 | up     | ****    | <-- Window 4
+  | python     | 1995 | 350000 | up     | ***     | <--<
+  | go         | 2007 | 200000 | up     | ****    | <---Window 4
   +------------+------+--------+--------+---------+
 
 * SQL vs Functions
