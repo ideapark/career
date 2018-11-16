@@ -1,0 +1,591 @@
+Git Easy Way
+成都
+20 Sep 2018
+
+周朋
+p@ctriple.cn
+https://github.com/ctriple
+微信 lockrecv
+
+* License
+
+Copyright © Zhou Peng <p@ctriple.cn>
+
+* 最简单的版本控制
+
+Copy-Modify
+
+- v1
+
+  [p@ctriple letsgo.v1]$ ls
+  bench.txt      defer.go           godebug.txt  server.go       struct.go       zlib.c
+  bomb.go        esc.go             gopher.png   simplicity.png  time-deps.bash
+  builderror.go  gc-animation.html  map.png      slice.txt       time-deps.svg
+  defer-filo.go  gc.png             sched.txt    sort.go         utf.go
+
+- v2
+
+  [p@ctriple letsgo.v2]$ ls
+  bench.txt      defer.go~          godebug.txt  server.go       struct.go       zlib.c~
+  bomb.go~       esc.go             gopher.png   simplicity.png  time-deps.bash
+  builderror.go  gc-animation.html  map.png~     slice.txt~      time-deps.svg
+  defer-filo.go  gc.png             sched.txt    sort.go~        utf.go
+
+问题：Duplication, Diff, History, Branch, Author, ...
+
+* 文件系统
+
+- 简化的内部结构
+
+  +--------+---------------+--------+--------+------------+----------------------------------+
+  | Super  |     Group     |  Data  |  Inode |   Inode    |           Data blocks            |
+  | Block  |  descriptors  | bitmap | bitmap |   tables   |                                  |
+  +--------+---------------+--------+--------+------------+----------------------------------+
+
+- Super Block
+
+  [p@ctriple blog.ctriple.cn]$ sudo dumpe2fs -h /dev/sda1
+  Last mounted on:          /
+  Filesystem UUID:          cb9baea8-7dfb-4f7e-acc4-ab326f7db872
+  Filesystem magic number:  0xEF53
+  Filesystem OS type:       Linux
+  Inode count:              6651904
+  Block count:              26578440
+  Free blocks:              20351240
+  Free inodes:              5877892
+  First block:              0
+  Block size:               4096
+  Inode size:               256
+  [ ...省略很多其他内容... ]
+
+* 文件系统
+
+.link https://elixir.bootlin.com/linux/latest/source/include/linux/fs.h
+
+  struct inode {
+    umode_t           i_mode;
+    unsigned short    i_opflags;
+    kuid_t            i_uid;       /* owner user id  */
+    kgid_t            i_gid;       /* owner group id */
+    unsigned int      i_flags;
+    dev_t             i_rdev;
+    loff_t            i_size;
+    struct timespec   i_atime;    /* access timestamp */
+    struct timespec   i_mtime;    /* modify timestamp - data block */
+    struct timespec   i_ctime;    /* change timestamp - inode */
+    /* ... 省略很多其他不相关内容 ... */
+  };
+
+* 文件 vs 目录
+
+- 文件
+
+  [p@ctriple blog.ctriple.cn]$ stat git-easy-way.slide
+    File: git-easy-way.slide
+    Size: 9300          Blocks: 24         IO Block: 4096   regular file
+  Device: 801h/2049d    Inode: 2099085     Links: 1         ^^^^^^^^^^^^
+  Access: (0644/-rw-r--r--)  Uid: ( 1000/ p)   Gid: ( 1000/ p)
+  Access: 2018-06-25 19:13:01.738131707 +0800
+  Modify: 2018-09-20 20:46:12.216220519 +0800
+  Change: 2018-09-20 20:46:12.216220519 +0800
+   Birth: -
+
+- 目录
+
+  [p@ctriple blog.ctriple.cn]$ stat letsgo
+    File: letsgo
+    Size: 4096          Blocks: 8          IO Block: 4096   directory
+  Device: 801h/2049d    Inode: 4203085     Links: 2         ^^^^^^^^^
+  Access: (0755/drwxr-xr-x)  Uid: ( 1000/ p)   Gid: ( 1000/ p)
+  Access: 2018-08-07 09:13:01.806795850 +0800
+  Modify: 2018-08-10 15:25:38.245177780 +0800
+  Change: 2018-08-10 15:25:38.245177780 +0800
+   Birth: -
+
+* 目录是一种特殊类型的文件
+
+  [p@ctriple blog.ctriple.cn]$ ls -F -l -h -i -n
+  2099065 -rw-r--r-- 1 1000 1000  35K Jun 25 19:13 LICENSE
+  2099066 -rw-r--r-- 1 1000 1000  366 Jun 25 19:13 README.md
+  2099067 -rw-r--r-- 1 1000 1000  290 Jun 25 19:13 blog.service
+  2099068 drwxr-xr-x 2 1000 1000 4.0K Jun 28 18:53 c/
+  2100260 -rw-r--r-- 1 1000 1000 394K Aug 11 10:47 csap.png
+  2099084 -rw-r--r-- 1 1000 1000 122K Jun 25 19:13 git-branching-model.png
+  2098581 -rw-r--r-- 1 1000 1000  11K Sep 20 22:09 git-easy-way.slide
+  4203085 drwxr-xr-x 2 1000 1000 4.0K Aug 10 15:25 letsgo/
+  2098821 -rw-r--r-- 1 1000 1000 7.7K Aug 12 09:18 letsgo.slide
+  2099101 -rw-r--r-- 1 1000 1000 6.1K Jun 25 19:13 pyspark-hard-way.slide
+  2099102 -rw-r--r-- 1 1000 1000  14K Jun 25 19:13 stack-howto.slide
+  2099103 -rw-r--r-- 1 1000 1000  28K Aug 11 10:54 深入理解计算机系统.slide
+  2099104 -rw-r--r-- 1 1000 1000 4.3K Jun 25 19:13 程序和进程.slide
+  2099105 -rw-r--r-- 1 1000 1000 1.8K Jun 25 19:13 程序设计思考.slide
+  2099106 -rw-r--r-- 1 1000 1000 3.2K Jun 25 19:13 链接和加载.slide
+     ↑         ↑        ↑    ↑    ↑        ↑           ↑
+   INODE      MODE     UID  GID  SIZE   TIMESTAMP   FILENAME
+
+- File & Directory both are data blocks
+
+文件: 数据块
+目录: 数据块（记录文件名和 inode 关系）
+
+* 还有那些常见的特殊类型文件
+
+  -rw-r--r--  1 root root   4.0K      Sep 16 11:10 .bashrc
+  prw-r--r--  1 root root      0      Sep 21 23:26 testfifo
+  srw-rw----  1 root docker    0      Sep 16 21:43 docker.sock
+  lrwxrwxrwx  1 root root     11      sep 16 21:43 core -> /proc/kcore
+  brw-rw----  1 root disk      8,  0  Sep 16 21:43 sda
+  crw-rw-rw-  1 root root      1,  3  Sep 16 21:43 null
+  ↑                            ↑   ↑
+  FILETYPE                  MAJOR/MINOR DEVICE NUMBER
+
+- File Type
+
+  -: regular file
+  p: fifo
+  s: socket
+  b: block device
+  c: character device
+  l: soft link
+
+* SHA (secure hash algorithm)
+
+- 数据块摘要，1比特位修改都会导致 Hash 值改变
+
+  [p@ctriple blog.ctriple.cn]$ sha256sum LICENSE README.md git-easy-way.slide
+  8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903  LICENSE
+  12c51d97e30b7cd5457305d99951c842163b271bab261ad2a7e938d2718e7330  README.md
+  bb0e0346f308895fadd14d37f9a35af50214149c0dc07d1401f1e6f4e16974d4  git-easy-way.slide
+
+- 有可能摘要相同，数据块不同吗？
+
+.link https://www.johndcook.com/blog/2017/01/10/probability-of-secure-hash-collisions/
+
+Conclusions
+
+  A 256-bit or 512-bit hash could in principle be secure since one could expect
+  to hash far more items before collisions are likely.
+
+* 开始 Git
+
+- master
+
+Branch name is alias of commit object.
+
+  [p@ctriple blog.ctriple.cn]$ git rev-parse master
+  cc4c780f71783c5e397cd984afb82008e367ed9e
+
+- commit object
+
+  [p@ctriple blog.ctriple.cn]$ git cat-file -p master^{commit}
+  tree 9d03065d90012526f83caa4428f71dbc46532dc5
+  parent 680f5b693d3468f2cdbb7bb31e725722ed1e7058
+  author Zhou Peng <p@ctriple.cn> 1537543934 +0800
+  committer Zhou Peng <p@ctriple.cn> 1537543934 +0800
+
+  git: more special file types
+
+  Signed-off-by: Zhou Peng <p@ctriple.cn>
+
+* 开始 Git
+
+- blob/tree object
+
+  [p@ctriple blog.ctriple.cn]$ git cat-file -p master^{tree}
+  100644 blob a1338d68517ee2ad6ee11214b201e5958cb2bbc3	.gitignore
+  100644 blob 94a9ed024d3859793618152ea559a168bbcbb5e2	LICENSE
+  100644 blob c8f035179719363ade1daa19fc77999395979170	README.md
+  100644 blob 1814b4672668a42c75a5656718c8f3917a2d822c	blog.service
+  040000 tree c6c7ba08648b9909bdfcbc6111f9b91f57c901bd	c
+  100644 blob 61e2279ab04c01221433e2536e19f29c1e97f29c	csap.png
+  100644 blob 5b96426c76e9b59f162331cf2c8eb5bd1446b8f6	git-branching-model.png
+  100644 blob fb77586c5cf1d80dad2e33cc7bbf951aa5c056cd	git-easy-way.slide
+  100644 blob 5474d5aea73b1d2be054ea1631af96d75d337798	letsgo.slide
+  040000 tree 56e189f79647d349289f699afa25bbe82bccee01	letsgo
+  100644 blob aeb980fb91e4d8fb709787e51f81d623e519fc1e	pyspark-hard-way.slide
+  100644 blob 8326fbe1587934f842014459da84f514635fdc63	stack-howto.slide
+  [...省略其他行...]
+
+* Objects Graph Visualization
+
+Git is more about a content addressable storage system.
+
+  commit: 98ca9                     commit: 34ac2                     commit: f30ab
+  +-----------------------+<----+   +------------------------+<----+   +---------------------+
+  |   commit: size        |     |   |    commit: size        |     |   |   commit: size      |
+  |     tree: 92ec2       |     |   |      tree: 184ca       |--+  |   |     tree: 0de24     |
+  |   parent: 0x000       |     +---|    parent: 98ca9       |  |  +---|   parent: 34ac2     |
+  |   author: Zhou Peng   |         |    author: ctriple.cn  |  |      |   author: byteor.cn |
+  | commiter: Zhou Peng   |         | committer: Zhou Peng   |  |      | commiter: Zhou Peng |
+  |  message: Sun arise   |         |   message: Feature X   |  |      |  message: Bugfix    |
+  +-----------------------+         +------------------------+  |      +---------------------+
+                                       tree: 184ca              |                     ^
+                                       +----------------+<------+                     |
+                                       |blob cf2cb file1|                         *--------*
+                                       |blob 96d7d file2|                         | master |
+                                    +--|tree f5141 dir1 |                         *--------*
+                                    |  +----------------+
+                                    +---> tree: f5141
+  .git/objects
+  +------------------------------------------------------------------------------------------+
+  | blob blob blob tree commit commit blob blob tree commit blob blob blob blob blob blob ...|
+  | tree blob blob blob blob blob tree blob blob blob tree tree blob tree blob blob ... ... .|
+  | blob blob blob commit commit tree blog blob blob blob commit blob tree blob ... ... ... .|
+  +------------------------------------------------------------------------------------------+
+
+* 开始 Git
+
+  [p@ctriple blog.ctriple.cn]$ git count-objects -v
+  count: 3
+  size: 24
+  in-pack: 671
+  packs: 1
+  size-pack: 1925
+  prune-packable: 0
+  garbage: 0
+  size-garbage: 0
+
+* .git 目录有什么
+
+  [p@ctriple .git]$ tree -L 1 -F
+  .
+  ├── FETCH_HEAD
+  ├── HEAD                  # point to current working tree
+  ├── ORIG_HEAD
+  ├── branches/
+  ├── config
+  ├── description
+  ├── hooks/                # pre/post hooks
+  ├── index                 # staging area
+  ├── info/
+  ├── logs/
+  ├── objects/              # blob/tree/commit
+  ├── packed-refs
+  └── refs/                 # remotes/tags/heads
+  6 directories, 8 files
+
+* .git/index
+
+  Working Directory   |            Index                |      Repository
+      project/        |      project/.git/index         |  project/.git/objects
+                      |                                 |
+                      |                                 |           HEAD
+                      |                                 |            |
+                      |                                 |          feature
+                      |                                 |            |
+                      |                                 |           a6d
+                      | mtime   file    wdir stage repo |            |
+      1:20 index.php  | 1:20  index.php  5d9  5d9   5d9 |           f89
+      1:20 README.md  | 1:20  README.md  cf5  cf5   cf5 |           / \
+                      |                                 |         cf5 5d9
+
+.link https://hackernoon.com/understanding-git-index-4821a0765cf
+
+* Git 分支
+
+  [p@ctriple blog.ctriple.cn]$ git branch -avv
+  * master                e84bda1 [origin/master] git: change test host to my home pc
+    remotes/origin/HEAD   -> origin/master
+    remotes/origin/master e84bda1 git: change test host to my home pc
+
+- 分支代价: 编辑修改几个指针
+- 分支优势: 易分易合，其他 SCM 没有两者兼得的
+- 分支思维: 探索创新，版本管理，开发，测试
+
+* 易分易合 -- 分
+
+- 常分支
+- 常提交
+- 常 diff
+- 常 merge
+
+- Oops, 冲突怎么办？
+
+  避免冲突
+  1. 分工
+  2. 模块
+  3. 沟通
+
+  解决冲突
+  1. diff
+  2. merge tools
+
+Emacs Merge Demo
+
+* 易分易合 -- 合
+
+- cherry-pick
+
+  diff+patch
+
+- rebase
+
+  cherry-pick a sequence of commits
+
+  o<--o<--o<--o<--o<--o<--o'<--o'<--o' master
+                   \     .    .    .
+                    \   .    .    .
+                     \ .    .    .
+                      o<---o<---o feature
+
+- merge
+
+  new commit with parents to two merged commits
+
+  o<--o<--o<--o<--o<--o<--o<--o<--o~ master
+                   \             /
+                    \           /
+                     \         /
+                      o<--o<--o feature
+
+* Git 怎样发布我的修改
+
+- 托管仓库
+
+  选择一个中心同步仓库，例如 GitHub
+  授信人员可写，其他人员只读
+  提交 PR，等待被 Merge 或者 Cherry-Pick
+
+- 同步的本质
+
+  两个节点之间对象 (blob/tree/commit) 之间同步
+  本地文件拷贝 cp，git 协议，http/https 协议，ssh 协议)，区别在于是否需要认证授权，是否通过网络
+  之后更新一些指针信息
+  如果有冲突等情况，程序员解决
+
+* 漂亮一点
+
+- 本地想怎么玩就怎么玩，Push Rmote 后你得遵守规则。
+
+- rebase
+
+  pick 25feba1 blog: Git: rebase explained.
+  pick 6f0646f blog: Git: picture size
+  pick f1b5362 blog: Git: picture size again.
+  pick c78266f blog: Git: github PR.
+
+  # 变基 9001bce..220d149 到 9001bce（4 个提交）
+  #
+  # 命令:
+  # p, pick = 使用提交
+  # r, reword = 使用提交，但修改提交说明
+  # e, edit = 使用提交，但停止以便进行提交修补
+  # s, squash = 使用提交，但和前一个版本融合
+  # f, fixup = 类似于 "squash"，但丢弃提交说明日志
+  # x, exec = 使用 shell 运行命令（此行剩余部分）
+  # d, drop = 删除提交
+  #
+  # 这些行可以被重新排序；它们会被从上至下地执行。
+  # 如果您在这里删除一行，对应的提交将会丢失。
+  # 然而，如果您删除全部内容，变基操作将会终止。
+  # 注意空提交已被注释掉
+
+* Git Design
+
+- Data Structure Centrical (blob/tree/commit object)
+
+  1. less data lock
+  2. easy storage (distributed)
+
+- Do One Thing And Do It Well
+
+  git is just a wrapper tool, each sub-command has its own executable. what's
+  the benefit?
+
+  1. decouple
+  2. easy to be integrated with other tools (Emacs Magit)
+  3. pipeline to implement complicated business logical
+
+  [p@ctriple /usr/lib/git-core]$ ls
+  git                   git-checkout        git-credential-store  git-for-each-ref  git-instaweb
+  git-add               git-checkout-index  git-cvsexportcommit   git-format-patch  git-interpret-trailers
+  git-add--interactive  git-cherry          git-cvsimport         git-fsck          git-log
+  git-am                git-cherry-pick     git-cvsserver         git-fsck-objects  git-ls-files
+  git-annotate          git-citool          git-daemon            git-gc            git-ls-remote
+  [...ommited for brevity...]
+
+* 开源社区优秀实践
+
+.link https://nvie.com/posts/a-successful-git-branching-model
+.image git-branching-model.png 500 800
+
+* 开源社区优秀实践 (Cherry-Pick)
+
+- Google
+
+Clone repos
+Edit and commit
+Send the patch
+
+.link https://github.com/golang/go/commits/master
+
+  6fdbed0543 * master origin/master runtime: respect timeout in semasleep on Darwin
+  291e57f057 * doc/contribute: fix typo and reword a few sentences
+  d6a27e8edc * cmd/link: never coalesce type descriptors when dynamically linking Go
+  899e0e3525 * go1.11beta1 api: promote next to go1.11
+  726a2d04ea * cmd/link: support DWARF compression on Darwin
+  3dced519cb * syscall, internal/poll: fix build on js/wasm
+  7d50abf039 * cmd/dist: skip non-std tests on js/wasm
+
+* 开源社区优秀实践 (Pull Request/Merge Request)
+
+- GitHub
+
+Fork to your namespace
+Edit and commit to your own forked repository
+Pull Request (PR)
+
+.link https://github.com/kubernetes/kubernetes/commits/master
+
+  7a9a30a4f7 *   master origin/master Merge pull request #65411 from nikhita/fix-publishing-bot-fakeclient
+             |\
+  764ae69671 | * client-go/examples/fake-client: add doc.go to fix go build warnings
+  f23ae61793 * |   Merge pull request #63773 from k82cn/rm_unused_var
+             |\ \
+             | |/
+             |/|
+  66d558dfd3 | * Removed unused vars.
+  ec37c0f643 * |   Merge pull request #65391 from smarterclayton/describe
+             |\ \
+  7ae6664171 | * | When splitting `snake_case` words, omit the underscore
+  f0311d8232 * | |   Merge pull request #65396 from bsalamat/sched_no_sort
+
+* 附录 1
+
+- Git 提交信息最佳实践
+
+  1. 不要提交任何冗余空格，Git 提供了一个简单的方法在提交之前检查可能的空白错误
+     并列出它们
+
+             git diff --check
+
+  2. 每次提交都是逻辑上独立的变更并且保持提交的可理解性和原子性。这样有助于代码检
+     视以及后期对该功能 Bug 的撤销。
+
+  3. 一般来说，你的信息应该从一个开始不超过50个字符的一行简要描述变更集，然后是
+     空白行，其次是更详细的解释：
+
+     概述：50个字符以内的语句总结本次修改
+
+     详细的描述语句，每行长度一般在72个字符以内，用完整的陈述性语句描述本次修改
+     背景，关键点，以及注意事项等。
+
+     如有必要，另起一段用空行分隔描述更多的信息：
+
+       - 可以用破折号按要点列举。
+       - 一般破折号或者星号前面空一到两个字符，这里的约定不是强制性的。
+
+* 附录 2
+
+- Git Commit Example
+
+  go/types: don't report cycle error if clearer error follows
+
+  If a cyclic declaration uses a non-type object where it expects
+  a type, don't report the cycle error in favor of the clearer and
+  more informative error about the missing type.
+
+  Fixes #25790.
+
+  Change-Id: If937078383def878efb4c69686e5b4b2a495fd5d
+  Reviewed-on: https://go-review.googlesource.com/135700
+  Reviewed-by: Alan Donovan <adonovan@google.com>
+
+.link https://github.com/golang/go/commit/d97b11f12fb36ae8117519ee983a8f811360ee1a
+
+* 附录 3
+
+- git blame
+
+Show what revision and author last modified each line of a file
+
+  b6e178ed7ee (Rick Hudson 2015-05-06 15:58:20  200) func readgogc() int32 {
+  b6e178ed7ee (Rick Hudson 2015-05-06 15:58:20  201)       p := gogetenv("GOGC")
+  b6e178ed7ee (Rick Hudson 2015-05-06 15:58:20  202)       if p == "off" {
+  b6e178ed7ee (Rick Hudson 2015-05-06 15:58:20  203)               return -1
+  b6e178ed7ee (Rick Hudson 2015-05-06 15:58:20  204)       }
+  d7b34d5f293 (Martin      2016-10-30 01:54:19  205)       if n, ok := atoi32(p); ok {
+  d7b34d5f293 (Martin      2016-10-30 01:54:19  206)               return n
+  d7b34d5f293 (Martin      2016-10-30 01:54:19  207)       }
+  d7b34d5f293 (Martin      2016-10-30 01:54:19  208)       return 100
+  b6e178ed7ee (Rick Hudson 2015-05-06 15:58:20  209) }
+  b6e178ed7ee (Rick Hudson 2015-05-06 15:58:20  210)
+  5789b28525c (Russ Cox    2015-03-05 16:04:17  211) // gcenable is called after the bulk of the runtime initialization,
+  5789b28525c (Russ Cox    2015-03-05 16:04:17  212) // just before we're about to start letting user code run.
+  5789b28525c (Russ Cox    2015-03-05 16:04:17  213) // It kicks off the background sweeper goroutine and enables GC.
+  5789b28525c (Russ Cox    2015-03-05 16:04:17  214) func gcenable() {
+  5789b28525c (Russ Cox    2015-03-05 16:04:17  215)       c := make(chan int, 1)
+  5789b28525c (Russ Cox    2015-03-05 16:04:17  216)       go bgsweep(c)
+  5789b28525c (Russ Cox    2015-03-05 16:04:17  217)       <-c
+  5789b28525c (Russ Cox    2015-03-05 16:04:17  218)       memstats.enablegc = true // now that runtime is initialized, GC is okay
+  5789b28525c (Russ Cox    2015-03-05 16:04:17  219) }
+
+* 附录 4
+
+- git stash
+
+  Stash the changes in a dirty working directory away
+
+- git add -p
+
+  Interactively choose hunks of patch between the index and the work tree and
+  add them to the index. This gives the user a chance to review the difference
+  before adding modified contents to the index.
+
+- git revert vs git reset
+
+  Revert:               HEAD
+                       /
+  o---o---o---o---x---o'
+               \
+  Reset:        HEAD
+
+* 附录 5
+
+- Windows/MacOS line ending
+
+  Git Server
+    Linux: '\n'
+
+  %~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%~%
+
+  Git Client:
+    Windows: '\r\n'
+      MacOS: '\r'
+    Andriod: '\n'
+
+- Checkout branch failed
+
+  Git will try to protect you from losing your data, you have to give git
+  confidence.
+
+  1. git stash
+  2. git checkout
+  3. git reset
+
+* 附录 6
+
+- git grep
+
+Print lines matching a pattern
+
+  [p@ctriple runtime]$ git grep -n 'sweepgen'
+  mcache.go:49:   // flushGen indicates the sweepgen during which this mcache
+  mcache.go:50:   // was last flushed. If flushGen != mheap_.sweepgen, the spans
+  mcache.go:88:   c.flushGen = mheap_.sweepgen
+  mcache.go:128:          if s.sweepgen != mheap_.sweepgen+3 {
+  mcache.go:129:                  throw("bad sweepgen in refill")
+  mcache.go:131:          atomic.Store(&s.sweepgen, mheap_.sweepgen)
+  mcache.go:146:  s.sweepgen = mheap_.sweepgen + 3
+  mcache.go:175:  sg := mheap_.sweepgen
+  [... ...]
+
+* 引用参考
+
+- Pro Git 第二版 简体中文
+
+.link https://bingohuang.gitbooks.io/progit2/content/10-git-internals/sections/plumbing-porcelain.html
+
+- Git 之父 Linus Tovalds 关于创造 Git 的思考
+
+.link https://www.youtube.com/watch?v=4XpnKHJAok8

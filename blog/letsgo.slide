@@ -1,0 +1,278 @@
+Let's Go: Yet Another Go Intro
+成都
+10 Feb 2018
+
+周朋
+p@ctriple.cn
+https://github.com/ctriple
+微信 lockrecv
+
+* License
+
+Copyright © Zhou Peng <p@ctriple.cn>
+
+* The Go Programming Language
+
+Go is an open source programming language that makes it easy to build simple,
+reliable and efficient software.
+
+.image letsgo/gopher.png
+.link https://golang.org
+
+* Agenda
+
+- Engineering Perspective
+- Technology Perspective
+
+* Engineering Perspective
+
+* GOPATH
+
+对工作目录结构强制要求：
+
+- 减少其他配置要求（例如C语言的头文件和链接库路径等配置）
+- 自动化工具（所有工具可以依赖此约定，减少混乱无序的各自配置）
+
+  $HOME/go
+  ├── bin
+  │   ├── benchcmp
+  │   ├── guru
+  │   └── h2i
+  ├── pkg
+  │   └── linux_amd64
+  └── src
+      ├── github.com
+      ├── golang.org
+      └── upspin.io
+
+* 包（Pakcage）
+
+清晰的模块定义和代码分离，更像是搭积木的方式构建软件:
+
+- 模块组合而非继承，耦合更少
+- 模块通过符号大小写标识可见性，简单优雅
+- 模块包含完整的实现和测试，更自然的模块级代码复用
+
+  [ctriple@manjaro ~]$ go list std
+  archive/tar
+  archive/zip
+  bufio
+  bytes
+  compress/bzip2
+  compress/flate
+  compress/gzip
+  compress/lzw
+  compress/zlib
+  container/heap
+  ...
+
+.link http://blog.ctriple.cn/letsgo/time-deps.svg Package time dependencies
+
+* 格式化（gofmt）
+
+就像CPU大小端的战争，程序语言大括号的战争也是宗教般的信仰差异。差异带来争论，争论带来分裂，分裂降低效率。
+
+    Gofmt's style is no one's favorite, yet gofmt is everyone's favorite.
+                                               - Rob Pike
+
+.link https://github.com/coreos/etcd etcd
+.link https://github.com/kubernetes/kubernetes kubernetes
+.link https://github.com/golang/go golang
+.link https://github.com/docker/docker docker
+
+* 错误而非警告（build）
+
+警告好比道德，错误好比法律，总会有人道德和法律之间的缝隙作恶。程序员也是，总会有人在警告面前选择无视。
+
+- 未引用变量
+- 一大堆乱七八糟的头文件 #include
+- 隐式类型转换
+
+.code letsgo/builderror.go
+
+* 工具
+
+工具是对已有经验和知识的固化，Golang有着完善且极易扩展的工具支持。
+
+- 文档 (godoc)
+- 编码辅助 (gocode, godef, guru, goimports, ...)
+- 性能调优 (pprof)
+- 依赖管理 (dep, vgo)
+
+  $ go doc fmt.Println
+  func Println(a ...interface{}) (n int, err error)
+      Println formats using the default formats for its operands and writes to
+      standard output. Spaces are always added between operands and a newline is
+      appended. It returns the number of bytes written and any write error
+      encountered.
+
+工具意味着更高的效率，更低的成本，更健壮的软件，更Happy的程序员。
+
+.link https://golang.org/pkg/encoding/json/#example_MarshalIndent Example MarshalIndent
+.link https://coreos.com/blog/improving-kubernetes-scheduler-performance.html Kubernetes调度10倍性能提升
+
+* 测试
+
+- testing (test, benchmark, example)
+- benchmark (alloc, cpu)
+- benchstat
+- race detect
+
+.code letsgo/bench.txt
+
+.link https://go-review.googlesource.com/c/go/+/112178 Benchstat
+
+* 其他
+
+- 编译速度 ($GOROOT/src/make.bash)
+
+  [ctriple@manjaro src]$ time ./make.bash
+  Building Go cmd/dist using /usr/local/go.
+  ... ...
+  Building packages and commands for linux/amd64.
+  ---
+  Installed Go for linux/amd64 in /home/ctriple/golang
+  Installed commands in /home/ctriple/golang/bin
+
+  real	1m29.364s
+  user	4m37.359s
+  sys	0m13.425s
+
+- cgo
+- 跨平台
+
+  OS: linux, windows, darwin, bsd, solaris, plan9
+  ARCH: amd64, arm, mips, powerpc, s390
+
+- 可执行文件依赖
+
+* 复杂的现实世界
+
+真实的世界对象之间运行影响无疑是无序的，异步的，并发的。构建程序其实就是对这些现实对象和他们之间作用的模拟刻画。
+
+大部分程序设计语言仅提供对单对象内部执行顺序的模拟，程序员需要承受很大的心智负担来管理运行对象本身（例如线程），运行对象之间的关系时序（通过操作系统的同步）。
+
+Golang的goroutine和channel，就是对真实世界对象和对象之间作用关系的描述，从语言级降低了程序员的心智负担，让程序员从更高的视角来处理并发，异步问题。
+
+    Channels orchestrate; mutexes serialize.
+                            - Rob Pike
+
+* Technology Perspective
+
+* Standard Library
+
+  archive  compress   encoding  go     index  mime     regexp   strings  time
+  bufio    container  errors    hash   io     net      runtime  sync     unicode
+  builtin  context    flag      html   log    os       sort     testing
+  bytes    crypto     fmt       image  math   reflect  strconv  text
+
+.code letsgo/server.go
+
+* String
+
+.link https://github.com/golang/go/blob/master/src/reflect/value.go#L1783 StringHeader
+.link https://blog.golang.org/strings Strings, bytes, runes and characters in Go
+
+.code letsgo/utf.go
+
+* Slice vs Array
+
+.link https://github.com/golang/go/blob/master/src/reflect/value.go#L1800 SliceHeader
+.link https://blog.golang.org/slices Slice
+.link https://blog.golang.org/go-slices-usage-and-internals Slice internals
+
+.code letsgo/slice.txt
+
+* Map
+
+.link https://github.com/golang/go/blob/master/src/runtime/map.go#L108 hmap
+.link https://www.ardanlabs.com/blog/2013/12/macro-view-of-map-internals-in-go.html map internals
+.link https://dave.cheney.net/2018/05/29/how-the-go-runtime-implements-maps-efficiently-without-generics map without generics
+
+.image letsgo/map.png
+
+* Struct
+
+.code letsgo/struct.go
+
+* Interface
+
+.link https://research.swtch.com/interfaces Russ Cox
+.link https://cmc.gitbook.io/go-internals/chapter-ii-interfaces Interface Implementation Details
+.link https://github.com/golang/go/blob/master/src/sort/sort.go#L14 sort.Interface
+
+.code letsgo/sort.go
+
+* Escaping Analysis
+
+.code letsgo/esc.go
+
+  // disable inline, display optimization infos
+  go build -gcflags "-l -m" esc.go
+  # command-line-arguments
+  ./esc.go:5:9: &i escapes to heap
+  ./esc.go:4:2: moved to heap: i
+
+* Goroutine
+
+.link https://github.com/golang/go/blob/master/src/runtime/runtime2.go#L338 goroutine
+
+.code letsgo/sched.txt
+
+* Channel
+
+    Parallelism is about performance, Concurrency is about program design.
+                                          - Rob Pike
+
+.link https://github.com/golang/go/blob/master/src/runtime/chan.go#L7 channel
+
+.code letsgo/bomb.go
+
+* Runtime
+
+.link https://golang.org/pkg/runtime/#hdr-Environment_Variables GODEBUG
+
+.code letsgo/godebug.txt
+
+* Defer
+
+Block-Based
+
+.code letsgo/zlib.c
+
+* Defer
+
+Function-Based
+
+.code letsgo/defer.go
+.link http://blog.ctriple.cn/letsgo/defer-filo.go Defer First-in Last-out
+
+* Memory Alloc
+
+- Span (Operating System)
+- Central (Runtime Global)
+- Cache (Goroutine)
+- func sysmon()
+
+* GC
+
+.image letsgo/gc.png
+
+.link http://blog.ctriple.cn/letsgo/gc-animation.html GC Animation
+.link https://blog.golang.org/ismmkeynote The Journey of Go's Garbage Collector [Rick Hudson]
+.link https://making.pusher.com/golangs-real-time-gc-in-theory-and-practice GC Latency Comparison
+
+* Conclusion
+
+What makes Go successful?
+
+.image letsgo/simplicity.png
+
+.link https://talks.golang.org/2015/simplicity-is-complicated.slide Simplicity is Complicated
+
+* 参考引用
+
+- [[https://talks.golang.org/2012/splash.article][Go at Google: Language Design in the Service of Software Engineering]]
+- [[https://go-proverbs.github.io][Go Proverbs]]
+- [[https://talks.golang.org/2012/concurrency.slide][Concurrency is not parallelism]]
+- [[https://commandcenter.blogspot.com/2012/06/less-is-exponentially-more.html][Less is exponentially more]]

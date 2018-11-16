@@ -1,0 +1,11 @@
+sync: simplify tryStore() implementation
+
+Since the new implementation is more clarity and does not cause
+performance degradation.
+
+name                                       old time/op  new time/op   delta
+LoadMostlyHits/*sync_test.DeepCopyMap-4    36.1ns ± 1%  35.1ns ± 2%  -2.67%  (p=0.000 n=19+18)
+LoadMostlyHits/*sync_test.RWMutexMap-4     78.6ns ± 1%  78.5ns ± 2%    ~     (p=0.296 n=20+20)
+LoadMostlyHits/*sync.Map-4                 36.9ns ± 0%  36.3ns ± 1%  -1.83%  (p=0.000 n=17+17)
+LoadMostlyMisses/*sync_test.DeepCopyMap-4  28.7ns ± 7%  30.0ns ±12%    ~     (p=0.089 n=20+20)
+

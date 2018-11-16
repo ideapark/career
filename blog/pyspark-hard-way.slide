@@ -1,0 +1,236 @@
+Pyspark: The Hard Way
+成都
+10 Apr 2018
+
+周朋
+p@ctriple.cn
+https://github.com/ctriple
+微信 lockrecv
+
+* License
+
+Copyright © Zhou Peng <p@ctriple.cn>
+
+* dataframe
+
+A dataframe is a representation of table, but much powerfull than RDBMS table.
+Among them *collect* and *explode* is mostly used by our daily work.
+
+  +----+-----+---+--------+
+  |year|month|day|  profit|
+  +----+-----+---+--------+
+  |2017|    2|  3|  100000|
+  |2018|    5|  6|  200150|
+  |2019|    8| 28|  891200|
+  |2010|   10|  1|20220200|
+  +----+-----+---+--------+
+
+* join
+
+Two tables linked by the same columns
+
+- Profit Table
+
+  +----+-----+---+--------+
+  |year|month|day|  profit|
+  +----+-----+---+--------+
+  |2017|    2|  3|  100000|
+  |2018|    5|  6|  200150|
+  |2019|    8| 28|  891200|
+  |2010|   10|  1|20220200|
+  +----+-----+---+--------+
+
+- Rank Table
+
+  +----+-----+---+------+
+  |year|month|day|  rank|
+  +----+-----+---+------+
+  |2017|    2|  3|   low|
+  |2018|    5|  6|middle|
+  |2019|    8| 28|middle|
+  |2010|   10|  1|  high|
+  +----+-----+---+------+
+
+* join
+
+Join on (year, month, day)
+
+  +----+-----+---+--------+------+
+  |year|month|day|  profit|  rank|
+  +----+-----+---+--------+------+
+  |2010|   10|  1|20220200|  high|
+  |2017|    2|  3|  100000|   low|
+  |2019|    8| 28|  891200|middle|
+  |2018|    5|  6|  200150|middle|
+  +----+-----+---+--------+------+
+
+* union
+
+Merge two tables to get a bigger table
+
+- Profit Table 1
+
+  +----+-----+---+--------+
+  |year|month|day|  profit|
+  +----+-----+---+--------+
+  |2017|    2|  3|  100000|
+  |2018|    5|  6|  200150|
+  +----+-----+---+--------+
+
+- Profit Table 2
+
+  +----+-----+---+--------+
+  |year|month|day|  profit|
+  +----+-----+---+--------+
+  |2019|    8| 28|  891200|
+  |2010|   10|  1|20220200|
+  +----+-----+---+--------+
+
+* union
+
+  +----+-----+---+--------+
+  |year|month|day|  profit|
+  +----+-----+---+--------+
+  |2017|    2|  3|  100000|
+  |2018|    5|  6|  200150|
+  |2019|    8| 28|  891200|
+  |2010|   10|  1|20220200|
+  +----+-----+---+--------+
+
+* select
+
+You can use rows to get more columns, or just drop some columns. (Just row
+operation)
+
+- Profit Table
+
+  +----+-----+---+--------+
+  |year|month|day|  profit|
+  +----+-----+---+--------+
+  |2017|    2|  3|  100000|
+  |2018|    5|  6|  200150|
+  |2019|    8| 28|  891200|
+  |2010|   10|  1|20220200|
+  +----+-----+---+--------+
+
+- Column date
+
+  +----+-----+---+--------+-----------+
+  |year|month|day|  profit|       date|
+  +----+-----+---+--------+-----------+
+  |2017|    2|  3|  100000| 2017-02-03|
+  |2018|    5|  6|  200150| 2018-05-06|
+  |2019|    8| 28|  891200| 2019-08-28|
+  |2010|   10|  1|20220200| 2010-10-01|
+  +----+-----+---+--------+-----------+
+
+* select
+
+- Drop column
+
+  +----+-----+--------+
+  |year|month|  profit|
+  +----+-----+--------+
+  |2017|    2|  100000|
+  |2018|    5|  200150|
+  |2019|    8|  891200|
+  |2010|   10|20220200|
+  +----+-----+--------+
+
+* collect
+
+More powerfull than select, collect makes you handle multiple rows at once.
+
+  +------------+------+--------+--------+---------+
+  |    language|  born|    user|   trend|  learned|
+  +------------+------+--------+--------+---------+
+  | c          | 1970 | 400000 | stable | ****    |
+  | java       | 1995 | 500000 | down   | **      |
+  | go         | 2007 | 200000 | up     | ****    |
+  | javascript | 1995 | 700000 | up     | **      |
+  | lisp       | 1960 | 300000 | stable | ****    |
+  | asm        | 1960 | 100000 | down   | **      |
+  | python     | 1995 | 350000 | up     | ***     |
+  +------------+------+--------+--------+---------+
+
+- Group then collect
+
+  +------+----------------------------+
+  | born |                    language|
+  +------+----------------------------+
+  | 1960 | [lisp, asm]                |
+  | 1970 | [c]                        |
+  | 1995 | [java, javascript, python] |
+  | 2007 | [go]                       |
+  +------+----------------------------+
+
+* explode
+
+Do opposite things agains collect, expand an array column to multiple rows.
+
+  +------+----------------------------+
+  | born |                    language|
+  +------+----------------------------+
+  | 1960 | [lisp, asm]                |
+  | 1970 | [c]                        |
+  | 1995 | [java, javascript, python] |
+  | 2007 | [go]                       |
+  +------+----------------------------+
+
+- explode language
+
+  +------+------------+
+  | born |    language|
+  +------+------------+
+  | 1960 |       lisp |
+  | 1960 |        asm |
+  | 1970 |          c |
+  | 1995 |       java |
+  | 1995 | javascript |
+  | 1995 |     python |
+  | 2007 |         go |
+  +------+------------+
+
+* Window Function
+
+You can use window function to outline a block of rows from a dataframe, then on
+each block of rows, many functions can be applied.
+
+- Origin Table
+
+  +------------+------+--------+--------+---------+
+  |    language|  born|    user|   trend|  learned|
+  +------------+------+--------+--------+---------+
+  | c          | 1970 | 400000 | stable | ****    |
+  | java       | 1995 | 500000 | down   | **      |
+  | go         | 2007 | 200000 | up     | ****    |
+  | javascript | 1995 | 700000 | up     | **      |
+  | lisp       | 1960 | 300000 | stable | ****    |
+  | asm        | 1960 | 100000 | down   | **      |
+  | python     | 1995 | 350000 | up     | ***     |
+  +------------+------+--------+--------+---------+
+
+* Window Function
+
+- Group by born
+
+  +------------+------+--------+--------+---------+
+  |    language|  born|    user|   trend|  learned|
+  +------------+------+--------+--------+---------+
+  | lisp       | 1960 | 300000 | stable | ****    | <-- Window 1
+  | asm        | 1960 | 100000 | down   | **      | <--
+  | c          | 1970 | 400000 | stable | ****    | <-- Window 2
+  | java       | 1995 | 500000 | down   | **      | <--
+  | javascript | 1995 | 700000 | up     | **      |     Window 3
+  | python     | 1995 | 350000 | up     | ***     | <--
+  | go         | 2007 | 200000 | up     | ****    | <-- Window 4
+  +------------+------+--------+--------+---------+
+
+* SQL vs Functions
+
+In one word: more functions, less sql.
+
+- Portability
+- Maintainbility
+- Readability
+- Comprehension
