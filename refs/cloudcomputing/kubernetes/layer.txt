@@ -72,7 +72,7 @@
 |                                                             APIs rather Providing their own.                          |
 +-----------------------------------------------------------------------------------------------------------------------+
 +-----------------------------------------------------------------------------------------------------------------------+
-| Governance Layer (APIs optional and pluggable)                                                                        |
+| Governance Layer: Automation and Policy Enforcement (APIs optional and pluggable)                                     |
 | +------------------------------------------------+ +----------------------------------------------------------------+ |
 | |Automation                                      | |Policy                                                          | |
 | |+------------------------+ +-------------------+| |+-------------+ +------------------+ +-------------------------+| |
@@ -87,7 +87,7 @@
 |                                                    +----------------------------------------------------------------+ |
 +-----------------------------------------------------------------------------------------------------------------------+
 +-----------------------------------------------------------------------------------------------------------------------+
-| Application Layer (APIs required and pluggable)                                                                       |
+| Application Layer: Deployment and Routing (APIs required and pluggable)                                               |
 | +----------------------------------------------------------+ +----------------------+                                 |
 | | Workloads                                                | | Services             |                                 |
 | | +--------+ +------------------+ +----------------------+ | | +-------+            |                                 |
@@ -105,7 +105,7 @@
 | +----------------------------------------------------------+                                                          |
 +-----------------------------------------------------------------------------------------------------------------------+
 +-----------------------------------------------------------------------------------------------------------------------+
-| Nucleus (APIs required and not pluggable)                                                                             |
+| Nucleus: API and Execution (APIs required and not pluggable)                                                          |
 | +----------------------------------------------------------------+ +--------------------------------------+           |
 | | API                                                            | | Execution                            |           |
 | |+-----------------+        +---------+ +-----------------------+| |+---------------------+ +------------+|           |
@@ -124,3 +124,76 @@
 | |+------------------------+                                      | |+---------------------+               |           |
 | +----------------------------------------------------------------+ +--------------------------------------+           |
 +-----------------------------------------------------------------------------------------------------------------------+
+
+# Conclusion
+
+## Nucleus
+
+- Minimum set of features and concepts needed to build the higher layers
+- API
+  - API machinery + persistence (etcd)
+  - Auth[nz] + Admission control
+  - Cascading deletion
+  - Namespaces
+  - Events
+  - Add ons
+- Execution
+  - Node + Pod
+  - Secret + ConfigMap
+  - PV + PVC
+  - Endpoints
+
+## Application layer
+
+- All users would use these to run applications
+- Scheduling (pluggable)
+- Enable major worload categories
+  - Stateless: Deployment + ReplicaSet
+  - Stateful: StatefulSet
+  - Cluster: DaemonSet
+  - Batch: CronJob + Job
+- Enable services/microservices (pluggable)
+  - Service + kube-proxy
+  - Ingress + Ingress controller
+  - DNS
+
+## Governance layer
+
+- Infrastructure / container / network metrics (for scheduling, scaling, etc.)
+- Automation
+  - Autoscaling: HorizontalPodAutoscaling, VerticalPodAutoscaling
+  - PodDisruptionBudget
+  - Dynamic provisioning of nodes, volumes, load balancers
+  - PodPreset + Service Catalog
+- Policy
+  - RBAC
+  - LimitRange
+  - ResourceQuota
+  - PodSecurityPolicy
+  - ImageReview
+  - NetworkPolicy
+
+## Interface layer
+
+- Client libraries
+- Kubectl
+- Swagger/OpenAPI-based tools
+- Cluster federation
+
+## Ecosystem
+
+- Inside containers -- diverse workloads
+- Above k8s -- diverse services and tools
+  - Logging + Monitoring
+  - Configuration DSLs + Deployment Orchestration
+  - CI/CD + PaaS
+  - Workflow + FaaS
+  - Data processing
+  - OTS applications: Middleware + Storage + Databases + ...
+  - UIs + Mobile Apps + ChatOps + ...
+- Below k8s -- diverse environments
+  - Container runtimes + network plugins + volume plugins
+  - Image registry
+  - Cloud provider
+  - Cluster + host creation, configuration, and management
+  - Identity management
