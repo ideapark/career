@@ -55,3 +55,12 @@ OKD evaluates authorizations using the following steps:
   3. Roles are used to find all the rules that apply.
   4. The action is checked against each rule to find a match.
   5. If no matching rule is found, the action is then denied by default.
+
+# ServiceAccount and Secrets
+
+Since every container that runs on the cluster is associated with a service
+account, it is also possible to associate secrets to those service accounts and
+have them automatically delivered into the container. This enables the
+infrastructure to manage secrets for pulling and pushing images, builds, and the
+deployment components, and also allows application code to easily leverage those
+secrets.
