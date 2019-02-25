@@ -1,41 +1,13 @@
 # Openshift vs Kubernetes
 
-```text
-o: OpenShift
-k: Kubernetes
+The Docker service provides the abstraction for packaging and creating
+Linux-based, lightweight container images. Kubernetes provides the cluster
+management and orchestrates containers on multiple hosts.
 
-ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
-o Project                                                                         o
-o                                                                                 o
-o  kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk  o
-o  k Namespace                                                                 k  o
-o  k                                                                           k  o
-o  k ooooooooooooooooooo         ooooooooooooooooooooo                         k  o
-o  k o Source to Image o         o Integrated Docker o                         k  o
-o  k o     (S2I)       o         o      Registry     o                         k  o
-o  k ooooooooooooooooooo         ooooooooooooooooooooo                         k  o
-o  k         |                             |                                   k  o
-o  k ooooooooooooooooooo                   |                 ooooooooooooooooo k  o
-o  k o      Build      o         ooooooooooooooooooooo       o Deployment    o k  o
-o  k o  Configuration  o---------o   Image Stream    o-------o Configuration o k  o
-o  k ooooooooooooooooooo         ooooooooooooooooooooo       ooooooooooooooooo k  o
-o  k                                                                 |         k  o
-o  k kkkkkkkkkkkkkkkkkkkkk       kkkkkkkkkkkkkkkkkkkkk       kkkkkkkkkkkkkkkkk k  o
-o  k k Persistent Volume k-------k        Pods       k-------k   Replication k k  o
-o  k k       Claim       k       kkkkkkkkkkkkkkkkkkkkk       kkkkkkkkkkkkkkkkk k  o
-o  k kkkkkkkkkkkkkkkkkkkkk                 |                                   k  o
-o  k          |                            |                                   k  o
-o  k kkkkkkkkkkkkkkkkkkkkk       kkkkkkkkkkkkkkkkkkkkk       ooooooooooooooooo k  o
-o  k k Persistent Volume k       k       Services    k-------o     Routes    o k  o
-o  k kkkkkkkkkkkkkkkkkkkkk       kkkkkkkkkkkkkkkkkkkkk       ooooooooooooooooo k  o
-o  k                                       |                         |         k  o
-o  k                                       +------------+------------+         k  o
-o  k                                                    |                      k  o
-o  k                             ooooooooooooooooooooooooooooooooooooooooooooo k  o
-o  k                             o     Software Defined Network (SDN)        o k  o
-o  k                             ooooooooooooooooooooooooooooooooooooooooooooo k  o
-o  k                                                                           k  o
-o  kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk  o
-o                                                                                 o
-ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
-```
+OKD (OpenShift community release) adds:
+
+  1) Source code management, builds, and deployments for developers
+  2) Managing and promoting images at scale as they flow through your system
+  3) Application management at scale
+  4) Team and user tracking for organizing a large developer origanization
+  5) Networking infrastructure that supports the cluster
