@@ -1,4 +1,4 @@
-# Adimission Controller
+# Custom Adimission Controllers
 
 ```text
                +---------+         +----------------+        +-----------+       +------------+        +------------+        +-----------+
@@ -16,3 +16,8 @@
                                                                                                          | Webhook | +
                                                                                                          +---------+
 ```
+
+Some common use-cases include:
+ * Mutating resources to inject side-car containers into pods
+ * Restricting projects to block some resources from a project
+ * Custom resource validation to perform complex validation on dependent fileds
