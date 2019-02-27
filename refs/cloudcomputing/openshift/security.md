@@ -27,3 +27,13 @@ profiles can be associated with a container to restrict available system calls.
 
 Deploying containers using RHEL Atomic Host reduces the attack surface by
 minimizing the host environment and tuning it for containers.
+
+# Other security matters
+
+- Container content
+- Registries
+- Build Process
+- Deployment
+- Container Platform
+- Network Security
+- Attached Storage
