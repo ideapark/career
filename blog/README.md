@@ -1,8 +1,6 @@
-# blog.ctriple.cn
+# Blogs on Computer Programming
 
-Blogs about computer programming
-
-## Preview on local workstation
+## Preview
 
 - Install golang (https://golang.org/doc/install)
 
@@ -11,3 +9,5 @@ Blogs about computer programming
     go get -u golang.org/x/tools/present
 
 - Run present and browse http://127.0.0.1:3999
+
+    $ present
