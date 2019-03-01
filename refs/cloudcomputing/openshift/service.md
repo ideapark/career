@@ -20,14 +20,17 @@ load-balancing or proxying is done and no cluster IP is allocated for this
 service. For such services, DNS is automatically configured depending on whether
 the service has selectors defined or not.
 
-Services with selectors: For headless services that define selectors, the
-endpoints controller creates Endpoints records in the API and modifies the DNS
-configuration to return A records (addresses) that point directly to the pods
-backing the service.
+- Services with selectors
 
-Services without selectors: For headless services that do not define selectors,
-the endpoints controller does not create Endpoints records. However, the DNS
-system looks for and configures the following records:
+For headless services that define selectors, the endpoints controller creates
+Endpoints records in the API and modifies the DNS configuration to return A
+records (addresses) that point directly to the pods backing the service.
+
+- Services without selectors
+
+For headless services that do not define selectors, the endpoints controller
+does not create Endpoints records. However, the DNS system looks for and
+configures the following records:
 
 - For ExternalName type services, CNAME records.
 
