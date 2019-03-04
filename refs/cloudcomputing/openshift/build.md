@@ -46,3 +46,45 @@ image.
 - Changing Serial to SerialLatestOnly and triggering a new build will cause
   cancellation of all existing builds in queue, except the currently running
   build and the most recently created build. The newest build will execute next.
+
+## Chaining Build
+
+For compiled languages (Go, C, C++, Java, etc.), including the dependencies
+necessary for compilation in the application image might increase the size of
+the image or introduce vulnerabilities that can be exploited.
+
+To avoid these problems, two builds can be chained together: one that produces
+the compiled artifact, and a second build that places that artifact in a
+separate image that runs the artifact. In the following example, a
+Source-to-Image is combined with a Docker build to compile an artifact that is
+then placed in a separate runtime image.
+
+```text
++-----------------+   +---------------+
+|S2I Builder Image|   | Source        |
++-----------------+   +---------------+
+        |                      |
+        +-----------|----------+
+                    |
+                    v
+        +----------------------+
+        |       S2I Build      |
+        +----------------------+
+                    |
+                    v
+    +------------------------------+  +---------------+ +------------+
+    | Image (with binary artifact) |  | Runtime Image | | Dockerfile |
+    +------------------------------+  +---------------+ +------------+
+                    |                         |                |
+                    +-------------------------|----------------+
+                                              |
+                                              v
+                              +----------------------------------+
+                              | Docker Build (with image source) |
+                              +----------------------------------+
+                                              |
+                                              v
+                           +----------------------------------------+
+                           | Runtime Image (with compiled artifact) |
+                           +----------------------------------------+
+```
