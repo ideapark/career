@@ -23,3 +23,12 @@ image.
 4. Binary (Local) inputs
 5. Input secrets and ConfigMaps
 6. External artifacts
+
+## Triggers
+
+1. Webhook
+  - GitHub
+  - GitLab
+  - Bitbucket
+2. Image change
+3. Configuration change
