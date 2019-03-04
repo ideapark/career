@@ -14,3 +14,12 @@ image.
                                      5. input secrets
                                      6. external artifacts
 ```
+
+## Input precedence (highest:1 -> lowest:6)
+
+1. Inline Dockerfile definitions
+2. Content extracted from existing images
+3. Git repositories
+4. Binary (Local) inputs
+5. Input secrets and ConfigMaps
+6. External artifacts
