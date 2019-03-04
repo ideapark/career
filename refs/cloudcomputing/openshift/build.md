@@ -32,3 +32,17 @@ image.
   - Bitbucket
 2. Image change
 3. Configuration change
+
+## Run Policy
+
+1. Parallel
+2. Serial
+3. SerialLatestOnly
+
+- Changing Parallel to Serial or SerialLatestOnly and triggering a new build
+  from this configuration will cause the new build to wait until all parallel
+  builds complete as the serial build can only run alone.
+
+- Changing Serial to SerialLatestOnly and triggering a new build will cause
+  cancellation of all existing builds in queue, except the currently running
+  build and the most recently created build. The newest build will execute next.
