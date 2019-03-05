@@ -43,3 +43,27 @@
      it's wrong
   9. Every component has to be easy to monitor and debug, and conversely
      summarizing and monitoring everything has to also be easy
+
+## OpenShift intalller bootstrapping
+
+  1. The bootstrap machine boots and starts hosting the remote resources
+     required for control plane machines to boot.
+
+  2. The control plane machines fetch the remote resources from the bootstrap
+     machine and finish booting.
+
+  3. The control plane machines form an etcd cluster.
+
+  4. The bootstrap machine starts a temporary Kubernetes control plane using the
+     newly-created etcd cluster.
+
+  5. The temporary control plane schedules the production control plane to the
+     control plane machines.
+
+  6. The temporary control plane shuts down, yielding to the production control
+     plane.
+
+  7. The bootstrap node injects OpenShift-specific components into the newly
+     formed control plane.
+
+  8. The installer then tears down the bootstrap resources.
