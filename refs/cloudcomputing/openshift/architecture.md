@@ -1,5 +1,13 @@
 # openshift architecture overview
 
+OKD adds:
+
+  1. Source code management, builds, and deployments for developers
+  2. Managing and promoting Images at scale as they flow through your system
+  3. Application management at scale
+  4. Team and user tracking for organizing a large developer organization
+  5. Networking infrastructure that supports the cluster
+
 ```text
                       +----------------------------------------------------------------------------------------------+
                       | ROUTING LAYER                                                                                |
