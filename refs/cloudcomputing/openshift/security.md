@@ -37,3 +37,9 @@ minimizing the host environment and tuning it for containers.
 - Container Platform
 - Network Security
 - Attached Storage
+
+# Security inside Container
+
+- container content scanning
+- image metadata
+- annotating image objects
