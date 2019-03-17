@@ -7,3 +7,13 @@
 
   2. Credentials for attaching and detaching do not need to be made present on
      every node, improving security.
+
+## Persistent volume snapshots (TECH-PREVIEW)
+
+  1. Create snapshot of a PersistentVolume bound to PersistentVolumeClaim
+  2. List existing VolumeSnaphots
+  3. Delete existing VolumeSnaphots
+  4. Create a new PersistentVolume from an existing VolumeSnaphot
+  5. Supported PersistentVolume types:
+    a. AWS Elastic Block Store (EBS)
+    b. Google Compute Engine (GCE) Persistent Disk (PD)
