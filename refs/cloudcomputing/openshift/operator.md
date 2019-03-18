@@ -19,3 +19,19 @@ milliseconds. Operators follow a maturity model that ranges from basic
 functionality to having specific logic for an application. Advanced Operators
 are designed to handle upgrades seamlessly, react to failures automatically, and
 not take shortcuts, like skipping a software backup process to save time.
+
+## Operator Components
+
+- Operator SDK
+
+Enables developers to build Operators based on their expertise without requiring
+knowledge of Kubernetes API complexities.
+
+- Operator Lifecycle Management
+
+Oversees installation, updates, and management of the lifecycle of all of the
+Operators (and their associated services) running across a Kubernetes cluster.
+
+- Operator Metering
+
+Enables usage reporting for Operators that provide specialized services.
