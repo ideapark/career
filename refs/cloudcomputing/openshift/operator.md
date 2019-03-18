@@ -35,3 +35,5 @@ Operators (and their associated services) running across a Kubernetes cluster.
 - Operator Metering
 
 Enables usage reporting for Operators that provide specialized services.
+
+More on [Operator Hub](https://www.operatorhub.io)
