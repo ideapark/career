@@ -22,3 +22,10 @@ administrators to give higher importance to some priorities.
 The nodes are sorted based on their scores and the node with the highest score
 is selected to host the pod. If multiple nodes have the same high score, then
 one of them is selected at random.
+
+# Advanced Scheduling
+
+- Pod Affinity and Anti-affinity
+- Node Affinity
+- Node Selectors
+- Taints and Tolerations
