@@ -73,3 +73,13 @@
   7. Azure Blob Storage
   8. Vendor S3
   9. Vendor Swift
+
+## Storage howto
+
+| Storage type | ROX | RWX | Registry     | Scaled registry[1] | Metrics          | Logging          | Apps             |
+| ---          | --- | --- | ---          | ---                | ---              | ---              | ---              |
+| Block        | Yes | No  | Configurable | Not configurable   | Recommended      | Recommended      | Recommended      |
+| File         | Yes | Yes | Configurable | Configurable       | Configurable     | Configurable     | Recommended      |
+| Object       | Yes | Yes | Recommended  | Recommended        | Not configurable | Not configurable | Not Configurable |
+
+[1]: A scaled registry is an OKD registry where three or more pod replicas are running.
