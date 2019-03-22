@@ -21,16 +21,15 @@
 | persistentVolume      | pv                  |
 | persistentVolumeClaim | pvc                 |
 
-# output verbosity and debugging
+# Troubleshooting oc
 
-| Verbosity | Description                                                                                                                                                                                      |
-| ---       | ---                                                                                                                                                                                              |
-| --v=0     | Generally useful for this to ALWAYS be visible to an operator.                                                                                                                                   |
-| --v=1     | A reasonable default log level if you don't want verbosity.                                                                                                                                      |
-| --v=2     | Useful steady state information about the service and important log messages that may correlate to significant changes in the system. This is the recommended default log level for most system. |
-| --v=3     | Extended information about changes.                                                                                                                                                              |
-| --v=4     | Debug level verbosity.                                                                                                                                                                           |
-| --v=6     | Display requested resources.                                                                                                                                                                     |
-| --v=7     | Display HTTP request headers.                                                                                                                                                                    |
-| --v=8     | Display HTTP request contents.                                                                                                                                                                   |
-| --v=9     | Display HTTP request contents without truncation of contents.                                                                                                                                    |
+You can get more verbosed output from any command by increasing the loglevel
+using -v=X flag. By default, the loglevel is set to 0, but you can set its value
+from 0 to 10.
+
+1-5 - are usually used internally by the commands, if the author decides to provide more explanation about the flow.
+  6 - provides basic information about HTTP traffic between the client and the server, such HTTP operation and URL.
+  7 - provides more thorough HTTP information, such as HTTP operation, URL, request headers and response status code.
+  8 - provides full HTTP request and response, including body.
+  9 - provides full HTTP request and response, including body and sample curl invocation.
+ 10 - provides all possible output the command provides.
