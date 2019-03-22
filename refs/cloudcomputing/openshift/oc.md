@@ -2,24 +2,29 @@
 
 | Object Type           | Abbreviated Version |
 |-----------------------|---------------------|
-| build                 |                     |
-| buildConfig           | bc                  |
-| deploymentConfig      | dc                  |
-| event                 | ev                  |
-| imageStream           | is                  |
-| imageStreamTag        | istag               |
-| imageStreamImage      | isimage             |
-| job                   |                     |
+| Build                 |                     |
+| BuildConfig           | bc                  |
+| DeploymentConfig      | dc                  |
+| Event                 | ev                  |
+| ImageStream           | is                  |
+| ImageStreamTag        | istag               |
+| ImageStreamImage      | isimage             |
+| Job                   |                     |
+| CronJob               | cj                  |
 | LimitRange            | limits              |
-| node                  |                     |
-| pod                   | po                  |
+| Node                  |                     |
+| Pod                   | po                  |
 | ResourceQuota         | quota               |
-| replicationController | rc                  |
-| secrets               |                     |
-| service               | svc                 |
+| ReplicationController | rc                  |
+| ReplicaSet            | rs                  |
+| Secrets               |                     |
+| Service               | svc                 |
 | ServiceAccount        | sa                  |
-| persistentVolume      | pv                  |
-| persistentVolumeClaim | pvc                 |
+| StatefulSets          | sts                 |
+| PersistentVolume      | pv                  |
+| PersistentVolumeClaim | pvc                 |
+
+[1]: If you want to know the full list of resources the server supports, use `oc api-resources`
 
 # Troubleshooting oc
 
