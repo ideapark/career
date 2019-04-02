@@ -1,0 +1,292 @@
+Clouding on Container
+天津
+2 Apr 2019
+
+周朋
+p@ctriple.cn
+https://github.com/ctriple
+微信 lockrecv
+
+* License
+
+Copyright © Zhou Peng <p@ctriple.cn>
+
+* Computer: Hardware Perspective
+
+计算机硬件体系结构
+
+  CPU
+  +----------------------+
+  |       register       |
+  |        +----+   +-+  |
+  | +--+   |----|-->|A|  |
+  | |pc|   |----|   |L|  |
+  | +--+   |----|<--|U|  |
+  |        +----+   +-+  |
+  |          ⬍           | System Bus         Memory Bus
+  |  +---------------+   | /    +------------+    |     +-------------+
+  |  | BUS Interface | <------> | I/O Bridge | <------> | Main Memory |
+  |  +---------------+   |      +------------+          +-------------+
+  +----------------------+            ⬆
+  <=============================================================| |=| |=| |=====>
+          ⬇                   ⬇    I/O BUS           ⬇      Extended Slot, Network Adapter
+      +---------------+ +---------------+       +----------------+
+      | USB Controler | | Video Adapter |       | Disk Controler |
+      +---------------+ +---------------+       +----------------+
+        |         |            |                       |
+      Mouse    Keyboard     Monitor                 ^^^^^^^^
+                                                    | Disk |
+                                                    +......+
+
+* Computer: Software Perspective
+
+软硬件层次关系
+
+  +------------------------------------------+ <--+
+  |              User Application            |    |
+  +------------------------------------------+    | Software
+  |              Operating System            |    |
+  +----------+---------------+---------------+ <--+
+  |   CPU    |  Main Memory  |  I/O Device   |    | Hardware
+  +----------+---------------+---------------+ <--+
+
+操作系统提供的抽像
+
+  +-------------- Process --------------------------+
+  |                                                 |
+  |            +------------ Virtual Memory --------|
+  |            |                                    |
+  |            |                                    |
+  |            |                   +--- File -------|
+  |            |                   |                |
+  +------------+-------------------+----------------+
+  |    CPU     |    Main Memory    |   I/O Device   |
+  +------------+-------------------+----------------+
+
+* Linux: Kernel vs User Space
+
+    Linux User/Kernel
+       Memory Split
+    +-----------------+0xffffffff
+    |   Kernel Space  |
+    |       (1GB)     |
+    +-----------------+0xc0000000
+    |                 |
+    |                 |
+    | User Mode Space |
+    |      (3GB)      |
+    |                 |
+    |                 |
+    +-----------------+0
+
+* Linux: Process Switches
+
+    +-----------------+0xffffffff     +-----------------+0xffffffff     +-----------------+0xffffffff
+    |   Kernel Space  |               |   Kernel Space  |               |   Kernel Space  |
+    |       (1GB)     |               |       (1GB)     |               |       (1GB)     |
+    +-----------------+0xc0000000     +-----------------+0xc0000000     +-----------------+0xc0000000
+    |*****************|               |*****************|               |*****************|
+    |                 |               |                 |               |                 |
+    | User Mode Space |    Process    | User Mode Space |    Process    | User Mode Space |
+    |****(Firefox)****|    Switch     |     (/bin/ls)   |    Switch     |*****(Firefox)***|
+    |*****************| ------------> |                 | ------------> |*****************|
+    |*****************|               |*****************|               |*****************|
+    +-----------------+0              +-----------------+0              +-----------------+0
+
+* Linux: System Calls
+
+$ man 2 syscalls
+
+       System call                Kernel        Notes
+       ───────────────────────────────────────────────────────────────────────
+       _llseek(2)                 1.2
+       _newselect(2)              2.0
+       _sysctl(2)                 2.0
+       accept(2)                  2.0           See notes on socketcall(2)
+       accept4(2)                 2.6.28
+       access(2)                  1.0
+       acct(2)                    1.0
+       add_key(2)                 2.6.10
+       adjtimex(2)                1.0
+       alarm(2)                   1.0
+       alloc_hugepages(2)         2.5.36        Removed in 2.5.44
+       arc_gettls(2)              3.9           ARC only
+       arc_settls(2)              3.9           ARC only
+       arc_usr_cmpxchg(2)         4.9           ARC onlt
+       arch_prctl(2)              2.6           x86_64, x86 since 4.12
+       atomic_barrier(2)          2.6.34        m68k only
+       atomic_cmpxchg_32(2)       2.6.34        m68k only
+       bdflush(2)                 1.2           Deprecated (does nothing)
+       ...                        ...           ...
+
+* Linux: Program
+
+  $ file $(which go)
+  $ LC_ALL=C readelf -h $(which go)
+  $ size $(which go)
+  $ strings $(which go) | tail
+  $ nm $(which go) | tail
+
+* Linux: Process
+
+/proc/{pid}/
+
+  $ pgrep systemd
+  1
+  244
+  274
+  595
+  737
+  1702
+
+  $ sudo ls /proc/1
+  attr        coredump_filter  gid_map          mountinfo   oom_score      schedstat   @status
+  autogroup   cpuset           io               @mounts     oom_score_adj  @sessionid  @syscall
+  auxv        @cwd             limits           mountstats  pagemap        setgroups   task
+  cgroup      @environ         loginuid         net         personality    smaps       timers
+  clear_refs  exe              map_files        ns          projid_map     stack       timerslack_ns
+  @cmdline    fd               @maps            numa_maps   @root          stat        uid_map
+  comm        fdinfo           mem              oom_adj     sched          statm       wchan
+
+* Linux: Program vs Process
+
+  +---------------------------------------------------------+
+  |                     Program                     Process |
+  +---------------------------------------------------------+
+  |     Persist:           Disk                      Memory |
+  |        Size:          Fixed                 Grow/Shrink |
+  |      Status:         Static             PID/UID/FDs/... |
+  |       Where:        /bin/ls                    /proc/1/ |
+  |   Operation:        R/W/D/M           KILL/PAUSE/RESUME |
+  | Composition: Header/Section    Stack/Heap/BSS/Data/Text |
+  |  Management:   FS Hierarchy   Kernel task_struct rbtree |
+  |                         ...                         ... |
+  +---------------------------------------------------------+
+
+* Container: Namespaced Process
+
+Isolation (Compute/Network/Storage)
+
+  Cgroups  —  isolates resource limiting, prioritization, accounting, group control
+  Network  —  isolates the network stack
+  Mount    —  isolates mount points
+  IPC      —  isolates interprocess communication
+  PID      —  isolates process IDs
+  User     —  isolates User and Group IDs
+  UTS      —  isolates hostnames and domain names
+
+* Container: Compared with Virtual Machine
+
+.image comparison.jpg
+
+* Container: Image
+
+- Union filesystem
+
+  +------------------+     +---------------+     +--------------------+     +----------------------+
+  | Base filesystem  |     | Filesystem 1  |     | Filesystem 2       |     | Resulting filesystem |
+  |    ├── pkgs/     |     |    ADD nginx/ |     |    MOD users.txt   |     |      ├── packages/   |
+  |    ├── users.txt |     |    DEL pkgs/  |     |    ADD packages/   |     |      ├── users.txt   |
+  |    └── editors/  | ==> |               | ==> |    ADD apikeys.txt | ==> |      ├── editors/    |
+  |                  |     |               |     |                    |     |      ├── nginx/      |
+  |                  |     |               |     |                    |     |      └── apikeys.txt |
+  +------------------+     +---------------+     +--------------------+     +----------------------+
+
+- Dockerfile
+
+  FROM ubuntu:14.04
+  RUN apt-get install -y python
+  ADD hello.py /tmp/hello.py
+
+* Container: Image Registry
+
+.image docker.svg
+
+* Docker: Build, Ship, Run, Any App Anywhere
+
+.image ship.png 500 900
+
+* What's the problem Docker not solved
+
+At massive scale
+
+.image scale.png 500 900
+
+* Kubernetes: Production-Grade Container Orchestration
+
+Automated container deployment, scaling, and management
+
+.image k8s.png 500 1000
+
+* Kubernetes: Core Concepts
+
+- IP per Pod
+
+  Pod: 1..N Collaborative Container
+  IP: Network Collaborative Unit Identity
+
+- Declarative Object
+
+.image loop.png
+
+* Kubernetes: Scaling Before
+
+.image scaling1.svg 630 900
+
+* Kubernetes: Scaling After
+
+.image scaling2.svg 630 900
+
+* Kubernetes: Rolling Update 1
+
+.image rolling1.svg 630 900
+
+* Kubernetes: Rolling Update 2
+
+.image rolling2.svg 630 900
+
+* Kubernetes: Rolling Update 3
+
+.image rolling3.svg 630 900
+
+* Kubernetes: Rolling Update 4
+
+.image rolling4.svg 630 900
+
+* What's the problem Kubernetes not solved
+
+.image engine.png 150 300
+.image plane.jpg  300 900
+
+* OpenShift: Full-Featured Container Platform
+
+.image platform.png 550 1000
+
+* OpenShift: Demo
+
+Any APP that can be containerized can benefit from Container Platform
+
+- gitlab
+
+How easy to setup a working gitlab
+
+- bluegreen pipeline
+
+Blue-Green pipeline, that's devops!
+
+- mongodb cluster
+
+Mongodb cluster scaling up and down
+
+- redis
+
+Deploy redis instance and expose it to public
+
+- postgresql
+
+Deploy postgresql database
+
+* References
+
+.link https://kubernetes.io/docs/home/ Kubernetes
+.link https://docs.okd.io/latest OpenShift
