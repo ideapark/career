@@ -1,0 +1,18 @@
+# Poseidon-Firmament scheduler
+
+## How it works
+
+It models the scheduling problem as a constraint-based optimization over a flow
+network graph – by reducing scheduling to a min-cost max-flow optimization
+problem. Due to the inherent rescheduling capabilities, the new scheduler
+enables a globally optimal scheduling environment that constantly keeps refining
+the workloads placements dynamically.
+
+## Use Case Scenarios
+
+- For "Big Data/AI" jobs consisting of a large number of tasks, throughput
+  benefits are tremendous.
+
+- Substantial throughput benefits also for service or batch job scenarios where
+  workload resource requirements are uniform across jobs
+  (Replicasets/Deployments/Jobs.).
