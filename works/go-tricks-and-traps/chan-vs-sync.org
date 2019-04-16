@@ -1,4 +1,0 @@
-** Golang chan vs sync
-
-- chan is better for logical concurrent architecture.
-- sync is better for local data concurrent access.
