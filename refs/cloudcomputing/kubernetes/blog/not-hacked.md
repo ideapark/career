@@ -10,11 +10,11 @@ identity of the client.
 
 Kubernetes component connection protocol
 
-[Component Connection Protocol](kubernetes-control-plane.png)
+![Component Connection Protocol](kubernetes-control-plane.png)
 
 Node TLS Bootstrap
 
-[Node TLS Bootstrap](node-tls-bootstrap.png)
+![Node TLS Bootstrap](node-tls-bootstrap.png)
 
 - Enable RBAC with least privilege, disable ABAC, and monitor logs
 
