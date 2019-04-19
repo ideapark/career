@@ -1,0 +1,18 @@
+# Remote Command Execution
+
+The kubelet handles remote execution requests from clients. Upon receiving a
+request, it upgrades the response, evaluates the request headers to determine
+what streams (stdin, stdout, and/or stderr) to expect to receive, and waits for
+the client to create the streams.
+
+After the kubelet has received all the streams, it executes the command in the
+container, copying between the streams and the command's stdin, stdout, stderr,
+as appropriate. When the command terminates, the kubelet closes the upgraded
+connection, as well as the underlying one.
+
+Architecturally, there are options for running a command in a container. The
+supported implementation currently in OKD invokes nsenter directly on the node
+host to enter the container's namespaces prior to executing the command.
+However, custom implementations could include using `docker exec`, or running a
+"helper" container that then runs nsenter so that nsenter is not a required
+binary that must be installed on the host.
