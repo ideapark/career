@@ -6,7 +6,7 @@
 
   1. Don't consume systems -- consume APIs
   2. Don't deploy software -- have the provider deploy it for you
-  3. Don's start with a large framework -- write small pieces of software as
+  3. Don't start with a large framework -- write small pieces of software as
      building blocks and connect them with data and events ranther than disks
      and databases
 
@@ -39,8 +39,8 @@
   5. Make failure and recovery an expected part of *every* aspect of the system
   6. Everything must be configured via an API
   7. Use Kubernetes to run Kubernetes
-  8. Updates have to be no big deal -- if an update isn't pushing a buttion,
-     it's wrong
+  8. Updates have to be no big deal -- if an update isn't pushing a button, it's
+     wrong
   9. Every component has to be easy to monitor and debug, and conversely
      summarizing and monitoring everything has to also be easy
 
