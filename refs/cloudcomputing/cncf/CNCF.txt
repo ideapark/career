@@ -1,5 +1,0 @@
-# CNCF Kubernetes
-
-CRI: Container Runtime Interface --> Computing resource \
-CNI: Container Network Interface --> Network resource    +---> Cloud Operating System
-CSI: Container Storage Interface --> Storage resource   /
