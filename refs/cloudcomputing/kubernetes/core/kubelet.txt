@@ -30,7 +30,7 @@
 | | CRI gPRC server | | |                   | |                  |
 | +-----------------+ | |                   | |                  |
 | +-----------------+ | |                   | |       Remote     |
-| | Network PLugin  | | |   rkt manager     | |Container Runtime |
+| | Network Plugin  | | |   rkt manager     | |Container Runtime |
 | |+---+ +-------+  | | |                   | |                  |
 | ||CNI| |kubenet|  | | |                   | |                  |
 | |+---+ +-------+  | | |                   | |                  |
