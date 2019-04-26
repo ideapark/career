@@ -6,9 +6,9 @@
 | 1.Codebase | 2.Dependency | 3.Config  | 4.Backing services       | 5.Build,release,run      | 6.Processes   | 7.Port binding | 8.Concurrency             | 9.Disposability      | 10.Dev/Prod parti | 11.Logs      | 12.Admin process |
 +------------+--------------+-----------+--------------------------+--------------------------+---------------+----------------+---------------------------+----------------------+-------------------+--------------+------------------+
 | GitHub     | Maven        | Env       |        Production        |        docker            | Stateless     | Self-contained |    Scale                  | Graceful termination | code->build->test | Event stream | One-off process  |
-| GitLab     | Gradle       | ConfigMap |         deploy           |                          |               |                |  |        HPA             |                      | plan           |  |              |                  |
+| GitLab     | Gradle       | ConfigMap |         deploy           |                          |               |                |  |        HPA             |                      | plan           v  |              |                  |
 | SVN        |              |           |       /   |   |  \       | code - build \           | Share-nothing | Port-bound     |  |      worker.3          |                      | monitor   release | Stdout       | kubectl exec     |
-|            |              |           |      /    |   |   \      |               -> release |               | Web process    |  |web.2 worker.2          |                      |    |           |  |              |                  |
+|            |              |           |      /    |   |   \      |               -> release |               | Web process    |  |web.2 worker.2          |                      |    ^           v  |              |                  |
 |            |              |           |   MySQL Email S3 Twitter |        config/           |               |                |  |web.1 worker.1 clock.1  |                      |   operate<-deploy |              |                  |
 |            |              |           |                          |                          |               |                |  +----------------------> |                      |                   |              |                  |
 +------------+--------------+-----------+--------------------------+--------------------------+---------------+----------------+---------------------------+----------------------+-------------------+--------------+------------------+
@@ -37,7 +37,7 @@
 我们的初衷是分享在现代软件开发过程中发现的一些系统性问题，并加深对这些问题的认识。
 我们提供了讨论这些问题时所需的共享词汇，同时使用相关术语给出一套针对这些问题的广
 义解决方案。本文格式的灵感来自于 Martin Fowler 的书籍： Patterns of Enterprise
-Application Architecture ， Refactoring 。
+Application Architecture， Refactoring。
 
 * 读者应该是哪些人？
 
