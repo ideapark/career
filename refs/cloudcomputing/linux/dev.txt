@@ -1,0 +1,17 @@
+# Device
+
+- Character Devices
+
+Deliver a continuous stream of data that applications read sequentially;
+generally, random access is not possible. Instead, such devices allow data to be
+read and written byte-by-byte or character-by-character. Modems are classical
+examples of character devices.
+
+- Block Devices
+
+Allow applications to address their data randomly and to freely select the
+position at which they want to read data. Typical block devices are hard disks
+because applications can address any position on the disk from which to read
+data. Also, data can be read or written only in multiples of block units
+(usually 512 bytes); character-based addressing, as in character devices, is not
+possible.
