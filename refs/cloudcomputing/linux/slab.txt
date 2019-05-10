@@ -1,0 +1,13 @@
+# Slab Cache
+
+1. For frequently used objects, the kernel defines its own cache that contains
+   only instances of the desired type. Each time one of the objects is required,
+   it can be quickly removed from the cache (and returned there after use); the
+   slab cache automatically takes care of interaction with the buddy system and
+   requests new page frames when the existing caches are full.
+
+2. For the general allocation of smaller memory blocks, the kernel defines a set
+   of slab caches for various object sizes that it can access using the same
+   functions with which we are familiar from userspace programming; a prefixed k
+   indicates that these functions are associated with the kernel: kmalloc and
+   kfree.
