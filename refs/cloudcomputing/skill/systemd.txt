@@ -3,8 +3,8 @@ System Management Daemon
 
  +--- systemd Utilities ---------------------------------------------------------------------+
  |                                                                                           |
- |    systemctl    journalctl    notify    analyze    cgls    cgtop    loginctl    nspawn    |
- |                                                                                           |
+ | systemctl        journalctl        loginctl                                               |
+ | systemd-notify   systemd-analyze   systemd-cgls   systemd-cgtop   systemd-nspawn          |
  +-------------------------------------------------------------------------------------------+
 
  +--- systemd Daemons --+ +--- systemd Targets ----------------------------------------------+
