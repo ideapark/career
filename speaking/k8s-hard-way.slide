@@ -1,0 +1,52 @@
+Kubernetes Hard Way
+天津
+16 May 2019
+
+周朋
+p@ctriple.cn
+https://github.com/ctriple
+微信 lockrecv
+
+* License
+
+Copyright © Zhou Peng <p@ctriple.cn>
+
+* 全景图
+
+.image k8s.png 500 1000
+
+* 文档
+
+Kubernetes Documentation
+
+.link https://kubernetes.io
+
+- 安装
+- 核心概念
+- 动手实践
+- Blog
+
+* 代码 (Go Progrmaming Language)
+
+.link https://github.com/kubernetes/kubernetes
+
+- 编译
+- 代码结构
+- GitHub (opensource community)
+
+* 其它
+
+- kubectl (-v=1-9)
+- etcd
+- docker/namespace/cgroup
+- linux/bash/curl/jq
+- tls certificate
+- network: iptables
+- storage: mount
+
+* Demo
+
+.link https://kubernetes.io/docs/tasks/run-application/run-replicated-stateful-application/ MySQL StatefulSet
+
+- 1:WRITE + n:READ
+- scale up/down
