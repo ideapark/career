@@ -31,15 +31,18 @@ eth0 (in A's netns) --> vethA --> br0 --> tun0 --> (NAT) --> eth0 (physical devi
 ## Access Diagram
 
 ```
-Machine outside      External Net      Node with external     Cluster Net
-  the cluster    ------------------->        access       -------------------> Cluster Node
-                                     \                   /                      \
-                                      \                 /                        \
-                             Public IP \               / Node IP          Node IP \
-                             Access     \             /  Address          Address  \
-                                         \           /                              \
-                                          \         /                                \  Pod IP
-                                           \       /      Pod IP                      \ Address
-                                         "Router" pod     Address                    Cluster Pod
-                                         (in the node)   (local to the cluster)     (in the node)
++---------------+                     +------------------+                     +------------+
+|Machine outside|    External Net     |Node with external|     Cluster Net     |            |
+| the cluster   |-------------------->|      access      |-------------------->|Cluster Node|
++---------------+                     +------------------+                     +------------+
+                                       \                /                        \
+                             Public IP  \              / Node IP          Node IP \
+                             Access      \            /  Address          Address  \
+                                          \          /                              \
+                                           \        /                                \  Pod IP
+                                            \      /                                  \ Address
+                                        +-------------+  Pod IP                  +-------------+
+                                        |"Router" pod | Address                  | Cluster Pod |
+                                        |(in the node)|(local to the cluster)    |(in the node)|
+                                        +-------------+                          +-------------+
 ```
