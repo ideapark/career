@@ -1,7 +1,7 @@
 Breadth First Search (BFS) Algorithm Implemented in C
 =====================================================
 
-Copyright (c) Zhou Peng <p@ctriple.cn>
+Copyright (C) Zhou Peng <p@ctriple.cn>
 
 
 Graph
@@ -30,8 +30,7 @@ Graph
           |+++#+$+$$#+++$++#++B
           |+++++#+#+$++++++++++
           |
-          |
-  Y Axis \|/
+  Y Axis  v
 
 
 Tokens
