@@ -32,7 +32,13 @@ Kubernetes Documentation
 
 - 编译
 - 代码结构
-- GitHub (opensource community)
+- Design
+
+.link https://github.com/kubernetes/community
+
+- GitHub (OpenSource)
+
+.link https://github.com/kubernetes/kubernetes/issues
 
 * 其它
 
@@ -48,5 +54,5 @@ Kubernetes Documentation
 
 .link https://kubernetes.io/docs/tasks/run-application/run-replicated-stateful-application/ MySQL StatefulSet
 
-- 1:WRITE + n:READ
+- write:1 + read:n
 - scale up/down
