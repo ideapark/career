@@ -37,7 +37,7 @@ quay.io/library/golang:alpine
 ### Comparison Table
 
 | Criteria    | Docker Hub                     | Quay.io                          | Artifactory   | Google Container Registry (gcr.io) |
-| ---         | ---                            | ---                              | ---           | ---                                |
+| ----------- | ------------------------------ | -------------------------------- | ------------- | ---------------------------------- |
 | Workflow    | github -> docker build         | pipeline supported               | N/A           | vender lock-in: gcloud sdk         |
 | Auth        | user/group: NO ldap/saml/oauth | read/write control: NO ldap/saml | ldap/saml     | limited ldap support               |
 | Performance | uneven                         | stable                           | N/A           | highly available                   |
