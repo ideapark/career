@@ -144,10 +144,10 @@ static inline int PRINT(struct list_head *nodelist)
 }
 
 /* pass predicate */
-typedef int (*Pass)(const struct point *p);
+typedef int (*Pass) (const struct point * p);
 
 /* target predicate */
-typedef int (*Target)(const struct point *p);
+typedef int (*Target) (const struct point * p);
 
 /*
  * @pathlist each node contains a list of point to the target

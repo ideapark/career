@@ -30,10 +30,10 @@ static void load_graph(const char *graph)
 {
 	FILE *f = fopen(graph, "r");
 
-  if (f == NULL) {
-    fprintf(stderr, "load_graph: %s: %s\n", graph, strerror(errno));
-    exit(1);
-  }
+	if (f == NULL) {
+		fprintf(stderr, "load_graph: %s: %s\n", graph, strerror(errno));
+		exit(1);
+	}
 
 	fscanf(f, "%d", &GRAPH_Y);
 	fscanf(f, "%d", &GRAPH_X);
@@ -63,8 +63,7 @@ end:
 
 static int graph_predicate(const struct point *p)
 {
-	return (p->x >= 0 && p->x < GRAPH_X) &&
-		(p->y >= 0 && p->y < GRAPH_Y);
+	return (p->x >= 0 && p->x < GRAPH_X) && (p->y >= 0 && p->y < GRAPH_Y);
 }
 
 static int grass_predicate(const struct point *p)
@@ -137,7 +136,7 @@ int main(int argc, char *argv[])
 {
 	load_graph(BFS_GRAPH);
 
-	const struct point startp = {.y=0, .x=0};
+	const struct point startp = {.y = 0,.x = 0 };
 
 	int nr;
 	struct list_head pathlist;
