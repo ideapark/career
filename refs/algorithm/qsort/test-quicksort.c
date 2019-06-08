@@ -1,7 +1,7 @@
 /*
- * Quick Sort Tests
+ * Quick Sorting Tests
  *
- * Copyright (c) Zhou Peng <p@ctriple.cn>
+ * Copyright (C) Zhou Peng <p@ctriple.cn>
  */
 
 #include <assert.h>
