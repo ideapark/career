@@ -1,3 +1,3 @@
 # https://byteor.cn
 
-I mostly write Go, and work for clouding on container.
+I mostly write Go, and DevOps on OpenShift.
