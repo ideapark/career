@@ -3,3 +3,5 @@
 echo " -----> Move HTTP server files into place."
 
 mv /tmp/src/* /opt/app-root/src/
+
+fix-permissions /opt/app-root
