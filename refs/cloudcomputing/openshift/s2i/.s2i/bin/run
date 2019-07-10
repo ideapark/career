@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -eo pipefail
+
+# Set environment variables
+
+# ...
+
+# Run additional deployment steps.
+
+# ...
+
+# Execute original run script.
+
+exec /usr/libexec/s2i/run
