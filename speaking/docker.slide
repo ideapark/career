@@ -1,0 +1,187 @@
+Docker: Inside and Out
+成都
+9 Jul 2019
+
+周朋
+p@ctriple.cn
+https://github.com/byteor
+微信 lockrecv
+
+* License
+
+Copyright © Zhou Peng <p@ctriple.cn>
+
+.image docker-logo.png
+
+* Agenda
+
+- Docker architecture
+- Build once, run anywhere?
+- Underlying technologies power Docker
+- What's docker do well and do bad?
+
+  # ===> MacOS Live Experience
+  $ brew install docker
+  $ docker --version
+
+* Docker Architecture: Client & Server
+
+Docker is a client-server application with these major components:
+
+  1. A server is a long-running program (the dockerd command).
+  2. A REST API interfaces that programs can use to talk to the daemon.
+  3. A command line interface (CLI) client (the docker command).
+
+.image engine-components-flow.png
+
+* Docker Architecture: Client & Server
+
+- docker info
+- -H unix:///var/run/docker.sock -H tcp://0.0.0.0:2375
+
+  $ docker version
+  Client: Docker Engine - Community
+    Version:           18.09.7
+    API version:       1.26 (downgraded from 1.39)
+    Go version:        go1.12.6
+    Built:             Thu Jun 27 22:52:31 2019
+    OS/Arch:           darwin/amd64
+
+  Server:
+    Version:          1.13.1
+    API version:      1.26 (minimum version 1.12)
+    Go version:       go1.10.3
+    Built:            Wed May  1 14:55:20 2019
+    OS/Arch:          linux/amd64
+
+  $ DOCKER_HOST=172.17.1.160 docker info
+  $ DOCKER_HOST=172.17.1.160 docker ps
+  $ DOCKER_HOST=172.17.1.160 docker images
+  $ DOCKER_HOST=172.17.1.160 docker events --format 'Type={{.Type}} Status={{.Status}} ID={{.ID}}'
+
+* Build Once, Run Anywhere (BUILD)
+
+  FROM archlinux/base:latest
+
+  MAINTAINER Zhou Peng <zhoupeng@xigua.city>
+  LABEL name="stress:v1.0"
+  LABEL vendor="XiguaCity, Inc."
+  LABEL description="Linux performance stress testing"
+
+  RUN pacman -Syyu --noconfirm && \
+      pacman -Sy --noconfirm stress && \
+      pacman -Scc --noconfirm
+
+  ENTRYPOINT ["stress"]
+  CMD ["--help"]
+
+Build image from Dockerfile:
+
+  $ docker build -t 127.0.0.1:5000/stress:v1.0 .
+
+.link https://docs.docker.com/engine/reference/builder/ Dockerfile reference
+.link https://docs.docker.com/develop/develop-images/dockerfile_best-practices/ Best practices
+
+* Build Once, Run Anywhere (SHIP)
+
+- Registry
+
+.image docker.svg 350 700
+
+  $ docker run --name registry -d -p 5000:5000 registry:latest
+  $ docker push 127.0.0.1:5000/stress:v1.0
+  $ docker inspect --format "{{range .Mounts}}{{.Name}}{{end}}" registry
+  $ docker volume ls
+
+* Build Once, Run Anywhere (RUN)
+
+- Run our stress image:
+
+  $ docker run --name stress 127.0.0.1:5000/stress:v1.0
+  $ docker logs stress
+
+- Another example from docker hub:
+
+  $ docker pull tomcat:latest
+  $ docker run --name web -d -p 8080:8080 tomcat:latest
+  $ docker logs web
+  $ docker exec -ti web sh
+
+.link http://172.17.1.160:8080 Tomcat serving on $DOCKER_HOST:8080
+
+* Underlying Technologies (SEPARATION OF READ/WRITE)
+
+- overlayfs
+
+  $ mount | grep ^overlay
+  overlay on
+           /var/lib/docker/overlay2/623ea7090af7aacae519d4254db2ce599e6d4f63f144/merged
+          type overlay
+          (rw,relatime,context="system_u:object_r:container_file_t:s0:c586,c1010",
+  lowerdir=/var/lib/docker/overlay2/l/MLKXPWTHTVQDOPXQTQNIG5B4QU:
+           /var/lib/docker/overlay2/l/U4TTDKI5BKSRJUTZ3PB3LRGLEQ:
+           /var/lib/docker/overlay2/l/PWGA7NTFSBR64O6QRV6PEDD3RW:
+           /var/lib/docker/overlay2/l/HEMG3J7ZBQRC2EYDC267G7AIUC,
+  upperdir=/var/lib/docker/overlay2/623ea7090af7aacae519d4254db2ce599e6d4f63f144/diff,
+   workdir=/var/lib/docker/overlay2/623ea7090af7aacae519d4254db2ce599e6d4f63f144/work)
+
+.image overlay_constructs.jpg
+
+* Underlying Technologies (ISOLATION)
+
+- namespace
+
+  1. PID: Process isolation (PID: Process ID).
+  2. NET: Managing network interfaces (NET: Networking).
+  3. IPC: Managing access to IPC resources (IPC: InterProcess Communication).
+  4. MNT: Managing filesystem mount points (MNT: Mount).
+  5. UTS: Isolating kernel and version identifiers. (UTS: Unix Timesharing System).
+
+  $ docker run -d --name web-hostnetwork --network=host tomcat:latest
+  $ docker run -d --name web-privileged  --privileged   tomcat:latest
+
+* Underlying Technologies (RESOURCE LIMITS)
+
+- cgroups
+
+A cgroup limits an application to a specific set of resources. Control groups
+allow Docker Engine to share available hardware resources to containers and
+optionally enforce limits and constraints. For example, you can limit the memory
+available to a specific container.
+
+  1. CPU
+  2. Memory
+  3. Network Bandwidth
+  4. Disk
+  5. Priority
+
+  $ docker run -d --name stress-oomkilled \
+               127.0.0.1:5000/stress:v1.0 \
+               -m 1 --memory=50m --vm-bytes 51m
+
+  $ docker run -d --name stress-happy \
+               127.0.0.1:5000/stress:v1.0 \
+               -m 1 --memory=50m --vm-bytes 49m
+
+* What's docker done well and done bad?
+
+Well:
+
+- Image standard (Dockerfile)
+- Simplify image & container management (docker help)
+- Enable more possibilities
+
+Bad:
+
+- Multiple containers on multiple nodes
+- Image is immutable and container filesystem is emphemeral, But apps have data to persist
+- At massive scale
+
+* What's next
+
+- Kubernetes
+
+Production-Grade Container Orchestration
+Automated container deployment, scaling, and management
+
+.image k8s-logo.png 400 400
