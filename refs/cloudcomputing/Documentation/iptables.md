@@ -141,7 +141,7 @@ COMMIT
 *nat
 
 # set up IP forwarding and nat
--A POSTROUTING -o eth0 -j SNAT --to 1.2.3.4
+-A POSTROUTING -o eth0 -j MASQUERADE
 
 COMMIT
 ```
