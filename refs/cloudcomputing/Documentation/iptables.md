@@ -96,7 +96,7 @@ iptables -X ssh-rules
 COMMIT
 ```
 
-- NAT example
+- SNAT (source NAT) example
 
 ```bash
 *filter
@@ -142,6 +142,18 @@ COMMIT
 
 # set up IP forwarding and nat
 -A POSTROUTING -o eth0 -j MASQUERADE
+
+COMMIT
+```
+
+- DNAT (destination NAT) example
+
+```bash
+*nat
+
+# set up IP forwarding and nat
+-A POSTROUTING -o eth0 -j SNAT --to 1.2.3.4
+-A PREROUTING -i eth0 -p tcp -d 1.2.3.4 --dport 80 -j DNAT --to 192.168.0.3:8080
 
 COMMIT
 ```
