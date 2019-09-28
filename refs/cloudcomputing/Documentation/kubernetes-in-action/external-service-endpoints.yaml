@@ -1,0 +1,21 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: google
+spec:
+  ports:
+  - name: https
+    port: 443
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: google
+subsets:
+  - addresses:
+    - ip: 208.43.237.140
+    - ip: 31.13.77.55
+    ports:
+    - name: https
+      port: 443

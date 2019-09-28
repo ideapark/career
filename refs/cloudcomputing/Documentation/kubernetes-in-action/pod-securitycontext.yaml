@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-securitycontext
+spec:
+  hostNetwork: true
+  hostPID: true
+  hostIPC: true
+  containers:
+  - name: main
+    image: alpine
+    command: ["/bin/sleep", "infinity"]
+    securityContext:
+      readOnlyRootFilesystem: true
+      privileged: true
+      runAsNonRoot: true
+      runAsUser: 405
+      capabilities:
+        drop:
+        - CHOWN
+        add:
+        - SYS_TIME
