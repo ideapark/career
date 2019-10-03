@@ -1,6 +1,21 @@
-# Microservices: Pros and Cons
+# Microservice
 
-## Pros
+A microservice architecture is the natural consequence of applying the single
+responsibility principle at the architectural level. This results in a number of
+benefits over a traditional monolithic architecture such as independent
+deployability, language, platform and technology independence for different
+components, distinct axes of scalability and increased architectural
+flexibility.
+
+In terms of size, there are no hard and fast rules. Commonly, microservices are
+of the order of hundreds of lines but can be tens or thousands depending on the
+responsibility they encapsulate. A good, albeit non-specific, rule of thumb is
+`as small as possible but as big as necessary to represent the domain concept
+they own`.
+
+## Pros and Cons
+
+- Pros
 
 1. Microservices allows for Independent development and deployment
    of the various services. This allows for teams to work and deploy
@@ -60,7 +75,7 @@
    to fix and deploy the isolated service instead of being forced to
    deploy the entire application.
 
-## Cons
+- Cons
 
 1. A microservices architecture necessitates a distributed system which
    can be complex and hard to manage. Having the right resources and
