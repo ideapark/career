@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Graceful reload
+nginx -s reload
