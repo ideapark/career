@@ -1,0 +1,15 @@
+# Requests & Limits
+
+                     CPU                                   Memory
+                    +---+                                  +---+
+                    |   |                                  |   |
+ Limit: where CPU   |---| 500m        Limit: level where   |---| 256Mi
+ throttling begins  |   |             Processes are killed |   |
+                    |   |                                  |   |
+                    |   |                                  |   |
+                    |   |                                  |   |
+                    |   |                                  |   |
+ Request: amount    |---| 200m        Request: amount      |---| 128Mi
+ guaranteed by k8s  |   |             guaranteed by k8s    |   |
+                    |   |                                  |   |
+                    +---+                                  +---+
