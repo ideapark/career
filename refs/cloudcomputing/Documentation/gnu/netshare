@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# A net sharing framework implemented by `netcat` and `named pipe`
+
+cat <<EOF
+SPEAKER.HOST                                               LISTENER.HOST
+
+# create named pipe                                        # listen on port 9999
+mkfifo /tmp/netshare                                       nc -l -p 9999
+
+# forward pipe message to listener.host
+nc listener.host 9999 < /tmp/netshare
+
+# speaking and listening
+echo https://gnu.org       > /tmp/netshare
+echo https://kernel.org    > /tmp/netshare
+echo https://kubernetes.io > /tmp/netshare
+
+EOF
