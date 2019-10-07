@@ -5,14 +5,14 @@
 > gcc -v -o a.out hello.o
 
 ```
-[esc@thinkpad kiss]$ gcc -v -o a.out hello.o
+[p@thinkpad kiss]$ gcc -v -o a.out hello.o
 Using built-in specs.
 COLLECT_GCC=gcc
 COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/lto-wrapper
 Target: x86_64-pc-linux-gnu
 Configured with: /build/gcc/src/gcc/configure --prefix=/usr --libdir=/usr/lib --libexecdir=/usr/lib --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://bugs.archlinux.org/ --enable-languages=c,c++,ada,fortran,go,lto,objc,obj-c++ --enable-shared --enable-threads=posix --enable-libmpx --with-system-zlib --with-isl --enable-__cxa_atexit --disable-libunwind-exceptions --enable-clocale=gnu --disable-libstdcxx-pch --disable-libssp --enable-gnu-unique-object --enable-linker-build-id --enable-lto --enable-plugin --enable-install-libiberty --with-linker-hash-style=gnu --enable-gnu-indirect-function --disable-multilib --disable-werror --enable-checking=release
 Thread model: posix
-gcc version 6.1.1 20160602 (GCC) 
+gcc version 6.1.1 20160602 (GCC)
 COMPILER_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/
 LIBRARY_PATH=/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../../lib/:/lib/../lib/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/6.1.1/../../../:/lib/:/usr/lib/
 COLLECT_GCC_OPTIONS='-v' '-o' 'a.out' '-mtune=generic' '-march=x86-64'
@@ -21,6 +21,6 @@ COLLECT_GCC_OPTIONS='-v' '-o' 'a.out' '-mtune=generic' '-march=x86-64'
 ```
 
 ```
-[esc@thinkpad kiss]$ ./a.out
+[p@thinkpad kiss]$ ./a.out
 Hello, world!
 ```

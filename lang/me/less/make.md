@@ -5,32 +5,32 @@
 > make
 
 ```
-[esc@thinkpad esc]$ pstree
-systemd-+-dbus-daemon
+[p@thinkpad p]$ pstree
+systemd-|-dbus-daemon
         |-dhcpcd
-        |-docker-+-docker-containe---8*[{docker-containe}]
+        |-docker-|-docker-containe---8*[{docker-containe}]
         |        `-10*[{docker}]
         |-gpg-agent
         |-login---bash---tmux
-        |-polkitd-+-{JS GC Helper}
+        |-polkitd-|-{JS GC Helper}
         |         |-{JS Sour~ Thread}
         |         |-{gdbus}
         |         |-{gmain}
         |         `-{polkitd}
         |-rtkit-daemon---2*[{rtkit-daemon}]
-        |-systemd-+-(sd-pam)
+        |-systemd-|-(sd-pam)
         |         |-dbus-daemon
-        |         |-gvfs-udisks2-vo-+-{gdbus}
+        |         |-gvfs-udisks2-vo-|-{gdbus}
         |         |                 `-{gmain}
-        |         |-gvfsd-+-{gdbus}
+        |         |-gvfsd-|-{gdbus}
         |         |       `-{gmain}
-        |         |-gvfsd-fuse-+-{gdbus}
+        |         |-gvfsd-fuse-|-{gdbus}
         |         |            |-{gmain}
         |         |            |-{gvfs-fuse-sub}
         |         |            `-2*[{gvfsd-fuse}]
-        |         |-gvfsd-metadata-+-{gdbus}
+        |         |-gvfsd-metadata-|-{gdbus}
         |         |                `-{gmain}
-        |         |-pulseaudio-+-{alsa-sink-ALC26}
+        |         |-pulseaudio-|-{alsa-sink-ALC26}
         |         |            `-{alsa-source-ALC}
         |         `-xfconfd
         |-systemd-journal
@@ -39,13 +39,13 @@ systemd-+-dbus-daemon
         |-systemd-resolve
         |-systemd-timesyn---2*[{sd-resolve}]
         |-systemd-udevd
-        |-tmux-+-bash---pstree
+        |-tmux-|-bash---pstree
         |      `-bash---make---sh---make---sh---cc---cc1
-        |-udisksd-+-{cleanup}
+        |-udisksd-|-{cleanup}
         |         |-{gdbus}
         |         |-{gmain}
         |         `-{probing-thread}
-        |-upowerd-+-{gdbus}
+        |-upowerd-|-{gdbus}
         |         `-{gmain}
         `-wpa_supplicant
 ```
