@@ -27,7 +27,11 @@ spec:
   seLinux:
     rule: RunAsAny
   volumes:
-  - '*'
+  - emptyDir
+  - configMap
+  - secret
+  - downwardAPI
+  - persistentVolumeClaim
   allowedCapabilities:
   - SYS_TIME
   defaultAddCapabilities:
