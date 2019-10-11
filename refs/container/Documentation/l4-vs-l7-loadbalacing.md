@@ -4,9 +4,9 @@
 | ----------- | ----------------------------------- | ---------------------------------------------------------------------------------------- |
 | Load        | Basic load balancing                | Advanced load balancing                                                                  |
 | Blancing    | 1. Based on IP address & port only  | 1. Based on URL - images, text, video                                                    |
-|             |                                     | 2. Based on client information - browser, OS, device, languge                            |
+|             |                                     | 2. Based on client information - browser, OS, device, language                           |
 |             |                                     |                                                                                          |
-|             | HTTP/S blind                        | Takes advantage of the HTTP/S packet info. Designed for apps of today & tomorrow         |
+|             | HTTP(S) blind                       | Takes advantage of the HTTP(S) packet info. Designed for apps of today & tomorrow        |
 |             |                                     |                                                                                          |
 |             | No Content (payload) rewrite &      | Supports content rewriting: Apps with hard-coded URLs, mergers & acquisitions,           |
 |             | switching: Inability to change      | publishing internal URLs, misconfigured apps, respond to malicious traffic.              |
