@@ -1,3 +1,3 @@
 # https://byteor.cn
 
-I mostly write Go, and DevOps on OpenShift.
+I mostly write Go, and star on openshift.
