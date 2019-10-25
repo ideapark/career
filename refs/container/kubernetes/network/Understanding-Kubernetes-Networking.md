@@ -44,7 +44,7 @@ called cluster-cidr, with small subnets corresponding to your worker nodes to
 these small subnets. this is proved to be a challenge on aws vpc router, but
 this is piece of cake on a simple/generic router in your network.
 
-[Pod Networking](pod-networking.png)
+![Pod Networking](pod-networking.png)
 
 - service network
 
@@ -55,7 +55,7 @@ never assigned to any of the interfaces of any the nodes/vms, etc. these
 (service ips) are used behind the scenes by kube-proxy to create (weird)
 iptables rules on the worker nodes.
 
-[Service Networking](service-networking.png)
+![Service Networking](service-networking.png)
 
 ## /etc/resolv.conf
 
