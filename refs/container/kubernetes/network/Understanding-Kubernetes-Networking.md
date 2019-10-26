@@ -55,7 +55,13 @@ never assigned to any of the interfaces of any the nodes/vms, etc. these
 (service ips) are used behind the scenes by kube-proxy to create (weird)
 iptables rules on the worker nodes.
 
-![Service Networking](service-networking.png)
+1. ClusterIP
+
+![Service ClusterIP Networking](service-clusterip-networking.png)
+
+2. NodePort
+
+![Service NodePort Networking](service-nodeport-networking.png)
 
 ## /etc/resolv.conf
 
