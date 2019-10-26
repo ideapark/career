@@ -1,3 +1,3 @@
-# https://byteor.cn
+# https://www.byteor.cn
 
-I mostly write Go, and star on openshift.
+I write Go, and run openshift.
