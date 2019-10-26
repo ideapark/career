@@ -1,4 +1,4 @@
-# understanding kubernetes networking
+# Understanding Kubernetes Networking
 
 ## kubernetes requirements on any networking implementation
 
