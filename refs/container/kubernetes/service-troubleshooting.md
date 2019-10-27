@@ -1,4 +1,4 @@
-# Servie Troubleshooting
+# Service Troubleshooting
 
 - First, make sure you're connecting to the service's cluster UP from within the
   cluster, not from the outside (*kubectl proxy* allows you do this).
