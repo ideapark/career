@@ -1,6 +1,17 @@
 # Why pause per Pod
 
+- dead process reaper
+
 Every PID namespace is equipped with a task that assumes the role taken by init
 in the global picture. One of the purposes of init is to call *wait4* for
 orphaned tasks, and this must likewise be done by the namespace-specific init
 variant. A pointer to the task structure of this task is stored in *child_reaper*.
+
+- pod scope network namespace
+
+All contianers in the same pod shares the same network namespace, so they can
+reach others through `localhost` network.
+
+- lifecycle management
+
+Pod lifecycle is managed with this pause cotainer lifecycle.
