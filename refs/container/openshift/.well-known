@@ -1,9 +1,9 @@
-https://devops.xiguacity.club/.well-known/oauth-authorization-server
+https://k8s.byteor.cn/.well-known/oauth-authorization-server
 
 {
-  "issuer": "https://devops.xiguacity.club",
-  "authorization_endpoint": "https://devops.xiguacity.club/oauth/authorize",
-  "token_endpoint": "https://devops.xiguacity.club/oauth/token",
+  "issuer": "https://k8s.byteor.cn",
+  "authorization_endpoint": "https://k8s.byteor.cn/oauth/authorize",
+  "token_endpoint": "https://k8s.byteor.cn/oauth/token",
   "scopes_supported": [
     "user:check-access",
     "user:full",
