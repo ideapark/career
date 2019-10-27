@@ -1,7 +1,10 @@
 # Service
 
-## userspace proxy mode
+## userspace proxy mode (<= kubernetes v1.2)
 
+NOTE: this is why the `kuber-proxy` named
+
+```text
 +-------------------------------------+
 | Node                                |
 | +--------+                          | +-----------+
@@ -22,10 +25,11 @@
     | labels: app=MyApp| | labels: app=MyApp | | labels: app=MyApp |
     | port: 9376       | | port: 9376        | | port: 9376        |
     +------------------+ +-------------------+ +-------------------+
+```
 
+## iptables proxy mode (default)
 
-## iptables proxy mode
-
+```text
                         +-----------+
                         | apiserver |
                         +-----------+
@@ -51,10 +55,11 @@
 | labels: app=MyApp | | labels: app=MyApp | | labels: app=MyApp |
 | port: 9376        | | port: 9376        | | port: 9376        |
 +-------------------+ +-------------------+ +-------------------+
+```
 
+## ipvs proxy mode (optional, performance better when thousands of services)
 
-## ipvs proxy mode
-
+```text
                         +-----------+
                         | apiserver |
                         +-----------+
@@ -84,3 +89,4 @@
 | +-------------------+ +-------------------+ +-------------------+ |
 |                      (Real Server)                                |
 +-------------------------------------------------------------------+
+```
