@@ -1,7 +1,7 @@
 # Service Troubleshooting
 
-- First, make sure you're connecting to the service's cluster UP from within the
-  cluster, not from the outside (*kubectl proxy* allows you do this).
+- First, make sure you're connecting to the service from within the cluster, not
+  from the outside (*kubectl proxy* allows you do this).
 
 - Don't bother pinging the service IP to figure out if the service is accessible
   (remember, the service's cluster IP is a virtual IP and pinging it will never
@@ -14,9 +14,9 @@
   Endpoints object with *kubectl get endpoints*.
 
 - If you're trying to access the service through its FQDN or a part of it (for
-  example, myservice.mynamespace.svc.cluster.local or myservice.mynamespace) and
-  it doesn't work, see if you can access it using its cluster IP instead of the
-  FQDN.
+  example, `myservice.mynamespace.svc.cluster.local` or `myservice.mynamespace`)
+  and it doesn't work, see if you can access it using its cluster IP instead of
+  the FQDN.
 
 - Check whether you're connecting to the port exposed by the service and not the
   target port.
