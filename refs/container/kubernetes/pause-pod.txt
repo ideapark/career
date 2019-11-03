@@ -15,3 +15,9 @@ reach others through `localhost` network.
 - lifecycle management
 
 Pod lifecycle is managed with this pause cotainer lifecycle.
+
+NOTE: The `pause` container was initially designed to act as `init` process
+within a PID namespace shared by all containers in the Pod. It performed the
+function of reaping zombie processes when a container died. PID namespace
+sharing is now disabled by default, so unless it has been explicitly enabled in
+the kubelet, all containers run their process as PID 1.
