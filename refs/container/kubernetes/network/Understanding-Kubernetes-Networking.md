@@ -68,6 +68,16 @@ iptables rules on the worker nodes.
 
 Cloud provider specific offerrings.
 
+# DNS
+
+The default internal domain name for a cluster is `cluster.local`. When you
+create a service, it assembles a subdomain of `namespace.svc.cluster.local`
+(where namespace is the namespace in which the service is running) and sets its
+name as the hostname. For example, if the service was named nginx and ran in the
+default namespace, consumers of the service would be able to reach it as
+`nginx.default.svc.cluster.local`. If the service's IP changes, the hostname
+remains the same. There is no interruption of service.
+
 ## /etc/resolv.conf
 
 - nameservers
