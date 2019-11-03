@@ -2,13 +2,14 @@
 
 ## kubernetes requirements on any networking implementation
 
-1. pods on a node can communicate with all pods on all nodes without nat
-2. agents on a node (e.g. system daemons, kubelet) can communicate with all pods
-   on that node
+1. Any Pod can communicate with any other Pod without the use of network address
+   translation (NAT). To facilitate this, Kubernetes assigns each Pod an IP
+   address that is routable within the cluster.
 
-for those platforms that support pods running in the host network (e.g. linux):
-pods in the host network of a node can communicate with all pods on all nodes
-witout nat
+2. A node can communicate with a Pod without the user of NAT.
+
+3. A Pod's awareness of its address is the same as how other resources see the
+   address. The host's address doesn't mask it.
 
 - compatible with vm
 
