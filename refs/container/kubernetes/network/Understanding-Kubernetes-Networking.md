@@ -64,6 +64,10 @@ iptables rules on the worker nodes.
 
 ![Service NodePort Networking](service-nodeport-networking.png)
 
+3. LoadBalancer
+
+Cloud provider specific offerrings.
+
 ## /etc/resolv.conf
 
 - nameservers
