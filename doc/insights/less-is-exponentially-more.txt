@@ -8,12 +8,6 @@
                              June 25, 2012
 
 
-Table of Contents
-─────────────────
-
-
-
-
 Here is the text of the talk I gave at the Go SF meeting in June, 2012.
 
 This is a personal talk. I do not speak for anyone else on the Go team
@@ -123,7 +117,7 @@ properties. it's short, easy to type. tools: goc, gol, goa. if there's
 an interactive debugger/interpreter it could just be called 'go'. the
 suffix is .go.
 
-Robert Empty interfaces: interface {}. These are implemented by all
+Robert Empty interfaces: interface{}. These are implemented by all
 interfaces, and thus this could take the place of void*.
 
 We didn't figure it all out right away. For instance, it took us over a
