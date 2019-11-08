@@ -1,3 +1,19 @@
+# go channel
+
+- close/send/recv
+
++-----------+-------------+----------------+----------------------------+
+| Operation | nil channel | closed channel | not-closed non-nil channel |
++-----------+-------------+----------------+----------------------------+
+|      close|        panic|           panic|            succeed to close|
+|-----------+-------------+----------------+----------------------------|
+|    send to|   block ever|           panic|    block or succeed to send|
+|-----------+-------------+----------------+----------------------------|
+|  recv from|   block ever|     never block|    block or succeed to recv|
++-----------+-------------+----------------+----------------------------+
+
+- channel vs mutex
+
 * Use locking (mutexes) when:
   * caching information in a shared data structure
   * holding state information, that is context or status of the running application
