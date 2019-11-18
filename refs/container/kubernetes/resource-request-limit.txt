@@ -13,3 +13,6 @@
  guaranteed by k8s  |   |             guaranteed by k8s    |   |
                     |   |                                  |   |
                     +---+                                  +---+
+
+NOTE: requests exceeds will be an important factor when linux OOMKiller chooses
+process to kill.
