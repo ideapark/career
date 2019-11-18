@@ -4,7 +4,7 @@ These are the areas that need attention before running your cluster in
 production.
 
 |                      | What is it                                  | Why you need it                              | Options                           |
-| ---                  | ---                                         | ---                                          | ---                               |
+| -------------------- | ------------------------------------------- | -------------------------------------------- | --------------------------------- |
 | Readiness Check      | Endpoints for Kubernetes to monitor         | Allows Kubernetes to restart or stop traffic | Read: Resilient apps with         |
 |                      | your application lifecycle.                 | to a pod.                                    | Liveness and Readiness            |
 |                      |                                             | Readiness failure is transient and tells     | probes.                           |

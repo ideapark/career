@@ -57,7 +57,7 @@ These are the areas that need attention before running your cluster in
 production.
 
 |                | What is it                                      | Why you need it                                   | Options                 |
-| ---            | ---                                             | ---                                               | ---                     |
+| -------------- | ----------------------------------------------- | ------------------------------------------------- | ----------------------- |
 | Build Pipeline | Tests, integrates, builds and deposits          | Ensures a bug free artefact before deployment.    | CircleCI                |
 |                | container artefact to registry.                 |                                                   | Travis                  |
 |                | Artefacts should be tagged with Git commit      |                                                   | Jenkins                 |
