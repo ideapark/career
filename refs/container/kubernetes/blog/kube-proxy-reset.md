@@ -27,8 +27,8 @@
 ## How to fixup
 
 - Make conntrack more liberal on packets, and don’t mark the packets as INVALID.
-  In Linux, you can do this by echo 1 >
-  /proc/sys/net/ipv4/netfilter/ip_conntrack_tcp_be_liberal.
+  In Linux, you can do this by:
+  `echo 1 > /proc/sys/net/ipv4/netfilter/ip_conntrack_tcp_be_liberal`
 
 - Specifically add an iptables rule to drop the packets that are marked as
   INVALID, so it won’t reach to client pod and cause harm.
