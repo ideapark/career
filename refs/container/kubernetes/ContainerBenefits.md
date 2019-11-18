@@ -37,7 +37,7 @@ application on an OS using logical resources.
 ## Lossely coupled, distributed, elastic, liberated micro-services
 
 Applications are broken into smaller, independent pieces and can be deployed and
-managed dynamically - not a fat monolithic stack running one big single-purpose
+managed dynamically - not a fat monolithic stack running on big single-purpose
 machine.
 
 ## Resource isolation
