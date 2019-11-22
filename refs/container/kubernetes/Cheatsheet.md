@@ -9,7 +9,8 @@ should be installed first
 View kubernetes config                                      kubectl config view
 View specific config items by json path                     kubectl config view -o jsonpath='{.user[?(@.name=="k8s")].user.password}'
                                                             kubectl config set-credentials kubeuser/foo.kubernetes.com \
-                                                            --username=kubeuser --password=kubepassword
+                                                                                           --username=kubeuser \
+                                                                                           --password=kubepassword
 ```
 
 ## Viewing, Finding Resources
