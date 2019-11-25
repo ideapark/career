@@ -1,20 +1,20 @@
 # go channel
 
-- close/send/recv
+## close/send/recv
 
-+-----------+-------------+----------------+----------------------------+
++-----------|-------------|----------------|----------------------------+
 | Operation | nil channel | closed channel | not-closed non-nil channel |
-+-----------+-------------+----------------+----------------------------+
++-----------|-------------|----------------|----------------------------+
 |      close|        panic|           panic|            succeed to close|
-|-----------+-------------+----------------+----------------------------|
+|-----------|-------------|----------------|----------------------------|
 |    send to|   block ever|           panic|    block or succeed to send|
-|-----------+-------------+----------------+----------------------------|
+|-----------|-------------|----------------|----------------------------|
 |  recv from|   block ever|     never block|    block or succeed to recv|
-+-----------+-------------+----------------+----------------------------+
++-----------|-------------|----------------|----------------------------+
 
-- Channel Operation
+## Channel Operation
 
-1. case A
+- case A
 
 When a goroutine `Grecv` tries to receive a value from a not-closed non-nil
 channel, the goroutine `Grecv` will acquire the lock associated with the channel
@@ -46,7 +46,7 @@ firstly, then do the following steps until one condition is satisfied.
      channel later. For this scenario, the channel receive operation is called a
      blocking operation.
 
-2. case B
+- case B
 
 When a goroutine `Gsend` tries to send a value to a not-closed non-nil channel,
 the goroutine `Gsend` will acquire the lock associated with the channel firstly,
@@ -75,7 +75,7 @@ then do the following steps until one step condition is satisfied.
      value from the channel later. For this scenario, the channel send operation
      is called a blocking operation.
 
-3. case C
+- case C
 
 When a goroutine tries to close a not-closed non-nil channel, once the goroutine
 has acquired the lock of the channel, both of the following two steps will be
@@ -94,7 +94,7 @@ performed by the following order.
      operations on the same channel. In fact, data races happen in concurrent
      send and close operations.
 
-4. case D
+- case D
 
 After a non-nil channel is closed, channel receive operations on the channel
 will never block. The values in the value buffer of the channel can still be
@@ -108,7 +108,14 @@ sent before the channel is closed. If the second return result is false, then
 the first result (the received value) must be a zero value of the element type
 of the channel.
 
-- channel vs mutex
+## Close Channel
+
+DON'T CLOSE A CHANNEL FROM THE RECEIVER SIDE AND DON'T CLOSE A CHANNEL IF THE
+CHANNEL HAS MULTIPLE CONCURRENT SENDERS.
+
+The universal principle is `DON'T CLOSE (OR SEND VALUES TO) CLOSED CHANNEL.`
+
+## channel vs mutex
 
 * Use locking (mutexes) when:
   * caching information in a shared data structure
