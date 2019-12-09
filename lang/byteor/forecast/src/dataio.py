@@ -7,7 +7,7 @@
 # 1. 从rest https导入供商DMS配置数据到Hive
 # 2. 从Hive导出DMS结果数据到Mongo
 
-# TODO(ctriple): switch mongo database by current vender
+# TODO(zhoupeng): switch mongo database by current vender
 
 import json
 import logging
