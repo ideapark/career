@@ -40,8 +40,7 @@ Lisp Introduction
 11. You can create new local variables with let, and global variables
     with defparameter.
 
-12. The assignment operator is setf. Its first argument can be an expr-
-    ession
+12. The assignment operator is setf. Its first argument can be an expression
 
 13. Functional programming, which means avoiding side-effects, is the
     dominant paradigm in Lisp.
