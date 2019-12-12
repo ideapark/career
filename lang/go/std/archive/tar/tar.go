@@ -27,14 +27,14 @@ func main() {
 			Size: int64(len(file.Body)),
 		}
 		if err := tw.WriteHeader(hdr); err != nil {
-			log.Fatalln(err)
+			log.Fatal(err)
 		}
 		if _, err := tw.Write([]byte(file.Body)); err != nil {
-			log.Fatalln(err)
+			log.Fatal(err)
 		}
 	}
 	if err := tw.Close(); err != nil {
-		log.Fatalln(err)
+		log.Fatal(err)
 	}
 
 	// Open and iterate through the files in the archive.
@@ -42,14 +42,14 @@ func main() {
 	for {
 		hdr, err := tr.Next()
 		if err == io.EOF {
-			break // end of tar archive
+			break // End of archive
 		}
 		if err != nil {
-			log.Fatalln(err)
+			log.Fatal(err)
 		}
 		fmt.Printf("Contents of %s:\n", hdr.Name)
 		if _, err := io.Copy(os.Stdout, tr); err != nil {
-			log.Fatalln(err)
+			log.Fatal(err)
 		}
 		fmt.Println()
 	}
