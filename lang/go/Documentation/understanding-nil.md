@@ -64,7 +64,7 @@ numbers --> 0              slices     --> nil  (have no backing array)
 string  --> ""             maps       --> nil  (are not initialized)
                            channels   --> nil  (are not initialized)
                            functions  --> nil  (are not initialized)
-                           interfaces --> nil  (have no value assigned, not event a nil pointer)
+                           interfaces --> nil  (have no value assigned, not even a nil pointer)
 ```
 
 - is nil useful
