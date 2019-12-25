@@ -1,8 +1,7 @@
----
-title: How does the golang scheduler works
-author: Ian Lance Taylor
-url: [Quora](https://www.quora.com/How-does-the-golang-scheduler-work/answer/Ian-Lance-Taylor)
----
+# How does the golang scheduler works
+
+Ian Lance Taylor & Dmitry Vyukov
+
 
 I will give an overview of the scheduler used as of Go version 1.7.
 
@@ -13,8 +12,8 @@ There are exactly GOMAXPROCS P’s (GOMAXPROCS is an environment variable and
 runtime function that sets the amount of parallelism in the program). In order
 for an M to execute a G, it must acquire a P. It will then run the G until it
 stops. A G stops by making a system call such as an I/O operation, by blocking
-on a channel operation, by calling a C function, by being pre-empted, or a few
-other minor cases. A G can only be pre-empted at a safe point, which in the
+on a channel operation, by calling a C function, by being preempted, or a few
+other minor cases. A G can only be preempted at a safe point, which in the
 current implementation can only happen when the code makes a function call.
 
 When a G blocks in something like a channel operation, it will be placed on a
@@ -37,7 +36,7 @@ as runnable, and, if there are available P’s, wake up an M to run it.
 Although the garbage collector is mostly concurrent, there are a couple of
 points where it has to briefly stop all the threads in order to safely move to
 the next stage of collection. It does this by marking all the running goroutines
-for pre-emption. As they reach a safe point, the G’s and the M’s will go to
+for preemption. As they reach a safe point, the G’s and the M’s will go to
 sleep. When the garbage collector is the only remaining running G, it will move
 to the next stage, and then wake up GOMAXPROC M’s, which will each find runnable
 G’s, and keep going.
@@ -46,3 +45,28 @@ The runtime.Gosched function causes the M to put its current G on the list of
 runnable goroutines and pick a new G off that list to start running.
 
 I think that’s all the main points.
+
+
+```text
+┌─┐         ┌─┐         ┌─┐         ┌─┐                  ┌─┐
+│ │         │ │         │ │         │ │                  │ │
+├─┤         ├─┤         ├─┤         ├─┤                  ├─┤ Global
+│ │         │G│         │ │         │ │                  │ │ state
+├─┤         ├─┤         ├─┤         ├─┤                  ├─┤
+│G│         │G│         │G│         │ │                  │G│
+├─┤         ├─┤         ├─┤         ├─┤                  ├─┤
+│G│         │G│         │G│         │G│                  │G│
+└┬┘         └┬┘         └┬┘         └┬┘                  └─┘
+ │           │           │           │
+ ↓           ↓           ↓           ↓
+┌─┬──────┐  ┌─┬──────┐  ┌─┬──────┐  ┌─┬──────┐     ┌────┐┌──────┐┌───────┐
+│P│mcache│  │P│mcache│  │P│mcache│  │P│mcache│     │heap││timers││netpoll│
+└┬┴──────┘  └┬┴──────┘  └┬┴──────┘  └┬┴──────┘     └────┘└──────┘└───────┘
+ │           │           │           │
+ ↓           ↓           ↓           ↓
+┌─┐         ┌─┐         ┌─┐         ┌─┐               ┌─┐ ┌─┐ ┌─┐
+│M│         │M│         │M│         │M│               │M│ │M│ │M│
+└─┘         └─┘         └─┘         └─┘               └─┘ └─┘ └─┘
+```
+
+G - goroutine; P - logical processor; M - OS thread (machine)
