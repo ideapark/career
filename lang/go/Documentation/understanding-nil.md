@@ -246,7 +246,7 @@ func (i ints) Sum() int {
     s := 0
     for _, v := range i {
         s += v
-    }_
+    }
     return s
 }
 var i []ints
