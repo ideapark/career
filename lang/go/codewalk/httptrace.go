@@ -8,7 +8,7 @@ import (
 )
 
 // transport is an http.RoundTripper that keeps track of the in-flight
-// request and implements hoos to report HTTP tracing events.
+// request and implements hooks to report HTTP tracing events.
 type transport struct {
 	current *http.Request
 }
