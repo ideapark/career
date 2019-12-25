@@ -1,5 +1,0 @@
-(defun our-reverse (lst)
-  (let ((acc nil))
-    (dolist (elt lst)
-      (push elt acc))
-    acc))

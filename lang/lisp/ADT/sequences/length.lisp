@@ -1,1 +1,0 @@
-(length '(a b c))

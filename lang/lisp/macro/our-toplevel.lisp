@@ -1,5 +1,0 @@
-(defun our-toplevel ()
-  (do ()
-      (nil)
-    (format t "~%> ")
-    (print (eval (read)))))
