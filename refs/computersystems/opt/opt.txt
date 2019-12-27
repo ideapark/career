@@ -1,8 +1,0 @@
-Performance Optimization
-========================
-
-CPE: Cycle Per Element
-
-- Eliminating loop inefficiencies
-- Reducing procedure calls
-- Eliminating unneeded memory references
