@@ -1,7 +1,0 @@
-Recursive
-=========
-
-1. Base case: The final case.
-2. Making progress: Forward to base case.
-3. Design rules: Imaging all recursive call run successfully.
-4. Compound interest rule: Do not repeat in sub-recursive.
