@@ -1,7 +1,0 @@
-NONDETERMINISTIC FINITE AUTOMATA
---------------------------------
-
-A nondeterministic finite automaton (NFA) is one that has a choice of edges –
-labeled with the same symbol – to follow out of a state. Or it may have special
-edges labeled with ε (the Greek letter epsilon), that can be followed without
-eating any symbol from the input.
