@@ -1,9 +1,0 @@
-Header
-Name
-Synopsis
-Description
-Option
-Files
-See also
-Bugs
-Author

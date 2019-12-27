@@ -1,2 +1,0 @@
-diff file1 file2 > diffs     # differ
-diff -c file1 file2 > diffs  # differ contains context

@@ -1,7 +1,0 @@
-cvs -d /usr/local/repository init
-cvs import wrox/chap9-cvs
-cvs checkout wrox/chap9-cvs
-cvs diff
-cvs rdiff
-cvs update
-cvs commit

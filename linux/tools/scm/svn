@@ -1,7 +1,0 @@
-svnadmin create /usr/local/repository
-svn import cvs-sp file:///usr/local/repository/trunk
-svn checkout file:///usr/local/repository/trunk cvs-sp
-svn diff
-svn diff tag1 tag2
-svn status -u
-svn commit
