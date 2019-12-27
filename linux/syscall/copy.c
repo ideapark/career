@@ -1,38 +1,43 @@
-/*
- * File Copy Using sendfile
- */
-
 #include <fcntl.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <sys/sendfile.h>
-#include <sys/stat.h>
-#include <sys/types.h>
 #include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+char buffer[2048];
+int version = 1;
+
+int copy(int old, int new)
+{
+	int count;
+
+	while ((count = read(old, buffer, sizeof(buffer))) > 0)
+		(void)write(new, buffer, count);
+
+	return 0;
+}
 
 int main(int argc, char *argv[])
 {
-	int read_fd;
-	int write_fd;
-	struct stat stat_buf;
-	off_t offset = 0;
+	int fdold, fdnew;
 
-	/* Open the input file. */
-	read_fd = open(argv[1], O_RDONLY);
+	if (argc != 3) {
+		printf("need 2 arguments for copy program\n");
+		exit(1);
+	}
 
-	/* Stat the input file to obtain its size. */
-	fstat(read_fd, &stat_buf);
+	fdold = open(argv[1], O_RDONLY);	/* open source file read only */
+	if (fdold == -1) {
+		printf("cannot open file %s\n", argv[1]);
+		exit(1);
+	}
 
-	/* Open the output file for writing, with the same permissions as
-	   the source file. */
-	write_fd = open(argv[2], O_WRONLY|O_CREAT, stat_buf.st_mode);
+	fdnew = creat(argv[2], 0666);	/* create target file rw for all */
+	if (fdnew == -1) {
+		printf("cannot create file %s\n", argv[2]);
+		exit(2);
+	}
 
-	/* Blast the bytes from one file to the other. */
-	sendfile(write_fd, read_fd, &offset, stat_buf.st_size);
+	(void)copy(fdold, fdnew);
 
-	/* Close up. */
-	close(read_fd);
-	close(write_fd);
-
-	return 0;
+	exit(0);
 }
