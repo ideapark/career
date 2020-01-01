@@ -24,7 +24,7 @@ MAC: 3c:97:ae:44:b3:7f
 - If you're in the same local network, you can send a packet with any random IP
   address on it, and as long as the MAC address is right it'll get there.
 
-- If you;re in a different network, to send a packet to a computer, it has to
+- If you're in a different network, to send a packet to a computer, it has to
   have the IP address of that instance on it.
 
 # Route table (cross networking)
