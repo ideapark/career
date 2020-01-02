@@ -1,16 +1,16 @@
 #include <errno.h>
 
-EPERM: permission error
-ENOENT: file/directory does not exist
-EINTR: system call interrupted
-EIO: io error
-EBUSY: device or resource busy
-EEXIST: file exist
-EINVAL: invalid parameter
-EMFILE: too many files opened
-ENODEV: device does not exist
-EISDIR: is a directory
-ENOTDIR: no a directory
+EPERM  : permission error
+ENOENT : file/directory does not exist
+EINTR  : system call interrupted
+EIO    : io error
+EBUSY  : device or resource busy
+EEXIST : file exist
+EINVAL : invalid parameter
+EMFILE : too many files opened
+ENODEV : device does not exist
+EISDIR : is a directory
+ENOTDIR: not a directory
 
 
 #include <string.h>
@@ -20,8 +20,6 @@ char *strerror(int errnum);
 NOTE:
 
     convert error code to a string
-
-
 
 #include <stdio.h>
 
