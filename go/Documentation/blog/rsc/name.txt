@@ -8,5 +8,5 @@ Similarly, i and j are a better pair of names for index variables than i1 and i2
 (or, worse, index1 and index2), because they are easier to tell apart when
 skimming the program. Global names must convey relatively more information,
 because they appear in a larger variety of contexts. Even so, a short, precise
-name can say more than a long-winded one: compare =acquire= and =take_ownership=.
-Make every name tell.
+name can say more than a long-winded one: compare `acquire` and
+`take_ownership`. Make every name tell.
