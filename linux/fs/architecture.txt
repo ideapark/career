@@ -6,18 +6,18 @@ Linux File System Architecture
           |-----------+         | <----- User Space
           |  Library  |         |
           +---------------------+
-                    ||
-                    || Call
-                    \/
+                    |
+                    | Call
+                    v
           +---------------------+
           |      System Call    |
           +---------------------+
           |--------+    Kernel  | <----- Kernel Space
           | Driver |            |
           +--------+------------+
-                 ||
-                 ||
-                 \/
+                  |
+                  |
+                  v
              +----------+
              | Hardware |
              +----------+
