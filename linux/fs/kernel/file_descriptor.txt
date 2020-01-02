@@ -1,3 +1,0 @@
-0: standard input
-1: standard output
-2: standard error
