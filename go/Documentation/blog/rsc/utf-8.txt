@@ -18,11 +18,10 @@ Table of Contents
 8 UTF-8 has no “byte order.”
 
 
-UTF-8 is a way to encode Unicode code points—integer values from 0
-through 10FFFF—into a byte stream, and it is far simpler than many
-people realize. The easiest way to make it confusing or complicated is
-to treat it as a black box, never looking inside. So let's start by
-looking inside. Here it is:
+UTF-8 is a way to encode Unicode code points—integer values from 0 through
+10FFFF—into a byte stream, and it is far simpler than many people realize. The
+easiest way to make it confusing or complicated is to treat it as a black box,
+never looking inside. So let's start by looking inside. Here it is:
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  Unicode code points      UTF-8 encoding(binary)
