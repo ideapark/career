@@ -1,6 +1,0 @@
-Closed Channel vs nil Channel
-=============================
-
-1. Send to closed channel, got pannic.
-2. Receive from closed channel, got buffered data or zero data.
-3. Both send and receive from/to nil channel, got blocked.
