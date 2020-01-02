@@ -33,7 +33,7 @@ GOOS=linux GOARCH=amd64 go tool compile -S t.go
     0x0008 00008 (t.go:5)   ADDL        CX, AX
     0x000a 00010 (t.go:5)   MOVL        AX, "".~r2+16(SP)                                            # first return value (int32)
     0x000e 00014 (t.go:5)   MOVB        $1, "".~r3+20(SP)                                            # second return value (bool true)
-    0x0013 00019 (t.go:5)   RET                                                                      # jump to return address stored a 0(SP)
+    0x0013 00019 (t.go:5)   RET                                                                      # jump to return address stored in 0(SP)
     0x0000 8b 44 24 0c 8b 4c 24 08 01 c8 89 44 24 10 c6 44  .D$..L$....D$..D
     0x0010 24 14 01 c3                                      $...
 "".main STEXT size=65 args=0x0 locals=0x18
