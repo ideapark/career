@@ -43,17 +43,17 @@ iptables -A INPUT \
          -m conntrack --ctstate NEW \
          -m recent --set --name SSHLIMIT --rsource
 
-# Create chain `ssh-rules`
-iptables -N ssh-rules
-iptables -A ssh-rules -s 18.130.0.0/16 -j ACCEPT
-iptables -A ssh-rules -s 18.11.0.0/16  -j ACCEPT
-iptables -A ssh-rules -j DROP
+# Create chain `SSH-RULES`
+iptables -N SSH-RULES
+iptables -A SSH-RULES -s 18.130.0.0/16 -j ACCEPT
+iptables -A SSH-RULES -s 18.11.0.0/16  -j ACCEPT
+iptables -A SSH-RULES -j DROP
 
-# Refer to chain `ssh-rules`
-iptables -A INPUT -p tcp -m tcp --dport 22 -j ssh-rules
+# Refer to chain `SSH-RULES`
+iptables -A INPUT -p tcp -m tcp --dport 22 -j SSH-RULES
 
-# Delete chain `ssh-rules`
-iptables -X ssh-rules
+# Delete chain `SSH-RULES`
+iptables -X SSH-RULES
 ```
 
 - Example firewall configuration
