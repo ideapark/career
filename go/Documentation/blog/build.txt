@@ -4,20 +4,6 @@
                               Dave Cheney
                             ━━━━━━━━━━━━━━━
 
-
-Table of Contents
-─────────────────
-
-1 Build tags
-.. 1.1 a build tag is evaluated as the OR of space-separated options
-.. 1.2 each option evaluates as the AND of its comma-separated terms
-.. 1.3 each term is an alphanumeric word or, preceded by !, its negation
-2 File suffixes
-
-
-
-
-
 1 Build tags
 ════════════
 
