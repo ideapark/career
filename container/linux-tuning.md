@@ -2,6 +2,8 @@
 
 - Open files
 
+Socket comumes file descriptor
+
 ```bash
 $ /proc/<pid>/limits
 Max open files         30000
@@ -13,11 +15,16 @@ Max open files         30000
 32767 - 61000
 ```
 
-- TIME_WAIT state
+- client: FIN_TIMEOUT server: TIME_WAIT
 
 ```text
 net.ipv4.ip_local_port_range = 18000 65535
-net.ipv4.netfilter.ip_conntrack_tcp_timeout_time_wait = 1
+
+# client
+net.ipv4.tcp_fin_timeout = 60
+
+# server
+net.ipv4.netfilter.ip_conntrack_tcp_timeout_time_wait = 60
 ```
 
 - Connection tracking
@@ -32,7 +39,8 @@ net.nf_conntrack_max
 Backlog of TCP connection waiting to be accepted by the application.
 
 ```text
-net.core.somaxconn
+# server
+net.core.somaxconn = 1024
 ```
 
 - JVM thread count
