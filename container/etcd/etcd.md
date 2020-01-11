@@ -1,4 +1,6 @@
-# Raft
+# Etcd
+
+## Raft
 
 - Time Sequence Required
 
@@ -30,4 +32,21 @@ broadcastTime = Network Latency + Disk Write
                                                 +--------+       |
                                                 |Follower|<------+
                                                 +--------+
+```
+
+## Etcd Server
+
+```text
++-------------------------+
+| +---------------------+ |
+| |     HTTP LAYER      | |
+| +---------------------+ |
+|                         |
+| +-------+ +-----------+ |
+| |  RAFT | |           | |
+| +-------+ | Replicate | |
+| +-------+ | State     | |
+| | Store | | Machine   | |
+| +-------+ +-----------+ |
++-------------------------+
 ```
