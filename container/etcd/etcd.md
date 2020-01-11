@@ -36,6 +36,9 @@ broadcastTime = Network Latency + Disk Write
 
 ## Etcd Server
 
+
+- Architecture
+
 ```text
 +-------------------------+
 | +---------------------+ |
@@ -49,4 +52,22 @@ broadcastTime = Network Latency + Disk Write
 | | Store | | Machine   | |
 | +-------+ +-----------+ |
 +-------------------------+
+```
+
+- Server Connection Topology
+
+#.Connection = Cn^2
+
+```text
++-------------+                 +-------------+
+| ETCD-SERVER |<----------------| ETCD-SERVER |
++-------------|---------------->+-------------+
+            /\\                   //\
+              \\                 //
+               \\               //
+                \\             //
+                 \\/         \//
+                 +-------------+
+                 | ETCD-SERVER |
+                 +-------------+
 ```
