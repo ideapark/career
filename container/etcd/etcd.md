@@ -87,3 +87,27 @@ $ etcd --name etcdX
        --advertise-client-urls https://etcdX:2379
        --discovery $ETCD_DISCOVERY
 ```
+
+- DNS self-discovery
+
+```bash
+$ dig +noall +answer SRV _etcd_server._tcp.example.com
+_etcd_server._tcp.example.com. 300 IN   SRV  0 0 2380 etcd0.example.com
+_etcd_server._tcp.example.com. 300 IN   SRV  0 0 2380 etcd1.example.com
+_etcd_server._tcp.example.com. 300 IN   SRV  0 0 2380 etcd2.example.com
+
+$ dig +noall +answer etcd0.example.com etcd1.example.com etcd2.example.com
+etcd0.example.com. 300 IN  A    10.0.1.10
+etcd1.example.com. 300 IN  A    10.0.1.20
+etcd2.example.com. 300 IN  A    10.0.1.30
+
+# X=[0,1,2]
+$ etcd --name etcdX
+       --initial-cluster-token etcd-cluster-##########
+       --initial-cluster-state new
+       --discovery-srv example.com
+       --initial-advertise-peer-urls https://etcdX.example.com:2380
+       --advertise-client-urls https://etcdX.example.com:2379
+       --listen-client-urls https://etcdX.example.com:2379
+       --listen-peer-urls https://etcdX.example.com:2380
+```
