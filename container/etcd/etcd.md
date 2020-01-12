@@ -71,3 +71,19 @@ broadcastTime = Network Latency + Disk Write
                  | ETCD-SERVER |
                  +-------------+
 ```
+
+## Cluster Initialization
+
+- Static Configuration
+
+- Etcd self-discovery
+
+```bash
+$ ETCD_DISCOVERY=$(curl https://discovery.etcd.io/new?size=3)
+$ etcd --name etcdX
+       --initial-advertise-peer-urls https://etcdX:2380
+       --listen-peer-urls https://etcdX:2380
+       --listen-client-urls https://etcdX:2379,https://localhost:2379
+       --advertise-client-urls https://etcdX:2379
+       --discovery $ETCD_DISCOVERY
+```
