@@ -398,3 +398,42 @@ to remove failing instances from the pool of responding instances
 
 to forward the request to another instance just in case you get an open circuit
 breaker or pool ejection
+
+## Chaos Testing
+
+- HTTP Errors
+
+```yaml
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: recommendation
+  namespace: tutorial
+spec:
+  host: recommendation
+  subsets:
+  - name: app-recommendation
+    labels:
+      app: recommendation
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: recommendation
+  namespace: tutorial
+spec:
+  hosts:
+  - recommendation
+  http:
+  - fault:
+      abort:
+        httpStatus: 503
+        percent: 50
+      route:
+      - destination:
+          host: recommendation
+          subset: app-recommendation
+```
+
+- Delays
