@@ -101,7 +101,7 @@ spec:
 
 - VirtualService
 
-Directs traffic using a subset and a weighting factor:
+1. Directs traffic using a subset and a weighting factor:
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
@@ -122,4 +122,31 @@ spec:
         host: recommendation
         subset: version-v2
       weight: 10
+```
+
+2. This rule uses a request header–based matching clause that will match only if
+   the request includes “Safari” as part of the user-agent header:
+
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: recommendation
+  namespace: tutorial
+spec:
+  hosts:
+  - recommendation
+  http:
+  - route:
+    - destination:
+        host: recommendation
+        subset: version-v1
+    match:
+    - headers:
+        baggage-user-agent:
+          regex: .*Safari.*
+  - route:
+    - destination:
+        host: recommendation
+        subset: version-v2
 ```
