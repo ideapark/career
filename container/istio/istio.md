@@ -170,3 +170,27 @@ spec:
       host: recommendation
       subset: version-v2
 ```
+
+- Egress
+
+Istio by default blocks all outbound (outside of the cluster) traffic unless you
+specifically and explicitly create rules to allow traffic out.
+
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: httpbin-egress-rule
+  namespace: tutorial
+spec:
+  hosts:
+  - now.httpbin.org
+  ports:
+  - name: http-80
+    number: 80
+    protocol: http
+```
+
+    $ kubectl get serviceentry -n tutorial
+    SERVICE-ENTRY NAME    HOSTS             PORTS    NAMESPACE  AGE
+    httpbin-egress-rule   now.httpbin.org   http/80  tutorial   5m
