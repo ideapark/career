@@ -383,3 +383,18 @@ spec:
         interval: 5.000s
         maxEjectionPercent: 100
 ```
+
+### Combination: Circuit Breaker + Pool Ejection + Retry
+
+1. Circuit breaker
+
+to avoid multiple concurrent requests to an instance
+
+2. Pool ejection
+
+to remove failing instances from the pool of responding instances
+
+3. Retries
+
+to forward the request to another instance just in case you get an open circuit
+breaker or pool ejection
