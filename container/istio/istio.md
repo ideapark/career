@@ -37,3 +37,35 @@ limits, also snatch monitoring and tracing data (Mixer), and even introduce a
 little chaos such as network delays or HTTP errors.
 
 - Control Plane
+
+1. Pilot
+
+The Pilot is responsible for managing the overall fleet—all of your
+microservices’ sidecars running across your Kubernetes/OpenShift cluster. The
+Istio Pilot ensures that each of the independent micro‐services, wrapped as
+individual Linux containers and running inside their pods, has the current view
+of the overall topology and an up-to-date “routing table.” Pilot provides
+capabilities like service discovery as well as support for VirtualService. The
+VirtualService is what gives you fine-grained request distribution, retries,
+timeouts, etc.
+
+2. Mixer
+
+As the name implies, Mixer is the Istio service that brings things together.
+Each of the distributed istio-proxies delivers its telemetry back to Mixer.
+Furthermore, Mixer maintains the canonical model of the usage and access
+policies for the overall suite of microservices. With Mixer, you can create
+policies, apply rate-limiting rules, and even capture custom metrics. Mixer has
+a pluggable backend architecture that is rapidly evolving with new plugins and
+partners that are extending Mixer’s default capabilities in many new and
+interesting ways.
+
+3. Citadel
+
+The Istio Citadel component, formerly known as Istio CA or Auth, is responsible
+for certificate signing, certificate issuance, and revocation/rotation. Istio
+issues X.509 certificates to all your microservices, allowing for mutual
+Transport Layer Security (mTLS) between those services, encrypting all their
+traffic transparently. It uses identity built into the underlying deployment
+platform and builds that into the certificates. This identity allows you to
+enforce policy.
