@@ -224,3 +224,86 @@ further requests.
 5. Pool ejection
 
 This provides auto removal of error-prone pods from the load- balancing pool.
+
+### Load Balancing
+
+1. ROUND_ROBIN
+
+This algorithm evenly distributes the load, in order, across the endpoints in
+the load-balancing pool.
+
+2. RANDOM
+
+This evenly distributes the load across the endpoints in the load-balancing pool
+but without any order.
+
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: recommendation
+  namespace: tutorial
+spec:
+  host: recommendation
+  trafficPolicy:
+    loadBalancer:
+      simple: RANDOM
+```
+
+3. LEAST_CONN
+
+This algorithm picks two random hosts from the load-balancing pool and
+determines which host has fewer outstanding requests (of the two) and sends to
+that endpoint. This is an implementa‐ tion of weighted least request load
+balancing.
+
+### Timeout
+
+Waiting is not a good solution if there is a customer on the other end of the
+request. Waiting also uses resources, causes other systems to potentially wait,
+and is usully a significant contributor to cascading failures. Your network
+traffic should always have timeouts in place, and you can use Istio service mesh
+to do this.
+
+```
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: recommendation
+  namespace: tutorial
+spec:
+  hosts:
+  - recommendation
+  http:
+  - route:
+    - destination:
+        host: recommendation
+    timeout: 1.000s
+```
+
+### Retry
+
+The network is not reliable you might experience transient, intermittent errors.
+This can be even more pronounced with distributed microservices rapidly
+deploying several times a week or even a day. The service or pod might have gone
+down only briefly. With Istio’s retry capability, you can make a few more
+attempts before having to truly deal with the error, potentially falling back to
+default logic.
+
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: recommendation
+  namespace: tutorial
+spec:
+  hosts:
+  - recommendation
+  http:
+  - route:
+    - destination:
+        host: recommendation
+    retries:
+      attempts: 3
+      perTryTimeout: 2s
+```
