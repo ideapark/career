@@ -71,3 +71,55 @@ platform and builds that into the certificates. This identity allows you to
 enforce policy.
 
 ## Up and Running
+
+![istio](https://istio.io/docs/)
+
+    $ istioctl kube-inject -f your-deployment.yaml
+
+## Traffic Control
+
+- DestinationRule
+
+Establishes which pods make up a specific subset:
+
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: recommendation
+  namespace: tutorial
+spec:
+  host: recommendation
+  subsets:
+  - name: version-v1
+    labels:
+      version: v1
+  - name: version-v2
+    labels:
+      version: v2
+```
+
+- VirtualService
+
+Directs traffic using a subset and a weighting factor:
+
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: recommendation
+  namespace: tutorial
+spec:
+  hosts:
+  - recommendation
+  http:
+  - route:
+    - destination:
+        host: recommendation
+        subset: version-v1
+      weight: 90
+    - destination:
+        host: recommendation
+        subset: version-v2
+      weight: 10
+```
