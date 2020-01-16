@@ -483,3 +483,133 @@ spec:
 ### Service Graph
 
 - Kiali
+
+## Security
+
+### mutual Transport Layer Security (mTLS)
+
+Enabling mTLS in Istio uses the combination of Policy and Destina tionRule
+objects.
+
+This applies to all services in the tutorial namespace. You can also optionally
+set a “mode” of *PERMISSIVE* versus *STRICT*. which allows for both mTLS and
+non-mTLS traffic, useful for scenarios where the sidecar, istio-proxy, has not
+yet been applied to all of your services.
+
+```yaml
+---
+apiVersion: authentication.istio.io/v1alpha3
+kind: Policy
+metadata:
+  name: default
+  namespace: tutorial
+spec:
+  peers:
+  - mtls: {}
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: default
+  namespace: tutorial
+spec:
+  host: "*.tutorial.svc.cluster.local"
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+```
+
+Now that you have enabled mTLS, you need to leverage a gateway to achieve
+end-to-end encryption. To set up the Istio Gateway for the customer service,
+create the Gate way and its supporting VirtualService objects.
+
+```yaml
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: customer-gateway
+  namespace: tutorial
+spec:
+  selector:
+    istio: ingressgateway  # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: customer
+  namespace: tutorial
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - customer-gateway
+  http:
+  - route:
+    - destination:
+        host: customer
+        port:
+          number: 8080
+    match:
+    - uri:
+        exact: /
+```
+
+### Access Control with Mixer Policy
+
+Istio’s Mixer Policy service allows you to construct a series of rules that
+ensure the various microservices that make up your application follow an
+approved invocation path.
+
+### Role-Based Access Control (RBAC)
+
+```yaml
+apiVersion: "rbac.istio.io/v1alpha1"
+kind: RbacConfig
+metadata:
+  name: default
+spec:
+  mode: ON_WITH_INCLUSION
+  inclusion:
+    namespaces: ["tutorial"]
+```
+
+• OFF: Istio authorization is disabled.
+• ON: Istio authorization is enabled for all services in the mesh.
+• ON_WITH_INCLUSION: Enabled only for services and name‐ spaces specified in the inclusion field.
+• ON_WITH_EXCLUSION: Enabled for all services in the mesh except the services and namespaces specified in the exclusion field.
+
+```yaml
+---
+apiVersion: rbac.istio.io/v1alpha1
+kind: ServiceRole
+metadata:
+  name: service-viewer
+  namespace: tutorial
+spec:
+  rules:
+  - services: ["*"]
+    methods: ["GET"]
+    constraints:
+    - key: "destination.labels[app]"
+      values: ["customer", "recommendation", "preference"]
+---
+apiVersion: rbac.istio.io/v1alpha1
+kind: ServiceRoleBinding
+metadata:
+  name: bind-service-viewer
+  namespace: tutorial
+spec:
+  subjects:
+  - user: "*"
+  roleRef:
+    kind: ServiceRole
+    name: "service-viewer"
+```
