@@ -581,10 +581,22 @@ spec:
     namespaces: ["tutorial"]
 ```
 
-• OFF: Istio authorization is disabled.
-• ON: Istio authorization is enabled for all services in the mesh.
-• ON_WITH_INCLUSION: Enabled only for services and name‐ spaces specified in the inclusion field.
-• ON_WITH_EXCLUSION: Enabled for all services in the mesh except the services and namespaces specified in the exclusion field.
+- OFF
+
+Istio authorization is disabled.
+
+- ON
+
+Istio authorization is enabled for all services in the mesh.
+
+- ON_WITH_INCLUSION
+
+Enabled only for services and name‐ spaces specified in the inclusion field.
+
+- ON_WITH_EXCLUSION
+
+Enabled for all services in the mesh except the services and namespaces
+specified in the exclusion field.
 
 ```yaml
 ---
