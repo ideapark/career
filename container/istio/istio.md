@@ -194,3 +194,33 @@ spec:
     $ kubectl get serviceentry -n tutorial
     SERVICE-ENTRY NAME    HOSTS             PORTS    NAMESPACE  AGE
     httpbin-egress-rule   now.httpbin.org   http/80  tutorial   5m
+
+## Service Resiliency
+
+Istio comes with many capabilities for implementing resilience within
+applications, but just as we noted earlier, the actual enforce‐ ment of these
+capabilities happens in the sidecar. This means that the resilience features
+listed here are not targeted toward any spe‐ cific programming language/runtime;
+they’re applicable regardless of library or framework you choose to write your
+service:
+
+1. Client-side load balancing
+
+Istio augments Kubernetes out-of-the-box load balancing.
+
+2. Timeout
+
+Wait only N seconds for a response and then give up.
+
+3. Retry
+
+If one pod returns an error (e.g., 503), retry for another pod.
+
+4. Simple circuit breaker
+
+Instead of overwhelming the degraded service, open the circuit and reject
+further requests.
+
+5. Pool ejection
+
+This provides auto removal of error-prone pods from the load- balancing pool.
