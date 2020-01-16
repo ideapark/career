@@ -437,3 +437,27 @@ spec:
 ```
 
 - Delays
+
+The most insidious of possible distributed computing faults is not a “dead”
+service but a service that is responding slowly, potentially causing a cascading
+failure in your network of services.
+
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: recommendation
+  namespace: tutorial
+spec:
+  hosts:
+  - recommendation
+  http:
+  - fault:
+      delay:
+        fixedDelay: 7.000s
+        percent: 50
+    route:
+    - destination:
+        host: recommendation
+        subset: app-recommendation
+```
