@@ -72,7 +72,7 @@ enforce policy.
 
 ## Up and Running
 
-![istio](https://istio.io/docs/)
+[istio](https://istio.io/docs/)
 
     $ istioctl kube-inject -f your-deployment.yaml
 
