@@ -154,10 +154,11 @@ spec:
 3. Dark Launch:
 
 ```yaml
-apiVersion: networking.istio.io/v1alpha3 kind: VirtualService
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
 metadata:
-      name: recommendation
-      namespace: tutorial
+  name: recommendation
+  namespace: tutorial
 spec:
   hosts:
   - recommendation
@@ -191,16 +192,18 @@ spec:
     protocol: http
 ```
 
-    $ kubectl get serviceentry -n tutorial
-    SERVICE-ENTRY NAME    HOSTS             PORTS    NAMESPACE  AGE
-    httpbin-egress-rule   now.httpbin.org   http/80  tutorial   5m
+```text
+$ kubectl get serviceentry -n tutorial
+SERVICE-ENTRY NAME    HOSTS             PORTS    NAMESPACE  AGE
+httpbin-egress-rule   now.httpbin.org   http/80  tutorial   5m
+```
 
 ## Service Resiliency
 
 Istio comes with many capabilities for implementing resilience within
-applications, but just as we noted earlier, the actual enforce‐ ment of these
+applications, but just as we noted earlier, the actual enforcement of these
 capabilities happens in the sidecar. This means that the resilience features
-listed here are not targeted toward any spe‐ cific programming language/runtime;
+listed here are not targeted toward any specific programming language/runtime;
 they’re applicable regardless of library or framework you choose to write your
 service:
 
@@ -265,7 +268,7 @@ and is usully a significant contributor to cascading failures. Your network
 traffic should always have timeouts in place, and you can use Istio service mesh
 to do this.
 
-```
+```yaml
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
@@ -342,7 +345,7 @@ spec:
 ### Pool Ejection
 
 Identifying badly behaving cluster hosts and not sending any more traffic to
-them for a cool-off period (essentially kicking the bad- behaving pod out of the
+them for a cool-off period (essentially kicking the bad-behaving pod out of the
 load-balancing pool).
 
 ```yaml
@@ -468,13 +471,15 @@ spec:
 
 - OpenTracing Headers
 
-    x-request-id
-    x-b3-traceid
-    x-b3-spanid
-    x-b3-parentspanid
-    x-b3-sampled
-    x-b3-flags
-    x-ot-span-context
+```text
+x-request-id
+x-b3-traceid
+x-b3-spanid
+x-b3-parentspanid
+x-b3-sampled
+x-b3-flags
+x-ot-span-context
+```
 
 ### Metrics
 
@@ -488,11 +493,11 @@ spec:
 
 ### mutual Transport Layer Security (mTLS)
 
-Enabling mTLS in Istio uses the combination of Policy and Destina tionRule
+Enabling mTLS in Istio uses the combination of Policy and DestinationRule
 objects.
 
 This applies to all services in the tutorial namespace. You can also optionally
-set a “mode” of *PERMISSIVE* versus *STRICT*. which allows for both mTLS and
+set a "mode" of *PERMISSIVE* versus *STRICT*. which allows for both mTLS and
 non-mTLS traffic, useful for scenarios where the sidecar, istio-proxy, has not
 yet been applied to all of your services.
 
@@ -591,7 +596,7 @@ Istio authorization is enabled for all services in the mesh.
 
 - ON_WITH_INCLUSION
 
-Enabled only for services and name‐ spaces specified in the inclusion field.
+Enabled only for services and namespaces specified in the inclusion field.
 
 - ON_WITH_EXCLUSION
 
