@@ -5,7 +5,7 @@ Linux File System Architecture
           |      User Program   |
           |-----------+         | <----- User Space
           |  Library  |         |
-          +---------------------+
+          +-----------+---------+
                     |
                     | Call
                     v
