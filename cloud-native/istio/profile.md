@@ -39,7 +39,7 @@ The components marked as *Y* are installed within each profile:
 
 |                        | default | demo | minimal | sds | remote |
 |------------------------|---------|------|---------|-----|--------|
-| CORE COMPONENTS        |         |      |         |     |        |
+| [CORE COMPONENTS]      |         |      |         |     |        |
 | istio-citadel          | Y       | Y    |         | Y   | Y      |
 | istio-egressgateway    |         | Y    |         |     |        |
 | istio-galley           | Y       | Y    |         | Y   |        |
@@ -49,7 +49,7 @@ The components marked as *Y* are installed within each profile:
 | istio-policy           | Y       | Y    |         | Y   |        |
 | istio-sidecar-injector | Y       | Y    |         | Y   | Y      |
 | istio-telemetry        | Y       | Y    |         | Y   |        |
-| ADDONS                 |         |      |         |     |        |
+| [ADDONS]               |         |      |         |     |        |
 | grafana                |         | Y    |         |     |        |
 | istio-tracing          |         | Y    |         |     |        |
 | kiali                  |         | Y    |         |     |        |
