@@ -486,6 +486,11 @@ x-ot-span-context
 
 - Promethues + Grafana
 
+1. Latency
+2. Traffic
+3. Errors
+4. Saturation
+
 ### Service Graph
 
 - Kiali
