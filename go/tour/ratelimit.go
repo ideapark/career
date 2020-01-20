@@ -12,7 +12,7 @@ func main() {
 	}
 	close(requests)
 
-	limiter := time.Tick(time.Millisecond * 200)
+	limiter := time.Tick(200 * time.Millisecond)
 
 	for req := range requests {
 		<-limiter
