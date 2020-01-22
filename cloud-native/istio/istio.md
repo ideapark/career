@@ -75,7 +75,9 @@ enforce policy.
 - [istio](https://istio.io/docs/)
 - [istio profile](profile.md)
 
-    $ istioctl kube-inject -f your-deployment.yaml
+```bash
+$ istioctl kube-inject -f kube-deployment.yaml
+```
 
 ## Traffic Control
 
