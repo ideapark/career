@@ -1,8 +1,0 @@
-First Class Object
-==================
-
-- can be constructed at runtime
-- can be used as func args or return value
-- can be stored into variable
-
-Function is a kind of First-Class-Object in Golang.
