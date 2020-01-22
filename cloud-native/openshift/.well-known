@@ -1,9 +1,9 @@
-https://k8s.byteor.cn/.well-known/oauth-authorization-server
+https://k8s.iobuf.io/.well-known/oauth-authorization-server
 
 {
-  "issuer": "https://k8s.byteor.cn",
-  "authorization_endpoint": "https://k8s.byteor.cn/oauth/authorize",
-  "token_endpoint": "https://k8s.byteor.cn/oauth/token",
+  "issuer": "https://k8s.iobuf.io",
+  "authorization_endpoint": "https://k8s.iobuf.io/oauth/authorize",
+  "token_endpoint": "https://k8s.iobuf.io/oauth/token",
   "scopes_supported": [
     "user:check-access",
     "user:full",
