@@ -52,7 +52,7 @@ func main() {
 }
 ```
 
-```shell
+```bash
 GOOS=linux GOARCH=amd64 go tool compile -S t.go
 ```
 
@@ -293,37 +293,37 @@ func main() {
 ```
 
 ```asm
-	0x0000 00000 (t.go:16)	TEXT	"".main(SB), $48-0
-	0x0000 00000 (t.go:16)	MOVQ	(TLS), CX
-	0x0009 00009 (t.go:16)	CMPQ	SP, 16(CX)
-	0x000d 00013 (t.go:16)	JLS	108
-	0x000f 00015 (t.go:16)	SUBQ	$48, SP
-	0x0013 00019 (t.go:16)	MOVQ	BP, 40(SP)
-	0x0018 00024 (t.go:16)	LEAQ	40(SP), BP
-	0x001d 00029 (t.go:16)	FUNCDATA	$0, gclocals·33cdeccccebe80329f1fdbee7f5874cb(SB)
-	0x001d 00029 (t.go:16)	FUNCDATA	$1, gclocals·33cdeccccebe80329f1fdbee7f5874cb(SB)
-	0x001d 00029 (t.go:17)	MOVL	$6754, ""..autotmp_1+36(SP)                             # create an addressable $6754 value at 36(SP)
-	0x0025 00037 (t.go:17)	LEAQ	go.itab."".Adder,"".Mather(SB), AX                      # set up go.itab."".Adder,"".Mather
-	0x002c 00044 (t.go:17)	MOVQ	AX, (SP)                                                # as first argument (tab *itab)
-	0x0030 00048 (t.go:17)	LEAQ	""..autotmp_1+36(SP), AX                                # set up &36(SP)
-	0x0035 00053 (t.go:17)	MOVQ	AX, 8(SP)                                               # as second argument (val unsafe.Pointer)
-	0x003a 00058 (t.go:17)	PCDATA	$0, $0
-	0x003a 00058 (t.go:17)	CALL	runtime.convT2I32(SB)                                   # func convT2I32(tab *itab, val uint32) (i iface)
-	0x003f 00063 (t.go:17)	MOVQ	16(SP), AX                                              # AX now holds i.tab
-	0x0044 00068 (t.go:17)	MOVQ	24(SP), CX                                              # CX now holds i.data
-	0x0049 00073 (t.go:18)	MOVQ	24(AX), AX                                              # AX now holds iface.tab.fun[0]
-	0x004d 00077 (t.go:18)	MOVQ	$137438953482, DX                                       # move (32,10) to
-	0x0057 00087 (t.go:18)	MOVQ	DX, 8(SP)                                               # the top of the stack (argument #3 & #2)
-	0x005c 00092 (t.go:18)	MOVQ	CX, (SP)
-	0x0060 00096 (t.go:18)	PCDATA	$0, $0
-	0x0060 00096 (t.go:18)	CALL	AX                                                      # call func (adder Adder) Add(a, b int32) int32
-	0x0062 00098 (t.go:19)	MOVQ	40(SP), BP
-	0x0067 00103 (t.go:19)	ADDQ	$48, SP
-	0x006b 00107 (t.go:19)	RET
-	0x006c 00108 (t.go:19)	NOP
-	0x006c 00108 (t.go:16)	PCDATA	$0, $-1
-	0x006c 00108 (t.go:16)	CALL	runtime.morestack_noctxt(SB)
-	0x0071 00113 (t.go:16)	JMP	0
+0x0000 00000 (t.go:16)	TEXT	"".main(SB), $48-0
+0x0000 00000 (t.go:16)	MOVQ	(TLS), CX
+0x0009 00009 (t.go:16)	CMPQ	SP, 16(CX)
+0x000d 00013 (t.go:16)	JLS	108
+0x000f 00015 (t.go:16)	SUBQ	$48, SP
+0x0013 00019 (t.go:16)	MOVQ	BP, 40(SP)
+0x0018 00024 (t.go:16)	LEAQ	40(SP), BP
+0x001d 00029 (t.go:16)	FUNCDATA	$0, gclocals·33cdeccccebe80329f1fdbee7f5874cb(SB)
+0x001d 00029 (t.go:16)	FUNCDATA	$1, gclocals·33cdeccccebe80329f1fdbee7f5874cb(SB)
+0x001d 00029 (t.go:17)	MOVL	$6754, ""..autotmp_1+36(SP)                             # create an addressable $6754 value at 36(SP)
+0x0025 00037 (t.go:17)	LEAQ	go.itab."".Adder,"".Mather(SB), AX                      # set up go.itab."".Adder,"".Mather
+0x002c 00044 (t.go:17)	MOVQ	AX, (SP)                                                # as first argument (tab *itab)
+0x0030 00048 (t.go:17)	LEAQ	""..autotmp_1+36(SP), AX                                # set up &36(SP)
+0x0035 00053 (t.go:17)	MOVQ	AX, 8(SP)                                               # as second argument (val unsafe.Pointer)
+0x003a 00058 (t.go:17)	PCDATA	$0, $0
+0x003a 00058 (t.go:17)	CALL	runtime.convT2I32(SB)                                   # func convT2I32(tab *itab, val uint32) (i iface)
+0x003f 00063 (t.go:17)	MOVQ	16(SP), AX                                              # AX now holds i.tab
+0x0044 00068 (t.go:17)	MOVQ	24(SP), CX                                              # CX now holds i.data
+0x0049 00073 (t.go:18)	MOVQ	24(AX), AX                                              # AX now holds iface.tab.fun[0]
+0x004d 00077 (t.go:18)	MOVQ	$137438953482, DX                                       # move (32,10) to
+0x0057 00087 (t.go:18)	MOVQ	DX, 8(SP)                                               # the top of the stack (argument #3 & #2)
+0x005c 00092 (t.go:18)	MOVQ	CX, (SP)
+0x0060 00096 (t.go:18)	PCDATA	$0, $0
+0x0060 00096 (t.go:18)	CALL	AX                                                      # call func (adder Adder) Add(a, b int32) int32
+0x0062 00098 (t.go:19)	MOVQ	40(SP), BP
+0x0067 00103 (t.go:19)	ADDQ	$48, SP
+0x006b 00107 (t.go:19)	RET
+0x006c 00108 (t.go:19)	NOP
+0x006c 00108 (t.go:16)	PCDATA	$0, $-1
+0x006c 00108 (t.go:16)	CALL	runtime.morestack_noctxt(SB)
+0x0071 00113 (t.go:16)	JMP	0
 ```
 
 ## Measurement
