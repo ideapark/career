@@ -4,14 +4,17 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"sync/atomic"
 )
 
 // Simple count server.
-type Counter int
+type Counter struct {
+	c int64
+}
 
 func (ctr *Counter) ServeHTTP(w http.ResponseWriter, req *http.Request) {
-	*ctr++
-	fmt.Fprintf(w, "counter = %d\n", *ctr)
+	atomic.AddInt64(&ctr.c, 1)
+	fmt.Fprintf(w, "counter = %d\n", ctr.c)
 }
 
 // A channel what sends a notification on each visit.
