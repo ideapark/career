@@ -19,4 +19,4 @@
 [Stopped]
 
     The process is stopped, it may be continued later. (If you've used shell
-    job control with CTRL-Z, fg, and bg, you understood stopping a procss.)
+    job control with CTRL-Z, fg, and bg, you understood stopping a process.)

@@ -6,16 +6,16 @@
  Descriptor tables,            0 | 1 | 2 |               0 | 1 | 2 |
  per process:                  ===========               ===========
                                |   |                     |   |
-                               | |-|---------------------|   |
-                              \|\| |-----------------------| |
-                                                          \|\|
+                               | +-----------------------+   |
+                               | | +---------------------+   |
+                               v v                       v   v
                 Bookkeeping | Bookkeeping | Bookkeeping | Bookkeeping |
  File table:    ------------|-------------|-------------|-------------|
                    Offset   |   Offset    |   Offset    |   Offset    |
                 =======================================================
                                  |                             |
                                  |                             |
-                                \|                            \|
+                                 v                             v
  File contents:                   | | |                   | | |
                                   | | |                   | | |
                                  =======                 =======
@@ -29,16 +29,16 @@ Duplicating Open Files: dup2(1, 3)
  Descriptor tables,             0 | 1 | 2 | 3 |
  per process:                   ===============
                                 |   |   |   |
-                                |   | --|---|
-                         |------|   | | |-----------|
-                        \|         \|\|            \|
+                                |   | +-|---+
+                         +------+   | | +-----------+
+                         v          v v             v
                   Bookkeeping | Bookkeeping | Bookkeeping |
  File table:      ------------|-------------|-------------|
                      Offset   |    Offset   |    Offset   |
                   =========================================
                                     |
                                     |
-                                   \|
+                                    v
                                      | | |
                                      | | |
  File contents:                     =======
