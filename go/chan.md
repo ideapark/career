@@ -1,16 +1,14 @@
-# go channel
+# Go Channel
 
 ## close/send/recv
 
-+-----------|-------------|----------------|----------------------------+
 | Operation | nil channel | closed channel | not-closed non-nil channel |
-+-----------|-------------|----------------|----------------------------+
-|      close|        panic|           panic|            succeed to close|
-|-----------|-------------|----------------|----------------------------|
-|    send to|   block ever|           panic|    block or succeed to send|
-|-----------|-------------|----------------|----------------------------|
-|  recv from|   block ever|     never block|    block or succeed to recv|
-+-----------|-------------|----------------|----------------------------+
+|-----------+-------------+----------------+----------------------------|
+| close     | panic       | panic          | succeed to close           |
+|-----------+-------------+----------------+----------------------------|
+| send to   | block ever  | panic          | block or succeed to send   |
+|-----------+-------------+----------------+----------------------------|
+| recv from | block ever  | never block    | block or succeed to recv   |
 
 ## Channel Operation
 
