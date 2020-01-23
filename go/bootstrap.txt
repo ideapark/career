@@ -19,9 +19,6 @@ Table of Contents
 9 Step 9. go tool api
 
 
-
-
-
 1 Step 1. all.bash
 ══════════════════
 
