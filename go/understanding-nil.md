@@ -154,7 +154,7 @@ use nil channel to disable a select case.
   close of nil channel panic
 
 ```
-// bug #1
+// BUG #1
 // if a or b closed, zero value return from channel
 func merge(out chan<- int, a, b <-chan int) {
     for {
@@ -167,7 +167,7 @@ func merge(out chan<- int, a, b <-chan int) {
     }
 }
 
-// bug #2
+// BUG #2
 // panic: goroutine deadlock
 func merge(out chan<- int, a, b <-chan int) {
     var aclosed, bclosed bool
@@ -183,7 +183,7 @@ func merge(out chan<- int, a, b <-chan int) {
     }
 }
 
-// work
+// WORK
 func merge(out chan<- int, a, b <-chan int) {
     for a != nil || b != nil {
         select {
@@ -226,7 +226,7 @@ nil interface is used as a signal
 
 ```go
 if err == nil {
-...
+    ...
 }
 ```
 
