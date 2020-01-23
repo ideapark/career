@@ -363,7 +363,7 @@ ok  	strings	0.374s
 
 ## Special cases & compiler tricks
 
-### emtpy interface
+### empty interface
 
 ```go
 type eface struct { // 16 bytes on linux/amd64
