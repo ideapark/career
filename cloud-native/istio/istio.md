@@ -76,7 +76,11 @@ enforce policy.
 - [istio profile](profile.md)
 
 ```bash
+# mannual injection
 $ istioctl kube-inject -f kube-deployment.yaml
+
+# automatic injection
+$ kubectl label namespace my-namespace istio-injection=enabled
 ```
 
 ## Traffic Control
