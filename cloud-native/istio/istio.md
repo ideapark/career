@@ -158,7 +158,7 @@ spec:
         subset: version-v2
 ```
 
-3. Dark Launch:
+3. Traffic mirror (Dark launch):
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
