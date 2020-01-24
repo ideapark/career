@@ -10,7 +10,7 @@ There are lots of posts that talk about the internals of slices, but when it
 comes to maps, we are left in the dark. I was wondering why and then I found the
 code for maps and it all made sense.
 
-https://golang.org/src/runtime/hashmap.go
+https://golang.org/src/runtime/map.go
 
 At least for me, this code is complicated. That being said, I think we can
 create a macro view of how maps are structured and grow. This should explain why
@@ -82,7 +82,7 @@ as (colors["Black"] = "#000000"), a hash key is generated against the key that
 is specified. In this case the string "Black" is used to generate the hash key.
 The low order bits (LOB) of the generated hash key is used to select a bucket.
 
-![hashmap-01.png](hashmap-01.png)
+![map1.png](map1.png)
 
 Once a bucket is selected, the key/value pair needs to be stored, removed or
 looked up, depending on the type of operation. If we look inside any bucket, we
@@ -93,7 +93,7 @@ bucket. Second, there is an array of bytes that store the key/value pairs. The
 byte array packs all the keys and then all the values together for the
 respective bucket.
 
-![hashmap-02.png](hashmap-02.png)
+![map2.png](map2.png)
 
 When we are iterating through a map, the iterator walks through the array of
 buckets and then return the key/value pairs in the order they are laid out in
@@ -125,7 +125,7 @@ A bucket is configured to store only 8 key/value pairs. If a ninth key needs to
 be added to a bucket that is full, an overflow bucket is created and reference
 from inside the respective bucket.
 
-![hashmap-03.png](hashmap-03.png)
+![map3.png](map3.png)
 
 ## How Maps Grow
 
@@ -158,7 +158,7 @@ key/value pairs that are together in an old bucket could be moved to different
 buckets inside the new bucket array. The evacuation algorithm attempts to
 distribute the key/value pairs evenly across the new bucket array.
 
-![hashmap-04.png](hashmap-04.png)
+![map4.png](map4.png)
 
 This is a very delicate dance because iterators still need to run through the
 old buckets until every old bucket has been evacuated. This also affects how
