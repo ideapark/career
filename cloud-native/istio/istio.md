@@ -21,9 +21,7 @@ capabilities like automatic retries, circuit breaker, service discovery,
 security, and more. The default service proxy for Istio is based on Envoy proxy.
 It provides features like load balancing for HTTP1.1, HTTP2, and gRPC. It has
 the ability to collect request-level metrics, trace spans, provide for service
-discovery, inject faults, and much more. You might notice that some of the
-capabilities of Istio overlap with Envoy. This fact is simply explained as Istio
-uses Envoy for its implementation of these capabilities.
+discovery, inject faults, and much more.
 
 2. Sidecar
 
