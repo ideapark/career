@@ -1,4 +1,4 @@
-// Print and passthrough trace headers
+// istio: print and passthrough trace headers
 package main
 
 import (
