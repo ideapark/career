@@ -2,6 +2,7 @@
 
 - Application Layer Networking
 
+```text
 +-------------------------------------------------------+
 | Additional Key Capabilities                           |
 |                                                       |
@@ -9,9 +10,11 @@
 | 2. Application Deployments                            |
 | 3. Application Secrets                                |
 +-------------------------------------------------------+
+```
 
 - Service Layer Networking
 
+```text
 +------------------------------------------+
 | Missing Service-Level needs:             |
 |                                          |
@@ -31,9 +34,11 @@
 | 12. Policy                               |
 | 13. Service performance monitoring       |
 +------------------------------------------+
+```
 
 - Lower Layer Networking (e.g, Kubernetes Networking)
 
+```text
 +----------------------------------------------+
 | Core Capabilities                            |
 |                                              |
@@ -47,3 +52,4 @@
 | 6. Stateful services                         |
 | 7. Multi-tenant, multi-region                |
 +----------------------------------------------+
+```
