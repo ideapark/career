@@ -1,6 +1,6 @@
-# REST
+# REST: Representational State Transfer
 
-[Representational State Transfer](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)
+[REST](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)
 
 ## Constraints
 
