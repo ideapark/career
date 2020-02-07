@@ -27,7 +27,9 @@ func tracingMiddleware(next http.HandlerFunc) http.HandlerFunc {
 
 func main() {
 	http.HandleFunc("/", tracingMiddleware(func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello headers, %v", r.Header)
+		for k, v := range r.Header {
+			fmt.Fprintln(w, k, ":", v)
+		}
 	}))
 
 	log.Fatal(http.ListenAndServe(":8081", nil))
