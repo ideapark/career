@@ -12,7 +12,7 @@
 +-------------------------------------------------------+
 ```
 
-- Service Layer Networking
+- Service Layer Networking (e.g, Istio ServiceMesh)
 
 ```text
 +------------------------------------------+
