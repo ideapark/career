@@ -183,7 +183,8 @@ spec:
 - Egress
 
 Istio by default blocks all outbound (outside of the cluster) traffic unless you
-specifically and explicitly create rules to allow traffic out.
+specifically and explicitly create rules to allow traffic out. (NOTE: this is
+not true as of istio-1.4.3 with `default` profile)
 
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
