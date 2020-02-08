@@ -106,6 +106,9 @@ spec:
 
 - VirtualService
 
+Without virtual services, Envoy distributes traffic using round-robin load
+balancing between all service instances.
+
 1. Directs traffic using a subset and a weighting factor:
 
 ```yaml
