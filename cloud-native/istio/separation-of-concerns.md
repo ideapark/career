@@ -1,6 +1,6 @@
-# Container Orchestration Capabilities And Focus VS Service-Level Needs
+# Separation of Concerns in Cloud-Native Applications
 
-- Application Layer Networking
+- Application
 
 ```text
 +-------------------------------------------------------+
@@ -12,7 +12,7 @@
 +-------------------------------------------------------+
 ```
 
-- Service Layer Networking (e.g, Istio ServiceMesh)
+- Service Mesh (Istio)
 
 ```text
 +------------------------------------------+
@@ -36,7 +36,7 @@
 +------------------------------------------+
 ```
 
-- Lower Layer Networking (e.g, Kubernetes Networking)
+- Deployment Platform (Kubernetes)
 
 ```text
 +----------------------------------------------+
