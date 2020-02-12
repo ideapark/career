@@ -43,10 +43,10 @@ Identity:
 1. X.509 SPIFF (spiff://cluster.local/ns/default/sa/default)
 2. JWT (USE_ORIGIN)
 
-Policy enforcement:
+Policy scope:
 
-1. MeshPolicy (mesh wide)
-2. Policy (namespace wide, service wide)
+1. MeshPolicy (mesh)
+2. Policy (namespace, service)
 
 - Authorization
 
