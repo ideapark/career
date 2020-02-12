@@ -45,8 +45,20 @@ Identity:
 
 Policy scope:
 
-1. MeshPolicy (mesh)
-2. Policy (namespace, service)
+1. Mesh-wide: *meshpolicy.authentication.istio.io*
+
+A policy defined in the mesh-scope storage with no target selector section.
+There can be at most one mesh-wide policy in the mesh.
+
+2. Namespace-wide: *policy.authentication.istio.io*
+
+A policy defined in the namespace-scope storage with name default and no target
+selector section. There can be at most one namespace-wide policy per namespace.
+
+3. Service-specific: *policy.authentication.istio.io*
+
+A policy defined in the namespace-scope storage, with non-empty target selector
+section. A namespace can have zero, one, or many service-specific policies.
 
 - Authorization
 
