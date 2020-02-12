@@ -38,6 +38,13 @@ forwarding traffic. You can use a sidecar configuration to do the following:
 
 - Authentication
 
+Identity:
+
+1. X.509 SPIFF (spiff://cluster.local/ns/default/sa/default)
+2. JWT (USE_ORIGIN)
+
+Policy enforcement:
+
 1. MeshPolicy (mesh wide)
 2. Policy (namespace wide, service wide)
 
