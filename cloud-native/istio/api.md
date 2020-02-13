@@ -40,8 +40,8 @@ forwarding traffic. You can use a sidecar configuration to do the following:
 
 Identity:
 
-1. X.509 SPIFF (spiff://cluster.local/ns/default/sa/default)
-2. JWT (USE_ORIGIN)
+1. x509 SPIFFE (spiffe://cluster.local/ns/default/sa/default)
+2. JWT: json web token (USE_ORIGIN)
 
 Policy scope:
 
