@@ -47,7 +47,7 @@ typedef struct rbtree_t {
 	rbtree_node root;
 } *rbtree;
 
-typedef int (*compare_func) (void *left, void *right);
+typedef int (*compare_func)(void *left, void *right);
 
 rbtree rbtree_create();
 void *rbtree_lookup(rbtree t, void *key, compare_func compare);
