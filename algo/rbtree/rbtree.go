@@ -115,8 +115,8 @@ func getcolor(n *node) color {
 
 // verify enforces the following five properties, which provide a theoretical
 // guarantee that the tree remains balanced. Note that many of these tests walk
-// the tree, making them very expensive, for this reason we turn them off by
-// default.
+// the tree, making them very expensive, for this reason we turn them on only
+// debug mode.
 func (t *tree) verify() {
 	const debug = false
 	if !debug {
