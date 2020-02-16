@@ -11,11 +11,11 @@
 //
 package rbtree
 
-// Interface describes a red-black tree's interfaces that an implemention must
-// be satisfied.
+// Interface describes a red-black tree interface methods that an implemention
+// must be satisfied.
 type Interface interface {
-	Lookup(key interface{}) (value interface{}, ok bool)
-	Insert(key interface{}, value interface{})
+	Lookup(key interface{}) (val interface{}, ok bool)
+	Insert(key interface{}, val interface{})
 	Delete(key interface{})
 }
 
@@ -205,10 +205,10 @@ func verify5Helper(n *node, blackCount int, pathBlackCount *int) {
 //
 
 // newNode is a helper function to allocate and initialize a new node.
-func newNode(key, value interface{}, color color, left, right *node) *node {
+func newNode(key, val interface{}, color color, left, right *node) *node {
 	newn := &node{
 		k: key,
-		v: value,
+		v: val,
 		c: color,
 		l: left,
 		r: right,
@@ -306,8 +306,8 @@ func (t *tree) replace(oldn *node, newn *node) {
 // the value (since we're implementing an associative array). Otherwise, we find
 // the place in the tree where the new pair belongs, then attach a newly created
 // red node containing the value.
-func (t *tree) Insert(key, value interface{}) {
-	newn := newNode(key, value, colorRED, nil, nil)
+func (t *tree) Insert(key, val interface{}) {
+	newn := newNode(key, val, colorRED, nil, nil)
 	if t.root == nil {
 		t.root = newn
 	} else {
@@ -315,7 +315,7 @@ func (t *tree) Insert(key, value interface{}) {
 		for {
 			ret := t.compare(key, n.k)
 			if ret == 0 {
-				n.v = value
+				n.v = val
 				return
 			} else if ret < 0 {
 				if n.l == nil {
