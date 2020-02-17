@@ -1,6 +1,10 @@
 # istioctl profile list
 
-The following built-in configuration profiles are currently available:
+## Install
+
+    $ istioctl manifest apply --set profile=default
+
+## Profiles
 
 1. default:
 
