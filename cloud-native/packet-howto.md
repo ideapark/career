@@ -10,7 +10,7 @@ Layer 2: the MAC address this packet should go to
 - arp table
 
 ```
-# arp -n
+$ arp -n
 Address                  HWtype  HWaddress           Flags Mask            Iface
 172.17.1.161             ether   ee:ff:ff:ff:ff:ff   C                     eth0
 172.17.1.191             ether   ee:ff:ff:ff:ff:ff   C                     eth0
@@ -30,7 +30,7 @@ MAC: 3c:97:ae:44:b3:7f
 # Route table (cross networking)
 
 ```
-ip route add 10.4.4.0/24 via 172.23.1.1 dev eth0
+$ ip route add 10.4.4.0/24 via 172.23.1.1 dev eth0
 ```
 
 `ip route add` adds an entry to the route table on your computer. This route
