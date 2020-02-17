@@ -1,6 +1,6 @@
 # istioctl profile list
 
-## Install
+## Install (v1.4.x)
 
     $ istioctl manifest apply --set profile=default
 
