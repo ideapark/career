@@ -2,7 +2,7 @@
 
 - Open files
 
-Socket comumes file descriptor
+Socket consumes file descriptor
 
 ```bash
 $ /proc/<pid>/limits
@@ -45,5 +45,5 @@ net.core.somaxconn = 1024
 
 - JVM thread count
 
-Increase thread count limit by decreasing the stack size per thread (*-Xss*) or
-by decreasing the memory allocated to the heap (*-Xms, -Xmx*).
+Increase thread count limit by decreasing the stack size per thread (`-Xss`) or
+by decreasing the memory allocated to the heap (`-Xms, -Xmx`).
