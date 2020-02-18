@@ -3,17 +3,26 @@
 # A net sharing framework implemented by `netcat` and `named pipe`
 
 cat <<EOF
-SPEAKER.HOST                                               LISTENER.HOST
+#
+# server.host: listen on port 9999
+#
+nc -l -p 9999
 
-# create named pipe                                        # listen on port 9999
-mkfifo /tmp/netshare                                       nc -l -p 9999
+#
+# client.host: create named pipe
+#
+mkfifo /tmp/myfifo
 
-# forward pipe message to listener.host
-nc listener.host 9999 < /tmp/netshare
+#
+# client.host: read pipe and write to server.host
+#
+nc server.host 9999 < /tmp/myfifo
 
-# speaking and listening
-echo https://gnu.org       > /tmp/netshare
-echo https://kernel.org    > /tmp/netshare
-echo https://kubernetes.io > /tmp/netshare
+#
+# client.host: write to pipe will be read by server.host
+#
+echo https://gnu.org     > /tmp/myfifo
+echo https://kernel.org  > /tmp/myfifo
+echo https://iobuf.io    > /tmp/myfifo
 
 EOF
