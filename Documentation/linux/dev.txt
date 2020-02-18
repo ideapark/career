@@ -1,13 +1,13 @@
 # Device
 
-- Character Devices
+- Character Devices (chrdev)
 
 Deliver a continuous stream of data that applications read sequentially;
 generally, random access is not possible. Instead, such devices allow data to be
 read and written byte-by-byte or character-by-character. Modems are classical
 examples of character devices.
 
-- Block Devices
+- Block Devices (blkdev)
 
 Allow applications to address their data randomly and to freely select the
 position at which they want to read data. Typical block devices are hard disks
