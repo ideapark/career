@@ -1,4 +1,4 @@
-# Emacs HOWTO
+# Emacs
 
 ## Basic
 
