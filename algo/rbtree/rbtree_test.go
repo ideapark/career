@@ -1,5 +1,4 @@
-// Copyright 2020 Zhou Peng <p@ctriple.cn>.
-//        ALL RIGHTS RESERVED
+// Copyright 2020 (C) Zhou Peng <p@iobuf.io>
 
 package rbtree
 
