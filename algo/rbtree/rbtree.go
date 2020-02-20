@@ -64,7 +64,7 @@ const (
 	colorBLACK
 )
 
-// node represents the red-black tree node, it wrapps key and value together to
+// node represents the red-black tree node, it wraps key and value together to
 // make this red-black implemention to be useful associative map.
 type node struct {
 	k interface{}
