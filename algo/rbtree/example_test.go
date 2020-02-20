@@ -53,6 +53,7 @@ func ExampleString() {
 }
 
 func ExampleNew() {
+	// A user defined type used as red-black tree key
 	type key struct {
 		i int
 		s string
