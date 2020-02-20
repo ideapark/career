@@ -41,8 +41,8 @@ func Integer() Interface {
 	return New(cmp)
 }
 
-// String constructs a read-black tree comparing string key, Note that you must
-// assure the key is string type, or it will panic.
+// String constructs a read-black tree by comparing string key, Note that you
+// must assure the key is string type, or it will panic.
 func String() Interface {
 	cmp := func(k1, k2 interface{}) int {
 		s1, s2 := k1.(string), k2.(string)
