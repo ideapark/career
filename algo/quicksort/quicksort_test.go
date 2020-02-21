@@ -1,3 +1,5 @@
+// Copyright 2020 (C) Zhou Peng <p@iobuf.io>
+
 package quicksort
 
 import (
