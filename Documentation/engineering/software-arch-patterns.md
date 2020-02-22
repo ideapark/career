@@ -1,13 +1,10 @@
-#+TITLE: Software Architecture Patterns
-#+AUTHOR: Mark Richards
-#+AUTHOR: Zhou Peng
-#+EMAIL: p@ctriple.cn
+# Software Architecture Patterns
 
 Understanding Common Architecture Patterns and When to Use Them
 
-* Layered Architecture
+# Layered Architecture
 
-** Overall agility
+## Overall agility
 
 Rating: Low
 
@@ -18,7 +15,7 @@ make changes in this architecture pattern because of the monolithic nature of
 most implementations as well as the tight coupling of components usually found
 with this pattern.
 
-** Ease of deployment
+## Ease of deployment
 
 Rating: Low
 
@@ -30,7 +27,7 @@ executed during off-hours or on weekends. As such, this pattern does not easily
 lend itself toward a continuous delivery pipeline, further reducing the overall
 rating for deployment.
 
-** Testability
+## Testability
 
 Rating: High
 
@@ -40,7 +37,7 @@ test. A developer can mock a presentation component or screen to isolate testing
 withing a business component, as well as mock the business layer to test certain
 screen functionality.
 
-** Performance
+## Performance
 
 Rating: Low
 
@@ -49,7 +46,7 @@ pattern does not lend itself to high-performance application due to the
 inefficiencies of having to go through multiple layers of the architecture to
 fulfill a business request.
 
-** Scalability
+## Scalability
 
 Rating: Low
 
@@ -60,7 +57,7 @@ by splitting the layers into separate physical deployments or replicating the
 entire application into multiple nodes, but overall the granularity is too
 broad, making it expensive to scale.
 
-** Ease of development
+## Ease of development
 
 Rating: High
 
@@ -72,7 +69,7 @@ business-application development. The connection between a company's
 communication and organization structure and the way it develops software is
 outlined is what is called =Conway's law=.
 
-* Event-Driven Architecture
+# Event-Driven Architecture
 
 - Mediator Topology
 
@@ -86,7 +83,7 @@ central event mediator; rather, the message flow is distributed across the event
 processor components in a chain-like fashion through a lightweight message
 broker.
 
-** Overall agility
+## Overall agility
 
 Rating: High
 
@@ -96,7 +93,7 @@ completely decoupled from other event processor components, changes are
 generally isolated to one or few event processors and can be made quickly
 without impacting other components.
 
-** Ease of deployment
+## Ease of deployment
 
 Rating: High
 
@@ -107,7 +104,7 @@ component is somewhat tightly coupled to the event processors: a change in an
 event processor component might also require a change in the event mediator,
 requiring both to be deployed for any given change.
 
-** Testability
+## Testability
 
 Rating: Low
 
@@ -115,7 +112,7 @@ Analysis: While individual unit testing is not overly difficult, it does require
 some sort of specialized testing client or testing tool to generate events.
 Testing is also complicated by the asynchronous nature of this pattern.
 
-** Performance
+## Performance
 
 Rating: High
 
@@ -126,7 +123,7 @@ asynchronous capabilities; in other words, the ability to perform decoupled,
 parallel asynchronous operations outweighs the cost of queuing and dequeuing
 messages.
 
-** Scalability
+## Scalability
 
 Rating: High
 
@@ -134,7 +131,7 @@ Analysis: Scalability is naturally achieved in this pattern through highly
 independent and decoupled event processors. Each event processor can be scaled
 separately, allowing for fine-grained scalability.
 
-** Ease of development
+## Ease of development
 
 Rating: Low
 
@@ -143,12 +140,12 @@ of the pattern as well as contract creation and the need for more advanced error
 handling conditions within the code for unresponsive event processors and failed
 brokers.
 
-* Microkernel Architecture
+# Microkernel Architecture
 
 The microkernel architecture pattern consists of two types of architecture
 components: a core system and plug-in modules.
 
-** Overall agility
+## Overall agility
 
 Rating: High
 
@@ -158,7 +155,7 @@ through loosely coupled plug-in modules. In general, the core system of most
 microkernel architectures tends to become stable quickly, and as such is fairly
 robust and requires few changes over time.
 
-** Ease of deployment
+## Ease of deployment
 
 Rating: High
 
@@ -166,7 +163,7 @@ Analysis: Depending on how the pattern is implemented, the plug-in modules can
 be dynamically added to the core system at runtime (e.g., hot-deployed),
 minimizing downtime during deployment.
 
-** Testability
+## Testability
 
 Rating: High
 
@@ -174,7 +171,7 @@ Analysis: Plug-in modules can be tested in isolation and can be easily mocked by
 the core system to demonstrate or prototype a particular feature with little or
 no change to the core system.
 
-** Performance
+## Performance
 
 Rating: High
 
@@ -187,7 +184,7 @@ can trim down the application server to only those features you need, removing
 expensive non-used features such as remote access, messaging, and caching that
 consume memory, CPU, and threads and slow down the app server.
 
-** Scalability
+## Scalability
 
 Rating: Low
 
@@ -197,7 +194,7 @@ and hence not highly scalable. Depending on how you implement the plug-in
 feature level, but overall this pattern is not known for producing highly
 scalable application.
 
-** Ease of development
+## Ease of development
 
 Rating: Low
 
@@ -207,11 +204,11 @@ plug-in registries, plug-in granularity, and the wide choice available for
 plug-in connectivity all contribute to the complexity involved with implementing
 this pattern.
 
-* Microservices Architecture Pattern
+# Microservices Architecture Pattern
 
 Separately deployed units.
 
-** Overall agility
+## Overall agility
 
 Rating: High
 
@@ -221,7 +218,7 @@ generally isolated to individual service components, which allows for fast and
 easy deployment. Also, applications build using this pattern tend to be very
 loosely coupled, which also helps facilitate change.
 
-** Ease of deployment
+## Ease of deployment
 
 Rating: High
 
@@ -232,7 +229,7 @@ component is somewhat tightly coupled to the event processors: a change in an
 event processor component might also require a change in the event mediator,
 requiring both to be deployed for any given change.
 
-** Testability
+## Testability
 
 Rating: High
 
@@ -245,7 +242,7 @@ coupled, there is much less of a chance from a development perspective of making
 a change that breaks another part of the application, easing the testing burden
 of having to test the entire application for one small change.
 
-** Performance
+## Performance
 
 Rating: Low
 
@@ -254,7 +251,7 @@ perform very well, overall this pattern does not naturally lend itself to
 high-performance applications due to the distributed nature of the microservices
 architecture pattern.
 
-** Scalability
+## Scalability
 
 Rating: High
 
@@ -265,7 +262,7 @@ not need to scale due to the low user volumes for that functionality, but the
 trade-placement service component may need to scale due to the distributed
 nature of the microservices architecture pattern.
 
-** Scalability
+## Scalability
 
 Rating: High
 
@@ -276,7 +273,7 @@ not need to scale due to the low user volumes for that functionality, but the
 trade-placement service component may need to scale due to the high throughput
 needed by most trading applications for this functionality.
 
-** Ease of development
+## Ease of development
 
 Rating: High
 
@@ -286,9 +283,9 @@ There is much less chance a developer will make a change in one service
 component that would affect other service components, thereby reducing the
 coordination needed among developers or development teams.
 
-* Space-Based Architecture
+# Space-Based Architecture
 
-** Overall agility
+## Overall agility
 
 Rating: High
 
@@ -299,7 +296,7 @@ changes related to an increase or decrease in user load (environment changes).
 Architectures created using this pattern generally respond well to coding
 changes due to the small application size and dynamic nature of the pattern.
 
-** Ease of deployment
+## Ease of deployment
 
 Rating: High
 
@@ -307,7 +304,7 @@ Analysis: Although space-based architectures are generally not decoupled and
 distributed, they are dynamic, and sophisticated cloud-based tools allow for
 applications to easily be "pushed" out to servers, simplifying deployment.
 
-** Testability
+## Testability
 
 Rating: Low
 
@@ -315,14 +312,14 @@ Analysis: Achieving very high user loads in a test environment is both expensive
 and time consuming, making it difficult to test the scalability aspects of the
 application.
 
-** Performance
+## Performance
 
 Rating: High
 
 Analysis: High performance is achieved through the in-memory data access and
 caching mechanisms build into this pattern.
 
-** Scalability
+## Scalability
 
 Rating: High
 
@@ -330,7 +327,7 @@ Analysis: High scalability come from the fact that there is little or no
 dependency on a centralized database, therefore essentially removing this
 limiting bottleneck from the scalability equation.
 
-** Ease of development
+## Ease of development
 
 Rating: Low
 
@@ -341,10 +338,10 @@ Furthermore, special care must be taken while developing these types of
 architectures to make sure nothing in the source code impacts performance and
 scalability.
 
-* Patterns Summary
+# Patterns Summary
 
 |                 | Layered | Event-driven | Microkernel | Microservices | Space-based |
-|-----------------+---------+--------------+-------------+---------------+-------------|
+|-----------------|---------|--------------|-------------|---------------|-------------|
 | Overall Agility | NO      | YES          | YES         | YES           | YES         |
 | Deployment      | NO      | YES          | YES         | YES           | YES         |
 | Testability     | YES     | NO           | YES         | YES           | NO          |
