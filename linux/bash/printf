@@ -1,6 +1,0 @@
-#!/bin/bash
-
-printf "%s\n" hello
-printf "%s %d\t%s\n" "Hi There" 15 people
-
-exit 0

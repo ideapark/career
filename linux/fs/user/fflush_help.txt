@@ -1,6 +1,0 @@
-#include <stdio.h>
-
-int fflush(FILE *stream);
-
-
-synchronize all buffered data to file

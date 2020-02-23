@@ -1,6 +1,0 @@
-#include <unistd.h>
-
-int ioctl(int fd, int cmd, ...);
-
-
-device specific

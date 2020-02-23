@@ -1,9 +1,0 @@
-#include <unistd.h>
-
-int close(int fd);
-
-
-when return n:
-
-    n = 0: close file successfully
-    n = -1: close file error, check global var errno

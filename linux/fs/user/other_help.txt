@@ -1,9 +1,0 @@
-#include <stdio.h>
-
-fgetpos(): get file stream current read/write position
-fsetpos(): set file stream current read/write position
-ftell(): get file steam current read/write offset
-rewind(): reset file stream read/write
-freopen(): reuse file stream
-setvbuf(): set file stream buffer
-remove(): equal to unlink, when path is a directory euqals to rmdir

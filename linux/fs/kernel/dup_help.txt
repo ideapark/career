@@ -1,7 +1,0 @@
-#include <unistd.h>
-
-int dup(int fd);
-int dup2(int fd, int fd2);
-
-
-duplicate file descriptor

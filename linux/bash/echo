@@ -1,5 +1,0 @@
-#!/bin/bash
-
-echo -n "string to output without new line"    # Linux style
-
-echo -e "string to output without new line\c"  # Old bash

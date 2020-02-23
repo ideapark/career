@@ -1,9 +1,0 @@
-#include <unistd.h>
-
-size_t read(int fd, void *buf, size_t nbytes);
-
-
-when return n:
-    n = -1: error occurred, check global var errno
-    n = 0: read no data in buffer
-    n <= nbytes: read number in fact

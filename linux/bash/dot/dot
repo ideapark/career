@@ -1,7 +1,0 @@
-. ./classic
-echo $PS1
-echo $version
-
-. ./latest
-echo $PS1
-echo $version
