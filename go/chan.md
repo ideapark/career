@@ -113,7 +113,7 @@ CHANNEL HAS MULTIPLE CONCURRENT SENDERS.
 
 The universal principle is `DON'T CLOSE (OR SEND VALUES TO) CLOSED CHANNEL.`
 
-## channel vs mutex
+## channel (MEMORY COPY) vs mutex (MEMORY SHARE)
 
 * Use locking (mutexes) when:
   * caching information in a shared data structure
