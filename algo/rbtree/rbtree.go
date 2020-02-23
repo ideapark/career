@@ -10,8 +10,8 @@
 //
 package rbtree
 
-// Interface describes a red-black tree interface methods that an implemention
-// must be satisfied.
+// Interface describes a red-black tree interface that an implemention must be
+// satisfied.
 type Interface interface {
 	Lookup(key interface{}) (val interface{}, ok bool)
 	Insert(key interface{}, val interface{})
@@ -75,6 +75,7 @@ type node struct {
 	p *node
 }
 
+// tree is an implemention of red-black tree
 type tree struct {
 	root    *node
 	compare func(k1, k2 interface{}) int
