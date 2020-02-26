@@ -22,3 +22,11 @@ relying on external processes and monitors.
 provides information to answer questions about application state.
 
 CLOUD-NATIVE APPLICATION IS DESIGNED FOR THE CLOUD AND RUN ON THE CLOUD.
+
+# Infrastructure as Code/Software
+
+A fundamental difference between infrastructure as code and infrastructure as
+software is that software continually runs and will create or mutate
+infrastructure based on the reconciler pattern.
+
+    Ansible (code) ...VS... Kubernetes (software)
