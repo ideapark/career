@@ -33,6 +33,6 @@ Time
 
 - Futher Thinking
 
-As to kubernetes network, although overlayed network type (such as vxlan,
-openvsiwtch) introduce 30% performance degrade, the whole request/response delay
-may not have significiently impact.
+As to kubernetes network plugin, although overlayed network type (such as vxlan,
+openvsiwtch) introduce ~30% performance degrade, the whole request/response
+delay may not have significiently impact.
