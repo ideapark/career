@@ -49,7 +49,7 @@ The components marked as *Y* are installed within each profile:
 | istio-galley           | Y       | Y    |         | Y   |        |
 | istio-ingressgateway   | Y       | Y    |         | Y   |        |
 | istio-nodeagent        |         |      |         | Y   |        |
-| istio-polit            | Y       | Y    | Y       | Y   |        |
+| istio-pilot            | Y       | Y    | Y       | Y   |        |
 | istio-policy           | Y       | Y    |         | Y   |        |
 | istio-sidecar-injector | Y       | Y    |         | Y   | Y      |
 | istio-telemetry        | Y       | Y    |         | Y   |        |
