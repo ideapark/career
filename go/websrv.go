@@ -9,12 +9,12 @@ import (
 
 // Simple count server.
 type Counter struct {
-	c int64
+	n int64
 }
 
-func (ctr *Counter) ServeHTTP(w http.ResponseWriter, req *http.Request) {
-	atomic.AddInt64(&ctr.c, 1)
-	fmt.Fprintf(w, "counter = %d\n", ctr.c)
+func (c *Counter) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+	atomic.AddInt64(&c.n, 1)
+	fmt.Fprintf(w, "counter = %d\n", c.n)
 }
 
 // A channel what sends a notification on each visit.
