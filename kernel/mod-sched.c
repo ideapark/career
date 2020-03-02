@@ -43,7 +43,7 @@ static void intrpt_routine(void *irrelevant)
  * Put data into the proc fs file.
  */
 ssize_t procfile_read(char *buffer, char **buffer_location, off_t offset,
-		      int buffer_length, int *eof, void *data)
+                      int buffer_length, int *eof, void *data)
 {
 	int len;
 

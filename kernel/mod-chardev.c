@@ -29,15 +29,15 @@ static ssize_t device_write(struct file *, const char *, size_t, loff_t *);
  */
 static int Major;            /* Majog number assigned to our device driver */
 static int Device_Open = 0;  /* Is device open?
-				Used to prevent multiple access to device */
+                                Used to prevent multiple access to device */
 static char msg[BUFLEN];     /* The msg the device will give when asked */
 static char *msg_ptr;
 
 static struct file_operations fops = {
-	.read    = device_read,
-	.write   = device_write,
-	.open    = device_open,
-	.release = device_release
+                                      .read    = device_read,
+                                      .write   = device_write,
+                                      .open    = device_open,
+                                      .release = device_release
 };
 
 /*
@@ -114,7 +114,7 @@ static int device_release(struct inode *inode, struct file *file)
  * to read from it.
  */
 static ssize_t device_read(struct file *filp, char *buffer,
-			   size_t length, loff_t *offset)
+                           size_t length, loff_t *offset)
 {
 	int bytes_read = 0;
 
@@ -141,7 +141,7 @@ static ssize_t device_read(struct file *filp, char *buffer,
  * Called when a process writes to dev file: echo "hi" > /dev/hello
  */
 static ssize_t device_write(struct file *filp, const char *buff,
-			    size_t len, loff_t *off)
+                            size_t len, loff_t *off)
 {
 	printk(KERN_ALERT "Sorry, this operation isn't supported.\n");
 
