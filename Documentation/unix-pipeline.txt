@@ -1,5 +1,4 @@
-(1)
-
+(1) -------------------------------------------------------------
           +----------+                    +-------------+
           | pipeline | ----- pipe() ----> | fd 3 | fd 4 |
           +----------+                    +-------------+
@@ -15,15 +14,15 @@
   Left-hand child  Right-hand child
 
 
-(2)
-                                           |
+(2) -------------------------------------------------------------
           +----------+                     | +-------------+
           | pipeline | ----- close() ----> | | fd 3 | fd 4 |
           +----------+                     | +-------------+
-           /        \                      |        ↑
+           /        \                               ↑
        wait()      wait()                           |
-         /            ----------+                   |
-        ↓                       ↓                   | Parent closes pipe,
+         /           |                              |
+        /            `---------+                    |
+       ↓                       ↓                    | Parent closes pipe,
  +----------+       |       +----------+            | waits for children
  | pipeline | --> 1 | 0 --> | pipeline |            |
  +----------+       |       +----------+            | Children move pipe
@@ -31,17 +30,18 @@
   +- close()/dup() -|- close()/dup() -+             | and stdin (right-hand child),
                     |                               | close signal pipe fds
                     +-------------------------------+
-Left-hand child           Right-hand child
+ Left-hand child           Right-hand child
 
-(3)
+
+(3) -------------------------------------------------------------
           +----------+
           | pipeline |
           +----------+
            /        \
-        wait()     wait()            Child call exec(),
-          /            \             programs run
-         /              \-------------+
-        ↓                             ↓
+        wait()     wait()           Child call exec(),
+         /            \             programs run
+        /              `-------------+
+        ↓                            ↓
 +---------------+               +------------------+
 | echo hi there | --> 1 | 0 --> | sed s/hi/hello/g | hello there
 +---------------+               +------------------+
