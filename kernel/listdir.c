@@ -5,6 +5,7 @@
 #include <dirent.h>
 #include <stdio.h>
 #include <string.h>
+#include <limits.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -37,9 +38,6 @@ int main(int argc, char *argv[])
 	char *dir_path;
 	DIR *dir;
 	struct dirent *entry;
-#ifndef PATH_MAX
-#define PATH_MAX 256
-#endif
 	char entry_path[PATH_MAX+1];
 	size_t path_len;
 
