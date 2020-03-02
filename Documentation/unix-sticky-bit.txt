@@ -1,18 +1,18 @@
-The sticky bit originated in the PDP-11 versions of Unix and was applied
-to regular executable files. This bit was applied to programs that were
-expected to be heavily used, such as the shell and the editor. When a
-program had this bit set, the kernel would keep a copy of the program's
-executable code on the swap device, from which it could be quickly loaded
-into memory for reuse. (Loading from the filesystem took longer: The
-image on the swap device was stored in contiguous disk blocks, whereas
-the image in the filesystem might be spread all over the disk.)
+The sticky bit originated in the PDP-11 versions of Unix and was applied to
+regular executable files. This bit was applied to programs that were expected to
+be heavily used, such as the shell and the editor. When a program had this bit
+set, the kernel would keep a copy of the program's executable code on the swap
+device, from which it could be quickly loaded into memory for reuse. (Loading
+from the filesystem took longer: The image on the swap device was stored in
+contiguous disk blocks, whereas the image in the filesystem might be spread all
+over the disk.)
 
 Modern systems have considerably faster disk and memory hardware than the
-PDP-11s of yore. The also use a technique called demand paging to load
-into memory only those parts of an executable program that are being
-executed. Thus, today, the sticky bit on a regular executable file serves
-no purpose, and indeed it has no effect.
+PDP-11s of yore. The also use a technique called demand paging to load into
+memory only those parts of an executable program that are being executed. Thus,
+today, the sticky bit on a regular executable file serves no purpose, and indeed
+it has no effect.
 
 The sticky bit on an writable directory prevents file removal from that
-directory, or file renaming within it, by anyone except the file's owner,
-or root.
+directory, or file renaming within it, by anyone except the file's owner, or
+root.
