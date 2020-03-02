@@ -1,7 +1,6 @@
 /*
  * Detect memory access using mprotect
  */
-
 #include <fcntl.h>
 #include <signal.h>
 #include <stdio.h>

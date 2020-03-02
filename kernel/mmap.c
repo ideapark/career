@@ -1,7 +1,6 @@
 /*
  * Read an integer from a memory-mapped file, and double it
  */
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <fcntl.h>

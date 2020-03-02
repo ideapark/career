@@ -1,7 +1,3 @@
-/*
- * Example Using popen
- */
-
 #include <stdio.h>
 #include <unistd.h>
 
