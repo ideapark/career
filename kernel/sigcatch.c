@@ -26,12 +26,12 @@ void handler(int signum)
 	}
 
 	strcat(buf, "\n");
-	(void)write(2, buf, strlen(buf));
+	write(2, buf, strlen(buf));
 }
 
 int main(void)
 {
-	(void)signal(SIGINT, handler);
+	signal(SIGINT, handler);
 
 	for (;;)
 		pause();
