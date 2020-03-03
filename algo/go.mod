@@ -1,3 +1,3 @@
-module iobuf.io/algo
+module go.iobuf.org/algo
 
 go 1.13
