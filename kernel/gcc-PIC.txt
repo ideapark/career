@@ -30,13 +30,13 @@ directories on the system:
   % gcc -o app app.o -L. -ltest
 
 Suppose that both libtest.a and libtest.so are available.Then the linker must
-choose one of the libraries and not the other.The linker searches each directory
-(first those specified with -L options, and then those in the standard
+choose one of the libraries and not the other. The linker searches each
+directory (first those specified with -L options, and then those in the standard
 directories). When the linker finds a directory that contains either libtest.a
 or libtest.so, the linker stops search directories. If only one of the two
 variants is present in the directory, the linker chooses that variant.
 Otherwise, the linker chooses the shared library version, unless you explicitly
-instruct it otherwise.You can use the -static option to demand static archives.
+instruct it otherwise. You can use the -static option to demand static archives.
 For example, the following line will use the libtest.a archive, even if the
 libtest.so shared library is also available:
 
