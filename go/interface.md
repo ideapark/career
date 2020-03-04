@@ -615,4 +615,4 @@ func typeSwitch() {
 0x00d3 00211 JMP	145                              ;; indirect jump to 163 (case uint16)
 ```
 
-NOTE: O(n) time complexicity
+NOTE: O(n) time complexity
