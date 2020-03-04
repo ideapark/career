@@ -22,7 +22,7 @@ int main(int argc, char *const argv[])
 
 	scanf(file_memory, "%d", &integer);
 	printf("value: %d\n", integer);
-	sprintf((char *)file_memory, "%d\n", 2 * integer);
+	sprintf((char *)file_memory, "%d", 2 * integer);
 
 	munmap(file_memory, FILE_LENGTH);
 
