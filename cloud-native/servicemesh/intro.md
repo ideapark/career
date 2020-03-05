@@ -1,3 +1,42 @@
+# Why We Need Service Mesh
+
+A service mesh is a dedicated infrastructure layer for handling
+service-to-service communication. It's responsible for the reliable delivery of
+requests the complex topology of services that comprise a modern, cloud native
+application.
+
+In the cloud native model, a single application might consist of hundreds of
+services; each service might have thousands of instances; and each of those
+instances might be in a constantly-changing state as they are dynamically
+scheduled by an orchestrator like Kubernetes. Not only is service communication
+in this world incredibly complex, it's a pervasive and fundamental part of
+runtime behavior. Managing it is vital to ensuring end-to-end performance and
+reliability.
+
+# Which Service Mesh Should I Use
+
+- The Common Attributes of a Service Mesh
+
+1. Resiliency features (retries, timeouts, deadlines, etc)
+2. Cascading failure prevention (circuit breaking)
+3. Robust load balancing algorithms
+4. Control over request routing (useful for things like CI/CD release patterns)
+5. The ability to introduce and manage TLS termination between communication endpoints
+6. Rich sets of metrics to provide instrumentation at the service-to-service layer
+
+- Product Comparisons
+
+| Product | Features Maturity | Language | Kubernetes Support |
+| ------- | ----------------- | -------- | ------------------ |
+| linkerd | OK                | Scala    | Y                  |
+| envoy   | +istio            | C++      | Y                  |
+| istio   | +envoy            | Go       | Y                  |
+| conduit | OK                | Rust/Go  | Y                  |
+
+- Conclusion
+
+istio+envoy wins
+
 # Istio
 
 Istio lets you connect, secure, control, and observe services. istio's diverse
