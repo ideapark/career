@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# A net sharing framework implemented by `nc` and `pipe`
+# An easy transport utility implemented by `nc` and `pipe`
 #
 
 cat <<EOF
