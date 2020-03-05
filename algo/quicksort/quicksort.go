@@ -9,7 +9,7 @@
 //   ELSE
 //     BEGIN
 //       choose an element V randomly from S;
-//       let S1, S2 and S3 be the sequences of elements in S less than, equal to, and greater than V, respectively;
+//       let S1, S2 and S3 be the sequences of elements in S <, =, and > V, respectively;
 //       RETURN (quicksort(S1) followed by S2 followed by quicksort(S3))
 //     END
 package quicksort
