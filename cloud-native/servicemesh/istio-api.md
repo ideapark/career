@@ -13,9 +13,9 @@ listeners, and protocol processing is configured via listeners with specific
 filters per protocol) and routes (HTTP/TLS match conditions, retry and timeout
 configuration, etc.). *VirtualServices* configure and route names.
 
-- ServiceEntrys
+- ServiceEntries
 
-Create clusters and populate their endpoints. *ServiceEntrys* enable the
+Create clusters and populate their endpoints. *ServiceEntries* enable the
 creation of new names.
 
 - DestinationRules
