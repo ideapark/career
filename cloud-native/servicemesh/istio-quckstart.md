@@ -100,7 +100,6 @@ enforce policy.
 ## Up and Running
 
 - [istio](https://istio.io/docs/)
-- [istio profile](profile.md)
 
 ```bash
 # mannual injection
