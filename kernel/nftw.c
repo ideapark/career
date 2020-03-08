@@ -46,8 +46,7 @@ int main(int argc, char *argv[])
 	nfds = getdtablesize() - SPARE_FDS;	/* leave some spare descriptors */
 	for (i = optind; i < argc; i++) {
 		if (nftw(argv[i], process, nfds, flags) != 0) {
-			fprintf(stderr, "%s: %s: stopped early\n",
-				argv[0], argv[i]);
+			fprintf(stderr, "%s: %s: stopped early\n", argv[0], argv[i]);
 			errors++;
 		}
 	}
