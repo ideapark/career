@@ -18,5 +18,5 @@ S C A L A B L E            R E S I L L I E N T       O B S E R V A B L E        
 
 ## 2 Capability Level
 
-- As Code: Versioned, Repeatable
-- As Software: API driven, Self-Awareness, Auto-Pilot
+- As Code: Versioned, Repeatable (Ansible, Terraform)
+- As Software: API driven, Self-Awareness, Auto-Pilot (Kubernetes, Operator)
