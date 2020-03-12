@@ -81,6 +81,13 @@ Each rule has the following standard fields:
 
 ## Policy
 
-- Handler
-- Instance
-- Rule
+- Mixer Side
+
+1. handler
+2. instance
+3. rule
+
+- Client Side
+
+1. quotaspec
+2. quotaspecbinding
