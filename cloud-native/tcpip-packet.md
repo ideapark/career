@@ -10,13 +10,10 @@ Layer 2: the MAC address this packet should go to
 - arp table
 
 ```
-$ arp -n
-Address                  HWtype  HWaddress           Flags Mask            Iface
-172.17.1.161             ether   ee:ff:ff:ff:ff:ff   C                     eth0
-172.17.1.191             ether   ee:ff:ff:ff:ff:ff   C                     eth0
-10.130.0.157             ether   0a:58:0a:82:00:9d   C                     tun0
-10.128.2.54              ether   0a:58:0a:80:02:36   C                     tun0
-172.17.1.152             ether   ee:ff:ff:ff:ff:ff   C                     eth0
+$ ip neighbor
+100.68.138.2   dev  wlp2s0   lladdr  44:00:4d:e2:54:cf  STALE
+100.68.138.1   dev  wlp2s0   lladdr  00:00:5e:00:01:16  REACHABLE
+192.168.100.2  dev  docker0  lladdr  02:42:c0:a8:64:02  STALE
 ```
 
 MAC: 3c:97:ae:44:b3:7f
