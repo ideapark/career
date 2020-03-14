@@ -41,7 +41,7 @@ func Integer() Interface {
 	return New(cmp)
 }
 
-// String constructs a read-black tree by comparing string key, Note that you
+// String constructs a red-black tree by comparing string key, Note that you
 // must assure the key is string type, or it will panic.
 func String() Interface {
 	cmp := func(k1, k2 interface{}) int {
@@ -115,8 +115,8 @@ func getcolor(n *node) color {
 
 // verify enforces the following five properties, which provide a theoretical
 // guarantee that the tree remains balanced. Note that many of these tests walk
-// the tree, making them very expensive, for this reason we turn them on only
-// debug mode.
+// the tree, making them very expensive, for this reason we turn them on debug
+// mode only.
 func (t *tree) verify() {
 	const debug = false
 	if !debug {
@@ -124,7 +124,7 @@ func (t *tree) verify() {
 	}
 	verify1(t.root)
 	verify2(t.root)
-	// property 3 is implicit
+	// property 3 is implicitly assured
 	verify4(t.root)
 	verify5(t.root)
 }
