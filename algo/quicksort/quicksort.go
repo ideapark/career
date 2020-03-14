@@ -33,7 +33,7 @@ func quicksort(data Interface, low, high int) {
 	if high <= low {
 		return
 	}
-	// move pivot element to data[low]
+	// move a random pivot element to data[low]
 	pivot := low + rand.Intn(high-low)
 	data.Swap(low, pivot)
 	last := low
