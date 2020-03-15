@@ -1,5 +1,5 @@
 ---------------------------------------------------------------------
-  Name                 Meaning
+ N A M E              D E S C R I P T I O N
 ---------------------------------------------------------------------
  E2BIG                Argument list too long
  EACCES               Permission denied
