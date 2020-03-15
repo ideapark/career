@@ -1,30 +1,74 @@
 /*
- * Read an integer from a memory-mapped file, and double it
+• Reading from and writing to a memory-mapped file avoids the extraneous copy
+  that occurs when using the read() or write() system calls, where the data
+  must be copied to and from a user-space buffer.
+
+• Aside from any potential page faults, reading from and writing to a memory-
+  mapped file does not incur any system call or context switch overhead. It is
+  as simple as accessing memory.
+
+• When multiple processes map the same object into memory, the data is shared
+  among all the processes. Read-only and shared writable mappings are shared
+  in their entirety; private writable mappings have their not-yet-COW
+  (copy-on-write) pages shared.
+
+• Seeking around the mapping involves trivial pointer manipulations. There is
+  no need for the lseek() system call.
  */
-#include <stdlib.h>
 #include <stdio.h>
-#include <fcntl.h>
-#include <sys/mman.h>
+#include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/mman.h>
+#include <fcntl.h>
 #include <unistd.h>
 
-#define FILE_LENGTH  0x100
-
-int main(int argc, char *const argv[])
+int main(int argc, char *argv[])
 {
-	int fd;
-	void *file_memory;
-	int integer;
+  struct stat sb;
+  off_t len;
+  char *p;
+  int fd;
 
-	fd = open(argv[1], O_RDWR, S_IRUSR|S_IWUSR);
-	file_memory = mmap(0, FILE_LENGTH, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0);
-	close(fd);
+  if (argc < 2) {
+    fprintf(stderr, "usage: %s <file>\n", argv[0]);
+    return 1;
+  }
 
-	scanf(file_memory, "%d", &integer);
-	printf("value: %d\n", integer);
-	sprintf((char *)file_memory, "%d", 2 * integer);
+  fd = open(argv[1], O_RDONLY);
+  if (fd == -1) {
+    perror("open");
+    return 1;
+  }
 
-	munmap(file_memory, FILE_LENGTH);
+  if (fstat(fd, &sb) == -1) {
+    perror("fstat");
+    return 1;
+  }
 
-	return 0;
+  if (!S_ISREG(sb.st_mode)) {
+    fprintf(stderr, "%s is not a file\n", argv[1]);
+    return 1;
+  }
+
+  p = mmap(0, sb.st_size, PROT_READ, MAP_SHARED, fd, 0);
+  if (p == MAP_FAILED) {
+    perror("mmap");
+    return 1;
+  }
+
+  if (close(fd) == -1) {
+    perror("close");
+    return 1;
+  }
+
+  for (len = 0; len < sb.st_size; len++) {
+    putchar(p[len]);
+  }
+
+  if (munmap(p, sb.st_size) == -1) {
+    perror("munmap");
+    return 1;
+  }
+
+  return 0;
 }
