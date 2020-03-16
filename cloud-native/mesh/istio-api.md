@@ -84,10 +84,33 @@ Each rule has the following standard fields:
 - Mixer Side
 
 1. handler
+
+Configuring a set of handlers, which determine the set of adapters that are
+being used and how they operate. Providing a `statsd` adapter with the IP
+address for a Statsd backend is an example of handler configuration.
+
 2. instance
+
+Configuring a set of instances, which describe how to map request attributes
+into adapter inputs. Instances represent a chunk of data that one or more
+adapters will operate on. For example, an operator may decide to generate
+`requestcount` metric instances from attributes such as
+`destination.service.host` and `response.code`.
+
 3. rule
+
+Configuring a set of rules, which describe when a particular adapter is called
+and which instances it is given. Rules consist of a match expression and
+actions. The match expression controls when to invoke an adapter, while the
+actions determine the set of instances to give the adapter. For example, a rule
+might send generated `requestcount` metric instances to a `statsd` adapter.
 
 - Client Side
 
 1. quotaspec
+
+`QuotaSpec` defines quota name and amount that the client should request.
+
 2. quotaspecbinding
+
+`QuotaSpecBinding` conditionally associates QuotaSpec with one or more services.
