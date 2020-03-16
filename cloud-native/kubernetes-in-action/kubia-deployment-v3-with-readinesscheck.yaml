@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -17,10 +18,10 @@ spec:
         app: kubia
     spec:
       containers:
-      - name: nodejs
-        image: luksa/kubia:v3
-        readinessProbe:
-          periodSeconds: 1
-          httpGet:
-            path: /
-            port: 8080
+        - name: nodejs
+          image: luksa/kubia:v3
+          readinessProbe:
+            periodSeconds: 1
+            httpGet:
+              path: /
+              port: 8080
