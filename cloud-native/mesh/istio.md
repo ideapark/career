@@ -1,4 +1,9 @@
-# Istio API Objects
+# Istio
+
+1. connect
+2. secure
+3. control
+4. observe
 
 ## Traffic Management
 
