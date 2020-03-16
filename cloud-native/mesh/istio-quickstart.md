@@ -9,25 +9,25 @@
 
 - Gateways
 
-Configure physical listeners. *Gateways* expose names.
+Configure physical listeners. `Gateways` expose names.
 
 - VirtualServices
 
 Configure both virtual listeners (hostname matches are encoded as separate
 listeners, and protocol processing is configured via listeners with specific
 filters per protocol) and routes (HTTP/TLS match conditions, retry and timeout
-configuration, etc.). *VirtualServices* configure and route names.
+configuration, etc.). `VirtualServices` configure and route names.
 
 - ServiceEntries
 
-Create clusters and populate their endpoints. *ServiceEntries* enable the
+Create clusters and populate their endpoints. `ServiceEntries` enable the
 creation of new names.
 
 - DestinationRules
 
 Configure how to communicate with clusters (secrets, load-balancing strategy,
 circuit breaking and connection pooling, etc.), and create new clusters when
-they’re used to define subsets. *DestinationRules* describe how to communicate
+they’re used to define subsets. `DestinationRules` describe how to communicate
 with the workloads behind a name.
 
 - Sidecar
@@ -39,7 +39,7 @@ forwarding traffic. You can use a sidecar configuration to do the following:
 1. Fine-tune the set of ports and protocols that an Envoy proxy accepts.
 2. Limit the set of services that the Envoy proxy can reach.
 
-## Security
+## Security (AAA)
 
 - Authentication
 
@@ -50,17 +50,17 @@ Identity:
 
 Policy scope:
 
-1. Mesh-wide: *meshpolicy.authentication.istio.io*
+1. Mesh-wide: `meshpolicy.authentication.istio.io`
 
 A policy defined in the mesh-scope storage with no target selector section.
 There can be at most one mesh-wide policy in the mesh.
 
-2. Namespace-wide: *policy.authentication.istio.io*
+2. Namespace-wide: `policy.authentication.istio.io`
 
 A policy defined in the namespace-scope storage with name default and no target
 selector section. There can be at most one namespace-wide policy per namespace.
 
-3. Service-specific: *policy.authentication.istio.io*
+3. Service-specific: `policy.authentication.istio.io`
 
 A policy defined in the namespace-scope storage, with non-empty target selector
 section. A namespace can have zero, one, or many service-specific policies.
