@@ -45,22 +45,22 @@ forwarding traffic. You can use a sidecar configuration to do the following:
 
 Identity:
 
-1. x509 SPIFFE (spiffe://cluster.local/ns/default/sa/default)
+1. x509 SPIFFE (spiffe://cluster.local/ns/<default>/sa/<default>)
 2. JWT: json web token (USE_ORIGIN)
 
 Policy scope:
 
-1. Mesh-wide: `meshpolicy.authentication.istio.io`
+1. Mesh-Wide: `meshpolicy.authentication.istio.io`
 
 A policy defined in the mesh-scope storage with no target selector section.
 There can be at most one mesh-wide policy in the mesh.
 
-2. Namespace-wide: `policy.authentication.istio.io`
+2. Namespace-Wide: `policy.authentication.istio.io`
 
 A policy defined in the namespace-scope storage with name default and no target
 selector section. There can be at most one namespace-wide policy per namespace.
 
-3. Service-specific: `policy.authentication.istio.io`
+3. Service-Specific: `policy.authentication.istio.io`
 
 A policy defined in the namespace-scope storage, with non-empty target selector
 section. A namespace can have zero, one, or many service-specific policies.
@@ -84,7 +84,7 @@ Each rule has the following standard fields:
     to:   A list of operations.
     when: A list of custom conditions.
 
-## Policy (istio-1.3.x, istio-1.4.x)
+## Policy Enforcement (istio-1.[3,4].x)
 
 - Mixer Side
 
