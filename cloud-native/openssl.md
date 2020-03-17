@@ -1,4 +1,4 @@
-# OPENSSL
+# OpenSSL
 
 ## Some of the abbreviations related to certificates
 
