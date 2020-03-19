@@ -12,7 +12,7 @@ int main()
   ssize_t nr;
   int fd, i;
 
-  fd = open("buccaneer.txt", O_RDONLY);
+  fd = open("gnu.txt", O_RDONLY);
   if (fd == -1) {
     perror("open");
     return 1;

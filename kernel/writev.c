@@ -12,12 +12,12 @@ int main()
   ssize_t nr;
   int fd, i;
   char *buf[] = {
-                 "The term buccaneer comes from the word boucan.\n",
-                 "A boucan is a wooden frame used for cooking meat.\n",
-                 "Buccaneer is the West Indies name for a pirate.\n"
+                 "emacs\n",b
+                 "gcc\n",
+                 "bash\n"
   };
 
-  fd = open("buccaneer.txt", O_WRONLY|O_CREAT|O_TRUNC);
+  fd = open("gnu.txt", O_WRONLY|O_CREAT|O_TRUNC);
 
   if (fd == -1) {
     perror ("open");

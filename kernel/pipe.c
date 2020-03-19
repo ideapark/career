@@ -1,7 +1,3 @@
-/*
- * Using a pipe to communicate with a child process
- */
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>

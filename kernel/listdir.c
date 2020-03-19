@@ -1,6 +1,3 @@
-/*
- * Print a directory listing
- */
 #include <assert.h>
 #include <dirent.h>
 #include <stdio.h>
