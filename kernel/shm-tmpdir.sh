@@ -1,11 +1,8 @@
 #!/bin/bash
 
 # generate giant file
-loop=1
-while [[ $i -lt 200000 ]]
-do
+for i in $(seq 200000); do
     echo $(date '+%s') >> /tmp/tmp_giant.txt
-    let "i+=1"
 done
 
 # shuffle
