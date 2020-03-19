@@ -1,13 +1,14 @@
+---
 apiVersion: v1
 kind: Pod
 metadata:
   name: pod-with-termination-message
 spec:
   containers:
-  - name: main
-    image: busybox
-    terminationMessagePath: /var/termination-reason
-    command:
-    - sh
-    - -c
-    - 'echo "Oops: I''m dying" > /var/termination-reason; exit 1'
+    - name: main
+      image: busybox
+      terminationMessagePath: /var/termination-reason
+      command:
+        - sh
+        - -c
+        - 'echo "Oops: I''m dying" > /var/termination-reason; exit 1'
