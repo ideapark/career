@@ -1,5 +1,35 @@
 # Monitoring
 
+## Why Monitor?
+
+- Analyzing long-term trends
+
+How big is my database and how fast is it growing? How quickly is my
+daily-active user count growing?
+
+- Comparing over time or experiment groups
+
+Are queries faster with Acme Bucket of Bytes 2.72 versus Ajax DB 3.14? How much
+better is my memcache hit rate with an extra node? Is my site slower than it was
+last week?
+
+- Alerting
+
+Something is broken, and somebody needs to fix it right now! Or, something might
+break soon, so somebody should look soon.
+
+- Building dashboards
+
+Dashboards should answer basic questions about your service, and normally
+include some form of the four golden signals (discussed in The Four Golden
+Signals).
+
+- Conducting ad hoc retrospective analysis (i.e., debugging)
+
+Our latency just shot up; what else happened around the same time?
+
+## Paging a human only when necessory
+
 Monitoring is one of the primary means by which service owners keep track of a
 system’s health and availability. As such, monitoring strategy should be
 constructed thoughtfully. A classic and common approach to monitoring is to
