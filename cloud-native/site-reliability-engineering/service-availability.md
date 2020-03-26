@@ -4,8 +4,8 @@
 
 ```text
                         U P T I M E
-availability = ------------------------------
-                U P T I ME + D O W N T I M E
+availability = -------------------------------
+                U P T I M E + D O W N T I M E
 ```
 
 - Aggregate availability
