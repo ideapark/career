@@ -3,7 +3,45 @@ author: Zhou Peng <p@ctriple.cn>
 description: cloud-native pillars and levels
 ---
 
-# Cloud-Native Pillars & Capability Level
+# What's Cloud-Native: Architecture + Engineering + People
+
+```text
+                          +--------------------------------------------+
+                          |                ARCHITECTURE                |
+                          |--------------------------------------------|
+                          | Elastic | Destributed | High Availiability |
+                          |--------------------------------------------|
+                          | Multi Tenant | Auto Ops | Self Service     |
+                          |--------------------------------------------|
+                          |           Micro-service architecture       |
+                          |--------------------------------------------|
+                          |        Cloud Infrastructure & PaaS         |
+                          +--------------------------------------------+
+                                               ..
+                                              .  .
+                                             .    .
+                                            ########
+                                           #CUSTOMER#
+                                          #   VALUE  #
+                                         # ########## #
+                                        .              .
+                                       .   Fast Scale   .
+                                      .  Agile Reliable  .
+                                     .      Efficient     .
+                                    .                      .
+                                   ... . . . . . . . . . . ..
+      +----------------------+                                    +-----------------------+
+      |      ENGINEERING     |                                    |         PEOPLE        |
+      |----------------------|                                    |-----------------------|
+      |      DevOps          |                                    |  Full Functional Team |
+      |----------------------|                                    |-----------------------|
+      | Micro-service CI/CD  |                                    |  Agile Team           |
+      |----------------------|                                    |-----------------------|
+      | Develop Environment  |                                    | Full Stack Engineer   |
+      +----------------------+                                    +-----------------------+
+```
+
+# Cloud-Native Infrastructure Pillars & Capability Level
 
 ## 4 Pillars
 
