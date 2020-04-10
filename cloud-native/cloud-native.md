@@ -1,11 +1,11 @@
 ---
 author: Zhou Peng <p@ctriple.cn>
-description: cloud-native pillars and levels
+description: Cloud-Native & Cloud-Native Infrastructure
 ---
 
 # What's Cloud-Native: Architecture + Engineering + People
 
-```text
+~~~
                           +--------------------------------------------+
                           |                ARCHITECTURE                |
                           |--------------------------------------------|
@@ -39,13 +39,13 @@ description: cloud-native pillars and levels
       |----------------------|                                    |-----------------------|
       | Develop Environment  |                                    | Full Stack Engineer   |
       +----------------------+                                    +-----------------------+
-```
+~~~
 
 # Cloud-Native Infrastructure Pillars & Capability Level
 
 ## 4 Pillars
 
-```text
+~~~
 S C A L A B L E            R E S I L L I E N T       O B S E R V A B L E        S E C U R I T Y
  Horizontal AutoScaler       Retry                     Monitoring                 Authentication
  High Availability           Timeout                   Logging                    Authorization
@@ -53,7 +53,7 @@ S C A L A B L E            R E S I L L I E N T       O B S E R V A B L E        
                              Load Balance              Tracing                    mTLS
 ------------------------------------------------------------------------------------------------
                                             API DRIVEN
-```
+~~~
 
 ## 2 Capability Level
 

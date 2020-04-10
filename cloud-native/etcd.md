@@ -4,17 +4,17 @@
 
 - Time Sequence Required
 
-```text
+~~~
 broadcastTime   <<   electionTimeout   <<    MTBF
  1.ms~10.ms           10.ms~500.ms        1.h~1.Month
 
 broadcastTime : Network Latency + Disk Write
          MTBF : Mean Time Between Failures of Nodes
-```
+~~~
 
 - Data Exchange
 
-```text
+~~~
                                                 +--------+
                                                 |Follower|<------+
                                                 +--------+       |
@@ -32,14 +32,14 @@ broadcastTime : Network Latency + Disk Write
                                                 +--------+       |
                                                 |Follower|<------+
                                                 +--------+
-```
+~~~
 
 ## Etcd Server
 
 
 - Architecture
 
-```text
+~~~
 +-------------------------+
 | +---------------------+ |
 | |     HTTP LAYER      | |
@@ -52,13 +52,13 @@ broadcastTime : Network Latency + Disk Write
 | | Store | | Machine   | |
 | +-------+ +-----------+ |
 +-------------------------+
-```
+~~~
 
 - Server Connection Topology
 
 #.Connection = Cn^2
 
-```text
+~~~
 +-------------+                 +-------------+
 | ETCD-SERVER |<----------------| ETCD-SERVER |
 +-------------|---------------->+-------------+
@@ -70,7 +70,7 @@ broadcastTime : Network Latency + Disk Write
                  +-------------+
                  | ETCD-SERVER |
                  +-------------+
-```
+~~~
 
 ## Cluster Initialization
 

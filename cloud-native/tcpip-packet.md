@@ -9,7 +9,7 @@ Layer 2: the MAC address this packet should go to
 
 - arp table
 
-```
+```bash
 $ ip neighbor
 100.68.138.2   dev  wlp2s0   lladdr  44:00:4d:e2:54:cf  STALE
 100.68.138.1   dev  wlp2s0   lladdr  00:00:5e:00:01:16  REACHABLE
@@ -26,7 +26,7 @@ MAC: 3c:97:ae:44:b3:7f
 
 # Route table (cross networking)
 
-```
+```bash
 $ ip route add 10.4.4.0/24 via 172.23.1.1 dev eth0
 ```
 

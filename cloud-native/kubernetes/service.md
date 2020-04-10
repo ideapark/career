@@ -4,7 +4,7 @@
 
 NOTE: this is why the `kuber-proxy` named
 
-```text
+~~~
 +-------------------------------------+
 | Node                                |
 | +--------+                          | +-----------+
@@ -25,11 +25,11 @@ NOTE: this is why the `kuber-proxy` named
     | labels: app=MyApp| | labels: app=MyApp | | labels: app=MyApp |
     | port: 9376       | | port: 9376        | | port: 9376        |
     +------------------+ +-------------------+ +-------------------+
-```
+~~~
 
 ## iptables proxy mode (default)
 
-```text
+~~~
                         +-----------+
                         | apiserver |
                         +-----------+
@@ -55,11 +55,11 @@ NOTE: this is why the `kuber-proxy` named
 | labels: app=MyApp | | labels: app=MyApp | | labels: app=MyApp |
 | port: 9376        | | port: 9376        | | port: 9376        |
 +-------------------+ +-------------------+ +-------------------+
-```
+~~~
 
 ## ipvs proxy mode (optional, performance better when thousands of services)
 
-```text
+~~~
                         +-----------+
                         | apiserver |
                         +-----------+
@@ -89,4 +89,4 @@ NOTE: this is why the `kuber-proxy` named
 | +-------------------+ +-------------------+ +-------------------+ |
 |                      (Real Server)                                |
 +-------------------------------------------------------------------+
-```
+~~~
