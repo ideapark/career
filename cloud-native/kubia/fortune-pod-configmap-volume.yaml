@@ -1,34 +1,35 @@
+---
 apiVersion: v1
 kind: Pod
 metadata:
   name: fortune
 spec:
   containers:
-  - name: html-generator
-    image: luksa/fortune
-    volumeMounts:
-    - name: html
-      mountPath: /var/htdocs
-  - name: web-server
-    image: nginx:alpine
-    volumeMounts:
-    - name: html
-      mountPath: /var/share/nginx/html
-      readOnly: true
-    - name: config
-      mountPath: /etc/nginx/conf.d
-      readOnly: true
-    ports:
-    - containerPort: 80
-      protocol: TCP
+    - name: html-generator
+      image: luksa/fortune
+      volumeMounts:
+        - name: html
+          mountPath: /var/htdocs
+    - name: web-server
+      image: nginx:alpine
+      volumeMounts:
+        - name: html
+          mountPath: /var/share/nginx/html
+          readOnly: true
+        - name: config
+          mountPath: /etc/nginx/conf.d
+          readOnly: true
+      ports:
+        - containerPort: 80
+          protocol: TCP
   volumes:
-  - name: html
-    emptyDir:
-      medium: Memory
-  - name: config
-    configMap:
-      name: fortune-config
-      defaultMode: 6600
-      items:
-      - key: nginx-gzip.conf
-        path: gzip.conf
+    - name: html
+      emptyDir:
+        medium: Memory
+    - name: config
+      configMap:
+        name: fortune-config
+        defaultMode: 6600
+        items:
+          - key: nginx-gzip.conf
+            path: gzip.conf
