@@ -37,6 +37,37 @@ Using file extensions, e.g.
 
 1. Named offsets from a global base
 
+## Stack Frame
+
+- w/o frame pointer
+
+```text
+ High address
+   ^
+   | CALLER
+   | +---------------+
+   | |   arguments   |
+   | +---------------+
+   | |parent ret addr|
+   | +---------------+
+   | |     local     |
+   | |   variables   |
+   | |               |CALLEE
+   | |               |+---------------+
+   | |               ||   arguments   |
+   | +---------------++---------------+ <---- FP (pseudo-register)
+   | | return address||parent ret addr|
+   | +---------------++---------------+ <---- SP (pseudo-register)
+   |                  |    local      |     \
+   |                  |   variable    |      \
+   |                  |               |       \
+   |                  |               |       / callee stack frame
+   |                  +---------------+      /
+   |                  | return address|     /
+   |                  +---------------+ <---- RSP (HW-register)
+   |
+ Low address
+```
 
 ## Example
 
