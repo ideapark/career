@@ -1,5 +1,43 @@
 # Go Assembler
 
+## Assembly Build Rule
+
+- Toolchain will select appropriate assembly files according to GOOS+GOARCH
+
+Using file extensions, e.g.
+
+  sys_linux_amd64.s
+  sys_darwin_amd64.s
+
+## Prototype
+
+- Function declaration
+
+[src/runtime/timestub.go](https://github.com/golang/go/blob/f639a81cd5e85ca9538c76e612867aa4c2ae241b/src/runtime/timestub2.go#L13)
+
+- Function assembly implementation
+
+[runtime/sys_linux_amd64.s](https://github.com/golang/go/blob/f639a81cd5e85ca9538c76e612867aa4c2ae241b/src/runtime/sys_linux_amd64.s#L209)
+
+## Pseudo-registers
+
+- FP: Frame Pointer
+
+1. Points to the bottom of the argument list
+2. Offsets are positive
+3. Offsets must include a name, e.g. arg+0(FP)
+
+- SP: Stack Pointer
+
+1. Points to the top of the space allocated for local variables
+2. Offsets are negative
+3. Offsets must include a name, e.g. ptr-8(SP)
+
+- SB: Static Base
+
+1. Named offsets from a global base
+
+
 ## Example
 
 ```go
