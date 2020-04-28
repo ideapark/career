@@ -69,6 +69,44 @@ Using file extensions, e.g.
  Low address
 ```
 
+- w/ frame pointer
+
+```text
+ High address
+   ^
+   | CALLER
+   | +---------------+
+   | |   arguments   |
+   | +---------------+
+   | |parent ret addr|
+   | +---------------+
+   | | parent frame  |
+   | |   pointer     |
+   | +---------------+
+   | |     local     |
+   | |   variables   |
+   | |               |CALLEE
+   | |               |+---------------+
+   | |               ||   arguments   |
+   | +---------------++---------------+ <---- FP (pseudo-register)
+   | | return address||parent ret addr|
+   | +---------------++---------------+
+   | | frame pointer || parent frame  |
+   | |               ||   pointer     |
+   | +---------------++---------------+ <---- SP (pseudo-register)
+   |                  |    local      |     \
+   |                  |   variable    |      \
+   |                  |               |       \
+   |                  |               |        \
+   |                  +---------------+        / callee stack frame
+   |                  | return address|       /
+   |                  +---------------+      /
+   |                  | frame pointer |     /
+   |                  +---------------+ <---- RSP (HW-register)
+   |
+ Low address
+```
+
 ## Example
 
 ```go
