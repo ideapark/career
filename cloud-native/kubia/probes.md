@@ -12,4 +12,5 @@ readiness probes. Liveness probes keep pods healthy by killing off unhealthy
 containers and replacing them with new, healthy ones, whereas readiness probes
 make sure that only pods that are ready to serve requests receive them. This is
 mostly necessary during container start up, but it's also useful after the
-container has been running for a while.
+container has been running for a while (service's endpoints will be updated
+according to Pod's readiness probe detection).
