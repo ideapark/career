@@ -1,7 +1,12 @@
 # Istio
 
+![Architecture](arch.svg)
+
 1. connect
 2. secure
+
+![Security Architecture](arch-sec.svg)
+
 3. control
 4. observe
 
