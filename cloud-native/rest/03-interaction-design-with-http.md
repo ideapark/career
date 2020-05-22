@@ -8,6 +8,7 @@
 
 - GET must be used to retrieve a representation of a resource
 
+```text
   $ curl -v http://api.example.restapi.org/greeting
 
   > GET /greeting HTTP/1.1
@@ -27,9 +28,11 @@
   < Content-Type: text/html
 
   <!doctype html><head><meta charset="utf-8"><title>Greeting</title></head> <body><div id="greeting">Hello World!</div></body></html>
+```
 
 - HEAD should be used to retrieve response headers
 
+```text
   $ curl --head http://api.example.restapi.org/greeting
 
   HTTP/1.1 200 OK
@@ -42,6 +45,7 @@
   Last-Modified: Sat, 20 Aug 2011 16:02:17 GMT
   Vary: Accept-Encoding
   Content-Type: text/html
+```
 
 - PUT must be used to both insert and update a stored resource
 
@@ -69,11 +73,13 @@
 
 > Status-Line = HTTP-Version SP Status-Code SP Reason-Phrase CRLF
 
+```text
   1xx: Informational     Communicates transfer protocol-level information.
   2xx: Success           Indicates that the client’s request was accepted successfully.
   3xx: Redirection       Indicates that the client must take some additional action in order to complete their request.
   4xx: Client Error      This category of error status codes points the finger at clients.
   5xx: Server Error      The server takes responsibility for these error status codes.
+```
 
 - 200 (“OK”) should be used to indicate nonspecific success
 - 200 (“OK”) must not be used to communicate errors in the response body
