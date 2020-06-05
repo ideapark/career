@@ -89,7 +89,7 @@ Each rule has the following standard fields:
     to:   A list of operations.
     when: A list of custom conditions.
 
-## Policy Enforcement (istio-1.[3,4].x)
+## Policy Enforcement (DEPRECATED since istio-1.5.0+)
 
 - Mixer Side
 
