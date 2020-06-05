@@ -1,4 +1,3 @@
----
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
@@ -8,10 +7,10 @@ spec:
   hostPID: false
   hostNetwork: false
   hostPorts:
-    - min: 10000
-      max: 11000
-    - min: 13000
-      max: 14000
+  - min: 10000
+    max: 11000
+  - min: 13000
+    max: 14000
   privileged: false
   readOnlyRootFilesystem: true
   runAsUser:
@@ -21,22 +20,22 @@ spec:
   supplementalGroups:
     rule: MustRunAs
     ranges:
-      - min: 2
-        max: 10
-      - min: 20
-        max: 30
+    - min: 2
+      max: 10
+    - min: 20
+      max: 30
   seLinux:
     rule: RunAsAny
   volumes:
-    - emptyDir
-    - configMap
-    - secret
-    - downwardAPI
-    - persistentVolumeClaim
+  - emptyDir
+  - configMap
+  - secret
+  - downwardAPI
+  - persistentVolumeClaim
   allowedCapabilities:
-    - SYS_TIME
+  - SYS_TIME
   defaultAddCapabilities:
-    - CHOWN
+  - CHOWN
   requiredDropCapabilities:
-    - SYS_ADMIN
-    - SYS_MODULE
+  - SYS_ADMIN
+  - SYS_MODULE
