@@ -1,4 +1,4 @@
-# ThirdPartyResources
+# ThirdPartyResources (DEPRECATED, CustomResourceDefinition)
 
 Extending Kubernetes API without code modification.
 
