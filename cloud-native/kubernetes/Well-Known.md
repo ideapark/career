@@ -46,12 +46,18 @@ rely on the Kubernetes scheduler to perform resource-based scheduling, and you
 should aim to schedule based on properties rather than on instance types (e.g.
 require a GPU, instead of requiring a g2.2xlarge)
 
-## failure-domain.beta.kubernetes.io/region
+## failure-domain.beta.kubernetes.io/region (deprecated)
+
 See failure-domain.beta.kubernetes.io/zone.
 
-## failure-domain.beta.kubernetes.io/zone
+## failure-domain.beta.kubernetes.io/zone (deprecated)
+
 Example:
 failure-domain.beta.kubernetes.io/region=us-east-1
 failure-domain.beta.kubernetes.io/zone=us-east-1c
 
 Used on: Node, PersistentVolume
+
+## topology.kubernetes.io/region
+
+## topology.kubernetes.io/zone
