@@ -1,0 +1,222 @@
+Kubernetes Service Internals
+成都
+22 Jun 2020
+
+周朋
+p@ctriple.cn
+https://github.com/iobuf
+微信 lockrecv
+
+* License
+
+Copyright © Zhou Peng <p@ctriple.cn>
+
+* Key Takeaways
+
+- Local Multi-Node Cluster
+- Kubernetes Service Internals
+- How Kubernetes Controllers Work
+
+* Kubernetes Cluster
+
+- $ kind create cluster --config=kind.yaml
+
+  $ kubectl get nodes
+  NAME                 STATUS   ROLES    AGE     VERSION
+  kind-control-plane   Ready    master   4m10s   v1.18.2
+  kind-worker          Ready    <none>   3m36s   v1.18.2
+  kind-worker2         Ready    <none>   3m36s   v1.18.2
+
+.link kind.yaml
+.link https://kind.sigs.k8s.io Kind
+
+- Cluster Networking
+
+  +----------------------+----------------------------------+
+  | NAME                 | SUBNET CIDR                      |
+  +----------------------+----------------------------------+
+  | Node                 | 172.18.0.0/16                    |
+  | Service              | 10.96.0.0/12                     |
+  | Pod                  | 10.244.0.0/16                    |
+  +----------------------+----------------------------------+
+
+* Cluster Overview
+
+  $ kubectl -n kube-system get pods
+  NAME                                         READY   STATUS    RESTARTS   AGE
+  coredns-66bff467f8-5pt4d                     1/1     Running   0          4m10s
+  coredns-66bff467f8-6x42l                     1/1     Running   0          4m10s
+  kube-apiserver-kind-control-plane            1/1     Running   0          4m25s
+  kube-controller-manager-kind-control-plane   1/1     Running   0          4m25s
+  kube-scheduler-kind-control-plane            1/1     Running   0          4m25s
+  etcd-kind-control-plane                      1/1     Running   0          4m25s
+  kindnet-2pqmx                                1/1     Running   0          4m10s
+  kindnet-jnzkk                                1/1     Running   0          3m55s
+  kindnet-ln97p                                1/1     Running   0          3m55s
+  kube-proxy-g99df                             1/1     Running   0          4m10s
+  kube-proxy-kw45m                             1/1     Running   0          3m55s
+  kube-proxy-zp8n5                             1/1     Running   0          3m55s
+
+  $ kubectl get services -o wide
+  NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE   SELECTOR
+  kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   57s   <none>
+
+* Cluster Node Components
+
+  +---------------------+                     +---------------------+
+  | kind-worker         |                     | kind-worker2        |
+  |---------------------|                     |---------------------|
+  | docker kubelet      | systemd service     | docker kubelet      | systemd service
+  |---------------------|                     |---------------------|
+  | kube-proxy          | pod                 | kube-proxy          | pod
+  | kindnet             |                     | kindnet             |
+  +---------------------+                     +---------------------+
+
+                   +---------------------------------+
+                   | kind-control-plane              |
+                   +---------------------------------+
+                   | docker kubelet                  | systemd service
+                   |---------------------------------|
+                   | kube-apiserver kube-scheduler   | static pod
+                   | kube-controller-manager etcd    |
+                   |---------------------------------|
+                   | kube-proxy    coredns-5pt4d     | pod
+                   | kindnet       coredns-6x42l     |
+                   +---------------------------------+
+
+* Kuard App
+
+  +-----------------------------------------------------------------------------------------------+
+  |      Name: kuard                                                                              |
+  | Namespace: default                                                                            |
+  |    Labels: app=kuard                                                                          |
+  |  Selector: app=kuard                                                                          |
+  |  Replicas: 2                                                                                  |
+  |     Image: gcr.io/kuar-demo/kuard-amd64:blue                                                  |
+  |      Port: 8080                                                                               |
+  |  Liveness: http-get http://:8080/healthy delay=0s timeout=1s period=10s #success=1 #failure=3 |
+  | Readiness: http-get http://:8080/ready   delay=0s timeout=1s period=10s #success=1 #failure=3 |
+  +-----------------------------------------------------------------------------------------------+
+
+$ kubectl apply -f kuard.yaml
+
+.link kuard.yaml
+
+* Cluster Node Components (Kuard App)
+
+  +---------------------+                     +---------------------+
+  | kind-worker         |                     | kind-worker2        |
+  |---------------------|                     |---------------------|
+  | docker kubelet      | systemd service     | docker kubelet      | systemd service
+  |---------------------|                     |---------------------|
+  | kube-proxy  kuard   | pod                 | kube-proxy  kuard   | pod
+  | kindnet             |                     | kindnet             |
+  +---------------------+                     +---------------------+
+
+                   +---------------------------------+
+                   | kind-control-plane              |
+                   +---------------------------------+
+                   | docker kubelet                  | systemd service
+                   |---------------------------------|
+                   | kube-apiserver kube-scheduler   | static pod
+                   | kube-controller-manager etcd    |
+                   |---------------------------------|
+                   | kube-proxy    coredns-5pt4d     | pod
+                   | kindnet       coredns-6x42l     |
+                   +---------------------------------+
+
+* kube-proxy
+
+The Kubernetes network proxy runs on each node (DaemonSet). This reflects
+services as defined in the Kubernetes API on each node and can do simple TCP,
+UDP, and SCTP stream forwarding or round robin TCP, UDP, and SCTP forwarding
+across a set of backends (Endpoints).
+
+  $ kubectl -n kube-system edit daemonset/kube-proxy
+  $ kubectl -n kube-system logs -f daemonset/kube-proxy
+
+* Service & Endpoints
+
+Endpoints is a collection of endpoints that implement the actual service.
+service is name and ip is stable identifier, otherwise endpoints is on the
+going.
+
+- service/kubernetes
+
+  +-------------------------------------------------+
+  |       Name: kubernetes                          |
+  |  Namespace: default                             |
+  |     Labels: component=apiserver                 |
+  |             provider=kubernetes                 |
+  |       Type: ClusterIP                           |
+  |         IP: 10.96.0.1                           |
+  |       Port: https  443/TCP                      |
+  | TargetPort: 6443/TCP                            |
+  |  Endpoints: 172.18.0.2:6443                     |
+  +-------------------------------------------------+
+
+* Kuard Pod Readiness Probe
+
+The kubelet uses readiness probes to know when a container is ready to start
+accepting traffic. A Pod is considered ready when all of its containers are
+ready. One use of this signal is to control which Pods are used as backends (aka
+Endpoints) for Services. When a Pod is not ready, it is removed from Service
+load balancers.
+
+  $ kubectl port-forward deployment/kuard 9090:8080
+
+.link http://localhost:9090 Kuard
+
+* Service ClusterIP
+
+  $ kubectl expose deployment/kuard --port=80 --target-port=8080 --type=ClusterIP
+  $ kubectl describe service/kuard
+
+- endpoints
+
+  $ kubectl describe endpoints/kuard
+
+- iptables
+
+  $ iptables -t nat -S
+
+* Service NodePort
+
+  kubectl expose deployment/kuard --port=80 --target-port=8080 --type=NodePort
+  kubectl describe service/kuard
+
+- endpoints
+
+  $ kubectl describe endpoints/kuard
+
+- iptables
+
+  $ iptables -t nat -S
+
+- node listening port
+
+  $ ss -4tlnp
+
+* Service LoadBalancer
+
+  $ kubectl expose deployment/kuard --port=80 --target-port=8080 --type=LoadBalancer
+  $ kubectl describe service/kuard
+
+- endpoints
+
+  $ kubectl describe endpoints/kuard
+
+- iptables
+
+  $ iptables -t nat -S
+
+- node listening port
+
+  $ ss -4tlnp
+
+* FAQ
+
+- Why ping service ip not working.
+- Why there is another EndpointSlice?
+- NAT limitations you may encounter.
+- When node offline (e,g. power off), what will happen?
