@@ -50,8 +50,10 @@ forwarding traffic. You can use a sidecar configuration to do the following:
 
 Identity:
 
-1. x509 SPIFFE (spiffe://cluster.local/ns/<default>/sa/<default>)
+1. x509 SPIFFE (spiffe://cluster.local/ns/<namespace>/sa/<serviceaccount>)
 2. JWT: json web token (USE_ORIGIN)
+
+[SPIFFE](https://spiffe.io/spire/concepts/)
 
 Policy scope:
 
