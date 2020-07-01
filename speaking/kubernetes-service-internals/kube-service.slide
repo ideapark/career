@@ -16,7 +16,7 @@ Copyright © Zhou Peng <p@ctriple.cn>
 - Local Multi-Node Cluster
 - Kubernetes Service Internals
 
-https://kubernetes.io/docs/concepts/services-networking/service
+.link https://kubernetes.io/docs/concepts/services-networking/service Kubernetes Service
 
 - How Kubernetes Controllers Work
 
