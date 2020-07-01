@@ -220,6 +220,7 @@ load balancers.
 * FAQ
 
 - Why ping service ip not working.
+- Service discovering mode DNS or Environment Variables, can we remove Env mode completely?
 - Why there is another EndpointSlice?
 - NAT limitations you may encounter.
 - When node offline (e,g. power off), what will happen?
