@@ -223,4 +223,7 @@ load balancers.
 - Service discovering mode DNS or Environment Variables, can we remove Env mode completely?
 - Why there is another EndpointSlice?
 - NAT limitations you may encounter.
+
+.link https://kubernetes.io/docs/tasks/administer-cluster/nodelocaldns/#motivation nf_conntrack_udp_timeout
+
 - When node offline (e,g. power off), what will happen?
