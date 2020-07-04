@@ -140,3 +140,23 @@
 |                             +---------------+                                   |
 +---------------------------------------------------------------------------------+
 ~~~
+
+## netfilter nat conntrack entry
+
+```
+{
+  protocol = udp
+  src      = anypod
+  sport    = 1234
+  dst      = cluster_ip
+  dport    = 53
+}
+==>
+{
+  protocol = udp
+  src      = anypod
+  sport    = 1234
+  dst      = dnspod
+  dport    = 5353
+}
+```
