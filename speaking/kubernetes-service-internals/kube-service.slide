@@ -24,11 +24,11 @@ Copyright © Zhou Peng <p@ctriple.cn>
 
 - $ kind create cluster --config=kind.yaml
 
-  $ kubectl get nodes
-  NAME                 STATUS   ROLES    AGE     VERSION
-  kind-control-plane   Ready    master   4m10s   v1.18.2
-  kind-worker          Ready    <none>   3m36s   v1.18.2
-  kind-worker2         Ready    <none>   3m36s   v1.18.2
+  $ kubectl get nodes -o wide
+  NAME                 STATUS   ROLES    AGE     VERSION   INTERNAL-IP
+  kind-control-plane   Ready    master   10m     v1.18.2   172.18.0.4
+  kind-worker          Ready    <none>   9m38s   v1.18.2   172.18.0.3
+  kind-worker2         Ready    <none>   9m38s   v1.18.2   172.18.0.2
 
 .link kind.yaml
 .link https://kind.sigs.k8s.io Kind
@@ -45,20 +45,20 @@ Copyright © Zhou Peng <p@ctriple.cn>
 
 * Cluster Overview
 
-  $ kubectl -n kube-system get pods
-  NAME                                         READY   STATUS    RESTARTS   AGE
-  coredns-66bff467f8-5pt4d                     1/1     Running   0          4m10s
-  coredns-66bff467f8-6x42l                     1/1     Running   0          4m10s
-  kube-apiserver-kind-control-plane            1/1     Running   0          4m25s
-  kube-controller-manager-kind-control-plane   1/1     Running   0          4m25s
-  kube-scheduler-kind-control-plane            1/1     Running   0          4m25s
-  etcd-kind-control-plane                      1/1     Running   0          4m25s
-  kindnet-2pqmx                                1/1     Running   0          4m10s
-  kindnet-jnzkk                                1/1     Running   0          3m55s
-  kindnet-ln97p                                1/1     Running   0          3m55s
-  kube-proxy-g99df                             1/1     Running   0          4m10s
-  kube-proxy-kw45m                             1/1     Running   0          3m55s
-  kube-proxy-zp8n5                             1/1     Running   0          3m55s
+  $ kubectl -n kube-system get pods -o wide --sort-by=spec.nodeName
+  NAME                                         READY   STATUS     IP           NODE
+  coredns-66bff467f8-7zvcz                     1/1     Running    10.244.0.4   kind-control-plane
+  coredns-66bff467f8-h9mts                     1/1     Running    10.244.0.2   kind-control-plane
+  etcd-kind-control-plane                      1/1     Running    172.18.0.4   kind-control-plane
+  kube-proxy-ftgtj                             1/1     Running    172.18.0.4   kind-control-plane
+  kindnet-gkql5                                1/1     Running    172.18.0.4   kind-control-plane
+  kube-scheduler-kind-control-plane            1/1     Running    172.18.0.4   kind-control-plane
+  kube-apiserver-kind-control-plane            1/1     Running    172.18.0.4   kind-control-plane
+  kube-controller-manager-kind-control-plane   1/1     Running    172.18.0.4   kind-control-plane
+  kindnet-79zhl                                1/1     Running    172.18.0.3   kind-worker
+  kube-proxy-q8fr9                             1/1     Running    172.18.0.3   kind-worker
+  kube-proxy-c5qk5                             1/1     Running    172.18.0.2   kind-worker2
+  kindnet-s4wtx                                1/1     Running    172.18.0.2   kind-worker2
 
   $ kubectl get services -o wide
   NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE   SELECTOR
@@ -66,26 +66,25 @@ Copyright © Zhou Peng <p@ctriple.cn>
 
 * Cluster Node Components
 
-  +---------------------+                     +---------------------+
-  | kind-worker         |                     | kind-worker2        |
-  |---------------------|                     |---------------------|
-  | docker kubelet      | systemd service     | docker kubelet      | systemd service
-  |---------------------|                     |---------------------|
-  | kube-proxy          | pod                 | kube-proxy          | pod
-  | kindnet             |                     | kindnet             |
-  +---------------------+                     +---------------------+
+  +-----------+--------------------+      +-----------+--------------------+
+  | HOSTNAME: | kind-worker        |      | HOSTNAME: | kind-worker2       |  #worker: 1 2 3 ... N
+  +-----------+--------------------+      +-----------+--------------------+
+  | SYSTEMD:  | docker kubelet     |      | SYSTEMD:  | docker kubelet     |
+  |-----------+--------------------|      |-----------+--------------------|
+  | POD:      | kube-proxy kindnet |      | POD:      | kube-proxy kindnet |
+  +-----------+--------------------+      +-----------+--------------------+
 
-                   +---------------------------------+
-                   | kind-control-plane              |
-                   +---------------------------------+
-                   | docker kubelet                  | systemd service
-                   |---------------------------------|
-                   | kube-apiserver kube-scheduler   | static pod
-                   | kube-controller-manager etcd    |
-                   |---------------------------------|
-                   | kube-proxy    coredns-5pt4d     | pod
-                   | kindnet       coredns-6x42l     |
-                   +---------------------------------+
+                   +------------+-------------------------------+
+                   | HOSTNAME:  | kind-control-plane            |   #control-plane: 1 3 (5 7)
+                   +------------+-------------------------------+
+                   | SYSTEMD:   | docker kubelet                |
+                   |------------+-------------------------------|
+                   | STATIC POD:| kube-apiserver kube-scheduler |
+                   |            | kube-controller-manager etcd  |
+                   |------------+-------------------------------|
+                   | POD:       | kube-proxy    coredns-5pt4d   |
+                   |            | kindnet       coredns-6x42l   |
+                   +------------+-------------------------------+
 
 * Kuard App
 
@@ -101,32 +100,35 @@ Copyright © Zhou Peng <p@ctriple.cn>
   | Readiness: http-get http://:8080/ready   delay=0s timeout=1s period=10s #success=1 #failure=3 |
   +-----------------------------------------------------------------------------------------------+
 
-$ kubectl apply -f kuard.yaml
-
 .link kuard.yaml
 
-* Cluster Node Components (Kuard App)
+  $ kubectl apply -f kuard.yaml
 
-  +---------------------+                     +---------------------+
-  | kind-worker         |                     | kind-worker2        |
-  |---------------------|                     |---------------------|
-  | docker kubelet      | systemd service     | docker kubelet      | systemd service
-  |---------------------|                     |---------------------|
-  | kube-proxy  kuard   | pod                 | kube-proxy  kuard   | pod
-  | kindnet             |                     | kindnet             |
-  +---------------------+                     +---------------------+
+  # in-cluster testing pod
+  $ kubectl run dnsutils --image=tutum/dnsutils --command -- sleep infinity
 
-                   +---------------------------------+
-                   | kind-control-plane              |
-                   +---------------------------------+
-                   | docker kubelet                  | systemd service
-                   |---------------------------------|
-                   | kube-apiserver kube-scheduler   | static pod
-                   | kube-controller-manager etcd    |
-                   |---------------------------------|
-                   | kube-proxy    coredns-5pt4d     | pod
-                   | kindnet       coredns-6x42l     |
-                   +---------------------------------+
+* Cluster Node Components (Kuard App Running)
+
+  +-----------+--------------------+      +-----------+--------------------+
+  | HOSTNAME: | kind-worker        |      | HOSTNAME: | kind-worker2       |  #worker: 1 2 3 ... N
+  +-----------+--------------------+      +-----------+--------------------+
+  | SYSTEMD:  | docker kubelet     |      | SYSTEMD:  | docker kubelet     |
+  |-----------+--------------------|      |-----------+--------------------|
+  | POD:      | kube-proxy kindnet |      | POD:      | kube-proxy kindnet |
+  |           | [kuard] [dnsutils] |      |           | [kuard]            |
+  +-----------+--------------------+      +-----------+--------------------+
+
+                   +------------+-------------------------------+
+                   | HOSTNAME:  | kind-control-plane            |   #control-plane: 1 3 (5 7)
+                   +------------+-------------------------------+
+                   | SYSTEMD:   | docker kubelet                |
+                   |------------+-------------------------------|
+                   | STATIC POD:| kube-apiserver kube-scheduler |
+                   |            | kube-controller-manager etcd  |
+                   |------------+-------------------------------|
+                   | POD:       | kube-proxy    coredns-5pt4d   |
+                   |            | kindnet       coredns-6x42l   |
+                   +------------+-------------------------------+
 
 * kube-proxy
 
@@ -138,13 +140,25 @@ across a set of backends (Endpoints).
   $ kubectl -n kube-system edit daemonset/kube-proxy
   $ kubectl -n kube-system logs -f daemonset/kube-proxy
 
+- kube-proxy verbose mode
+
+  spec:
+    containers:
+    - command:
+      - /usr/local/bin/kube-proxy
+      - -v=6
+      - --config=/var/lib/kube-proxy/config.conf
+      - --hostname-override=$(NODE_NAME)
+
 * Service & Endpoints
 
 Endpoints is a collection of endpoints that implement the actual service.
 service is name and ip is stable identifier, otherwise endpoints is on the
 going.
 
-- service/kubernetes
+- The very first default in-cluster service named kubernetes which resides in namespace default.
+
+  $ kubectl get services -o wide
 
   +-------------------------------------------------+
   |       Name: kubernetes                          |
@@ -158,7 +172,7 @@ going.
   |  Endpoints: 172.18.0.2:6443                     |
   +-------------------------------------------------+
 
-* Kuard Pod Readiness Probe
+* Pod Readiness Probe
 
 The kubelet uses readiness probes to know when a container is ready to start
 accepting traffic. A Pod is considered ready when all of its containers are
@@ -166,64 +180,94 @@ ready. One use of this signal is to control which Pods are used as backends (aka
 Endpoints) for Services. When a Pod is not ready, it is removed from Service
 load balancers.
 
+  # Make kuard app accessible out side of cluster temporarily
+  # we will see how readiness probe affect service's endpoints
   $ kubectl port-forward deployment/kuard 9090:8080
 
 .link http://localhost:9090 Kuard
 
-* Service ClusterIP
+* Service (in-cluster)
+
+- ClusterIP
 
   $ kubectl expose deployment/kuard --port=80 --target-port=8080 --type=ClusterIP
   $ kubectl describe service/kuard
 
-- endpoints
-
+  # endpoints is on the going
   $ kubectl describe endpoints/kuard
 
-- iptables
-
+  # iptables rules
   $ iptables -t nat -S
 
-* Service NodePort
+- Cluster Networking
+
+  +----------------------+----------------------------------+
+  | NAME                 | SUBNET CIDR                      |
+  +----------------------+----------------------------------+
+  | Node                 | 172.18.0.0/16                    |
+  | Service              | 10.96.0.0/12                     |
+  | Pod                  | 10.244.0.0/16                    |
+  +----------------------+----------------------------------+
+
+* Service (out-of-cluster)
+
+- NodePort
 
   kubectl expose deployment/kuard --port=80 --target-port=8080 --type=NodePort
   kubectl describe service/kuard
 
-- endpoints
-
+  # endpoints is on the going
   $ kubectl describe endpoints/kuard
 
-- iptables
-
+  # iptables rules
   $ iptables -t nat -S
 
-- node listening port
-
+  # listening port
   $ ss -4tlnp
 
-* Service LoadBalancer
+- Cluster Networking
+
+  +----------------------+----------------------------------+
+  | NAME                 | SUBNET CIDR                      |
+  +----------------------+----------------------------------+
+  | Node                 | 172.18.0.0/16                    |
+  | Service              | 10.96.0.0/12                     |
+  | Pod                  | 10.244.0.0/16                    |
+  +----------------------+----------------------------------+
+
+* Service (out-of-cluster with cloud vendor)
+
+- LoadBalancer
 
   $ kubectl expose deployment/kuard --port=80 --target-port=8080 --type=LoadBalancer
   $ kubectl describe service/kuard
 
-- endpoints
-
+  # endpoints is one the going
   $ kubectl describe endpoints/kuard
 
-- iptables
-
+  # iptables rules
   $ iptables -t nat -S
 
-- node listening port
-
+  # listening port
   $ ss -4tlnp
+
+- Cluster Networking
+
+  +----------------------+----------------------------------+
+  | NAME                 | SUBNET CIDR                      |
+  +----------------------+----------------------------------+
+  | Node                 | 172.18.0.0/16                    |
+  | Service              | 10.96.0.0/12                     |
+  | Pod                  | 10.244.0.0/16                    |
+  +----------------------+----------------------------------+
 
 * FAQ
 
-- Why ping service ip not working.
-- Service discovering mode DNS or Environment Variables, can we remove Env mode completely?
-- Why there is another EndpointSlice?
-- NAT limitations you may encounter.
+- Why ping service ip not working?
+- DNS or Environment Variables service discovering, how and why?
+- NAT limitations and bugs.
 
 .link https://kubernetes.io/docs/tasks/administer-cluster/nodelocaldns/#motivation nf_conntrack_udp_timeout
 
 - When node offline (e,g. power off), what will happen?
+- Why there is another EndpointSlice?
