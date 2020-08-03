@@ -57,7 +57,7 @@ NOTE: this is why the `kuber-proxy` named
 +-------------------+ +-------------------+ +-------------------+
 ~~~
 
-## ipvs proxy mode (optional, performance better when thousands of services)
+## ipvs proxy mode (optional, performance better when thousands of services, v1.11 GA)
 
 ~~~
                         +-----------+
