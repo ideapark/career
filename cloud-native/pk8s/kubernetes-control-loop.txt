@@ -1,0 +1,16 @@
+
+     User                                         resync period
+      |                                                |
+      |                                                | Reconcile
+      |                                                |
+      v               Get notified about               v            Make world look
++------------------+  changes via informers  +-------------------+    as desired     +--------------+
+|Custom Resource   |------------------------>|C.O.N.T.R.O.L.L.E.R|------------------>|External World|
+|with desired state|<------------------------|      L.O.O.P      |                   |              |
++------------------+     Update status       +-------------------+                   +--------------+
+                                                 ^            |
+                                                 |            |
+                                                 +------------+
+                                               Requeue after (conflict)
+                                               error (depending on work
+                                               queue with deplay and backoff)
