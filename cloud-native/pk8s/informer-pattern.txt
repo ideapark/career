@@ -1,0 +1,12 @@
+CLIENT-GO INFORMER PATTERN
+
+                +------------------+
+                |  Informer        |        Get("foo")/List
+                |              +--------+<-------------------------
+ Watch events   | +---------+  |Lister  |-------------------------->
+ from API erver | |         |  +--------+   *corev1.Pod
+--------------->| |S.T.O.R.E|  +--------+
+                | |         |  |Informer|-------------------------->
+                | +---------+  +--------+   event handler calls
+                |                  |        with *corev1.Pod
+                +------------------+
