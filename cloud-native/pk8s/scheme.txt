@@ -1,0 +1,22 @@
+# S.C.H.E.M.E
+
+   Defaulters
+       \              ReflectType          GroupVersionKinds
+        \                  |                   /
+         +------------------------------------+
+         |S.C.H.E.M.E                         |
+         |  k8s.io/apimachinery/runtime.Scheme|--- Conversions
+         |  k8s.io/client-go/kubernetes/scheme|
+         +------------------------------------+
+                    /
+                   /
+               +-----+
+               |Codec|
+               +-----+
+
+
+# API Machinery in a nutshell
+
++-----------+   Scheme  +----------------+  RESTMapper  +--------------------+  Client   +---------+
+|Golang Type|---------->|GroupVersionKind|------------->|GroupVersionResource|---------->|HTTP path|
++-----------+           +----------------+              +--------------------+           +---------+
