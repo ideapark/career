@@ -1,9 +1,9 @@
-https://k8s.iobuf.io/.well-known/oauth-authorization-server
+https://k8s.iotty.io/.well-known/oauth-authorization-server
 
 {
-  "issuer": "https://k8s.iobuf.io",
-  "authorization_endpoint": "https://k8s.iobuf.io/oauth/authorize",
-  "token_endpoint": "https://k8s.iobuf.io/oauth/token",
+  "issuer": "https://k8s.iotty.io",
+  "authorization_endpoint": "https://k8s.iotty.io/oauth/authorize",
+  "token_endpoint": "https://k8s.iotty.io/oauth/token",
   "scopes_supported": [
     "user:check-access",
     "user:full",

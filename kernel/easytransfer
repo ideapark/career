@@ -25,6 +25,6 @@ nc server.host 9999 < /tmp/myfifo
 #
 echo https://gnu.org     > /tmp/myfifo
 echo https://kernel.org  > /tmp/myfifo
-echo https://iobuf.org   > /tmp/myfifo
+echo https://iotty.org   > /tmp/myfifo
 
 EOF

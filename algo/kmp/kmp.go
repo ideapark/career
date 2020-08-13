@@ -1,4 +1,4 @@
-// Copyright 2020 (C) Zhou Peng <p@iobuf.io>
+// Copyright 2020 (C) Zhou Peng <p@iotty.io>
 
 // Package implements Knuth–Morris–Pratt algorithm.
 // https://en.wikipedia.org/wiki/Knuth-Morris-Pratt_algorithm
