@@ -7,7 +7,7 @@ description: Cloud-Native & Cloud-Native Infrastructure
 
 ~~~
                           +--------------------------------------------+
-                          |                ARCHITECTURE                |
+                          |          A.R.C.H.I.T.E.C.T.U.R.E           |
                           |--------------------------------------------|
                           | Elastic | Destributed | High Availiability |
                           |--------------------------------------------|
@@ -30,15 +30,15 @@ description: Cloud-Native & Cloud-Native Infrastructure
                                      .      Efficient     .
                                     .                      .
                                    ... . . . . . . . . . . ..
-      +----------------------+                                    +-----------------------+
-      |      ENGINEERING     |                                    |         PEOPLE        |
-      |----------------------|                                    |-----------------------|
-      |      DevOps          |                                    |  Full Functional Team |
-      |----------------------|                                    |-----------------------|
-      | Micro-service CI/CD  |                                    |  Agile Team           |
-      |----------------------|                                    |-----------------------|
-      | Develop Environment  |                                    | Full Stack Engineer   |
-      +----------------------+                                    +-----------------------+
+      +-----------------------+                                    +-----------------------+
+      | E.N.G.I.N.E.E.R.I.N.G |                                    |      P.E.O.P.L.E      |
+      |-----------------------|                                    |-----------------------|
+      |      DevOps           |                                    | Full Functional Team  |
+      |-----------------------|                                    |-----------------------|
+      | Micro-service CI/CD   |                                    | Agile Team            |
+      |-----------------------|                                    |-----------------------|
+      | Develop Environment   |                                    | Full Stack Engineer   |
+      +-----------------------+                                    +-----------------------+
 ~~~
 
 # Cloud-Native Infrastructure Pillars & Capability Level
