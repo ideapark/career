@@ -80,11 +80,11 @@ broadcastTime : Network Latency + Disk Write
 
 ```bash
 $ ETCD_DISCOVERY=$(curl https://discovery.etcd.io/new?size=3)
-$ etcd --name etcdX
-       --initial-advertise-peer-urls https://etcdX:2380
-       --listen-peer-urls https://etcdX:2380
-       --listen-client-urls https://etcdX:2379,https://localhost:2379
-       --advertise-client-urls https://etcdX:2379
+$ etcd --name etcdX                                                    \
+       --initial-advertise-peer-urls https://etcdX:2380                \
+       --listen-peer-urls https://etcdX:2380                           \
+       --listen-client-urls https://etcdX:2379,https://localhost:2379  \
+       --advertise-client-urls https://etcdX:2379                      \
        --discovery $ETCD_DISCOVERY
 ```
 
@@ -102,13 +102,13 @@ etcd1.example.com. 300 IN  A    10.0.1.20
 etcd2.example.com. 300 IN  A    10.0.1.30
 
 # X=[0,1,2]
-$ etcd --name etcdX
-       --initial-cluster-token etcd-cluster-##########
-       --initial-cluster-state new
-       --discovery-srv example.com
-       --initial-advertise-peer-urls https://etcdX.example.com:2380
-       --advertise-client-urls https://etcdX.example.com:2379
-       --listen-client-urls https://etcdX.example.com:2379
+$ etcd --name etcdX                                                  \
+       --initial-cluster-token etcd-cluster-##########               \
+       --initial-cluster-state new                                   \
+       --discovery-srv example.com                                   \
+       --initial-advertise-peer-urls https://etcdX.example.com:2380  \
+       --advertise-client-urls https://etcdX.example.com:2379        \
+       --listen-client-urls https://etcdX.example.com:2379           \
        --listen-peer-urls https://etcdX.example.com:2380
 ```
 
