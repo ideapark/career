@@ -1,3 +1,3 @@
-module iotty.io/algo
+module iotty.go/algo
 
 go 1.13

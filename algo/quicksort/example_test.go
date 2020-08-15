@@ -1,4 +1,4 @@
-// Copyright 2020 (C) Zhou Peng <p@iotty.io>
+// Copyright 2020 (C) Zhou Peng <p@iotty.go>
 
 package quicksort
 
