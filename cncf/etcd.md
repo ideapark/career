@@ -56,7 +56,7 @@ broadcastTime : Network Latency + Disk Write
 
 - Server Connection Topology
 
-#.Connection = Cn^2
+#conn=Cn^2
 
 ~~~
 +-------------+                 +-------------+
