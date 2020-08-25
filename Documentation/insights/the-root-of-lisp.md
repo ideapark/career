@@ -26,7 +26,7 @@
 零个或多个表达式组成的表(list),表达式之间用空格分开,放入一对括号中.以下是一些表
 达式:
 
-```
+```lisp
 foo
 ()
 (foo)
@@ -46,7 +46,7 @@ quote,atom,eq,car,cdr,cons,和cond.
 
 - (quote x) 返回x.为了可读性我们把(quote x)简记为'x.
 
-```
+```lisp
 > (quote a)
 a
 > 'a
@@ -58,7 +58,7 @@ a
 - (atom x)返回原子t如果x的值是一个原子或是空表,否则返回(). 在Lisp中我们按惯例用
   原子t表示真, 而用空表表示假.
 
-```
+```lisp
 > (atom 'a)
 t
 > (atom '(a b c))
@@ -71,14 +71,14 @@ t
 个表,我们避免它被求值. 一个未被引用的表作为自变量传给象atom这样的操作符将被视为
 代码:
 
-```
+```lisp
 > (atom (atom 'a))
 t
 ```
 
 反之一个被引用的表仅被视为表, 在此例中就是有两个元素的表:
 
-```
+```lisp
 > (atom '(atom 'a))
 ()
 ```
@@ -91,7 +91,7 @@ t
 
 - (eq x y)返回t如果x和y的值是同一个原子或都是空表, 否则返回().
 
-```
+```lisp
 > (eq 'a 'a)
 t
 > (eq 'a 'b)
@@ -102,14 +102,14 @@ t
 
 - (car x)期望x的值是一个表并且返回x的第一个元素.
 
-```
+```lisp
 > (car '(a b c))
 a
 ```
 
 - (cdr x)期望x的值是一个表并且返回x的第一个元素之后的所有元素.
 
-```
+```lisp
 > (cdr '(a b c))
 (b c)
 ```
@@ -117,7 +117,7 @@ a
 - (cons x y)期望y的值是一个表并且返回一个新表,它的第一个元素是x的值,后面跟着y的
   值的各个元素.
 
-```
+```lisp
 > (cons 'a '(b c))
 (a b c)
 > (cons 'a (cons 'b (cons 'c '())))
@@ -132,7 +132,7 @@ a
   求值直到有一个返回t. 如果能找到这样的p表达式,相应的e表达式的值作为整个cond表达
   式的 返回值.
 
-```
+```lisp
 > (cond ((eq 'a 'b) 'first)
 ((atom 'a)  'second))
 second
@@ -153,7 +153,7 @@ $p_{1}$...$p_{n}$是原子(叫做参数),e是表达式. 如果表达式的第一
 则称为函数调用.它的值计算如下.每一个表达式$a_{i}$先求值,然后e再求值.在e的求值过
 程中,每个出现在e中的$p_{i}$的值是相应的$a_{i}$在最近一次的函数调用中的值.
 
-```
+```lisp
 > ((lambda (x) (cons x '(b))) 'a)
 (a b)
 > ((lambda (x y) (cons x (cdr y)))
@@ -164,19 +164,19 @@ $p_{1}$...$p_{n}$是原子(叫做参数),e是表达式. 如果表达式的第一
 
 如果一个表达式的第一个元素f是原子且f不是原始操作符
 
-```
+```lisp
 (f $a_{1}$...$a_{n}$)
 ```
 
 并且f的值是一个函数(lambda ($p_{1}$...$p_{n}$)),则以上表达式的值就是
 
-```
+```lisp
 ((lambda ($p_{1}$...$p_{n}$) e) $a_{1}$...$a_{n}$)
 ```
 
 的值. 换句话说,参数在表达式中不但可以作为自变量也可以作为操作符使用:
 
-```
+```lisp
 > ((lambda (f) (f '(b c)))
    '(lambda (x) (cons 'a x)))
 (a b c)
@@ -184,7 +184,7 @@ $p_{1}$...$p_{n}$是原子(叫做参数),e是表达式. 如果表达式的第一
 
 有另外一个函数记号使得函数能提及它本身,这样我们就能方便地定义递归函数记号
 
-```
+```lisp
 (label f (lambda ($p_{1}$...$p_{n}$) e))
 ```
 
@@ -194,14 +194,14 @@ $p_{1}$...$p_{n}$是原子(叫做参数),e是表达式. 如果表达式的第一
 假设我们要定义函数(subst x y z), 它取表达式x,原子y和表z做参数,返回一个象z那样的
 表, 不过z中出现的y(在任何嵌套层次上)被x代替.
 
-```
+```lisp
 > (subst 'm 'b '(a b (a b c) d))
 (a m (a m c) d)
 ```
 
 我们可以这样表示此函数
 
-```
+```lisp
 (label subst (lambda (x y z)
               (cond ((atom z)
                      (cond ((eq z y) x)
@@ -212,13 +212,13 @@ $p_{1}$...$p_{n}$是原子(叫做参数),e是表达式. 如果表达式的第一
 
 我们简记f=(label f (lambda ($p_{1}$...$p_{n}$) e))为
 
-```
+```lisp
 (defun f ($p_{1}$...$p_{n}$) e)
 ```
 
 于是
 
-```
+```lisp
 (defun subst (x y z)
  (cond ((atom z)
         (cond ((eq z y) x)
@@ -230,13 +230,13 @@ $p_{1}$...$p_{n}$是原子(叫做参数),e是表达式. 如果表达式的第一
 偶然地我们在这儿看到如何写cond表达式的缺省子句. 第一个元素是't的子句总是会成功的.
 于是
 
-```
+```lisp
 (cond (x y) ('t z))
 ```
 
 等同于我们在某些语言中写的
 
-```
+```lisp
 if x then y else z
 ```
 
@@ -246,7 +246,7 @@ if x then y else z
 引进一些常见模式的简记法. 我们用cxr,其中x是a或d的序列,来简记相应的car和cdr的组合.
 比如(cadr e)是(car (cdr e))的简记,它返回e的第二个元素.
 
-```
+```lisp
 > (cadr '((a b) (c d) e))
 (c d)
 > (caddr '((a b) (c d) e))
@@ -257,7 +257,7 @@ e
 
 我们还用(list $e_{1}$...$e_{n}$)表示(cons $e_{1}$...(cons $e_{n}$'()) ...).
 
-```
+```lisp
 > (cons 'a (cons 'b (cons 'c '())))
 (a b c)
 > (list 'a 'b 'c)
@@ -269,7 +269,7 @@ e
 
 - (null. x)测试它的自变量是否是空表.
 
-```
+```lisp
 (defun null. (x)
   (eq x '()))
 
@@ -281,7 +281,7 @@ t
 
 - (and. x y)返回t如果它的两个自变量都是t, 否则返回().
 
-```
+```lisp
 (defun and. (x y)
  (cond (x (cond (y 't) ('t '())))
   ('t '())))
@@ -294,7 +294,7 @@ t
 
 - (not. x)返回t如果它的自变量返回(),返回()如果它的自变量返回t.
 
-```
+```lisp
 (defun not. (x)
  (cond (x '())
   ('t 't)))
@@ -307,7 +307,7 @@ t
 
 - (append. x y)取两个表并返回它们的连结.
 
-```
+```lisp
 (defun append. (x y)
    (cond ((null. x) y)
          ('t (cons (car x) (append. (cdr x) y)))))
@@ -321,7 +321,7 @@ t
 - (pair. x y)取两个相同长度的表,返回一个由双元素表构成的表,双元素表是相应位置的
   x,y的元素对.
 
-```
+```lisp
 (defun pair. (x y)
   (cond ((and. (null. x) (null. y)) '())
         ((and. (not. (atom x)) (not. (atom y)))
@@ -335,7 +335,7 @@ t
 - (assoc. x y)取原子x和形如pair.函数所返回的表y,返回y中第一个符合如下条件的表的
   第二个元素:它的第一个元素是x.
 
-```
+```lisp
 (defun assoc. (x y)
   (cond ((eq (caar y) x) (cadar y))
         ('t (assoc. x (cdr y)))))
@@ -352,7 +352,7 @@ new
 现在惊喜来了. 我们可以写一个函数作为我们语言的解释器:此函数取任意Lisp表达式作自
 变量并返回它的值. 如下所示:
 
-```
+```lisp
 (defun eval. (e a)
   (cond
     ((atom e) (assoc. e a))
@@ -398,7 +398,7 @@ eval.有两个自变量: e是要求值的表达式, a是由一些赋给原子的
 eval.的骨架是一个有四个子句的cond表达式. 如何对表达式求值取决于它的类型. 第一个
 子句处理原子. 如果e是原子, 我们在环境中寻找它的值:
 
-```
+```lisp
 > (eval. 'x '((x a) (y b)))
 a
 ```
@@ -406,7 +406,7 @@ a
 第二个子句是另一个cond, 它处理形如(a ...)的表达式, 其中a是原子. 这包括所有的原始
 操作符, 每个对应一条子句.
 
-```
+```lisp
 > (eval. '(eq 'a 'a) '())
 t
 > (eval. '(cons x '(b c))
@@ -420,7 +420,7 @@ t
 归地对cond子句进行求值,寻找第一个元素返回t的子句. 如果找到了这样的子句, 它返回此
 子句的第二个元素.
 
-```
+```lisp
 > (eval. '(cond ((atom x) 'atom)
                 ('t 'list))
          '((x '(a b))))
@@ -430,14 +430,14 @@ list
 第二个子句的最后部分处理函数调用. 它把原子替换为它的值(应该是lambda 或label表达
 式)然后对所得结果表达式求值. 于是
 
-```
+```lisp
 (eval. '(f '(b c))
        '((f (lambda (x) (cons 'a x)))))
 ```
 
 变为
 
-```
+```lisp
 (eval. '((lambda (x) (cons 'a x)) '(b c))
        '((f (lambda (x) (cons 'a x)))))
 ```
@@ -448,7 +448,7 @@ eval.的最后cond两个子句处理第一个元素是lambda或label的函数调
 求值, 先把函数名和函数本身压入环境, 然后调用eval.对一个内部有lambda的表达式求值.
 即:
 
-```
+```lisp
 (eval. '((label firstatom (lambda (x)
                             (cond ((atom x) x)
                                   ('t (firstatom (car x))))))
@@ -458,7 +458,7 @@ eval.的最后cond两个子句处理第一个元素是lambda或label的函数调
 
 变为
 
-```
+```lisp
 (eval. '((lambda (x)
            (cond ((atom x) x)
                  ('t (firstatom (car x)))))
@@ -476,7 +476,7 @@ eval.的最后cond两个子句处理第一个元素是lambda或label的函数调
 evlis.来求得自变量($a_{1}$...$a_{n}$)对应的值($v_{1}$...$v_{n}$),把
 ($p_{1}$$v_{1}$)...($p_{n}$$v_{n}$)添加到环境里,然后对e求值. 于是
 
-```
+```lisp
 (eval. '((lambda (x y) (cons x (cdr y)))
          'a
          '(b c d))
@@ -485,7 +485,7 @@ evlis.来求得自变量($a_{1}$...$a_{n}$)对应的值($v_{1}$...$v_{n}$),把
 
 变为
 
-```
+```lisp
 (eval. '(cons x (cdr y))
        '((x a) (y (b c d))))
 ```
@@ -535,13 +535,13 @@ eval只是不过是被apply调用的子程序来完成所有的工作.
 在eval.的定义中我们调用了其它函数如pair.和assoc.,但任何我们用原始操作符定义的函
 数调用都可以用eval.来代替. 即
 
-```
+```lisp
 (assoc. (car e) a)
 ```
 
 能写成
 
-```
+```lisp
 (eval. '((label assoc.
                 (lambda (x y)
                   (cond ((eq (caar y) x) (cadar y))
@@ -559,7 +559,7 @@ eval只是不过是被apply调用的子程序来完成所有的工作.
 我还在麦卡锡的论文中碰到一个问题. 在定义了eval之后, 他继续给出了一些更高级的函
 数--接受其它函数作为自变量的函数. 他定义了maplist:
 
-```
+```lisp
 (label maplist
        (lambda (x f)
          (cond ((null x) '())
