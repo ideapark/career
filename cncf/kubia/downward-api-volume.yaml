@@ -29,24 +29,24 @@ spec:
   - name: downward
     downwardAPI:
       items:
-      - path: "podName"
+      - path: podName
         fieldRef:
           fieldPath: metadata.name
-      - path: "podNamespace"
+      - path: podNamespace
         fieldRef:
           fieldPath: metadata.namespace
-      - path: "labels"
+      - path: labels
         fieldRef:
           fieldPath: metadata.labels
-      - path: "annotations"
+      - path: annotations
         fieldRef:
           fieldPath: metadata.annotations
-      - path: "containerCpuRequestMilliCores"
+      - path: containerCpuRequestMilliCores
         resourceFieldRef:
           containerName: main
           resource: requests.cpu
           divisor: 1m
-      - path: "containerMemoryLimitBytes"
+      - path: containerMemoryLimitBytes
         resourceFieldRef:
           containerName: main
           resource: limits.memory
