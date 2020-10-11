@@ -50,7 +50,7 @@ Liveness:  exec [powershift image alive]
            #success=1
            #failure=3
 
-Readiness: http-get http://:8080/healthz/ready
+Readiness: http-get http://:8080/readyz
            delay=0s
            timeout=1s
            period=10s
