@@ -4,7 +4,7 @@ Command-Line Options to List Predefined Macros
  Compiler              C macros                         C++ macros
 ----------------------------------------------------------------------------------------
  Clang/LLVM            clang -dM -E -x c /dev/null      clang++ -dM -E -x c++ /dev/null
- GNU GCC/G++           gcc -dM -E -x c /dev/null        g++ -dM -E -x c++ /dev/null
+ GNU GCC/G++           gcc   -dM -E -x c /dev/null      g++     -dM -E -x c++ /dev/null
 ----------------------------------------------------------------------------------------
 
  "-dM"  dumps a list of macros.
