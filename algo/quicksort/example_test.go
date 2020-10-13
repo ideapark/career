@@ -54,11 +54,26 @@ func (p itemSlice) Swap(i, j int) { p[i], p[j] = p[j], p[i] }
 
 func ExampleSort() {
 	items := []item{
-		item{2, "2"},
-		item{1, "1"},
-		item{0, "0"},
-		item{-1, "-1"},
-		item{-2, "-2"},
+		{
+			i: 2,
+			s: "2",
+		},
+		{
+			i: 1,
+			s: "1",
+		},
+		{
+			i: 0,
+			s: "0",
+		},
+		{
+			i: -1,
+			s: "-1",
+		},
+		{
+			i: -2,
+			s: "-2",
+		},
 	}
 	Sort(itemSlice(items))
 	for i := 0; i < len(items); i++ {
