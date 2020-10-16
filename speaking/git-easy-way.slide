@@ -4,8 +4,8 @@ Git Easy Way
 
 周朋
 p@ctriple.cn
-https://github.com/iotty
-微信 lockrecv
+https://github.com/thinpark
+微信 thinpark
 
 * License
 
@@ -211,14 +211,14 @@ Branch name is alias of commit object.
 Git is more about a content addressable storage system.
 
   commit: 98ca9                     commit: 34ac2                     commit: f30ab
-  +-----------------------+<----+   +------------------------+<----+   +---------------------+
-  |   commit: size        |     |   |    commit: size        |     |   |   commit: size      |
-  |     tree: 92ec2       |     |   |      tree: 184ca       |--+  |   |     tree: 0de24     |
-  |   parent: 0x000       |     +---|    parent: 98ca9       |  |  +---|   parent: 34ac2     |
-  |   author: Zhou Peng   |         |    author: ctriple.cn  |  |      |   author: iotty.go  |
-  | commiter: Zhou Peng   |         | committer: Zhou Peng   |  |      | commiter: Zhou Peng |
-  |  message: Sun arise   |         |   message: Feature X   |  |      |  message: Bugfix    |
-  +-----------------------+         +------------------------+  |      +---------------------+
+  +-----------------------+<----+   +------------------------+<----+   +-----------------------+
+  |   commit: size        |     |   |    commit: size        |     |   |   commit: size        |
+  |     tree: 92ec2       |     |   |      tree: 184ca       |--+  |   |     tree: 0de24       |
+  |   parent: 0x000       |     +---|    parent: 98ca9       |  |  +---|   parent: 34ac2       |
+  |   author: Zhou Peng   |         |    author: ctriple.cn  |  |      |   author: thinpark.io |
+  | commiter: Zhou Peng   |         | committer: Zhou Peng   |  |      | commiter: Zhou Peng   |
+  |  message: Sun arise   |         |   message: Feature X   |  |      |  message: Bugfix      |
+  +-----------------------+         +------------------------+  |      +-----------------------+
                                        tree: 184ca              |                     ^
                                        +----------------+<------+                     |
                                        |blob cf2cb file1|                         *--------*

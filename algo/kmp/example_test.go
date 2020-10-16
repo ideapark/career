@@ -1,4 +1,4 @@
-// Copyright 2020 (C) Zhou Peng <p@iotty.go>
+// Copyright 2020 (C) Zhou Peng <p@thinpark.io>
 
 package kmp
 
