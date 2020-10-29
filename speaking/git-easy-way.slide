@@ -17,7 +17,7 @@ Copy-Modify
 
 - v1
 
-  [p@ctriple letsgo.v1]$ ls
+  [p@thinpark letsgo.v1]$ ls
   bench.txt      defer.go           godebug.txt  server.go       struct.go       zlib.c
   bomb.go        esc.go             gopher.png   simplicity.png  time-deps.bash
   builderror.go  gc-animation.html  map.png      slice.txt       time-deps.svg
@@ -25,7 +25,7 @@ Copy-Modify
 
 - v2
 
-  [p@ctriple letsgo.v2]$ ls
+  [p@thinpark letsgo.v2]$ ls
   bench.txt      defer.go~          godebug.txt  server.go       struct.go       zlib.c~
   bomb.go~       esc.go             gopher.png   simplicity.png  time-deps.bash
   builderror.go  gc-animation.html  map.png~     slice.txt~      time-deps.svg
@@ -44,7 +44,7 @@ Copy-Modify
 
 - Super Block
 
-  [p@ctriple blog.ctriple.cn]$ sudo dumpe2fs -h /dev/sda1
+  [p@thinpark blog.thinpark.io]$ sudo dumpe2fs -h /dev/sda1
   Last mounted on:          /
   Filesystem UUID:          cb9baea8-7dfb-4f7e-acc4-ab326f7db872
   Filesystem magic number:  0xEF53
@@ -80,7 +80,7 @@ Copy-Modify
 
 - 文件
 
-  [p@ctriple blog.ctriple.cn]$ stat git-easy-way.slide
+  [p@thinpark blog.thinpark.io]$ stat git-easy-way.slide
     File: git-easy-way.slide
     Size: 9300          Blocks: 24         IO Block: 4096   regular file
   Device: 801h/2049d    Inode: 2099085     Links: 1         ^^^^^^^^^^^^
@@ -92,7 +92,7 @@ Copy-Modify
 
 - 目录
 
-  [p@ctriple blog.ctriple.cn]$ stat letsgo
+  [p@thinpark blog.thinpark.io]$ stat letsgo
     File: letsgo
     Size: 4096          Blocks: 8          IO Block: 4096   directory
   Device: 801h/2049d    Inode: 4203085     Links: 2         ^^^^^^^^^
@@ -104,7 +104,7 @@ Copy-Modify
 
 * 目录是一种特殊类型的文件
 
-  [p@ctriple blog.ctriple.cn]$ ls -F -l -h -i -n
+  [p@thinpark blog.thinpark.io]$ ls -F -l -h -i -n
   2099065 -rw-r--r-- 1 1000 1000  35K Jun 25 19:13 LICENSE
   2099066 -rw-r--r-- 1 1000 1000  366 Jun 25 19:13 README.md
   2099067 -rw-r--r-- 1 1000 1000  290 Jun 25 19:13 blog.service
@@ -152,7 +152,7 @@ Copy-Modify
 
 - 数据块摘要，1比特位修改都会导致 Hash 值改变
 
-  [p@ctriple blog.ctriple.cn]$ sha256sum LICENSE README.md git-easy-way.slide
+  [p@thinpark blog.thinpark.io]$ sha256sum LICENSE README.md git-easy-way.slide
   8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903  LICENSE
   12c51d97e30b7cd5457305d99951c842163b271bab261ad2a7e938d2718e7330  README.md
   bb0e0346f308895fadd14d37f9a35af50214149c0dc07d1401f1e6f4e16974d4  git-easy-way.slide
@@ -172,12 +172,12 @@ Conclusions
 
 Branch name is alias of commit object.
 
-  [p@ctriple blog.ctriple.cn]$ git rev-parse master
+  [p@thinpark blog.thinpark.io]$ git rev-parse master
   cc4c780f71783c5e397cd984afb82008e367ed9e
 
 - commit object
 
-  [p@ctriple blog.ctriple.cn]$ git cat-file -p master^{commit}
+  [p@thinpark blog.thinpark.io]$ git cat-file -p master^{commit}
   tree 9d03065d90012526f83caa4428f71dbc46532dc5
   parent 680f5b693d3468f2cdbb7bb31e725722ed1e7058
   author Zhou Peng <p@ctriple.cn> 1537543934 +0800
@@ -191,7 +191,7 @@ Branch name is alias of commit object.
 
 - blob/tree object
 
-  [p@ctriple blog.ctriple.cn]$ git cat-file -p master^{tree}
+  [p@thinpark blog.thinpark.io]$ git cat-file -p master^{tree}
   100644 blob a1338d68517ee2ad6ee11214b201e5958cb2bbc3	.gitignore
   100644 blob 94a9ed024d3859793618152ea559a168bbcbb5e2	LICENSE
   100644 blob c8f035179719363ade1daa19fc77999395979170	README.md
@@ -215,7 +215,7 @@ Git is more about a content addressable storage system.
   |   commit: size        |     |   |    commit: size        |     |   |   commit: size        |
   |     tree: 92ec2       |     |   |      tree: 184ca       |--+  |   |     tree: 0de24       |
   |   parent: 0x000       |     +---|    parent: 98ca9       |  |  +---|   parent: 34ac2       |
-  |   author: Zhou Peng   |         |    author: ctriple.cn  |  |      |   author: thinpark.io |
+  |   author: Zhou Peng   |         |    author: thinpark.io |  |      |   author: thinpark.io |
   | commiter: Zhou Peng   |         | committer: Zhou Peng   |  |      | commiter: Zhou Peng   |
   |  message: Sun arise   |         |   message: Feature X   |  |      |  message: Bugfix      |
   +-----------------------+         +------------------------+  |      +-----------------------+
@@ -235,7 +235,7 @@ Git is more about a content addressable storage system.
 
 * 开始 Git
 
-  [p@ctriple blog.ctriple.cn]$ git count-objects -v
+  [p@thinpark blog.thinpark.io]$ git count-objects -v
   count: 3
   size: 24
   in-pack: 671
@@ -247,7 +247,7 @@ Git is more about a content addressable storage system.
 
 * .git 目录有什么
 
-  [p@ctriple .git]$ tree -L 1 -F
+  [p@thinpark .git]$ tree -L 1 -F
   .
   ├── FETCH_HEAD
   ├── HEAD                  # point to current working tree
@@ -283,7 +283,7 @@ Git is more about a content addressable storage system.
 
 * Git 分支
 
-  [p@ctriple blog.ctriple.cn]$ git branch -avv
+  [p@thinpark blog.thinpark.io]$ git branch -avv
   * master                e84bda1 [origin/master] git: change test host to my home pc
     remotes/origin/HEAD   -> origin/master
     remotes/origin/master e84bda1 git: change test host to my home pc
@@ -396,7 +396,7 @@ Emacs Merge Demo
   2. easy to be integrated with other tools (Emacs Magit)
   3. pipeline to implement complicated business logical
 
-  [p@ctriple /usr/lib/git-core]$ ls
+  [p@thinpark /usr/lib/git-core]$ ls
   git                   git-checkout        git-credential-store  git-for-each-ref  git-instaweb
   git-add               git-checkout-index  git-cvsexportcommit   git-format-patch  git-interpret-trailers
   git-add--interactive  git-cherry          git-cvsimport         git-fsck          git-log
@@ -569,7 +569,7 @@ Show what revision and author last modified each line of a file
 
 Print lines matching a pattern
 
-  [p@ctriple runtime]$ git grep -n 'sweepgen'
+  [p@thinpark runtime]$ git grep -n 'sweepgen'
   mcache.go:49:   // flushGen indicates the sweepgen during which this mcache
   mcache.go:50:   // was last flushed. If flushGen != mheap_.sweepgen, the spans
   mcache.go:88:   c.flushGen = mheap_.sweepgen
