@@ -3,13 +3,13 @@ Git Easy Way
 20 Sep 2018
 
 周朋
-p@ctriple.cn
+p@thinpark.io
 https://github.com/thinpark
 微信 thinpark
 
 * License
 
-Copyright © Zhou Peng <p@ctriple.cn>
+Copyright © Zhou Peng <p@thinpark.io>
 
 * 最简单的版本控制
 
@@ -180,12 +180,12 @@ Branch name is alias of commit object.
   [p@thinpark blog.thinpark.io]$ git cat-file -p master^{commit}
   tree 9d03065d90012526f83caa4428f71dbc46532dc5
   parent 680f5b693d3468f2cdbb7bb31e725722ed1e7058
-  author Zhou Peng <p@ctriple.cn> 1537543934 +0800
-  committer Zhou Peng <p@ctriple.cn> 1537543934 +0800
+  author Zhou Peng <p@thinpark.io> 1537543934 +0800
+  committer Zhou Peng <p@thinpark.io> 1537543934 +0800
 
   git: more special file types
 
-  Signed-off-by: Zhou Peng <p@ctriple.cn>
+  Signed-off-by: Zhou Peng <p@thinpark.io>
 
 * 开始 Git
 
