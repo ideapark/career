@@ -1,0 +1,145 @@
+Istio ServiceMesh
+成都
+4 Mar 2021
+
+周朋
+p@thinpark.io
+https://github.com/thinpark
+微信 thinpark
+
+* License
+
+Copyright © Zhou Peng <p@thinpark.io>
+
+* Why ServiceMesh?
+
+  +---+---+---+---+---+---+---+---+---+
+  | A | D | X | I | N | M | T | X | Z |  A: java@vm
+  +---+---+---+---+---+---+---+---+---+  B: go@docker
+  | V | B | A | D | W | K | X | V | A |  C: nodejs@docker
+  +---+---+---+---+---+---+---+---+---+  D: python@docker
+  | U | M | P | W | K | U | H | E | A |  E: mysql@vm
+  +---+---+---+---+---+---+---+---+---+  F: redis@docker
+  | Q | B | R | I | M | V | Z | M | X |  G: 3rdparty service like alipay.com
+  +---+---+---+---+---+---+---+---+---+  ...
+  | W | E | F | Z | N | R | I | Q | M |
+  +---+---+---+---+---+---+---+---+---+
+
+1. microservice is not silver bullet
+2. servicemesh come to rescue
+3. overview or logically is a whole
+4. but physically or implementation is divided as smaller part
+5. implementations are heterogeneous (programming language, deployment, cloud, ...)
+6. so network will be the magical point to make all the above a realistic
+
+Microservices is more about divide, servicemesh is more about combine.
+
+* Istio
+
+What pain-point come with microservice?
+
+1. connect
+  service discovery, route
+
+2. secure
+  network level and application level
+
+3. control
+  policy and enforement
+
+4. observe
+  metrics, logging, tracing
+
+Istio is a kind of servicemesh implementation (controlplane strictly) that solve the problems JUST RIGHT.
+
+* Bootstrap Istio
+
+  //
+  // https://kind.sigs.k8s.io
+  //
+  kind create cluster --name istio
+
+  //
+  // https://istio.io
+  //
+  istioctl install -y --set meshConfig.accessLogFile=/dev/stdout
+  kubectl label namespace default istio-injection=enabled
+
+  //
+  // Gateway accessable out of cluster for LoadBalancer not available (sudo maybe needed)
+  //
+  kubectl -n istio-system port-forward service/istio-ingressgateway 80:80
+
+  //
+  // https://www.jaegertracing.io
+  //
+  kubectl apply -f jaeger.yaml
+
+.link 4.observe/jaeger.yaml jaeger.yaml
+
+* Microservice Architecture BookInfo
+
+  kubectl apply -f all.yaml -f gateway.yaml
+
+.image 0.bookinfo/arch.svg 400 550
+.link 0.bookinfo/all.yaml       all.yaml
+.link 0.bookinfo/gateway.yaml   gateway.yaml
+
+* Connect
+
+1. without any route rule
+
+2. all route v1
+
+  kubectl apply -f destination-rule-all.yaml -f virtual-service-all-v1.yaml
+
+.link 1.connect/destination-rule-all.yaml    destination-rule-all.yaml
+.link 1.connect/virtual-service-all-v1.yaml  virtual-service-all-v1.yaml
+
+3. traffic management
+
+  kubectl apply -f virtual-service-reviews-v2-v3.yaml
+  kubectl apply -f virtual-service-reviews-v3.yaml
+
+.link 1.connect/virtual-service-reviews-v2-v3.yaml   virtual-service-reviews-v2-v3.yaml
+.link 1.connect/virtual-service-reviews-v3.yaml      virtual-service-reviews-v3.yaml
+
+* Secure
+
+1. zero-trust network
+
+  kubectl apply -f disable-mtls.yaml
+
+.link 2.secure/disable-mtls.yaml  disable-mtls.yaml
+
+  // On a node which hosts containers
+  // we use 'productpage' istio-proxy sidecar network namespace
+  nsenter -n -t <PID> tcpdump dst port 9080 -A
+
+2. use mTLS
+
+  kubectl apply -f strict-mtls.yaml
+
+.link 2.secure/strict-mtls.yaml  strict-mtls.yaml
+
+3. AAA: Authentication, Authorization, Audit
+
+They are more about application level oriented, not included in this talk.
+
+* Control
+
+1. ratelimit
+
+  kubectl apply -f envoyfilter.yaml
+
+.link 3.control/envoyfilter.yaml  envoyfilter.yaml
+
+* Observe
+
+1. service/pod/container In&Out logs
+
+  kubectl logs -c istio-proxy deployment/productpage-v1
+
+2. business journe tracing
+
+  istioctl dashboard jaeger
