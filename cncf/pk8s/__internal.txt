@@ -4,7 +4,7 @@ Conversion from and to the hub version
 
 
      +--------+           +-------+
-     |v1alpha1|           |b1beta1|
+     |v1alpha1|           |v1beta1|
      +--------+           +-------+
               \          /
                \        /
