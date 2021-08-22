@@ -342,7 +342,7 @@ following examples show the effect of scaling:
 
     $perf stat -B -e cycles,cycles ls -R ~ > /dev/null
 
-     Performance counter stats for 'ls -R /home/thinpark/':
+     Performance counter stats for 'ls -R /home/park/':
 
               157645520      cycles
               157645520      cycles
@@ -353,7 +353,7 @@ Here, there is no multiplexing and thus no scaling. Let's add one more event:
 
     $perf stat -B -e cycles,cycles,cycles,cycles,cycles ls -R ~ > /dev/null
 
-     Performance counter stats for 'ls -R /home/thinpark/':
+     Performance counter stats for 'ls -R /home/park/':
 
               157150443      cycles                    [78.39%]
               155643261      cycles                    [81.24%]

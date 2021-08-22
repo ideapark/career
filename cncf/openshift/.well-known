@@ -2,8 +2,8 @@ https://k8s.tinpark.io/.well-known/oauth-authorization-server
 
 {
   "issuer": "https://k8s.thinkpark.io",
-  "authorization_endpoint": "https://k8s.thinpark.io/oauth/authorize",
-  "token_endpoint": "https://k8s.thinpark.io/oauth/token",
+  "authorization_endpoint": "https://k8s.ideapark.io/oauth/authorize",
+  "token_endpoint": "https://k8s.ideapark.io/oauth/token",
   "scopes_supported": [
     "user:check-access",
     "user:full",

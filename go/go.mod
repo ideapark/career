@@ -1,3 +1,3 @@
-module thinpark.io/go
+module ideapark.io/go
 
 go 1.15

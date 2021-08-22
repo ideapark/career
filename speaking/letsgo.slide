@@ -3,13 +3,13 @@ Let's Go: Yet Another Go Intro
 10 Feb 2018
 
 周朋
-p@thinpark.io
-https://github.com/thinpark
-微信 thinpark
+park@ideapark.io
+https://github.com/ideapark
+微信 ideapark
 
 * License
 
-Copyright © Zhou Peng <p@thinpark.io>
+Copyright © Zhou Peng <park@ideapark.io>
 
 * The Go Programming Language
 
@@ -53,7 +53,7 @@ reliable and efficient software.
 - 模块通过符号大小写标识可见性，简单优雅
 - 模块包含完整的实现和测试，更自然的模块级代码复用
 
-  [p@thinpark ~]$ go list std
+  [park@ideapark ~]$ go list std
   archive/tar
   archive/zip
   bufio
@@ -126,13 +126,13 @@ reliable and efficient software.
 
 - 编译速度 ($GOROOT/src/make.bash)
 
-  [p@thinpark src]$ time ./make.bash
+  [park@ideapark src]$ time ./make.bash
   Building Go cmd/dist using /usr/local/go.
   ... ...
   Building packages and commands for linux/amd64.
   ---
-  Installed Go for linux/amd64 in /home/thinpark/golang
-  Installed commands in /home/thinpark/golang/bin
+  Installed Go for linux/amd64 in /home/park/golang
+  Installed commands in /home/park/golang/bin
 
   real	1m29.364s
   user	4m37.359s

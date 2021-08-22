@@ -1,4 +1,4 @@
-// Copyright 2020 (C) Zhou Peng <p@thinpark.io>
+// Copyright 2020 (C) Zhou Peng <park@ideapark.io>
 
 package rbtree
 

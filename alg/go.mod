@@ -1,3 +1,3 @@
-module thinpark.io/alg
+module ideapark.io/alg
 
 go 1.13

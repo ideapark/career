@@ -1,5 +1,5 @@
 ---
-author: Zhou Peng <p@thinpark.io>
+author: Zhou Peng <park@ideapark.io>
 description: Cloud-Native & Cloud-Native Infrastructure
 ---
 
