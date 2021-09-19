@@ -1,4 +1,4 @@
-// Copyright 2020 (C) Zhou Peng <park@ideapark.io>
+// Copyright 2020 (C) Park Zhou <park@ideapark.io>
 
 // Package rbtree provides a red-black tree algorithm implemention
 //
