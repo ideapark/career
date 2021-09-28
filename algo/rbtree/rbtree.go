@@ -6,7 +6,7 @@
 // used to implement associative arrays. It has O(log n) worst-case time for
 // each operation and is quite efficient in practice.
 //
-// https://en.wikipedia.org/wiki/Re-Black_tree
+// https://en.wikipedia.org/wiki/Red-Black_tree
 //
 package rbtree
 
