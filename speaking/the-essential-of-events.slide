@@ -1,0 +1,25 @@
+The Essential of Events
+成都
+28 Sep 2021
+
+周朋
+park@ideapark.io
+https://github.com/ideapark
+微信 ideapark
+
+* License
+
+Copyright © Zhou Peng <park@ideapark.io>
+
+* Events
+
+Event describes a fact occurred, with the timestamp, reason, result
+and limited contexts.
+
+* Monitoring
+
+* Logging
+
+* Tracing
+
+* Profiling
