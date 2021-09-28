@@ -18,8 +18,19 @@ and limited contexts.
 
 * Monitoring
 
+Metrics are aggregations of a series of events. User facing business
+level.
+
 * Logging
+
+Logs are append-only record of events. Single service instance level.
 
 * Tracing
 
+Tracing connects discreted events. Cross multiple service instances
+level.
+
 * Profiling
+
+Profiling is a snapshot of all the events in a period of time. Single
+instance process level.
