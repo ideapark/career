@@ -19,16 +19,12 @@ import (
 	"sort"
 )
 
-type Interface interface {
-	sort.Interface
-}
-
 // Sort sorts data using quick sorting algorithm
-func Sort(data Interface) {
+func Sort(data sort.Interface) {
 	quicksort(data, 0, data.Len())
 }
 
-func quicksort(data Interface, low, high int) {
+func quicksort(data sort.Interface, low, high int) {
 	// nothing to do
 	if high <= low {
 		return
