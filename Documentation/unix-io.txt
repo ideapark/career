@@ -1,0 +1,30 @@
++--------------+-----------------+-----------------------+-----------------------+----------------------+
+|   blocking   |   nonblocking   |    I/O multiplexing   |   signal-driven I/O   |   asynchronous I/O   |
++--------------+-----------------+-----------------------+-----------------------+----------------------+<------+
+|   initiate   |       check     |         check         |                       |        initiate      |       |
+|      .       |       check     |           .           |                       |                      |       |
+|      .       |       check     |           . b         |                       |                      |       |
+|      .       |       check     |           . l         |                       |                      |       |
+|      .       |       check     |           . o         |                       |                      |       | wait for
+|      .       |       check     |           . c         |                       |                      |       | data (eg, data arrives at NIC,
+|      .       |       check     |           . k         |                       |                      |       | then copied to kernel buffer)
+|      .       |       check     |           . e         |                       |                      |       |
+|      .       |       check     |           . d         |                       |                      |       |
+|      . b     |       check     |           v           |                       |                      |       |
+|      . l     |       check     |         ready         |       notification    |                      |       |
+|      . o     |         .       |        initiate       |        initiate       |                      |<------+
+|      . c     |         . b     |           .           |           .           |                      |       |
+|      . k     |         . l     |           . b         |           . b         |                      |       |
+|      . e     |         . o     |           . l         |           . l         |                      |       |
+|      . d     |         . c     |           . o         |           . o         |                      |       | copy data
+|      .       |         . k     |           . c         |           . c         |                      |       | from kernel
+|      .       |         . e     |           . k         |           . k         |                      |       | to user
+|      .       |         . d     |           . e         |           . e         |                      |       |
+|      .       |         .       |           . d         |           . d         |                      |       |
+|      v       |         v       |           v           |           v           |                      |       |
+|  complete    |     complete    |       complete        |       complete        |      notification    |       |
++--------------+-----------------+-----------------------+-----------------------+----------------------+<------+
+^                                                                                ^                      ^
+|                                                                                |                      |
++--------------------------------------------------------------------------------+----------------------+
+         1st phase handled differently; 2nd phase handled the same.                    handles both
