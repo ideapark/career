@@ -1,0 +1,25 @@
+# Program
+
+Every program has three standard streams: standard input (stdin),
+standard output (stdout), and standard error (stderr).
+
+    stdin       stdout
+    -->+----------+-->
+       | PROGRAM  |
+       +----------+-->
+                stderr
+
+# Pipe
+
+Chain multiple programs together to complete more complicated task,
+Let's say: `ls | cat -n | rev`
+
+
+    stdin     stdout          stdin       stdout         stdin      stdout
+(1) -->+--------+-->..........-->+----------+-->.........-->+---------+--> (2)
+       |   ls   |                |  cat -n  |               |   rev   |
+       +--------+--> (3)         +----------+--> (4)        +---------+--> (5)
+              stderr                      stderr                    stderr
+
+If you're using a gnu bash to execute the above pipe chain, the
+keyboard would be (1) and monitor would be (2), (3), (4), (5).
