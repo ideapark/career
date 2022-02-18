@@ -39,3 +39,7 @@
 
 (define squares (list 1 4 9 16 25))
 (list-ref squares 3)
+
+;; map establishes a higher level of abstraction in dealing with
+;; lists.
+(map (lambda (x) (* x x)) '(1 2 3 4))
