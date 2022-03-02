@@ -1,4 +1,4 @@
-// Copyright 2020 (C) Park Zhou <park@ideapark.io>
+// Copyright 2020 © Park Zhou <park@ideapark.io>
 
 package kmp
 
