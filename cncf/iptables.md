@@ -1,6 +1,8 @@
 # the flow of packets through the chains in various tables
 
-~~~
+```text
+ HARDWARE                                                KERNEL                                                         USER
+
 +---------+                         PREROUTING                                                   INPUT                +---------+
 |         |     +--------------------------------------------------+                +----------------------------+    |         |
 |         |     |   +-----+   +----------+   +--------+   +-----+  |                |   +--------+   +--------+  |    |         |
@@ -29,7 +31,7 @@
 |         |                +---------------------------+    +------------------------------------------------------+  |         |
 |         |                         POSTROUTING                                      OUTPUT                           |         |
 +---------+                                                                                                           +---------+
-~~~
+```
 
 ```bash
 # See `filter` table rules without DNS resolving
@@ -37,10 +39,10 @@ iptables -L -n --line-numbers
 
 # Module `tcp`, `conntrack`, `recent`
 iptables -A INPUT \
-         -p tcp \
-         -m tcp --dport 22 \
-         -m conntrack --ctstate NEW \
-         -m recent --set --name SSHLIMIT --rsource
+		 -p tcp \
+		 -m tcp --dport 22 \
+		 -m conntrack --ctstate NEW \
+		 -m recent --set --name SSHLIMIT --rsource
 
 # Create chain `SSH-RULES`
 iptables -N SSH-RULES
