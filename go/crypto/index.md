@@ -94,3 +94,18 @@ Lets choose our plaintext message, `m=9`:
 
 	Encryption: m^e mod n = 9^7    mod 143 = 48 = c
 	Decryption: c^d mod n = 48^103 mod 143 = 9  = m
+
+## Diffie-Hellman (rfc2631)
+
+    Constants: p=23, g=5
+
+        Alice: a=4, A=g^a mod p=4
+          Bob: b=3, B=g^b mod p=10
+
+        ===> A,B are public known on the wire
+
+        Alice: a=4, B=10
+          Bob: b=3, A=4
+
+        Alice: s=B^a mod p=18
+          Bob: s=A^b mod p=18
