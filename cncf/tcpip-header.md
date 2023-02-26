@@ -10,7 +10,7 @@
     +-------------------------------------------------------------------------------------------------------------------------------+
     |                                                    Acknowledgment Number                                                      |
     +---------------+---------------+---+---+---+---+---+---+---+---+---------------------------------------------------------------+
-    |  Data Offset  |   Reserved    |cwr|ece|urg|ack|psh|rst|syn|fin|                            Window                             |
+    |  Data Offset  |   Reserved    |CWR|ECE|URG|ACK|PSH|RST|SYN|FIN|                            Window                             |
     +---------------+---------------+---+---+---+---+---+---+---+---+---------------------------------------------------------------+
     |                            Checksum                           |                         Urgent Pointer                        |
     +---------------------------------------------------------------+-----------------------------------+---------------------------+
@@ -18,6 +18,88 @@
     +---------------------------------------------------------------------------------------------------+---------------------------+
     |                                                             Data                                                              |
     +-------------------------------------------------------------------------------------------------------------------------------+
+
+```text
+          Source Port: (16 bits)
+                  The source port number
+
+     Destination Port: (16 bits)
+                  The destination port number
+
+      Sequence Number: (32 bits)
+                  The sequence number of the first data octet in this segement
+                  (except when the SYN flag is set). If SYN is set, the sequence
+                  number is the initial sequence number (ISN) and the first data
+                  octet is ISN+1.
+
+Acknowledgment Number: (32 bits)
+                  If the ACK control bit is set, this field contains the value of
+                  the next sequence number the sender of the segment is expecting
+                  to receive. Once a connection is established, this is always sent.
+
+          Data Offset: (4 bits)
+                  The number of 32-bit words in the TCP header. This indicates where
+                  the data begins. The TCP header (even one including options) is
+                  an integer multiple of 32 bits long.
+
+             Reserved: (4 bits)
+                  A set of control bits reserved for future use. Must be zero in
+                  generated segments and must be ignored in received segments if
+                  the corresponding future features are not implemented by the
+                  sending or receiving host.
+
+         Control Bits:
+                  The control bits are also known as "flags". Assigment is managed
+                  by IANA from the "TCP Header Flags" registry.
+
+                  CWR: (1 bit) Congestion Window Reduced
+                  ECE: (1 bit) ECN-Echo
+                  URG: (1 bit) Urgent pointer field is significant
+                  ACK: (1 bit) Acknowledgment field is significant
+                  PSH: (1 bit) Push function
+                  RST: (1 bit) Reset the connection
+                  SYN: (1 bit) Synchronize sequence numbers
+                  FIN: (1 bit) No more data from sender
+
+               Window: (16 bits)
+                  The number of data octets beginning with the one indicated in the
+                  acknowledgment field that the sender of this segment is willing to
+                  accept. The value is shifted when the window scaling extension is
+                  used.
+
+                  The window size MUST be treated as an unsigned number, or else
+                  large window sizes will appear like negative windows and TCP will
+                  not work. It is RECOMMENDED that implementations will reserve 32-bit
+                  fields for the send and receive window sizes in the connection
+                  record and do all window computations with 32 bits.
+
+             Checksum: (16 bits)
+                  The checksum field is the 16-bit one's complement of the ones' complement
+                  sum of all 16-bit words in the header and text. The checksum computation
+                  needs to ensure the 16-bit alignment of the data being summed. If a
+                  segment contains an odd number of header and text octets, alignment can
+                  be achieved by padding the last octet with zeros on its right to form a
+                  16-bit word for checksum purposes. The pad is not transmitted as part of
+                  the segment. While computing the checksum, the checksum field itself is
+                  replaced with zeros.
+
+       Urgent Pointer: (16 bits)
+                  This field communicates the current value of the urgent pointer as a
+                  positive offset from the sequence number in this segment. The urgent
+                  pointer points to the sequence number of the octet following the urgent
+                  data. This field is only to be interpreted in segments with the URG control
+                  bit set.
+
+              Options: (DOffset-5)*32
+                  Kind  Lengh    Meaning
+                  ----------------------------------------
+                   0    -        End of Option List Option
+                   1    -        No-Operation
+                   2    4        Maximum Segment Size
+
+                 Data: (variable length)
+                  User data carried by the TCP segment.
+```
 
 ## TCP Connection Status (RFC 9293)
 
