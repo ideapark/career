@@ -66,6 +66,14 @@
     |                                                         Options                                   |          Padding          |
     +---------------------------------------------------------------------------------------------------+---------------------------+
 
+```text
+High Order Bits Format                           Class
+--------------- -------------------------------  -----
+    0            7 bits of net, 24 bits of host    a
+    10          14 bits of net, 16 bits of host    b
+    110         21 bits of net,  8 bits of host    c
+    111         escape to extended addressing mode
+```
 
 # ICMP (Internet Control Message Protocol) Basic Headers
 
