@@ -19,6 +19,8 @@
     |                                                             Data                                                              |
     +-------------------------------------------------------------------------------------------------------------------------------+
 
+## TCP Header Explained
+
 ```text
           Source Port: (16 bits)
                   The source port number
@@ -99,6 +101,31 @@ Acknowledgment Number: (32 bits)
 
                  Data: (variable length)
                   User data carried by the TCP segment.
+```
+
+## Key Connection State Variables
+
+```text
+                   1         2          3          4
+              ----------|----------|----------|----------
+                     SND.UNA    SND.NXT    SND.UNA
+                                          +SND.WND
+
+        1 - old sequence numbers that have been acknowledged
+        2 - sequence numbers of unacknowledged data
+        3 - sequence numbers allowed for new data transmission
+        4 - future sequence numbers that are not yet allowed
+```
+
+```text
+                       1          2          3
+                   ----------|----------|----------
+                          RCV.NXT    RCV.NXT
+                                    +RCV.WND
+
+        1 - old sequence numbers that have been acknowledged
+        2 - sequence numbers allowed for new reception
+        3 - future sequence numbers that are not yet allowed
 ```
 
 ## TCP Connection Status (RFC 9293)
