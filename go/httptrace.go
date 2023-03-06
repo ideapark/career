@@ -30,7 +30,7 @@ func main() {
 	t := &transport{}
 
 	// URL will be redirected to www.archlinux.org
-	req, _ := http.NewRequest("GET", "https://archlinux.org", nil)
+	req, _ := http.NewRequest(http.MethodGet, "https://archlinux.org", http.NoBody)
 	trace := &httptrace.ClientTrace{
 		GotConn: t.GotConn,
 	}
