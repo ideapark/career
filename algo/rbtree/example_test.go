@@ -58,7 +58,7 @@ func ExampleNew() {
 		i int
 		s string
 	}
-	cmp := func(k1, k2 interface{}) int {
+	cmp := func(k1, k2 any) int {
 		d1, d2 := k1.(key), k2.(key)
 		if d1.i == d2.i {
 			if d1.s == d2.s {

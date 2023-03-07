@@ -7,19 +7,18 @@
 // each operation and is quite efficient in practice.
 //
 // https://en.wikipedia.org/wiki/Red-Black_tree
-//
 package rbtree
 
 // Interface describes a red-black tree interface that an implemention must be
 // satisfied.
 type Interface interface {
-	Lookup(key interface{}) (val interface{}, ok bool)
-	Insert(key interface{}, val interface{})
-	Delete(key interface{})
+	Lookup(key any) (val any, ok bool)
+	Insert(key any, val any)
+	Delete(key any)
 }
 
 // New constructs a red-black tree using the compare function specified.
-func New(cmp func(k1, k2 interface{}) int) Interface {
+func New(cmp func(k1, k2 any) int) Interface {
 	t := &tree{compare: cmp}
 	t.verify()
 	return t
@@ -28,7 +27,7 @@ func New(cmp func(k1, k2 interface{}) int) Interface {
 // Integer constructs a red-black tree by comparing integer key. Note that you
 // must assure the key is integer type, or it will panic.
 func Integer() Interface {
-	cmp := func(k1, k2 interface{}) int {
+	cmp := func(k1, k2 any) int {
 		i1, i2 := k1.(int), k2.(int)
 		if i1 == i2 {
 			return 0
@@ -44,7 +43,7 @@ func Integer() Interface {
 // String constructs a red-black tree by comparing string key, Note that you
 // must assure the key is string type, or it will panic.
 func String() Interface {
-	cmp := func(k1, k2 interface{}) int {
+	cmp := func(k1, k2 any) int {
 		s1, s2 := k1.(string), k2.(string)
 		if s1 == s2 {
 			return 0
@@ -67,8 +66,8 @@ const (
 // node represents the red-black tree node, it wraps key and value together to
 // make this red-black implemention to be useful associative map.
 type node struct {
-	k interface{}
-	v interface{}
+	k any
+	v any
 	c color
 	l *node
 	r *node
@@ -78,7 +77,7 @@ type node struct {
 // tree is an implemention of red-black tree
 type tree struct {
 	root    *node
-	compare func(k1, k2 interface{}) int
+	compare func(k1, k2 any) int
 }
 
 // grandparent returns parent's parent of node n.
@@ -205,7 +204,7 @@ func verify5Helper(n *node, blackCount int, pathBlackCount *int) {
 //
 
 // newNode is a helper function to allocate and initialize a new node.
-func newNode(key, val interface{}, color color, left, right *node) *node {
+func newNode(key, val any, color color, left, right *node) *node {
 	newn := &node{
 		k: key,
 		v: val,
@@ -225,7 +224,7 @@ func newNode(key, val interface{}, color color, left, right *node) *node {
 
 // Lookup returns the value of node, whose key equals the specified one. the ok
 // is true if found or false otherwise.
-func (t *tree) Lookup(key interface{}) (val interface{}, ok bool) {
+func (t *tree) Lookup(key any) (val any, ok bool) {
 	n := t.lookup(key)
 	if n == nil {
 		return nil, false
@@ -235,7 +234,7 @@ func (t *tree) Lookup(key interface{}) (val interface{}, ok bool) {
 
 // lookup do read-only search on a red-black tree by the given key, returns the
 // node if success, or nil when not found.
-func (t *tree) lookup(key interface{}) *node {
+func (t *tree) lookup(key any) *node {
 	n := t.root
 	for n != nil {
 		ret := t.compare(key, n.k)
@@ -306,7 +305,7 @@ func (t *tree) replace(oldn *node, newn *node) {
 // the value (since we're implementing an associative array). Otherwise, we find
 // the place in the tree where the new pair belongs, then attach a newly created
 // red node containing the value.
-func (t *tree) Insert(key, val interface{}) {
+func (t *tree) Insert(key, val any) {
 	newn := newNode(key, val, colorRED, nil, nil)
 	if t.root == nil {
 		t.root = newn
@@ -382,11 +381,11 @@ func (t *tree) insert3(n *node) {
 
 // In this case, we deal with two cases that are mirror images of one another:
 //
-//   1. The new node is the right child of its parent and the parent is the left
-//      child of the grandparent. In this case we rotate left about the parent.
+//  1. The new node is the right child of its parent and the parent is the left
+//     child of the grandparent. In this case we rotate left about the parent.
 //
-//   2. The new node is the left child of its parent and the parent is the right
-//      child of the grandparent. In this case we rotate right about the parent.
+//  2. The new node is the left child of its parent and the parent is the right
+//     child of the grandparent. In this case we rotate right about the parent.
 //
 // Neither of these fixes the properties, but they put the tree in the correct
 // form to apply case 5.
@@ -404,13 +403,13 @@ func (t *tree) insert4(n *node) {
 // In this final case, we deal with two cases that are mirror images of one
 // another:
 //
-//   1. The new node is the left child of its parent and the parent is the left
-//      child of the grandparent. In this case we rotate right about the
-//      grandparent.
+//  1. The new node is the left child of its parent and the parent is the left
+//     child of the grandparent. In this case we rotate right about the
+//     grandparent.
 //
-//   2. The new node is the right child of its parent and the parent is the
-//      right child of the grandparent. In this case we rotate left about the
-//      grandparent.
+//  2. The new node is the right child of its parent and the parent is the
+//     right child of the grandparent. In this case we rotate left about the
+//     grandparent.
 //
 // Now the properties are satisfied and all cases have been covered.
 func (t *tree) insert5(n *node) {
@@ -431,7 +430,7 @@ func (t *tree) insert5(n *node) {
 // the left subtree) into the node to be deleted, and then we delete the
 // predecessor node, which was only one non-leaf child. This same predecessor
 // also also works in a red-black tree without affecting any properties.
-func (t *tree) Delete(key interface{}) {
+func (t *tree) Delete(key any) {
 	n := t.lookup(key)
 	if n == nil {
 		return // key not found, do nothing
@@ -538,13 +537,13 @@ func (t *tree) delete4(n *node) {
 
 // There are two cases handled here which are mirror images of one another:
 //
-//   1. N's sibling S is black, S's left child is red, S's right child is black,
-//      and N is the left child of its parent. We exchange the colors of S and
-//      its left sibling and rotate right at S.
+//  1. N's sibling S is black, S's left child is red, S's right child is black,
+//     and N is the left child of its parent. We exchange the colors of S and
+//     its left sibling and rotate right at S.
 //
-//   2. N's sibling S is black, S's right child is red, S's left child is black,
-//      and N is the right child of its parent. We exchange the colors of S and
-//      its right sibling and rotate left at S.
+//  2. N's sibling S is black, S's right child is red, S's left child is black,
+//     and N is the right child of its parent. We exchange the colors of S and
+//     its right sibling and rotate left at S.
 func (t *tree) delete5(n *node) {
 	if n == n.p.l &&
 		getcolor(sibling(n)) == colorBLACK &&
@@ -566,24 +565,24 @@ func (t *tree) delete5(n *node) {
 
 // There are two cases handled here which are mirror images of one another:
 //
-//   1. N's sibling S is black, S's right child is red, and N is the left child of
-//      its parent. We exchange the colors of N's parent and sibling, make S's
-//      right child black, then rotate left at N's parent.
+//  1. N's sibling S is black, S's right child is red, and N is the left child of
+//     its parent. We exchange the colors of N's parent and sibling, make S's
+//     right child black, then rotate left at N's parent.
 //
-//   2. N's sibling S is black, S's left child is red, and N is the right child of
-//      its parent. We exchange the colors of N's parent and sibling, make S's left
-//      child black, then rotate right at N's parent.
+//  2. N's sibling S is black, S's left child is red, and N is the right child of
+//     its parent. We exchange the colors of N's parent and sibling, make S's left
+//     child black, then rotate right at N's parent.
 //
 // This accomplishes three things at once:
 //
-//   1. We add a black node to all paths through N, either by adding a black S to
-//      those paths or by recoloring N's parent black.
+//  1. We add a black node to all paths through N, either by adding a black S to
+//     those paths or by recoloring N's parent black.
 //
-//   2. We remove a black node from all paths through S's red child, either by
-//      removing P from those paths or by recoloring S.
+//  2. We remove a black node from all paths through S's red child, either by
+//     removing P from those paths or by recoloring S.
 //
-//   3. We recolor S's red child black, adding a black node back to all paths
-//      through S's red child.
+//  3. We recolor S's red child black, adding a black node back to all paths
+//     through S's red child.
 //
 // S's left child has become a child of N's parent during the rotation and so is
 // unaffected.
