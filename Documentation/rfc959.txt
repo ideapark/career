@@ -1,0 +1,25 @@
+# FTP
+
+                                      -------------
+                                      |/---------\|
+                                      ||   User  ||    --------
+                                      ||Interface|<--->| User |
+                                      |\----^----/|    --------
+            ----------                |     |     |
+            |/------\|  FTP Commands  |/----V----\|
+            ||Server|<---------------->|   User  ||
+            ||  PI  ||   FTP Replies  ||    PI   ||
+            |\--^---/|                |\----^----/|
+            |   |    |                |     |     |
+--------    |/--V---\|      Data      |/----V----\|    --------
+| File |<--->|Server|<---------------->|  User   |<--->| File |
+|System|    || DTP  ||   Connection   ||   DTP   ||    |System|
+--------    |\------/|                |\---------/|    --------
+            ----------                -------------
+
+            Server-FTP                   USER-FTP
+
+
+
+ PI: protocol interpreter
+DTP: data transfer process
