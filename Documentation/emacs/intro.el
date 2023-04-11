@@ -40,3 +40,11 @@ nil      ; nil (false, empty, ...)
 [this list includes "text between quotation marks."] ;; C-x C-e
 
 
+;;; Symbol:
+;;;
+;;; the universal emacs object (value, function, etc) abstracted representation.
+;;;
+(symbolp         'emacs-lisp-mode)
+(symbol-name     'emacs-lisp-mode)
+(symbol-function 'emacs-lisp-mode)
+(symbol-value    'emacs-lisp-mode)
