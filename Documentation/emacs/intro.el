@@ -51,3 +51,9 @@ nil      ; nil (false, empty, ...)
 ;; symbol with values
 (symbol-value 'kill-ring)
 kill-ring
+
+(symbol-value 'fill-column)
+fill-column
+
++   ;; expected value
+(+) ;; expected function
