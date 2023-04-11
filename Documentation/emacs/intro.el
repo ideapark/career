@@ -47,4 +47,7 @@ nil      ; nil (false, empty, ...)
 (symbolp         'emacs-lisp-mode)
 (symbol-name     'emacs-lisp-mode)
 (symbol-function 'emacs-lisp-mode)
-(symbol-value    'emacs-lisp-mode)
+
+;; symbol with values
+(symbol-value 'kill-ring)
+kill-ring
