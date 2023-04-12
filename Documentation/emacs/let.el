@@ -23,4 +23,9 @@ If the CHARACTERITIC is the string \"fierce\", then warn of a tiger."
 (type-of-animal "fierce")
 (type-of-animal "stripes")
 
-
+;;; save-excursion
+(let ((editor "GNU Emacs"))
+  (save-excursion
+    (progn
+      (switch-to-buffer (get-buffer-create "*gnu*"))
+      (insert editor))))
