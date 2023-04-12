@@ -44,9 +44,10 @@ nil      ; nil (false, empty, ...)
 ;;;
 ;;; the universal emacs object (value, function, etc) abstracted representation.
 ;;;
-(symbolp         'emacs-lisp-mode)
-(symbol-name     'emacs-lisp-mode)
-(symbol-function 'emacs-lisp-mode)
+(symbolp         'deactivate-mark)
+(symbol-name     'deactivate-mark)
+(symbol-function 'deactivate-mark) ;; symbol can hold function
+(symbol-value    'deactivate-mark) ;; and value simultaneously
 
 ;; symbol with values
 (symbol-value 'kill-ring)
