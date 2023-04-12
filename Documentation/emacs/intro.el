@@ -90,3 +90,11 @@ fill-column
 		 (substring
 		  "The quick brown foxes jumped." 16 21)
 		 " leaping."))
+
+;;;; Setting the value of a variable
+(set 'flowers '(rose violet daisy buttercup))
+(setq flowers '(rose violet daisy buttercup))
+
+(setq carnivores '(lion tiger leopard))
+(setq trees '(pine fir oak maple)
+      herbivores '(gazellle antelope zebra))
