@@ -1,4 +1,4 @@
-;;; Lisp Lists
+;;;; Lisp Lists
 
 ;; flowers
 '(rose violet daisy buttercup)
@@ -57,3 +57,22 @@ fill-column
 
 +   ;; expected value
 (+) ;; expected function
+
+;;;; Arguments
+(concat "abc" "def")           ;; two atom string
+(substring "你好，世界！" 3 5)   ;; 1 atom string, 2 atom numbers
+(+ 2 fill-column)              ;; symbol evaluate to value: (eval fill-column)
+(concat "The "
+	(number-to-string (+ 2 fill-column))
+	" red foxes.")         ;; list argument that returns a value
+
+;;; Wrong type argument
+;; Debugger entered--Lisp error: (wrong-type-argument number-or-marker-p emacs)
+;;   +(2 emacs)
+;;   eval((+ 2 'emacs) nil)
+;;   elisp--eval-last-sexp(nil)
+;;   eval-last-sexp(nil)
+;;   funcall-interactively(eval-last-sexp nil)
+;;   call-interactively(eval-last-sexp nil nil)
+;;   command-execute(eval-last-sexp)
+(+ 2 'emacs)
