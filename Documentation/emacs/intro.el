@@ -76,3 +76,17 @@ fill-column
 ;;   call-interactively(eval-last-sexp nil nil)
 ;;   command-execute(eval-last-sexp)
 (+ 2 'emacs)
+
+;;;; message
+(message "This message appears in the echo area!")
+(message "The name of this buffer is: %s." (buffer-name))
+(message "The value of fill-column is %d." fill-column)
+(message "There are %d %s in the office!"
+	 (- fill-column 14)
+	 "pink elephants")
+(message "He saw %d %s"
+	 (- fill-column 32)
+	 (concat "red "
+		 (substring
+		  "The quick brown foxes jumped." 16 21)
+		 " leaping."))
