@@ -1,0 +1,235 @@
+A Micro-Manual for LISP - Not the whole truth
+
+		     John McCarthy
+     Artificial Intelligence Laboratory
+	      Stanford University
+
+
+    LISP data are symbolic expressions that can be either `atoms' or
+`lists'. Atoms are strings of letters and digits and other character
+not otherwise used in LISP. A list consists of a left parenthesis
+followed by zero or more atoms or lists separated by spaces and ending
+with a right parenthesis. Examples: a, onion, (), (a), (a onion a),
+(plus 3 (times x pi) 1), (car (quote (a b))).
+
+    The LISP programming language is defined by rules whereby certain
+LISP expressions have other LISP expressions as values. The funtion
+called value that we will use in giving these rules is not part of the
+LISP language but rather part of the informal mathematical language
+used to define LISP. Likewise, the italic letters `e' and `a'
+(sometimes with subscripts) denote LISP expressions, the letter `v'
+(usually subscripted) denotes an atom serving as a variable, and the
+letter `f' stands for a LISP expression serving as a function name.
+
+1. value (quote e) = e. Thus the value of (quote a) is a.
+
+2. value (car e), where value e is a non-empty list, is the first
+    element of value e. Thus value (car (quote (a b c))) = a.
+
+3. value (cdr e), where value e is a non-empty list, is the list that
+    remains when the first element of value e is deleted. Thus value
+    (cdr (quote (a b c))) = (b c).
+
+4. value (cons e1 e2), is the list that results from prefixing value
+    e1 onto the list value of e2. Thus value (cons (quote a) (quote (b c))) = (a b c).
+
+5. value (equal e1 e2) is T if value e1 = value e2. Otherwise, its
+    value is NIL. Thus value (equal (car (quote (a b))) (quote a)) = T.
+
+6. value (atom a) = T if value e is an atom; otherwise its value is NIL.
+
+7. value (cond (Pi Ei) . . . (Pn En)) = value Ei, where Pi is the
+    first of the P's whose value is not NIL. Thus value
+    (cond ((atom (quote a)) (quote b)) ((quote T) (quote c))) = b.
+
+8. An atom v, regarded as a variable, may have a value.
+
+9. value ((lambda (Vi . . . Vn) E) Ei . . . En) is the same value E
+    but in an environment in which the variables Vi . . . Vn take the
+    values of the expressions Ei . . . En in the original
+    environment. Thus value
+    ((lambda (x y) (cons (car x) y)) (quote (a b)) (cdr (quote (c d)))) = (a d).
+
+10. Here's the hard one. value ((label f (lambda (Vi . . . Vn) E)) Ei . . . En)
+      is the same as value ((lambda (Vi . . . Vn) E) Ei . . . En)
+      with the additional rule that whenever (f Ai . . . An)
+      must be evaluated, `f' is replaced by (label f (lambda (Vi . . . Vn) E)).
+      Lists beginning with label define functions recursively.
+
+    This is the core of LISP, and here are more examples:
+value (car x) = (a b) if value x = ((a b) c), and value
+((label ff (lambda (x) (cond ((atom x) x) ((quote T) (ff (car x)))))) (quote ((a b) c))) = a.
+Thus ((label ff (lambda (x) (cond ((atom x) x) ((quote T) (ff (car x))))))),
+is the LISP name of a function `ff' such that `ff' is the
+first atom in the written form of `e'. Note that the list `ff' is
+substituted for the atom `ff' twice.
+
+
+Abbreviations
+
+    The above LISP needs some abbreviations for practical use.
+
+1. The variables T and NIL are permanently assigned the values T and
+    NIL, and NIL is the name of the null list ().
+
+2. So as not to describe a LISP function each time it is used, we
+    define it permanently by typing (defun f (V1 .  .  . Vn) e).
+    Thereafter (f E1 . . . En) is evaluated by evaluating E with
+    the variable Vi, . . ., Vn taking the values value Ei, . . ., En
+    respectively. Thus, after we define
+    (defun ff (x) (cond ((atom x) x) (t (ff (car x))))), typing (ff (quote ((a b) c))),
+    gets `a' from LISP.
+
+3. We have the permanent function definitions. (defun null (x) (equal x nil))
+    and (defun cadr (x) (car (cdr x))). and similarly for arbitrary
+    combinations of A and D.
+
+4. (list Ei . . . En) is defined for each n to be (cons Ei (cons . . . (cons En nil)))
+
+5. (and p q) abbreviates (cond (p q) (t nil)). ANDs with more terms
+    are defined similarly, and the propositional connectives `or' and
+    `not' are used in abbreviating corresponding conditional
+    expressions.
+
+    Here are more examples of LISP function definitions:
+
+(defun alt (x)
+  (cond ((or (null x) (null (cdr x))) x)
+	    (t (cons (car x) (alt (cddr x))))))
+
+defines a function that gives alternate elements of a list starting
+with the first element. Thus (alt (quote (a b c d e))) = (a c e)
+
+(defun subst (x y z)
+  (cond ((atom z) (cond ((equal z y) x) (t z)))
+	    (t (cons (subst x y (car z)) (subst x y (cdr z))))))
+
+where Y is an atom, gives the result of substituting X for Y in
+Z. Thus (subst (quote (plus x y)) (quote v) (quote (times x v))) = (times x (plus x y)).
+
+    You may now program in LISP. Call LISP on a time-sharing computer,
+define some functions, type in a LISP expression, and LISP will output
+its value on your terminal.
+
+
+
+THE LISP INTERPRETER WRITTEN IN LISP
+
+    The rules we have given for evaluating LISP expressions can
+themselves be expressed as a LISP function (eval e a), where `e' is an
+expression to be evaluated, and `a' is a list of variable-value pairs,
+`a' is used in the recursion and is often initially NIL. The long LISP
+expression that follows is just such an evaluator. It is presented as
+a single LABEL expressions with all auxiliary functions also defined
+by LABEL expressions internally, so that it references only the basic
+functions of LISP and some of abbreviations like CADR and friends. It
+knows about all the functions that are used in its own definition so
+that it can evaluate itself evaluating some other expression. It does
+not know about DEFUNs or any feature of LISP not explained in this
+micro-manual such as functional arguments, property list functions,
+input-output, or sequential programs.
+
+    The function `eval' can serve as an interpreter for LISP, and LISP
+interpreters are actually made by hand-compiling EVAL into machine
+language or by cross-compiling it on a machine for which a LISP system
+already exists.
+
+    The definition would have been easier to follow had we defined
+auxiliary functions separately rather than include them using
+LABEL. However, we would then have needed property list functions in
+order to make the `eval' self-applicable. These auxiliary functions
+are `evlis' which evaluates lists of expressions, `evcond' which
+evaluates conditional expressions, `assoc' which finds the value
+associated with a variable in the environment, and `pairup' which
+pairs up the corresponding elements of two lists.
+
+
+
+Here is the eval.
+
+(label eval (lambda (e a)
+	      (cond ((atom e)
+		     (cond ((eq e nil) nil)
+			   ((eq e t) t)
+			   (t (cdr ((label
+				     assoc
+				     (lambda (e a)
+				       (cond ((null a) nil)
+					     ((eq e caar a)) (car a)
+					     (t (assoc e (cdr a)))))
+				     e
+				     a)))))
+		     ((atom (car e))
+		      (cond ((eq (car e) (quote quote)) (cadr e))
+			    ((eq (car e) (quote car))
+			     (car (eval (cadr e) a)))
+			    ((eq (car e) (quote cdr))
+			     (cdr (eval (cadr e) a)))
+			    ((eq (car e) (quote cadr))
+			     (cadr (eval (cadr e) a)))
+			    ((eq (car e) (quote caddr))
+			     (caddr (eval (cadr e) a)))
+			    ((eq (car e) (quote caar))
+			     (caar (eval (cadr e) a)))
+			    ((eq (car e) (quote cadar))
+			     (cadar (eval (cadr e) a)))
+			    ((eq (car e) (quote caddar))
+			     (caddar (eval (cadr e) a)))
+			    ((eq (car e) (quote atom))
+			     (atom (eval (cadr e) a)))
+			    ((eq (car e) (quote null))
+			     (null (eval (cadr e) a)))
+			    ((eq (car e) (quote cons))
+			     (cons (eval (cadr e) a) (eval (caddr e) a)))
+			    ((eq (car e) (quote eq))
+			     (eq (eval (cadr e) a) (eval (caddr e) a)))
+			    ((eq (car e) (quote cond))
+			     ((label evcond
+				     (lambda (u a) (cond ((eval (caar u) a)
+							  ((eval (cadar u)
+								 a))
+							  (t (evcond (cdr u)
+								     a)))))
+				     (cdr e)
+				     a))
+			     (t (eval (cons (cdr ((label
+						   assoc
+						   (lambda (e a)
+						     (cond
+						      ((null a) nil)
+						      ((eq e (caar a))
+						       (car a))
+						      (t (assoc e
+								(cdr a))))))
+						  (car e)
+						  a))
+					    (cdr e))
+				      a))))
+		      ((eq (caar e) (quote lambda))
+		       (eval (caddar e)
+			     ((label ffappend
+				     (lambda (u v)
+				       (cond ((null u) v)
+					     (t (cons (car u)
+						      (ffappend (cdr u)
+								v))))))
+			      ((label
+				pairup
+				(lambda (u v)
+				  (cond ((null u) nil)
+					(t (cons (cons (car u) (car v))
+						 (pairup (cdr u)
+							 (cdr v)))))))
+			       (label
+				evlis
+				(lambda (u a)
+				  (cond ((null u) nil)
+					(t (cons (eval (car u) a)
+						 (evlis (cdr u)
+							a))))))
+			       (cdr e)
+			       a))
+			     a)))
+		     ((eq (caar e) (quote label))
+		      (eval (cons (caddar e) (cdr e))) a)))))
+
