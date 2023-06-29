@@ -1,4 +1,4 @@
-# One's Complement
+# Two's Complement
 
 Computer is more good at add operation than minus. So the actual minus
 operation is transformed to a add operation to be carried out. But how
@@ -60,7 +60,7 @@ are assigned to the computer bits width number points wisely. (b)
 minus could be transformed to add operation mathmatically equaltion
 `5-2 = 5+(-2).`
 
-One's complement, or nature number complements is that:
+Two's complement, or nature number complements is that:
 
 (a) if number is positive, the complement number is itself exactly.
 (b) otherwise if negative, the compelemnt number is the positive
