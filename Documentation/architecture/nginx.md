@@ -1,6 +1,6 @@
-# nginx
+# NGINX
 
-nginx (pronounced "engine x") is a free open source web server written by
+Nginx (pronounced "engine x") is a free open source web server written by
 Igor Sysoev, a Russian software engineer. Since its public launch in 2004,
 nginx has focused on high performance, high concurrency and low memory
 usage. Additional features on top of the web server functionality, like
