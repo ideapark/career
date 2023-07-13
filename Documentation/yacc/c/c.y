@@ -537,6 +537,7 @@ declaration_list
         ;
 
 %%
+
 #include <stdio.h>
 
 void yyerror(const char *s)

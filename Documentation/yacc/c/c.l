@@ -21,6 +21,7 @@ NOTE: The following %-parameters are the minimum sizes needed for real Lex.
 %a  1213
 %o  1117
 
+/* regular definitions */
 O   [0-7]
 D   [0-9]
 NZ  [1-9]
