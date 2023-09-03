@@ -1,3 +1,3 @@
 module ideapark.io/algo
 
-go 1.19
+go 1.21
