@@ -1,5 +1,5 @@
 #+TITLE: Linux Syscall Architecture Registers
-#+AUTHOR: park@ideapark.io
+#+AUTHOR: ideapark@139.com
 
 | archi/ABI   | arg1 | arg2 | arg3 | arg4 | arg5 | arg6 | arg7 |
 |-------------+------+------+------+------+------+------+------|

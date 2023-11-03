@@ -1,4 +1,4 @@
-module ideapark.io/crypto
+module ideapark.cc/crypto
 
 go 1.19
 

@@ -3,13 +3,13 @@ Docker: Inside and Out
 9 Jul 2019
 
 周朋
-park@ideapark.io
+ideapark@139.com
 https://github.com/ideapark
 微信 ideaparkio
 
 * License
 
-Copyright © Zhou Peng <park@ideapark.io>
+Copyright © Park Zhou <ideapark@139.com>
 
 .image docker-logo.png
 
@@ -63,7 +63,7 @@ Docker is a client-server application with these major components:
 
   FROM archlinux/base:latest
 
-  MAINTAINER Zhou Peng <zhoupeng@xigua.city>
+  MAINTAINER Park Zhou <zhoupeng@xigua.city>
   LABEL name="stress:v1.0"
   LABEL vendor="XiguaCity, Inc."
   LABEL description="Linux performance stress testing"

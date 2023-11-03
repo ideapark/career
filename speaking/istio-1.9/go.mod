@@ -1,4 +1,4 @@
-module ideapark.io/istio
+module ideapark.cc/istio
 
 go 1.16
 

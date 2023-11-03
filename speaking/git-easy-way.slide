@@ -3,13 +3,13 @@ Git Easy Way
 20 Sep 2018
 
 周朋
-park@ideapark.io
+ideapark@139.com
 https://github.com/ideapark
 微信 ideaparkio
 
 * License
 
-Copyright © Zhou Peng <park@ideapark.io>
+Copyright © Park Zhou <ideapark@139.com>
 
 * 最简单的版本控制
 
@@ -44,7 +44,7 @@ Copy-Modify
 
 - Super Block
 
-  [park@ideapark blog.ideapark.io]$ sudo dumpe2fs -h /dev/sda1
+  [park@ideapark blog.ideapark.cc]$ sudo dumpe2fs -h /dev/sda1
   Last mounted on:          /
   Filesystem UUID:          cb9baea8-7dfb-4f7e-acc4-ab326f7db872
   Filesystem magic number:  0xEF53
@@ -80,7 +80,7 @@ Copy-Modify
 
 - 文件
 
-  [park@ideapark blog.ideapark.io]$ stat git-easy-way.slide
+  [park@ideapark blog.ideapark.cc]$ stat git-easy-way.slide
     File: git-easy-way.slide
     Size: 9300          Blocks: 24         IO Block: 4096   regular file
   Device: 801h/2049d    Inode: 2099085     Links: 1         ^^^^^^^^^^^^
@@ -92,7 +92,7 @@ Copy-Modify
 
 - 目录
 
-  [park@ideapark blog.ideapark.io]$ stat letsgo
+  [park@ideapark blog.ideapark.cc]$ stat letsgo
     File: letsgo
     Size: 4096          Blocks: 8          IO Block: 4096   directory
   Device: 801h/2049d    Inode: 4203085     Links: 2         ^^^^^^^^^
@@ -104,7 +104,7 @@ Copy-Modify
 
 * 目录是一种特殊类型的文件
 
-  [park@ideapark blog.ideapark.io]$ ls -F -l -h -i -n
+  [park@ideapark blog.ideapark.cc]$ ls -F -l -h -i -n
   2099065 -rw-r--r-- 1 1000 1000  35K Jun 25 19:13 LICENSE
   2099066 -rw-r--r-- 1 1000 1000  366 Jun 25 19:13 README.md
   2099067 -rw-r--r-- 1 1000 1000  290 Jun 25 19:13 blog.service
@@ -152,7 +152,7 @@ Copy-Modify
 
 - 数据块摘要，1比特位修改都会导致 Hash 值改变
 
-  [park@ideapark blog.ideapark.io]$ sha256sum LICENSE README.md git-easy-way.slide
+  [park@ideapark blog.ideapark.cc]$ sha256sum LICENSE README.md git-easy-way.slide
   8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903  LICENSE
   12c51d97e30b7cd5457305d99951c842163b271bab261ad2a7e938d2718e7330  README.md
   bb0e0346f308895fadd14d37f9a35af50214149c0dc07d1401f1e6f4e16974d4  git-easy-way.slide
@@ -172,26 +172,26 @@ Conclusions
 
 Branch name is alias of commit object.
 
-  [park@ideapark blog.ideapark.io]$ git rev-parse master
+  [park@ideapark blog.ideapark.cc]$ git rev-parse master
   cc4c780f71783c5e397cd984afb82008e367ed9e
 
 - commit object
 
-  [park@ideapark blog.ideapark.io]$ git cat-file -p master^{commit}
+  [park@ideapark blog.ideapark.cc]$ git cat-file -p master^{commit}
   tree 9d03065d90012526f83caa4428f71dbc46532dc5
   parent 680f5b693d3468f2cdbb7bb31e725722ed1e7058
-  author Zhou Peng <park@ideapark.io> 1537543934 +0800
-  committer Zhou Peng <park@ideapark.io> 1537543934 +0800
+  author Park Zhou <ideapark@139.com> 1537543934 +0800
+  committer Park Zhou <ideapark@139.com> 1537543934 +0800
 
   git: more special file types
 
-  Signed-off-by: Zhou Peng <park@ideapark.io>
+  Signed-off-by: Park Zhou <ideapark@139.com>
 
 * 开始 Git
 
 - blob/tree object
 
-  [park@ideapark blog.ideapark.io]$ git cat-file -p master^{tree}
+  [park@ideapark blog.ideapark.cc]$ git cat-file -p master^{tree}
   100644 blob a1338d68517ee2ad6ee11214b201e5958cb2bbc3	.gitignore
   100644 blob 94a9ed024d3859793618152ea559a168bbcbb5e2	LICENSE
   100644 blob c8f035179719363ade1daa19fc77999395979170	README.md
@@ -215,8 +215,8 @@ Git is more about a content addressable storage system.
   |   commit: size        |     |   |    commit: size        |     |   |   commit: size        |
   |     tree: 92ec2       |     |   |      tree: 184ca       |--+  |   |     tree: 0de24       |
   |   parent: 0x000       |     +---|    parent: 98ca9       |  |  +---|   parent: 34ac2       |
-  |   author: Zhou Peng   |         |    author: ideapark.io |  |      |   author: ideapark.io |
-  | commiter: Zhou Peng   |         | committer: Zhou Peng   |  |      | commiter: Zhou Peng   |
+  |   author: Park Zhou   |         |    author: ideapark.cc |  |      |   author: ideapark.cc |
+  | commiter: Park Zhou   |         | committer: Park Zhou   |  |      | commiter: Park Zhou   |
   |  message: Sun arise   |         |   message: Feature X   |  |      |  message: Bugfix      |
   +-----------------------+         +------------------------+  |      +-----------------------+
                                        tree: 184ca              |                     ^
@@ -235,7 +235,7 @@ Git is more about a content addressable storage system.
 
 * 开始 Git
 
-  [park@ideapark blog.ideapark.io]$ git count-objects -v
+  [park@ideapark blog.ideapark.cc]$ git count-objects -v
   count: 3
   size: 24
   in-pack: 671
@@ -283,7 +283,7 @@ Git is more about a content addressable storage system.
 
 * Git 分支
 
-  [park@ideapark blog.ideapark.io]$ git branch -avv
+  [park@ideapark blog.ideapark.cc]$ git branch -avv
   * master                e84bda1 [origin/master] git: change test host to my home pc
     remotes/origin/HEAD   -> origin/master
     remotes/origin/master e84bda1 git: change test host to my home pc

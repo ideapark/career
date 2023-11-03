@@ -1,4 +1,4 @@
-// Copyright 2022 © Park Zhou <park@ideapark.io>
+// Copyright 2022 © Park Zhou <ideapark@139.com>
 
 // Package huffman implements huffman coding algorithm
 //

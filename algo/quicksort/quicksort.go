@@ -1,4 +1,4 @@
-// Copyright 2020 © Park Zhou <park@ideapark.io>
+// Copyright 2020 © Park Zhou <ideapark@139.com>
 
 // Package quicksort implements quick sorting algorithm. This is just a practice
 // implemention, you should always use Go standard package sort instead.

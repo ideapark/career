@@ -1,5 +1,5 @@
 ---
-author: Zhou Peng <park@ideapark.io>
+author: Park Zhou <ideapark@139.com>
 description: Cloud-Native & Cloud-Native Infrastructure
 ---
 

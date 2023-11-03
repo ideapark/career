@@ -1,3 +1,3 @@
-module ideapark.io/go
+module ideapark.cc/go
 
 go 1.15

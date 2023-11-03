@@ -1,3 +1,3 @@
-module ideapark.io/algo
+module ideapark.cc/algo
 
 go 1.21
