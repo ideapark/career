@@ -50,6 +50,67 @@ Double Precision
 
 
 
+Bit Pattern     Meaning of Exponent Field
+-----------     -------------------------
+ 0000 0000      Denormalized Numbers, including zero
+ 0000 0001      -126
+   ...          ...
+ 0111 1110      -1
+ 0111 1111      0
+ 1000 0000      +1
+   ...          ...
+ 1111 1110      +127
+ 1111 1111      Infinity, Not-a-Number (NaN)
+
+For normalized numbers, the exponent has an effective range of
+-126..+127.
+
+The smallest positive normalized number is:
+
+  In binary: 1.00000000000000000000000x2^-126 (There are 23 zeros)
+  In bits:   0x00800000 = 0 00000001 00000000000000000000000
+  Decimal approximation: 1.17549435x10^-38
+
+The largest normalized number is:
+
+  In binary: 1.11111111111111111111111x2^+127 (There are 23 ones)
+  In bits:   0x7F7FFFFF = 0 11111110 11111111111111111111111
+  Decimal approximation: 3.4028235x10^38
+
+If the exponent is all ones (i.e., 11111111), the the value of the
+fraction matters. If the fraction is all zeros, then the value is +Inf
+or -Inf depending on the sign bit.
+
+  +Inf: 0x7F800000 = 0 11111111 00000000000000000000000
+  -Inf: 0xFF800000 = 1 11111111 00000000000000000000000
+
+If the exponent is all ones (i.e., 11111111), and the value of the
+fraction is not all zeros, the NaN is represented. There are multiple
+representions that are to be interpreted as NaN values. The canonical,
+preferred representation of NaN is often this:
+
+  NaN (typical): 0xFFFFFFFF = 1 11111111 11111111111111111111111
+
+If the exponent field is all zeros (i.e., 00000000), the the vaule is
+a denormalized number. The value of the number is:
+
+  N = (-1)^sign x 0.fraction x 2^-126
+
+Notice that the leading implicit "1" bit is no longer assumed; it is
+now "0". Also the exponent is always -126, which happens to be the
+smallest exponent for normalized numbers.
+
+Here are some sample numbers that may help explain denormalized
+numbers:
+
+Smallest normalized number  : 1.00000000000000000000000 x 2^-126 (24 bits of precision)
+Largest denormalized number : 0.11111111111111111111111 x 2^-126 (23 bits of precision)
+Random denormalized number  : 0.00000000001100101110101 x 2^-126 (13 bits of precision)
+Smallest denormalized number: 0.00000000000000000000001 x 2^-126 (1 bit of precision)
++0.0                        : 0.00000000000000000000000 x 2^-126 (0 bit of precision)
+
+
+
 Example
 
 ==> 85.125
