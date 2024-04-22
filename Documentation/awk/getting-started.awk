@@ -25,3 +25,12 @@ $3 > 0 { print $1, $2 * $3 }
 # print the names of those employees who did not work.
 #
 $3 == 0 { print $1 }
+
+#
+# AWK Built-in Variable
+#
+# NF: counts the number of fields
+# NR: counts the number of lines
+#
+{ print NF, $NF }
+{ print NR, $0  }
