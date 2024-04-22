@@ -39,3 +39,18 @@ $3 == 0 { print $1 }
 # Formatted printing
 #
 { printf("%-8s: $%-.2f\n", $1, $2 * $3) }
+
+#
+# Two special patterns
+#
+#  BEGIN : matches before the first line of the first input file
+#  END   : matches after the last line of the last file
+#
+BEGIN {
+    print "Name    RATE      HOURS";
+    print "------------------------"
+}
+{ print }
+END {
+    print "------------------------"
+}
