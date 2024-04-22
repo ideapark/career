@@ -54,3 +54,76 @@ BEGIN {
 END {
     print "------------------------"
 }
+
+#
+# Counting, Sum, Averages
+#
+
+# awk variable initialized with vaule 0.
+$3 > 15 { emp = emp + 1 }
+END { print emp, "employees worked more than 15 hours." }
+
+# average
+{ pay = pay + $2 * $3 }
+END {
+    print NR, "employees"
+    print "total pay is", pay
+    print "average pay is", pay/NR
+}
+
+#
+# Finds the employee who is paid the most per hour.
+#
+$2 > maxrate { maxrate = $2; maxemp = $1 }
+END {
+    print "highest hourly rate:", maxrate, "for", maxemp
+}
+
+#
+# String concatenation
+#
+{ names = names $1 " " }
+END {
+    print names
+}
+
+#
+# Print the last input line.
+#
+{ last = $0 }
+END {
+    print last
+}
+
+#
+# AWK built-in functions
+#
+{ print $1, length($1) }
+
+#
+# Control-Flow Statements
+#
+$2 > 6 { n = n + 1; pay = pay + $2 * $3 }
+END {
+    if (n > 0)
+	print n, "employees, totoal pay is", pay, "average pay is", pay/n
+    else
+	print "no employees are paid more than $6/hour"
+}
+
+#
+# Reverse input lines
+#
+{ line[NR] = $0 }
+END {
+    i = NR
+    while (i > 0) {
+	print line[i]
+	i = i -1
+    }
+}
+END {
+    for (i = NR; i > 0; i--) {
+	print line[i]
+    }
+}
