@@ -34,3 +34,8 @@ $3 == 0 { print $1 }
 #
 { print NF, $NF }
 { print NR, $0  }
+
+#
+# Formatted printing
+#
+{ printf("%-8s: $%-.2f\n", $1, $2 * $3) }
