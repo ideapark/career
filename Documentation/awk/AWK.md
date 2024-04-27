@@ -1,5 +1,6 @@
 # Builtin Variables
 
+```text
 ==========================================================================================
    VARIABLE     |                     MEANING                     |         DEFAULT
 ----------------+-------------------------------------------------+-----------------------
@@ -21,9 +22,11 @@
 
   SPC: " "
   RET: "\n"
+```
 
 # Expressions
 
+```text
 ==========================================================================================
 1. The primary expressions are:
 	numeric and string constants, variables, fields, function calls, array elements.
@@ -40,3 +43,22 @@
 	increment and decrement operators ++ and -- (prefix and postfix)
 	parentheses for grouping
 ------------------------------------------------------------------------------------------
+```
+
+# Builtin Arithmetic Functions
+
+```text
+==========================================================================================
+   FUNCTION        |                        VAULE RETURNED
+-------------------+----------------------------------------------------------------------
+	atan2(y,x)     | arctangent of y/x in the range -π to π
+	cos(x)         | consine of x, with x in radians
+	exp(x)         | exponential function of x, e^x
+	int(x)         | integer part of x; truncated towards 0 when x > 0
+	log(x)         | natural (base e) logrithm of x
+	rand()         | random number r, where 0 <= r < 1
+	sin(x)         | sine of x, with x in radians
+	sqrt(x)        | square root of x
+	srand(x)       | x is new seed for rand()
+-------------------+----------------------------------------------------------------------
+```
