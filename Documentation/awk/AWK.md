@@ -62,3 +62,24 @@
     srand(x)       | x is new seed for rand()
 -------------------+----------------------------------------------------------------------
 ```
+
+# Builtin String Functions
+
+```text
+=====================================================================================================================================
+        FUNCTION           |                        DESCRIPTION
+---------------------------+---------------------------------------------------------------------------------------------------------
+    gsub(r,s)              | substitute s for r globally in $0, return number of substitutions made
+    gsub(r,s,t)            | substitute s for r globally in string t, return number of substitute made
+    index(s,t)             | return first position of string t in s, or 0 if t is not present
+    length(s)              | return number of characters in s
+    match(s,r)             | test whether s contains a substring matched by r, return index or 0; sets RSTART and RLENGTH
+    split(s,a)             | split s into array a on FS, return number of fields
+    split(s,a,fs)          | split s into array a on field separator fs, return number of fields
+    sprintf(fmt,expr-list) | return expr-list formatted according to format string fmt
+    sub(r,s)               | substitute s for the leftmost longest substring of $0 matched by r; return number of substitutions made
+    sub(r,s,t)             | substitute s for the leftmost longest substring of t matched by r; return number of substitutions made
+    substr(s,p)            | return suffix of s starting at position p
+    substr(s,p,n)          | return substring of s of length n starting at position p
+---------------------------+---------------------------------------------------------------------------------------------------------
+```
