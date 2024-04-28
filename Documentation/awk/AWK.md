@@ -108,3 +108,44 @@
  grouping             | ()                  |    ($i)++      | add 1 to value of i-th field
 ----------------------+---------------------+----------------+----------------------------------------------------
 ```
+
+# Control-Flow Statements
+
+```text
+========================================================================
+{ stmts }
+    statement grouping
+
+if (expr) smt
+    if expr is true, execute smt
+
+if (expr) stmt1 else stmt2
+    if expr is true, execute stmt1, otherwise execute stmt2
+
+while (expr) stmt
+    if expr is true, execute stmt, then repeat
+
+for (expr1; expr2; expr3) stmt
+    equivalent to expr1; while (expr2) { stmt; expr3; }
+
+for (var in array) stmt
+    execute stmt with var set to each subscript in array in turn
+
+do stmt while (expr)
+    execute stmt; if expr is true; repeat
+
+break
+    immediately leave innermost enclosing while, for or do
+
+continue
+    start next iteration of innermost enclosing while, for or do
+
+next
+    start next iteration of main input loop
+
+exit
+exit expr
+    go immediately to the END action; if within the END action, exit
+    program entirely. return expr as program status.
+------------------------------------------------------------------------
+```
