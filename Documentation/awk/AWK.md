@@ -83,3 +83,28 @@
     substr(s,p,n)          | return substring of s of length n starting at position p
 ---------------------------+---------------------------------------------------------------------------------------------------------
 ```
+
+# Expression Operators
+
+```text
+==================================================================================================================
+       OPERATION      |      OPERATORS      |    EXAMPLE     |     MEANING OF EXAMPLE
+----------------------+---------------------+----------------+----------------------------------------------------
+ assignment           | = += -= *= /= %= ^= |    x *= 2      | x = x * 2
+ conditional          | ?:                  |    x ? y : z   | if x is true then y else z
+ logical OR           | ||                  |    x || y      | 1 if x or y are true, 0 otherwise
+ logical AND          | &&                  |    x && y      | 1 if x and y are true, 0 otherwise
+ array membership     | in                  |    i in a      | 1 if a[i] exists, 0 otherwise
+ matching             | ~ !~                |    $1 ~ /x/    | 1 if the first field contains an x, 0 otherwise
+ relatioinal          | < <= == != >= >     |    x == y      | 1 if x is equal to y, 0 otherwise
+ concatenation        |                     |    "a" "bc"    | "abc"; there is no explicit concatenation operator
+ add,substract        | + -                 |    x + y       | sum of x and y
+ multiply,divide,mod  | * / %               |    x % y       | remainder of x divided by y
+ unary plus and minus | + -                 |    -x          | negated vault of x
+ logical NOT          | !                   |    !$1         | 1 if $1 is zero or null, 0 otherwise
+ exponentiation       | ^                   |    x ^ y       | multiply x for y times
+ increment,decrement  | ++ --               |    ++x, x++    | add 1 to x
+ field                | $                   |    $i+1        | vaule of i-th field, plus 1
+ grouping             | ()                  |    ($i)++      | add 1 to value of i-th field
+----------------------+---------------------+----------------+----------------------------------------------------
+```
