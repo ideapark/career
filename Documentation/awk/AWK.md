@@ -182,3 +182,21 @@ close(filename), close(command)
 system(command)
     execute command; value is status return of command
 ```
+
+# Printf Format-Control Characters
+
+```text
+==========================================================================================
+  CHARACTER  |   PRINT EXPRESSION AS
+-------------+----------------------------------------------------------------------------
+      c      | ASCII character
+      d      | decimal integer
+      e      | [-]d.ddddddE[+-]dd
+      f      | [-]ddd.dddddd
+      g      | e or f conversion, whichever is shorter, with nonsignificant zeros suppressed
+      o      | unsigned octal number
+      s      | string
+      x      | unsigned hexadecimal number
+      %      | print a %; no argument is consumed
+-------------+----------------------------------------------------------------------------
+```
