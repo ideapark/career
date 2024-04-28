@@ -149,3 +149,36 @@ exit expr
     program entirely. return expr as program status.
 ------------------------------------------------------------------------
 ```
+
+# Output Statements
+
+```text
+========================================================================
+print
+    print $0 on standard output
+
+print expr, expr, ...
+    print expr's, separated by OFS, terminated ORS
+
+print expr, expr, ... >filename
+    print on file filename instead of standard output
+
+print expr, expr, ... >>filename
+    append to file filename instead of overwriting previous contents
+
+print expr, expr, ... | command
+    print to standard input of command
+
+printf(format, expr, expr, ...)
+printf(format, expr, expr, ...) >filename
+printf(format, expr, expr, ...) >>filename
+printf(format, expr, expr, ...) | command
+    printf statements are like print but the first argument specifies
+    output format
+
+close(filename), close(command)
+    break connection between print and filename or command
+
+system(command)
+    execute command; value is status return of command
+```
