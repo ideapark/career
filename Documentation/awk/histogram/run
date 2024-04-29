@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+awk -f i.awk | awk -f o.awk
