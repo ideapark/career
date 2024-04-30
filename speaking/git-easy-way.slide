@@ -3,13 +3,13 @@ Git Easy Way
 20 Sep 2018
 
 周朋
-ideapark@139.com
+ideapark@petalmail.com
 https://github.com/ideapark
 微信 ideaparkio
 
 * License
 
-Copyright © Park Zhou <ideapark@139.com>
+Copyright © Park Zhou <ideapark@petalmail.com>
 
 * 最简单的版本控制
 
@@ -180,12 +180,12 @@ Branch name is alias of commit object.
   [park@ideapark blog.ideapark.cc]$ git cat-file -p master^{commit}
   tree 9d03065d90012526f83caa4428f71dbc46532dc5
   parent 680f5b693d3468f2cdbb7bb31e725722ed1e7058
-  author Park Zhou <ideapark@139.com> 1537543934 +0800
-  committer Park Zhou <ideapark@139.com> 1537543934 +0800
+  author Park Zhou <ideapark@petalmail.com> 1537543934 +0800
+  committer Park Zhou <ideapark@petalmail.com> 1537543934 +0800
 
   git: more special file types
 
-  Signed-off-by: Park Zhou <ideapark@139.com>
+  Signed-off-by: Park Zhou <ideapark@petalmail.com>
 
 * 开始 Git
 

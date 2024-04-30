@@ -1,6 +1,6 @@
 #+TITLE: THE TWELVE-FACTOR APP
 #+AUTHOR: https://12factor.net/zh_cn/
-#+EMAIL: ideapark@139.com
+#+EMAIL: ideapark@petalmail.com
 
 +------------+--------------+-----------+--------------------------+--------------------------+---------------+----------------+---------------------------+----------------------+-------------------+--------------+------------------+
 | 1.Codebase | 2.Dependency | 3.Config  | 4.Backing services       | 5.Build,release,run      | 6.Processes   | 7.Port binding | 8.Concurrency             | 9.Disposability      | 10.Dev/Prod parti | 11.Logs      | 12.Admin process |

@@ -1,4 +1,4 @@
-// Copyright 2020 © Park Zhou <ideapark@139.com>
+// Copyright 2020 © Park Zhou <ideapark@petalmail.com>
 
 package quicksort
 
