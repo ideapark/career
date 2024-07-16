@@ -1,5 +1,23 @@
 # CALLING CONVENTION
 
+There are six general stages in calling a function:
+
+1. Place the arguments where the function can access them.
+
+2. Jump to the function (using RV32I's jal).
+
+3. Acquire local storage resources the function needs, saving
+   registers as required.
+
+4. Perform the desired task of the function.
+
+5. Place the function result value where the calling program can
+   access it, restore any registers, and release any local storage
+   resources.
+
+6. Since a function can be called from serval points in a program,
+   return control to the point of origin (using ret).
+
 +------------------+-------------+-------------------------------------+--------+
 |    Register      |   ABI Name  |              Description            | Saver  |
 +------------------+-------------+-------------------------------------+--------+
