@@ -1,0 +1,28 @@
+# Assembler directives
+
++-------------------------------+----------------------------------------------------------------------------------------------------------------+
+| Directive                     |                                                      Description                                               |
++-------------------------------+----------------------------------------------------------------------------------------------------------------+
+| .text                         | Subsequent items are stored in the text section (machine mode).                                                |
+| .data                         | Subsequent items are stored in the data section (global variables).                                            |
+| .bss                          | Subsequent items are stored in the bss section (global variables initialized to 0).                            |
+| .section .foo                 | Subsequent items are stored in the section named .foo.                                                         |
+| .align  n                     | Align the text datum on a 2^n-byte boundry, eg,. .align 2 aligns the next value on a word boundry.             |
+| .balign n                     | Align the next datum on a n-byte boundry. eg,. .balign 4 aligns the next value on a word boundry.              |
+| .globl  sym                   | Declare that label sym is global and may be referenced from other files.                                       |
+| .string "str"                 | Store the string str in memory and null-terminate it.                                                          |
+| .byte   b1,...,bn             | Store the n 8-bit quantities in successive bytes of memory .                                                   |
+| .half   w1,...,wn             | Store the n 16-bit quantities in successive memory of halfwords.                                               |
+| .word   w1,...,wn             | Store the n 32-bit quantities in successive memory of words.                                                   |
+| .dword  w1,...,wn             | Store the n 64-bit quantities in successive memory of doublewords.                                             |
+| .float  f1,...,f2             | Store the n single-precision floating-point numbers in successive memory words.                                |
+| .double d1,...,d2             | Store the n double-precision floating-point numbers in successive memory doublewords.                          |
+| .option rvc                   | Compress subsequent instructions.                                                                              |
+| .option norvc                 | Don't compress subsequent instructions.                                                                        |
+| .option relax                 | Allow linker relaxations for subsequent instructions.                                                          |
+| .option norelax               | Don't allow linker relaxations for subsequent instructions.                                                    |
+| .option pic                   | Subsequent instructions are position-independent code.                                                         |
+| .option nopic                 | Subsequent instructions are position-dependent code.                                                           |
+| .option push                  | Push the current setting of all .options to a stack, so that a subsequent .option pop will restore their value |
+| .option pop                   | Pop the option stack, restoring all .option's to their setting at the time of the last .option push            |
++-------------------------------+----------------------------------------------------------------------------------------------------------------+
