@@ -33,12 +33,16 @@ There are six general stages in calling a function:
 |    x10-11        |  a0-1       | Function arguments/return values    | Caller |
 |    x12-17        |  a2-7       | Function arguments                  | Caller |
 |    x18-27        |  s2-11      | Saved registers                     | Callee |
-|    x28-31        |  t36        | Temporaries                         | Caller |
-+------------------+-------------+-------------------------------------+--------+
-|    f0-7          | ft0-7       | FP temporaries                      | Caller |
-|    f8-9          | fs0-1       | FP saved registers                  | Callee |
-|    f10-11        | fa0-1       | FP arguments/return values          | Caller |
-|    f12-17        | fa2-7       | FP arguments                        | Caller |
-|    f18-27        | fs2-11      | FP saved registers                  | Callee |
-|    f28-31        | ft8-11      | FP temporaries                      | Caller |
-+------------------+-------------+-------------------------------------+--------+
+|    x28-31        |  t36        | Temporaries                         | Caller |               fscr: Floating-point control and status register
++------------------+-------------+-------------------------------------+--------+            31                                                8 7                   5    4    3    2    1    0
+|    f0-7          | ft0-7       | FP temporaries                      | Caller |             +------------------------------------------------+-+-------------------+----+----+----+----+----+
+|    f8-9          | fs0-1       | FP saved registers                  | Callee |             |        Reserved                                | |Rounding Mode (frm)|  Accrued Exp (fflags)  |
+|    f10-11        | fa0-1       | FP arguments/return values          | Caller |             +------------------------------------------------+-+-------------------+----+----+----+----+----+
+|    f12-17        | fa2-7       | FP arguments                        | Caller |                                   24                                   3           | NV | DZ | OF | UF | NX |
+|    f18-27        | fs2-11      | FP saved registers                  | Callee |                                                                                    +----+----+----+----+----+
+|    f28-31        | ft8-11      | FP temporaries                      | Caller |                                                                                       1    1    1    1    1
++------------------+-------------+-------------------------------------+--------+                                                                                                               NV: Invalid Operation
+                                                                                                                                                                                                DZ: Divide by Zero
+                                                                                                                                                                                                OF: Overflow
+                                                                                                                                                                                                UF: Underflow
+                                                                                                                                                                                                NX: Inexact
