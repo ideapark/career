@@ -42,6 +42,8 @@ exception. Supervisor interrupts and page-fault exceptions are only
 possible when supervisor mode is implemented (XLEN is 32 for RV32 or
 64 for RV64).
 
+- mcause
+
 ┌───────────────────┬──────────────────┬────────────────────────────────┐
 │Interrupt/Exception│  Exception Code  │           Description          │
 │  mcause[XLEN-1]   │ mcause[XLEN-2:0] │                                │
@@ -68,6 +70,15 @@ possible when supervisor mode is implemented (XLEN is 32 for RV32 or
 │                0  │               13 │ Load page fault                │
 │                0  │               15 │ Store page fault               │
 └───────────────────┴──────────────────┴────────────────────────────────┘
+
+- mstatus
+
+XLEN-1 XLEN-2         23 22 21  20 19   18  17 16,15 14,13 12,11   8    7  6  5     4   3  2  1   0
+  ┌──┬─────────────────┬───┬──┬───┬───┬───┬────┬────┬────┬─────┬─┬───┬────┬─┬────┬────┬───┬─┬───┬───┐
+  │SD│       0         │TSR│TW│TVM│MXR│SUM│MPRV│ XS │ FS │ MPP │0│SPP│MPIE│0│SPIE│UPIE│MIE│0│SIE│UIE│
+  └──┴─────────────────┴───┴──┴───┴───┴───┴────┴────┴────┴─────┴─┴───┴────┴─┴────┴────┴───┴─┴───┴───┘
+    1     XLEN-24        1   1  1   1   1   1     2    2    2   2  1    1  1   1    1   1  1  1   1
+
 ## Supervisor Mode
 
 ## User Mode
