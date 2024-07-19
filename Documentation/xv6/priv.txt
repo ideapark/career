@@ -79,6 +79,34 @@ XLEN-1 XLEN-2         23 22 21  20 19   18  17 16,15 14,13 12,11   8    7  6  5 
   └──┴─────────────────┴───┴──┴───┴───┴───┴────┴────┴────┴─────┴─┴───┴────┴─┴────┴────┴───┴─┴───┴───┘
     1     XLEN-24        1   1  1   1   1   1     2    2    2   2  1    1  1   1    1   1  1  1   1
 
+Eight control and status register (CSRs) are integral to machine-mode
+exception handling:
+
+* mtvec, Machine Trap Vector, holds the address the processor jumps to
+         when an exception occurs.
+
+* mepc, Machine Exception PC, points to the instruction where the
+        exception occurred.
+
+* mcause, Machine Exception Cause, indicates which exception occurred.
+
+* mie, Machine Interrupt Enable, lists which interrupts the processor
+       can take and which it must ignore.
+
+* mip, Machine Interrupt Pending, lists the interrupts currently
+       pending.
+
+* mtval, Machine Trap Value, holds additional trap information; the
+         faulting address for address exceptions, the instruction
+         itself for illegal instruction exceptions; and zero for other
+         exceptions.
+
+* mscratch, Machine Scratch, holds one world of data for temporary
+            storage.
+
+* mstatus, Machine Status, holds the global interrupt enable, along
+           with a plethora of other state.
+
 ## Supervisor Mode
 
 ## User Mode
