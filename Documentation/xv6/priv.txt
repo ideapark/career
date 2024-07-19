@@ -1,0 +1,73 @@
+# Privileged Architecture
+
+More-privileged modes generally have access to all of the features of
+less-privileged modes, and they add additional functionality not
+available to less-privileged modes, such as the ability to handle
+interrupts and perform I/O. Processors typically spend most of their
+execution time in their least-privileged mode; interrupts and
+exceptions transfer control to more-privileged modes.
+
+        mret: machine-mode trap return
+              ^                 ^^^
+        sret: supervisor-mode trap return
+              ^                    ^^^
+  sfence.vma: supervisor-mode fence.virtual memory address
+              ^               ^^^^^^^       ^      ^
+         wfi: wait for interrupt
+              ^    ^   ^
+## Machine Mode
+
+Five kind of synchronous exceptions can happen during M-mode execution:
+
+1. Access fault exceptions arise when a physical memory address
+   doesn't support the access type - for example, attempting to store
+   to a ROM.
+
+2. Breakpoint exceptions arise from executing an ebreak instruciton,
+   or when an address or datum matches a debug trigger.
+
+3. Environment call exceptions arise from executing an ecall
+   instruction.
+
+4. Illegal instruction exceptions result from decoding an invalid opcode.
+
+5. Misaligned address exceptions occur when the effective address
+   isn't divisible by the access size - for example, amoadd.w with an
+   address of 0x12.
+
+RISC-V exception and interrupt causes. The most-significant bit of
+mcause is set to 1 for interrupts or 0 for synchronous exceptions, and
+the least-significant bits identify the interrupt or
+exception. Supervisor interrupts and page-fault exceptions are only
+possible when supervisor mode is implemented (XLEN is 32 for RV32 or
+64 for RV64).
+
+┌───────────────────┬──────────────────┬────────────────────────────────┐
+│Interrupt/Exception│  Exception Code  │           Description          │
+│  mcause[XLEN-1]   │ mcause[XLEN-2:0] │                                │
+├───────────────────┼──────────────────┼────────────────────────────────┤
+│                1  │                1 │ Supervisor software interrupt  │
+│                1  │                3 │ Machine software interrupt     │
+│                1  │                5 │ Supervisor timer interrupt     │
+│                1  │                7 │ Machine timer interrupt        │
+│                1  │                9 │ Supervisor external interrupt  │
+│                1  │               11 │ Machine external interrupt     │
+├───────────────────┼──────────────────┼────────────────────────────────┤
+│                0  │                0 │ Instruction address misaligned │
+│                0  │                1 │ Instruction access fault       │
+│                0  │                2 │ Illegal instruction            │
+│                0  │                3 │ Breakpoint                     │
+│                0  │                4 │ Load address misaligned        │
+│                0  │                5 │ Load access fault              │
+│                0  │                6 │ Store address misaligned       │
+│                0  │                7 │ Store access fault             │
+│                0  │                8 │ Environment call from U-mode   │
+│                0  │                9 │ Environment call from S-mode   │
+│                0  │               11 │ Environment call from M-mode   │
+│                0  │               12 │ Instruction page fault         │
+│                0  │               13 │ Load page fault                │
+│                0  │               15 │ Store page fault               │
+└───────────────────┴──────────────────┴────────────────────────────────┘
+## Supervisor Mode
+
+## User Mode
