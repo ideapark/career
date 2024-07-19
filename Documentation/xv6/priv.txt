@@ -107,6 +107,40 @@ exception handling:
 * mstatus, Machine Status, holds the global interrupt enable, along
            with a plethora of other state.
 
+When a hart takes an exception, the hardware atomically undergoes
+several state transitions:
+
+1. The PC of the exceptional instruction is preserved in mepc, and the
+   PC is set to mtvec. (For synchronous exceptions, mepc points to the
+   instruction that caused the exception; for interrupts, it points
+   where execution should resume after the interrupt is handled.)
+
+2. mcause is set to the exception cause, and mtval is set to the
+   faulting address or some other exception-specific word of
+   information.
+
+3. Interrupts are disabled by setting MIE=0 in the mstatus CSR, and
+   the previous value of MIE is preserved in MPIE.
+
+4. The pre-exception privilege mode is preserved in mstatus' MPP
+   field, and the privilege mode is changed to M. (If the processor
+   only implements M-mode, this step is effectively skipped.)
+
+To avoid overwriting the contents of the integer registers, the
+prologue of an interrupt handler usually begins by swapping an integer
+register (say, a0) with the mscratch CSR.  Usually, the software will
+have arranged for mscratch to contain a pointer to additional
+in-memory scratch space, which the handler uses to save as many
+integer registers as its body will use. After the body executes, the
+epilogue of an interrupt handler restores the registers it saved to
+memory, then again swaps a0 with mscratch, restoring both registers to
+their pre-exception values. Finally, the handler returns with mret, an
+instruction unique to M-mode. mret sets the PC to mepc, restores the
+previous interrupt-enable setting by copying the mstatus MPIE field to
+MIE, and sets the privilege mode to the value in mstatus’ MPP field,
+essentially reversing the actions described in the preceding
+paragraph.
+
 ## Supervisor Mode
 
 ## User Mode
