@@ -141,6 +141,20 @@ MIE, and sets the privilege mode to the value in mstatus’ MPP field,
 essentially reversing the actions described in the preceding
 paragraph.
 
+- Physical Memory Protection (PMP)
+
+ XLEN-1
+  ┌─────────────────────────────────────────────────────┐
+  │             address[PhysicalAddressSize-1:2]        │
+  └─────────────────────────────────────────────────────┘
+
+   7 6 5 4 3 2 1 0
+  ┌─┬───┬───┬─┬─┬─┐   R: read
+  │L│ 0 │ A │X│W│R│   W: write
+  └─┴───┴───┴─┴─┴─┘   X: execute
+                      A: PMP mode
+		      L: locks PMP and registers
+
 ## Supervisor Mode
 
 ## User Mode
