@@ -153,7 +153,7 @@ paragraph.
   │L│ 0 │ A │X│W│R│   W: write
   └─┴───┴───┴─┴─┴─┘   X: execute
                       A: PMP mode
-		      L: locks PMP and registers
+                      L: locks PMP and registers
 
 ## Supervisor Mode
 
@@ -181,5 +181,70 @@ S-mode CSRs instead of M-mode ones:
 
 4. The pre-exceptino privilege mode is preserved in sstatus' SPP
    field, and the privilege mode is changed to S.
+
+- RV32 Sv32 page-table entry (PTE)
+
+  31         20 19         10 9   8 7 6 5 4 3 2 1 0
+  ┌────────────┬─────────────┬─────┬─┬─┬─┬─┬─┬─┬─┬─┐
+  │   PPN[1]   │    PPN[0]   │ RSW │D│A│G│U│X│W│R|V|
+  └────────────┴─────────────┴─────┴─┴─┴─┴─┴─┴─┴─┴─┘
+       12            10         2   1 1 1 1 1 1 1 1
+
+- RV64 Sv39 page-table entry (PTE)
+
+  63         54 53              28 27         19 18       10 9 8 7 6 5 4 3 2 1 0
+  ┌────────────┬──────────────────┬─────────────┬───────────┬───┬─┬─┬─┬─┬─┬─┬─┬─┐
+  │  Reserved  │     PPN[2]       │    PPN[1]   │   PPN[0]  │RSW│D│A│G│U│X|W|R|V|
+  └────────────┴──────────────────┴─────────────┴───────────┴───┴─┴─┴─┴─┴─┴─┴─┴─┘
+       10              26               9             9       2  1 1 1 1 1 1 1 1
+
+1. The V bit indicates whether the rest of this PTE is valid (V=1). If
+   V=0, any virtual address translation that traverses this PTE
+   results in a page fault.
+
+2. The R, W, and X bits indicate the page has read, write, and execute
+   permissions, respectively. If all three bits are 0, this PTE is a
+   pointer to the next level of the page table; otherwise, it's a leaf
+   of the tree.
+
+3. The U bit indicates whether this page is a user page, if U=0,
+   U-mode cannot access this page, but S-mode can. If U=1, U-mode can
+   access this page, but S-mode cannot.
+
+4. The G bit indicates this mapping exists in all virtual-address
+   spaces, information the hardware can use to improve
+   address-translation performance. It is typically only used for
+   pages that belong to the operating system.
+
+5. The A bit indicates whether the pages has been accessed since the
+   last time the A bit was cleared.
+
+6. The D bit indicates whether the page has been dirtied (i.e.,
+   written) since the last time the D bit was cleared.
+
+7. The RSW field is reserved for the operating system's use; the
+   hardware ignores it.
+
+8. The PPN field holds a physical page number, which is part of a
+   physical address. If this PTE is a leaf, the PPN is part of the
+   translated physical address. Otherwise, the PPN gives the address
+   of the next level of the page table.
+
+- satp: Supervisor Address Translation and Protection
+
+   31  30        22 21                   0
+  ┌────┬───────────┬─────────────────────┐
+  │MODE│    ASID   │          PPN        | RV32
+  └────┴───────────┴─────────────────────┘       MODE:
+     1       9                22                     0 Bare No translation or protection
+                                                     1 Sv32 Page-based 32-bit virtual addressing
+
+  63 60 59              44 43                                           0
+  ┌────┬──────────────────┬─────────────────────────────────────────────┐
+  │MODE│       ASID       │                        PPN                  | RV64
+  └────┴──────────────────┴─────────────────────────────────────────────┘        MODE:
+    4          16                                  44                                0 Bare No translation or protection
+                                                                                     8 Sv39 Page-based 39-bit virtual addressing
+                                                                                     9 Sv48 Page-based 48-bit virtual addressing
 
 ## User Mode
