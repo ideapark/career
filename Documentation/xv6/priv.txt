@@ -157,4 +157,29 @@ paragraph.
 
 ## Supervisor Mode
 
+- sstatus
+
+ XLEN-1 XLEN-2                    20  19    18  17 16 15   14 13  12  9  8  7 6   5   4   3 2  1   0
+  ┌────┬───────────────────────────┬─────┬─────┬─┬───────┬───────┬─────┬───┬───┬────┬────┬───┬───┬───┐
+  │ SD │             0             │ MXR │ SUM │0│XS[1:0]│FS[1:0]│  0  │SPP│ 0 |SPIE|UPIE| 0 |SIE|UIE|
+  └────┴───────────────────────────┴─────┴─────┴─┴───────┴───────┴─────┴───┴───┴────┴────┴───┴───┴───┘
+    1            XLEN-21              1     1   1    2       2      4    1   2    1   1    2   1   1
+
+If a hart takes an exception and it is delegated to S-mode, the
+hardware atomically undergoes several similar state transitions, using
+S-mode CSRs instead of M-mode ones:
+
+1. The PC of the exceptional instruction is preserved in sepc, and the
+   PC is set to stvec.
+
+2. scause is set to the exception cause, and stval is set to the
+   faulting address or some other exception-specific word of
+   information.
+
+3. Interrupts are disabled by setting SIE=0 in the sstatus CSR, and
+   the previous value of SIE is preserved in SPIE.
+
+4. The pre-exceptino privilege mode is preserved in sstatus' SPP
+   field, and the privilege mode is changed to S.
+
 ## User Mode
