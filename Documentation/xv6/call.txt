@@ -21,11 +21,11 @@ There are six general stages in calling a function:
 +------------------+-------------+-------------------------------------+--------+
 |    Register      |   ABI Name  |              Description            | Saver  |
 +------------------+-------------+-------------------------------------+--------+
-|    x0            |  zero       | Hard-wired zero                     | ---    |
+|    x0            |  zero       | Hard-wired zero                     | --     |
 |    x1            |  ra         | Return address                      | Caller |
 |    x2            |  sp         | Stack pointer                       | Callee |
-|    x3            |  gp         | Global pointer                      | ---    |
-|    x4            |  tp         | Thread pointer                      | ---    |
+|    x3            |  gp         | Global pointer                      | --     |
+|    x4            |  tp         | Thread pointer                      | --     |
 |    x5            |  t0         | Temporaries/alternate link register | Caller |
 |    x6-7          |  t1-2       | Temporaries                         | Caller |
 |    x8            |  s0/fp      | Saved registers/frame pointer       | Callee |
@@ -33,7 +33,7 @@ There are six general stages in calling a function:
 |    x10-11        |  a0-1       | Function arguments/return values    | Caller |
 |    x12-17        |  a2-7       | Function arguments                  | Caller |
 |    x18-27        |  s2-11      | Saved registers                     | Callee |
-|    x28-31        |  t36        | Temporaries                         | Caller |               fscr: Floating-point control and status register
+|    x28-31        |  t3-6       | Temporaries                         | Caller |               fscr: Floating-point control and status register
 +------------------+-------------+-------------------------------------+--------+            31                                                8 7                   5    4    3    2    1    0
 |    f0-7          | ft0-7       | FP temporaries                      | Caller |             +------------------------------------------------+-+-------------------+----+----+----+----+----+
 |    f8-9          | fs0-1       | FP saved registers                  | Callee |             |        Reserved                                | |Rounding Mode (frm)|  Accrued Exp (fflags)  |
