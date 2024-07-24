@@ -1,0 +1,13 @@
+31                                                   0
+ ┌─────────┬────────┬───────┬──────┬───────┬─────────┐
+ │  funct7 │   rs2  │  rs1  │funct3│  rd   │  opcode │
+ ├─────────┼────────┼───────┼──────┼───────┼─────────┤
+ │  7bits  │ 5bits  │ 5bits │3bits │ 5bits │  7bits  │
+ └─────────┴────────┴───────┴──────┴───────┴─────────┘
+
+opcode: Basic operation of the instruction, and this abbreviation is its traditional name.
+    rd: The reigster destination operand. It gets the result of the operation.
+funct3: An additional opcode field.
+   rs1: The first register source operand.
+   rs2: The second register source operand.
+funct7: An additional opcode field.
