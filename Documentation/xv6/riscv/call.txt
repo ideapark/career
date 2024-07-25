@@ -18,30 +18,30 @@ There are six general stages in calling a function:
 6. Since a function can be called from serval points in a program,
    return control to the point of origin (using ret).
 
-+------------------+-------------+-------------------------------------+--------+
-|    Register      |   ABI Name  |              Description            | Saver  |
-+------------------+-------------+-------------------------------------+--------+
-|    x0            |  zero       | Hard-wired zero                     | --     |
-|    x1            |  ra         | Return address                      | Caller |
-|    x2            |  sp         | Stack pointer                       | Callee |
-|    x3            |  gp         | Global pointer                      | --     |
-|    x4            |  tp         | Thread pointer                      | --     |
-|    x5            |  t0         | Temporaries/alternate link register | Caller |
-|    x6-7          |  t1-2       | Temporaries                         | Caller |
-|    x8            |  s0/fp      | Saved registers/frame pointer       | Callee |
-|    x9            |  s1         | Saved register                      | Callee |
-|    x10-11        |  a0-1       | Function arguments/return values    | Caller |
-|    x12-17        |  a2-7       | Function arguments                  | Caller |
-|    x18-27        |  s2-11      | Saved registers                     | Callee |
-|    x28-31        |  t3-6       | Temporaries                         | Caller |               fscr: Floating-point control and status register
-+------------------+-------------+-------------------------------------+--------+            31                                                8 7                   5    4    3    2    1    0
-|    f0-7          | ft0-7       | FP temporaries                      | Caller |             +------------------------------------------------+-+-------------------+----+----+----+----+----+
-|    f8-9          | fs0-1       | FP saved registers                  | Callee |             |        Reserved                                | |Rounding Mode (frm)|  Accrued Exp (fflags)  |
-|    f10-11        | fa0-1       | FP arguments/return values          | Caller |             +------------------------------------------------+-+-------------------+----+----+----+----+----+
-|    f12-17        | fa2-7       | FP arguments                        | Caller |                                   24                                   3           | NV | DZ | OF | UF | NX |
-|    f18-27        | fs2-11      | FP saved registers                  | Callee |                                                                                    +----+----+----+----+----+
-|    f28-31        | ft8-11      | FP temporaries                      | Caller |                                                                                       1    1    1    1    1
-+------------------+-------------+-------------------------------------+--------+                                                                                                               NV: Invalid Operation
+┌──────────────────┬─────────────┬─────────────────────────────────────┬────────┐
+│    Register      │   ABI Name  │              Description            │ Calle-?│
+├──────────────────┼─────────────┼─────────────────────────────────────┼────────┤
+│    x0            │  zero       │ Hard-wired zero                     │ -      │
+│    x1            │  ra         │ Return address                      │ -R     │
+│    x2            │  sp         │ Stack pointer                       │ -E     │
+│    x3            │  gp         │ Global pointer                      │ -      │
+│    x4            │  tp         │ Thread pointer                      │ -      │
+│    x5            │  t0         │ Temporaries/alternate link register │ -R     │
+│    x6-7          │  t1-2       │ Temporaries                         │ -R     │
+│    x8            │  s0/fp      │ Saved registers/frame pointer       │ -E     │
+│    x9            │  s1         │ Saved register                      │ -E     │
+│    x10-11        │  a0-1       │ Function arguments/return values    │ -R     │
+│    x12-17        │  a2-7       │ Function arguments                  │ -R     │
+│    x18-27        │  s2-11      │ Saved registers                     │ -E     │
+│    x28-31        │  t3-6       │ Temporaries                         │ -R     │               fscr: Floating-point control and status register
+├──────────────────┼─────────────┼─────────────────────────────────────┼────────┤            31                                                8 7                   5    4    3    2    1    0
+│    f0-7          │ ft0-7       │ FP temporaries                      │ -R     │             ┌────────────────────────────────────────────────┬─┬───────────────────┬────┬────┬────┬────┬────┐
+│    f8-9          │ fs0-1       │ FP saved registers                  │ -E     │             │        Reserved                                │ │Rounding Mode (frm)│  Accrued Exp (fflags)  │
+│    f10-11        │ fa0-1       │ FP arguments/return values          │ -R     │             └────────────────────────────────────────────────┴─┴───────────────────┼────┼────┼────┼────┼────┤
+│    f12-17        │ fa2-7       │ FP arguments                        │ -R     │                                   24                                   3           │ NV │ DZ │ OF │ UF │ NX │
+│    f18-27        │ fs2-11      │ FP saved registers                  │ -E     │                                                                                    └────┴────┴────┴────┴────┘
+│    f28-31        │ ft8-11      │ FP temporaries                      │ -R     │                                                                                       1    1    1    1    1
+└──────────────────┴─────────────┴─────────────────────────────────────┴────────┘                                                                                                               NV: Invalid Operation
                                                                                                                                                                                                 DZ: Divide by Zero
                                                                                                                                                                                                 OF: Overflow
                                                                                                                                                                                                 UF: Underflow
