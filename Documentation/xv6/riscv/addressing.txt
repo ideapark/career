@@ -1,0 +1,43 @@
+# RISC-V Addressig Mode
+
+1. Immediate addressing, where the operand is a constant within the instruction itself.
+
+ ┌─────────┬─────┬──────┬────┬─────┐
+ │immediate│ rs1 │funct3│ rd │  op │
+ └─────────┴─────┴──────┴────┴─────┘
+
+2. Register addressing, where the operand is a register.
+
+ ┌──────┬─────┬─────┬──────┬────┬──┐
+ │funct7│ rs2 │ rs1 │funct3│ rd │op│
+ └──────┴─────┴──┬──┴──────┴────┴──┘           Register
+                 │                             ┌──────────────────────────────┐
+		 └────────────────────────────→│            Register          │
+                                               └──────────────────────────────┘
+
+3. Base or displacement addressing, where the operand is at the memory
+   location whose address is the sum of a register and a constant in
+   the instruction.
+
+ ┌─────────┬─────┬──────┬────┬─────┐
+ │immediate│ rs1 │funct3│ rd │  op │
+ └────┬────┴─────┴──────┴────┴─────┘           Memory
+      │                                        ┌────┬────────┬────┬───────────┐
+      ├───────────────────────────────────────→│Byte│Halfword│Word│Doubleworld│
+      │                                        └────┴────────┴────┴───────────┘
+ ┌────┴────────────────────────────┐
+ │              Register           │
+ └─────────────────────────────────┘
+
+4. PC-relative addressing, where the branch address is the sum of the
+   PC and a constant in the insruction.
+
+ ┌───┬─────┬─────┬────────┬────┬───┐
+ │imm│ rs2 │ rs1 │ funct3 │imm │ op│
+ └─┬─┴─────┴─────┴────────┴────┴───┘           Memory
+   │                                           ┌───────────────┬──────────────┐
+   ├──────────────────────────────────────────→│World          │              │
+   │                                           └───────────────┴──────────────┘
+ ┌─┴───────────────────────────────┐
+ │                PC               │
+ └─────────────────────────────────┘
