@@ -1,0 +1,46 @@
+File System
+===========
+
+The purpose of a file system is to organize and store data. and it
+addresses several challenges:
+
+1. The file system needs on-disk data structures to represent the tree
+    of named directories and files, to record the identities of the
+    blocks that hold each file's content, and to record which area of
+    the disk are free.
+
+2. The file system must support crash recovery. That is, if a crash
+   (e.g., power failure) occurs, the file system must still work
+   correctly after a restart (this does not mean or equal to no data
+   lost). The risk is that a crash might interrupt a sequence of
+   updates and leave inconsistent on-disk data structures (e.g., a
+   block that is both used in a file and marked free).
+
+
+3. Different processes may operate on the file system at the same
+   time, so the file system code must coordinate to maintain
+   invariants.
+
+4. Accessing a disk is orders of magnitude slower than accessing
+   memory, so the file system must maintain an in-memory cache of
+   popular blocks.
+
+
+Layers of the xv6 file system
+=============================
+
+  ┌─────────────────────┐
+  │   File descriptor   │
+  ├─────────────────────┤
+  │   Pathname          │
+  ├─────────────────────┤
+  │   Directory         │
+  ├─────────────────────┤
+  │   Inode             │
+  ├─────────────────────┤
+  │   Logging           │
+  ├─────────────────────┤
+  │   Buffer cache      │
+  ├─────────────────────┤
+  │   Disk              │
+  └─────────────────────┘
