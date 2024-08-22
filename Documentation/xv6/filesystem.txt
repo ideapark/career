@@ -44,3 +44,17 @@ Layers of the xv6 file system
   ├─────────────────────┤
   │   Disk              │
   └─────────────────────┘
+
+Structure of the xv6 file system
+================================
+
+   blk.0 blk.1 blk.2  ...                                                  blk.n
+  ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
+  │boot │super│    log    │      inode      │   bitmap  │ data  ...   ...   data│
+  └─┬───┴─┬───┴─────┴─────┴─────┴─────┴─────┴─┬───┴─────┴─────┴─────┴─────┴─────┘
+    │     │                                   │
+    │     │                                   └──→ tracking data block in use
+    │     │
+    │     └──→ superblock: #blk,#log,#inode,#data
+    │
+    └──→ boot sector
