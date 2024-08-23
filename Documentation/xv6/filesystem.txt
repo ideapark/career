@@ -30,19 +30,19 @@ Layers of the xv6 file system
 =============================
 
   ┌─────────────────────┐
-  │   File descriptor   │
+  │   File descriptor   │→ abstract resources as files, fd is more universal interface provided to per-process
   ├─────────────────────┤
   │   Pathname          │
   ├─────────────────────┤
-  │   Directory         │
+  │   Directory         │→ organize the tree
   ├─────────────────────┤
-  │   Inode             │
+  │   Inode             │→ file: type,size,major,minor,nlink,data blks
   ├─────────────────────┤
-  │   Logging           │
+  │   Logging           │→ Tx of file system operations involve multiple writes to disk (e.g., w:inode+w:bitmap+w:data)
   ├─────────────────────┤
-  │   Buffer cache      │
+  │   Buffer cache      │→ sync/cache disk block, for speedup and block consistency
   ├─────────────────────┤
-  │   Disk              │
+  │   Disk              │→ sector
   └─────────────────────┘
 
 Structure of the xv6 file system
@@ -58,3 +58,42 @@ Structure of the xv6 file system
     │     └──→ superblock: #blk,#log,#inode,#data
     │
     └──→ boot sector
+
+The representation of a file on disk
+====================================
+
+  struct dinode
+  ┌─────────────────────┐
+  │   type              │
+  ├─────────────────────┤         .┌──────┐
+  │   major             │        . │ data │
+  ├─────────────────────┤       .  │      │
+  │   minor             │      .   └──────┘
+  ├─────────────────────┤     .
+  │   nlink             │    .
+  ├─────────────────────┤   .
+  │   size              │  .
+  ├─────────────────────┤ .        .┌──────┐
+  │   address 1         │.       .  │ data │
+  ├─────────────────────┤      .    │      │
+  │   ... ...           │    .      └──────┘
+  ├─────────────────────┤  .
+  │   address 12        │.
+  ├─────────────────────┤
+  │   indirect          │.
+  └─────────────────────┘  .
+                             .
+                               .                                 .┌──────┐
+                                 .  indirect block             .  │ data │
+                                   .┌─────────────────────┐  .    │      │
+                                    │   address 1         │.      └──────┘
+                                    ├─────────────────────┤
+                                    │   ... ...           │
+                                    ├─────────────────────┤
+                                    │   address 256       │.
+                                    └─────────────────────┘  .
+                                                               .
+                                                                 .┌──────┐
+                                                                  │ data │
+                                                                  │      │
+                                                                  └──────┘
