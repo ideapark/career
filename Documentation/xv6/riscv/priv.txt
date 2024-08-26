@@ -241,7 +241,7 @@ S-mode CSRs instead of M-mode ones:
 
   63 60 59              44 43                                           0
   ┌────┬──────────────────┬─────────────────────────────────────────────┐
-  │MODE│       ASID       │                        PPN                  | RV64
+  │MODE│       ASID       │                        PPN                  │ RV64
   └────┴──────────────────┴─────────────────────────────────────────────┘        MODE:
     4          16                                  44                                0 Bare No translation or protection
                                                                                      8 Sv39 Page-based 39-bit virtual addressing
