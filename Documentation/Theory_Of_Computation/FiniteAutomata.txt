@@ -1,6 +1,14 @@
 FINITE AUTOMATA
 ---------------
 
+A finite automaton is a 5-tuple (Q,Σ,δ,q0,F), where
+
+1. Q is a finite set of states,
+2. Σ is a finite alphabet,
+3. δ: Q × Σ −→ Q is the transition function,
+4. q0 ∈ Q is the start state, and
+5. F ⊆ Q is the set of accept states.
+
 Let M = (Q,Σ,δ,q0,F) be a finite automaton and let w = w1w2···wn be a
 string where each wi is a member of the alphabet Σ. Then M accepts w
 if a sequence of states r0,r1,...,rn in Q exists with three
