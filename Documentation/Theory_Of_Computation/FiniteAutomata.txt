@@ -44,3 +44,12 @@ A nondeterministic finite automaton is a 5-tuple (Q,Σ,δ,q0,F), where
 3. δ: Q × Σε −→ P(Q) is the transition function,
 4. q0 ∈ Q is the start state, and
 5. F ⊆ Q is the set of accept states.
+
+Let N = (Q,Σ,δ,q0,F) be an NFA and w a string over the alphabet
+Σ. Then we say that N accepts w if we can write w as w = y1y2···ym,
+where each yi is a member of Σε and a sequence of states r0,r1,...,rm
+exists in Q with three conditions:
+
+1. r0 = q0,
+2. ri+1 ∈ δ(ri,yi+1), for i=0, ..., m−1, and
+3. rm ∈ F.
