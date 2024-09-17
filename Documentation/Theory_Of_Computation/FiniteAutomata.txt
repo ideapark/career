@@ -28,6 +28,15 @@ concatenation, and star as follows:
 NONDETERMINISTIC FINITE AUTOMATON
 ---------------------------------
 
+In an NFA, the transition function takes a state and an input symbol
+or the empty string and produces the set of possible next states. In
+order to write the formal definition, we need to set up some
+additional notation. For any set Q we write P(Q) to be the collection
+of all subsets of Q. Here P(Q) is called the power set of Q. For any
+alphabet Σ we write Σε to be Σ ∪ {ε}. Now we can write the formal
+description of the type of the transition function in an NFA as
+δ: Q × Σε −→ P(Q).
+
 A nondeterministic finite automaton is a 5-tuple (Q,Σ,δ,q0,F), where
 
 1. Q is a finite set of states,
