@@ -1,3 +1,6 @@
+FINITE AUTOMATA
+---------------
+
 Let M = (Q,Σ,δ,q0,F) be a finite automaton and let w = w1w2···wn be a
 string where each wi is a member of the alphabet Σ. Then M accepts w
 if a sequence of states r0,r1,...,rn in Q exists with three
@@ -6,3 +9,16 @@ conditions:
 1. r0 = q0,
 2. δ(ri, wi+1) = ri+1, for i=0, ..., n−1, and
 3. rn ∈ F.
+
+A language is called a regular language if some finite automaton
+recognizes it.
+
+REGULAR OPERATIONS
+------------------
+
+Let A and B be languages. We define the regular operations union,
+concatenation, and star as follows:
+
+• Union: A ∪ B = {x| x ∈ A or x ∈ B}.
+• Concatenation: A ◦ B = {xy| x ∈ A and y ∈ B}.
+• Star: A∗ = {x1x2...xk| k ≥ 0 and each xi ∈ A}.
