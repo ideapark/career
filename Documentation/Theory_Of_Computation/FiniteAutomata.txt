@@ -61,3 +61,56 @@ exists in Q with three conditions:
 1. r0 = q0,
 2. ri+1 ∈ δ(ri,yi+1), for i=0, ..., m−1, and
 3. rm ∈ F.
+
+
+EQUIVALENCE OF NFAs AND DFAs
+----------------------------
+
+PROOF Let N=(Q,Σ,δ,q0,F) be the NFA recognizing some language A. We
+construct a DFA M=(Q',Σ,δ',q0',F') recognizing A. Before doing the
+full construction, let’s first consider the easier case wherein N has
+no ε arrows. Later we take the ε arrows into account.
+
+1. Q' = P(Q).
+   Every state of M is a set of states of N. Recall that P(Q) is the
+   set of subsets of Q.
+
+2. For R∈Q' and a∈Σ, let δ'(R,a) = {q∈Q| q∈δ(r,a) for some r∈R}. If R
+   is a state of M, it is also a set of states of N. When M reads a
+   symbol a in state R, it shows where a takes each state in
+   R. Because each state may go to a set of states, we take the union
+   of all these sets. Another way to write this expression is
+   δ'(R,a)={union of the sets δ(r, a) for each possible r∈R}.
+
+3. q0' = {q0}.
+   M starts in the state corresponding to the collection containing
+   just the start state of N.
+
+4. F' = {R∈Q'| R contains an accept state of N}. The machine M accepts
+   if one of the possible states that N could be in at this point is
+   an accept state.
+
+Now we need to consider the ε arrows. To do so, we set up an extra bit
+of notation. For any state R of M, we define E(R) to be the collection
+of states that can be reached from members of R by going only along ε
+arrows, including the members of R themselves. Formally, for R⊆Q let
+
+  E(R) = {q| q can be reached from R by traveling along 0 or more ε arrows}.
+
+Then we modify the transition function of M to place additional
+fingers on all states that can be reached by going along ε arrows
+after every step. Replacing δ(r,a) by E(δ(r,a)) achieves this
+effect. Thus
+
+  δ'(R,a) = {q ∈ Q| q ∈ E(δ(r,a)) for some r ∈ R}.
+
+Additionally, we need to modify the start state of M to move the
+fingers initially to all possible states that can be reached from the
+start state of N along the ε arrows. Changing q0' to be E({q0})
+achieves this effect. We have now completed the construction of the
+DFA M that simulates the NFA N.
+
+The construction of M obviously works correctly. At every step in the
+computation of M on an input, it clearly enters a state that
+corresponds to the subset of states that N could be in at that
+point. Thus our proof is complete.
