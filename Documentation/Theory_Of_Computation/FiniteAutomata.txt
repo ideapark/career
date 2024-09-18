@@ -121,3 +121,12 @@ REGULAR LANGUAGES ARE EQUIVALENT TO NFAs/DFAs
 
 A language is regular if and only if some nondeterministic finite
 automaton recognizes it.
+
+Regular Language is closed under regular operations of Union,
+Concatenation and Star. So more complicated and expressive regular
+languages can be constructed from simpler ones by conducting these
+operations, the resulting products are regular languages as well.
+
+• The class of regular languages is closed under the union operation.
+• The class of regular languages is closed under the concatenation operation.
+• The class of regular languages is closed under the star operation.
