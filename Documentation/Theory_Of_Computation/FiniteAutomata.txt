@@ -130,3 +130,23 @@ operations, the resulting products are regular languages as well.
 • The class of regular languages is closed under the union operation.
 • The class of regular languages is closed under the concatenation operation.
 • The class of regular languages is closed under the star operation.
+
+
+REGULAR EXPRESSION
+------------------
+
+Say that R is a regular expression if R is
+
+1. a for some a in the alphabet Σ,
+2. ε,
+3. ∅,
+4. (R1∪R2), where R1 and R2 are regular expressions,
+5. (R1◦R2), where R1 and R2 are regular expressions, or
+6. (R1∗), where R1 is a regular expression.
+
+In items 1 and 2, the regular expressions a and ε represent the
+languages {a} and {ε}, respectively. In item 3, the regular expression
+∅ represents the empty language. In items 4, 5, and 6, the expressions
+represent the languages obtained by taking the union or concatenation
+of the languages R1 and R2, or the star of the language R1,
+respectively.
