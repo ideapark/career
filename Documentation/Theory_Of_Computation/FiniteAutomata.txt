@@ -114,3 +114,10 @@ The construction of M obviously works correctly. At every step in the
 computation of M on an input, it clearly enters a state that
 corresponds to the subset of states that N could be in at that
 point. Thus our proof is complete.
+
+
+REGULAR LANGUAGES ARE EQUIVALENT TO NFAs/DFAs
+---------------------------------------------
+
+A language is regular if and only if some nondeterministic finite
+automaton recognizes it.
