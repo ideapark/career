@@ -171,3 +171,25 @@ and a sequence of states q0,q1,...,qk exists such that
 2. qk = qaccept is the accept state, and
 3. for each i, we have wi∈L(Ri), where Ri=δ(qi−1,qi); in other words,
    Ri is the expression on the arrow from qi−1 to qi.
+
+
+NONREGULAR LANGUAGES
+--------------------
+
+Pumping Lemma: If A is a regular language, then there is a number p
+(the pumping length) where if s is any string in A of length at least
+p, then s may be divided into three pieces, s=xyz, satisfying the
+following conditions:
+
+1. for each i ≥ 0, xy^iz ∈ A,
+2. |y| > 0, and
+3. |xy| ≤ p.
+
+The notation where |s| represents the length of string s, y^i means
+that i copies of y are concatenated together, and y^0 equals ε.  When
+s is divided into xyz, either x or z may be ε, but condition 2 says
+that y ≠ ε. Observe that without condition 2 the theorem would be
+trivially true.  Condition 3 states that the pieces x and y together
+have length at most p. It is an extra technical condition that we
+occasionally find useful when proving certain languages to be
+nonregular.
