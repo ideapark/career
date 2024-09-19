@@ -193,3 +193,11 @@ trivially true.  Condition 3 states that the pieces x and y together
 have length at most p. It is an extra technical condition that we
 occasionally find useful when proving certain languages to be
 nonregular.
+
+
+OPENING QUESTION
+----------------
+
+Why it is named _*regular*_ languages?
+
+https://en.wikipedia.org/wiki/Regular_language
