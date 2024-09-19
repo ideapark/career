@@ -163,3 +163,11 @@ A generalized nondeterministic finite automaton is a 5-tuple,
 3. δ: (Q−{qaccept} × Q−{qstart}) −→ R is the transition function,
 4. qstart is the start state, and
 5. qaccept is the accept state.
+
+A GNFA accepts a string w in Σ∗ if w=w1w2···wk, where each wi is in Σ∗
+and a sequence of states q0,q1,...,qk exists such that
+
+1. q0 = qstart is the start state,
+2. qk = qaccept is the accept state, and
+3. for each i, we have wi∈L(Ri), where Ri=δ(qi−1,qi); in other words,
+   Ri is the expression on the arrow from qi−1 to qi.
