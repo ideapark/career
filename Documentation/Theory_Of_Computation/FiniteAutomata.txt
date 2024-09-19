@@ -150,3 +150,16 @@ languages {a} and {ε}, respectively. In item 3, the regular expression
 represent the languages obtained by taking the union or concatenation
 of the languages R1 and R2, or the star of the language R1,
 respectively.
+
+
+GENERALIZED NONDETERMINISTIC FINITE AUTOMATON (GNFA)
+----------------------------------------------------
+
+A generalized nondeterministic finite automaton is a 5-tuple,
+(Q,Σ,δ,qstart,qaccept), where
+
+1. Q is the finite set of states,
+2. Σ is the input alphabet,
+3. δ: (Q−{qaccept} × Q−{qstart}) −→ R is the transition function,
+4. qstart is the start state, and
+5. qaccept is the accept state.
