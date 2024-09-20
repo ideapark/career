@@ -94,3 +94,19 @@ are all finite sets, and
 4. δ: Q×Σε×Γε−→P(Q×Γε) is the transition function,
 5. q0∈Q is the start state, and
 6. F⊆Q is the set of accept states.
+
+A pushdown automaton M=(Q,Σ,Γ,δ,q0,F) computes as follows. It accepts
+input w if w can be written as w=w1w2···wm, where each wi∈Σε and
+sequences of states r0,r1,...,rm ∈ Q and strings s0,s1,...,sm ∈ Γ∗
+exist that satisfy the following three conditions. The strings si
+represent the sequence of stack contents that M has on the accepting
+branch of the computation.
+
+1. r0=q0 and s0=ε. This condition signifies that M starts out
+   properly, in the start state and with an empty stack.
+2. For i=0,...,m−1, we have (ri+1,b) ∈ δ(ri,wi+1,a), where si=at and
+   si+1=bt for some a,b∈Γε and t∈Γ∗. This condition states that M
+   moves properly according to the state, stack, and next input
+   symbol.
+3. rm∈F. This condition states that an accept state occurs at the
+   input end.
