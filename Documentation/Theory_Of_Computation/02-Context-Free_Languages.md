@@ -80,3 +80,17 @@ replace each rule A→u1u2···uk, where k≥3 and each ui is a variable or
 terminal symbol, with the rules A→u1A1, A1→u2A2, A2→u3A3, ..., and
 Ak−2→uk−1uk. The Ai’s are new variables. We replace any terminal ui in
 the preceding rule(s) with the new variable Ui and add the rule Ui→ui.
+
+
+PUSHDOWN AUTOMATON (PDA)
+------------------------
+
+A pushdown automaton is a 6-tuple (Q,Σ,Γ,δ,q0,F), where Q, Σ, Γ, and F
+are all finite sets, and
+
+1. Q is the set of states,
+2. Σ is the input alphabet,
+3. Γ is the stack alphabet,
+4. δ: Q×Σε×Γε−→P(Q×Γε) is the transition function,
+5. q0∈Q is the start state, and
+6. F⊆Q is the set of accept states.
