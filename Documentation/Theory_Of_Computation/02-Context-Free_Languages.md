@@ -28,3 +28,17 @@ by combining their rules and then adding the new rule S→S1|S2|···|Sk,
 where the variables Si are the start variables for the individual
 grammars. Solving several simpler problems is often easier than
 solving one complicated problem.
+
+
+CHOMSKY NORMAL FORM
+-------------------
+
+A context-free grammar is in Chomsky normal form if every rule is of
+the form
+
+  A → BC
+  A → a
+
+where a is any terminal and A, B, and C are any variables —- except
+that B and C may not be the start variable. In addition, we permit the
+rule S → ε, where S is the start variable.
