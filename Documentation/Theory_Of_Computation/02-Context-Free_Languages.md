@@ -125,3 +125,21 @@ Because every regular language is recognized by a finite automaton and
 every finite automaton is automatically a pushdown automaton that
 simply ignores its stack, we now know that every regular language is
 also a context-free language.
+
+
+DETERMINISTIC PUSHDOWN AUTOMATON
+--------------------------------
+
+A deterministic pushdown automaton is a 6-tuple (Q,Σ,Γ,δ,q0,F), where
+Q, Σ, Γ, and F are all finite sets, and
+
+1. Q is the set of states,
+2. Σ is the input alphabet,
+3. Γ is the stack alphabet,
+4. δ: Q×Σε×Γε −→ (Q×Γε) ∪ {∅} is the transition function,
+5. q0 ∈ Q is the start state, and
+6. F ⊆ Q is the set of accept states.
+
+The transition function δ must satisfy the following condition. For
+every q∈Q, a∈Σ, and x∈Γ, exactly one of the values δ(q,a,x), δ(q,a,ε),
+δ(q,ε,x), and δ(q,ε,ε) is not ∅.
