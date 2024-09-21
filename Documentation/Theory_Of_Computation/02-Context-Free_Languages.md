@@ -120,3 +120,8 @@ PUSHDOWN AUTOMATON IS EQUIVALENT WITH CONTEXT-FREE GRAMMARS
 
 2. If a pushdown automaton recognizes some language, then it is
    context free.
+
+Because every regular language is recognized by a finite automaton and
+every finite automaton is automatically a pushdown automaton that
+simply ignores its stack, we now know that every regular language is
+also a context-free language.
