@@ -110,3 +110,13 @@ branch of the computation.
    symbol.
 3. rm∈F. This condition states that an accept state occurs at the
    input end.
+
+
+PUSHDOWN AUTOMATON IS EQUIVALENT WITH CONTEXT-FREE GRAMMARS
+-----------------------------------------------------------
+
+1. If a language is context free, then some pushdown automaton
+   recognizes it.
+
+2. If a pushdown automaton recognizes some language, then it is
+   context free.
