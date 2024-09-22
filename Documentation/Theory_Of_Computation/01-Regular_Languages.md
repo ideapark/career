@@ -49,7 +49,7 @@ A nondeterministic finite automaton is a 5-tuple (Q,Σ,δ,q0,F), where
 
 1. Q is a finite set of states,
 2. Σ is a finite alphabet,
-3. δ: Q × Σε −→ P(Q) is the transition function,
+3. δ: Q × Σε −→ P(Q)={R|R⊆Q} is the transition function,
 4. q0 ∈ Q is the start state, and
 5. F ⊆ Q is the set of accept states.
 
