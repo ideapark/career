@@ -172,6 +172,33 @@ and a sequence of states q0,q1,...,qk exists such that
 3. for each i, we have wi∈L(Ri), where Ri=δ(qi−1,qi); in other words,
    Ri is the expression on the arrow from qi−1 to qi.
 
+Let M be the DFA for language A. Then we convert M to a GNFA G by
+adding a new start state and a new accept state and additional
+transition arrows as necessary. We use the procedure CONVERT(G), which
+takes a GNFA and returns an equivalent regular expression. This
+procedure uses recursion, which means that it calls itself. An
+infinite loop is avoided because the procedure calls itself only to
+process a GNFA that has one fewer state. The case where the GNFA has
+two states is handled without recursion.
+
+- CONVERT(G):
+
+1. Let k be the number of states of G.
+2. If k=2, then G must consist of a start state, an accept state, and
+   a single arrow connecting them and labeled with a regular
+   expression R. Return the expression R.
+3. If k>2, we select any state qrip∈Q different from qstart and
+   qaccept and let G' be the GNFA (Q',Σ,δ',qstart,qaccept), where
+
+     Q' = Q − {qrip},
+
+   and for any qi∈Q'−{qaccept} and any qj∈Q'−{qstart}, let
+
+     δ'(qi,qj) = (R1)(R2)∗(R3)∪(R4), for R1 = δ(qi,qrip),
+                                        R2 = δ(qrip,qrip),
+                                        R3 = δ(qrip,qj), and
+                                        R4 = δ(qi,qj).
+4. Compute CONVERT(G') and return this value.
 
 NONREGULAR LANGUAGES
 --------------------
