@@ -49,6 +49,12 @@ a CFG to handle this situation by using a rule of the form R→uRv,
 which generates strings wherein the portion containing the u’s
 corresponds to the portion containing the v’s.
 
+Finally, in more complex languages, the strings may contain certain
+structures that appear recursively as part of other (or the same)
+structures. To achieve this effect, place the variable symbol
+generating the structure in the location of the rules corresponding to
+where that structure may recursively appear.
+
 
 CHOMSKY NORMAL FORM
 -------------------
