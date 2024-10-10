@@ -29,6 +29,14 @@ where the variables Si are the start variables for the individual
 grammars. Solving several simpler problems is often easier than
 solving one complicated problem.
 
+Second, constructing a CFG for a language that happens to be regular
+is easy if you can first construct a DFA for that language. You can
+convert any DFA into an equivalent CFG as follows. Make a variable Ri
+for each state qi of the DFA. Add the rule Ri→aRj to the CFG if
+δ(qi,a)=qj is a transition in the DFA. Add the rule Ri→ε if qi is an
+accept state of the DFA. Make R0 the start variable of the grammar,
+where q0 is the start state of the machine. Verify on your own that
+the resulting CFG generates the same language that the DFA recognizes.
 
 CHOMSKY NORMAL FORM
 -------------------
