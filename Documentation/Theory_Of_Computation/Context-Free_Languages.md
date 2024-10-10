@@ -38,6 +38,18 @@ accept state of the DFA. Make R0 the start variable of the grammar,
 where q0 is the start state of the machine. Verify on your own that
 the resulting CFG generates the same language that the DFA recognizes.
 
+Third, certain context-free languages contain strings with two
+substrings that are “linked” in the sense that a machine for such a
+language would need to remember an unbounded amount of information
+about one of the substrings to verify that it corresponds properly to
+the other substring. This situation occurs in the language
+{0^n1^n|n≥0} because a machine would need to remember the number of 0s
+in order to verify that it equals the number of 1s. You can construct
+a CFG to handle this situation by using a rule of the form R→uRv,
+which generates strings wherein the portion containing the u’s
+corresponds to the portion containing the v’s.
+
+
 CHOMSKY NORMAL FORM
 -------------------
 
