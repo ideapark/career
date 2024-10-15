@@ -169,3 +169,26 @@ Q, Σ, Γ, and F are all finite sets, and
 The transition function δ must satisfy the following condition. For
 every q∈Q, a∈Σ, and x∈Γ, exactly one of the values δ(q,a,x), δ(q,a,ε),
 δ(q,ε,x), and δ(q,ε,ε) is not ∅.
+
+The transition function may output either a single move of the form
+(r,y) or it may indicate no action by outputting ∅.
+
+To illustrate these possibilities, let’s consider an example. Suppose
+a DPDA M with transition function δ is in state q, has a as its next
+input symbol, and has symbol x on the top of its stack. If
+δ(q,a,x)=(r,y) then M reads a, pops x off the stack, enters state r,
+and pushes y on the stack.
+
+Alternatively, if δ(q,a,x)=∅ then when M is in state q, it has
+no move that reads a and pops x. In that case, the condition on δ
+requires that one of δ(q,ε,x), δ(q,a,ε), or δ(q,ε,ε) is nonempty, and
+then M moves accordingly. The condition enforces deterministic
+behavior by preventing the DPDA from taking two different actions in
+the same situation, such as would be the case if both δ(q,a,x)≠∅ and
+δ(q,a,ε)≠∅.
+
+A DPDA has exactly one legal move in every situation where its stack
+is nonempty. If the stack is empty, a DPDA can move only if the
+transition function specifies a move that pops ε. Otherwise the DPDA
+has no legal move and it rejects without reading the rest of the
+input.
