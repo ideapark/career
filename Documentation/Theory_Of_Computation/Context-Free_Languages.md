@@ -192,3 +192,21 @@ is nonempty. If the stack is empty, a DPDA can move only if the
 transition function specifies a move that pops ε. Otherwise the DPDA
 has no legal move and it rejects without reading the rest of the
 input.
+
+
+LR(k) GRAMMARS
+--------------
+
+In an LR(k) grammar, a handle may also depend on symbols that follow
+the handle, but only on the first k of these. The acronym LR(k) stands
+for: Left to right input processing, Rightmost derivations (or
+equivalently, leftmost reductions), and k symbols of lookahead.
+
+To make this precise, let h be a handle of a valid string v=xhy. Say
+that h is forced by lookahead k if h is the unique handle of every
+valid string xhyˆ where yˆ∈Σ∗ and where y and yˆ agree on their first
+k symbols. (If either string is shorter than k, the strings must agree
+up to the length of the shorter one.)
+
+An LR(k) grammar is a context-free grammar such that the handle of
+every valid string is forced by lookahead k.
