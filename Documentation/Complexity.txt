@@ -1,0 +1,24 @@
+SOURCES OF COMPLEXITY
+=====================
+
+	   ^
+	   |
+	   | Accidental   +-------------------------+   +------------------------+   +----------------------+
+	   | complexity   | Violating the SPOT rule |   | Premature optimization |   | Non-orthogonality    |
+	   |              +-------------------------+   +------------------------+   +----------------------+
+	   |
+	   |
+	   | Optional     +-------------------------+   +------------------------+   +----------------------+
+Kinds of   | complexity   | Methodology overhead    |   | EVERYTHING ELSE!       |   | Convenience features |
+complexity |              +-------------------------+   +------------------------+   +----------------------+
+	   |
+	   |
+	   | Essential    +-------------------------+   +------------------------+   +-----------------------+
+	   | complexity   | Development tools       |   | Core data structures   |   |Functional requirements|
+	   |              +-------------------------+   +------------------------+   +-----------------------+
+	   |
+	   |
+	   |                    Codebase size                  Implementation                Interface
+	   |                                                     complexity                 complexity
+
+	       ---------------------------------------------------------------------------------------------->
