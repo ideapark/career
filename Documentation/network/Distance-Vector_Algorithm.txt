@@ -1,0 +1,24 @@
+Distance-Vector (DV) Algorithm
+==============================
+
+At each node, x:
+
+ 1: Initialization:
+ 2:     for all destinations y in N:
+ 3:       Dx(y) = c(x,y) /* if y is not a neighbor then c(x,y)= ∞ */
+ 4:     for each neighbor w
+ 5:       Dw(y) = ? for all destinations y in N
+ 6:     for each neighbor w
+ 7:       send distance vector Dx = [Dx(y): y in N] to w
+ 8:
+ 9: Loop
+10:     wait (until I see a link cost change to some neighbor w or
+11:           until I receive a distance vector from some neighbor w)
+12:
+13:     for each y in N:
+14:       Dx(y) = min_v{c(x,v)+Dv(y)}
+15:
+16: if Dx(y) changed for any destination y
+17:     send distance vector Dx = [Dx(y): y in N] to all neighbor
+18:
+19: forever
