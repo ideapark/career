@@ -3,20 +3,20 @@ FINITE AUTOMATA
 
 A finite automaton is a 5-tuple (Q,Σ,δ,q0,F), where
 
-1. Q is a finite set of states,
-2. Σ is a finite alphabet,
-3. δ: Q × Σ −→ Q is the transition function,
-4. q0 ∈ Q is the start state, and
-5. F ⊆ Q is the set of accept states.
+  1. Q is a finite set of states,
+  2. Σ is a finite alphabet,
+  3. δ: Q × Σ → Q is the transition function,
+  4. q0 ∈ Q is the start state, and
+  5. F ⊆ Q is the set of accept states.
 
 Let M = (Q,Σ,δ,q0,F) be a finite automaton and let w = w1w2···wn be a
 string where each wi is a member of the alphabet Σ. Then M accepts w
 if a sequence of states r0,r1,...,rn in Q exists with three
 conditions:
 
-1. r0 = q0,
-2. δ(ri, wi+1) = ri+1, for i=0, ..., n−1, and
-3. rn ∈ F.
+  1. r0 = q0,
+  2. δ(ri,wi+1) = ri+1, for i=0, ..., n−1, and
+  3. rn ∈ F.
 
 A language is called a regular language if some finite automaton
 recognizes it.
@@ -28,9 +28,9 @@ REGULAR OPERATIONS
 Let A and B be languages. We define the regular operations union,
 concatenation, and star as follows:
 
-• Union: A ∪ B = {x| x ∈ A or x ∈ B}.
-• Concatenation: A ◦ B = {xy| x ∈ A and y ∈ B}.
-• Star: A∗ = {x1x2...xk| k ≥ 0 and each xi ∈ A}.
+  1. Union: A ∪ B = {x| x ∈ A or x ∈ B}.
+  2. Concatenation: A ◦ B = {xy| x ∈ A and y ∈ B}.
+  3. Star: A∗ = {x1x2...xk| k ≥ 0 and each xi ∈ A}.
 
 
 NONDETERMINISTIC FINITE AUTOMATON
@@ -43,24 +43,24 @@ additional notation. For any set Q we write P(Q) to be the collection
 of all subsets of Q. Here P(Q) is called the power set of Q. For any
 alphabet Σ we write Σε to be Σ ∪ {ε}. Now we can write the formal
 description of the type of the transition function in an NFA as
-δ: Q × Σε −→ P(Q).
+δ: Q × Σε → P(Q).
 
 A nondeterministic finite automaton is a 5-tuple (Q,Σ,δ,q0,F), where
 
-1. Q is a finite set of states,
-2. Σ is a finite alphabet,
-3. δ: Q × Σε −→ P(Q)={R|R⊆Q} is the transition function,
-4. q0 ∈ Q is the start state, and
-5. F ⊆ Q is the set of accept states.
+  1. Q is a finite set of states,
+  2. Σ is a finite alphabet,
+  3. δ: Q × Σε → P(Q)={R|R⊆Q} is the transition function,
+  4. q0 ∈ Q is the start state, and
+  5. F ⊆ Q is the set of accept states.
 
 Let N = (Q,Σ,δ,q0,F) be an NFA and w a string over the alphabet
 Σ. Then we say that N accepts w if we can write w as w = y1y2···ym,
 where each yi is a member of Σε and a sequence of states r0,r1,...,rm
 exists in Q with three conditions:
 
-1. r0 = q0,
-2. ri+1 ∈ δ(ri,yi+1), for i=0, ..., m−1, and
-3. rm ∈ F.
+  1. r0 = q0,
+  2. ri+1 ∈ δ(ri,yi+1), for i=0, ..., m−1, and
+  3. rm ∈ F.
 
 
 EQUIVALENCE OF NFAs AND DFAs
@@ -80,15 +80,15 @@ no ε arrows. Later we take the ε arrows into account.
    symbol a in state R, it shows where a takes each state in
    R. Because each state may go to a set of states, we take the union
    of all these sets. Another way to write this expression is
-   δ'(R,a)={union of the sets δ(r, a) for each possible r∈R}.
+   δ'(R,a)={union of the sets δ(r,a) for each possible r∈R}.
 
 3. q0' = {q0}.
    M starts in the state corresponding to the collection containing
    just the start state of N.
 
-4. F' = {R∈Q'| R contains an accept state of N}. The machine M accepts
-   if one of the possible states that N could be in at this point is
-   an accept state.
+4. F' = {R∈Q'| R contains an accept state of N}.
+   The machine M accepts if one of the possible states that N could be
+   in at this point is an accept state.
 
 Now we need to consider the ε arrows. To do so, we set up an extra bit
 of notation. For any state R of M, we define E(R) to be the collection
@@ -102,7 +102,7 @@ fingers on all states that can be reached by going along ε arrows
 after every step. Replacing δ(r,a) by E(δ(r,a)) achieves this
 effect. Thus
 
-  δ'(R,a) = {q ∈ Q| q ∈ E(δ(r,a)) for some r ∈ R}.
+  δ'(R,a) = {q∈Q| q∈E(δ(r,a)) for some r∈R}.
 
 Additionally, we need to modify the start state of M to move the
 fingers initially to all possible states that can be reached from the
@@ -127,9 +127,9 @@ Concatenation and Star. So more complicated and expressive regular
 languages can be constructed from simpler ones by conducting these
 operations, the resulting products are regular languages as well.
 
-• The class of regular languages is closed under the union operation.
-• The class of regular languages is closed under the concatenation operation.
-• The class of regular languages is closed under the star operation.
+  1. The class of regular languages is closed under the union operation.
+  2. The class of regular languages is closed under the concatenation operation.
+  3. The class of regular languages is closed under the star operation.
 
 
 REGULAR EXPRESSION
@@ -137,12 +137,12 @@ REGULAR EXPRESSION
 
 Say that R is a regular expression if R is
 
-1. a for some a in the alphabet Σ,
-2. ε,
-3. ∅,
-4. (R1∪R2), where R1 and R2 are regular expressions,
-5. (R1◦R2), where R1 and R2 are regular expressions, or
-6. (R1∗), where R1 is a regular expression.
+  1. a for some a in the alphabet Σ,
+  2. ε,
+  3. ∅,
+  4. (R1∪R2), where R1 and R2 are regular expressions,
+  5. (R1◦R2), where R1 and R2 are regular expressions, or
+  6. (R1∗), where R1 is a regular expression.
 
 In items 1 and 2, the regular expressions a and ε represent the
 languages {a} and {ε}, respectively. In item 3, the regular expression
@@ -158,19 +158,19 @@ GENERALIZED NONDETERMINISTIC FINITE AUTOMATON (GNFA)
 A generalized nondeterministic finite automaton is a 5-tuple,
 (Q,Σ,δ,qstart,qaccept), where
 
-1. Q is the finite set of states,
-2. Σ is the input alphabet,
-3. δ: (Q−{qaccept} × Q−{qstart}) −→ R is the transition function,
-4. qstart is the start state, and
-5. qaccept is the accept state.
+  1. Q is the finite set of states,
+  2. Σ is the input alphabet,
+  3. δ: (Q−{qaccept} × Q−{qstart}) → R is the transition function,
+  4. qstart is the start state, and
+  5. qaccept is the accept state.
 
 A GNFA accepts a string w in Σ∗ if w=w1w2···wk, where each wi is in Σ∗
 and a sequence of states q0,q1,...,qk exists such that
 
-1. q0 = qstart is the start state,
-2. qk = qaccept is the accept state, and
-3. for each i, we have wi∈L(Ri), where Ri=δ(qi−1,qi); in other words,
-   Ri is the expression on the arrow from qi−1 to qi.
+  1. q0 = qstart is the start state,
+  2. qk = qaccept is the accept state, and
+  3. for each i, we have wi∈L(Ri), where Ri=δ(qi−1,qi); in other words,
+     Ri is the expression on the arrow from qi−1 to qi.
 
 Let M be the DFA for language A. Then we convert M to a GNFA G by
 adding a new start state and a new accept state and additional
@@ -195,9 +195,9 @@ two states is handled without recursion.
    and for any qi∈Q'−{qaccept} and any qj∈Q'−{qstart}, let
 
      δ'(qi,qj) = (R1)(R2)∗(R3)∪(R4), for R1 = δ(qi,qrip),
-                                        R2 = δ(qrip,qrip),
-                                        R3 = δ(qrip,qj), and
-                                        R4 = δ(qi,qj).
+                                         R2 = δ(qrip,qrip),
+                                         R3 = δ(qrip,qj), and
+                                         R4 = δ(qi,qj).
 4. Compute CONVERT(G') and return this value.
 
 NONREGULAR LANGUAGES
@@ -208,9 +208,9 @@ Pumping Lemma: If A is a regular language, then there is a number p
 p, then s may be divided into three pieces, s=xyz, satisfying the
 following conditions:
 
-1. for each i ≥ 0, xy^iz ∈ A,
-2. |y| > 0, and
-3. |xy| ≤ p.
+  1. for each i ≥ 0, xy^iz ∈ A,
+  2. |y| > 0, and
+  3. |xy| ≤ p.
 
 The notation where |s| represents the length of string s, y^i means
 that i copies of y are concatenated together, and y^0 equals ε.  When
