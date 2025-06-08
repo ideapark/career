@@ -154,6 +154,18 @@ simply ignores its stack, we now know that every regular language is
 also a context-free language.
 
 
+THE PUMPING LEMMA FOR CONTEXT-FREE LANGUAGES
+--------------------------------------------
+
+If A is a context-free language, then there is a number p (the pumping
+length) where, if s is any string in A of length at least p, then s
+may be divided into five pieces s = uvxyz satisfying the conditions
+
+  1. for each i ≥ 0, uv^ixy^iz ∈ A,
+  2. |vy| > 0, and
+  3. |vxy| ≤ p.
+
+
 DETERMINISTIC PUSHDOWN AUTOMATON
 --------------------------------
 
