@@ -1,22 +1,22 @@
 FINITE AUTOMATA
 ---------------
 
-A finite automaton is a 5-tuple (Q,Σ,δ,q0,F), where
+A finite automaton is a 5-tuple (Q,Σ,δ,q₀,F), where
 
   1. Q is a finite set of states,
   2. Σ is a finite alphabet,
   3. δ: Q × Σ → Q is the transition function,
-  4. q0 ∈ Q is the start state, and
+  4. q₀ ∈ Q is the start state, and
   5. F ⊆ Q is the set of accept states.
 
-Let M = (Q,Σ,δ,q0,F) be a finite automaton and let w = w1w2···wn be a
-string where each wi is a member of the alphabet Σ. Then M accepts w
-if a sequence of states r0,r1,...,rn in Q exists with three
+Let M = (Q,Σ,δ,q₀,F) be a finite automaton and let w = w₁w₂···wₑ be a
+string where each wᵢ is a member of the alphabet Σ. Then M accepts w
+if a sequence of states r₀,r₁,...,rₑ in Q exists with three
 conditions:
 
-  1. r0 = q0,
-  2. δ(ri,wi+1) = ri+1, for i=0, ..., n−1, and
-  3. rn ∈ F.
+  1. r₀ = q₀,
+  2. δ(rᵢ,wᵢ₊₁) = rᵢ₊₁, for i=0, ..., e−1, and
+  3. rₑ ∈ F.
 
 A language is called a regular language if some finite automaton
 recognizes it.
@@ -30,7 +30,7 @@ concatenation, and star as follows:
 
   1. Union: A ∪ B = {x| x ∈ A or x ∈ B}.
   2. Concatenation: A ◦ B = {xy| x ∈ A and y ∈ B}.
-  3. Star: A∗ = {x1x2...xk| k ≥ 0 and each xi ∈ A}.
+  3. Star: A* = {x₁x₂...xₑ| e ≥ 0 and each xᵢ ∈ A}.
 
 
 NONDETERMINISTIC FINITE AUTOMATON
@@ -39,40 +39,40 @@ NONDETERMINISTIC FINITE AUTOMATON
 In an NFA, the transition function takes a state and an input symbol
 or the empty string and produces the set of possible next states. In
 order to write the formal definition, we need to set up some
-additional notation. For any set Q we write P(Q) to be the collection
-of all subsets of Q. Here P(Q) is called the power set of Q. For any
+additional notation. For any set Q we write 𝒫(Q) to be the collection
+of all subsets of Q. Here 𝒫(Q) is called the power set of Q. For any
 alphabet Σ we write Σε to be Σ ∪ {ε}. Now we can write the formal
 description of the type of the transition function in an NFA as
-δ: Q × Σε → P(Q).
+δ: Q × Σε → 𝒫(Q).
 
 A nondeterministic finite automaton is a 5-tuple (Q,Σ,δ,q0,F), where
 
   1. Q is a finite set of states,
   2. Σ is a finite alphabet,
-  3. δ: Q × Σε → P(Q)={R|R⊆Q} is the transition function,
+  3. δ: Q × Σε → 𝒫(Q)={R|R⊆Q} is the transition function,
   4. q0 ∈ Q is the start state, and
   5. F ⊆ Q is the set of accept states.
 
-Let N = (Q,Σ,δ,q0,F) be an NFA and w a string over the alphabet
-Σ. Then we say that N accepts w if we can write w as w = y1y2···ym,
-where each yi is a member of Σε and a sequence of states r0,r1,...,rm
+Let N = (Q,Σ,δ,q₀,F) be an NFA and w a string over the alphabet
+Σ. Then we say that N accepts w if we can write w as w = y₁y₂···yₑ,
+where each yᵢ is a member of Σε and a sequence of states r₀,r₁,...,rₑ
 exists in Q with three conditions:
 
-  1. r0 = q0,
-  2. ri+1 ∈ δ(ri,yi+1), for i=0, ..., m−1, and
-  3. rm ∈ F.
+  1. r₀ = q₀,
+  2. rᵢ₊₁ ∈ δ(rᵢ,yᵢ₊₁), for i=0, ..., e−1, and
+  3. rₑ ∈ F.
 
 
 EQUIVALENCE OF NFAs AND DFAs
 ----------------------------
 
-PROOF Let N=(Q,Σ,δ,q0,F) be the NFA recognizing some language A. We
-construct a DFA M=(Q',Σ,δ',q0',F') recognizing A. Before doing the
+PROOF Let N=(Q,Σ,δ,q₀,F) be the NFA recognizing some language A. We
+construct a DFA M=(Q',Σ,δ',q₀',F') recognizing A. Before doing the
 full construction, let’s first consider the easier case wherein N has
 no ε arrows. Later we take the ε arrows into account.
 
-1. Q' = P(Q).
-   Every state of M is a set of states of N. Recall that P(Q) is the
+1. Q' = 𝒫(Q).
+   Every state of M is a set of states of N. Recall that 𝒫(Q) is the
    set of subsets of Q.
 
 2. For R∈Q' and a∈Σ, let δ'(R,a) = {q∈Q| q∈δ(r,a) for some r∈R}. If R
@@ -82,7 +82,7 @@ no ε arrows. Later we take the ε arrows into account.
    of all these sets. Another way to write this expression is
    δ'(R,a)={union of the sets δ(r,a) for each possible r∈R}.
 
-3. q0' = {q0}.
+3. q₀' = {q₀}.
    M starts in the state corresponding to the collection containing
    just the start state of N.
 
@@ -106,7 +106,7 @@ effect. Thus
 
 Additionally, we need to modify the start state of M to move the
 fingers initially to all possible states that can be reached from the
-start state of N along the ε arrows. Changing q0' to be E({q0})
+start state of N along the ε arrows. Changing q₀' to be E({q₀})
 achieves this effect. We have now completed the construction of the
 DFA M that simulates the NFA N.
 
@@ -140,15 +140,15 @@ Say that R is a regular expression if R is
   1. a for some a in the alphabet Σ,
   2. ε,
   3. ∅,
-  4. (R1∪R2), where R1 and R2 are regular expressions,
-  5. (R1◦R2), where R1 and R2 are regular expressions, or
-  6. (R1∗), where R1 is a regular expression.
+  4. (R₁∪R₂), where R1 and R2 are regular expressions,
+  5. (R₁◦R₂), where R1 and R2 are regular expressions, or
+  6. (R₁∗), where R1 is a regular expression.
 
 In items 1 and 2, the regular expressions a and ε represent the
 languages {a} and {ε}, respectively. In item 3, the regular expression
 ∅ represents the empty language. In items 4, 5, and 6, the expressions
 represent the languages obtained by taking the union or concatenation
-of the languages R1 and R2, or the star of the language R1,
+of the languages R₁ and R₂, or the star of the language R₁,
 respectively.
 
 
@@ -156,21 +156,21 @@ GENERALIZED NONDETERMINISTIC FINITE AUTOMATON (GNFA)
 ----------------------------------------------------
 
 A generalized nondeterministic finite automaton is a 5-tuple,
-(Q,Σ,δ,qstart,qaccept), where
+(Q,Σ,δ,qˢ,qᵃ), where
 
   1. Q is the finite set of states,
   2. Σ is the input alphabet,
-  3. δ: (Q−{qaccept} × Q−{qstart}) → R is the transition function,
-  4. qstart is the start state, and
-  5. qaccept is the accept state.
+  3. δ: (Q−{qᵃ} × Q−{qˢ}) → R is the transition function,
+  4. qˢ is the start state, and
+  5. qᵃ is the accept state.
 
-A GNFA accepts a string w in Σ∗ if w=w1w2···wk, where each wi is in Σ∗
-and a sequence of states q0,q1,...,qk exists such that
+A GNFA accepts a string w in Σ* if w=w₁w₂···wₑ, where each wᵢ is in Σ*
+and a sequence of states q₀,q₁,...,qₑ exists such that
 
-  1. q0 = qstart is the start state,
-  2. qk = qaccept is the accept state, and
-  3. for each i, we have wi∈L(Ri), where Ri=δ(qi−1,qi); in other words,
-     Ri is the expression on the arrow from qi−1 to qi.
+  1. q₀ = qˢ is the start state,
+  2. qₑ = qᵃ is the accept state, and
+  3. for each i, we have wᵢ∈L(Rᵢ), where Ri=δ(qᵢ₋₁,qᵢ); in other words,
+     Rᵢ is the expression on the arrow from qᵢ₋₁ to qi.
 
 Let M be the DFA for language A. Then we convert M to a GNFA G by
 adding a new start state and a new accept state and additional
@@ -190,14 +190,14 @@ two states is handled without recursion.
 3. If k>2, we select any state qrip∈Q different from qstart and
    qaccept and let G' be the GNFA (Q',Σ,δ',qstart,qaccept), where
 
-     Q' = Q − {qrip},
+     Q' = Q − {qᵣ},
 
-   and for any qi∈Q'−{qaccept} and any qj∈Q'−{qstart}, let
+   and for any qᵢ∈Q'−{qaccept} and any qⱼ∈Q'−{qstart}, let
 
-     δ'(qi,qj) = (R1)(R2)∗(R3)∪(R4), for R1 = δ(qi,qrip),
-                                         R2 = δ(qrip,qrip),
-                                         R3 = δ(qrip,qj), and
-                                         R4 = δ(qi,qj).
+     δ'(qᵢ,qⱼ) = (R₁)(R₂)∗(R₃)∪(R₄), for R₁ = δ(qᵢ,qᵣ),
+                                         R₂ = δ(qᵣ,qᵣ),
+                                         R₃ = δ(qᵣ,qⱼ), and
+                                         R₄ = δ(qᵢ,qⱼ).
 4. Compute CONVERT(G') and return this value.
 
 NONREGULAR LANGUAGES
@@ -208,12 +208,12 @@ Pumping Lemma: If A is a regular language, then there is a number p
 p, then s may be divided into three pieces, s=xyz, satisfying the
 following conditions:
 
-  1. for each i ≥ 0, xy^iz ∈ A,
+  1. for each i ≥ 0, xyⁱz ∈ A,
   2. |y| > 0, and
   3. |xy| ≤ p.
 
-The notation where |s| represents the length of string s, y^i means
-that i copies of y are concatenated together, and y^0 equals ε.  When
+The notation where |s| represents the length of string s, yⁱ means
+that i copies of y are concatenated together, and y⁰ equals ε.  When
 s is divided into xyz, either x or z may be ε, but condition 2 says
 that y ≠ ε. Observe that without condition 2 the theorem would be
 trivially true.  Condition 3 states that the pieces x and y together

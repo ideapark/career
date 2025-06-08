@@ -25,18 +25,18 @@ First, many CFLs are the union of simpler CFLs. If you must construct
 a CFG for a CFL that you can break into simpler pieces, do so and then
 construct individual grammars for each piece. These individual
 grammars can be easily merged into a grammar for the original language
-by combining their rules and then adding the new rule S→S1|S2|···|Sk,
-where the variables Si are the start variables for the individual
+by combining their rules and then adding the new rule S→S₁|S₂|···|Sₑ,
+where the variables Sᵢ are the start variables for the individual
 grammars. Solving several simpler problems is often easier than
 solving one complicated problem.
 
 Second, constructing a CFG for a language that happens to be regular
 is easy if you can first construct a DFA for that language. You can
 convert any DFA into an equivalent CFG as follows. Make a variable Ri
-for each state qi of the DFA. Add the rule Ri→aRj to the CFG if
-δ(qi,a)=qj is a transition in the DFA. Add the rule Ri→ε if qi is an
-accept state of the DFA. Make R0 the start variable of the grammar,
-where q0 is the start state of the machine. Verify on your own that
+for each state qi of the DFA. Add the rule Rᵢ→aRⱼ to the CFG if
+δ(qᵢ,a)=qⱼ is a transition in the DFA. Add the rule Rᵢ→ε if qi is an
+accept state of the DFA. Make R₀ the start variable of the grammar,
+where q₀ is the start state of the machine. Verify on your own that
 the resulting CFG generates the same language that the DFA recognizes.
 
 Third, certain context-free languages contain strings with two
@@ -44,7 +44,7 @@ substrings that are “linked” in the sense that a machine for such a
 language would need to remember an unbounded amount of information
 about one of the substrings to verify that it corresponds properly to
 the other substring. This situation occurs in the language
-{0^n1^n|n≥0} because a machine would need to remember the number of 0s
+{0ⁿ1ⁿ|n≥0} because a machine would need to remember the number of 0s
 in order to verify that it equals the number of 1s. You can construct
 a CFG to handle this situation by using a rule of the form R→uRv,
 which generates strings wherein the portion containing the u’s
@@ -63,8 +63,8 @@ CHOMSKY NORMAL FORM
 A context-free grammar is in Chomsky normal form if every rule is of
 the form
 
-  A → BC
-  A → a
+  1. A → BC
+  2. A → a
 
 where a is any terminal and A, B, and C are any variables —- except
 that B and C may not be the start variable. In addition, we permit the
@@ -86,7 +86,7 @@ form.
 
 PROOF:
 
-First, we add a new start variable S0 and the rule S0→S, where S was
+First, we add a new start variable S₀ and the rule S₀→S, where S was
 the original start variable. This change guarantees that the start
 variable doesn’t occur on the right-hand side of a rule.  Second, we
 take care of all ε-rules. We remove an ε-rule A→ε, where A is not the
@@ -103,39 +103,39 @@ rule B→u appears, we add the rule A→u unless this was a unit rule
 previously removed. As before, u is a string of variables and
 terminals. We repeat these steps until we eliminate all unit rules.
 Finally, we convert all remaining rules into the proper form. We
-replace each rule A→u1u2···uk, where k≥3 and each ui is a variable or
-terminal symbol, with the rules A→u1A1, A1→u2A2, A2→u3A3, ..., and
-Ak−2→uk−1uk. The Ai’s are new variables. We replace any terminal ui in
-the preceding rule(s) with the new variable Ui and add the rule Ui→ui.
+replace each rule A→u₁u₂···uₑ, where e≥3 and each ui is a variable or
+terminal symbol, with the rules A→u₁A₁, A₁→u₂A₂, A₂→u₃A₃, ..., and
+Aₑ₋₂→uₑ₋₁uₑ. The Aᵢ’s are new variables. We replace any terminal uᵢ in
+the preceding rule(s) with the new variable Uᵢ and add the rule Uᵢ→uᵢ.
 
 
 PUSHDOWN AUTOMATON (PDA)
 ------------------------
 
-A pushdown automaton is a 6-tuple (Q,Σ,Γ,δ,q0,F), where Q, Σ, Γ, and F
+A pushdown automaton is a 6-tuple (Q,Σ,Γ,δ,q₀,F), where Q, Σ, Γ, and F
 are all finite sets, and
 
   1. Q is the set of states,
   2. Σ is the input alphabet,
   3. Γ is the stack alphabet,
-  4. δ: Q×Σε×Γε → P(Q×Γε) is the transition function,
-  5. q0∈Q is the start state, and
-  6. F⊆Q is the set of accept states.
+  4. δ: Q × Σε × Γε → 𝒫(Q×Γε) is the transition function,
+  5. q₀ ∈ Q is the start state, and
+  6. F ⊆ Q is the set of accept states.
 
-A pushdown automaton M=(Q,Σ,Γ,δ,q0,F) computes as follows. It accepts
-input w if w can be written as w=w1w2···wm, where each wi∈Σε and
-sequences of states r0,r1,...,rm ∈ Q and strings s0,s1,...,sm ∈ Γ∗
-exist that satisfy the following three conditions. The strings si
+A pushdown automaton M=(Q,Σ,Γ,δ,q₀,F) computes as follows. It accepts
+input w if w can be written as w=w₁w₂···wₑ, where each wᵢ∈Σε and
+sequences of states r₀,r₁,...,rₑ ∈ Q and strings s₀,s₁,...,sₑ ∈ Γ∗
+exist that satisfy the following three conditions. The strings sᵢ
 represent the sequence of stack contents that M has on the accepting
 branch of the computation.
 
-  1. r0=q0 and s0=ε. This condition signifies that M starts out
+  1. r₀=q₀ and s₀=ε. This condition signifies that M starts out
      properly, in the start state and with an empty stack.
-  2. For i=0,...,m−1, we have (ri+1,b) ∈ δ(ri,wi+1,a), where si=at and
-     si+1=bt for some a,b∈Γε and t∈Γ∗. This condition states that M
+  2. For i=0,...,e−1, we have (rᵢ₊₁,b) ∈ δ(rᵢ,wᵢ₊₁,a), where sᵢ=at and
+     sᵢ₊₁=bt for some a,b∈Γε and t∈Γ*. This condition states that M
      moves properly according to the state, stack, and next input
      symbol.
-  3. rm∈F. This condition states that an accept state occurs at the
+  3. rₑ∈F. This condition states that an accept state occurs at the
      input end.
 
 
@@ -161,7 +161,7 @@ If A is a context-free language, then there is a number p (the pumping
 length) where, if s is any string in A of length at least p, then s
 may be divided into five pieces s = uvxyz satisfying the conditions
 
-  1. for each i ≥ 0, uv^ixy^iz ∈ A,
+  1. for each i ≥ 0, uvⁱxyⁱz ∈ A,
   2. |vy| > 0, and
   3. |vxy| ≤ p.
 
@@ -169,14 +169,14 @@ may be divided into five pieces s = uvxyz satisfying the conditions
 DETERMINISTIC PUSHDOWN AUTOMATON
 --------------------------------
 
-A deterministic pushdown automaton is a 6-tuple (Q,Σ,Γ,δ,q0,F), where
+A deterministic pushdown automaton is a 6-tuple (Q,Σ,Γ,δ,q₀,F), where
 Q, Σ, Γ, and F are all finite sets, and
 
   1. Q is the set of states,
   2. Σ is the input alphabet,
   3. Γ is the stack alphabet,
-  4. δ: Q×Σε×Γε → (Q×Γε)∪{∅} is the transition function,
-  5. q0 ∈ Q is the start state, and
+  4. δ: Q × Σε × Γε → (Q×Γε)∪{∅} is the transition function,
+  5. q₀ ∈ Q is the start state, and
   6. F ⊆ Q is the set of accept states.
 
 The transition function δ must satisfy the following condition. For
@@ -212,12 +212,12 @@ LR(k) GRAMMARS
 
 In an LR(k) grammar, a handle may also depend on symbols that follow
 the handle, but only on the first k of these. The acronym LR(k) stands
-for: Left to right input processing, Rightmost derivations (or
-equivalently, leftmost reductions), and k symbols of lookahead.
+for: L̫eft to right input processing, R̫ightmost derivations (or
+equivalently, leftmost reductions), and k̫ symbols of lookahead.
 
 To make this precise, let h be a handle of a valid string v=xhy. Say
 that h is forced by lookahead k if h is the unique handle of every
-valid string xhyˆ where yˆ∈Σ∗ and where y and yˆ agree on their first
+valid string xhyͦ where yͦ∈Σ* and where y and yͦ agree on their first
 k symbols. (If either string is shorter than k, the strings must agree
 up to the length of the shorter one.)
 
