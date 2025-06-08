@@ -3,10 +3,11 @@ CONTEXT-FREE GRAMMAR (CFG)
 
 A context-free grammar is a 4-tuple (V,Σ,R,S), where
 
-1. V is a finite set called the variables,
-2. Σ is a finite set, disjoint from V, called the terminals,
-3. R is a finite set of rules, with each rule being a variable and a string of variables and terminals, and
-4. S ∈ V is the start variable.
+  1. V is a finite set called the variables,
+  2. Σ is a finite set, disjoint from V, called the terminals,
+  3. R is a finite set of rules, with each rule being a variable and a
+     string of variables and terminals, and
+  4. S ∈ V is the start variable.
 
 
 DESIGNING CONTEXT-FREE GRAMMARS
@@ -114,12 +115,12 @@ PUSHDOWN AUTOMATON (PDA)
 A pushdown automaton is a 6-tuple (Q,Σ,Γ,δ,q0,F), where Q, Σ, Γ, and F
 are all finite sets, and
 
-1. Q is the set of states,
-2. Σ is the input alphabet,
-3. Γ is the stack alphabet,
-4. δ: Q×Σε×Γε−→P(Q×Γε) is the transition function,
-5. q0∈Q is the start state, and
-6. F⊆Q is the set of accept states.
+  1. Q is the set of states,
+  2. Σ is the input alphabet,
+  3. Γ is the stack alphabet,
+  4. δ: Q×Σε×Γε → P(Q×Γε) is the transition function,
+  5. q0∈Q is the start state, and
+  6. F⊆Q is the set of accept states.
 
 A pushdown automaton M=(Q,Σ,Γ,δ,q0,F) computes as follows. It accepts
 input w if w can be written as w=w1w2···wm, where each wi∈Σε and
@@ -128,24 +129,24 @@ exist that satisfy the following three conditions. The strings si
 represent the sequence of stack contents that M has on the accepting
 branch of the computation.
 
-1. r0=q0 and s0=ε. This condition signifies that M starts out
-   properly, in the start state and with an empty stack.
-2. For i=0,...,m−1, we have (ri+1,b) ∈ δ(ri,wi+1,a), where si=at and
-   si+1=bt for some a,b∈Γε and t∈Γ∗. This condition states that M
-   moves properly according to the state, stack, and next input
-   symbol.
-3. rm∈F. This condition states that an accept state occurs at the
-   input end.
+  1. r0=q0 and s0=ε. This condition signifies that M starts out
+     properly, in the start state and with an empty stack.
+  2. For i=0,...,m−1, we have (ri+1,b) ∈ δ(ri,wi+1,a), where si=at and
+     si+1=bt for some a,b∈Γε and t∈Γ∗. This condition states that M
+     moves properly according to the state, stack, and next input
+     symbol.
+  3. rm∈F. This condition states that an accept state occurs at the
+     input end.
 
 
 PUSHDOWN AUTOMATON IS EQUIVALENT WITH CONTEXT-FREE GRAMMARS
 -----------------------------------------------------------
 
-1. If a language is context free, then some pushdown automaton
-   recognizes it.
+  1. If a language is context free, then some pushdown automaton
+     recognizes it.
 
-2. If a pushdown automaton recognizes some language, then it is
-   context free.
+  2. If a pushdown automaton recognizes some language, then it is
+     context free.
 
 Because every regular language is recognized by a finite automaton and
 every finite automaton is automatically a pushdown automaton that
@@ -159,12 +160,12 @@ DETERMINISTIC PUSHDOWN AUTOMATON
 A deterministic pushdown automaton is a 6-tuple (Q,Σ,Γ,δ,q0,F), where
 Q, Σ, Γ, and F are all finite sets, and
 
-1. Q is the set of states,
-2. Σ is the input alphabet,
-3. Γ is the stack alphabet,
-4. δ: Q×Σε×Γε −→ (Q×Γε) ∪ {∅} is the transition function,
-5. q0 ∈ Q is the start state, and
-6. F ⊆ Q is the set of accept states.
+  1. Q is the set of states,
+  2. Σ is the input alphabet,
+  3. Γ is the stack alphabet,
+  4. δ: Q×Σε×Γε → (Q×Γε)∪{∅} is the transition function,
+  5. q0 ∈ Q is the start state, and
+  6. F ⊆ Q is the set of accept states.
 
 The transition function δ must satisfy the following condition. For
 every q∈Q, a∈Σ, and x∈Γ, exactly one of the values δ(q,a,x), δ(q,a,ε),
