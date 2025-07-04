@@ -1,0 +1,110 @@
+X.509 Certificate
+=================
+
+                       +----------------------+ <---+-----+-----+
+                       |   Version            |     |     |     |
+                       +----------------------+     |     |     |
+                       |   Certificate        |     |     |     |
+                       |   serial number      |     |     |     |
+                       +----------------------+     |     |     |
+       Signature       |   Algorithm          |     |     |     |
+       algorithm       |......................|     |     |     |
+       identifier      |   Parameters         |     |     |     |
+                       +----------------------+     |     |     |
+                       |   Issuer name        |     |     |     |
+                       +----------------------+     |     |     |
+       Period of       |   Not before         |     |     |     |
+       validity        |......................|     |V1   |V2   |V3
+                       |   Not after          |     |     |     |
+                       +----------------------+     |     |     |
+                       |   Subject name       |     |     |     |
+                       +----------------------+     |     |     |
+       Subject's       |   Algorithms         |     |     |     |
+       public key      |......................|     |     |     |
+       info            |   Parameters         |     |     |     |
+                       |......................|     |     |     |
+                       |   Key                |     |     |     |
+                       +----------------------+ <---+     |     |
+                       |   Issuer unique      |           |     |
+                       |   identifier         |           |     |
+                       +----------------------+           |     |
+                       |   Subject unique     |           |     |
+                       |   identifier         |           |     |
+                       +----------------------+ <---------+     |
+                       |   Extensions         |                 |
+                       +----------------------+ <---------------+
+       Signature       |   Algorithms         |                 |
+                       |......................|                 |
+                       |   Parameters         |                 |V1,V2,V3
+                       |......................|                 |
+                       |   Encrypted hash     |                 |
+                       +----------------------+ <---------------+
+
+
+Certificate Revocation List
+===========================
+
+       Signature       +-------------------------------+
+       algorithm       |   Algorithm                   |
+       identifier      |...............................|
+                       |   Parameters                  |
+                       +-------------------------------+
+                       |   Issuer Name                 |
+                       +-------------------------------+
+                       |   This update date            |
+                       +-------------------------------+
+                       |   Nexut update date           |
+                       +-------------------------------+
+       Revoked         |   User certificate serial #   |
+       certificate     |...............................|
+                       |   Revocation date             |
+                       +-------------------------------+
+                       |                               |
+                       |        •                      |
+                       |        •                      |
+                       |        •                      |
+                       |                               |
+                       +-------------------------------+
+       Revoked         |  User certificate serial #    |
+       certificate     |...............................|
+                       |  Revocation date              |
+                       +-------------------------------+
+       Signature       |  Algorithms                   |
+                       |...............................|
+                       |  Parameters                   |
+                       |...............................|
+                       |  Encrypted                    |
+                       +-------------------------------+
+
+
+• Version: Differentiates among successive versions of the certificate
+  format; the default is version 1. If the issuer unique identifier or
+  subject unique identifier are present, the value must be version
+  2. If one or more extensions are present, the version must be
+  version 3.
+
+• Serial number: An integer value unique within the issuing CA that is
+  unambiguously associated with this certificate.
+
+• Signature algorithm identifier: The algorithm used to sign the
+  certificate together with any associated parameters. Because this
+  information is repeated in the signature field at the end of the
+  certificate, this field has little, if any, utility.
+
+• Issuer name: X.500 is the name of the CA that created and signed
+  this certificate.
+
+• Period of validity: Consists of two dates: the first and last on
+  which the certificate is valid.
+
+• Subject name: The name of the user to whom this certificate
+  refers.That is, this certificate certifies the public key of the
+  subject who holds the corresponding private key.
+
+• Subject’s public-key information: The public key of the subject,
+  plus an identifier of the algorithm for which this key is to be
+  used, together with any associated parameters.
+
+• Issuer unique identifier: An optional-bit string field used to
+  identify uniquely the issuing CA in the event the X.500 name has
+  been reused for different entities.
