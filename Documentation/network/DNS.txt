@@ -1,0 +1,61 @@
+The principal DNS resource record types
+=======================================
+
+    +------------+----------------------------------------------+--------------------------------------------------+
+    |   Type     |                   Meaning                    |                      Value                       |
+    +------------+----------------------------------------------+--------------------------------------------------+
+    |  SOA       | Start of authority                           | Parameters for this zone                         |
+    |  A         | IPv4 address of a host                       | 32-Bit integer                                   |
+    |  AAAA      | IPv6 address of a host                       | 128-Bit integer                                  |
+    |  MX        | Mail exchange                                | Priority, domain willing to accept email         |
+    |  NS        | Name server                                  | Name of a server for this domain                 |
+    |  CNAME     | Canonical name                               | Domain name                                      |
+    |  PTR       | Pointer                                      | Alias for an IP address                          |
+    |  SPF       | Sender policy framework                      | Text encoding of mai sending policy              |
+    |  SRV       | Service                                      | Host that provides it                            |
+    |  TXT       | Text                                         | Descriptive ASCII text                           |
+    +------------+----------------------------------------------+--------------------------------------------------+
+
+An SOA record provides the name of the primary source of information
+about the name server’s zone (described below), the email address of
+its administrator, a unique serial number, and various flags and
+timeouts.
+
+The most important record type is the A (Address) record. It holds a
+32-bit IPv4 address of an interface for some host. The corresponding
+AAAA, or ‘‘quad A,’’ record holds a 128-bit IPv6 address. Every
+Internet host must have at least one IP address so that other machines
+can communicate with it. Some hosts have two or more network
+interfaces, in which case they will have two or more type A or AAAA
+resource records. Consequently, DNS can return multiple addresses for
+a single name.
+
+A common record type is the MX record. It specifies the name of the
+host prepared to accept email for the specified domain.
+
+Another important record type is the NS record. It specifies a name
+server for the domain or subdomain. This is a host that has a copy of
+the database for a domain. It is used as part of the process to look
+up names.
+
+CNAME records allow aliases to be created.
+
+Like CNAME, PTR points to another name. However, unlike CNAME, which
+is really just a macro definition (i.e., a mechanism to replace one
+string by another), PTR is a regular DNS data type whose
+interpretation depends on the context in which it is found. In
+practice, it is nearly always used to associate a name with an IP
+address to allow lookups of the IP address and return the name of the
+corresponding machine. These are called reverse lookups.
+
+SRV is a newer type of record that allows a host to be identified for
+a given service in a domain.
+
+SPF is also a newer type of record. It lets a domain encode
+information about what machines in the domain will send mail to the
+rest of the Internet. This helps receiving machines check that mail is
+valid.
+
+TXT records were originally provided to allow domains to identify
+themselves in arbitrary ways. Nowadays, they usually encode
+machinereadable information, typically the SPF information.
