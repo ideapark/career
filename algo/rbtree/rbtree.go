@@ -593,10 +593,11 @@ func (t *tree) delete5(n *node) {
 func (t *tree) delete6(n *node) {
 	sibling(n).c = getcolor(n.p)
 	n.p.c = colorBLACK
-	if n == n.p.l {
+	switch n {
+	case n.p.l:
 		sibling(n).r.c = colorBLACK
 		t.rotateLeft(n.p)
-	} else if n == n.p.r {
+	case n.p.r:
 		sibling(n).l.c = colorBLACK
 		t.rotateRight(n.p)
 	}
