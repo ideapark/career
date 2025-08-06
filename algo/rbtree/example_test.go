@@ -8,15 +8,15 @@ import (
 
 func ExampleInteger() {
 	tree := Integer()
-	for i := 0; i < 5; i++ {
+	for i := range 5 {
 		tree.Insert(i, i)
 	}
-	for i := 0; i < 5; i++ {
+	for i := range 5 {
 		if i%2 == 0 {
 			tree.Delete(i)
 		}
 	}
-	for i := 0; i < 5; i++ {
+	for i := range 5 {
 		v, ok := tree.Lookup(i)
 		if i%2 != 0 && ok {
 			fmt.Println(v)

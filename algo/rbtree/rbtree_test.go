@@ -8,10 +8,10 @@ import (
 
 func TestInteger(t *testing.T) {
 	tree := Integer()
-	for i := 0; i < 100; i++ {
+	for i := range 100 {
 		tree.Insert(i, i)
 	}
-	for i := 0; i < 100; i++ {
+	for i := range 100 {
 		v, ok := tree.Lookup(i)
 		if !ok {
 			t.Fatalf("do not find %d", i)
@@ -20,12 +20,12 @@ func TestInteger(t *testing.T) {
 			t.Fatalf("expect: %d, got: %d", i, v)
 		}
 	}
-	for i := 0; i < 100; i++ {
+	for i := range 100 {
 		if i%2 == 0 {
 			tree.Delete(i)
 		}
 	}
-	for i := 0; i < 100; i++ {
+	for i := range 100 {
 		if i%2 == 0 {
 			v, ok := tree.Lookup(i)
 			if ok {

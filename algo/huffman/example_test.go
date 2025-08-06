@@ -4,6 +4,7 @@ package huffman
 
 import (
 	"fmt"
+	"slices"
 )
 
 func ExampleEncode() {
@@ -17,14 +18,7 @@ func ExampleEncode() {
 	}
 	for _, c := range cases {
 		_, encdata := Encode(c.input)
-		found := false
-		for _, want := range c.want {
-			if want == encdata {
-				found = true
-				break
-			}
-		}
-		fmt.Println(found)
+		fmt.Println(slices.Contains(c.want, encdata))
 	}
 
 	// Output:

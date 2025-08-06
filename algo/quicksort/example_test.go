@@ -76,7 +76,7 @@ func ExampleSort() {
 		},
 	}
 	Sort(itemSlice(items))
-	for i := 0; i < len(items); i++ {
+	for i := range len(items) {
 		fmt.Println(items[i])
 	}
 
